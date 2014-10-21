@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+    <welcome-file-list>
+        <welcome-file>index.jsp</welcome-file>
+    </welcome-file-list>
+    <context-param>
+        <param-name>driver</param-name>
+        <param-value>org.postgresql.Driver</param-value>
+        <description>Database Connectivity Driver Name</description>
+    </context-param>
+    <context-param>
+        <param-name>url</param-name>
+        <param-value>jdbc:postgresql://localhost/hms</param-value>
+        <description>Database connection string</description>
+    </context-param>
+    <context-param>
+        <param-name>user</param-name>
+        <param-value>hms</param-value>
+        <description>Application database user login</description>
+    </context-param>
+    <context-param>
+        <param-name>pass</param-name>
+        <param-value>hms!</param-value>
+        <description>Application database user password</description>
+    </context-param>
+    <servlet>
+        <servlet-name>fileReader</servlet-name>
+        <servlet-class>com.mysoft.fileReader</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>fileReader</servlet-name>
+        <url-pattern>/fileReader</url-pattern>
+    </servlet-mapping>
+    <session-config>
+        <session-timeout>0</session-timeout>
+    </session-config>
+</web-app>

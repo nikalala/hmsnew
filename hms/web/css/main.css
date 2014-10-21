@@ -1,0 +1,174 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Jul 12, 2014, 2:25:35 PM
+    Author     : djorj
+*/
+body { padding-bottom: 20px; padding-top: 40px; }
+html, body {
+    height: 100%;
+}
+
+[class^="selfin-"],
+[class*=" selfin-"] {
+    display: inline-block;
+    width: 17px;
+    height: 16px;
+    *margin-right: .3em;
+    line-height: 14px;
+    vertical-align: text-top;
+    background-image: url("images/csg-selfin.png");
+    background-position: 14px 14px;
+    background-repeat: no-repeat;
+}
+[class^="selfin-"]:last-child,
+[class*=" selfin-"]:last-child {
+    *margin-left: 0;
+}
+
+.selfin-1{ background-position: 0 0; width: 16px; height: 16px; } 
+.selfin-2{ background-position: -21px 0; width: 16px; height: 16px; } 
+
+#contextMenu {
+  position: absolute;
+  display:none;
+}
+
+.nav-tabs > li .close {
+    margin: -2px 0 0 10px;
+    font-size: 18px;
+}
+
+.table.table-borderless td,
+.table.table-borderless th {
+    border-top: 0;
+}
+
+.equal, .equal > div[class*='col-'] {  
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    flex:1 1 auto;
+}
+
+/* tab color */
+#maintabs.nav-tabs>li>a {
+  background-color: darkgrey !important; 
+  border-color: darkgrey !important;
+  color:#000000;
+  height: 25px;
+}
+
+/* active tab color */
+#maintabs.nav-tabs>li.active>a, #maintabs.nav-tabs>li.active>a:hover, #maintabs.nav-tabs>li.active>a:focus {
+  color: #428BCA;
+  background-color: #F5F5F5 !important;
+  //border: 1px solid #888888;
+  height: 26px;
+  border-color: #F5F5F5 !important;
+}
+
+/* hover tab color */
+#maintabs.nav-tabs>li>a:hover {
+  color: #000000;
+  background-color: #F5F5F5 !important;
+  //border: 1px solid #888888;
+  height: 26px;
+  border-color: #F5F5F5 !important;
+}
+
+.panel-heading {
+    background-color: #E9E9E9 !important;
+    border-color: #C8C8C8 !important;
+    color: #000000 !important;
+}
+
+.panel {
+    border-color: #C8C8C8 !important;
+}
+
+.iconblack {
+    color: #000000;
+}
+
+#infotabs.nav-tabs>li>a {
+  //background-color: darkgrey !important; 
+  //border-color: darkgrey !important;
+  color:#000000;
+  //height: 25px;
+}
+
+/* active tab color */
+#infotabs.nav-tabs>li.active>a, .nav-tabs>li.active>a:hover, .nav-tabs>li.active>a:focus {
+  color: #428BCA;
+  //background-color: #FfFfFf !important;
+  //border: 1px solid #888888;
+  //height: 26px;
+  //border-color: #F5F5F5 !important;
+}
+
+/* hover tab color */
+#infotabs.nav-tabs>li>a:hover {
+  //color: #000000;
+  //background-color: #FfFfFf !important;
+  //border: 1px solid #888888;
+  //height: 26px;
+  //border-color: #F5F5F5 !important;
+}
+
+a:focus { outline:0; }
+
+a:active,
+a:hover {
+    outline: 0;
+}
+
+ol, ul {
+    list-style: none outside none;
+}
+
+.tbllabel {
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.input-group-xs>.form-control,
+.input-group-xs>.input-group-addon,
+.input-group-xs>.input-append>.form-control,
+.input-group-xs>.input-group-btn>.btn {
+    display:inline-table;
+    vertical-align:middle;
+    //display: table-cell;
+    height: 22px;
+    padding: 1px 5px;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.input-group-addon-xs {
+  padding: 6px 6px;
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 1;
+  color: #555;
+  text-align: center;
+  background-color: #eee;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  
+  display:inline-table;
+    
+    height: 22px;
+    padding: 1px 5px;
+    font-size: 12px;
+    line-height: 1.5;
+    
+    width: 1%;
+  white-space: nowrap;
+  vertical-align: middle;
+}

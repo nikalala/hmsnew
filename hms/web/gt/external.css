@@ -1,0 +1,405 @@
+/*--------------- jquery ui tabs CSS -------------------*/
+.ui-tabs { position: relative; margin-top:7px;  /*zoom: 1; */  } /* position: relative prevents IE scroll bug (element with position: relative inside container with overflow: auto appear as "fixed") */
+.ui-tabs .ui-tabs-nav,.ui-dtpstayview { 
+	width:983px; 
+	background:-moz-linear-gradient(32% 76% 90deg, #dadada, #f1f1f1 80%);
+	background:-webkit-gradient(linear, 77% 82%, 77% 30%, from(#dadada), to(#f1f1f1));
+	-moz-box-shadow:0 1px 2px #a5a5a5;
+	-webkit-box-shadow:0 1px 2px #a5a5a5;
+	box-shadow:0 1px 2px #a5a5a5;
+	height: 21px;
+	margin: 0 0 4px;
+	-webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box; 
+}
+.ui-tabs ul{position:relative;}
+.ui-tabs .ui-tabs-nav li,.ui-dtpstayview li { 
+	list-style: none; 
+	float: left; 
+	position: relative; 
+	top: 0; 
+	margin:0; 
+	padding: 0; 
+	white-space: nowrap; 
+}
+.ui-tabs .ui-tabs-nav li a { 
+	float: left;  
+	text-decoration: none; 
+	background:url(../images/tabs.png) repeat-x; 
+	background-position:right bottom; 
+	font-size:13px; 
+	font-weight:bold; 
+	color:#3e484d;
+	text-shadow:0px 1px 1px #FFF;
+}
+.ui-tabs-nav li a:hover {color:#63757e;}
+.ui-tabs .ui-tabs-nav li a span{
+	float:left;
+	background:url(../images/tabs.png) repeat-x; 
+	background-position:left bottom;
+	padding: 6px 18px 7px 22px;
+	margin-right: 12px;
+}
+.ui-tabs .ui-tabs-nav li.ui-tabs-selected { 
+	margin-bottom: 0;  color:#FFF;
+	background:url(../images/tabs.png) repeat-x; 
+	background-position:right top;
+	top:1px;
+}
+.ui-tabs .ui-tabs-nav li.ui-tabs-selected a span{ 
+	color:#FFF;
+	text-shadow:none;
+	background:url(../images/tabs.png) repeat-x; 
+	background-position:left top;
+}
+.ui-state-active{ }
+.ui-tabs .ui-tabs-nav li.ui-tabs-selected a, .ui-tabs .ui-tabs-nav li.ui-state-disabled a, .ui-tabs .ui-tabs-nav li.ui-state-processing a { cursor: text; color:#d1d9dc;  background-position:left -233px; }
+.ui-tabs .ui-tabs-nav li a, .ui-tabs.ui-tabs-collapsible .ui-tabs-nav li.ui-tabs-selected a { cursor: pointer; } /* first selector in group seems obsolete, but required to overcome bug in Opera applying cursor: text overall if defined elsewhere... */
+.ui-tabs .ui-tabs-panel { /*display: block;*/ border-width: 0; background: none; /*float:left;*/ width:100%; }
+.ui-tabs .ui-tabs-hide { display: none !important; }
+
+/*--------------- jquery ui datepicker CSS -------------------*/
+.ui-datepicker { /*width: 18em; padding: 0 .2em 0 10px;*/ float:left;background:#F2F2F2;border-bottom: 2px solid #B1BCB6; z-index: 10000;} /*Manali - 1.0.35.40 - 02 Aug 2013, Purpose : For displaying 2 months calendar, need to do some modifications in this css, add background, border-bottom And z-index*/
+.ui-datepicker-inline{width: 18em; }
+.ui-datepicker .ui-datepicker-header { position:relative; padding:.3em 0; background:-moz-linear-gradient(32% 96% 90deg, #404a52, #181b1e 80%);background:-webkit-gradient(linear, 77% 96%, 77% 30%, from(#404a52), to(#181b1e)); border-bottom:2px solid #9d9e9f; }
+.ui-datepicker .ui-datepicker-prev, .ui-datepicker .ui-datepicker-next { position:absolute; top: 8px; width: 1.8em; height: 1.8em; }
+.ui-datepicker .ui-datepicker-prev-hover, .ui-datepicker .ui-datepicker-next-hover { top: 8px; }
+.ui-datepicker .ui-datepicker-prev { left:2px; cursor:pointer; }
+.ui-datepicker .ui-datepicker-next { right:2px; cursor:pointer; }
+.ui-datepicker .ui-datepicker-prev-hover { left:2px; }
+.ui-datepicker .ui-datepicker-next-hover { right:2px; }
+.ui-datepicker .ui-datepicker-prev span, .ui-datepicker .ui-datepicker-next span { display: block; position: absolute; left: 50%; margin-left: -8px; top: 50%; margin-top: -11px;  }
+.ui-datepicker .ui-datepicker-title { margin: 0 2.3em; line-height: 1.8em; text-align: center; font-size:13px;	color:#FFF;	font-weight:bold; text-shadow:1px 1px 0px #000; }
+.ui-datepicker .ui-datepicker-title select { font-size:1em; margin:1px 0; }
+.ui-datepicker select.ui-datepicker-month-year {width: 100%;}
+.ui-datepicker select.ui-datepicker-month, 
+.ui-datepicker select.ui-datepicker-year { width: 49%;}
+.ui-datepicker table {width: 100%; font-size: .9em; border-collapse: collapse;margin:0 0 .4em; /*border-bottom:2px solid #b1bcb6;  background:#f2f2f2;*/} /*Manali - 1.0.35.40 - 02 Aug 2013, Purpose : For displaying 2 months calendar, need to do some modifications in this css, commented background and border-bottom*/
+.ui-datepicker th { padding: .7em .3em; text-align: center; font-weight: bold; border: 0; color:black; font-size:11px;  }
+.ui-datepicker td { border: 0; padding: 3px; }
+.ui-datepicker td span, .ui-datepicker td a { display: block; border:1px solid #fff; padding: .3em; text-align: center; text-decoration: none; color:#666666; font-size:11px; font-weight:bold;}
+.ui-datepicker .ui-datepicker-buttonpane { background-image: none; margin: .7em 0 0 0; padding:0 .2em; border-left: 0; border-right: 0; border-bottom: 0; }
+.ui-datepicker .ui-datepicker-buttonpane button { float: right; margin: .5em .2em .4em; cursor: pointer; padding: .2em .6em .3em .6em; width:auto; overflow:visible; }
+.ui-datepicker .ui-datepicker-buttonpane button.ui-datepicker-current { float:left; }
+/*** added by viken***/
+.ui-datepicker .ui-datepicker-current-day a {
+	border:1px solid #cdd5d0!important;
+	color:#0383a3!important;
+	background:#fff;
+}
+.ui-datepicker td a:hover{
+	border:1px solid #b1bcb6!important;
+}
+td.ui-datepicker-week-end a.ui-state-default{
+	color:#b0b0b0;
+}
+/* with multiple calendars */
+.ui-datepicker.ui-datepicker-multi { width:auto; }
+.ui-datepicker-multi .ui-datepicker-group { float:left; }
+.ui-datepicker-multi .ui-datepicker-group table { width:95%; margin:0 auto .4em; }
+.ui-datepicker-multi-2 .ui-datepicker-group { width:50%; }
+.ui-datepicker-multi-3 .ui-datepicker-group { width:33.3%; }
+.ui-datepicker-multi-4 .ui-datepicker-group { width:25%; }
+.ui-datepicker-multi .ui-datepicker-group-last .ui-datepicker-header { border-left-width:0; }
+.ui-datepicker-multi .ui-datepicker-group-middle .ui-datepicker-header { border-left-width:0; }
+.ui-datepicker-multi .ui-datepicker-buttonpane { clear:left; }
+.ui-datepicker-row-break { clear:both; width:100%; }
+/* RTL support */
+.ui-datepicker-rtl { direction: rtl; }
+.ui-datepicker-rtl .ui-datepicker-prev { right: 2px; left: auto; }
+.ui-datepicker-rtl .ui-datepicker-next { left: 2px; right: auto; }
+.ui-datepicker-rtl .ui-datepicker-prev:hover { right: 1px; left: auto; }
+.ui-datepicker-rtl .ui-datepicker-next:hover { left: 1px; right: auto; }
+.ui-datepicker-rtl .ui-datepicker-buttonpane { clear:right; }
+.ui-datepicker-rtl .ui-datepicker-buttonpane button { float: left; }
+.ui-datepicker-rtl .ui-datepicker-buttonpane button.ui-datepicker-current { float:right; }
+.ui-datepicker-rtl .ui-datepicker-group { float:right; }
+.ui-datepicker-rtl .ui-datepicker-group-last .ui-datepicker-header { border-right-width:0; border-left-width:1px; }
+.ui-datepicker-rtl .ui-datepicker-group-middle .ui-datepicker-header { border-right-width:0; border-left-width:1px; }
+.ui-datepicker-group-last{-moz-box-sizing: border-box;-webkit-box-sizing: border-box;box-sizing: border-box;border-left: 1px solid #CCCCCC;    min-height: 220px;}  /*Manali - 1.0.35.40 - 02 Aug 2013, Purpose : For displaying 2 months calendar, need to do some modifications in this css,added this class*/
+/* IE6 IFRAME FIX (taken from datepicker 1.5.3 */
+.ui-datepicker-cover {
+    display: none; /*sorry for IE5*/
+    display/**/: block; /*sorry for IE5*/
+    position: absolute; /*must have*/
+    z-index: -1; /*must have*/
+    filter: mask(); /*must have*/
+    top: -4px; /*must have*/
+    left: -4px; /*must have*/
+    width: 200px; /*must have*/
+    height: 200px; /*must have*/
+}
+.ui-widget-header .ui-icon {
+background-image:url("../images/icons.png");
+overflow:hidden;
+text-indent:-99999px;
+height:16px;
+width:16px;
+}
+.ui-icon-circle-triangle-e{
+	background-position:left -195px;
+}
+.ui-icon-circle-triangle-w{
+	background-position:left -174px;
+}
+
+/*--------------- jNotify jquery CSS -------------------*/
+/** jNotify CSS **/
+#jNotify {
+	position:absolute;
+	background:#d8e6fc  ;
+	background-position:-442px -612px;
+	color:#35517c;
+	border:1px solid #a7c3f0;
+	padding:10px;
+	padding-left:50px;
+	margin:15px;
+	z-index:9999;
+	-moz-border-radius : 5px;
+	border-radius:5px;
+	-webkit-border-radius:5px;
+}
+#jNotify a {color:#35517c !important;text-decoration:none;}
+/** jSuccess CSS **/
+#jSuccess {
+	position:absolute;
+	background:#E6EFC2  ;
+	background-position:-442px -735px ;
+	color:#264409;
+	border:1px solid #C6D880;
+	padding:10px;
+	padding-left:50px;
+	margin:15px;
+	z-index:9999;
+	-moz-border-radius : 5px;
+	border-radius:5px;
+	-webkit-border-radius:5px;
+}
+#jSuccess a {color:#264409 !important;text-decoration:none;}
+/** jError CSS **/
+#jError {
+	position:absolute;
+	background:#FBE3E4  ;
+	background-position:-442px -668px;
+	color:#8a1f11;
+	border:1px solid #FBC2C4;
+	padding:10px;
+	padding-left:50px;
+	margin:15px;
+	z-index:9999;
+	-moz-border-radius : 5px;
+	border-radius:5px;
+	-webkit-border-radius:5px;
+}
+#jError a {color:#8a1f11 !important;text-decoration:none;}
+#jConfirm, #jAlert,#jErrorValid {
+	position:absolute;
+	color:#000000;
+	margin:15px 15px 15px 50px;
+	padding:7px;
+	z-index:9999;
+	border:1px solid rgba(0, 0, 0, 0.4);
+	-moz-border-radius : 5px;
+	border-radius:5px;
+	-webkit-border-radius:5px;
+/*	width:400px;*/
+}
+#jConfirm a, #jAlert a,#jErrorValid a  {color:#8a1f11 !important;text-decoration:none;}
+.jConfirm_container, .jAlert_container{
+    float: left;
+    position: relative;
+    width:380px;
+	padding:10px;
+	background:#FFF ;
+	background-position:10px 15px;
+	height: 75px;
+    overflow: auto;
+	border-bottom: 1px solid #CCCCCC;
+}
+#jErrorValid{
+	padding-left:10px;
+	background:#FBE3E4!important;
+}
+
+.jConfirm_container p, .jAlert_container p{
+    line-height: 18px;
+    padding: 7px 0 0 60px;	
+}
+.jAlert_container{
+	background-position:10px -68px;
+}
+.alert_head{
+	background:-moz-linear-gradient(32% 76% 90deg, #7fb0de, #c4e4ff 80%);
+	background:-webkit-gradient(linear, 77% 82%, 77% 30%, from(#7fb0de), to(#c4e4ff));
+	padding:7px 10px;
+	font-size:14px;
+	color:#074b8b;
+	text-shadow:0 1px 1px #FFF;
+	border-bottom:1px solid #5d8ab3;	
+}
+
+#jErrorValid span{
+	float:left;
+	width:35px;
+	height: 20px;
+}
+.messageSummery{
+	float:left;
+}
+.messageSummery h2{
+	padding-bottom:7px;
+}
+#jErrorValid ul li{
+	line-height:20px;
+}
+
+.notifyicon {
+    position:relative;
+    z-index:1;
+    overflow:hidden;
+    list-style:none;
+    padding:0;
+    margin:0 0 0.25em;
+}
+
+.notifyicon:before, .notifyicon:after,
+.notifyicon a:before, .notifyicon a:after {
+    content:"";
+    position:absolute;
+    top:15px;
+    left:0;
+}
+
+.notifyicon a:before, .notifyicon a:after {
+    margin:-8px 0 0;
+}
+
+.jError a::before,.jWarning a::before,.jInfo a::before{
+    content:"!";
+    left:12px;
+    width:16px; 
+    height:16px;
+    margin-top:-8px;
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+    font-size:14px;
+    font-weight:bold;
+    line-height:15px;
+    text-align:center;
+    color:#fff;
+	background:-moz-linear-gradient(32% 76% 90deg, #C41717, #ED2726 80%);
+	background:-webkit-gradient(linear, 77% 82%, 77% 30%, from(#C41717), to(#ED2726));
+	border:1px solid #AA0606;
+    -webkit-border-radius:16px; 
+    -moz-border-radius:16px; 
+    border-radius:16px;
+}
+
+.jWarning a::before,.jInfo a::before{
+	background:-moz-linear-gradient(32% 76% 90deg, #236eba, #3395f1 80%);
+	background:-webkit-gradient(linear, 77% 82%, 77% 30%, from(#236eba), to(#3395f1));
+	border:1px solid #0d4d88;
+	box-shadow:0px 1px 0 #d8ecff inset;
+	-moz-box-shadow:0px 1px 0 #d8ecff inset;
+    -webkit-box-shadow:0px 1px 0 #d8ecff inset;
+	}
+
+.success1 a:before {
+    left:11px;
+    width:18px; 
+    height:18px;
+    margin-top:-8px;
+	-webkit-border-radius:16px; 
+    -moz-border-radius:16px; 
+    border-radius:16px;
+	background:-moz-linear-gradient(32% 76% 90deg, #789926, #90B23A 80%);
+	background:-webkit-gradient(linear, 77% 82%, 77% 30%, from(#789926), to(#90B23A));
+}
+.success1 a:after {
+    left:17px; 
+    width:3px; 
+    height:8px; 
+    border-width:0 2px 2px 0;
+    border-style:solid;
+    border-color:#fff;
+    margin-top:-7px; 
+    -webkit-transform:rotate(45deg);
+    -moz-transform:rotate(45deg);
+    -o-transform:rotate(45deg);
+    transform:rotate(45deg);
+}
+/** OVERLAY **/
+#jOverlay {
+	width:100%;
+	height:100%;
+	position:fixed;
+	top:0;
+	left:0;
+	z-index:9998;
+	cursor:wait;
+}
+
+
+/*loading */
+.bar1 {
+  -moz-transform:rotate(0deg) translate(0, -40px);
+  -webkit-transform:rotate(0deg) translate(0, -40px);opacity:0.12;
+}
+.bar2 {
+  -moz-transform:rotate(45deg) translate(0, -40px);
+  -webkit-transform:rotate(45deg) translate(0, -40px);opacity:0.25;
+}
+.bar3 {
+  -moz-transform:rotate(90deg) translate(0, -40px);
+  -webkit-transform:rotate(90deg) translate(0, -40px);opacity:0.37;
+}
+.bar4 {
+  -moz-transform:rotate(135deg) translate(0, -40px);
+  -webkit-transform:rotate(135deg) translate(0, -40px);opacity:0.50;
+}
+.bar5 {
+  -moz-transform:rotate(180deg) translate(0, -40px);
+  -webkit-transform:rotate(180deg) translate(0, -40px);opacity:0.62;
+}
+.bar6 {
+  -moz-transform:rotate(225deg) translate(0, -40px);
+  -webkit-transform:rotate(225deg) translate(0, -40px);opacity:0.75;
+}
+.bar7 {
+  -moz-transform:rotate(270deg) translate(0, -40px);
+  -webkit-transform:rotate(270deg) translate(0, -40px);opacity:0.87;
+}
+.bar8 {
+  -moz-transform:rotate(315deg) translate(0, -40px);
+  -webkit-transform:rotate(315deg) translate(0, -40px);opacity:1;
+}
+ #cssloading {
+  position:absolute;
+  width:100px;
+  height:100px;
+  margin-bottom:1.5em;
+  margin-right:1.5em;
+  -moz-border-radius:100px;
+	left:47%;
+	top:45%;
+  -moz-transform:scale(0.5);
+  -webkit-transform:scale(0.5);
+}
+#cssloading li {
+  width:10px;
+  height:30px;
+  background:#000;
+  position:absolute;
+  top:35px;
+  left:45px;
+}
+.contextMenu {
+	position: absolute;
+	width: 120px;
+	z-index: 99999;
+	border: 1px solid #ACA899;
+	background: #fff;
+	padding: 0px;
+	margin: 0px;
+	display: none;
+}
