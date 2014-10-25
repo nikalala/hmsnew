@@ -95,7 +95,7 @@ public class folio {
         return val;
     }
     
-    public void setFolio(ReservationBean res, ReservationroomBean resroom, String dateformats2, Vector extracharges,int type,PersonnelBean user) throws Exception {
+    public void setFolio(ReservationBean res, ReservationroomBean resroom, PaymentBean pm, String dateformats2, Vector extracharges,int type,PersonnelBean user) throws Exception {
         if((type == 0 || type == 3) && res.getCompanyid() == null)  throw new Exception("აირჩიეთ კომპანია");
         // main folio
         CheckinreservationsettingsBean[] checkinsettings = CheckinreservationsettingsManager.getInstance().loadByWhere("limit 1");
@@ -113,6 +113,11 @@ public class folio {
         folio = FolioManager.getInstance().save(folio);
         
         folioid = folio.getFolioid().longValue();
+        
+        if(pm != null && pm.getAmount() != null){
+            pm.setFolioid(folioid);
+            pm = PaymentManager.getInstance().save(pm);
+        }
 
         FolioBean folio1 = null;
         if(type == 3){
