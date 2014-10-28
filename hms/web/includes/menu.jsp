@@ -26,7 +26,7 @@
                             <a href="javascript:newWindow('construction','ტრანზაქციის ჩამატება');">ტრანზაქციის ჩამატება</a>
                         </li>
                         <li>
-                            <a href="javascript:getBody('stayviewleft','construction');">რეზერვაციების სია</a>
+                            <a href="javascript:getBody('stayviewleft','reservationlist','რეზერვაციის სია','res1');">რეზერვაციების სია</a>
                         </li>
                         <li>
                             <a href="javascript:getBody('stayviewleft','construction');">ჩამომსვლელთა სია</a>
@@ -109,7 +109,7 @@
                     <a href="javascript:getBody('stayviewleft','construction');" data-toggle="tooltip" title="სწრაფი ნახვა"><span class="glyphicon glyphicon-eye-open"></span></a>
                 </li>
                 <li>
-                    <a href="javascript:getBody('stayviewleft,'construction');" data-toggle="tooltip" title="სამუშაო მაგიდა"><span class="glyphicon glyphicon-dashboard"></span></a>
+                    <a href="javascript:getBody('stayviewleft','construction');" data-toggle="tooltip" title="სამუშაო მაგიდა"><span class="glyphicon glyphicon-dashboard"></span></a>
                 </li>
                 <li>
                     <a href="javascript:getBody('stayviewleft','construction');" data-toggle="tooltip" title="ოთახები"><span class="glyphicon glyphicon-th"></span></a>

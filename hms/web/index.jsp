@@ -78,7 +78,7 @@ String bgcol = "#F5F5F5";
       
         $(document).ready(function() {
             
-            getBody("stayviewleft","stayview",'რეზერვაციის სია','res1');
+            getBody("stayviewleft","stayview",'დატვირთულობა','res1');
             
             if($("#maincontent").height() > 652)
                 $("#mainpanel0").height($("#maincontent").height()-2);
@@ -253,7 +253,7 @@ String bgcol = "#F5F5F5";
         %>
     </ul>
 </div>
-
+    <div class="loading-panel"></div>
 </body>
 
 </html>

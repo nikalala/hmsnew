@@ -160,9 +160,9 @@ $(document).ready(function(){
         $("#jqgh_listfolio_descr").css('text-align', 'left');
         $("#jqgh_listfolio_regby").css('text-align', 'left');
         $("#jqgh_listfolio_price").css('text-align', 'right');
-        
+
         //$("#listfolio").jqGrid().setGridParam({height: 1700}).trigger("reloadGrid");
-   
+
 });
 </script>
 <style>
