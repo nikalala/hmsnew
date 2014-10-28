@@ -16,10 +16,12 @@ package com.mysoft.hms;
 
 // imports- 
 
+
 public class TaxaccountBean
 // extends+ 
 
 // extends- 
+
 {
     private Integer taxaccount;
     private boolean taxaccount_is_modified = false;
@@ -462,4 +464,5 @@ public class TaxaccountBean
 // class+ 
 
 // class- 
+
 }

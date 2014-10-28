@@ -16,10 +16,12 @@ package com.mysoft.hms;
 
 // imports- 
 
+
 public class VipstatusBean
 // extends+ 
 
 // extends- 
+
 {
     private Integer vipstatusid;
     private boolean vipstatusid_is_modified = false;
@@ -379,4 +381,5 @@ public class VipstatusBean
 // class+ 
 
 // class- 
+
 }

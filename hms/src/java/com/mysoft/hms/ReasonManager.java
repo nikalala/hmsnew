@@ -17,6 +17,7 @@ import java.sql.*;
 
 // imports- 
 
+
 /**
  * Handles database calls for the reason table.
  */
@@ -24,6 +25,7 @@ public class ReasonManager
 // extends+ 
 
 // extends- 
+
 {
 
     /**
@@ -1368,4 +1370,5 @@ public class ReasonManager
 // class+ 
 
 // class- 
+
 }

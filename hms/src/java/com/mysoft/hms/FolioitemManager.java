@@ -17,6 +17,7 @@ import java.sql.*;
 
 // imports- 
 
+
 /**
  * Handles database calls for the folioitem table.
  */
@@ -24,6 +25,7 @@ public class FolioitemManager
 // extends+ 
 
 // extends- 
+
 {
 
     /**
@@ -145,6 +147,13 @@ public class FolioitemManager
     public static final int TYPE_NOTE = Types.VARCHAR;
     public static final String NAME_NOTE = "note";
 
+    /**
+     * Column manual of type Types.BIT mapped to Boolean.
+     */
+    public static final int ID_MANUAL = 17;
+    public static final int TYPE_MANUAL = Types.BIT;
+    public static final String NAME_MANUAL = "manual";
+
 
     private static final String TABLE_NAME = "folioitem";
 
@@ -170,6 +179,7 @@ public class FolioitemManager
         ,"folioitem.regbyid"
         ,"folioitem.regdate"
         ,"folioitem.note"
+        ,"folioitem.manual"
     };
 
     /**
@@ -191,7 +201,8 @@ public class FolioitemManager
                             + ",folioitem.done"
                             + ",folioitem.regbyid"
                             + ",folioitem.regdate"
-                            + ",folioitem.note";
+                            + ",folioitem.note"
+                            + ",folioitem.manual";
 
     private static FolioitemManager singleton = new FolioitemManager();
 
@@ -1085,6 +1096,14 @@ public class FolioitemManager
                     _dirtyCount++;
                 }
 
+                if (pObject.isManualModified()) {
+                    if (_dirtyCount>0) {
+                        _sql.append(",");
+                    }
+                    _sql.append("manual");
+                    _dirtyCount++;
+                }
+
                 _sql.append(") values (");
                 if(_dirtyCount > 0) {
                     _sql.append("?");
@@ -1163,6 +1182,10 @@ public class FolioitemManager
     
                 if (pObject.isNoteModified()) {
                     ps.setString(++_dirtyCount, pObject.getNote());
+                }
+    
+                if (pObject.isManualModified()) {
+                    Manager.setBoolean(ps, ++_dirtyCount, pObject.getManual());
                 }
     
                 ps.executeUpdate();
@@ -1329,6 +1352,15 @@ public class FolioitemManager
                     }
                     _sql.append("note").append("=?");
                 }
+
+                if (pObject.isManualModified()) {
+                    if (useComma) {
+                        _sql.append(",");
+                    } else {
+                        useComma=true;
+                    }
+                    _sql.append("manual").append("=?");
+                }
                 _sql.append(" WHERE ");
                 _sql.append("folioitem.folioitemid=?");
                 ps = c.prepareStatement(_sql.toString(),ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
@@ -1400,6 +1432,10 @@ public class FolioitemManager
 
                 if (pObject.isNoteModified()) {
                       ps.setString(++_dirtyCount, pObject.getNote());
+                }
+
+                if (pObject.isManualModified()) {
+                      Manager.setBoolean(ps, ++_dirtyCount, pObject.getManual());
                 }
     
                 if (_dirtyCount == 0) {
@@ -1563,6 +1599,11 @@ public class FolioitemManager
                  _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("note= ?");
              }
     
+             if (pObject.isManualModified()) {
+                 _dirtyCount ++; 
+                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("manual= ?");
+             }
+    
              if (_dirtyCount == 0) {
                  throw new SQLException ("The pObject to look for is invalid : not initialized !");
              }
@@ -1637,6 +1678,10 @@ public class FolioitemManager
     
              if (pObject.isNoteModified()) {
                  ps.setString(++_dirtyCount, pObject.getNote());
+             }
+    
+             if (pObject.isManualModified()) {
+                 Manager.setBoolean(ps, ++_dirtyCount, pObject.getManual());
              }
     
              ps.executeQuery();
@@ -1787,6 +1832,13 @@ public class FolioitemManager
                 _dirtyAnd ++;
             }
     
+            if (pObject.isManualInitialized()) {
+                if (_dirtyAnd > 0)
+                    sql.append(" AND ");
+                sql.append("manual").append("=?");
+                _dirtyAnd ++;
+            }
+    
             c = getConnection();
             ps = c.prepareStatement(sql.toString(),ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             int _dirtyCount = 0;
@@ -1857,6 +1909,10 @@ public class FolioitemManager
     
             if (pObject.isNoteInitialized()) {
                 ps.setString(++_dirtyCount, pObject.getNote());
+            }
+    
+            if (pObject.isManualInitialized()) {
+                Manager.setBoolean(ps, ++_dirtyCount, pObject.getManual());
             }
     
             int _rows = ps.executeUpdate();
@@ -2054,6 +2110,11 @@ public class FolioitemManager
                     _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("note= ?");
                 }
     
+                if (pObject.isManualModified()) {
+                    _dirtyCount++; 
+                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("manual= ?");
+                }
+    
                 if (_dirtyCount == 0)
                    throw new SQLException ("The pObject to look is unvalid : not initialized !");
     
@@ -2131,6 +2192,10 @@ public class FolioitemManager
                     ps.setString(++_dirtyCount, pObject.getNote());
                 }
     
+                if (pObject.isManualModified()) {
+                    Manager.setBoolean(ps, ++_dirtyCount, pObject.getManual());
+                }
+    
                 return countByPreparedStatement(ps);
         }
         finally
@@ -2172,6 +2237,7 @@ public class FolioitemManager
         pObject.setRegbyid(Manager.getInteger(rs, 15));
         pObject.setRegdate(rs.getTimestamp(16));
         pObject.setNote(rs.getString(17));
+        pObject.setManual(Manager.getBoolean(rs, 18));
 
         pObject.isNew(false);
         pObject.resetIsModified();
@@ -2261,6 +2327,10 @@ public class FolioitemManager
                 case ID_NOTE:
                     ++pos;
                     pObject.setNote(rs.getString(pos));
+                    break;
+                case ID_MANUAL:
+                    ++pos;
+                    pObject.setManual(Manager.getBoolean(rs, pos));
                     break;
             }
         }
@@ -2406,4 +2476,5 @@ public class FolioitemManager
 // class+ 
 
 // class- 
+
 }

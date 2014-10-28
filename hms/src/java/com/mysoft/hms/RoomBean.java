@@ -16,10 +16,12 @@ package com.mysoft.hms;
 
 // imports- 
 
+
 public class RoomBean
 // extends+ 
 
 // extends- 
+
 {
     private Integer roomid;
     private boolean roomid_is_modified = false;
@@ -1034,4 +1036,5 @@ public class RoomBean
 // class+ 
 
 // class- 
+
 }

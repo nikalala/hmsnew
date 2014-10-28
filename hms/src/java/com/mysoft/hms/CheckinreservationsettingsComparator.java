@@ -17,6 +17,7 @@ import java.util.Comparator;
 
 // imports- 
 
+
 /**
  * Comparator class is used to sort the CheckinreservationsettingsBean objects.
  */
@@ -24,6 +25,7 @@ public class CheckinreservationsettingsComparator implements Comparator
 // extends+ 
 
 // extends- 
+
 {
     /**
      * Holds the field on which the comparison is performed.
@@ -395,4 +397,5 @@ public class CheckinreservationsettingsComparator implements Comparator
 // class+ 
 
 // class- 
+
 }

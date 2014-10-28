@@ -18,6 +18,7 @@ import java.sql.SQLException;
 // imports- 
 
 
+
 /**
  * Listener that is notified of roomtype table changes.
  */
@@ -25,6 +26,7 @@ public interface RoomtypeListener
 // extends+ 
 
 // extends- 
+
 {
     /**
      * Invoked just before inserting a RoomtypeBean record into the database.
@@ -61,4 +63,5 @@ public interface RoomtypeListener
 // class+ 
 
 // class- 
+
 }

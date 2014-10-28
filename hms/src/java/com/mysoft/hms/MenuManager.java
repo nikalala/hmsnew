@@ -17,6 +17,7 @@ import java.sql.*;
 
 // imports- 
 
+
 /**
  * Handles database calls for the menu table.
  */
@@ -24,6 +25,7 @@ public class MenuManager
 // extends+ 
 
 // extends- 
+
 {
 
     /**
@@ -1232,4 +1234,5 @@ public class MenuManager
 // class+ 
 
 // class- 
+
 }

@@ -17,6 +17,7 @@ import java.sql.*;
 
 // imports- 
 
+
 /**
  * Handles database calls for the confmail table.
  */
@@ -24,6 +25,7 @@ public class ConfmailManager
 // extends+ 
 
 // extends- 
+
 {
 
     /**
@@ -1174,4 +1176,5 @@ public class ConfmailManager
 // class+ 
 
 // class- 
+
 }

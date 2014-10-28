@@ -17,6 +17,7 @@ import java.sql.*;
 
 // imports- 
 
+
 /**
  * Handles database calls for the v_reservationlist table.
  */
@@ -24,6 +25,7 @@ public class VReservationlistManager
 // extends+ 
 
 // extends- 
+
 {
 
     /**
@@ -2183,4 +2185,5 @@ public class VReservationlistManager
 // class+ 
 
 // class- 
+
 }

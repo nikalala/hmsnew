@@ -16,10 +16,12 @@ package com.mysoft.hms;
 
 // imports- 
 
+
 public class FolioitemBean
 // extends+ 
 
 // extends- 
+
 {
     private Long folioitemid;
     private boolean folioitemid_is_modified = false;
@@ -88,6 +90,10 @@ public class FolioitemBean
     private String note;
     private boolean note_is_modified = false;
     private boolean note_is_initialized = false;
+    
+    private Boolean manual;
+    private boolean manual_is_modified = false;
+    private boolean manual_is_initialized = false;
     
     private boolean _isNew = true;
     
@@ -1227,6 +1233,73 @@ public class FolioitemBean
     }
 
     /**
+     * Getter method for manual.
+     * <br>
+     * Meta Data Information (in progress):
+     * <ul>
+     * <li>full name: folioitem.manual
+     * <li>default value: false
+     * <li>column size: 1
+     * <li>jdbc type returned by the driver: Types.BIT
+     * </ul>
+     *
+     * @return the value of manual
+     */
+    public Boolean getManual()
+    {
+        return manual; 
+    }
+
+    /**
+     * Setter method for manual.
+     * <br>
+     * Attention, there will be no comparison with current value which
+     * means calling this method will mark the field as 'modified' in all cases.
+     *
+     * @param newVal the new value to be assigned to manual
+     */
+    public void setManual(Boolean newVal) {
+        if ((newVal != null && this.manual != null && newVal.equals(this.manual)) || 
+            (newVal == null && this.manual == null && manual_is_initialized)) {
+            return; 
+        } 
+        this.manual = newVal; 
+        manual_is_modified = true; 
+        manual_is_initialized = true; 
+    }
+
+    /**
+     * Setter method for manual.
+     * <br>
+     * Convenient for those who do not want to deal with Objects for primary types.
+     *
+     * @param newVal the new value to be assigned to manual
+     */
+    public void setManual(boolean newVal) {
+        setManual(new Boolean(newVal));
+    }
+
+    /**
+     * Determines if the manual has been modified.
+     *
+     * @return true if the field has been modified, false if the field has not been modified
+     */
+    public boolean isManualModified() {
+        return manual_is_modified; 
+    }
+
+    /**
+     * Determines if the manual has been initialized.
+     * <br>
+     * It is useful to determine if a field is null on purpose or just because it has not been initialized.
+     *
+     * @return true if the field has been initialized, false otherwise
+     */
+    public boolean isManualInitialized() {
+        return manual_is_initialized; 
+    }
+
+    /**
      * Determines if the current object is new.
      *
      * @return true if the current object is new, false if the object is not new
@@ -1268,7 +1341,8 @@ public class FolioitemBean
 		done_is_modified || 
 		regbyid_is_modified || 
 		regdate_is_modified || 
-		note_is_modified;
+		note_is_modified || 
+		manual_is_modified;
     }
 
     /**
@@ -1292,6 +1366,7 @@ public class FolioitemBean
         regbyid_is_modified = false;
         regdate_is_modified = false;
         note_is_modified = false;
+        manual_is_modified = false;
     }
 
     /**
@@ -1317,6 +1392,7 @@ public class FolioitemBean
         setRegbyid(bean.getRegbyid());
         setRegdate(bean.getRegdate());
         setNote(bean.getNote());
+        setManual(bean.getManual());
     }
 
     /**
@@ -1343,10 +1419,12 @@ public class FolioitemBean
                  + "\n - folioitem.regbyid = " + (regbyid_is_initialized ? ("[" + (regbyid == null ? null : regbyid.toString()) + "]") : "not initialized") + ""
                  + "\n - folioitem.regdate = " + (regdate_is_initialized ? ("[" + (regdate == null ? null : regdate.toString()) + "]") : "not initialized") + ""
                  + "\n - folioitem.note = " + (note_is_initialized ? ("[" + (note == null ? null : note.toString()) + "]") : "not initialized") + ""
+                 + "\n - folioitem.manual = " + (manual_is_initialized ? ("[" + (manual == null ? null : manual.toString()) + "]") : "not initialized") + ""
             ;
     }
 
 // class+ 
 
 // class- 
+
 }

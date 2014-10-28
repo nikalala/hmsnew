@@ -16,10 +16,12 @@ package com.mysoft.hms;
 
 // imports- 
 
+
 public class RoomownerroomBean
 // extends+ 
 
 // extends- 
+
 {
     private Long roomownerid;
     private boolean roomownerid_is_modified = false;
@@ -240,4 +242,5 @@ public class RoomownerroomBean
 // class+ 
 
 // class- 
+
 }

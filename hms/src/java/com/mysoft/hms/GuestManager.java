@@ -17,6 +17,7 @@ import java.sql.*;
 
 // imports- 
 
+
 /**
  * Handles database calls for the guest table.
  */
@@ -24,6 +25,7 @@ public class GuestManager
 // extends+ 
 
 // extends- 
+
 {
 
     /**
@@ -3426,4 +3428,5 @@ public class GuestManager
 // class+ 
 
 // class- 
+
 }

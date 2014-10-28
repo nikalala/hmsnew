@@ -16,10 +16,12 @@ package com.mysoft.hms;
 
 // imports- 
 
+
 public class PlevelBean
 // extends+ 
 
 // extends- 
+
 {
     private Integer plevelid;
     private boolean plevelid_is_modified = false;
@@ -462,4 +464,5 @@ public class PlevelBean
 // class+ 
 
 // class- 
+
 }

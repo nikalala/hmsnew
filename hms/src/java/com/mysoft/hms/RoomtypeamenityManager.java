@@ -17,6 +17,7 @@ import java.sql.*;
 
 // imports- 
 
+
 /**
  * Handles database calls for the roomtypeamenity table.
  */
@@ -24,6 +25,7 @@ public class RoomtypeamenityManager
 // extends+ 
 
 // extends- 
+
 {
 
     /**
@@ -1052,4 +1054,5 @@ public class RoomtypeamenityManager
 // class+ 
 
 // class- 
+
 }

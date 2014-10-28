@@ -16,10 +16,12 @@ package com.mysoft.hms;
 
 // imports- 
 
+
 public class ExtrachargetaxBean
 // extends+ 
 
 // extends- 
+
 {
     private Integer extrachargeid;
     private boolean extrachargeid_is_modified = false;
@@ -240,4 +242,5 @@ public class ExtrachargetaxBean
 // class+ 
 
 // class- 
+
 }

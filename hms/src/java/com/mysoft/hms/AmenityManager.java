@@ -17,6 +17,7 @@ import java.sql.*;
 
 // imports- 
 
+
 /**
  * Handles database calls for the amenity table.
  */
@@ -24,6 +25,7 @@ public class AmenityManager
 // extends+ 
 
 // extends- 
+
 {
 
     /**
@@ -1436,4 +1438,5 @@ public class AmenityManager
 // class+ 
 
 // class- 
+
 }

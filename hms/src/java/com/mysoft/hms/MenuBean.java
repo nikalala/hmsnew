@@ -16,10 +16,12 @@ package com.mysoft.hms;
 
 // imports- 
 
+
 public class MenuBean
 // extends+ 
 
 // extends- 
+
 {
     private Integer menuid;
     private boolean menuid_is_modified = false;
@@ -441,4 +443,5 @@ public class MenuBean
 // class+ 
 
 // class- 
+
 }

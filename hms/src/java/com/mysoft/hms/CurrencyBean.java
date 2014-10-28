@@ -16,10 +16,12 @@ package com.mysoft.hms;
 
 // imports- 
 
+
 public class CurrencyBean
 // extends+ 
 
 // extends- 
+
 {
     private Integer currencyid;
     private boolean currencyid_is_modified = false;
@@ -586,4 +588,5 @@ public class CurrencyBean
 // class+ 
 
 // class- 
+
 }

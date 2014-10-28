@@ -16,10 +16,12 @@ package com.mysoft.hms;
 
 // imports- 
 
+
 public class ContragentBean
 // extends+ 
 
 // extends- 
+
 {
     private Long contragentid;
     private boolean contragentid_is_modified = false;
@@ -2094,4 +2096,5 @@ public class ContragentBean
 // class+ 
 
 // class- 
+
 }

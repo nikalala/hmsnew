@@ -17,6 +17,7 @@ import java.sql.*;
 
 // imports- 
 
+
 /**
  * Handles database calls for the connectedroom table.
  */
@@ -24,6 +25,7 @@ public class ConnectedroomManager
 // extends+ 
 
 // extends- 
+
 {
 
     /**
@@ -1024,4 +1026,5 @@ public class ConnectedroomManager
 // class+ 
 
 // class- 
+
 }

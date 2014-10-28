@@ -16,10 +16,12 @@ package com.mysoft.hms;
 
 // imports- 
 
+
 public class ReservationBean
 // extends+ 
 
 // extends- 
+
 {
     private Long reservationid;
     private boolean reservationid_is_modified = false;
@@ -2155,6 +2157,7 @@ public class ReservationBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: reservation.status
+     * <li>comments: -1 - finished, 0 - active, 1 - canceled, 2 - no show, 3 - voided
      * <li>default value: 0
      * <li>column size: 10
      * <li>jdbc type returned by the driver: Types.INTEGER
@@ -2396,4 +2399,5 @@ public class ReservationBean
 // class+ 
 
 // class- 
+
 }

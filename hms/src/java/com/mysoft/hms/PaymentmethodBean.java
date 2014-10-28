@@ -16,10 +16,12 @@ package com.mysoft.hms;
 
 // imports- 
 
+
 public class PaymentmethodBean
 // extends+ 
 
 // extends- 
+
 {
     private Integer paymentmethodid;
     private boolean paymentmethodid_is_modified = false;
@@ -1056,4 +1058,5 @@ public class PaymentmethodBean
 // class+ 
 
 // class- 
+
 }

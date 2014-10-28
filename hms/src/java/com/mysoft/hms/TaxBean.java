@@ -16,10 +16,12 @@ package com.mysoft.hms;
 
 // imports- 
 
+
 public class TaxBean
 // extends+ 
 
 // extends- 
+
 {
     private Integer taxid;
     private boolean taxid_is_modified = false;
@@ -1055,4 +1057,5 @@ public class TaxBean
 // class+ 
 
 // class- 
+
 }

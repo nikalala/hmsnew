@@ -16,10 +16,12 @@ package com.mysoft.hms;
 
 // imports- 
 
+
 public class PersonneltypeBean
 // extends+ 
 
 // extends- 
+
 {
     private Integer personneltypeid;
     private boolean personneltypeid_is_modified = false;
@@ -430,4 +432,5 @@ public class PersonneltypeBean
 // class+ 
 
 // class- 
+
 }

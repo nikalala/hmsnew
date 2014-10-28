@@ -17,6 +17,7 @@ import java.util.Comparator;
 
 // imports- 
 
+
 /**
  * Comparator class is used to sort the RoomtypeamenityBean objects.
  */
@@ -24,6 +25,7 @@ public class RoomtypeamenityComparator implements Comparator
 // extends+ 
 
 // extends- 
+
 {
     /**
      * Holds the field on which the comparison is performed.
@@ -118,4 +120,5 @@ public class RoomtypeamenityComparator implements Comparator
 // class+ 
 
 // class- 
+
 }

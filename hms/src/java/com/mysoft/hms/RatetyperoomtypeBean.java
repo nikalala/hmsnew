@@ -16,10 +16,12 @@ package com.mysoft.hms;
 
 // imports- 
 
+
 public class RatetyperoomtypeBean
 // extends+ 
 
 // extends- 
+
 {
     private Integer ratetypeid;
     private boolean ratetypeid_is_modified = false;
@@ -240,4 +242,5 @@ public class RatetyperoomtypeBean
 // class+ 
 
 // class- 
+
 }

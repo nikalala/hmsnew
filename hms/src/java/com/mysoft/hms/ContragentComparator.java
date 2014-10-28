@@ -17,6 +17,7 @@ import java.util.Comparator;
 
 // imports- 
 
+
 /**
  * Comparator class is used to sort the ContragentBean objects.
  */
@@ -24,6 +25,7 @@ public class ContragentComparator implements Comparator
 // extends+ 
 
 // extends- 
+
 {
     /**
      * Holds the field on which the comparison is performed.
@@ -408,4 +410,5 @@ public class ContragentComparator implements Comparator
 // class+ 
 
 // class- 
+
 }

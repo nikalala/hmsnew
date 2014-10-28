@@ -17,6 +17,7 @@ import java.util.Comparator;
 
 // imports- 
 
+
 /**
  * Comparator class is used to sort the VReservationlistBean objects.
  */
@@ -24,6 +25,7 @@ public class VReservationlistComparator implements Comparator
 // extends+ 
 
 // extends- 
+
 {
     /**
      * Holds the field on which the comparison is performed.
@@ -378,4 +380,5 @@ public class VReservationlistComparator implements Comparator
 // class+ 
 
 // class- 
+
 }

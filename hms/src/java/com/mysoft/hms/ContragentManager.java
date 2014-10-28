@@ -17,6 +17,7 @@ import java.sql.*;
 
 // imports- 
 
+
 /**
  * Handles database calls for the contragent table.
  */
@@ -24,6 +25,7 @@ public class ContragentManager
 // extends+ 
 
 // extends- 
+
 {
 
     /**
@@ -3338,4 +3340,5 @@ public class ContragentManager
 // class+ 
 
 // class- 
+
 }

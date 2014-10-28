@@ -17,6 +17,7 @@ import java.util.Comparator;
 
 // imports- 
 
+
 /**
  * Comparator class is used to sort the RatetypeBean objects.
  */
@@ -24,6 +25,7 @@ public class RatetypeComparator implements Comparator
 // extends+ 
 
 // extends- 
+
 {
     /**
      * Holds the field on which the comparison is performed.
@@ -172,4 +174,5 @@ public class RatetypeComparator implements Comparator
 // class+ 
 
 // class- 
+
 }

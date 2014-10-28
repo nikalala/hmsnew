@@ -17,6 +17,7 @@ import java.util.Comparator;
 
 // imports- 
 
+
 /**
  * Comparator class is used to sort the ReservationreasonBean objects.
  */
@@ -24,6 +25,7 @@ public class ReservationreasonComparator implements Comparator
 // extends+ 
 
 // extends- 
+
 {
     /**
      * Holds the field on which the comparison is performed.
@@ -118,4 +120,5 @@ public class ReservationreasonComparator implements Comparator
 // class+ 
 
 // class- 
+
 }

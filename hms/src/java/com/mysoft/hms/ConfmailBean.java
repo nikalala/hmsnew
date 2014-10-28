@@ -16,10 +16,12 @@ package com.mysoft.hms;
 
 // imports- 
 
+
 public class ConfmailBean
 // extends+ 
 
 // extends- 
+
 {
     private Integer confmailid;
     private boolean confmailid_is_modified = false;
@@ -493,4 +495,5 @@ public class ConfmailBean
 // class+ 
 
 // class- 
+
 }

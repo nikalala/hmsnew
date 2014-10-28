@@ -17,6 +17,7 @@ import java.sql.*;
 
 // imports- 
 
+
 /**
  * Handles database calls for the bedtype table.
  */
@@ -24,6 +25,7 @@ public class BedtypeManager
 // extends+ 
 
 // extends- 
+
 {
 
     /**
@@ -1400,4 +1402,5 @@ public class BedtypeManager
 // class+ 
 
 // class- 
+
 }

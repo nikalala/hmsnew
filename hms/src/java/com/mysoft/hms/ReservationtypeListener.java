@@ -18,6 +18,7 @@ import java.sql.SQLException;
 // imports- 
 
 
+
 /**
  * Listener that is notified of reservationtype table changes.
  */
@@ -25,6 +26,7 @@ public interface ReservationtypeListener
 // extends+ 
 
 // extends- 
+
 {
     /**
      * Invoked just before inserting a ReservationtypeBean record into the database.
@@ -61,4 +63,5 @@ public interface ReservationtypeListener
 // class+ 
 
 // class- 
+
 }

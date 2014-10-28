@@ -17,6 +17,7 @@ import java.util.Comparator;
 
 // imports- 
 
+
 /**
  * Comparator class is used to sort the CurrencyrateBean objects.
  */
@@ -24,6 +25,7 @@ public class CurrencyrateComparator implements Comparator
 // extends+ 
 
 // extends- 
+
 {
     /**
      * Holds the field on which the comparison is performed.
@@ -144,4 +146,5 @@ public class CurrencyrateComparator implements Comparator
 // class+ 
 
 // class- 
+
 }

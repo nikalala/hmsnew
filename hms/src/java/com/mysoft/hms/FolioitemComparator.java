@@ -17,6 +17,7 @@ import java.util.Comparator;
 
 // imports- 
 
+
 /**
  * Comparator class is used to sort the FolioitemBean objects.
  */
@@ -24,6 +25,7 @@ public class FolioitemComparator implements Comparator
 // extends+ 
 
 // extends- 
+
 {
     /**
      * Holds the field on which the comparison is performed.
@@ -95,6 +97,7 @@ public class FolioitemComparator implements Comparator
      *   <li>FolioitemManager.ID_REGBYID
      *   <li>FolioitemManager.ID_REGDATE
      *   <li>FolioitemManager.ID_NOTE
+     *   <li>FolioitemManager.ID_MANUAL
      * </ul>
      *
      * @param bReverse set this value to true, if you want to reverse the sorting results
@@ -289,4 +292,5 @@ public class FolioitemComparator implements Comparator
 // class+ 
 
 // class- 
+
 }

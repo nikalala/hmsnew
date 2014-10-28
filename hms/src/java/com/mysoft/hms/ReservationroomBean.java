@@ -16,10 +16,12 @@ package com.mysoft.hms;
 
 // imports- 
 
+
 public class ReservationroomBean
 // extends+ 
 
 // extends- 
+
 {
     private Long reservationroomid;
     private boolean reservationroomid_is_modified = false;
@@ -919,4 +921,5 @@ public class ReservationroomBean
 // class+ 
 
 // class- 
+
 }

@@ -16,10 +16,12 @@ package com.mysoft.hms;
 
 // imports- 
 
+
 public class SeasonBean
 // extends+ 
 
 // extends- 
+
 {
     private Integer seasonid;
     private boolean seasonid_is_modified = false;
@@ -1054,4 +1056,5 @@ public class SeasonBean
 // class+ 
 
 // class- 
+
 }

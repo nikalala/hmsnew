@@ -16,10 +16,12 @@ package com.mysoft.hms;
 
 // imports- 
 
+
 public class PayoutBean
 // extends+ 
 
 // extends- 
+
 {
     private Integer payoutid;
     private boolean payoutid_is_modified = false;
@@ -533,4 +535,5 @@ public class PayoutBean
 // class+ 
 
 // class- 
+
 }

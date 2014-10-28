@@ -16,10 +16,12 @@ package com.mysoft.hms;
 
 // imports- 
 
+
 public class ReservationreasonBean
 // extends+ 
 
 // extends- 
+
 {
     private Long reservationid;
     private boolean reservationid_is_modified = false;
@@ -240,4 +242,5 @@ public class ReservationreasonBean
 // class+ 
 
 // class- 
+
 }

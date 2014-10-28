@@ -16,10 +16,12 @@ package com.mysoft.hms;
 
 // imports- 
 
+
 public class BsourceBean
 // extends+ 
 
 // extends- 
+
 {
     private Integer bsourceid;
     private boolean bsourceid_is_modified = false;
@@ -598,4 +600,5 @@ public class BsourceBean
 // class+ 
 
 // class- 
+
 }

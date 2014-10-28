@@ -16,10 +16,12 @@ package com.mysoft.hms;
 
 // imports- 
 
+
 public class RoomstBean
 // extends+ 
 
 // extends- 
+
 {
     private Long roomstsid;
     private boolean roomstsid_is_modified = false;
@@ -545,4 +547,5 @@ public class RoomstBean
 // class+ 
 
 // class- 
+
 }

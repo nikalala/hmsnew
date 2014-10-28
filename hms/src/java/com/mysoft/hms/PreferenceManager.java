@@ -17,6 +17,7 @@ import java.sql.*;
 
 // imports- 
 
+
 /**
  * Handles database calls for the preference table.
  */
@@ -24,6 +25,7 @@ public class PreferenceManager
 // extends+ 
 
 // extends- 
+
 {
 
     /**
@@ -1410,4 +1412,5 @@ public class PreferenceManager
 // class+ 
 
 // class- 
+
 }

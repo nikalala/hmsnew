@@ -17,6 +17,7 @@ import java.sql.*;
 
 // imports- 
 
+
 /**
  * Handles database calls for the templatecategory table.
  */
@@ -24,6 +25,7 @@ public class TemplatecategoryManager
 // extends+ 
 
 // extends- 
+
 {
 
     /**
@@ -1300,4 +1302,5 @@ public class TemplatecategoryManager
 // class+ 
 
 // class- 
+
 }

@@ -17,6 +17,7 @@ import java.util.Comparator;
 
 // imports- 
 
+
 /**
  * Comparator class is used to sort the ReservationtypeBean objects.
  */
@@ -24,6 +25,7 @@ public class ReservationtypeComparator implements Comparator
 // extends+ 
 
 // extends- 
+
 {
     /**
      * Holds the field on which the comparison is performed.
@@ -159,4 +161,5 @@ public class ReservationtypeComparator implements Comparator
 // class+ 
 
 // class- 
+
 }

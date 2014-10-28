@@ -17,6 +17,7 @@ import java.sql.*;
 
 // imports- 
 
+
 /**
  * Handles database calls for the roomimage table.
  */
@@ -24,6 +25,7 @@ public class RoomimageManager
 // extends+ 
 
 // extends- 
+
 {
 
     /**
@@ -1342,4 +1344,5 @@ public class RoomimageManager
 // class+ 
 
 // class- 
+
 }

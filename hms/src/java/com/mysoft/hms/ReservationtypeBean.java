@@ -16,10 +16,12 @@ package com.mysoft.hms;
 
 // imports- 
 
+
 public class ReservationtypeBean
 // extends+ 
 
 // extends- 
+
 {
     private Integer reservationtypeid;
     private boolean reservationtypeid_is_modified = false;
@@ -598,4 +600,5 @@ public class ReservationtypeBean
 // class+ 
 
 // class- 
+
 }

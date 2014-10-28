@@ -16,10 +16,12 @@ package com.mysoft.hms;
 
 // imports- 
 
+
 public class StcolorBean
 // extends+ 
 
 // extends- 
+
 {
     private Integer stcolorid;
     private boolean stcolorid_is_modified = false;
@@ -610,4 +612,5 @@ public class StcolorBean
 // class+ 
 
 // class- 
+
 }

@@ -16,10 +16,12 @@ package com.mysoft.hms;
 
 // imports- 
 
+
 public class NationalityBean
 // extends+ 
 
 // extends- 
+
 {
     private Integer nationalityid;
     private boolean nationalityid_is_modified = false;
@@ -226,4 +228,5 @@ public class NationalityBean
 // class+ 
 
 // class- 
+
 }

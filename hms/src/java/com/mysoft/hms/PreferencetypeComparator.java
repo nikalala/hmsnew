@@ -17,6 +17,7 @@ import java.util.Comparator;
 
 // imports- 
 
+
 /**
  * Comparator class is used to sort the PreferencetypeBean objects.
  */
@@ -24,6 +25,7 @@ public class PreferencetypeComparator implements Comparator
 // extends+ 
 
 // extends- 
+
 {
     /**
      * Holds the field on which the comparison is performed.
@@ -146,4 +148,5 @@ public class PreferencetypeComparator implements Comparator
 // class+ 
 
 // class- 
+
 }

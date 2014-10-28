@@ -18,6 +18,7 @@ import java.sql.SQLException;
 // imports- 
 
 
+
 /**
  * Listener that is notified of preferencetype table changes.
  */
@@ -25,6 +26,7 @@ public interface PreferencetypeListener
 // extends+ 
 
 // extends- 
+
 {
     /**
      * Invoked just before inserting a PreferencetypeBean record into the database.
@@ -61,4 +63,5 @@ public interface PreferencetypeListener
 // class+ 
 
 // class- 
+
 }

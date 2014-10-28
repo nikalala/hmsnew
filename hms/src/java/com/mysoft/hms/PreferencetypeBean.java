@@ -16,10 +16,12 @@ package com.mysoft.hms;
 
 // imports- 
 
+
 public class PreferencetypeBean
 // extends+ 
 
 // extends- 
+
 {
     private Integer preferencetypeid;
     private boolean preferencetypeid_is_modified = false;
@@ -532,4 +534,5 @@ public class PreferencetypeBean
 // class+ 
 
 // class- 
+
 }

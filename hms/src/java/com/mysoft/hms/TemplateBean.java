@@ -16,10 +16,12 @@ package com.mysoft.hms;
 
 // imports- 
 
+
 public class TemplateBean
 // extends+ 
 
 // extends- 
+
 {
     private Integer templateid;
     private boolean templateid_is_modified = false;
@@ -946,4 +948,5 @@ public class TemplateBean
 // class+ 
 
 // class- 
+
 }

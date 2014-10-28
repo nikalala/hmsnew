@@ -18,6 +18,7 @@ import java.sql.SQLException;
 // imports- 
 
 
+
 /**
  * Listener that is notified of extrachargefolio table changes.
  */
@@ -25,6 +26,7 @@ public interface ExtrachargefolioListener
 // extends+ 
 
 // extends- 
+
 {
     /**
      * Invoked just before inserting a ExtrachargefolioBean record into the database.
@@ -61,4 +63,5 @@ public interface ExtrachargefolioListener
 // class+ 
 
 // class- 
+
 }

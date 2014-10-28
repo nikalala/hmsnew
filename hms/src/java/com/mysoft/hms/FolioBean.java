@@ -16,10 +16,12 @@ package com.mysoft.hms;
 
 // imports- 
 
+
 public class FolioBean
 // extends+ 
 
 // extends- 
+
 {
     private Long folioid;
     private boolean folioid_is_modified = false;
@@ -682,4 +684,5 @@ public class FolioBean
 // class+ 
 
 // class- 
+
 }

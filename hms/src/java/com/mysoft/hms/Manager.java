@@ -20,6 +20,7 @@ import javax.sql.DataSource;
 
 // imports- 
 
+
 /**
  * The Manager provides connections and manages transactions transparently.
  * <br>
@@ -34,6 +35,7 @@ public class Manager
 // extends+ 
 
 // extends- 
+
 {
     private static Manager manager_instance = new Manager();
     private static InheritableThreadLocal trans_conn = new InheritableThreadLocal();
@@ -371,4 +373,5 @@ public class Manager
 // class+ 
 
 // class- 
+
 }

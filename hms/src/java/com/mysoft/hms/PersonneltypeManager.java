@@ -17,6 +17,7 @@ import java.sql.*;
 
 // imports- 
 
+
 /**
  * Handles database calls for the personneltype table.
  */
@@ -24,6 +25,7 @@ public class PersonneltypeManager
 // extends+ 
 
 // extends- 
+
 {
 
     /**
@@ -1175,4 +1177,5 @@ public class PersonneltypeManager
 // class+ 
 
 // class- 
+
 }

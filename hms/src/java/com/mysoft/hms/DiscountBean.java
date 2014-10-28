@@ -16,10 +16,12 @@ package com.mysoft.hms;
 
 // imports- 
 
+
 public class DiscountBean
 // extends+ 
 
 // extends- 
+
 {
     private Integer discountid;
     private boolean discountid_is_modified = false;
@@ -978,4 +980,5 @@ public class DiscountBean
 // class+ 
 
 // class- 
+
 }

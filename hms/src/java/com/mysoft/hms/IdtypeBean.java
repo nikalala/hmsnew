@@ -16,10 +16,12 @@ package com.mysoft.hms;
 
 // imports- 
 
+
 public class IdtypeBean
 // extends+ 
 
 // extends- 
+
 {
     private Integer idtypeid;
     private boolean idtypeid_is_modified = false;
@@ -379,4 +381,5 @@ public class IdtypeBean
 // class+ 
 
 // class- 
+
 }

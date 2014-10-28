@@ -16,10 +16,12 @@ package com.mysoft.hms;
 
 // imports- 
 
+
 public class RoomimageBean
 // extends+ 
 
 // extends- 
+
 {
     private Integer roomimageid;
     private boolean roomimageid_is_modified = false;
@@ -529,4 +531,5 @@ public class RoomimageBean
 // class+ 
 
 // class- 
+
 }

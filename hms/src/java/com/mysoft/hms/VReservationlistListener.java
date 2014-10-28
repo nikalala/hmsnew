@@ -18,6 +18,7 @@ import java.sql.SQLException;
 // imports- 
 
 
+
 /**
  * Listener that is notified of v_reservationlist table changes.
  */
@@ -25,6 +26,7 @@ public interface VReservationlistListener
 // extends+ 
 
 // extends- 
+
 {
     /**
      * Invoked just before inserting a VReservationlistBean record into the database.
@@ -61,4 +63,5 @@ public interface VReservationlistListener
 // class+ 
 
 // class- 
+
 }

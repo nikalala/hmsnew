@@ -17,6 +17,7 @@ import java.sql.*;
 
 // imports- 
 
+
 /**
  * Handles database calls for the ratetype table.
  */
@@ -24,6 +25,7 @@ public class RatetypeManager
 // extends+ 
 
 // extends- 
+
 {
 
     /**
@@ -1692,4 +1694,5 @@ public class RatetypeManager
 // class+ 
 
 // class- 
+
 }

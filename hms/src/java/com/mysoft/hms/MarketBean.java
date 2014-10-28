@@ -16,10 +16,12 @@ package com.mysoft.hms;
 
 // imports- 
 
+
 public class MarketBean
 // extends+ 
 
 // extends- 
+
 {
     private Integer marketid;
     private boolean marketid_is_modified = false;
@@ -598,4 +600,5 @@ public class MarketBean
 // class+ 
 
 // class- 
+
 }

@@ -17,6 +17,7 @@ import java.sql.*;
 
 // imports- 
 
+
 /**
  * Handles database calls for the market table.
  */
@@ -24,6 +25,7 @@ public class MarketManager
 // extends+ 
 
 // extends- 
+
 {
 
     /**
@@ -1528,4 +1530,5 @@ public class MarketManager
 // class+ 
 
 // class- 
+
 }
