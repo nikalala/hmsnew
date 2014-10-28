@@ -152,7 +152,7 @@ table.scrollwk tr {
     
     $(document).ready(function() {
         
-        $("#myModalSave").removeClass("btn-primary").addClass("btn-danger")
+        $("#myModalSave").removeClass("btn-primary").addClass("btn-danger");
         $("#myModalSave").html("რეზერვაცია");
         $("#myModalCheckin").remove();
         var r= $('<button type="button" class="btn btn-danger" id="myModalCheckin" onclick="savedata1(\'myModal\',\'checkin=true\')">მიღება</button>');
