@@ -18,7 +18,6 @@ import java.sql.SQLException;
 // imports- 
 
 
-
 /**
  * Listener that is notified of roomrates table changes.
  */
@@ -26,7 +25,6 @@ public interface RoomratesListener
 // extends+ 
 
 // extends- 
-
 {
     /**
      * Invoked just before inserting a RoomratesBean record into the database.
@@ -63,5 +61,4 @@ public interface RoomratesListener
 // class+ 
 
 // class- 
-
 }

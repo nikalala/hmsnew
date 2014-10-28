@@ -18,7 +18,6 @@ import java.sql.SQLException;
 // imports- 
 
 
-
 /**
  * Listener that is notified of vipstatus table changes.
  */
@@ -26,7 +25,6 @@ public interface VipstatusListener
 // extends+ 
 
 // extends- 
-
 {
     /**
      * Invoked just before inserting a VipstatusBean record into the database.
@@ -63,5 +61,4 @@ public interface VipstatusListener
 // class+ 
 
 // class- 
-
 }

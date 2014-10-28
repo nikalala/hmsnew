@@ -16,12 +16,10 @@ package com.mysoft.hms;
 
 // imports- 
 
-
 public class AmenityBean
 // extends+ 
 
 // extends- 
-
 {
     private Integer amenityid;
     private boolean amenityid_is_modified = false;
@@ -688,5 +686,4 @@ public class AmenityBean
 // class+ 
 
 // class- 
-
 }

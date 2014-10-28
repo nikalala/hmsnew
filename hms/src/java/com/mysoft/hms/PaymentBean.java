@@ -16,12 +16,10 @@ package com.mysoft.hms;
 
 // imports- 
 
-
 public class PaymentBean
 // extends+ 
 
 // extends- 
-
 {
     private Long paymentid;
     private boolean paymentid_is_modified = false;
@@ -897,5 +895,4 @@ public class PaymentBean
 // class+ 
 
 // class- 
-
 }

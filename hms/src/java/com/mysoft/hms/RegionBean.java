@@ -16,12 +16,10 @@ package com.mysoft.hms;
 
 // imports- 
 
-
 public class RegionBean
 // extends+ 
 
 // extends- 
-
 {
     private Integer regionid;
     private boolean regionid_is_modified = false;
@@ -371,5 +369,4 @@ public class RegionBean
 // class+ 
 
 // class- 
-
 }

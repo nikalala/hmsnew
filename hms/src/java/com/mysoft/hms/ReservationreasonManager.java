@@ -17,7 +17,6 @@ import java.sql.*;
 
 // imports- 
 
-
 /**
  * Handles database calls for the reservationreason table.
  */
@@ -25,7 +24,6 @@ public class ReservationreasonManager
 // extends+ 
 
 // extends- 
-
 {
 
     /**
@@ -1054,5 +1052,4 @@ public class ReservationreasonManager
 // class+ 
 
 // class- 
-
 }

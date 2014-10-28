@@ -18,7 +18,6 @@ import java.sql.SQLException;
 // imports- 
 
 
-
 /**
  * Listener that is notified of taxaccount table changes.
  */
@@ -26,7 +25,6 @@ public interface TaxaccountListener
 // extends+ 
 
 // extends- 
-
 {
     /**
      * Invoked just before inserting a TaxaccountBean record into the database.
@@ -63,5 +61,4 @@ public interface TaxaccountListener
 // class+ 
 
 // class- 
-
 }

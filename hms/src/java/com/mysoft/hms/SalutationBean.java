@@ -16,12 +16,10 @@ package com.mysoft.hms;
 
 // imports- 
 
-
 public class SalutationBean
 // extends+ 
 
 // extends- 
-
 {
     private Integer salutationid;
     private boolean salutationid_is_modified = false;
@@ -229,5 +227,4 @@ public class SalutationBean
 // class+ 
 
 // class- 
-
 }

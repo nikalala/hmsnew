@@ -18,7 +18,6 @@ import java.sql.SQLException;
 // imports- 
 
 
-
 /**
  * Listener that is notified of reason table changes.
  */
@@ -26,7 +25,6 @@ public interface ReasonListener
 // extends+ 
 
 // extends- 
-
 {
     /**
      * Invoked just before inserting a ReasonBean record into the database.
@@ -63,5 +61,4 @@ public interface ReasonListener
 // class+ 
 
 // class- 
-
 }

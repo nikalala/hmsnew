@@ -16,12 +16,10 @@ package com.mysoft.hms;
 
 // imports- 
 
-
 public class ReasonBean
 // extends+ 
 
 // extends- 
-
 {
     private Integer reasonid;
     private boolean reasonid_is_modified = false;
@@ -611,5 +609,4 @@ public class ReasonBean
 // class+ 
 
 // class- 
-
 }

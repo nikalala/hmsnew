@@ -17,7 +17,6 @@ import java.sql.*;
 
 // imports- 
 
-
 /**
  * Handles database calls for the idtype table.
  */
@@ -25,7 +24,6 @@ public class IdtypeManager
 // extends+ 
 
 // extends- 
-
 {
 
     /**
@@ -1365,5 +1363,4 @@ public class IdtypeManager
 // class+ 
 
 // class- 
-
 }

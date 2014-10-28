@@ -18,7 +18,6 @@ import java.sql.SQLException;
 // imports- 
 
 
-
 /**
  * Listener that is notified of idtype table changes.
  */
@@ -26,7 +25,6 @@ public interface IdtypeListener
 // extends+ 
 
 // extends- 
-
 {
     /**
      * Invoked just before inserting a IdtypeBean record into the database.
@@ -63,5 +61,4 @@ public interface IdtypeListener
 // class+ 
 
 // class- 
-
 }

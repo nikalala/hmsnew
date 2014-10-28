@@ -17,7 +17,6 @@ import java.sql.*;
 
 // imports- 
 
-
 /**
  * Handles database calls for the discount table.
  */
@@ -25,7 +24,6 @@ public class DiscountManager
 // extends+ 
 
 // extends- 
-
 {
 
     /**
@@ -2030,5 +2028,4 @@ public class DiscountManager
 // class+ 
 
 // class- 
-
 }

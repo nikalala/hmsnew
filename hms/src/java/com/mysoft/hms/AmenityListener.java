@@ -18,7 +18,6 @@ import java.sql.SQLException;
 // imports- 
 
 
-
 /**
  * Listener that is notified of amenity table changes.
  */
@@ -26,7 +25,6 @@ public interface AmenityListener
 // extends+ 
 
 // extends- 
-
 {
     /**
      * Invoked just before inserting a AmenityBean record into the database.
@@ -63,5 +61,4 @@ public interface AmenityListener
 // class+ 
 
 // class- 
-
 }

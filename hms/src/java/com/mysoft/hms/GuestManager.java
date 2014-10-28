@@ -17,7 +17,6 @@ import java.sql.*;
 
 // imports- 
 
-
 /**
  * Handles database calls for the guest table.
  */
@@ -25,7 +24,6 @@ public class GuestManager
 // extends+ 
 
 // extends- 
-
 {
 
     /**
@@ -2719,6 +2717,38 @@ public class GuestManager
          }
     }
 
+    /**
+     * Retrieves an array of RoomtypeBean using the relation table Reservationroom given a GuestBean object.
+     *
+     * @param pObject the GuestBean pObject to be used
+     * @return an array of RoomtypeBean 
+     */
+    // MANY TO MANY
+    public RoomtypeBean[] loadRoomtypeViaReservationroom(GuestBean pObject) throws SQLException
+    {
+         Connection c = null;
+         PreparedStatement ps = null;
+         String strSQL =      " SELECT "
+                         + "        *"
+                         + " FROM  "
+                         + "        roomtype,reservationroom"
+                         + " WHERE "    
+                         + "     reservationroom.guestid = ?"
+                         + " AND reservationroom.roomtypeid = roomtype.roomtypeid";
+         try
+         {
+             c = getConnection();
+             ps = c.prepareStatement(strSQL,ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+             Manager.setLong(ps, 1, pObject.getGuestid());
+             return RoomtypeManager.getInstance().loadByPreparedStatement(ps);
+         }
+         finally
+         {
+            getManager().close(ps);
+            freeConnection(c);
+         }
+    }
+
 
 
     ///////////////////////////////////////////////////////////////////////
@@ -3396,5 +3426,4 @@ public class GuestManager
 // class+ 
 
 // class- 
-
 }

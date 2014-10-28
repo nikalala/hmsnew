@@ -17,7 +17,6 @@ import java.sql.*;
 
 // imports- 
 
-
 /**
  * Handles database calls for the roomrates table.
  */
@@ -25,7 +24,6 @@ public class RoomratesManager
 // extends+ 
 
 // extends- 
-
 {
 
     /**
@@ -961,5 +959,4 @@ public class RoomratesManager
 // class+ 
 
 // class- 
-
 }

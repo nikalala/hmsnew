@@ -16,12 +16,10 @@ package com.mysoft.hms;
 
 // imports- 
 
-
 public class HouseunitBean
 // extends+ 
 
 // extends- 
-
 {
     private Integer houseunitid;
     private boolean houseunitid_is_modified = false;
@@ -535,5 +533,4 @@ public class HouseunitBean
 // class+ 
 
 // class- 
-
 }

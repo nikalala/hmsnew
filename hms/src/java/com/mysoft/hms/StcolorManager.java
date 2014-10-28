@@ -17,7 +17,6 @@ import java.sql.*;
 
 // imports- 
 
-
 /**
  * Handles database calls for the stcolor table.
  */
@@ -25,7 +24,6 @@ public class StcolorManager
 // extends+ 
 
 // extends- 
-
 {
 
     /**
@@ -1333,5 +1331,4 @@ public class StcolorManager
 // class+ 
 
 // class- 
-
 }

@@ -17,7 +17,6 @@ import java.sql.*;
 
 // imports- 
 
-
 /**
  * Handles database calls for the extracharge table.
  */
@@ -25,7 +24,6 @@ public class ExtrachargeManager
 // extends+ 
 
 // extends- 
-
 {
 
     /**
@@ -2242,5 +2240,4 @@ public class ExtrachargeManager
 // class+ 
 
 // class- 
-
 }

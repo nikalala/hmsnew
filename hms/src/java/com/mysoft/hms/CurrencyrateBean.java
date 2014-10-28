@@ -16,12 +16,10 @@ package com.mysoft.hms;
 
 // imports- 
 
-
 public class CurrencyrateBean
 // extends+ 
 
 // extends- 
-
 {
     private Long currencyrateid;
     private boolean currencyrateid_is_modified = false;
@@ -393,5 +391,4 @@ public class CurrencyrateBean
 // class+ 
 
 // class- 
-
 }

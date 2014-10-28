@@ -17,7 +17,6 @@ import java.sql.*;
 
 // imports- 
 
-
 /**
  * Handles database calls for the extrachargefolio table.
  */
@@ -25,7 +24,6 @@ public class ExtrachargefolioManager
 // extends+ 
 
 // extends- 
-
 {
 
     /**
@@ -1294,5 +1292,4 @@ public class ExtrachargefolioManager
 // class+ 
 
 // class- 
-
 }

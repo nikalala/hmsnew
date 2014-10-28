@@ -17,7 +17,6 @@ import java.sql.*;
 
 // imports- 
 
-
 /**
  * Handles database calls for the houseunit table.
  */
@@ -25,7 +24,6 @@ public class HouseunitManager
 // extends+ 
 
 // extends- 
-
 {
 
     /**
@@ -1265,5 +1263,4 @@ public class HouseunitManager
 // class+ 
 
 // class- 
-
 }

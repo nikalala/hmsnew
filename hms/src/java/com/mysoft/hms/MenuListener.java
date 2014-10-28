@@ -18,7 +18,6 @@ import java.sql.SQLException;
 // imports- 
 
 
-
 /**
  * Listener that is notified of menu table changes.
  */
@@ -26,7 +25,6 @@ public interface MenuListener
 // extends+ 
 
 // extends- 
-
 {
     /**
      * Invoked just before inserting a MenuBean record into the database.
@@ -63,5 +61,4 @@ public interface MenuListener
 // class+ 
 
 // class- 
-
 }

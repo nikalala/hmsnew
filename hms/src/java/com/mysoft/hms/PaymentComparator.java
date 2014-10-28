@@ -17,7 +17,6 @@ import java.util.Comparator;
 
 // imports- 
 
-
 /**
  * Comparator class is used to sort the PaymentBean objects.
  */
@@ -25,7 +24,6 @@ public class PaymentComparator implements Comparator
 // extends+ 
 
 // extends- 
-
 {
     /**
      * Holds the field on which the comparison is performed.
@@ -225,5 +223,4 @@ public class PaymentComparator implements Comparator
 // class+ 
 
 // class- 
-
 }

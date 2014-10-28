@@ -18,7 +18,6 @@ import java.sql.SQLException;
 // imports- 
 
 
-
 /**
  * Listener that is notified of nationality table changes.
  */
@@ -26,7 +25,6 @@ public interface NationalityListener
 // extends+ 
 
 // extends- 
-
 {
     /**
      * Invoked just before inserting a NationalityBean record into the database.
@@ -63,5 +61,4 @@ public interface NationalityListener
 // class+ 
 
 // class- 
-
 }

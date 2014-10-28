@@ -17,7 +17,6 @@ import java.sql.*;
 
 // imports- 
 
-
 /**
  * Handles database calls for the reservationroom table.
  */
@@ -25,7 +24,6 @@ public class ReservationroomManager
 // extends+ 
 
 // extends- 
-
 {
 
     /**
@@ -98,6 +96,13 @@ public class ReservationroomManager
     public static final int TYPE_REGDATE = Types.TIMESTAMP;
     public static final String NAME_REGDATE = "regdate";
 
+    /**
+     * Column roomtypeid of type Types.INTEGER mapped to Integer.
+     */
+    public static final int ID_ROOMTYPEID = 10;
+    public static final int TYPE_ROOMTYPEID = Types.INTEGER;
+    public static final String NAME_ROOMTYPEID = "roomtypeid";
+
 
     private static final String TABLE_NAME = "reservationroom";
 
@@ -116,6 +121,7 @@ public class ReservationroomManager
         ,"reservationroom.guestid"
         ,"reservationroom.regbyid"
         ,"reservationroom.regdate"
+        ,"reservationroom.roomtypeid"
     };
 
     /**
@@ -130,7 +136,8 @@ public class ReservationroomManager
                             + ",reservationroom.ratetypeid"
                             + ",reservationroom.guestid"
                             + ",reservationroom.regbyid"
-                            + ",reservationroom.regdate";
+                            + ",reservationroom.regdate"
+                            + ",reservationroom.roomtypeid";
 
     private static ReservationroomManager singleton = new ReservationroomManager();
 
@@ -482,6 +489,57 @@ public class ReservationroomManager
     }
 
 
+    /**
+     * Loads ReservationroomBean array from the reservationroom table using its roomtypeid field.
+     *
+     * @return an array of ReservationroomBean 
+     */
+    // LOAD BY IMPORTED KEY
+    public ReservationroomBean[] loadByRoomtypeid(Integer value) throws SQLException 
+    {
+        Connection c = null;
+        PreparedStatement ps = null;
+        try 
+        {
+            c = getConnection();
+            ps = c.prepareStatement("SELECT " + ALL_FIELDS + " FROM reservationroom WHERE roomtypeid=?",ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            Manager.setInteger(ps, 1, value);
+            return loadByPreparedStatement(ps);
+        }
+        finally
+        {
+            getManager().close(ps);
+            freeConnection(c);
+        }
+    }
+
+
+    /**
+     * Deletes from the reservationroom table by roomtypeid field.
+     *
+     * @param value the key value to seek
+     * @return the number of rows deleted
+     */
+    // DELETE BY IMPORTED KEY
+    public int deleteByRoomtypeid(Integer value) throws SQLException 
+    {
+        Connection c = null;
+        PreparedStatement ps = null;
+        try 
+        {
+            c = getConnection();
+            ps = c.prepareStatement("DELETE FROM reservationroom WHERE roomtypeid=?");
+            Manager.setInteger(ps, 1, value);
+            return ps.executeUpdate();
+        }
+        finally
+        {
+            getManager().close(ps);
+            freeConnection(c);
+        }
+    }
+
+
 
     //////////////////////////////////////
     // GET/SET FOREIGN KEY BEAN METHOD
@@ -623,6 +681,34 @@ public class ReservationroomManager
     public ReservationroomBean setRoomBean(ReservationroomBean pObject,RoomBean pObjectToBeSet)
     {
         pObject.setRoomid(pObjectToBeSet.getRoomid());
+        return pObject;
+    }
+
+    /**
+     * Retrieves the RoomtypeBean object from the reservationroom.roomtypeid field.
+     *
+     * @param pObject the ReservationroomBean 
+     * @return the associated RoomtypeBean pObject
+     */
+    // GET IMPORTED
+    public RoomtypeBean getRoomtypeBean(ReservationroomBean pObject) throws SQLException
+    {
+        RoomtypeBean other = RoomtypeManager.getInstance().createRoomtypeBean();
+        other.setRoomtypeid(pObject.getRoomtypeid());
+        return RoomtypeManager.getInstance().loadUniqueUsingTemplate(other);
+    }
+
+    /**
+     * Associates the ReservationroomBean object to the RoomtypeBean object.
+     *
+     * @param pObject the ReservationroomBean object to use
+     * @param pObjectToBeSet the RoomtypeBean object to associate to the ReservationroomBean 
+     * @return the associated RoomtypeBean pObject
+     */
+    // SET IMPORTED
+    public ReservationroomBean setRoomtypeBean(ReservationroomBean pObject,RoomtypeBean pObjectToBeSet)
+    {
+        pObject.setRoomtypeid(pObjectToBeSet.getRoomtypeid());
         return pObject;
     }
 
@@ -889,6 +975,14 @@ public class ReservationroomManager
                     _dirtyCount++;
                 }
 
+                if (pObject.isRoomtypeidModified()) {
+                    if (_dirtyCount>0) {
+                        _sql.append(",");
+                    }
+                    _sql.append("roomtypeid");
+                    _dirtyCount++;
+                }
+
                 _sql.append(") values (");
                 if(_dirtyCount > 0) {
                     _sql.append("?");
@@ -939,6 +1033,10 @@ public class ReservationroomManager
     
                 if (pObject.isRegdateModified()) {
                     ps.setTimestamp(++_dirtyCount, pObject.getRegdate());
+                }
+    
+                if (pObject.isRoomtypeidModified()) {
+                    Manager.setInteger(ps, ++_dirtyCount, pObject.getRoomtypeid());
                 }
     
                 ps.executeUpdate();
@@ -1042,6 +1140,15 @@ public class ReservationroomManager
                     }
                     _sql.append("regdate").append("=?");
                 }
+
+                if (pObject.isRoomtypeidModified()) {
+                    if (useComma) {
+                        _sql.append(",");
+                    } else {
+                        useComma=true;
+                    }
+                    _sql.append("roomtypeid").append("=?");
+                }
                 _sql.append(" WHERE ");
                 _sql.append("reservationroom.reservationroomid=?");
                 ps = c.prepareStatement(_sql.toString(),ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
@@ -1085,6 +1192,10 @@ public class ReservationroomManager
 
                 if (pObject.isRegdateModified()) {
                       ps.setTimestamp(++_dirtyCount, pObject.getRegdate());
+                }
+
+                if (pObject.isRoomtypeidModified()) {
+                      Manager.setInteger(ps, ++_dirtyCount, pObject.getRoomtypeid());
                 }
     
                 if (_dirtyCount == 0) {
@@ -1213,6 +1324,11 @@ public class ReservationroomManager
                  _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("regdate= ?");
              }
     
+             if (pObject.isRoomtypeidModified()) {
+                 _dirtyCount ++; 
+                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("roomtypeid= ?");
+             }
+    
              if (_dirtyCount == 0) {
                  throw new SQLException ("The pObject to look for is invalid : not initialized !");
              }
@@ -1259,6 +1375,10 @@ public class ReservationroomManager
     
              if (pObject.isRegdateModified()) {
                  ps.setTimestamp(++_dirtyCount, pObject.getRegdate());
+             }
+    
+             if (pObject.isRoomtypeidModified()) {
+                 Manager.setInteger(ps, ++_dirtyCount, pObject.getRoomtypeid());
              }
     
              ps.executeQuery();
@@ -1360,6 +1480,13 @@ public class ReservationroomManager
                 _dirtyAnd ++;
             }
     
+            if (pObject.isRoomtypeidInitialized()) {
+                if (_dirtyAnd > 0)
+                    sql.append(" AND ");
+                sql.append("roomtypeid").append("=?");
+                _dirtyAnd ++;
+            }
+    
             c = getConnection();
             ps = c.prepareStatement(sql.toString(),ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             int _dirtyCount = 0;
@@ -1402,6 +1529,10 @@ public class ReservationroomManager
     
             if (pObject.isRegdateInitialized()) {
                 ps.setTimestamp(++_dirtyCount, pObject.getRegdate());
+            }
+    
+            if (pObject.isRoomtypeidInitialized()) {
+                Manager.setInteger(ps, ++_dirtyCount, pObject.getRoomtypeid());
             }
     
             int _rows = ps.executeUpdate();
@@ -1665,6 +1796,11 @@ public class ReservationroomManager
                     _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("regdate= ?");
                 }
     
+                if (pObject.isRoomtypeidModified()) {
+                    _dirtyCount++; 
+                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("roomtypeid= ?");
+                }
+    
                 if (_dirtyCount == 0)
                    throw new SQLException ("The pObject to look is unvalid : not initialized !");
     
@@ -1714,6 +1850,10 @@ public class ReservationroomManager
                     ps.setTimestamp(++_dirtyCount, pObject.getRegdate());
                 }
     
+                if (pObject.isRoomtypeidModified()) {
+                    Manager.setInteger(ps, ++_dirtyCount, pObject.getRoomtypeid());
+                }
+    
                 return countByPreparedStatement(ps);
         }
         finally
@@ -1748,6 +1888,7 @@ public class ReservationroomManager
         pObject.setGuestid(Manager.getLong(rs, 8));
         pObject.setRegbyid(Manager.getInteger(rs, 9));
         pObject.setRegdate(rs.getTimestamp(10));
+        pObject.setRoomtypeid(Manager.getInteger(rs, 11));
 
         pObject.isNew(false);
         pObject.resetIsModified();
@@ -1809,6 +1950,10 @@ public class ReservationroomManager
                 case ID_REGDATE:
                     ++pos;
                     pObject.setRegdate(rs.getTimestamp(pos));
+                    break;
+                case ID_ROOMTYPEID:
+                    ++pos;
+                    pObject.setRoomtypeid(Manager.getInteger(rs, pos));
                     break;
             }
         }
@@ -1954,5 +2099,4 @@ public class ReservationroomManager
 // class+ 
 
 // class- 
-
 }

@@ -16,12 +16,10 @@ package com.mysoft.hms;
 
 // imports- 
 
-
 public class BedtypeBean
 // extends+ 
 
 // extends- 
-
 {
     private Integer bedtypeid;
     private boolean bedtypeid_is_modified = false;
@@ -600,5 +598,4 @@ public class BedtypeBean
 // class+ 
 
 // class- 
-
 }

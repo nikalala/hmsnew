@@ -17,7 +17,6 @@ import java.sql.*;
 
 // imports- 
 
-
 /**
  * Handles database calls for the reservation table.
  */
@@ -25,7 +24,6 @@ public class ReservationManager
 // extends+ 
 
 // extends- 
-
 {
 
     /**
@@ -238,6 +236,13 @@ public class ReservationManager
     public static final int TYPE_DISCOUNTNIGHTS = Types.INTEGER;
     public static final String NAME_DISCOUNTNIGHTS = "discountnights";
 
+    /**
+     * Column status of type Types.INTEGER mapped to Integer.
+     */
+    public static final int ID_STATUS = 30;
+    public static final int TYPE_STATUS = Types.INTEGER;
+    public static final String NAME_STATUS = "status";
+
 
     private static final String TABLE_NAME = "reservation";
 
@@ -276,6 +281,7 @@ public class ReservationManager
         ,"reservation.nomanualtax"
         ,"reservation.notax"
         ,"reservation.discountnights"
+        ,"reservation.status"
     };
 
     /**
@@ -310,7 +316,8 @@ public class ReservationManager
                             + ",reservation.num"
                             + ",reservation.nomanualtax"
                             + ",reservation.notax"
-                            + ",reservation.discountnights";
+                            + ",reservation.discountnights"
+                            + ",reservation.status";
 
     private static ReservationManager singleton = new ReservationManager();
 
@@ -1540,6 +1547,14 @@ public class ReservationManager
                     _dirtyCount++;
                 }
 
+                if (pObject.isStatusModified()) {
+                    if (_dirtyCount>0) {
+                        _sql.append(",");
+                    }
+                    _sql.append("status");
+                    _dirtyCount++;
+                }
+
                 _sql.append(") values (");
                 if(_dirtyCount > 0) {
                     _sql.append("?");
@@ -1670,6 +1685,10 @@ public class ReservationManager
     
                 if (pObject.isDiscountnightsModified()) {
                     Manager.setInteger(ps, ++_dirtyCount, pObject.getDiscountnights());
+                }
+    
+                if (pObject.isStatusModified()) {
+                    Manager.setInteger(ps, ++_dirtyCount, pObject.getStatus());
                 }
     
                 ps.executeUpdate();
@@ -1953,6 +1972,15 @@ public class ReservationManager
                     }
                     _sql.append("discountnights").append("=?");
                 }
+
+                if (pObject.isStatusModified()) {
+                    if (useComma) {
+                        _sql.append(",");
+                    } else {
+                        useComma=true;
+                    }
+                    _sql.append("status").append("=?");
+                }
                 _sql.append(" WHERE ");
                 _sql.append("reservation.reservationid=?");
                 ps = c.prepareStatement(_sql.toString(),ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
@@ -2076,6 +2104,10 @@ public class ReservationManager
 
                 if (pObject.isDiscountnightsModified()) {
                       Manager.setInteger(ps, ++_dirtyCount, pObject.getDiscountnights());
+                }
+
+                if (pObject.isStatusModified()) {
+                      Manager.setInteger(ps, ++_dirtyCount, pObject.getStatus());
                 }
     
                 if (_dirtyCount == 0) {
@@ -2304,6 +2336,11 @@ public class ReservationManager
                  _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("discountnights= ?");
              }
     
+             if (pObject.isStatusModified()) {
+                 _dirtyCount ++; 
+                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("status= ?");
+             }
+    
              if (_dirtyCount == 0) {
                  throw new SQLException ("The pObject to look for is invalid : not initialized !");
              }
@@ -2430,6 +2467,10 @@ public class ReservationManager
     
              if (pObject.isDiscountnightsModified()) {
                  Manager.setInteger(ps, ++_dirtyCount, pObject.getDiscountnights());
+             }
+    
+             if (pObject.isStatusModified()) {
+                 Manager.setInteger(ps, ++_dirtyCount, pObject.getStatus());
              }
     
              ps.executeQuery();
@@ -2671,6 +2712,13 @@ public class ReservationManager
                 _dirtyAnd ++;
             }
     
+            if (pObject.isStatusInitialized()) {
+                if (_dirtyAnd > 0)
+                    sql.append(" AND ");
+                sql.append("status").append("=?");
+                _dirtyAnd ++;
+            }
+    
             c = getConnection();
             ps = c.prepareStatement(sql.toString(),ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             int _dirtyCount = 0;
@@ -2793,6 +2841,10 @@ public class ReservationManager
     
             if (pObject.isDiscountnightsInitialized()) {
                 Manager.setInteger(ps, ++_dirtyCount, pObject.getDiscountnights());
+            }
+    
+            if (pObject.isStatusInitialized()) {
+                Manager.setInteger(ps, ++_dirtyCount, pObject.getStatus());
             }
     
             int _rows = ps.executeUpdate();
@@ -2962,6 +3014,38 @@ public class ReservationManager
              ps = c.prepareStatement(strSQL,ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
              Manager.setLong(ps, 1, pObject.getReservationid());
              return RoomManager.getInstance().loadByPreparedStatement(ps);
+         }
+         finally
+         {
+            getManager().close(ps);
+            freeConnection(c);
+         }
+    }
+
+    /**
+     * Retrieves an array of RoomtypeBean using the relation table Reservationroom given a ReservationBean object.
+     *
+     * @param pObject the ReservationBean pObject to be used
+     * @return an array of RoomtypeBean 
+     */
+    // MANY TO MANY
+    public RoomtypeBean[] loadRoomtypeViaReservationroom(ReservationBean pObject) throws SQLException
+    {
+         Connection c = null;
+         PreparedStatement ps = null;
+         String strSQL =      " SELECT "
+                         + "        *"
+                         + " FROM  "
+                         + "        roomtype,reservationroom"
+                         + " WHERE "    
+                         + "     reservationroom.reservationid = ?"
+                         + " AND reservationroom.roomtypeid = roomtype.roomtypeid";
+         try
+         {
+             c = getConnection();
+             ps = c.prepareStatement(strSQL,ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+             Manager.setLong(ps, 1, pObject.getReservationid());
+             return RoomtypeManager.getInstance().loadByPreparedStatement(ps);
          }
          finally
          {
@@ -3220,6 +3304,11 @@ public class ReservationManager
                     _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("discountnights= ?");
                 }
     
+                if (pObject.isStatusModified()) {
+                    _dirtyCount++; 
+                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("status= ?");
+                }
+    
                 if (_dirtyCount == 0)
                    throw new SQLException ("The pObject to look is unvalid : not initialized !");
     
@@ -3349,6 +3438,10 @@ public class ReservationManager
                     Manager.setInteger(ps, ++_dirtyCount, pObject.getDiscountnights());
                 }
     
+                if (pObject.isStatusModified()) {
+                    Manager.setInteger(ps, ++_dirtyCount, pObject.getStatus());
+                }
+    
                 return countByPreparedStatement(ps);
         }
         finally
@@ -3403,6 +3496,7 @@ public class ReservationManager
         pObject.setNomanualtax(Manager.getBoolean(rs, 28));
         pObject.setNotax(Manager.getBoolean(rs, 29));
         pObject.setDiscountnights(Manager.getInteger(rs, 30));
+        pObject.setStatus(Manager.getInteger(rs, 31));
 
         pObject.isNew(false);
         pObject.resetIsModified();
@@ -3544,6 +3638,10 @@ public class ReservationManager
                 case ID_DISCOUNTNIGHTS:
                     ++pos;
                     pObject.setDiscountnights(Manager.getInteger(rs, pos));
+                    break;
+                case ID_STATUS:
+                    ++pos;
+                    pObject.setStatus(Manager.getInteger(rs, pos));
                     break;
             }
         }
@@ -3689,5 +3787,4 @@ public class ReservationManager
 // class+ 
 
 // class- 
-
 }

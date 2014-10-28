@@ -16,12 +16,10 @@ package com.mysoft.hms;
 
 // imports- 
 
-
 public class HousekeepingstatusBean
 // extends+ 
 
 // extends- 
-
 {
     private Integer housekeepingstatusid;
     private boolean housekeepingstatusid_is_modified = false;
@@ -600,5 +598,4 @@ public class HousekeepingstatusBean
 // class+ 
 
 // class- 
-
 }

@@ -17,7 +17,6 @@ import java.sql.*;
 
 // imports- 
 
-
 /**
  * Handles database calls for the payment table.
  */
@@ -25,7 +24,6 @@ public class PaymentManager
 // extends+ 
 
 // extends- 
-
 {
 
     /**
@@ -1842,5 +1840,4 @@ public class PaymentManager
 // class+ 
 
 // class- 
-
 }

@@ -17,7 +17,6 @@ import java.util.Comparator;
 
 // imports- 
 
-
 /**
  * Comparator class is used to sort the RoomrateBean objects.
  */
@@ -25,7 +24,6 @@ public class RoomrateComparator implements Comparator
 // extends+ 
 
 // extends- 
-
 {
     /**
      * Holds the field on which the comparison is performed.
@@ -212,5 +210,4 @@ public class RoomrateComparator implements Comparator
 // class+ 
 
 // class- 
-
 }

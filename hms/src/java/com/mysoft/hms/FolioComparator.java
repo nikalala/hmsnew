@@ -17,7 +17,6 @@ import java.util.Comparator;
 
 // imports- 
 
-
 /**
  * Comparator class is used to sort the FolioBean objects.
  */
@@ -25,7 +24,6 @@ public class FolioComparator implements Comparator
 // extends+ 
 
 // extends- 
-
 {
     /**
      * Holds the field on which the comparison is performed.
@@ -198,5 +196,4 @@ public class FolioComparator implements Comparator
 // class+ 
 
 // class- 
-
 }

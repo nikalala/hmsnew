@@ -18,7 +18,6 @@ import java.sql.SQLException;
 // imports- 
 
 
-
 /**
  * Listener that is notified of personneltype table changes.
  */
@@ -26,7 +25,6 @@ public interface PersonneltypeListener
 // extends+ 
 
 // extends- 
-
 {
     /**
      * Invoked just before inserting a PersonneltypeBean record into the database.
@@ -63,5 +61,4 @@ public interface PersonneltypeListener
 // class+ 
 
 // class- 
-
 }

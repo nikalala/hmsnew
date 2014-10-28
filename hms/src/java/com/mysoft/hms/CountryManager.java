@@ -17,7 +17,6 @@ import java.sql.*;
 
 // imports- 
 
-
 /**
  * Handles database calls for the country table.
  */
@@ -25,7 +24,6 @@ public class CountryManager
 // extends+ 
 
 // extends- 
-
 {
 
     /**
@@ -1401,5 +1399,4 @@ public class CountryManager
 // class+ 
 
 // class- 
-
 }

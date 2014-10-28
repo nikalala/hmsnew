@@ -16,12 +16,10 @@ package com.mysoft.hms;
 
 // imports- 
 
-
 public class DistrictBean
 // extends+ 
 
 // extends- 
-
 {
     private Integer districtid;
     private boolean districtid_is_modified = false;
@@ -306,5 +304,4 @@ public class DistrictBean
 // class+ 
 
 // class- 
-
 }

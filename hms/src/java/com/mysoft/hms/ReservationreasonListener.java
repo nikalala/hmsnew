@@ -18,7 +18,6 @@ import java.sql.SQLException;
 // imports- 
 
 
-
 /**
  * Listener that is notified of reservationreason table changes.
  */
@@ -26,7 +25,6 @@ public interface ReservationreasonListener
 // extends+ 
 
 // extends- 
-
 {
     /**
      * Invoked just before inserting a ReservationreasonBean record into the database.
@@ -63,5 +61,4 @@ public interface ReservationreasonListener
 // class+ 
 
 // class- 
-
 }

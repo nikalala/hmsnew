@@ -18,7 +18,6 @@ import java.sql.SQLException;
 // imports- 
 
 
-
 /**
  * Listener that is notified of houseunit table changes.
  */
@@ -26,7 +25,6 @@ public interface HouseunitListener
 // extends+ 
 
 // extends- 
-
 {
     /**
      * Invoked just before inserting a HouseunitBean record into the database.
@@ -63,5 +61,4 @@ public interface HouseunitListener
 // class+ 
 
 // class- 
-
 }

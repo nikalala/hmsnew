@@ -17,7 +17,6 @@ import java.sql.*;
 
 // imports- 
 
-
 /**
  * Handles database calls for the roomtype table.
  */
@@ -25,7 +24,6 @@ public class RoomtypeManager
 // extends+ 
 
 // extends- 
-
 {
 
     /**
@@ -1406,6 +1404,166 @@ public class RoomtypeManager
     }
 
     /**
+     * Retrieves an array of GuestBean using the relation table Reservationroom given a RoomtypeBean object.
+     *
+     * @param pObject the RoomtypeBean pObject to be used
+     * @return an array of GuestBean 
+     */
+    // MANY TO MANY
+    public GuestBean[] loadGuestViaReservationroom(RoomtypeBean pObject) throws SQLException
+    {
+         Connection c = null;
+         PreparedStatement ps = null;
+         String strSQL =      " SELECT "
+                         + "        *"
+                         + " FROM  "
+                         + "        guest,reservationroom"
+                         + " WHERE "    
+                         + "     reservationroom.roomtypeid = ?"
+                         + " AND reservationroom.guestid = guest.guestid";
+         try
+         {
+             c = getConnection();
+             ps = c.prepareStatement(strSQL,ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+             Manager.setInteger(ps, 1, pObject.getRoomtypeid());
+             return GuestManager.getInstance().loadByPreparedStatement(ps);
+         }
+         finally
+         {
+            getManager().close(ps);
+            freeConnection(c);
+         }
+    }
+
+    /**
+     * Retrieves an array of PersonnelBean using the relation table Reservationroom given a RoomtypeBean object.
+     *
+     * @param pObject the RoomtypeBean pObject to be used
+     * @return an array of PersonnelBean 
+     */
+    // MANY TO MANY
+    public PersonnelBean[] loadPersonnelViaReservationroom(RoomtypeBean pObject) throws SQLException
+    {
+         Connection c = null;
+         PreparedStatement ps = null;
+         String strSQL =      " SELECT "
+                         + "        *"
+                         + " FROM  "
+                         + "        personnel,reservationroom"
+                         + " WHERE "    
+                         + "     reservationroom.roomtypeid = ?"
+                         + " AND reservationroom.regbyid = personnel.personnelid";
+         try
+         {
+             c = getConnection();
+             ps = c.prepareStatement(strSQL,ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+             Manager.setInteger(ps, 1, pObject.getRoomtypeid());
+             return PersonnelManager.getInstance().loadByPreparedStatement(ps);
+         }
+         finally
+         {
+            getManager().close(ps);
+            freeConnection(c);
+         }
+    }
+
+    /**
+     * Retrieves an array of RatetypeBean using the relation table Reservationroom given a RoomtypeBean object.
+     *
+     * @param pObject the RoomtypeBean pObject to be used
+     * @return an array of RatetypeBean 
+     */
+    // MANY TO MANY
+    public RatetypeBean[] loadRatetypeViaReservationroom(RoomtypeBean pObject) throws SQLException
+    {
+         Connection c = null;
+         PreparedStatement ps = null;
+         String strSQL =      " SELECT "
+                         + "        *"
+                         + " FROM  "
+                         + "        ratetype,reservationroom"
+                         + " WHERE "    
+                         + "     reservationroom.roomtypeid = ?"
+                         + " AND reservationroom.ratetypeid = ratetype.ratetypeid";
+         try
+         {
+             c = getConnection();
+             ps = c.prepareStatement(strSQL,ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+             Manager.setInteger(ps, 1, pObject.getRoomtypeid());
+             return RatetypeManager.getInstance().loadByPreparedStatement(ps);
+         }
+         finally
+         {
+            getManager().close(ps);
+            freeConnection(c);
+         }
+    }
+
+    /**
+     * Retrieves an array of ReservationBean using the relation table Reservationroom given a RoomtypeBean object.
+     *
+     * @param pObject the RoomtypeBean pObject to be used
+     * @return an array of ReservationBean 
+     */
+    // MANY TO MANY
+    public ReservationBean[] loadReservationViaReservationroom(RoomtypeBean pObject) throws SQLException
+    {
+         Connection c = null;
+         PreparedStatement ps = null;
+         String strSQL =      " SELECT "
+                         + "        *"
+                         + " FROM  "
+                         + "        reservation,reservationroom"
+                         + " WHERE "    
+                         + "     reservationroom.roomtypeid = ?"
+                         + " AND reservationroom.reservationid = reservation.reservationid";
+         try
+         {
+             c = getConnection();
+             ps = c.prepareStatement(strSQL,ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+             Manager.setInteger(ps, 1, pObject.getRoomtypeid());
+             return ReservationManager.getInstance().loadByPreparedStatement(ps);
+         }
+         finally
+         {
+            getManager().close(ps);
+            freeConnection(c);
+         }
+    }
+
+    /**
+     * Retrieves an array of RoomBean using the relation table Reservationroom given a RoomtypeBean object.
+     *
+     * @param pObject the RoomtypeBean pObject to be used
+     * @return an array of RoomBean 
+     */
+    // MANY TO MANY
+    public RoomBean[] loadRoomViaReservationroom(RoomtypeBean pObject) throws SQLException
+    {
+         Connection c = null;
+         PreparedStatement ps = null;
+         String strSQL =      " SELECT "
+                         + "        *"
+                         + " FROM  "
+                         + "        room,reservationroom"
+                         + " WHERE "    
+                         + "     reservationroom.roomtypeid = ?"
+                         + " AND reservationroom.roomid = room.roomid";
+         try
+         {
+             c = getConnection();
+             ps = c.prepareStatement(strSQL,ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+             Manager.setInteger(ps, 1, pObject.getRoomtypeid());
+             return RoomManager.getInstance().loadByPreparedStatement(ps);
+         }
+         finally
+         {
+            getManager().close(ps);
+            freeConnection(c);
+         }
+    }
+
+    /**
      * Retrieves an array of BedtypeBean using the relation table Room given a RoomtypeBean object.
      *
      * @param pObject the RoomtypeBean pObject to be used
@@ -2106,5 +2264,4 @@ public class RoomtypeManager
 // class+ 
 
 // class- 
-
 }

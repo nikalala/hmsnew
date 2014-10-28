@@ -16,12 +16,10 @@ package com.mysoft.hms;
 
 // imports- 
 
-
 public class ReservationBean
 // extends+ 
 
 // extends- 
-
 {
     private Long reservationid;
     private boolean reservationid_is_modified = false;
@@ -142,6 +140,10 @@ public class ReservationBean
     private Integer discountnights;
     private boolean discountnights_is_modified = false;
     private boolean discountnights_is_initialized = false;
+    
+    private Integer status;
+    private boolean status_is_modified = false;
+    private boolean status_is_initialized = false;
     
     private boolean _isNew = true;
     
@@ -2148,6 +2150,74 @@ public class ReservationBean
     }
 
     /**
+     * Getter method for status.
+     * <br>
+     * Meta Data Information (in progress):
+     * <ul>
+     * <li>full name: reservation.status
+     * <li>default value: 0
+     * <li>column size: 10
+     * <li>jdbc type returned by the driver: Types.INTEGER
+     * </ul>
+     *
+     * @return the value of status
+     */
+    public Integer getStatus()
+    {
+        return status; 
+    }
+
+    /**
+     * Setter method for status.
+     * <br>
+     * The new value is set only if compareTo() says it is different,
+     * or if one of either the new value or the current value is null.
+     * In case the new value is different, it is set and the field is marked as 'modified'.
+     *
+     * @param newVal the new value to be assigned to status
+     */
+    public void setStatus(Integer newVal) {
+        if ((newVal != null && this.status != null && (newVal.compareTo(this.status) == 0)) || 
+            (newVal == null && this.status == null && status_is_initialized)) {
+            return; 
+        } 
+        this.status = newVal; 
+        status_is_modified = true; 
+        status_is_initialized = true; 
+    }
+
+    /**
+     * Setter method for status.
+     * <br>
+     * Convenient for those who do not want to deal with Objects for primary types.
+     *
+     * @param newVal the new value to be assigned to status
+     */
+    public void setStatus(int newVal) {
+        setStatus(new Integer(newVal));
+    }
+
+    /**
+     * Determines if the status has been modified.
+     *
+     * @return true if the field has been modified, false if the field has not been modified
+     */
+    public boolean isStatusModified() {
+        return status_is_modified; 
+    }
+
+    /**
+     * Determines if the status has been initialized.
+     * <br>
+     * It is useful to determine if a field is null on purpose or just because it has not been initialized.
+     *
+     * @return true if the field has been initialized, false otherwise
+     */
+    public boolean isStatusInitialized() {
+        return status_is_initialized; 
+    }
+
+    /**
      * Determines if the current object is new.
      *
      * @return true if the current object is new, false if the object is not new
@@ -2202,7 +2272,8 @@ public class ReservationBean
 		num_is_modified || 
 		nomanualtax_is_modified || 
 		notax_is_modified || 
-		discountnights_is_modified;
+		discountnights_is_modified || 
+		status_is_modified;
     }
 
     /**
@@ -2239,6 +2310,7 @@ public class ReservationBean
         nomanualtax_is_modified = false;
         notax_is_modified = false;
         discountnights_is_modified = false;
+        status_is_modified = false;
     }
 
     /**
@@ -2277,6 +2349,7 @@ public class ReservationBean
         setNomanualtax(bean.getNomanualtax());
         setNotax(bean.getNotax());
         setDiscountnights(bean.getDiscountnights());
+        setStatus(bean.getStatus());
     }
 
     /**
@@ -2316,11 +2389,11 @@ public class ReservationBean
                  + "\n - reservation.nomanualtax = " + (nomanualtax_is_initialized ? ("[" + (nomanualtax == null ? null : nomanualtax.toString()) + "]") : "not initialized") + ""
                  + "\n - reservation.notax = " + (notax_is_initialized ? ("[" + (notax == null ? null : notax.toString()) + "]") : "not initialized") + ""
                  + "\n - reservation.discountnights = " + (discountnights_is_initialized ? ("[" + (discountnights == null ? null : discountnights.toString()) + "]") : "not initialized") + ""
+                 + "\n - reservation.status = " + (status_is_initialized ? ("[" + (status == null ? null : status.toString()) + "]") : "not initialized") + ""
             ;
     }
 
 // class+ 
 
 // class- 
-
 }

@@ -18,7 +18,6 @@ import java.sql.SQLException;
 // imports- 
 
 
-
 /**
  * Listener that is notified of paymentmethod table changes.
  */
@@ -26,7 +25,6 @@ public interface PaymentmethodListener
 // extends+ 
 
 // extends- 
-
 {
     /**
      * Invoked just before inserting a PaymentmethodBean record into the database.
@@ -63,5 +61,4 @@ public interface PaymentmethodListener
 // class+ 
 
 // class- 
-
 }

@@ -17,7 +17,6 @@ import java.sql.*;
 
 // imports- 
 
-
 /**
  * Handles database calls for the tax table.
  */
@@ -25,7 +24,6 @@ public class TaxManager
 // extends+ 
 
 // extends- 
-
 {
 
     /**
@@ -1970,5 +1968,4 @@ public class TaxManager
 // class+ 
 
 // class- 
-
 }

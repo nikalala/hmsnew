@@ -17,7 +17,6 @@ import java.util.Comparator;
 
 // imports- 
 
-
 /**
  * Comparator class is used to sort the DiscountBean objects.
  */
@@ -25,7 +24,6 @@ public class DiscountComparator implements Comparator
 // extends+ 
 
 // extends- 
-
 {
     /**
      * Holds the field on which the comparison is performed.
@@ -178,5 +176,4 @@ public class DiscountComparator implements Comparator
 // class+ 
 
 // class- 
-
 }

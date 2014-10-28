@@ -17,7 +17,6 @@ import java.util.Comparator;
 
 // imports- 
 
-
 /**
  * Comparator class is used to sort the GuestBean objects.
  */
@@ -25,7 +24,6 @@ public class GuestComparator implements Comparator
 // extends+ 
 
 // extends- 
-
 {
     /**
      * Holds the field on which the comparison is performed.
@@ -433,5 +431,4 @@ public class GuestComparator implements Comparator
 // class+ 
 
 // class- 
-
 }

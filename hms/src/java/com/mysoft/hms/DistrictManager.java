@@ -17,7 +17,6 @@ import java.sql.*;
 
 // imports- 
 
-
 /**
  * Handles database calls for the district table.
  */
@@ -25,7 +24,6 @@ public class DistrictManager
 // extends+ 
 
 // extends- 
-
 {
 
     /**
@@ -1098,5 +1096,4 @@ public class DistrictManager
 // class+ 
 
 // class- 
-
 }

@@ -16,12 +16,10 @@ package com.mysoft.hms;
 
 // imports- 
 
-
 public class TemplatecategoryBean
 // extends+ 
 
 // extends- 
-
 {
     private Integer templatecategoryid;
     private boolean templatecategoryid_is_modified = false;
@@ -535,5 +533,4 @@ public class TemplatecategoryBean
 // class+ 
 
 // class- 
-
 }

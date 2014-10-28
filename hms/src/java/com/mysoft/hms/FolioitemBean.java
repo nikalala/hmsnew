@@ -16,12 +16,10 @@ package com.mysoft.hms;
 
 // imports- 
 
-
 public class FolioitemBean
 // extends+ 
 
 // extends- 
-
 {
     private Long folioitemid;
     private boolean folioitemid_is_modified = false;
@@ -1351,5 +1349,4 @@ public class FolioitemBean
 // class+ 
 
 // class- 
-
 }

@@ -16,12 +16,10 @@ package com.mysoft.hms;
 
 // imports- 
 
-
 public class TransportationmodeBean
 // extends+ 
 
 // extends- 
-
 {
     private Integer transportationmodeid;
     private boolean transportationmodeid_is_modified = false;
@@ -535,5 +533,4 @@ public class TransportationmodeBean
 // class+ 
 
 // class- 
-
 }

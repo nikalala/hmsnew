@@ -16,12 +16,10 @@ package com.mysoft.hms;
 
 // imports- 
 
-
 public class DisplaysettingsBean
 // extends+ 
 
 // extends- 
-
 {
     private Integer displaysettingsid;
     private boolean displaysettingsid_is_modified = false;
@@ -1425,5 +1423,4 @@ public class DisplaysettingsBean
 // class+ 
 
 // class- 
-
 }

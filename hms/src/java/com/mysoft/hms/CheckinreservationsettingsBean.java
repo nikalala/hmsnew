@@ -16,12 +16,10 @@ package com.mysoft.hms;
 
 // imports- 
 
-
 public class CheckinreservationsettingsBean
 // extends+ 
 
 // extends- 
-
 {
     private Integer checkinreservationsettingsid;
     private boolean checkinreservationsettingsid_is_modified = false;
@@ -3918,5 +3916,4 @@ public class CheckinreservationsettingsBean
 // class+ 
 
 // class- 
-
 }

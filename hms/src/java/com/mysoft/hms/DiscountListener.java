@@ -18,7 +18,6 @@ import java.sql.SQLException;
 // imports- 
 
 
-
 /**
  * Listener that is notified of discount table changes.
  */
@@ -26,7 +25,6 @@ public interface DiscountListener
 // extends+ 
 
 // extends- 
-
 {
     /**
      * Invoked just before inserting a DiscountBean record into the database.
@@ -63,5 +61,4 @@ public interface DiscountListener
 // class+ 
 
 // class- 
-
 }

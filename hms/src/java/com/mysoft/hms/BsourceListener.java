@@ -18,7 +18,6 @@ import java.sql.SQLException;
 // imports- 
 
 
-
 /**
  * Listener that is notified of bsource table changes.
  */
@@ -26,7 +25,6 @@ public interface BsourceListener
 // extends+ 
 
 // extends- 
-
 {
     /**
      * Invoked just before inserting a BsourceBean record into the database.
@@ -63,5 +61,4 @@ public interface BsourceListener
 // class+ 
 
 // class- 
-
 }

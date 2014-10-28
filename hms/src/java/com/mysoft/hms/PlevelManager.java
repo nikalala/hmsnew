@@ -17,7 +17,6 @@ import java.sql.*;
 
 // imports- 
 
-
 /**
  * Handles database calls for the plevel table.
  */
@@ -25,7 +24,6 @@ public class PlevelManager
 // extends+ 
 
 // extends- 
-
 {
 
     /**
@@ -1276,5 +1274,4 @@ public class PlevelManager
 // class+ 
 
 // class- 
-
 }

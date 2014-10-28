@@ -18,7 +18,6 @@ import java.sql.SQLException;
 // imports- 
 
 
-
 /**
  * Listener that is notified of district table changes.
  */
@@ -26,7 +25,6 @@ public interface DistrictListener
 // extends+ 
 
 // extends- 
-
 {
     /**
      * Invoked just before inserting a DistrictBean record into the database.
@@ -63,5 +61,4 @@ public interface DistrictListener
 // class+ 
 
 // class- 
-
 }

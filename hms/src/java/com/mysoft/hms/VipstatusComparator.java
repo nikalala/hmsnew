@@ -17,7 +17,6 @@ import java.util.Comparator;
 
 // imports- 
 
-
 /**
  * Comparator class is used to sort the VipstatusBean objects.
  */
@@ -25,7 +24,6 @@ public class VipstatusComparator implements Comparator
 // extends+ 
 
 // extends- 
-
 {
     /**
      * Holds the field on which the comparison is performed.
@@ -122,5 +120,4 @@ public class VipstatusComparator implements Comparator
 // class+ 
 
 // class- 
-
 }

@@ -17,7 +17,6 @@ import java.sql.*;
 
 // imports- 
 
-
 /**
  * Handles database calls for the vipstatus table.
  */
@@ -25,7 +24,6 @@ public class VipstatusManager
 // extends+ 
 
 // extends- 
-
 {
 
     /**
@@ -1237,5 +1235,4 @@ public class VipstatusManager
 // class+ 
 
 // class- 
-
 }

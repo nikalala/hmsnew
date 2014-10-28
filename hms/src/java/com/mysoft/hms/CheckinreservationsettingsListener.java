@@ -18,7 +18,6 @@ import java.sql.SQLException;
 // imports- 
 
 
-
 /**
  * Listener that is notified of checkinreservationsettings table changes.
  */
@@ -26,7 +25,6 @@ public interface CheckinreservationsettingsListener
 // extends+ 
 
 // extends- 
-
 {
     /**
      * Invoked just before inserting a CheckinreservationsettingsBean record into the database.
@@ -63,5 +61,4 @@ public interface CheckinreservationsettingsListener
 // class+ 
 
 // class- 
-
 }

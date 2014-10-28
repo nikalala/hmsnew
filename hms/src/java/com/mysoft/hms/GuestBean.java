@@ -16,12 +16,10 @@ package com.mysoft.hms;
 
 // imports- 
 
-
 public class GuestBean
 // extends+ 
 
 // extends- 
-
 {
     private Long guestid;
     private boolean guestid_is_modified = false;
@@ -2005,5 +2003,4 @@ public class GuestBean
 // class+ 
 
 // class- 
-
 }

@@ -17,7 +17,6 @@ import java.sql.*;
 
 // imports- 
 
-
 /**
  * Handles database calls for the checkinreservationsettings table.
  */
@@ -25,7 +24,6 @@ public class CheckinreservationsettingsManager
 // extends+ 
 
 // extends- 
-
 {
 
     /**
@@ -4325,5 +4323,4 @@ public class CheckinreservationsettingsManager
 // class+ 
 
 // class- 
-
 }

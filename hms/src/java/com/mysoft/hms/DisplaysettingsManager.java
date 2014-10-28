@@ -17,7 +17,6 @@ import java.sql.*;
 
 // imports- 
 
-
 /**
  * Handles database calls for the displaysettings table.
  */
@@ -25,7 +24,6 @@ public class DisplaysettingsManager
 // extends+ 
 
 // extends- 
-
 {
 
     /**
@@ -2397,5 +2395,4 @@ public class DisplaysettingsManager
 // class+ 
 
 // class- 
-
 }

@@ -17,7 +17,6 @@ import java.util.Comparator;
 
 // imports- 
 
-
 /**
  * Comparator class is used to sort the ReservationBean objects.
  */
@@ -25,7 +24,6 @@ public class ReservationComparator implements Comparator
 // extends+ 
 
 // extends- 
-
 {
     /**
      * Holds the field on which the comparison is performed.
@@ -75,6 +73,7 @@ public class ReservationComparator implements Comparator
      *   <li>ReservationManager.ID_POSTINGVALUEEVERY
      *   <li>ReservationManager.ID_NUM
      *   <li>ReservationManager.ID_DISCOUNTNIGHTS
+     *   <li>ReservationManager.ID_STATUS
      * </ul>
      */
     public ReservationComparator(int iType)
@@ -123,6 +122,7 @@ public class ReservationComparator implements Comparator
      *   <li>ReservationManager.ID_NOMANUALTAX
      *   <li>ReservationManager.ID_NOTAX
      *   <li>ReservationManager.ID_DISCOUNTNIGHTS
+     *   <li>ReservationManager.ID_STATUS
      * </ul>
      *
      * @param bReverse set this value to true, if you want to reverse the sorting results
@@ -451,6 +451,17 @@ public class ReservationComparator implements Comparator
                     iReturn = b1.getDiscountnights().compareTo(b2.getDiscountnights());
                 }
                 break;
+            case ReservationManager.ID_STATUS:
+                if (b1.getStatus() == null && b2.getStatus() != null) {
+                    iReturn = -1;
+                } else if (b1.getStatus() == null && b2.getStatus() == null) {
+                    iReturn = 0;
+                } else if (b1.getStatus() != null && b2.getStatus() == null) {
+                    iReturn = 1;
+                } else { 
+                    iReturn = b1.getStatus().compareTo(b2.getStatus());
+                }
+                break;
             default: 
                 throw new IllegalArgumentException("Type passed for the field is not supported");
         }
@@ -460,5 +471,4 @@ public class ReservationComparator implements Comparator
 // class+ 
 
 // class- 
-
 }

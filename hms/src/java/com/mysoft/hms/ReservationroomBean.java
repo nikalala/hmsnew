@@ -16,12 +16,10 @@ package com.mysoft.hms;
 
 // imports- 
 
-
 public class ReservationroomBean
 // extends+ 
 
 // extends- 
-
 {
     private Long reservationroomid;
     private boolean reservationroomid_is_modified = false;
@@ -62,6 +60,10 @@ public class ReservationroomBean
     private java.sql.Timestamp regdate;
     private boolean regdate_is_modified = false;
     private boolean regdate_is_initialized = false;
+    
+    private Integer roomtypeid;
+    private boolean roomtypeid_is_modified = false;
+    private boolean roomtypeid_is_initialized = false;
     
     private boolean _isNew = true;
     
@@ -751,6 +753,74 @@ public class ReservationroomBean
     }
 
     /**
+     * Getter method for roomtypeid.
+     * <br>
+     * Meta Data Information (in progress):
+     * <ul>
+     * <li>full name: reservationroom.roomtypeid
+     * <li> foreign key: roomtype.roomtypeid
+     * <li>column size: 10
+     * <li>jdbc type returned by the driver: Types.INTEGER
+     * </ul>
+     *
+     * @return the value of roomtypeid
+     */
+    public Integer getRoomtypeid()
+    {
+        return roomtypeid; 
+    }
+
+    /**
+     * Setter method for roomtypeid.
+     * <br>
+     * The new value is set only if compareTo() says it is different,
+     * or if one of either the new value or the current value is null.
+     * In case the new value is different, it is set and the field is marked as 'modified'.
+     *
+     * @param newVal the new value to be assigned to roomtypeid
+     */
+    public void setRoomtypeid(Integer newVal) {
+        if ((newVal != null && this.roomtypeid != null && (newVal.compareTo(this.roomtypeid) == 0)) || 
+            (newVal == null && this.roomtypeid == null && roomtypeid_is_initialized)) {
+            return; 
+        } 
+        this.roomtypeid = newVal; 
+        roomtypeid_is_modified = true; 
+        roomtypeid_is_initialized = true; 
+    }
+
+    /**
+     * Setter method for roomtypeid.
+     * <br>
+     * Convenient for those who do not want to deal with Objects for primary types.
+     *
+     * @param newVal the new value to be assigned to roomtypeid
+     */
+    public void setRoomtypeid(int newVal) {
+        setRoomtypeid(new Integer(newVal));
+    }
+
+    /**
+     * Determines if the roomtypeid has been modified.
+     *
+     * @return true if the field has been modified, false if the field has not been modified
+     */
+    public boolean isRoomtypeidModified() {
+        return roomtypeid_is_modified; 
+    }
+
+    /**
+     * Determines if the roomtypeid has been initialized.
+     * <br>
+     * It is useful to determine if a field is null on purpose or just because it has not been initialized.
+     *
+     * @return true if the field has been initialized, false otherwise
+     */
+    public boolean isRoomtypeidInitialized() {
+        return roomtypeid_is_initialized; 
+    }
+
+    /**
      * Determines if the current object is new.
      *
      * @return true if the current object is new, false if the object is not new
@@ -785,7 +855,8 @@ public class ReservationroomBean
 		ratetypeid_is_modified || 
 		guestid_is_modified || 
 		regbyid_is_modified || 
-		regdate_is_modified;
+		regdate_is_modified || 
+		roomtypeid_is_modified;
     }
 
     /**
@@ -802,6 +873,7 @@ public class ReservationroomBean
         guestid_is_modified = false;
         regbyid_is_modified = false;
         regdate_is_modified = false;
+        roomtypeid_is_modified = false;
     }
 
     /**
@@ -820,6 +892,7 @@ public class ReservationroomBean
         setGuestid(bean.getGuestid());
         setRegbyid(bean.getRegbyid());
         setRegdate(bean.getRegdate());
+        setRoomtypeid(bean.getRoomtypeid());
     }
 
     /**
@@ -839,11 +912,11 @@ public class ReservationroomBean
                  + "\n - reservationroom.guestid = " + (guestid_is_initialized ? ("[" + (guestid == null ? null : guestid.toString()) + "]") : "not initialized") + ""
                  + "\n - reservationroom.regbyid = " + (regbyid_is_initialized ? ("[" + (regbyid == null ? null : regbyid.toString()) + "]") : "not initialized") + ""
                  + "\n - reservationroom.regdate = " + (regdate_is_initialized ? ("[" + (regdate == null ? null : regdate.toString()) + "]") : "not initialized") + ""
+                 + "\n - reservationroom.roomtypeid = " + (roomtypeid_is_initialized ? ("[" + (roomtypeid == null ? null : roomtypeid.toString()) + "]") : "not initialized") + ""
             ;
     }
 
 // class+ 
 
 // class- 
-
 }

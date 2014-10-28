@@ -16,12 +16,10 @@ package com.mysoft.hms;
 
 // imports- 
 
-
 public class CityBean
 // extends+ 
 
 // extends- 
-
 {
     private Integer cityid;
     private boolean cityid_is_modified = false;
@@ -436,5 +434,4 @@ public class CityBean
 // class+ 
 
 // class- 
-
 }

@@ -17,7 +17,6 @@ import java.sql.*;
 
 // imports- 
 
-
 /**
  * Handles database calls for the ratetype table.
  */
@@ -25,7 +24,6 @@ public class RatetypeManager
 // extends+ 
 
 // extends- 
-
 {
 
     /**
@@ -1156,6 +1154,38 @@ public class RatetypeManager
     }
 
     /**
+     * Retrieves an array of RoomtypeBean using the relation table Reservationroom given a RatetypeBean object.
+     *
+     * @param pObject the RatetypeBean pObject to be used
+     * @return an array of RoomtypeBean 
+     */
+    // MANY TO MANY
+    public RoomtypeBean[] loadRoomtypeViaReservationroom(RatetypeBean pObject) throws SQLException
+    {
+         Connection c = null;
+         PreparedStatement ps = null;
+         String strSQL =      " SELECT "
+                         + "        *"
+                         + " FROM  "
+                         + "        roomtype,reservationroom"
+                         + " WHERE "    
+                         + "     reservationroom.ratetypeid = ?"
+                         + " AND reservationroom.roomtypeid = roomtype.roomtypeid";
+         try
+         {
+             c = getConnection();
+             ps = c.prepareStatement(strSQL,ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+             Manager.setInteger(ps, 1, pObject.getRatetypeid());
+             return RoomtypeManager.getInstance().loadByPreparedStatement(ps);
+         }
+         finally
+         {
+            getManager().close(ps);
+            freeConnection(c);
+         }
+    }
+
+    /**
      * Retrieves an array of ContragentBean using the relation table Roomrate given a RatetypeBean object.
      *
      * @param pObject the RatetypeBean pObject to be used
@@ -1662,5 +1692,4 @@ public class RatetypeManager
 // class+ 
 
 // class- 
-
 }

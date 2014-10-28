@@ -16,12 +16,10 @@ package com.mysoft.hms;
 
 // imports- 
 
-
 public class CountryBean
 // extends+ 
 
 // extends- 
-
 {
     private Integer countryid;
     private boolean countryid_is_modified = false;
@@ -425,5 +423,4 @@ public class CountryBean
 // class+ 
 
 // class- 
-
 }

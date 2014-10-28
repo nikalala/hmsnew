@@ -17,7 +17,6 @@ import java.util.Comparator;
 
 // imports- 
 
-
 /**
  * Comparator class is used to sort the ReservationroomBean objects.
  */
@@ -25,7 +24,6 @@ public class ReservationroomComparator implements Comparator
 // extends+ 
 
 // extends- 
-
 {
     /**
      * Holds the field on which the comparison is performed.
@@ -56,6 +54,7 @@ public class ReservationroomComparator implements Comparator
      *   <li>ReservationroomManager.ID_GUESTID
      *   <li>ReservationroomManager.ID_REGBYID
      *   <li>ReservationroomManager.ID_REGDATE
+     *   <li>ReservationroomManager.ID_ROOMTYPEID
      * </ul>
      */
     public ReservationroomComparator(int iType)
@@ -84,6 +83,7 @@ public class ReservationroomComparator implements Comparator
      *   <li>ReservationroomManager.ID_GUESTID
      *   <li>ReservationroomManager.ID_REGBYID
      *   <li>ReservationroomManager.ID_REGDATE
+     *   <li>ReservationroomManager.ID_ROOMTYPEID
      * </ul>
      *
      * @param bReverse set this value to true, if you want to reverse the sorting results
@@ -203,6 +203,17 @@ public class ReservationroomComparator implements Comparator
                     iReturn = b1.getRegdate().compareTo(b2.getRegdate());
                 }
                 break;
+            case ReservationroomManager.ID_ROOMTYPEID:
+                if (b1.getRoomtypeid() == null && b2.getRoomtypeid() != null) {
+                    iReturn = -1;
+                } else if (b1.getRoomtypeid() == null && b2.getRoomtypeid() == null) {
+                    iReturn = 0;
+                } else if (b1.getRoomtypeid() != null && b2.getRoomtypeid() == null) {
+                    iReturn = 1;
+                } else { 
+                    iReturn = b1.getRoomtypeid().compareTo(b2.getRoomtypeid());
+                }
+                break;
             default: 
                 throw new IllegalArgumentException("Type passed for the field is not supported");
         }
@@ -212,5 +223,4 @@ public class ReservationroomComparator implements Comparator
 // class+ 
 
 // class- 
-
 }

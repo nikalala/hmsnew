@@ -17,7 +17,6 @@ import java.sql.*;
 
 // imports- 
 
-
 /**
  * Handles database calls for the folioitem table.
  */
@@ -25,7 +24,6 @@ public class FolioitemManager
 // extends+ 
 
 // extends- 
-
 {
 
     /**
@@ -2408,5 +2406,4 @@ public class FolioitemManager
 // class+ 
 
 // class- 
-
 }

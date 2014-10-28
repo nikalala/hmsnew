@@ -17,7 +17,6 @@ import java.util.Comparator;
 
 // imports- 
 
-
 /**
  * Comparator class is used to sort the PlevelBean objects.
  */
@@ -25,7 +24,6 @@ public class PlevelComparator implements Comparator
 // extends+ 
 
 // extends- 
-
 {
     /**
      * Holds the field on which the comparison is performed.
@@ -135,5 +133,4 @@ public class PlevelComparator implements Comparator
 // class+ 
 
 // class- 
-
 }

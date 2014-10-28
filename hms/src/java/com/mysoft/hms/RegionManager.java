@@ -17,7 +17,6 @@ import java.sql.*;
 
 // imports- 
 
-
 /**
  * Handles database calls for the region table.
  */
@@ -25,7 +24,6 @@ public class RegionManager
 // extends+ 
 
 // extends- 
-
 {
 
     /**
@@ -1129,5 +1127,4 @@ public class RegionManager
 // class+ 
 
 // class- 
-
 }

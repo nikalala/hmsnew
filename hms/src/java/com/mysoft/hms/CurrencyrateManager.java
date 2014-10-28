@@ -17,7 +17,6 @@ import java.sql.*;
 
 // imports- 
 
-
 /**
  * Handles database calls for the currencyrate table.
  */
@@ -25,7 +24,6 @@ public class CurrencyrateManager
 // extends+ 
 
 // extends- 
-
 {
 
     /**
@@ -1129,5 +1127,4 @@ public class CurrencyrateManager
 // class+ 
 
 // class- 
-
 }

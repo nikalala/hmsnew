@@ -17,7 +17,6 @@ import java.util.Comparator;
 
 // imports- 
 
-
 /**
  * Comparator class is used to sort the ExtrachargefolioBean objects.
  */
@@ -25,7 +24,6 @@ public class ExtrachargefolioComparator implements Comparator
 // extends+ 
 
 // extends- 
-
 {
     /**
      * Holds the field on which the comparison is performed.
@@ -198,5 +196,4 @@ public class ExtrachargefolioComparator implements Comparator
 // class+ 
 
 // class- 
-
 }

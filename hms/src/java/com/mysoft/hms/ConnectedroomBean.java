@@ -16,12 +16,10 @@ package com.mysoft.hms;
 
 // imports- 
 
-
 public class ConnectedroomBean
 // extends+ 
 
 // extends- 
-
 {
     private Integer roomid;
     private boolean roomid_is_modified = false;
@@ -242,5 +240,4 @@ public class ConnectedroomBean
 // class+ 
 
 // class- 
-
 }
