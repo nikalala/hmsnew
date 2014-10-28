@@ -165,29 +165,6 @@ $(document).ready(function(){
 
 });
 </script>
-<style>
-    .pseudobutton {
-        cursor: pointer;
-    }
-    
-    .pseudobutton:hover {
-        color: #E13B27;
-    }
-    
-    .altrow {
-        background-color: #F9F9F9;
-    }
-    
-    .ui-jqgrid tr.ui-row-ltr td {
-        border-right-style: none !important;
-        border-left-style: none !important;
-        border-bottom-color: #DDDDDD !important;
-    }
-    
-    .ui-jqgrid {
-        background-color: #F6F6F6;
-    }
-</style>
 <div id="foliotab" style="height: 100%;">
     <table width="100%" style="border-color: #BEBEBE; border-style: solid; border-width: 1px;">
         <tr>

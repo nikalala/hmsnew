@@ -191,3 +191,34 @@ ol, ul {
 }
 
 /* Loading */
+
+/* JQGRID */
+
+.pseudobutton {
+    cursor: pointer;
+}
+
+.pseudobutton:hover {
+    color: #E13B27;
+}
+
+.altrow {
+    background-color: #F9F9F9;
+}
+
+.ui-jqgrid tr.ui-row-ltr td {
+    border-right-style: none !important;
+    border-left-style: none !important;
+    border-bottom-color: #DDDDDD !important;
+}
+
+.ui-jqgrid {
+    background-color: #F6F6F6;
+}
+.dropdown-menu > li > a > img
+{
+    margin-right: 10px;
+    width: 18px;
+    height: 18px;
+}
+/* JQGRID */

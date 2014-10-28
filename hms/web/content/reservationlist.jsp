@@ -1,48 +1,77 @@
 <%@page contentType="text/html; charset=UTF-8" %>
 <%@page pageEncoding="UTF-8" %>
 <%@include file="../includes/init.jsp" %>
-<%
-    //Getting full reservation List From DB
-    VReservationlistBean[] ReservationBeanList = VReservationlistManager.getInstance().loadByWhere("");
-%>
 
+<style>
 
+.ui-jqgrid tr.jqgrow td {
+    height: 20px !important;
+    line-height: 19px !important;
+    white-space: normal !important;
+}
 
+</style>
 <script type="text/javascript">
     $(document).ready(function () {
-        console.log("hi");
         jQuery('#list_reservs').jqGrid(
                 {
-                    datatype: 'local',
-                    colNames: ['რეზ#', 'ჩამოსვლა', 'წასვლა', 'სტუმრის სახელი', 'ოთახი', 'წყარო', 'კომპანია', 'ჯამი', 'დეპოზიტი', 'მომხმარებელი', 'რეზ.ტიპი'],
-                    colModel: [
-                        {width: 80, hidden: false, name: 'reservationid', index: 'reservationid', align: 'left'},
-                        {width: 100, hidden: false, name: 'arraivaldate', index: 'arraivaldate', align: 'left'},
-                        {width: 100, hidden: false, name: 'departuredate', index: 'departuredate', align: 'center'},
-                        {width: 150, hidden: false, name: 'type', index: 'type', align: 'left'},
-                        {width: 200, hidden: false, name: 'descr', index: 'descr', align: 'left'},
-                        {width: 120, hidden: false, name: 'regby', index: 'regby', align: 'left'},
-                        {width: 100, hidden: false, name: 'act', index: 'act', align: 'center'},
-                        {width: 40, hidden: false, name: 'curr', index: 'curr', align: 'right'},
-                        {width: 50, hidden: false, name: 'price', index: 'price', align: 'right'},
-                        {width: 50, hidden: false, name: 'price', index: 'price', align: 'right'}
+                    url:'content/getreservationlist.jsp',
+                    datatype: 'xml',
+                    colNames: [
+                        'რეზ#',
+                        'ჩამოსვლა',
+                        'წასვლა',
+                        'სტუმრის სახელი',
+                        'ოთახი',
+                        'წყარო',
+                        'კომპანია',
+                        'ჯამი',
+                        'დეპოზიტი',
+                        'მომხმარებელი',
+                        'რეზ.ტიპი',
+                        ''
                     ],
+                    colModel: [
+                        {width: 50, hidden: false, name: 'reservationroomid', index: 'reservationroomid', align: 'left'},
+                        {width: 80, hidden: false, name: 'arraivaldate', index: 'arraivaldate', align: 'left'},
+                        {width: 65, hidden: false, name: 'departuredate', index: 'departuredate', align: 'left'},
+                        {width: 120, hidden: false, name: 'guest', index: 'guest', align: 'left'},
+                        {width: 100, hidden: false, name: 'roomcode', index: 'roomcode', align: 'center'},
+                        {width: 100, hidden: false, name: 'bsourcename', index: 'bsourcename', align: 'left'},
+                        {width: 85, hidden: false, name: 'companyname', index: 'companyname', align: 'left'},
+                        {width: 80, hidden: false, name: 'price', index: 'price', align: 'right'},
+                        {width: 80, hidden: false, name: 'paid', index: 'paid', align: 'right'},
+                        {width: 110, hidden: false, name: 'user', index: 'user', align: 'center'},
+                        {width: 94, hidden: false, name: 'reservationtype', index: 'reservationtype', align: 'center'},
+                        {width: 60, hidden: false, name: 'action', index: 'action', align: 'center'}
+                    ],
+                    loadComplete: function() {
+                        //line below removes the title attr rom last child...
+                        $("#list_reservs td:last-child").removeAttr( "title" );
+                    },
                     rowNum: 2000,
-                    height: 40,
+                    height: 400,
                     autowidth: true,
                     sortname: 'name',
                     viewrecords: true,
-                    sortorder: 'asc',
-                    multiselect: true
-                })
-                .jqGrid('bindKeys');
+                    sortorder: 'asc'
+                }).jqGrid('bindKeys');
+        //maincurrency.getCode();
+        $("#jqgh_list_reservs_reservationroomid").css("text-align","left");
+        $("#jqgh_list_reservs_arraivaldate").css("text-align","left");
+        $("#jqgh_list_reservs_departuredate").css("text-align","left");
+        $("#jqgh_list_reservs_guest").css("text-align","left");
+        $("#jqgh_list_reservs_roomcode").css("text-align","center");
+        $("#jqgh_list_reservs_bsourcename").css("text-align","left");
+        $("#jqgh_list_reservs_companyname").css("text-align","left");
+        $("#jqgh_list_reservs_price").css("text-align","right");
+        $("#jqgh_list_reservs_paid").css("text-align","right");
+        $("#jqgh_list_reservs_user").css("text-align","center");
+        $("#jqgh_list_reservs_reservationtype").css("text-align","center");
+        $("#jqgh_list_reservs_action").css("text-align","center");
 
-        var data = <%=ReservationBeanList%>;
-        <% for(int i=0;i<=ReservationBeanList.length;i++){ %>
-            //jQuery("#list_reservs").jqGrid('addRowData', <%=i + 1%>, <%=ReservationBeanList[i]%>);
-        <% } %>
+
     });
 </script>
 
-
-<table id='list_reservs' width='100%' align='center'></table>
+<table id='list_reservs' class="table-striped table-hover" width='100%' align='center'></table>
