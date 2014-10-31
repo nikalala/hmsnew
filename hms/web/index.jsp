@@ -41,6 +41,7 @@ String bgcol = "#F5F5F5";
   <link rel="stylesheet" type="text/css" href="css/main.css">
   <link rel="stylesheet" type="text/css" href="css/jquery.dataTables.min.css">
   <link rel="stylesheet" type="text/css" href="css/ui.jqgrid.css">
+  <link rel="stylesheet" type="text/css" href="css/bootstrap-select.min.css">
   <script type="text/javascript" src="js/jquery.min.js"></script>
   <script type="text/javascript" src="js/bootstrap3.min.js"></script>
   <script type="text/javascript" src="js/daterangepicker.jQuery.compressed.js"></script>
@@ -54,7 +55,8 @@ String bgcol = "#F5F5F5";
   <script type="text/javascript" src="js/jquery.jqGrid.min.js"></script>
   <script type="text/javascript" src="js/dataTables.bootstrap.js"></script>
   <script type="text/javascript" src="js/locales/bootstrap-datepicker.ka.js"></script>
-  
+  <script type="text/javascript" src="js/bootstrap-select.js"></script>
+
   
   
   <%--link href="js/ext/ext-theme-classic-all.css" rel="stylesheet" type="text/css" />

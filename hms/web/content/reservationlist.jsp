@@ -37,11 +37,13 @@
         box-shadow: 0 3px 3px 2px #C4C4C4;
         height: 30px;
         margin: 10px;
+        background: #FFF;
     }
     #filter_table td {
         vertical-align: middle;
         text-align: left;
         padding: 2px;
+        font-size: 11px;
     }
     #filter_table input
     {
@@ -49,6 +51,36 @@
         border-radius: 2px !important;
 
     }
+
+    .input-append .add-on:last-child, .input-append .btn:last-child, .input-append .btn-group:last-child > .dropdown-toggle {
+        -webkit-border-radius: 0 4px 4px 0;
+        -moz-border-radius: 0 4px 4px 0;
+        border-radius: 0 4px 4px 0;
+    }
+    .input-append .add-on, .input-append .btn, .input-append .btn-group {
+        margin-left: -1px;
+    }
+    .input-append .add-on, .input-prepend .add-on, .input-append .btn, .input-prepend .btn, .input-append .btn-group > .dropdown-toggle, .input-prepend .btn-group > .dropdown-toggle {
+        vertical-align: top;
+        -webkit-border-radius: 0;
+        -moz-border-radius: 0;
+        border-radius: 0;
+    }
+    .input-append .add-on, .input-prepend .add-on {
+        display: inline-block;
+        width: auto;
+        height: 26px;
+        min-width: 16px;
+        padding: 4px 5px;
+        font-size: 14px;
+        font-weight: normal;
+        line-height: 20px;
+        text-align: center;
+        text-shadow: 0 1px 0 #ffffff;
+        background-color: #eeeeee;
+        border: 1px solid #ccc;
+    }
+
 </style>
 <script type="text/javascript">
     $(document).ready(function () {
@@ -109,67 +141,86 @@
         $("#jqgh_list_reservs_reservationtype").css("text-align", "center");
         $("#jqgh_list_reservs_action").css("text-align", "center");
 
-
+        $('.date').datepicker(<%=pickerformat2%>);
+        $('.dropdown').selectpicker();
     });
 </script>
 
 <div id="status_bar" width='100%' align='center' style="height: 146px;font-weight: bold;">
 
-    <table width="100%" id="filter_table" style="margin-left: 10px; color: #8A8A8A;">
-        <tr>
-            <td colspan="8">&nbsp;</td>
-        </tr>
-        <tr>
-            <td><input class="form-control" type="text" id="reservNumb" placeholder=" ქვითრის #"/></td>
-            <td rowspan="2" style="vertical-align: bottom; text-align: right;">ოთახი</td>
-            <td colspan="2"><input class="form-control" type="text" id="firstlast" placeholder=" სახელი გვარი"/></td>
-            <td style="text-align: right;">ჩამოსვლა</td>
-            <td><input class="form-control" type="text" id="arrival_dateFrom" placeholder=" თარიღიდან" /></td>
-            <td><input class="form-control" type="text" id="reserv_dateTo" placeholder=" თარიღამდე"/></td>
-            <td rowspan="4">&nbsp;</td>
-            <td>
-                <button type="button" class="btn btn-danger" id="search_reserve_filer" style="width: 69px;">ძებნა</button>
-            </td>
-        </tr>
-        <tr>
-            <td><input class="form-control" type="text" id="checkNumb" placeholder=" რეზერვაციის #"/></td>
-            <td><select name="reserv_type3" class="form-control dropdown" id="roomNumb">
-            </select></td>
-            <td><select name="reserv_type4" class="form-control dropdown" id="roomType">
-            </select></td>
-            <td style="text-align: right;">რეზერვაცია</td>
-            <td><input class="form-control" type="text"  id="reserv_dateFrom" placeholder=" თარიღიდან"/></td>
-            <td>
-                <input class="form-control" type="text" id="arrival_dateTo" placeholder=" თარიღამდე"/></td>
-            <td>
-                <button type="button" class="btn btn-default" id="cancel_reserve_filer" data-dismiss="modal" style="width: 69px;">გაუქმება</button>
-            </td>
-        </tr>
-        <tr>
-            <td><input class="form-control" type="text" placeholder=" გაუქმების #"id="cancelNumb"/></td>
-            <td style="text-align: right;">წყარო</td>
-            <td colspan="2"><input class="form-control" type="text" id="txtSource"/></td>
-            <td style="text-align: right;">ტიპი</td>
-            <td>
-                <select name="reserv_type" class="form-control dropdown" id="reserv_type">
-                </select></td>
-            <td><select name="reserv_type2" class="form-control dropdown" id="reserv_type2">
-            </select></td>
-            <td rowspan="2">
-                <button type="button" class="btn btn-danger" id="create_group_reserve_filer" style="width: 69px;white-space: normal !important;">ჯგუფის შექმნა</button>
-            </td>
-        </tr>
-        <tr>
-            <td colspan="2"><input type="checkbox" name="showMrooms" id="showMrooms"/>
-                აჩვენე მიუკუთვნილებელი ნომერი
-            </td>
-            <td colspan="2"><input type="checkbox" name="showIncomplOrders" id="showIncomplOrders"/>
-                აჩვენე ჩავარდნილი/დაუსრულებელი ვებ ჯავშნები
-            </td>
-            <td colspan="3">&nbsp;</td>
-        </tr>
-    </table>
 
+    <div class="col-md-16">
+        <input class="col-md-2" type="text" id="checkNumb" placeholder=" რეზერვაციის #" />
+        <input class="col-md-4" type="text" id="firstlast" placeholder=" სახელი გვარი"/>
+        <span class="col-md-2">ჩამოსვლა</span>
+        <div class="input-append date col-md-3">
+            <input type="text" class="span2 " id="arrival_dateFrom" placeholder=" თარიღიდან" style="float: left;width: 83%;">
+            <span class="add-on" style="float: left;"><i class="glyphicon glyphicon-calendar"></i></span>
+        </div>
+        <div class="input-append date col-md-3">
+            <input type="text" class="span2 " id="arrival_dateTo" placeholder=" თარიღამდე" style="float: left;width: 83%;">
+            <span class="add-on" style="float: left;"><i class="glyphicon glyphicon-calendar"></i></span>
+        </div>
+        <button type="button" class="btn btn-danger col-md-2" id="search_reserve_filer" style="width: 69px;">ძებნა</button>
+    </div>
+
+    <div class="col-md-16">
+        <input class="col-md-2" type="text" id="reservNumb" placeholder=" ქვითრის #" />
+        <span class="col-md-1">ოთახი</span>
+        <select class="dropdown col-md-2">
+            <option>Mustard</option>
+            <option>Ketchup</option>
+            <option>Relish</option>
+            <option>Mustard</option>
+            <option>Ketchup</option>
+        </select>
+        <select class="dropdown col-md-2">
+            <option>Mustard</option>
+            <option>Ketchup</option>
+            <option>Relish</option>
+            <option>Mustard</option>
+            <option>Ketchup</option>
+        </select>
+        <span class="col-md-1">რეზერვაცია</span>
+        <div class="input-append date col-md-3">
+            <input type="text" class="span2 " id="reserv_dateFrom" placeholder=" თარიღიდან">
+            <span class="add-on" style="float: left;"><i class="glyphicon glyphicon-calendar"></i></span>
+        </div>
+        <div class="input-append date col-md-3">
+            <input type="text" class="span2" id="reserv_dateTo" placeholder=" თარიღამდე">
+            <span class="add-on" style="float: left;"><i class="glyphicon glyphicon-calendar"></i></span>
+        </div>
+        <button type="button" class="btn btn-default col-md-2" id="cancel_reserve_filer" data-dismiss="modal">გაუქმება</button>
+    </div>
+
+    <%--<div class="col-md-16">--%>
+        <%--<input class="form-control" type="text" placeholder=" გაუქმების #" id="cancelNumb" />--%>
+        <%--<span>წყარო</span>--%>
+        <%--<input class="form-control" type="text" id="txtSource"/>--%>
+        <%--<span>ტიპი</span>--%>
+        <%--<select class="dropdown">--%>
+            <%--<option>Mustard</option>--%>
+            <%--<option>Ketchup</option>--%>
+            <%--<option>Relish</option>--%>
+        <%--</select>--%>
+        <%--<select class="dropdown">--%>
+            <%--<option>Mustard</option>--%>
+            <%--<option>Ketchup</option>--%>
+            <%--<option>Relish</option>--%>
+        <%--</select>--%>
+        <%--<button type="button" class="btn btn-danger" id="create_group_reserve_filer" style="white-space: normal !important;">ჯგუფის შექმნა</button>--%>
+    <%--</div>--%>
+
+
+
+
+
+
+
+            <%--<input type="checkbox" name="showMrooms" id="showMrooms" style="color: #818181;font-weight: normal;"/>--%>
+                <%--აჩვენე მიუკუთვნილებელი ნომერი--%>
+            <%--<input type="checkbox" name="showIncomplOrders" id="showIncomplOrders" style="color: #818181;font-weight: normal;"/>--%>
+                <%--აჩვენე ჩავარდნილი/დაუსრულებელი ვებ ჯავშნები--%>
 </div>
 
 <div id="status_bar" width='100%' align='center'>
