@@ -1,5 +1,5 @@
 var tabcount = 0;
-$(document).ready(function(){
+$(document).ready(function () {
     loader = $(".loading-panel");
 });
 
@@ -378,7 +378,7 @@ function getBody(fname) {
             $('#centercontent').html(data);
             loader.hide();
         },
-        error: function() {
+        error: function () {
             loader.hide();
         },
         async: false
@@ -407,7 +407,7 @@ function getBody(fname1, fname2, name, id) {
             $('#leftcontent').html(data);
             loader.hide();
         },
-        error: function() {
+        error: function () {
             loader.hide();
         },
         async: false
@@ -531,6 +531,15 @@ function editNameSearch(id, cid, prefix) {
     //else {
     extramodal0("contactSearch", "კონტაქტის ძებნა", "id=" + id + "&term=" + term + "&cid=" + cid + "&prefix=" + prefix);
     //}
+}
+
+function isNullOrEmpty(value)
+{
+    if(value === 'NULL' || value === '' || value === null || typeof value === 'undefined')
+    {
+        return true;
+    }
+    return false;
 }
 
 var hmsDaysMin = ["კვი", "ორშ", "სამ", "ოთხ", "ხუთ", "პარ", "შაბ", "კვი"];

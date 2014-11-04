@@ -3,8 +3,13 @@
 <%@include file="../includes/initxml.jsp"%>
 
 <%
+    String where = (String)request.getParameter("where");
+    if(where == null)
+    {
+        where = "";
+    }
     SimpleDateFormat resListDate = new SimpleDateFormat(arrdepdateformats[dff]);
-    VReservationlistBean[] ReservationBeanList = VReservationlistManager.getInstance().loadByWhere("");
+    VReservationlistBean[] ReservationBeanList = VReservationlistManager.getInstance().loadByWhere(where);
 %>
 
 <rows>
@@ -12,8 +17,6 @@
 	<%--<total><%=total_pages%></total>--%>
 	<%--<records><%=count%></records>--%>
 	<%
-        //TODO : remove first for cycle.. it is just for demonstration
-        for(int j = 0; j < 15; j++){
         for(int i=0;i< ReservationBeanList.length;i++){  %>
                 <row id='<%=ReservationBeanList[i].getReservationid()%>'>
                     <cell><![CDATA[<%=ReservationBeanList[i].getReservationroomid()%>]]></cell>
@@ -72,5 +75,5 @@
                     </cell>
 
                 </row>
-            <% } } %>
+            <% } %>
 </rows>

@@ -354,6 +354,7 @@ public class VReservationlistManager
         {
             c = getConnection();
             pStatement = c.createStatement();
+            System.out.print(sql);
             rs =  pStatement.executeQuery(sql);
             v = new java.util.ArrayList();
             while(rs.next())
