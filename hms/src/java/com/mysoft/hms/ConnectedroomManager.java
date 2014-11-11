@@ -158,57 +158,6 @@ public class ConnectedroomManager
     //////////////////////////////////////
 
     /**
-     * Loads ConnectedroomBean array from the connectedroom table using its roomid field.
-     *
-     * @return an array of ConnectedroomBean 
-     */
-    // LOAD BY IMPORTED KEY
-    public ConnectedroomBean[] loadByRoomid(Integer value) throws SQLException 
-    {
-        Connection c = null;
-        PreparedStatement ps = null;
-        try 
-        {
-            c = getConnection();
-            ps = c.prepareStatement("SELECT " + ALL_FIELDS + " FROM connectedroom WHERE roomid=?",ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-            Manager.setInteger(ps, 1, value);
-            return loadByPreparedStatement(ps);
-        }
-        finally
-        {
-            getManager().close(ps);
-            freeConnection(c);
-        }
-    }
-
-
-    /**
-     * Deletes from the connectedroom table by roomid field.
-     *
-     * @param value the key value to seek
-     * @return the number of rows deleted
-     */
-    // DELETE BY IMPORTED KEY
-    public int deleteByRoomid(Integer value) throws SQLException 
-    {
-        Connection c = null;
-        PreparedStatement ps = null;
-        try 
-        {
-            c = getConnection();
-            ps = c.prepareStatement("DELETE FROM connectedroom WHERE roomid=?");
-            Manager.setInteger(ps, 1, value);
-            return ps.executeUpdate();
-        }
-        finally
-        {
-            getManager().close(ps);
-            freeConnection(c);
-        }
-    }
-
-
-    /**
      * Loads ConnectedroomBean array from the connectedroom table using its connectedid field.
      *
      * @return an array of ConnectedroomBean 
@@ -259,6 +208,57 @@ public class ConnectedroomManager
     }
 
 
+    /**
+     * Loads ConnectedroomBean array from the connectedroom table using its roomid field.
+     *
+     * @return an array of ConnectedroomBean 
+     */
+    // LOAD BY IMPORTED KEY
+    public ConnectedroomBean[] loadByRoomid(Integer value) throws SQLException 
+    {
+        Connection c = null;
+        PreparedStatement ps = null;
+        try 
+        {
+            c = getConnection();
+            ps = c.prepareStatement("SELECT " + ALL_FIELDS + " FROM connectedroom WHERE roomid=?",ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            Manager.setInteger(ps, 1, value);
+            return loadByPreparedStatement(ps);
+        }
+        finally
+        {
+            getManager().close(ps);
+            freeConnection(c);
+        }
+    }
+
+
+    /**
+     * Deletes from the connectedroom table by roomid field.
+     *
+     * @param value the key value to seek
+     * @return the number of rows deleted
+     */
+    // DELETE BY IMPORTED KEY
+    public int deleteByRoomid(Integer value) throws SQLException 
+    {
+        Connection c = null;
+        PreparedStatement ps = null;
+        try 
+        {
+            c = getConnection();
+            ps = c.prepareStatement("DELETE FROM connectedroom WHERE roomid=?");
+            Manager.setInteger(ps, 1, value);
+            return ps.executeUpdate();
+        }
+        finally
+        {
+            getManager().close(ps);
+            freeConnection(c);
+        }
+    }
+
+
 
     //////////////////////////////////////
     // GET/SET FOREIGN KEY BEAN METHOD
@@ -273,7 +273,7 @@ public class ConnectedroomManager
     public RoomBean getRoomBean(ConnectedroomBean pObject) throws SQLException
     {
         RoomBean other = RoomManager.getInstance().createRoomBean();
-        other.setRoomid(pObject.getRoomid());
+        other.setRoomid(pObject.getConnectedid());
         return RoomManager.getInstance().loadUniqueUsingTemplate(other);
     }
 
@@ -287,7 +287,7 @@ public class ConnectedroomManager
     // SET IMPORTED
     public ConnectedroomBean setRoomBean(ConnectedroomBean pObject,RoomBean pObjectToBeSet)
     {
-        pObject.setRoomid(pObjectToBeSet.getRoomid());
+        pObject.setConnectedid(pObjectToBeSet.getRoomid());
         return pObject;
     }
 

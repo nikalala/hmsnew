@@ -990,7 +990,7 @@ public class MarketManager
                          + "        contragent,reservation"
                          + " WHERE "    
                          + "     reservation.marketid = ?"
-                         + " AND reservation.contractcontragentid = contragent.contragentid";
+                         + " AND reservation.companyid = contragent.contragentid";
          try
          {
              c = getConnection();

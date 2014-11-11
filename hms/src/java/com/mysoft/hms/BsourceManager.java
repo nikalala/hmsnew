@@ -958,7 +958,7 @@ public class BsourceManager
                          + "        contragent,reservation"
                          + " WHERE "    
                          + "     reservation.bsourceid = ?"
-                         + " AND reservation.contractcontragentid = contragent.contragentid";
+                         + " AND reservation.companyid = contragent.contragentid";
          try
          {
              c = getConnection();

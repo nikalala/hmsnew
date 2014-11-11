@@ -2345,7 +2345,7 @@ public class ContragentManager
                          + " FROM  "
                          + "        bsource,reservation"
                          + " WHERE "    
-                         + "     reservation.contractcontragentid = ?"
+                         + "     reservation.companyid = ?"
                          + " AND reservation.bsourceid = bsource.bsourceid";
          try
          {
@@ -2377,7 +2377,7 @@ public class ContragentManager
                          + " FROM  "
                          + "        discount,reservation"
                          + " WHERE "    
-                         + "     reservation.contractcontragentid = ?"
+                         + "     reservation.companyid = ?"
                          + " AND reservation.discountid = discount.discountid";
          try
          {
@@ -2409,7 +2409,7 @@ public class ContragentManager
                          + " FROM  "
                          + "        market,reservation"
                          + " WHERE "    
-                         + "     reservation.contractcontragentid = ?"
+                         + "     reservation.companyid = ?"
                          + " AND reservation.marketid = market.marketid";
          try
          {
@@ -2441,7 +2441,7 @@ public class ContragentManager
                          + " FROM  "
                          + "        paymentmethod,reservation"
                          + " WHERE "    
-                         + "     reservation.contractcontragentid = ?"
+                         + "     reservation.companyid = ?"
                          + " AND reservation.paymentmethodid = paymentmethod.paymentmethodid";
          try
          {
@@ -2473,7 +2473,7 @@ public class ContragentManager
                          + " FROM  "
                          + "        personnel,reservation"
                          + " WHERE "    
-                         + "     reservation.contractcontragentid = ?"
+                         + "     reservation.companyid = ?"
                          + " AND reservation.regbyid = personnel.personnelid";
          try
          {
@@ -2505,7 +2505,7 @@ public class ContragentManager
                          + " FROM  "
                          + "        reservationtype,reservation"
                          + " WHERE "    
-                         + "     reservation.contractcontragentid = ?"
+                         + "     reservation.companyid = ?"
                          + " AND reservation.reservationtypeid = reservationtype.reservationtypeid";
          try
          {

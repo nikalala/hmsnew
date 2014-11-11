@@ -1809,7 +1809,7 @@ public class PaymentmethodManager
                          + "        contragent,reservation"
                          + " WHERE "    
                          + "     reservation.paymentmethodid = ?"
-                         + " AND reservation.contractcontragentid = contragent.contragentid";
+                         + " AND reservation.companyid = contragent.contragentid";
          try
          {
              c = getConnection();

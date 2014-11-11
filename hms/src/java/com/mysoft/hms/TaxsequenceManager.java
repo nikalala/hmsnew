@@ -158,57 +158,6 @@ public class TaxsequenceManager
     //////////////////////////////////////
 
     /**
-     * Loads TaxsequenceBean array from the taxsequence table using its taxid field.
-     *
-     * @return an array of TaxsequenceBean 
-     */
-    // LOAD BY IMPORTED KEY
-    public TaxsequenceBean[] loadByTaxid(Integer value) throws SQLException 
-    {
-        Connection c = null;
-        PreparedStatement ps = null;
-        try 
-        {
-            c = getConnection();
-            ps = c.prepareStatement("SELECT " + ALL_FIELDS + " FROM taxsequence WHERE taxid=?",ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-            Manager.setInteger(ps, 1, value);
-            return loadByPreparedStatement(ps);
-        }
-        finally
-        {
-            getManager().close(ps);
-            freeConnection(c);
-        }
-    }
-
-
-    /**
-     * Deletes from the taxsequence table by taxid field.
-     *
-     * @param value the key value to seek
-     * @return the number of rows deleted
-     */
-    // DELETE BY IMPORTED KEY
-    public int deleteByTaxid(Integer value) throws SQLException 
-    {
-        Connection c = null;
-        PreparedStatement ps = null;
-        try 
-        {
-            c = getConnection();
-            ps = c.prepareStatement("DELETE FROM taxsequence WHERE taxid=?");
-            Manager.setInteger(ps, 1, value);
-            return ps.executeUpdate();
-        }
-        finally
-        {
-            getManager().close(ps);
-            freeConnection(c);
-        }
-    }
-
-
-    /**
      * Loads TaxsequenceBean array from the taxsequence table using its afterid field.
      *
      * @return an array of TaxsequenceBean 
@@ -259,6 +208,57 @@ public class TaxsequenceManager
     }
 
 
+    /**
+     * Loads TaxsequenceBean array from the taxsequence table using its taxid field.
+     *
+     * @return an array of TaxsequenceBean 
+     */
+    // LOAD BY IMPORTED KEY
+    public TaxsequenceBean[] loadByTaxid(Integer value) throws SQLException 
+    {
+        Connection c = null;
+        PreparedStatement ps = null;
+        try 
+        {
+            c = getConnection();
+            ps = c.prepareStatement("SELECT " + ALL_FIELDS + " FROM taxsequence WHERE taxid=?",ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            Manager.setInteger(ps, 1, value);
+            return loadByPreparedStatement(ps);
+        }
+        finally
+        {
+            getManager().close(ps);
+            freeConnection(c);
+        }
+    }
+
+
+    /**
+     * Deletes from the taxsequence table by taxid field.
+     *
+     * @param value the key value to seek
+     * @return the number of rows deleted
+     */
+    // DELETE BY IMPORTED KEY
+    public int deleteByTaxid(Integer value) throws SQLException 
+    {
+        Connection c = null;
+        PreparedStatement ps = null;
+        try 
+        {
+            c = getConnection();
+            ps = c.prepareStatement("DELETE FROM taxsequence WHERE taxid=?");
+            Manager.setInteger(ps, 1, value);
+            return ps.executeUpdate();
+        }
+        finally
+        {
+            getManager().close(ps);
+            freeConnection(c);
+        }
+    }
+
+
 
     //////////////////////////////////////
     // GET/SET FOREIGN KEY BEAN METHOD
@@ -273,7 +273,7 @@ public class TaxsequenceManager
     public TaxBean getTaxBean(TaxsequenceBean pObject) throws SQLException
     {
         TaxBean other = TaxManager.getInstance().createTaxBean();
-        other.setTaxid(pObject.getTaxid());
+        other.setTaxid(pObject.getAfterid());
         return TaxManager.getInstance().loadUniqueUsingTemplate(other);
     }
 
@@ -287,7 +287,7 @@ public class TaxsequenceManager
     // SET IMPORTED
     public TaxsequenceBean setTaxBean(TaxsequenceBean pObject,TaxBean pObjectToBeSet)
     {
-        pObject.setTaxid(pObjectToBeSet.getTaxid());
+        pObject.setAfterid(pObjectToBeSet.getTaxid());
         return pObject;
     }
 

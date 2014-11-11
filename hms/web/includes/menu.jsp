@@ -35,7 +35,7 @@
                             <a href="javascript:getBody('stayviewleft','construction');">წამსვლელთა სია</a>
                         </li>
                         <li>
-                            <a href="javascript:getBody('stayviewleft','construction');">სტუმრების მონაცემთა ბაზა</a>
+                            <a href="javascript:getBody('stayviewleft','guestdblist','სტუმრების მონაცემთა ბაზა','res1');">სტუმრების მონაცემთა ბაზა</a>
                         </li>
                         <li>
                             <a href="javascript:newWindow('construction','ღამის აუდიტი');">ღამის აუდიტი</a>
@@ -65,7 +65,7 @@
                     <a href="#mb59" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-usd" style="padding-right: 10px;"></span> სალარო <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li>
-                            <a href="javascript:getBody('stayviewleft','construction');">ტურისტული აგენტები</a>
+                            <a href="javascript:getBody('stayviewleft','tagents','ტურისტული აგენტები','res1');">ტურისტული აგენტები</a>
                         </li>
                         <li>
                             <a href="javascript:getBody('stayviewleft','construction');">კომპანიები</a>

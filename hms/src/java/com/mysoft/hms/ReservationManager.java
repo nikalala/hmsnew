@@ -468,108 +468,6 @@ public class ReservationManager
 
 
     /**
-     * Loads ReservationBean array from the reservation table using its contractcontragentid field.
-     *
-     * @return an array of ReservationBean 
-     */
-    // LOAD BY IMPORTED KEY
-    public ReservationBean[] loadByContractcontragentid(Long value) throws SQLException 
-    {
-        Connection c = null;
-        PreparedStatement ps = null;
-        try 
-        {
-            c = getConnection();
-            ps = c.prepareStatement("SELECT " + ALL_FIELDS + " FROM reservation WHERE contractcontragentid=?",ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-            Manager.setLong(ps, 1, value);
-            return loadByPreparedStatement(ps);
-        }
-        finally
-        {
-            getManager().close(ps);
-            freeConnection(c);
-        }
-    }
-
-
-    /**
-     * Deletes from the reservation table by contractcontragentid field.
-     *
-     * @param value the key value to seek
-     * @return the number of rows deleted
-     */
-    // DELETE BY IMPORTED KEY
-    public int deleteByContractcontragentid(Long value) throws SQLException 
-    {
-        Connection c = null;
-        PreparedStatement ps = null;
-        try 
-        {
-            c = getConnection();
-            ps = c.prepareStatement("DELETE FROM reservation WHERE contractcontragentid=?");
-            Manager.setLong(ps, 1, value);
-            return ps.executeUpdate();
-        }
-        finally
-        {
-            getManager().close(ps);
-            freeConnection(c);
-        }
-    }
-
-
-    /**
-     * Loads ReservationBean array from the reservation table using its paymentcontragentid field.
-     *
-     * @return an array of ReservationBean 
-     */
-    // LOAD BY IMPORTED KEY
-    public ReservationBean[] loadByPaymentcontragentid(Long value) throws SQLException 
-    {
-        Connection c = null;
-        PreparedStatement ps = null;
-        try 
-        {
-            c = getConnection();
-            ps = c.prepareStatement("SELECT " + ALL_FIELDS + " FROM reservation WHERE paymentcontragentid=?",ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-            Manager.setLong(ps, 1, value);
-            return loadByPreparedStatement(ps);
-        }
-        finally
-        {
-            getManager().close(ps);
-            freeConnection(c);
-        }
-    }
-
-
-    /**
-     * Deletes from the reservation table by paymentcontragentid field.
-     *
-     * @param value the key value to seek
-     * @return the number of rows deleted
-     */
-    // DELETE BY IMPORTED KEY
-    public int deleteByPaymentcontragentid(Long value) throws SQLException 
-    {
-        Connection c = null;
-        PreparedStatement ps = null;
-        try 
-        {
-            c = getConnection();
-            ps = c.prepareStatement("DELETE FROM reservation WHERE paymentcontragentid=?");
-            Manager.setLong(ps, 1, value);
-            return ps.executeUpdate();
-        }
-        finally
-        {
-            getManager().close(ps);
-            freeConnection(c);
-        }
-    }
-
-
-    /**
      * Loads ReservationBean array from the reservation table using its companyid field.
      *
      * @return an array of ReservationBean 
@@ -621,6 +519,57 @@ public class ReservationManager
 
 
     /**
+     * Loads ReservationBean array from the reservation table using its contractcontragentid field.
+     *
+     * @return an array of ReservationBean 
+     */
+    // LOAD BY IMPORTED KEY
+    public ReservationBean[] loadByContractcontragentid(Long value) throws SQLException 
+    {
+        Connection c = null;
+        PreparedStatement ps = null;
+        try 
+        {
+            c = getConnection();
+            ps = c.prepareStatement("SELECT " + ALL_FIELDS + " FROM reservation WHERE contractcontragentid=?",ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            Manager.setLong(ps, 1, value);
+            return loadByPreparedStatement(ps);
+        }
+        finally
+        {
+            getManager().close(ps);
+            freeConnection(c);
+        }
+    }
+
+
+    /**
+     * Deletes from the reservation table by contractcontragentid field.
+     *
+     * @param value the key value to seek
+     * @return the number of rows deleted
+     */
+    // DELETE BY IMPORTED KEY
+    public int deleteByContractcontragentid(Long value) throws SQLException 
+    {
+        Connection c = null;
+        PreparedStatement ps = null;
+        try 
+        {
+            c = getConnection();
+            ps = c.prepareStatement("DELETE FROM reservation WHERE contractcontragentid=?");
+            Manager.setLong(ps, 1, value);
+            return ps.executeUpdate();
+        }
+        finally
+        {
+            getManager().close(ps);
+            freeConnection(c);
+        }
+    }
+
+
+    /**
      * Loads ReservationBean array from the reservation table using its taid field.
      *
      * @return an array of ReservationBean 
@@ -660,6 +609,57 @@ public class ReservationManager
         {
             c = getConnection();
             ps = c.prepareStatement("DELETE FROM reservation WHERE taid=?");
+            Manager.setLong(ps, 1, value);
+            return ps.executeUpdate();
+        }
+        finally
+        {
+            getManager().close(ps);
+            freeConnection(c);
+        }
+    }
+
+
+    /**
+     * Loads ReservationBean array from the reservation table using its paymentcontragentid field.
+     *
+     * @return an array of ReservationBean 
+     */
+    // LOAD BY IMPORTED KEY
+    public ReservationBean[] loadByPaymentcontragentid(Long value) throws SQLException 
+    {
+        Connection c = null;
+        PreparedStatement ps = null;
+        try 
+        {
+            c = getConnection();
+            ps = c.prepareStatement("SELECT " + ALL_FIELDS + " FROM reservation WHERE paymentcontragentid=?",ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            Manager.setLong(ps, 1, value);
+            return loadByPreparedStatement(ps);
+        }
+        finally
+        {
+            getManager().close(ps);
+            freeConnection(c);
+        }
+    }
+
+
+    /**
+     * Deletes from the reservation table by paymentcontragentid field.
+     *
+     * @param value the key value to seek
+     * @return the number of rows deleted
+     */
+    // DELETE BY IMPORTED KEY
+    public int deleteByPaymentcontragentid(Long value) throws SQLException 
+    {
+        Connection c = null;
+        PreparedStatement ps = null;
+        try 
+        {
+            c = getConnection();
+            ps = c.prepareStatement("DELETE FROM reservation WHERE paymentcontragentid=?");
             Manager.setLong(ps, 1, value);
             return ps.executeUpdate();
         }
@@ -968,7 +968,7 @@ public class ReservationManager
     public ContragentBean getContragentBean(ReservationBean pObject) throws SQLException
     {
         ContragentBean other = ContragentManager.getInstance().createContragentBean();
-        other.setContragentid(pObject.getContractcontragentid());
+        other.setContragentid(pObject.getCompanyid());
         return ContragentManager.getInstance().loadUniqueUsingTemplate(other);
     }
 
@@ -982,7 +982,7 @@ public class ReservationManager
     // SET IMPORTED
     public ReservationBean setContragentBean(ReservationBean pObject,ContragentBean pObjectToBeSet)
     {
-        pObject.setContractcontragentid(pObjectToBeSet.getContragentid());
+        pObject.setCompanyid(pObjectToBeSet.getContragentid());
         return pObject;
     }
 

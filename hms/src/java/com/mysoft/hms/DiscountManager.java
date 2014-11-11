@@ -1420,7 +1420,7 @@ public class DiscountManager
                          + "        contragent,reservation"
                          + " WHERE "    
                          + "     reservation.discountid = ?"
-                         + " AND reservation.contractcontragentid = contragent.contragentid";
+                         + " AND reservation.companyid = contragent.contragentid";
          try
          {
              c = getConnection();

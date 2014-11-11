@@ -542,5 +542,56 @@ function isNullOrEmpty(value)
     return false;
 }
 
+function urlencode(str) {
+  return str.replace(' ', '!!!');
+}
+
 var hmsDaysMin = ["კვი", "ორშ", "სამ", "ოთხ", "ხუთ", "პარ", "შაბ", "კვი"];
 var hmsMonthsMin = ["იან", "თებ", "მარ", "აპრ", "მაი", "ივნ", "ივლ", "აგვ", "სექ", "ოქტ", "ნოე", "დეკ"];
+
+    function initializeGrid(grid)
+    {
+        jQuery("#"+grid.id).jqGrid(
+            {
+                url: grid.url,
+                datatype: grid.type,
+                colNames: grid.cols,
+                colModel: grid.model,
+                loadComplete: function(){
+                    $("#" +grid.id+ " td:last-child").removeAttr("title");
+                },
+                rowNum: 2000,
+                height: 400,
+                autowidth: true,
+                sortname: grid.sort,
+                viewrecords: true,
+                sortorder: grid.order
+            }).jqGrid('bindKeys');
+            for(var i = 0; i < grid.model.length; i++)
+            {
+                $("#jqgh_" + grid.id + "_" + grid.model[i].name).css("text-align", grid.model[i].align);
+            }
+    }
+
+    function reloadGrid(gridId,pgUrl)
+    {
+        console.log(pgUrl);
+        jQuery("#"+gridId).jqGrid().setGridParam({
+            url: pgUrl
+        }).trigger("reloadGrid");
+    }
+
+    function colModelGenerator(width,colName,alligment)
+    {
+       var pos = "left";
+       switch(alligment)
+       {
+           case 1:
+               pos = "center";
+               break;
+           case 2:
+               pos = "right";
+               break;
+       }
+       return {width: width, hidden: false, name: colName, index: colName, align: pos};
+    }

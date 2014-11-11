@@ -139,7 +139,7 @@ public class RatetypeBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: ratetype.code
-     * <li>comments: მოკლე სახელწოდება
+     * <li>comments: ????? ???????????
      * <li>column size: 2147483647
      * <li>jdbc type returned by the driver: Types.VARCHAR
      * </ul>
@@ -196,7 +196,7 @@ public class RatetypeBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: ratetype.name
-     * <li>comments: დასახელება
+     * <li>comments: ??????????
      * <li>column size: 2147483647
      * <li>jdbc type returned by the driver: Types.VARCHAR
      * </ul>
@@ -254,7 +254,7 @@ public class RatetypeBean
      * <ul>
      * <li>full name: ratetype.regbyid
      * <li> foreign key: personnel.personnelid
-     * <li>comments: ავტორი
+     * <li>comments: ??????
      * <li>column size: 10
      * <li>jdbc type returned by the driver: Types.INTEGER
      * </ul>
@@ -322,7 +322,7 @@ public class RatetypeBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: ratetype.regdate
-     * <li>comments: რეგისტრაციის თარიღი
+     * <li>comments: ???????????? ??????
      * <li>default value: now()
      * <li>column size: 29
      * <li>jdbc type returned by the driver: Types.TIMESTAMP
@@ -391,7 +391,7 @@ public class RatetypeBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: ratetype.active
-     * <li>comments: აქტიური
+     * <li>comments: ???????
      * <li>default value: true
      * <li>column size: 1
      * <li>jdbc type returned by the driver: Types.BIT
@@ -459,7 +459,7 @@ public class RatetypeBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: ratetype.ord
-     * <li>comments: სორტირება
+     * <li>comments: ?????????
      * <li>default value: 0
      * <li>column size: 10
      * <li>jdbc type returned by the driver: Types.INTEGER
@@ -528,7 +528,7 @@ public class RatetypeBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: ratetype.deleted
-     * <li>comments: წაშლილი
+     * <li>comments: ???????
      * <li>default value: false
      * <li>column size: 1
      * <li>jdbc type returned by the driver: Types.BIT

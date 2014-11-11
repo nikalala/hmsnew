@@ -155,7 +155,7 @@ public class DiscountBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: discount.code
-     * <li>comments: მოკლე სახელწოდება
+     * <li>comments: ????? ???????????
      * <li>column size: 2147483647
      * <li>jdbc type returned by the driver: Types.VARCHAR
      * </ul>
@@ -212,7 +212,7 @@ public class DiscountBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: discount.name
-     * <li>comments: დასახელება
+     * <li>comments: ??????????
      * <li>column size: 2147483647
      * <li>jdbc type returned by the driver: Types.VARCHAR
      * </ul>
@@ -269,7 +269,7 @@ public class DiscountBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: discount.perctype
-     * <li>comments: ფასდაკლების ტიპი
+     * <li>comments: ??????????? ????
      * <li>default value: true
      * <li>column size: 1
      * <li>jdbc type returned by the driver: Types.BIT
@@ -337,7 +337,7 @@ public class DiscountBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: discount.open
-     * <li>comments: ღია ფასდაკლება
+     * <li>comments: ??? ??????????
      * <li>default value: false
      * <li>column size: 1
      * <li>jdbc type returned by the driver: Types.BIT
@@ -405,7 +405,7 @@ public class DiscountBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: discount.val
-     * <li>comments: ოდენობა
+     * <li>comments: ???????
      * <li>column size: 17
      * <li>jdbc type returned by the driver: Types.DOUBLE
      * </ul>
@@ -473,7 +473,7 @@ public class DiscountBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: discount.roomrate
-     * <li>comments: ოთახის გადასახადებზე
+     * <li>comments: ?????? ?????????????
      * <li>default value: true
      * <li>column size: 1
      * <li>jdbc type returned by the driver: Types.BIT
@@ -541,7 +541,7 @@ public class DiscountBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: discount.extracharge
-     * <li>comments: დამატებით სერვისებზე
+     * <li>comments: ????????? ??????????
      * <li>default value: true
      * <li>column size: 1
      * <li>jdbc type returned by the driver: Types.BIT
@@ -610,7 +610,7 @@ public class DiscountBean
      * <ul>
      * <li>full name: discount.regbyid
      * <li> foreign key: personnel.personnelid
-     * <li>comments: ავტორი
+     * <li>comments: ??????
      * <li>column size: 10
      * <li>jdbc type returned by the driver: Types.INTEGER
      * </ul>
@@ -678,7 +678,7 @@ public class DiscountBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: discount.regdate
-     * <li>comments: რეგისტრაციის თარიღი
+     * <li>comments: ???????????? ??????
      * <li>default value: now()
      * <li>column size: 29
      * <li>jdbc type returned by the driver: Types.TIMESTAMP
@@ -747,7 +747,7 @@ public class DiscountBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: discount.active
-     * <li>comments: აქტიური
+     * <li>comments: ???????
      * <li>default value: true
      * <li>column size: 1
      * <li>jdbc type returned by the driver: Types.BIT
@@ -815,7 +815,7 @@ public class DiscountBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: discount.deleted
-     * <li>comments: წაშლილი
+     * <li>comments: ???????
      * <li>default value: false
      * <li>column size: 1
      * <li>jdbc type returned by the driver: Types.BIT

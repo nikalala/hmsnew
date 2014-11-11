@@ -42,6 +42,7 @@ String bgcol = "#F5F5F5";
   <link rel="stylesheet" type="text/css" href="css/jquery.dataTables.min.css">
   <link rel="stylesheet" type="text/css" href="css/ui.jqgrid.css">
   <link rel="stylesheet" type="text/css" href="css/bootstrap-select.min.css">
+  <link rel="stylesheet" type="text/css" href="css/font-awesome.css">
   <script type="text/javascript" src="js/jquery.min.js"></script>
   <script type="text/javascript" src="js/bootstrap3.min.js"></script>
   <script type="text/javascript" src="js/daterangepicker.jQuery.compressed.js"></script>
@@ -50,13 +51,15 @@ String bgcol = "#F5F5F5";
   <script type="text/javascript" src="js/bootstrap-datepicker.js"></script>
   <script type="text/javascript" src="js/moment.js"></script>
   <script type="text/javascript" src="js/main.js"></script>
+  <script type="text/javascript" src="js/grids.js"></script>
+  <script type="text/javascript" src="js/filter-panel.js"></script>
   <script type="text/javascript" src="js/jquery.dataTables.min.js"></script>
   <script type="text/javascript" src="js/i18n/grid.locale-ka.js"></script>
   <script type="text/javascript" src="js/jquery.jqGrid.min.js"></script>
   <script type="text/javascript" src="js/dataTables.bootstrap.js"></script>
   <script type="text/javascript" src="js/locales/bootstrap-datepicker.ka.js"></script>
   <script type="text/javascript" src="js/bootstrap-select.js"></script>
-
+  <script src="js/bootstrap-combobox.js" type="text/javascript"></script>
   
   
   <%--link href="js/ext/ext-theme-classic-all.css" rel="stylesheet" type="text/css" />

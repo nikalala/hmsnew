@@ -1118,7 +1118,7 @@ public class ReservationtypeManager
                          + "        contragent,reservation"
                          + " WHERE "    
                          + "     reservation.reservationtypeid = ?"
-                         + " AND reservation.contractcontragentid = contragent.contragentid";
+                         + " AND reservation.companyid = contragent.contragentid";
          try
          {
              c = getConnection();
