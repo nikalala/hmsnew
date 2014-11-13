@@ -458,10 +458,14 @@ function removeAllTabs() {
 }
 
 function addTab(fname2, name, id) {
+    fname2 = fname2.replace(".jsp.jsp",".jsp");
+    var tabname = "/content/" + fname2 + ".jsp";
+    tabname = tabname.replace(".jsp.jsp",".jsp").replace("content/content/","hms/content/");
+
     if (tabcount == 0)
-        $('#maintabs').append('<li style=""><a src="/content/' + fname2 + '.jsp" href="#' + id + '" data-toggle="tab" style="padding-top: 4px; background-color: #F5F5F5;">' + name + '</a></li>');
+        $('#maintabs').append('<li style=""><a src='+tabname+' href="#' + id + '" data-toggle="tab" style="padding-top: 4px; background-color: #F5F5F5;">' + name + '</a></li>');
     else
-        $('#maintabs').append('<li style=""><a src="/content/' + fname2 + '.jsp" href="#' + id + '" data-toggle="tab" style="padding-top: 3px; background-color: #F5F5F5;"><button class="close closeTab" type="button" >×</button>' + name + '</a></li>');
+        $('#maintabs').append('<li style=""><a src='+tabname+' href="#' + id + '" data-toggle="tab" style="padding-top: 3px; background-color: #F5F5F5;"><button class="close closeTab" type="button" >×</button>' + name + '</a></li>');
 
     $('#centerTabContent').append('<div class="tab-pane" id="' + id + '"></div>');
     loader.show();
