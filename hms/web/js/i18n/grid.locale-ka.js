@@ -12,7 +12,7 @@ $.extend($.jgrid,{
 	defaults : {
 		recordtext: "ნახვა {0}-{1} სულ {2}-დან",
 		emptyrecords: "ჩანაწერი არ არის",
-		loadtext: "ჩატვირთვა...",
+		loadtext: "",
 		pgtext : "გვერდი {0} {1}-დან"
 	},
 	search : {

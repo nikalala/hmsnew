@@ -8,206 +8,203 @@
 <link rel="stylesheet" type="text/css" href="css/grid-filter.css">
 <script type="text/javascript">
 
-$(document).ready(function () {
-    initializeGrid(resGrid);
-    $('.date').datepicker(<%=pickerformat1%>);
-    $('.dropdown').selectpicker();
-    $(".btn-group").css("width", "100%", "!important");
-    $("#grid-table label").each(function () {
-        $(this).css("float", "right", "!important");
-        $(this).css("line-height", "27px", "!important");
+    var lastroomtypeId = 0;
+    $(document).ready(function () {
+        loadDefaults();
     });
-    $("#grid-table input").height($("#grid-table .btn-group").height() - 6, "!important");
-    $("#filter-form input[type='text']").css("width", "100%", "!important");
-    $(".date input[type='text']").css("position", "relative");
-    $("#roomBean").next().css("padding-left", "0");
-    $("#roomType").next().css("padding-right", "0");
-    $("#res1").css("margin","10px");
-    $("#ui-jqgrid-bdiv").width($(".first-table").width());
-    $("#gview_list_reservs").width($(".first-table").width());
-    $("#gbox_list_reservs").width($(".first-table").width());
-    $(".ui-jqgrid-bdiv").css("width","inherit","!important");
-    $("#list_reservs").width($(".first-table").width() - 30);
-    $("#list_reservs").css("margin-left","10px");
-});
 
-$("#roomType").on('change', function () {
-    var element = $("option:selected", this);
-    var id = $(this).val();
-    var selected = "";
-    if (id > 0) {
-        var html = "<option value='0'>-ოთახის #-</option>";
-        <% for (int i = 0; i < roomBeans.length; i++) {%>
-        var value = "<%=roomBeans[i].getRoomtypeid()%>";
-        var roomid = "<%=roomBeans[i].getRoomid()%>";
-        if(roomid == lastroomtypeId)
-        {
-            console.log(roomid);
-            selected = 'selected="selected"';
-        }else{
-            selected = '';
-        }
-        if (id == value) {
-            html +=
-                    "<option value='<%=roomBeans[i].getRoomid()%>' roomtypeid='<%=roomBeans[i].getRoomtypeid()%>' "+selected+"><%=roomBeans[i].getName()%>";
-            html += "</option>";
-        }
-        <% } %>
-    } else {
-        var html = "<option value='0'>-ოთახის #-</option>";
-        <% for (int i = 0; i < roomBeans.length; i++) {%>
-        html +="<option value='<%=roomBeans[i].getRoomid()%>' roomtypeid='<%=roomBeans[i].getRoomtypeid()%>'><%=roomBeans[i].getName()%>";
-        html += "</option>";
-        <% }%>
-    }
-    selected = ""
-    lastroomtypeId = 0;
-    //console.log(html);
-    $("#roomBean").html(html);
-    $('#roomBean').selectpicker("refresh");
-    $('#roomBean').next().css("width","100%").css("padding-left","0px");
-    /**/
-    /*$('#roomBean').change();*/
-});
-
-var lastroomtypeId = 0;
-$("#roomBean").on('change', function () {
-    var element = $("option:selected", this);
-    var id = element.attr("roomtypeid");
-    if (id > 0) {
-        $("#roomType").val(id);
-        lastroomtypeId = element.val();
-        $('#roomType').change();
-    } else {
-        var html = "<option value='0' selected='selected'>-ოთახის ტიპი-</option>";
-        <% for (int i = 0; i < roomTypes.length; i++) { %>
-        html +="<option value='<%=roomTypes[i].getRoomtypeid()%>'><%=roomTypes[i].getName()%></option>";
-        <% } %>
-        $("#roomType").html(html);
-        $('#roomType').selectpicker("refresh");
-        $('#roomType').next().css("width","100%").css("padding-left","0px");
-
-        var rooms = "<option value='0'>-ოთახის #-</option>";
-        <% for (int i = 0; i < roomBeans.length; i++) {%>
-        rooms +="<option value='<%=roomBeans[i].getRoomid()%>' roomtypeid='<%=roomBeans[i].getRoomtypeid()%>'><%=roomBeans[i].getName()%>";
-        rooms += "</option>";
-        <% }%>
-
-        $("#roomBean").html(rooms);
-        $('#roomBean').selectpicker("refresh");
-        $('#roomBean').next().css("width","100%").css("padding-left","0px");
-    }
-});
-
-function AddDays(arg) {
-    var today = new Date();
-    $("#dateFrom").datepicker("setDate", today);
-    var tomorrow = new Date();
-    tomorrow.setDate(today.getDate() + arg);
-    $("#dateTo").datepicker("setDate", tomorrow);
-}
-
-function doFilter() {
-
-    var filterQuery = "";
-    var contQuery = " AND ";
-    var fitlerEquals = " = ";
-
-    var checkNum = $("#checkNumb");
-    var name = $("#firstlast");
-    var dtFrom = $("#arrival_dateFrom");
-    var dtTo = $("#arrival_dateTo");
-    var reservNum = $("#reservNumb");
-    var roomBean = $("#roomBean");
-    var roomType = $("#roomType");
-    var reserv_dateFrom = $("#reserv_dateFrom");
-    var reserv_dateTo = $("#reserv_dateTo");
-    var cancelNumb = $("#cancelNumb");
-    var txtSource = $("#txtSource");
-    var reservStatus = $("#reservStatus");
-    var reservType = $("#reservType");
-    var showMrooms = $("#showMrooms");
-    var showIncomplOrders = $("#showIncomplOrders");
-
-    if (!isNullOrEmpty(name.val())) {
-        filterQuery += " guest LIKE '%" + name.val() + "%'" + contQuery;
-    }
-
-    if (!isNullOrEmpty(dtFrom.val()) && !isNullOrEmpty(dtTo.val())) {
-        filterQuery += "to_date('" + dtFrom.val() + "', '<%=dateformats2[dff]%>') <= arraivaldate AND arraivaldate <= to_date('" + dtTo.val() + "','<%=dateformats2[dff]%>')" + contQuery;
-    }
-
-    if (!isNullOrEmpty(reserv_dateFrom.val()) && !isNullOrEmpty(reserv_dateTo.val())) {
-        filterQuery += "to_date('" + reserv_dateFrom.val() + "', '<%=dateformats2[dff]%>') <= regdate AND regdate <= to_date('" + reserv_dateTo.val() + "','<%=dateformats2[dff]%>')" + contQuery;
-    }
-
-    if (!isNullOrEmpty(reservNum.val())) {
-        filterQuery += " vouchernum LIKE '%" + reservNum.val() + "%'" + contQuery;
-    }
-
-    if (!isNullOrEmpty(roomBean.val())) {
-        filterQuery += " roomid " + fitlerEquals + roomBean.val() + contQuery;
-    }
-
-    if (!isNullOrEmpty(roomType.val())) {
-        filterQuery += " roomtypecode " + fitlerEquals + "'" + roomType.val() + "'" + contQuery;
-    }
-
-    if (!isNullOrEmpty(txtSource.val())) {
-        filterQuery += " bsourcename LIKE '%" + txtSource.val() + "%'" + contQuery;
-    }
-
-    if (!isNullOrEmpty(reservType.val())) {
-        filterQuery += " reservationtypeid " + fitlerEquals + reservType.val() + contQuery;
-    }
-
-    if (!isNullOrEmpty(reservStatus.val())) {
-        if (reservStatus.val() == 4) {
-            filterQuery += " status IN(0,1,2,3) " + contQuery;
+    $("#roomType").on('change', function () {
+        var element = $("option:selected", this);
+        var id = $(this).val();
+        var selected = "";
+        if (id > 0) {
+            var html = "<option value='0'>-ოთახის #-</option>";
+            <% for (int i = 0; i < roomBeans.length; i++) {%>
+            var value = "<%=roomBeans[i].getRoomtypeid()%>";
+            var roomid = "<%=roomBeans[i].getRoomid()%>";
+            if (roomid == lastroomtypeId) {
+                console.log(roomid);
+                selected = 'selected="selected"';
+            } else {
+                selected = '';
+            }
+            if (id == value) {
+                html +=
+                        "<option value='<%=roomBeans[i].getRoomid()%>' roomtypeid='<%=roomBeans[i].getRoomtypeid()%>' " + selected + "><%=roomBeans[i].getName()%>";
+                html += "</option>";
+            }
+            <% } %>
         } else {
-            filterQuery += " status " + fitlerEquals + reservStatus.val() + contQuery;
+            var html = "<option value='0'>-ოთახის #-</option>";
+            <% for (int i = 0; i < roomBeans.length; i++) {%>
+            html += "<option value='<%=roomBeans[i].getRoomid()%>' roomtypeid='<%=roomBeans[i].getRoomtypeid()%>'><%=roomBeans[i].getName()%>";
+            html += "</option>";
+            <% }%>
         }
-    }
-
-    filterQuery += (showMrooms.is(':checked') ? " reservationroomid is null" : "reservationroomid is not null ") + contQuery;
-
-    var retVal = "";
-
-    if (!isNullOrEmpty(checkNum.val())) {
-        retVal = " reservationroomid " + fitlerEquals + checkNum.val();
-    }else{
-        retVal = filterQuery.substring(0, filterQuery.trim().lastIndexOf("AND"));
-    }
-
-    var url = "content/getreservationlist.jsp?where=where " + retVal;
-    reloadGrid(resGrid.id,url);
-}
-
-function resetFilterPanel() {
-    $("#filter-form :input").each(function () {
-        $(this).val('');
+        selected = ""
+        lastroomtypeId = 0;
+        //console.log(html);
+        $("#roomBean").html(html);
+        $('#roomBean').selectpicker("refresh");
+        $('#roomBean').next().css("width", "100%").css("padding-left", "0px");
+        /**/
+        /*$('#roomBean').change();*/
     });
-    //clean dropdowns
-    $('#filter-form .dropdown option').removeAttr('selected');
-    $("#filter-form .dropdown").change();
+
+    $("#roomBean").on('change', function () {
+        var element = $("option:selected", this);
+        var id = element.attr("roomtypeid");
+        if (id > 0) {
+            $("#roomType").val(id);
+            lastroomtypeId = element.val();
+            $('#roomType').change();
+        } else {
+            var html = "<option value='0' selected='selected'>-ოთახის ტიპი-</option>";
+            <% for (int i = 0; i < roomTypes.length; i++) { %>
+            html += "<option value='<%=roomTypes[i].getRoomtypeid()%>'><%=roomTypes[i].getName()%></option>";
+            <% } %>
+            $("#roomType").html(html);
+            $('#roomType').selectpicker("refresh");
+            $('#roomType').next().css("width", "100%").css("padding-left", "0px");
+
+            var rooms = "<option value='0'>-ოთახის #-</option>";
+            <% for (int i = 0; i < roomBeans.length; i++) {%>
+            rooms += "<option value='<%=roomBeans[i].getRoomid()%>' roomtypeid='<%=roomBeans[i].getRoomtypeid()%>'><%=roomBeans[i].getName()%>";
+            rooms += "</option>";
+            <% }%>
+
+            $("#roomBean").html(rooms);
+            $('#roomBean').selectpicker("refresh");
+            $('#roomBean').next().css("width", "100%").css("padding-left", "0px");
+        }
+    });
+
+    function loadDefaults() {
+        initializeGrid(resGrid);
+        $('.date').datepicker(<%=pickerformat1%>);
+        $('.dropdown').selectpicker();
+        $(".btn-group").css("width", "100%", "!important");
+        $("#grid-table label").each(function () {
+            $(this).css("float", "right", "!important");
+            $(this).css("line-height", "27px", "!important");
+        });
+        $("#grid-table input").height($("#grid-table .btn-group").height() - 6, "!important");
+        $("#filter-form input[type='text']").css("width", "100%", "!important");
+        $(".date input[type='text']").css("position", "relative");
+        $("#roomBean").next().css("padding-left", "0");
+        $("#roomType").next().css("padding-right", "0");
+        $("#res1").css("margin", "10px");
+    }
+
+    function AddDays(arg) {
+        var today = new Date();
+        $("#dateFrom").datepicker("setDate", today);
+        var tomorrow = new Date();
+        tomorrow.setDate(today.getDate() + arg);
+        $("#dateTo").datepicker("setDate", tomorrow);
+    }
+
+    function doFilter() {
+
+        var filterQuery = "";
+        var contQuery = " AND ";
+        var fitlerEquals = " = ";
+
+        var checkNum = $("#checkNumb");
+        var name = $("#firstlast");
+        var dtFrom = $("#arrival_dateFrom");
+        var dtTo = $("#arrival_dateTo");
+        var reservNum = $("#reservNumb");
+        var roomBean = $("#roomBean");
+        var roomType = $("#roomType");
+        var reserv_dateFrom = $("#reserv_dateFrom");
+        var reserv_dateTo = $("#reserv_dateTo");
+        var cancelNumb = $("#cancelNumb");
+        var txtSource = $("#txtSource");
+        var reservStatus = $("#reservStatus");
+        var reservType = $("#reservType");
+        var showMrooms = $("#showMrooms");
+        var showIncomplOrders = $("#showIncomplOrders");
+
+        if (!isNullOrEmpty(name.val())) {
+            filterQuery += " guest LIKE '%" + name.val() + "%'" + contQuery;
+        }
+
+        if (!isNullOrEmpty(dtFrom.val()) && !isNullOrEmpty(dtTo.val())) {
+            filterQuery += "to_date('" + dtFrom.val() + "', '<%=dateformats2[dff]%>') <= arraivaldate AND arraivaldate <= to_date('" + dtTo.val() + "','<%=dateformats2[dff]%>')" + contQuery;
+        }
+
+        if (!isNullOrEmpty(reserv_dateFrom.val()) && !isNullOrEmpty(reserv_dateTo.val())) {
+            filterQuery += "to_date('" + reserv_dateFrom.val() + "', '<%=dateformats2[dff]%>') <= regdate AND regdate <= to_date('" + reserv_dateTo.val() + "','<%=dateformats2[dff]%>')" + contQuery;
+        }
+
+        if (!isNullOrEmpty(reservNum.val())) {
+            filterQuery += " vouchernum LIKE '%" + reservNum.val() + "%'" + contQuery;
+        }
+
+        if (!isNullOrEmpty(roomBean.val())) {
+            filterQuery += " roomid " + fitlerEquals + roomBean.val() + contQuery;
+        }
+
+        if (!isNullOrEmpty(roomType.val())) {
+            filterQuery += " roomtypecode " + fitlerEquals + "'" + roomType.val() + "'" + contQuery;
+        }
+
+        if (!isNullOrEmpty(txtSource.val())) {
+            filterQuery += " bsourcename LIKE '%" + txtSource.val() + "%'" + contQuery;
+        }
+
+        if (!isNullOrEmpty(reservType.val())) {
+            filterQuery += " reservationtypeid " + fitlerEquals + reservType.val() + contQuery;
+        }
+
+        if (!isNullOrEmpty(reservStatus.val())) {
+            if (reservStatus.val() == 4) {
+                filterQuery += " status IN(0,1,2,3) " + contQuery;
+            } else {
+                filterQuery += " status " + fitlerEquals + reservStatus.val() + contQuery;
+            }
+        }
+
+        filterQuery += (showMrooms.is(':checked') ? " reservationroomid is null" : "reservationroomid is not null ") + contQuery;
+
+        var retVal = "";
+
+        if (!isNullOrEmpty(checkNum.val())) {
+            retVal = " reservationroomid " + fitlerEquals + checkNum.val();
+        } else {
+            retVal = filterQuery.substring(0, filterQuery.trim().lastIndexOf("AND"));
+        }
+
+        var url = "content/getreservationlist.jsp?where=where " + retVal;
+        reloadGrid(resGrid.id, url);
+    }
+
+    function resetFilterPanel() {
+        $("#filter-form :input").each(function () {
+            $(this).val('');
+        });
+        //clean dropdowns
+        $('#filter-form .dropdown option').removeAttr('selected');
+        $("#filter-form .dropdown").change();
+        reInitialize();
+    }
+
+    function reInitialize() {
+        AddDays(7);
+        $('#reservStatus').val(0);
+        $('#reservStatus').change();
+        $('#reserv_dateFrom').val('');
+        $('#reserv_dateTo').val('');
+    }
+
     reInitialize();
-}
-
-function reInitialize() {
-    AddDays(7);
-    $('#reservStatus').val(0);
-    $('#reservStatus').change();
-    $('#reserv_dateFrom').val('');
-    $('#reserv_dateTo').val('');
-}
-
-reInitialize();
 
 </script>
 <form name="filter-form" id="filter-form">
 <table id="grid-table" class="first-table">
     <tr>
-        <td style="max-width: 1530px;">
+        <td>
             <div id="status_bar" class="first-status-bar" align='center'>
                 <div style="width: 100%; float: left;">
                     <span style="float: left; margin: 7px 0 0 10px;">ძიების კრიტერიუმები</span>
@@ -387,11 +384,11 @@ reInitialize();
     </tr>
     </table>
     <table id="grid-table">
-    <tr>
-        <td>
-            <table id='list_reservs' class="table-striped table-hover" align='center'></table>
-        </td>
-    </tr>
+        <tr>
+            <td>
+                <table id='list_reservs' class="table-striped table-hover" align='center'></table>
+            </td>
+        </tr>
     </table>
 </form>
 <div align="center" id="grid-footer" style="background: transparent; width: 100%;height: 33px;line-height: 33px; margin:0 auto;">

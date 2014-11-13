@@ -78,7 +78,20 @@ tr.ui-search-toolbar select {margin: 1px 0px 0px 0px}
 .ui-jqgrid .ui-subgrid td.subgrid-cell {border-width: 0px 0px 1px 0px;}
 .ui-jqgrid .ui-th-subgrid {height:20px;}
 /* loading */
-.ui-jqgrid .loading {position: absolute; top: 45%;left: 45%;width: auto;z-index:101;padding: 6px; margin: 5px;text-align: center;font-weight: bold;display: none;border-width: 2px !important; font-size:11px;}
+.ui-jqgrid .loading {
+    display:    none;
+    position:   fixed;
+    z-index:    1000;
+    top:        0;
+    left:       0;
+    height:     100%;
+    width:      100%;
+    background: rgba( 255, 255, 255, .8 )
+    url('../images/loader.gif')
+    50% 50%
+    no-repeat;
+    overflow: hidden;
+}
 .ui-jqgrid .jqgrid-overlay {display:none;z-index:100;}
 * html .jqgrid-overlay {width: expression(this.parentNode.offsetWidth+'px');height: expression(this.parentNode.offsetHeight+'px');}
 * .jqgrid-overlay iframe {position:absolute;top:0;left:0;z-index:-1;width: expression(this.parentNode.offsetWidth+'px');height: expression(this.parentNode.offsetHeight+'px');}

@@ -25,10 +25,10 @@
     <row id='<%=guestList[i].getGuestid()%>'>
         <cell><![CDATA[<%=guestList[i].getGuest()%>]]></cell>
         <cell><![CDATA[<%=guestList[i].getCity()%>]]></cell>
-        <cell><![CDATA[<%=guestList[i].getPhone()%>]]></cell>
-        <cell><![CDATA[<%=guestList[i].getMobile()%>]]></cell>
-        <cell><![CDATA[<%=guestList[i].getEmail()%> ]]></cell>
         <cell><![CDATA[<%=guestList[i].getCountry()%>]]></cell>
+        <cell><![CDATA[<%=guestList[i].getMobile()%>]]></cell>
+        <cell><![CDATA[<%=guestList[i].getPhone()%>]]></cell>
+        <cell><![CDATA[<%=guestList[i].getEmail()%> ]]></cell>
         <cell><![CDATA[<%=guestList[i].getVipstatus()%>]]></cell>
         <cell>
             <![CDATA[<a href="#" class="btn btn-xs btn-default"><i class="fa fa-pencil"></i></a>

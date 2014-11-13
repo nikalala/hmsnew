@@ -80,9 +80,10 @@ String bgcol = "#F5F5F5";
         var dateglobalformat1 = "<%=dateformats1[dff]%>";
       
         var globalpars = <%=jschs%>;
-      
+
         $(document).ready(function() {
-            
+
+            //loadMainBody();
             getBody("stayviewleft","stayview",'დატვირთულობა','res1');
             
             if($("#maincontent").height() > 652)

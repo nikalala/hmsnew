@@ -17,7 +17,7 @@
 	<%--<total><%=total_pages%></total>--%>
 	<%--<records><%=count%></records>--%>
 	<%
-        for(int u=0; u < 50; u++){
+        for(int u=0; u < 1; u++){
         for(int i=0;i< ReservationBeanList.length;i++){  %>
                 <row id='<%=ReservationBeanList[i].getReservationid()%>'>
                     <cell><![CDATA[<%=ReservationBeanList[i].getReservationroomid()%>]]></cell>

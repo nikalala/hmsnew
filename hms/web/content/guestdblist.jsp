@@ -8,56 +8,49 @@
 %>
 
 <link rel="stylesheet" type="text/css" href="css/grid-filter.css">
-<style>
-    .ui-jqgrid tr.jqgrow td {
-        /*height: 40px !important;*/
-    }
 
-    .ui-jqgrid {
-        position: inherit !important;
-    }
-</style>
 <script type="text/javascript">
 
-    function getListOfContacts(where) {
-        var uri = "content/getguestlistdb.jsp?query=" + encodeURIComponent("where " + where);
-        if(isNullOrEmpty(where))
-        {
-            uri = "content/getguestlistdb.jsp?query=0";
-        }
-        console.log(uri);
-        jQuery("#list_guestdblist").jqGrid().setGridParam({
-            url: uri
-        }).trigger("reloadGrid");
-    }
-
     $(document).ready(function () {
-        //$('.combobox').btComboBox();
-        initializeGrid(guestGrid);
-        $('.dropdown').selectpicker();
-        $(".btn-group").css("width", "100%", "!important");
-        $("#status_bar label").each(function () {
-            $(this).css("float", "right", "!important");
-        });
-        $("#status_bar input").height($("#status_bar .btn-group").height() - 6, "!important");
-        $("#status_bar label").each(function () {
-            $(this).css("line-height", "27px", "!important");
-        });
-        $("#filterGuests").width($("#showAllGuests").width());
-        $(".sec-status-bar").width($(".first-status-bar").width());
-        $(".ui-jqgrid").width("100%");
-        $(".ui-jqgrid-bdiv").width("100%");
-        $(".ui-jqgrid-view").width("100%");
-        $(".ui-state-default").width("100%");
-        $("#list_guestdblist").width("100%");
-        $(".ui-jqgrid-htable").width("100%");
-        $("#jqgh_list_guestdblist_cb").css("text-align","left").css("margin-left","21px").css("height","32px");
 
-
+        loadDefaults();
 
     });
 
+    function resetFilterPanel() {
+        $("#filter-form :input").each(function () {
+            $(this).val('');
+        });
+        //clean dropdowns
+        $('#filter-form .dropdown option').removeAttr('selected');
+        $("#filter-form .dropdown").change();
+        reInitialize();
+    }
 
+    function reInitialize() {
+        $('#vipBean').val(0);
+        $('#vipBean').change();
+        $('#countryBean').val(0);
+        $('#countryBean').change();
+
+    }
+
+    function loadDefaults() {
+        initializeGrid(guestGrid);
+        $('.date').datepicker(<%=pickerformat1%>);
+        $('.dropdown').selectpicker();
+        $(".btn-group").css("width", "100%", "!important");
+        $("#grid-table label").each(function () {
+            $(this).css("float", "right", "!important");
+            $(this).css("line-height", "27px", "!important");
+        });
+        $("#grid-table input").height($("#grid-table .btn-group").height() - 6, "!important");
+        $("#filter-form input[type='text']").css("width", "100%", "!important");
+        $(".date input[type='text']").css("position", "relative");
+        $("#roomBean").next().css("padding-left", "0");
+        $("#roomType").next().css("padding-right", "0");
+        $("#res1").css("margin", "10px");
+    }
 
     function doFilter(bool) {
 
@@ -67,7 +60,9 @@
 
         if(bool)
         {
-            getListOfContacts("");
+            resetFilterPanel();
+            var uri = "content/getguestlistdb.jsp?query=0";
+            reloadGrid(guestGrid.id, uri);
             return;
         }
         var vip = $("#vipBean");
@@ -94,94 +89,108 @@
 
         var retVal = filterQuery.substring(0,filterQuery.trim().lastIndexOf("AND"));
         if (!isNullOrEmpty(retVal)) {
-            getListOfContacts(retVal);
+            var url = "content/getguestlistdb.jsp?query=" + encodeURIComponent("where " + retVal);
+            reloadGrid(guestGrid.id, url);
         }
     }
 
 </script>
 
-<div id="status_bar" class="first-status-bar" align='center'
-     style="height: 100%;float: left;padding: 10px; margin: 10px;">
-    <form name="filter-form" id="filter-form">
-    <div id="header_object"
-         style="width: 100%;float: left;margin: 10px 0 10px 0;border-bottom: solid 1px #E0E0E0;  height: 13px;">
-        <div style="float: left; margin-top: -10px;"><span>ძიების კრიტერიუმები</span></div>
-        <div style="float: right; margin-top: -17px;">
-            <button type="button" class="btn btn-default" id="btnExport" style="border: 0; font-weight: bold;">
-                ექსპორტი
-            </button>
-            <button type="button" class="btn btn-default" id="addGuest" style="border: 0; font-weight: bold;">
-                სტუმრის დამატება
-            </button>
-        </div>
-    </div>
-    <div style="width: 100%;float: left;">
-        <div class="col-md-2">
-            <label>ვიპ სტატუსი:</label>
-        </div>
-        <div class="col-md-3">
-            <select class="dropdown combobox" style="width: 100%; margin: 4px;" id="vipBean">
-                <option value=""></option>
-                <% for (int i = 0; i < vips.length; i++) { %>
-                <option value="<%=vips[i].getVipstatusid()%>"><%=vips[i].getName()%>
-                </option>
-                <% } %>
-            </select>
-        </div>
-        <div class="col-md-2">
-            <label>სტუმრის სახელი:</label>
-        </div>
-        <div class="col-md-3">
-            <input type="text" style="width: 100% !important;" id="guest">
-        </div>
-        <div class="col-md-1">
-            <label>ქვეყანა:</label>
-        </div>
-        <div class="col-md-3">
-            <select class="dropdown combobox" style="width: 100%; margin: 4px;" id="countryBean">
-                <option value="">-აირჩიეთ-</option>
-                <% for (int i = 0; i < country.length; i++) { %>
-                <option value="<%=country[i].getCountryid()%>"><%=country[i].getName()%>
-                </option>
-                <% } %>
-            </select>
-        </div>
-        <div class="col-md-2">
-            <button type="button" class="btn btn-danger" id="filterGuests" onclick="doFilter(false);">
-                ძიება
-            </button>
-        </div>
-    </div>
-    <div style="width: 100%;float: left; margin-top: 10px;">
-        <div class="col-md-2">
-            <label>ქალაქი:</label>
-        </div>
-        <div class="col-md-3">
-            <input type="text" style="width: 100% !important;" id="city">
-        </div>
+<form name="filter-form" id="filter-form">
 
-        <div class="col-md-2">
-            <label>ტელეფონი:</label>
-        </div>
-        <div class="col-md-3">
-            <input type="text" style="width: 100% !important;" id="phone">
-        </div>
+    <table id="grid-table" class="first-table">
+        <tr>
+            <td>
+                <div id="status_bar" class="first-status-bar" align='center'>
+                    <div style="width: 100%; float: left;">
+                        <span style="float: left; margin: 7px 0 0 10px;">ძიების კრიტერიუმები</span>
+                        <button type="button" class="btn btn-default" id="btnExport"
+                                style="border: 0; font-weight: bold; float: right; margin: 3px 5px 0 0;">
+                            ექსპორტი
+                        </button>
+                        <button type="button" class="btn btn-default" id="addGuest" style="border: 0; font-weight: bold;">
+                            სტუმრის დამატება
+                        </button>
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div style="width: 100%;float: left;">
+                    <div class="col-md-2">
+                        <label>ვიპ სტატუსი:</label>
+                    </div>
+                    <div class="col-md-3">
+                        <select class="dropdown combobox" style="width: 100%; margin: 4px;" id="vipBean">
+                            <option value=""></option>
+                            <% for (int i = 0; i < vips.length; i++) { %>
+                            <option value="<%=vips[i].getVipstatusid()%>"><%=vips[i].getName()%>
+                            </option>
+                            <% } %>
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <label>სტუმრის სახელი:</label>
+                    </div>
+                    <div class="col-md-3">
+                        <input type="text" style="width: 100% !important;" id="guest">
+                    </div>
+                    <div class="col-md-1">
+                        <label>ქვეყანა:</label>
+                    </div>
+                    <div class="col-md-3">
+                        <select class="dropdown combobox" style="width: 100%; margin: 4px;" id="countryBean">
+                            <option value="">-აირჩიეთ-</option>
+                            <% for (int i = 0; i < country.length; i++) { %>
+                            <option value="<%=country[i].getCountryid()%>"><%=country[i].getName()%>
+                            </option>
+                            <% } %>
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <button type="button" class="btn btn-danger" style="width: 100%;" id="filterGuests" onclick="doFilter(false);">
+                            ძიება
+                        </button>
+                    </div>
+                </div>
+                <div style="width: 100%;float: left; margin-top: 10px;">
+                    <div class="col-md-2">
+                        <label>ქალაქი:</label>
+                    </div>
+                    <div class="col-md-3">
+                        <input type="text" style="width: 100% !important;" id="city">
+                    </div>
 
-        <div class="col-md-1">
-        </div>
-        <div class="col-md-3">
-        </div>
+                    <div class="col-md-2">
+                        <label>ტელეფონი:</label>
+                    </div>
+                    <div class="col-md-3">
+                        <input type="text" style="width: 100% !important;" id="phone">
+                    </div>
 
-        <div class="col-md-2">
-            <button type="button" class="btn btn-default" id="showAllGuests" onclick="doFilter(true);">
-                მაჩვენე ყველა
-            </button>
-        </div>
-    </div>
-    </form>
-</div>
-<div id="status_bar" align='center' class="sec-status-bar"
-     style="height: 100%;float: left;padding: 10px; margin: 10px; background: transparent;">
-    <table id='list_guestdblist' class="table-striped table-hover" width='100%' align='center'
-           style="float: left;"></table>
+                    <div class="col-md-1">
+                    </div>
+                    <div class="col-md-3">
+                    </div>
+
+                    <div class="col-md-2">
+                        <button type="button" class="btn btn-default" style="width: 100%;" id="showAllGuests" onclick="doFilter(true);">
+                            მაჩვენე ყველა
+                        </button>
+                    </div>
+                </div>
+            </td>
+        </tr>
+    </table>
+    <table id="grid-table">
+        <tr>
+            <td>
+                <table id='list_guestdblist' class="table-striped table-hover" align='center'></table>
+            </td>
+        </tr>
+    </table>
+</form>
+<div align="center" id="grid-footer" style="background: transparent; width: 100%;height: 33px;line-height: 33px; margin:0 auto;">
+    <div style="background-color: red; margin:10px 0 10px 0;">HELLO THIS IS THE FOOTER</div>
 </div>

@@ -190,6 +190,25 @@ ol, ul {
     overflow: hidden;
 }
 
+.first-table tr:first-child td
+{
+    border-bottom: solid 1px #C7C7C7;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+}
+.first-table tr:nth-child(2)
+{
+    background-color:#FFF;
+}
+.first-table tr:nth-child(2) td:first-child
+{
+    -webkit-box-shadow: 0 3px 3px 2px #292929;
+    box-shadow: 0 3px 3px 2px #C4C4C4;
+    padding-bottom: 10px;
+}
+
+
+
 /* Loading */
 
 /* JQGRID */

@@ -6,22 +6,18 @@
     <context-param>
         <param-name>driver</param-name>
         <param-value>org.postgresql.Driver</param-value>
-        <description>Database Connectivity Driver Name</description>
     </context-param>
     <context-param>
         <param-name>url</param-name>
         <param-value>jdbc:postgresql://localhost/hms</param-value>
-        <description>Database connection string</description>
     </context-param>
     <context-param>
         <param-name>user</param-name>
         <param-value>hms</param-value>
-        <description>Application database user login</description>
     </context-param>
     <context-param>
         <param-name>pass</param-name>
         <param-value>hms!</param-value>
-        <description>Application database user password</description>
     </context-param>
     <servlet>
         <servlet-name>fileReader</servlet-name>

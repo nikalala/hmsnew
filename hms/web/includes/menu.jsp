@@ -65,10 +65,10 @@
                     <a href="#mb59" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-usd" style="padding-right: 10px;"></span> სალარო <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li>
-                            <a href="javascript:getBody('stayviewleft','tagents','ტურისტული აგენტები','res1');">ტურისტული აგენტები</a>
+                            <a href="javascript:getBody('stayviewleft','tagents','ტურისტული აგენტები','res1','?type=2');">ტურისტული აგენტები</a>
                         </li>
                         <li>
-                            <a href="javascript:getBody('stayviewleft','construction');">კომპანიები</a>
+                            <a href="javascript:getBody('stayviewleft','tagents','კომპანიები','res1','?type=1');">კომპანიები</a>
                         </li>
                         <li>
                             <a href="javascript:getBody('construction','construction');">ხარჯები</a>

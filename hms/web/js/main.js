@@ -1,7 +1,14 @@
 var tabcount = 0;
 $(document).ready(function () {
+
     loader = $(".loading-panel");
+
 });
+
+function loadMainBody()
+{
+    getBody("stayviewleft","stayview",'დატვირთულობა','res1');
+}
 
 function sleep(milliseconds) {
     var start = new Date().getTime();
@@ -397,8 +404,22 @@ function getLBody(fname) {
     });
 }
 
-function getBody(fname1, fname2, name, id) {
+function checkTabs(pageName){
+    if($('.nav-tabs li').size() > 0)
+    {
+        console.log($('.nav-tabs li'));
+    }
+    if(pageName !== "stayview"){
+        console.log("opening tab > " + pageName);
+    }
+}
+
+function getBody(fname1, fname2, name, id, param) {
+
+    checkTabs(fname2);
+
     loader.show();
+    console.log("started method getBody");
     $.ajax({
         type: "POST",
         url: "content/" + fname1 + ".jsp",
@@ -413,25 +434,40 @@ function getBody(fname1, fname2, name, id) {
         async: false
     });
     removeTab(id);
-    addTab("content/" + fname2 + ".jsp", name, id);
+    var reqParam = "";
+    if(!isNullOrEmpty(param))
+    {
+        reqParam = param;
+    }
+    console.log(reqParam);
+
+    addTab("content/" + fname2 + ".jsp"+reqParam, name, id);
 }
 
 function removeTab(id) {
     $("#" + id).remove();
+    if($('.nav-tabs li').size() == 0)
+    {
+        //loadMainBody();
+    }
 }
 
 function removeAllTabs() {
-    $('.tab-pane ul li').remove();
+    /*$('.tab-pane ul li').remove();*/
+    $('.nav-tabs li').remove();
 }
 
 function addTab(fname2, name, id) {
     if (tabcount == 0)
-        $('#maintabs').append('<li style=""><a src="content/' + fname2 + '.jsp" href="#' + id + '" data-toggle="tab" style="padding-top: 4px; background-color: #F5F5F5;">' + name + '</a></li>');
+        $('#maintabs').append('<li style=""><a src="/content/' + fname2 + '.jsp" href="#' + id + '" data-toggle="tab" style="padding-top: 4px; background-color: #F5F5F5;">' + name + '</a></li>');
     else
-        $('#maintabs').append('<li style=""><a src="content/' + fname2 + '.jsp" href="#' + id + '" data-toggle="tab" style="padding-top: 3px; background-color: #F5F5F5;"><button class="close closeTab" type="button" >×</button>' + name + '</a></li>');
+        $('#maintabs').append('<li style=""><a src="/content/' + fname2 + '.jsp" href="#' + id + '" data-toggle="tab" style="padding-top: 3px; background-color: #F5F5F5;"><button class="close closeTab" type="button" >×</button>' + name + '</a></li>');
+
     $('#centerTabContent').append('<div class="tab-pane" id="' + id + '"></div>');
     loader.show();
+    console.log(fname2);
     $.get(fname2, function (data) {
+        console.log("#" + id);
         $("#" + id).html(data);
         loader.hide();
     });
@@ -551,6 +587,10 @@ var hmsMonthsMin = ["იან", "თებ", "მარ", "აპრ", "მა�
 
     function initializeGrid(grid)
     {
+        $("#load_list_reservs").removeAttr("class");
+        $("#load_list_reservs").html('');
+        $("#load_list_reservs").addClass( 'loading-panel' );
+        $("#load_list_reservs").css('display','block');
         jQuery("#"+grid.id).jqGrid(
             {
                 url: grid.url,
@@ -559,6 +599,15 @@ var hmsMonthsMin = ["იან", "თებ", "მარ", "აპრ", "მა�
                 colModel: grid.model,
                 loadComplete: function(){
                     $("#" +grid.id+ " td:last-child").removeAttr("title");
+                    reInitializeGrid(grid.id);
+                    for(var i = 0; i < grid.model.length; i++)
+                    {
+                        $("#" + grid.id + "_" + grid.model[i].name).css("text-align", grid.model[i].align).css("width",grid.model[i].width);
+                        console.log($("[aria-describedby="+grid.id+"_"+grid.model[i].name+"]"));
+                        $("[aria-describedby="+grid.id+"_"+grid.model[i].name+"]").width(grid.model[i].width);
+                    }
+                    $(".ui-jqgrid .ui-jqgrid-htable th").css({"height":"22px"},{"padding":"0 2px 0 6px"});
+                    $("#" + grid.id + " td").css("padding-top","0","!important");
                 },
                 rowNum: 2000,
                 height: 400,
@@ -567,19 +616,48 @@ var hmsMonthsMin = ["იან", "თებ", "მარ", "აპრ", "მა�
                 viewrecords: true,
                 sortorder: grid.order
             }).jqGrid('bindKeys');
-            for(var i = 0; i < grid.model.length; i++)
-            {
-                $("#jqgh_" + grid.id + "_" + grid.model[i].name).css("text-align", grid.model[i].align);
-            }
+    }
+
+    function reInitializeGrid(gridId)
+    {
+        var ftWidth = $("#filter-form").width();
+        $(".first-table").width(ftWidth);
+        $("#ui-jqgrid-bdiv").width(ftWidth);
+        $("#gview_"+gridId).width(ftWidth);
+        $("#gbox_"+gridId).width(ftWidth);
+
+        $(".ui-jqgrid-bdiv").css("width",ftWidth,"!important");
+        $(".ui-jqgrid-hdiv").css("width",ftWidth,"!important");
+        $(".ui-jqgrid-htable").css("width",ftWidth,"!important");
+        $("#"+gridId).width(ftWidth);
+        //$("#"+gridId).css("margin-left","10px");
+        $(".jqgfirstrow").remove();
     }
 
     function reloadGrid(gridId,pgUrl)
     {
         console.log(pgUrl);
         jQuery("#"+gridId).jqGrid().setGridParam({
-            url: pgUrl
+            url: pgUrl,
+            loadComplete: function(){
+                reInitializeGrid(gridId);
+            }
         }).trigger("reloadGrid");
+
     }
+
+    function checkIfScrollBarExist(divId)
+    {
+        var val = $('#'+divId).hasScrollBar();
+        console.log(val);
+        return true;
+    }
+
+    (function($) {
+        $.fn.hasScrollBar = function() {
+            return this.get(0).scrollHeight > this.height();
+        }
+    })(jQuery);
 
     function colModelGenerator(width,colName,alligment)
     {

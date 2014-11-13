@@ -6,14 +6,14 @@
         colModelGenerator(60,'arraivaldate',0),
         colModelGenerator(60,'departuredate',0),
         colModelGenerator(120,'guest',0),
-        colModelGenerator(90,'roomcode',1),
+        colModelGenerator(90,'roomcode',0),
         colModelGenerator(90,'bsourcename',0),
         colModelGenerator(85,'companyname',0),
-        colModelGenerator(60,'price',2),
-        colModelGenerator(80,'paid',2),
-        colModelGenerator(110,'user',1),
-        colModelGenerator(94,'reservationtype',1),
-        colModelGenerator(40,'action',1));
+        colModelGenerator(60,'price',0),
+        colModelGenerator(80,'paid',0),
+        colModelGenerator(110,'user',0),
+        colModelGenerator(94,'reservationtype',0),
+        colModelGenerator(40,'action',0));
     resGrid = {
         id : 'list_reservs',
         url : 'content/getreservationlist.jsp',
@@ -50,3 +50,27 @@
         order : 'asc'
     };
     /* -------------------------------- Geust List Model ------------------------------------*/
+
+    /* -------------------------------- tagentsGrid List Model ------------------------------------*/
+    var tagentsGridModel = [];
+    tagentsGridModel.push(
+        colModelGenerator(120,'company',0),
+        colModelGenerator(60,'contragent',0),
+        colModelGenerator(60,'city',0),
+        colModelGenerator(90,'country',0),
+        colModelGenerator(90,'phone',0),
+        colModelGenerator(90,'email',0),
+        colModelGenerator(57,'action',1)
+    );
+    tagentsGrid = {
+        id : 'list_tagens',
+        url : 'content/getcontrlist.jsp',
+        type : 'xml',
+        cols : ['კომპანია','სახელი, გვარი','ქალაქი','ქვეყანა',
+            'ტელეფონი','ელ.ფოსტა',''],
+        model : tagentsGridModel,
+        sort : 'company',
+        order : 'asc'
+    };
+    /* -------------------------------- tagentsGrid List Model ------------------------------------*/
+
