@@ -219,7 +219,7 @@ public class ContragentBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: contragent.type
-     * <li>comments: ????CODEcontragenttype
+     * <li>comments: ტიპიCODEcontragenttype
      * <li>column size: 10
      * <li>jdbc type returned by the driver: Types.INTEGER
      * </ul>
@@ -288,7 +288,7 @@ public class ContragentBean
      * <ul>
      * <li>full name: contragent.salutationid
      * <li> foreign key: salutation.salutationid
-     * <li>comments: ????????? ?????
+     * <li>comments: მიმართვის ფორმა
      * <li>column size: 10
      * <li>jdbc type returned by the driver: Types.INTEGER
      * </ul>
@@ -356,7 +356,7 @@ public class ContragentBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: contragent.fname
-     * <li>comments: ??????
+     * <li>comments: სახელი
      * <li>column size: 2147483647
      * <li>jdbc type returned by the driver: Types.VARCHAR
      * </ul>
@@ -413,7 +413,7 @@ public class ContragentBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: contragent.lname
-     * <li>comments: ?????
+     * <li>comments: გვარი
      * <li>column size: 2147483647
      * <li>jdbc type returned by the driver: Types.VARCHAR
      * </ul>
@@ -470,7 +470,7 @@ public class ContragentBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: contragent.name
-     * <li>comments: ??????????
+     * <li>comments: დასახელება
      * <li>column size: 2147483647
      * <li>jdbc type returned by the driver: Types.VARCHAR
      * </ul>
@@ -527,7 +527,7 @@ public class ContragentBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: contragent.address
-     * <li>comments: ?????????
+     * <li>comments: მისამართი
      * <li>column size: 2147483647
      * <li>jdbc type returned by the driver: Types.VARCHAR
      * </ul>
@@ -585,7 +585,7 @@ public class ContragentBean
      * <ul>
      * <li>full name: contragent.countryid
      * <li> foreign key: country.countryid
-     * <li>comments: ???????
+     * <li>comments: ქვეყანა
      * <li>column size: 10
      * <li>jdbc type returned by the driver: Types.INTEGER
      * </ul>
@@ -653,7 +653,7 @@ public class ContragentBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: contragent.city
-     * <li>comments: ??????
+     * <li>comments: ქალაქი
      * <li>column size: 2147483647
      * <li>jdbc type returned by the driver: Types.VARCHAR
      * </ul>
@@ -710,7 +710,7 @@ public class ContragentBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: contragent.zip
-     * <li>comments: ???????
+     * <li>comments: ინდექსი
      * <li>column size: 100
      * <li>jdbc type returned by the driver: Types.VARCHAR
      * </ul>
@@ -767,7 +767,7 @@ public class ContragentBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: contragent.phone
-     * <li>comments: ????????
+     * <li>comments: ტელეფონი
      * <li>column size: 100
      * <li>jdbc type returned by the driver: Types.VARCHAR
      * </ul>
@@ -824,7 +824,7 @@ public class ContragentBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: contragent.fax
-     * <li>comments: ?????
+     * <li>comments: ფაქსი
      * <li>column size: 100
      * <li>jdbc type returned by the driver: Types.VARCHAR
      * </ul>
@@ -881,7 +881,7 @@ public class ContragentBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: contragent.mobile
-     * <li>comments: ????????
+     * <li>comments: მობილური
      * <li>column size: 100
      * <li>jdbc type returned by the driver: Types.VARCHAR
      * </ul>
@@ -938,7 +938,7 @@ public class ContragentBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: contragent.email
-     * <li>comments: ???????
+     * <li>comments: ელფოსტა
      * <li>column size: 255
      * <li>jdbc type returned by the driver: Types.VARCHAR
      * </ul>
@@ -995,7 +995,7 @@ public class ContragentBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: contragent.commissionplan
-     * <li>comments: ?????????? ?????CODEcommissionplan
+     * <li>comments: საკომისიოს გეგმაCODEcommissionplan
      * <li>column size: 10
      * <li>jdbc type returned by the driver: Types.INTEGER
      * </ul>
@@ -1063,7 +1063,7 @@ public class ContragentBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: contragent.val
-     * <li>comments: ?????
+     * <li>comments: თანხა
      * <li>column size: 17
      * <li>jdbc type returned by the driver: Types.DOUBLE
      * </ul>
@@ -1131,7 +1131,7 @@ public class ContragentBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: contragent.rate
-     * <li>comments: ??????CODErate
+     * <li>comments: ტარიფიCODErate
      * <li>column size: 10
      * <li>jdbc type returned by the driver: Types.INTEGER
      * </ul>
@@ -1199,7 +1199,7 @@ public class ContragentBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: contragent.openbalance
-     * <li>comments: ??????? ???????
+     * <li>comments: საწყისი ბალანსი
      * <li>column size: 17
      * <li>jdbc type returned by the driver: Types.DOUBLE
      * </ul>
@@ -1267,7 +1267,7 @@ public class ContragentBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: contragent.roominventory
-     * <li>comments: ????? ?????CODEroominventory
+     * <li>comments: ოთხის ფონდიCODEroominventory
      * <li>column size: 10
      * <li>jdbc type returned by the driver: Types.INTEGER
      * </ul>
@@ -1335,7 +1335,7 @@ public class ContragentBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: contragent.createuser
-     * <li>comments: ??????? ???????????? ????????
+     * <li>comments: შეეძლოს მომხმარებლის დამატება
      * <li>column size: 1
      * <li>jdbc type returned by the driver: Types.BIT
      * </ul>
@@ -1402,7 +1402,7 @@ public class ContragentBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: contragent.bsource
-     * <li>comments: ???????? ?????
+     * <li>comments: ბიზნესის წყარო
      * <li>column size: 1
      * <li>jdbc type returned by the driver: Types.BIT
      * </ul>
@@ -1536,7 +1536,7 @@ public class ContragentBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: contragent.idn
-     * <li>comments: ????. ??????
+     * <li>comments: საიდ. ნომერი
      * <li>column size: 255
      * <li>jdbc type returned by the driver: Types.VARCHAR
      * </ul>
@@ -1593,7 +1593,7 @@ public class ContragentBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: contragent.creditterm
-     * <li>comments: ???????? ??????
+     * <li>comments: კრედიტის პირობა
      * <li>column size: 10
      * <li>jdbc type returned by the driver: Types.INTEGER
      * </ul>
@@ -1661,7 +1661,7 @@ public class ContragentBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: contragent.creditlimit
-     * <li>comments: ???????? ??????
+     * <li>comments: კრედიტის ლიმიტი
      * <li>column size: 17
      * <li>jdbc type returned by the driver: Types.DOUBLE
      * </ul>
@@ -1730,7 +1730,7 @@ public class ContragentBean
      * <ul>
      * <li>full name: contragent.regbyid
      * <li> foreign key: personnel.personnelid
-     * <li>comments: ??????
+     * <li>comments: ავტორი
      * <li>column size: 10
      * <li>jdbc type returned by the driver: Types.INTEGER
      * </ul>
@@ -1798,7 +1798,7 @@ public class ContragentBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: contragent.regdate
-     * <li>comments: ???????????? ??????
+     * <li>comments: რეგისტრაციის თარიღი
      * <li>default value: now()
      * <li>column size: 29
      * <li>jdbc type returned by the driver: Types.TIMESTAMP
@@ -1867,7 +1867,7 @@ public class ContragentBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: contragent.deleted
-     * <li>comments: ???????
+     * <li>comments: წაშლილი
      * <li>default value: false
      * <li>column size: 1
      * <li>jdbc type returned by the driver: Types.BIT

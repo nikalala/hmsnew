@@ -2,7 +2,7 @@
 <%@page pageEncoding="UTF-8"%>
 <%@include file="../includes/init.jsp"%>
 <%
-DiscountBean[] discounts = DiscountManager.getInstance().loadByWhere("where active = true and deleted = false order by name");
+DiscountBean[] discounts = DiscountManager.getInstance().loadByWhere("where extracharge = true and active = true and deleted = false order by name");
 ReservationroomBean rroom = ReservationroomManager.getInstance().loadByPrimaryKey(new Long(request.getParameter("reservationroomid")));
 ReservationBean reserv = ReservationManager.getInstance().loadByPrimaryKey(rroom.getReservationid());
 long bid = 0;
@@ -39,7 +39,28 @@ FolioBean[] folios = FolioManager.getInstance().loadByWhere("where reservationro
         }).trigger("reloadGrid");
     }
     
-    
+    function addFolioitem(){
+        $.post(
+        "content/ajax/folioitem.jsp",
+        {
+            act: "add",
+            date: $("#foliodate").val(),
+            actiontype: $("#folio_actiontype").val(),
+            actionvalue: $("#folio_actionvalue").val(),
+            currencyid: $("#folio_currencyid").val(),
+            amount: $("#folio_amount").val(),
+            qty: $("#folio_qty").val(),
+            voucher: $("#folio_voucher").val(),
+            comment: $("#folio_comment").val(),
+            folioid: $("#folio_folioid").val(),
+            discountid: $("#folio_discountid").val(),
+            discount: $("#folio_discount_amount").val()
+        },
+        function(data){
+            if(data.result == 0)    BootstrapDialog.alert(data.error);
+            else refreshFoliolist(<%=rroom.getReservationroomid()%>);
+        },"json");
+    }
     
 $(document).ready(function(){
     
@@ -101,7 +122,21 @@ $(document).ready(function(){
             $("#folio_extra2").hide();
             h = h+40;
             jQuery("#listfolio").jqGrid().setGridParam({height: h});
-        }
+        } 
+        $.post("content/ajax/getactions.jsp",{ actiontype: action },function(data){
+            $("#folio_actionvalue").html(data);
+        });
+        
+   });
+   
+   $("#folio_actionvalue").on("change",function(){
+       var action = $("#folio_actiontype").val();
+       var aval = $("#folio_actionvalue").val();
+       if(action == 4){
+           $.post("content/ajax/getBeanPars.jsp",{ objname: "Discount", id: aval },function(data){
+                console.log(data);
+            },"json");
+       }
    });
    
    $("#folio_extra0").hide();
@@ -245,7 +280,7 @@ $(document).ready(function(){
             </td>
             <td></td>
             <td style="text-align: right; padding-right: 5px;">
-                <button style="width: 80px; margin-top: 2px;" type="button" class="btn btn-sm btn-danger navbar-btn">დამატება</button>
+                <button style="width: 80px; margin-top: 2px;" onclick="addFolioitem()" type="button" class="btn btn-sm btn-danger navbar-btn">დამატება</button>
             </td>
         </tr>
         <tr style="height: 27px;" id="folio_extra2">

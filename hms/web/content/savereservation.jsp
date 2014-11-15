@@ -22,6 +22,8 @@ try{
     boolean printfolio = false;
     boolean printbill = false;
     boolean checkin = false;
+    int wintype = Integer.parseInt(request.getParameter("wintype"));
+    
     int resroomnum = 0;
     for(resroomnum = 0;request.getParameter("walkin_guest_"+String.valueOf(resroomnum+1)) != null;resroomnum++);
     
@@ -65,7 +67,7 @@ try{
                 throw new Exception("აირჩიეთ ქვეყანა");
             guest.setCountryid(countryid);
         } else if(name.equalsIgnoreCase("guestinfo_roomid")){
-            if(val == null || val.equalsIgnoreCase("null") || val.equals("0"))
+            if(checkin && (val == null || val.equalsIgnoreCase("null") || val.equals("0")))
                 throw new Exception("აირჩიეთ ოთახი");
             resroom.setRoomid(new Integer(val));
         } else if(name.equalsIgnoreCase("guestinfo_ratetypeid")){
@@ -104,6 +106,8 @@ try{
             resroom.setAdult(new Integer(val));
         } else if(name.equalsIgnoreCase("guestinfo_child")){
             resroom.setChild(new Integer(val));
+        } else if(name.equalsIgnoreCase("guestinfo_roomtypeid")){
+            resroom.setRoomtypeid(new Integer(val));
         } else if(name.equalsIgnoreCase("guestinfo_reservationtypeid")){
             res.setReservationtypeid(new Integer(val));
         } else if(name.equalsIgnoreCase("contacttinfo_email")){
@@ -342,6 +346,8 @@ try{
     if(res.getPaymentmode()== null)
         throw new Exception("აირჩიეთ გადახდის მეთოდი");
     
+    if(payment.getAmount() != null && payment.getPaymentmethodid().intValue() == 0)
+        throw new Exception("აირჩიეთ გადახდის ტიპი გადახდაში");
     
     CheckinreservationsettingsBean[] stt = CheckinreservationsettingsManager.getInstance().loadAll();
     if(stt.length > 0){
@@ -367,43 +373,74 @@ try{
 //            throw new Exception("სტუმრის მისამართი არაა მითითებული");
     }
     
+    if(resroom.getRoomid() != null && resroom.getRoomid().intValue() == 0)
+        resroom.setRoomid(null);
+    
     if(res.getDiscountid() != null && res.getPostingvalueevery() == null)
         throw new Exception("მიუთითეთ ფასდაკლება");
     if(res.getPostingtype() != null && res.getPostingtype().intValue() == 0 && res.getDiscountnights() == null)
         throw new Exception("მიუთითეთ ფასდაკლების ღამე(ებ)ი");
+    if(checkin && resroom.getRoomid() == null)
+        throw new Exception("აირჩიეთ ოთახი");
+    if(resroom.getRoomtypeid().intValue() == 0)
+        throw new Exception("აირჩიეთ ოთახის ტიპი");
+    
+    if(resroom.getRoomid() != null){
+        String sqlcheck = "where "
+                + "arraivaldate < to_timestamp('"+dtlong.format(res.getDeparturedate())+"','DD/MM/YYYY HH24:MI') and "
+                + "departuredate > to_timestamp('"+dtlong.format(res.getArraivaldate())+"','DD/MM/YYYY HH24:MI') and "
+                + "reservationid in (select reservationid from reservationroom where roomid = "+resroom.getRoomid()+")";
+        if(ReservationManager.getInstance().countWhere(sqlcheck) > 0)
+            throw new Exception("ოთახი ამ პერიოდში დაკავებულია");
+    }
     
     res.setRegbyid(user.getPersonnelid());
+    if(!checkin){
+        res.setStatus(-1);
+    }
     res = ReservationManager.getInstance().save(res);
+    ReservationtypeBean restype = ReservationtypeManager.getInstance().loadByPrimaryKey(res.getReservationtypeid());
     guest.setRegbyid(user.getPersonnelid());
     guest = GuestManager.getInstance().save(guest);
     resroom.setGuestid(guest.getGuestid());
     resroom.setReservationid(res.getReservationid());
     resroom.setRegbyid(user.getPersonnelid());
     resroom = ReservationroomManager.getInstance().save(resroom);
-    RoomstBean roomst = RoomstManager.getInstance().createRoomstBean();
-    roomst.setRegbyid(user.getPersonnelid());
-    roomst.setRoomid(resroom.getRoomid());
-    roomst.setStatusdate(res.getArraivaldate());
-    if(checkin) roomst.setSt(1);
-    else        roomst.setSt(0);
-    roomst = RoomstManager.getInstance().save(roomst);
-    for(int i=0;i<guests.length;i++){
-        guests[i].setRegbyid(user.getPersonnelid());
-        guests[i] = GuestManager.getInstance().save(guests[i]);
+    if(resroom.getRoomid() != null){
+        RoomstBean roomst = RoomstManager.getInstance().createRoomstBean();
+        roomst.setRegbyid(user.getPersonnelid());
+        roomst.setRoomid(resroom.getRoomid());
+        roomst.setStatusdate(res.getArraivaldate());
+        if(checkin) roomst.setSt(1);
+        else {
+            if(restype.getConfirmed().booleanValue())        roomst.setSt(0);
+            else                                             roomst.setSt(7);
+        }
+        roomst = RoomstManager.getInstance().save(roomst);
+        for(int i=0;i<guests.length;i++){
+            guests[i].setRegbyid(user.getPersonnelid());
+            guests[i] = GuestManager.getInstance().save(guests[i]);
+        }
     }
-    
     for(int i=0;i<resrooms.length;i++){
+        if(resrooms[i].getRoomid() != null && resrooms[i].getRoomid().intValue() == 0)
+            resrooms[i].setRoomid(null);
         resrooms[i].setGuestid(guests[i].getGuestid());
         resrooms[i].setReservationid(res.getReservationid());
         resrooms[i].setRegbyid(user.getPersonnelid());
         resrooms[i] = ReservationroomManager.getInstance().save(resrooms[i]);
-        roomst = RoomstManager.getInstance().createRoomstBean();
-        roomst.setRegbyid(user.getPersonnelid());
-        roomst.setRoomid(resrooms[i].getRoomid());
-        roomst.setStatusdate(res.getArraivaldate());
-        if(checkin) roomst.setSt(1);
-        else        roomst.setSt(0);
-        roomst = RoomstManager.getInstance().save(roomst);
+        if(resrooms[i].getRoomid() != null){
+            RoomstBean roomst = RoomstManager.getInstance().createRoomstBean();
+            roomst.setRegbyid(user.getPersonnelid());
+            roomst.setRoomid(resrooms[i].getRoomid());
+            roomst.setStatusdate(res.getArraivaldate());
+            if(checkin) roomst.setSt(1);
+            else {
+                if(restype.getConfirmed().booleanValue())        roomst.setSt(0);
+                else                                             roomst.setSt(7);
+            }
+            roomst = RoomstManager.getInstance().save(roomst);
+        }
     }
     
     Vector v = (Vector)session.getAttribute("WALKIN_REMARKS");
@@ -421,11 +458,8 @@ try{
     if(v == null)   v = new Vector();
     folio fl = new folio();
 
-    fl.setFolio(res, resroom, dateformats2[dff], v,res.getBillto().intValue(),user);
-    if(payment.getAmount() != null){
-        payment.setFolioid(fl.folioid);
-        payment = PaymentManager.getInstance().save(payment);
-    }
+    fl.setFolio(res, resroom, payment, dateformats2[dff], v,res.getBillto().intValue(),user);
+    
     /*
     switch(res.getBillto().intValue()){
         case 0:

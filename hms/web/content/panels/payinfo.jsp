@@ -4,7 +4,7 @@
 <%
 String type = request.getParameter("type");
 ContragentBean[] specs = ContragentManager.getInstance().loadByWhere("where rate = 1 order by name, lname, fname");
-PaymentmethodBean[] paymentmethods = PaymentmethodManager.getInstance().loadByWhere("where paymentmode = 0 order by name");
+PaymentmethodBean[] paymentmethods = PaymentmethodManager.getInstance().loadByWhere("where active = true and deleted = false order by name");
 ContragentBean[] contragents = ContragentManager.getInstance().loadByWhere("order by name, lname, fname");
 
 RoomrateBean[] roomrates = RoomrateManager.getInstance().loadByWhere("order by ord");

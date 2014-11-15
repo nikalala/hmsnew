@@ -1,3 +1,9 @@
+
+
+var today = new Date();
+var tomorrow = new Date();
+tomorrow.setDate(tomorrow.getDate() + 1);
+
 var tabcount = 0;
 $(document).ready(function () {
 

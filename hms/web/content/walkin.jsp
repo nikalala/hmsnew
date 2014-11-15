@@ -3,6 +3,11 @@
 <%@include file="../includes/init.jsp"%>
 <%
 
+int wintype = 0;
+if(request.getParameter("wintype") != null){
+    wintype = Integer.parseInt(request.getParameter("wintype"));
+}
+    
 session.removeAttribute("WALKIN_EXTRACHARGES");
 session.removeAttribute("WALKIN_REMARKS");
 
@@ -155,9 +160,10 @@ table.scrollwk tr {
         $("#myModalSave").removeClass("btn-primary").addClass("btn-danger");
         $("#myModalSave").html("რეზერვაცია");
         $("#myModalCheckin").remove();
+        <%if(wintype == 0){%>
         var r= $('<button type="button" class="btn btn-danger" id="myModalCheckin" onclick="savedata1(\'myModal\',\'checkin=true\')">მიღება</button>');
         $("#myModalFooter").append(r);
-        
+        <%}%>
         $("#walkin_set_rates").hide();
         $("#walkin_set_copy").hide();
         
@@ -263,7 +269,7 @@ table.scrollwk tr {
     
     
 </script>
-<input type="hidden" id="action" value="savereservation.jsp?action=save&type=walkin"/>
+<input type="hidden" id="action" value="savereservation.jsp?action=save&type=walkin&wintype=<%=wintype%>"/>
 <input type="hidden" id="maindiv" value="registration"/>
 <input type="hidden" id="callbackurl" value="content/stayviewleft.jsp"/>
 <input type="hidden" id="callbackdata" value="leftcontent"/>
@@ -298,6 +304,7 @@ table.scrollwk tr {
                 <div class="panel-body" style="height: 140px;">
                     <jsp:include page="panels/stayinfo.jsp">
                         <jsp:param name="type" value="walkin"/>
+                        <jsp:param name="wintype" value="<%=wintype%>"/>
                     </jsp:include>
                 </div>
             </div>

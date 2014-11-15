@@ -2,6 +2,9 @@
 <%@page pageEncoding="UTF-8"%>
 <%@include file="../../includes/init.jsp"%>
 <%
+int wintype = 0;
+if(request.getParameter("wintype") != null)
+    wintype = Integer.parseInt(request.getParameter("wintype"));
 String type = request.getParameter("type");
 RoomtypeBean[] roomtypes = RoomtypeManager.getInstance().loadByWhere("order by name");
 RoomBean[] rooms = RoomManager.getInstance().loadByWhere("order by name");
@@ -9,6 +12,12 @@ RoomrateBean[] roomrates = RoomrateManager.getInstance().loadByWhere("order by o
 ReservationtypeBean[] resrvationtypes = ReservationtypeManager.getInstance().loadByWhere("order by name");
 Calendar arr = Calendar.getInstance();
 Calendar dep = Calendar.getInstance();
+String pkfmt = pickerformat2;
+if(wintype > 0){
+    arr.add(Calendar.DATE, 1);
+    dep.add(Calendar.DATE, 1);
+    pkfmt = pickerformat2.replaceAll("new Date()","new Date("+arr.getTimeInMillis()+")");
+}
 int nights = 1;
 if(checkinsettings != null){
     Calendar tm = Calendar.getInstance();
@@ -32,8 +41,8 @@ if(checkinsettings != null){
 %>
 <script>
     $(document).ready(function(){
-        $('#guestinfo_arrivaldate').datepicker(<%=pickerformat2%>).on('changeDate', function(e){updateWalkinStayInfo(1);});
-        $('#guestinfo_departuredate').datepicker(<%=pickerformat2%>).on('changeDate', function(e){updateWalkinStayInfo(2);});
+        $('#guestinfo_arrivaldate').datepicker(<%=pkfmt%>).on('changeDate', function(e){updateWalkinStayInfo(1);});
+        $('#guestinfo_departuredate').datepicker(<%=pkfmt%>).on('changeDate', function(e){updateWalkinStayInfo(2);});
         $('#guestinfo_arrivaltime').keyup(function(e){updateWalkinStayInfo(1);});
         $('#guestinfo_departuretime').keyup(function(e){updateWalkinStayInfo(2);});
         $('#guestinfo_night').keyup(function(e){updateWalkinStayInfo(3);});

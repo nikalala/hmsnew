@@ -52,7 +52,7 @@ for(int i=0;i<items.length;i++){
     String particular = "";
     boolean noroom = false;
     if(items[i].getRoomid() != null)    {
-        particular = "ოთახი";
+        particular = "ოთახის გადასახადი";
     }
     else if(items[i].getTaxid() != null){
         TaxBean tax = TaxManager.getInstance().loadByPrimaryKey(items[i].getTaxid());
@@ -78,6 +78,8 @@ for(int i=0;i<items.length;i++){
         noroom = true;
         particular = "დამრგვალება";
     }
+    if(items[i].getManual().booleanValue())
+        noroom = false;
     PersonnelBean regby = PersonnelManager.getInstance().loadByPrimaryKey(items[i].getRegbyid());
     int st = 0;
     String sact = "";

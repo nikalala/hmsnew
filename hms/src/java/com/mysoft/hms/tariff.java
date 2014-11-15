@@ -116,7 +116,7 @@ public class tariff {
         this.calstart.setTime(reserv.getArraivaldate());
         this.calstart.add(Calendar.DATE, i);
         this.calend.setTime(reserv.getDeparturedate());
-        this.roomtype = RoomtypeManager.getInstance().loadByPrimaryKey(room.getRoomtypeid());
+        this.roomtype = RoomtypeManager.getInstance().loadByPrimaryKey(rroom.getRoomtypeid());
         
         this.disctype = 0;
         DiscountBean disc = null;

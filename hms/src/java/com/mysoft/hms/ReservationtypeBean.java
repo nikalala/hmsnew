@@ -135,7 +135,7 @@ public class ReservationtypeBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: reservationtype.name
-     * <li>comments: ??????????
+     * <li>comments: დასახელება
      * <li>column size: 2147483647
      * <li>jdbc type returned by the driver: Types.VARCHAR
      * </ul>
@@ -192,7 +192,7 @@ public class ReservationtypeBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: reservationtype.confirmed
-     * <li>comments: ?????????????
+     * <li>comments: დადასტურებული
      * <li>default value: false
      * <li>column size: 1
      * <li>jdbc type returned by the driver: Types.BIT
@@ -260,7 +260,7 @@ public class ReservationtypeBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: reservationtype.color
-     * <li>comments: ????
+     * <li>comments: ფერი
      * <li>column size: 7
      * <li>jdbc type returned by the driver: Types.VARCHAR
      * </ul>
@@ -318,7 +318,7 @@ public class ReservationtypeBean
      * <ul>
      * <li>full name: reservationtype.regbyid
      * <li> foreign key: personnel.personnelid
-     * <li>comments: ??????
+     * <li>comments: ავტორი
      * <li>column size: 10
      * <li>jdbc type returned by the driver: Types.INTEGER
      * </ul>
@@ -386,7 +386,7 @@ public class ReservationtypeBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: reservationtype.regdate
-     * <li>comments: ???????????? ??????
+     * <li>comments: რეგისტრაციის თარიღი
      * <li>default value: now()
      * <li>column size: 29
      * <li>jdbc type returned by the driver: Types.TIMESTAMP
@@ -455,7 +455,7 @@ public class ReservationtypeBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: reservationtype.active
-     * <li>comments: ???????
+     * <li>comments: აქტიური
      * <li>default value: true
      * <li>column size: 1
      * <li>jdbc type returned by the driver: Types.BIT

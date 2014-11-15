@@ -8,7 +8,7 @@ String id = request.getParameter("id");
 
 String functionname = "loadByPrimaryKey";
 
-Class cl = Class.forName("com.mysoft."+objname+"Manager");
+Class cl = Class.forName("com.mysoft.hms."+objname+"Manager");
 
 Class typename = null;
 Object o = null;

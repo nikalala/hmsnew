@@ -124,7 +124,7 @@ public class RegionBean
      * <ul>
      * <li>full name: region.countryid
      * <li> foreign key: country.countryid
-     * <li>comments: ???????
+     * <li>comments: ქვეყანა
      * <li>column size: 10
      * <li>jdbc type returned by the driver: Types.INTEGER
      * </ul>
@@ -192,7 +192,7 @@ public class RegionBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: region.name
-     * <li>comments: ??????
+     * <li>comments: სახელი
      * <li>column size: 2147483647
      * <li>jdbc type returned by the driver: Types.VARCHAR
      * </ul>
@@ -249,7 +249,7 @@ public class RegionBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: region.code
-     * <li>comments: ????? ??????
+     * <li>comments: მოკლე სახელი
      * <li>column size: 2147483647
      * <li>jdbc type returned by the driver: Types.VARCHAR
      * </ul>

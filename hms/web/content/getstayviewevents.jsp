@@ -38,7 +38,7 @@ Calendar cal2 = Calendar.getInstance();
 cal2.setTimeInMillis(cal1.getTimeInMillis());
 cal2.add(Calendar.DATE,31);
 
-String sql = "where reservationid in ("
+String sql = "where roomid is not null and reservationid in ("
         + "select reservationid from reservation where departuredate >= to_date('"+dtlong.format(cal1.getTime())+"','DD/MM/YYYY HH24:MI')"
         + " or arraivaldate < to_date('"+dtlong.format(cal2.getTime())+"','DD/MM/YYYY HH24:MI')"
         + ") order by reservationroomid";

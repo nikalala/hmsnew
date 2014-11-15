@@ -59,6 +59,7 @@ String bgcol = "#F5F5F5";
   <script type="text/javascript" src="js/dataTables.bootstrap.js"></script>
   <script type="text/javascript" src="js/locales/bootstrap-datepicker.ka.js"></script>
   <script type="text/javascript" src="js/bootstrap-select.js"></script>
+  <script src="js/plugins/jquery.bootstrap.wizard.min.js" type="text/javascript"></script>
   <script src="js/bootstrap-combobox.js" type="text/javascript"></script>
   
   

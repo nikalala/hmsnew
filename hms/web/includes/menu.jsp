@@ -20,10 +20,10 @@
                             <a href="javascript:newWindow('walkin','მოსული სტუმარი');">სტუმრის მიღება</a>
                         </li>
                         <li>
-                            <a href="javascript:newWindow('construction','სტუმრის მიღება / რეზერვაცია');">ახალი რეზერვაცია</a>
+                            <a href="javascript:newWindow1('walkin','სტუმრის მიღება / რეზერვაცია','wintype=2');">ახალი რეზერვაცია</a>
                         </li>
                         <li>
-                            <a href="javascript:newWindow('construction','ტრანზაქციის ჩამატება');">ტრანზაქციის ჩამატება</a>
+                            <a href="javascript:newWindow1('walkin','ტრანზაქციის ჩამატება','wintype=2');">ტრანზაქციის ჩამატება</a>
                         </li>
                         <li>
                             <a href="javascript:getBody('stayviewleft','reservationlist','რეზერვაციის სია','res1');">რეზერვაციების სია</a>
@@ -38,7 +38,7 @@
                             <a href="javascript:getBody('stayviewleft','guestdblist','სტუმრების მონაცემთა ბაზა','res1');">სტუმრების მონაცემთა ბაზა</a>
                         </li>
                         <li>
-                            <a href="javascript:newWindow('construction','ღამის აუდიტი');">ღამის აუდიტი</a>
+                            <a href="javascript:newWindow('nightaudit','ღამის აუდიტი');">ღამის აუდიტი</a>
                         </li>
                         <li>
                             <a href="javascript:newWindow('construction','ბლოკირება');">ბლოკირება</a>
