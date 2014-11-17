@@ -396,7 +396,7 @@ try{
     
     res.setRegbyid(user.getPersonnelid());
     if(!checkin){
-        res.setStatus(-1);
+        res.setStatus(0);
     }
     res = ReservationManager.getInstance().save(res);
     ReservationtypeBean restype = ReservationtypeManager.getInstance().loadByPrimaryKey(res.getReservationtypeid());

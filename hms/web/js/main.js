@@ -641,7 +641,7 @@ var hmsMonthsMin = ["იან", "თებ", "მარ", "აპრ", "მა�
         $(".ui-jqgrid-htable").css("width",ftWidth,"!important");
         $("#"+gridId).width(ftWidth);
         //$("#"+gridId).css("margin-left","10px");
-        $(".jqgfirstrow").remove();
+        //$(".jqgfirstrow").remove();
     }
 
     function reloadGrid(gridId,pgUrl)

@@ -14,9 +14,9 @@ Calendar arr = Calendar.getInstance();
 Calendar dep = Calendar.getInstance();
 String pkfmt = pickerformat2;
 if(wintype > 0){
-    arr.add(Calendar.DATE, 1);
-    dep.add(Calendar.DATE, 1);
-    pkfmt = pickerformat2.replaceAll("new Date()","new Date("+arr.getTimeInMillis()+")");
+    //arr.add(Calendar.DATE, 1);
+    //dep.add(Calendar.DATE, 1);
+    //pkfmt = pickerformat2.replaceAll("new Date()","new Date("+arr.getTimeInMillis()+")");
 }
 int nights = 1;
 if(checkinsettings != null){

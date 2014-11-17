@@ -9,7 +9,31 @@
         where = "";
     }
     SimpleDateFormat resListDate = new SimpleDateFormat(arrdepdateformats[dff]);
-    VReservationlistBean[] ReservationBeanList = VReservationlistManager.getInstance().loadByWhere(where);
+    
+    
+    int ipg = 1;
+int ilmt = 10;
+String pg = request.getParameter("page");
+if(pg != null)  ipg = Integer.parseInt(pg);
+String lmt = request.getParameter("rows");
+if(lmt != null) ilmt = Integer.parseInt(lmt);
+String sidx = request.getParameter("sidx");
+if(sidx == null)    sidx = "";
+String sord = request.getParameter("sord");
+if(sord == null)    sord = "";
+//int count = VReservationlistManager.getInstance().countWhere(where);
+int total_pages = 0;
+//if(count > 0)    total_pages = (int)(count/ilmt);
+//if(total_pages*ilmt < count)    total_pages++;
+if(ipg > total_pages) ipg=total_pages;
+int start = ilmt*ipg - ilmt;
+if(start < 0)   start = 0;
+String limit = "limit "+ilmt+" offset "+start;
+String order = "order by "+sidx+" "+sord;
+    
+    
+    VReservationlistBean[] ReservationBeanList = VReservationlistManager.getInstance().loadByWhere(where+" "+order);
+System.out.println("select * from v_reservationlist "+where+" "+order);
 %>
 
 <rows>
