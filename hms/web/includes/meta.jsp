@@ -177,13 +177,18 @@ System.out.println(rid+" = "+statusid);
 int getRoomStatus(Date dt,int rid) throws Exception {
     int n = -1;
     SimpleDateFormat dtlong = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-    String sql = "where roomid = "+rid+" and statusdate <= ";
-    if(dt != null)  sql += "to_timestamp('"+dtlong.format(dt)+"','DD/MM/YYYY HH24:MI')";
-    else            sql += "now()";
-    sql += " order by statusdate desc limit 1";
-    RoomstBean[] statuses = RoomstManager.getInstance().loadByWhere(sql);
-    if(statuses.length > 0)
-        n = statuses[0].getSt().intValue();
+    //SimpleDateFormat dtshort = new SimpleDateFormat("dd/MM/yyyy");
+    //String sql = "where roomid = "+rid+" and statusdate <= ";
+    //if(dt != null)  sql += "to_timestamp('"+dtlong.format(dt)+"','DD/MM/YYYY HH24:MI')";
+    //else            sql += "now()";
+    //sql += " order by statusdate desc limit 1";
+    String sql = "select getroomstatus("+rid+",";
+    if(dt == null)  dt = new Date();
+    sql += "'"+dtlong.format(dt)+"')";
+    //RoomstBean[] statuses = RoomstManager.getInstance().loadByWhere(sql);
+    //if(statuses.length > 0)
+    //    n = statuses[0].getSt().intValue();
+    n = (int)getSum(sql);
     return n;
 }
 

@@ -2,7 +2,7 @@
 <%@page pageEncoding="UTF-8"%>
 <%@include file="../includes/init.jsp"%>
 <%
-ReservationroomBean[] reservs = ReservationroomManager.getInstance().loadByWhere("where roomid is not null and reservationid in (select reservationid from reservation where arraivaldate <= now()::date) and leader = true order by guestid");
+ReservationroomBean[] reservs = ReservationroomManager.getInstance().loadByWhere("where roomid is not null and reservationid in (select reservationid from reservation where status <= 0 and arraivaldate::date <= now()::date and departuredate::date >= now()::date) and leader = true order by guestid");
 %>
 <style>
 table.lscroll tbody {

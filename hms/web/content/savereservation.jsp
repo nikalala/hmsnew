@@ -390,6 +390,7 @@ try{
                 + "arraivaldate < to_timestamp('"+dtlong.format(res.getDeparturedate())+"','DD/MM/YYYY HH24:MI') and "
                 + "departuredate > to_timestamp('"+dtlong.format(res.getArraivaldate())+"','DD/MM/YYYY HH24:MI') and "
                 + "reservationid in (select reservationid from reservationroom where roomid = "+resroom.getRoomid()+")";
+System.out.println("select * from reservation "+sqlcheck);
         if(ReservationManager.getInstance().countWhere(sqlcheck) > 0)
             throw new Exception("ოთახი ამ პერიოდში დაკავებულია");
     }
@@ -397,7 +398,7 @@ try{
     res.setRegbyid(user.getPersonnelid());
     if(!checkin){
         res.setStatus(0);
-    }
+    } else res.setStatus(-1);
     res = ReservationManager.getInstance().save(res);
     ReservationtypeBean restype = ReservationtypeManager.getInstance().loadByPrimaryKey(res.getReservationtypeid());
     guest.setRegbyid(user.getPersonnelid());
