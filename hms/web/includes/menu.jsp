@@ -29,10 +29,10 @@
                             <a href="javascript:getBody('stayviewleft','reservationlist','რეზერვაციის სია','res1');">რეზერვაციების სია</a>
                         </li>
                         <li>
-                            <a href="javascript:getBody('stayviewleft','construction');">ჩამომსვლელთა სია</a>
+                            <a href="javascript:getBody('stayviewleft','arrivallist','ჩამომსვლელთა სია','res1');">ჩამომსვლელთა სია</a>
                         </li>
                         <li>
-                            <a href="javascript:getBody('stayviewleft','construction');">წამსვლელთა სია</a>
+                            <a href="javascript:getBody('stayviewleft','deplist','წამსვლელთა სია','res1');">წამსვლელთა სია</a>
                         </li>
                         <li>
                             <a href="javascript:getBody('stayviewleft','guestdblist','სტუმრების მონაცემთა ბაზა','res1');">სტუმრების მონაცემთა ბაზა</a>
@@ -71,7 +71,7 @@
                             <a href="javascript:getBody('stayviewleft','tagents','კომპანიები','res1','?type=1');">კომპანიები</a>
                         </li>
                         <li>
-                            <a href="javascript:getBody('construction','construction');">ხარჯები</a>
+                            <a href="javascript:getBody('construction','expenses','ხარჯები','res1');">ხარჯები</a>
                         </li>
                         <li>
                             <a href="javascript:newWindow('construction','მოლარე');">მოლარე</a>

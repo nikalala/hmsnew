@@ -49,7 +49,7 @@
         $(".date input[type='text']").css("position", "relative");
         $("#roomBean").next().css("padding-left", "0");
         $("#roomType").next().css("padding-right", "0");
-        $("#res1").css("margin", "10px");
+        $("#res1").css("margin", "0px 10px 10px 10px");
     }
 
     function doFilter(bool) {

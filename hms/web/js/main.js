@@ -683,3 +683,5 @@ var hmsMonthsMin = ["იან", "თებ", "მარ", "აპრ", "მა�
        }
        return {width: width, hidden: false, name: colName, index: colName, align: pos};
     }
+
+
