@@ -30,6 +30,7 @@ ReservationBean[] ress1 = ReservationManager.getInstance().loadByWhere("where ar
         ],
         rowNum:2000,
         height: 200,
+        width: 960,
         autowidth: false,
         sortname: 'reservationid',
         viewrecords: true,
@@ -58,10 +59,6 @@ ReservationBean[] ress1 = ReservationManager.getInstance().loadByWhere("where ar
         
     });
 </script>
-<table width='100%' align='center' style="margin-left: 220px; margin-top: 0px;">
-    <tr>
-        <td align='center'>
-            <table id="pendingreservations" width='100%' align='center' style="margin-left: 220px;"></table>
-        </td>
-    </tr>
-</table>
+<div style="position: relative; margin-left: 210px;">
+<table id="pendingreservations" width='100%' align='center' style=""></table>
+</div>

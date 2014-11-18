@@ -97,7 +97,7 @@ else {
                         ნაბიჯი <%=i+1%> - <%=tabs.length%>-დან [ <%=tabs[i]%> <%=cldate%> ]
                     </h3>
                 </div>
-                <div class="panel-body" style="height:300px;">
+                <div class="panel-body">
                     <jsp:include page="<%= fname %>" flush="true" />    
                 </div>
             </div>
