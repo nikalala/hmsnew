@@ -6,15 +6,7 @@
 String[] tabs = {"დაუსრულებელი რეზერვაციები","დასრულებული რეზერვაციები","ოთახის სტატუსი","დაურეგულირებელი ფოლიო","ღამის გადასახადი","დღის დახურვა"};
 
 
-String cldate = dt.format(new Date());
-ClosedateBean[] closedates = ClosedateManager.getInstance().loadByWhere("order by cldate desc limit 1");
-if(closedates.length > 0)
-    cldate = dt.format(closedates[0].getCldate());
-else {
-    ReservationBean[] ress = ReservationManager.getInstance().loadByWhere("order by arraivaldate asc limit 1");
-    if(ress.length > 0)
-        cldate = dt.format(ress[0].getArraivaldate());
-}
+String cldate = dt.format(dclosedate);
 %>
 <style>
     /* custom inclusion of right, left and below tabs */

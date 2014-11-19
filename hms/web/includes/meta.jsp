@@ -928,6 +928,20 @@ if(checkinsettingss.length > 0){
     jschs = obj.toString();
 }
 
+ClosedateBean closedate = ClosedateManager.getInstance().createClosedateBean();
+ClosedateBean[] bclosedate = ClosedateManager.getInstance().loadByWhere("order by cldate desc limit 1");
+if(bclosedate.length == 0){
+    String fdt = "01/01/2014";
+    ReservationBean[] reservs = ReservationManager.getInstance().loadByWhere("order by arraivaldate asc");
+    if(reservs.length > 0)
+        fdt = df.format(reservs[0].getArraivaldate());
+    closedate.setCldate(df.parse(fdt));
+    closedate.setRegbyid(user.getPersonnelid());
+    closedate = ClosedateManager.getInstance().save(closedate);
+} else closedate = ClosedateManager.getInstance().loadByPrimaryKey(bclosedate[0].getClosedateid());
+
+long lclosedate = closedate.getCldate().getTime();
+Date dclosedate = closedate.getCldate();
 
 dt = new SimpleDateFormat(dateformats[dff]);
 dtime = new SimpleDateFormat(timeformats1[tff]);
