@@ -51,14 +51,15 @@ ReservationroomBean[] reservs = ReservationroomManager.getInstance().loadByWhere
             guestname += guest.getFname() + " " + guest.getLname();
             RatetypeBean rttype = RatetypeManager.getInstance().loadByPrimaryKey(reservs[i].getRatetypeid());
             ReservationtypeBean rtp = ReservationtypeManager.getInstance().loadByPrimaryKey(res.getReservationtypeid());
-            String bsname = "";
-            if(res.getBsourceid() != null){
-                BsourceBean bs = BsourceManager.getInstance().loadByPrimaryKey(res.getBsourceid());
-                bsname = bs.getName();
-            }
-            double total = getSum("select sum(amount) from folioitem where folioid in (select folioid from folio where reservationroomid = "+reservs[i].getReservationroomid()+")");
+            double total = getSum("select sum(amount) from folioitem where particular not in (1,2) and folioid in (select folioid from folio where reservationroomid = "+reservs[i].getReservationroomid()+")");
             double deposit = getSum("select sum(amount) from payment where folioid in (select folioid from folio where reservationroomid = "+reservs[i].getReservationroomid()+")");
-            String actions = "<a href=\"#\" class=\"btn btn-xs btn-default\"><i class=\"fa fa-remove\"></i></a>";
+            double total1 = getSum("select sum(amount) from folioitem where particular not in (1,2,5) and folioid in (select folioid from folio where reservationroomid = "+reservs[i].getReservationroomid()+")");
+            double term = 0;
+            if(res.getAdvancepaymentamount() != null)   term = res.getAdvancepaymentamount().doubleValue();
+            if(total1 == 0 || deposit*100/total1 >= term) continue;
+            
+            
+            String actions = "<a href=\"#\" title=\"CANCEL\" class=\"btn btn-xs btn-default\"><i class=\"fa fa-remove\"></i></a>";
             
             %>
                 <row id='<%=reservs[i].getReservationroomid()%>'>
@@ -68,7 +69,6 @@ ReservationroomBean[] reservs = ReservationroomManager.getInstance().loadByWhere
                     <cell><![CDATA[<%=rttype.getCode()%>]]></cell>
                     <cell><![CDATA[<%=rtp.getName()%>]]></cell>
                     <cell><![CDATA[<%=dt.format(res.getAdvancepaymentdate())%>]]></cell>
-                    <cell><![CDATA[<%=bsname%>]]></cell>
                     <cell><![CDATA[<%=dt.format(res.getDeparturedate())%>]]></cell>
                     <cell><![CDATA[<%=maincurrency.getCode()%> <%=dc.format(total)%>]]></cell>
                     <cell><![CDATA[<%=maincurrency.getCode()%> <%=dc.format(deposit)%>]]></cell>

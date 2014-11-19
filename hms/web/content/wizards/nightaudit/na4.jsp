@@ -2,18 +2,17 @@
 <%@page pageEncoding="UTF-8"%>
 <%@include file="../../../includes/init.jsp"%>
 <%
-Date cldate = dt.parse(request.getParameter("cldate"));
-
-ReservationBean[] ress1 = ReservationManager.getInstance().loadByWhere("where arraivaldate::date = to_date('"+df.format(cldate)+"','DD/MM/YYYY')");
 
 %>
 <script>
     $(document).ready(function() {
        
+    //$("#nounsettledfolio").hide();
+    $("#unsettledfoliotbl").hide();
         
     jQuery('#unsettledfolio').jqGrid(
     {
-        url:'wizards/nightaudit/content/getunsettledfolio.jsp',
+        url:'content/wizards/nightaudit/content/getna4.jsp',
         datatype: 'xml',
         colNames:['რეზ. #', 'სტუმარი', 'ოთახი', 'ტარიფი', 'რეზ. ტიპი', 'წყარო','წასვლა','სულ','დეპოზიტი','მოქმედება'],
         colModel:[
@@ -33,12 +32,22 @@ ReservationBean[] ress1 = ReservationManager.getInstance().loadByWhere("where ar
         width: 960,
         autowidth: false,
         sortname: 'reservationid',
-        viewrecords: true,
+        //viewrecords: true,
         sortorder: 'asc',
         altRows: true,
         altclass: 'altrow',
-        footerrow : true,
-        userDataOnFooter:true
+        //footerrow : true,
+        //userDataOnFooter:true,
+        gridComplete: function() {
+            //var rows = $("#roomstatus").getGridParam("reccount"); 
+            //if(rows > 0){
+            //    $("#nounsettledfolio").hide();
+            //    $("#unsettledfoliotbl").show();
+            //} else {
+            //    $("#nounsettledfolio").show();
+            //    $("#unsettledfoliotbl").hide();
+            //}
+        }
         })
         .jqGrid('bindKeys')
 	//.navButtonAdd('#pager1',{caption:'',buttonicon:'ui-icon-circle-plus',onClickButton: function(){ setInsurance(jQuery('#listcurrency').jqGrid('getGridParam','selrow')); },position:'last'})
@@ -59,6 +68,7 @@ ReservationBean[] ress1 = ReservationManager.getInstance().loadByWhere("where ar
         
     });
 </script>
-<div style="position: relative; margin-left: 210px;">
-<table id="unsettledfolio" width='100%' align='center' style=""></table>
+<div style="color: red;" id="nounsettledfolio">მიმდინარე თარიღისთვის არ არსებობს დაურეგულირებელი ფოლიო</div>
+<div style="position: relative; margin-left: 210px;" id="unsettledfoliotbl">
+    <table id="unsettledfolio" width='100%' align='center' style=""></table>
 </div>

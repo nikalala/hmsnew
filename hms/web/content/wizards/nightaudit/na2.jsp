@@ -2,20 +2,19 @@
 <%@page pageEncoding="UTF-8"%>
 <%@include file="../../../includes/init.jsp"%>
 <%
-Date cldate = dt.parse(request.getParameter("cldate"));
-
-ReservationBean[] ress1 = ReservationManager.getInstance().loadByWhere("where arraivaldate::date = to_date('"+df.format(cldate)+"','DD/MM/YYYY')");
 
 %>
 <script>
     $(document).ready(function() {
        
+    $("#norelasereservations").hide();
+    $("#relasereservationstbl").hide();
         
     jQuery('#relasereservations').jqGrid(
     {
         url:'content/wizards/nightaudit/content/getna2.jsp',
         datatype: 'xml',
-        colNames:['რეზ. #', 'სტუმარი', 'ოთახი', 'ტარიფი', 'რეზ. ტიპი', 'რელიზის თარიღი', 'წყარო','წასვლა','სულ','დეპოზიტი','მოქმედება'],
+        colNames:['რეზ. #', 'სტუმარი', 'ოთახი', 'ტარიფი', 'რეზ. ტიპი', 'რელიზი', 'წასვლა','სულ','დეპოზიტი','მოქმედება'],
         colModel:[
             {width: 120, hidden:false, name:'reservationid', index:'reservationid', align:'left'},
             {width: 140, hidden:false, name:'guest', index:'guest', align:'left'},
@@ -23,7 +22,6 @@ ReservationBean[] ress1 = ReservationManager.getInstance().loadByWhere("where ar
             {width: 100, hidden:false, name:'rate', index:'rate', align:'right'},
             {width: 100, hidden:false, name:'reservationtype', index:'reservationtype', align:'left'},
             {width: 100, hidden:false, name:'relesedate', index:'relesedate', align:'right'},
-            {width: 100, hidden:false, name:'bsource', index:'bsource', align:'left'},
             {width: 100, hidden:false, name:'departure', index:'departure', align:'left'},
             {width: 100, hidden:false, name:'total', index:'total', align:'left'},
             {width: 100, hidden:false, name:'deposit', index:'deposit', align:'left'},
@@ -34,10 +32,20 @@ ReservationBean[] ress1 = ReservationManager.getInstance().loadByWhere("where ar
         width: 960,
         autowidth: false,
         sortname: 'reservationroomid',
-        viewrecords: true,
+        //viewrecords: true,
         sortorder: 'asc',
         altRows: true,
-        altclass: 'altrow'
+        altclass: 'altrow',
+        gridComplete: function() {
+            var rows = $("#relasereservations").getGridParam("reccount"); 
+            if(rows > 0){
+                $("#norelasereservations").hide();
+                $("#relasereservationstbl").show();
+            } else {
+                $("#norelasereservations").show();
+                $("#relasereservationstbl").hide();
+            }
+        }
         //footerrow : true,
         //userDataOnFooter:true
         })
@@ -60,6 +68,8 @@ ReservationBean[] ress1 = ReservationManager.getInstance().loadByWhere("where ar
         
     });
 </script>
-<div style="position: relative; margin-left: 210px;">
-<table id="relasereservations" width='100%' align='center' style=""></table>
+<div id="norelasereservations" style="color: red !important;">მიმდინარე თარიღისთვის არ არსებობს დასრულებელი რეზერვაცია</div>
+<div style="position: relative; margin-left: 210px;" id="relasereservationstbl">
+    
+    <table id="relasereservations" width='100%' align='center' style=""></table>
 </div>

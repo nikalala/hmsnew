@@ -2,18 +2,18 @@
 <%@page pageEncoding="UTF-8"%>
 <%@include file="../../../includes/init.jsp"%>
 <%
-Date cldate = dt.parse(request.getParameter("cldate"));
-
-ReservationBean[] ress1 = ReservationManager.getInstance().loadByWhere("where arraivaldate::date = to_date('"+df.format(cldate)+"','DD/MM/YYYY')");
 
 %>
 <script>
     $(document).ready(function() {
        
+    $("#noroomstatus").hide();
+    $("#roomstatustbl").hide();
+
         
     jQuery('#roomstatus').jqGrid(
     {
-        url:'wizards/nightaudit/content/getroomstatus.jsp',
+        url:'content/wizards/nightaudit/content/getna3.jsp',
         datatype: 'xml',
         colNames:['ოთახი', 'სტუმარი', 'ჩამოსვლა', 'წასვლა', 'სულ', 'ბალანსი','სტატუსი','მოქმედება'],
         colModel:[
@@ -36,7 +36,17 @@ ReservationBean[] ress1 = ReservationManager.getInstance().loadByWhere("where ar
         altRows: true,
         altclass: 'altrow',
         footerrow : true,
-        userDataOnFooter:true
+        userDataOnFooter:true,
+        gridComplete: function() {
+            var rows = $("#roomstatus").getGridParam("reccount"); 
+            if(rows > 0){
+                $("#noroomstatus").hide();
+                $("#roomstatustbl").show();
+            } else {
+                $("#noroomstatus").show();
+                $("#roomstatustbl").hide();
+            }
+        }
         })
         .jqGrid('bindKeys')
 	//.navButtonAdd('#pager1',{caption:'',buttonicon:'ui-icon-circle-plus',onClickButton: function(){ setInsurance(jQuery('#listcurrency').jqGrid('getGridParam','selrow')); },position:'last'})
@@ -55,6 +65,7 @@ ReservationBean[] ress1 = ReservationManager.getInstance().loadByWhere("where ar
         
     });
 </script>
-<div style="position: relative; margin-left: 210px;">
-<table id="roomstatus" width='100%' align='center' style=""></table>
+<div id="noroomstatus" style="color: red;">მიმდინარე თარიღისთვის არ არსებობს დაუსრულებელი რეზერვაცია</div>
+<div style="position: relative; margin-left: 210px;" id="roomstatustbl">
+    <table id="roomstatus" width='100%' align='center' style=""></table>
 </div>

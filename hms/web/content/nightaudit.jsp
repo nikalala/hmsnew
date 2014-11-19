@@ -56,6 +56,15 @@ String cldate = dt.format(dclosedate);
         border-left: 1px solid #ddd;
     }
 
+
+.ui-jqgrid .ui-jqgrid-bdiv {
+    position: absolute;
+    padding-left: 18px;
+    margin: 0em;
+    padding: 0px;
+    overflow: auto;
+    text-align: left;
+}
 </style>
 <script>
     $(document).ready(function() {

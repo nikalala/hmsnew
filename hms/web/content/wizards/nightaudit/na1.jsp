@@ -2,15 +2,14 @@
 <%@page pageEncoding="UTF-8"%>
 <%@include file="../../../includes/init.jsp"%>
 <%
-Date cldate = dt.parse(request.getParameter("cldate"));
-
-ReservationBean[] ress1 = ReservationManager.getInstance().loadByWhere("where arraivaldate::date = to_date('"+df.format(cldate)+"','DD/MM/YYYY')");
 
 %>
 <script>
     $(document).ready(function() {
        
-        
+    $("#nopendingreservations").hide();
+    $("#pendingreservationstbl").hide();
+    
     jQuery('#pendingreservations').jqGrid(
     {
         url:'content/wizards/nightaudit/content/getna1.jsp',
@@ -33,10 +32,20 @@ ReservationBean[] ress1 = ReservationManager.getInstance().loadByWhere("where ar
         width: 960,
         autowidth: false,
         sortname: 'reservationroomid',
-        viewrecords: true,
+        //viewrecords: true,
         sortorder: 'asc',
         altRows: true,
-        altclass: 'altrow'
+        altclass: 'altrow',
+        gridComplete: function() {
+            var rows = $("#pendingreservations").getGridParam("reccount"); 
+            if(rows > 0){
+                $("#nopendingreservations").hide();
+                $("#pendingreservationstbl").show();
+            } else {
+                $("#nopendingreservations").show();
+                $("#pendingreservationstbl").hide();
+            }
+        }
         //footerrow : true,
         //userDataOnFooter:true
         })
@@ -59,15 +68,7 @@ ReservationBean[] ress1 = ReservationManager.getInstance().loadByWhere("where ar
         
     });
 </script>
-<style>
-.ui-jqgrid .ui-jqgrid-bdiv {
-    position: absolute;
-    margin: 0em;
-    padding: 0px;
-    overflow: auto;
-    text-align: left;
-}
-</style>
-<div style="position: relative; margin-left: 210px;">
-<table id="pendingreservations" width='100%' align='center' style=""></table>
+<div id="nopendingreservations" style="color: red;">მიმდინარე თარიღისთვის არ არსებობს დაუსრულებელი რეზერვაცია</div>
+<div style="position: relative; margin-left: 210px;" id="pendingreservationstbl">
+    <table id="pendingreservations" width='100%' align='center' style="" class="nalist" ></table>
 </div>

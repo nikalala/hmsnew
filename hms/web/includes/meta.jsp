@@ -794,6 +794,7 @@ SimpleDateFormat dnika = new SimpleDateFormat("dd-MM-yyyy");
 SimpleDateFormat dnikaday = new SimpleDateFormat("dd-MM");
 
 SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+SimpleDateFormat dflong = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 SimpleDateFormat sdf0 = new SimpleDateFormat("yyyy/MM/dd");
 SimpleDateFormat dtlong = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 SimpleDateFormat dtlongs = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
