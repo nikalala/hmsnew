@@ -597,10 +597,10 @@ var hmsMonthsMin = ["იან", "თებ", "მარ", "აპრ", "მა�
 
     function initializeGrid(grid)
     {
-        $("#load_list_reservs").removeAttr("class");
+       /* $("#load_list_reservs").removeAttr("class");
         $("#load_list_reservs").html('');
         $("#load_list_reservs").addClass( 'loading-panel' );
-        $("#load_list_reservs").css('display','block');
+        $("#load_list_reservs").css('display','block');*/
         jQuery("#"+grid.id).jqGrid(
             {
                 url: grid.url,
@@ -610,14 +610,10 @@ var hmsMonthsMin = ["იან", "თებ", "მარ", "აპრ", "მა�
                 loadComplete: function(){
                     $("#" +grid.id+ " td:last-child").removeAttr("title");
                     reInitializeGrid(grid.id);
-                    for(var i = 0; i < grid.model.length; i++)
-                    {
-                        $("#" + grid.id + "_" + grid.model[i].name).css("text-align", grid.model[i].align).css("width",grid.model[i].width);
-                        console.log($("[aria-describedby="+grid.id+"_"+grid.model[i].name+"]"));
-                        $("[aria-describedby="+grid.id+"_"+grid.model[i].name+"]").width(grid.model[i].width);
-                    }
-                    $(".ui-jqgrid .ui-jqgrid-htable th").css({"height":"22px"},{"padding":"0 2px 0 6px"});
-                    $("#" + grid.id + " td").css("padding-top","0","!important");
+                },
+                gridComplete : function()
+                {
+                    ReDrawTable(grid);
                 },
                 rowNum: 2000,
                 height: 400,
@@ -627,7 +623,16 @@ var hmsMonthsMin = ["იან", "თებ", "მარ", "აპრ", "მა�
                 sortorder: grid.order
             }).jqGrid('bindKeys');
     }
-
+    function ReDrawTable(grid)
+    {
+        for(var i = 0; i < grid.model.length; i++)
+        {
+            $("#" + grid.id + "_" + grid.model[i].name).css("text-align", grid.model[i].align).css("width",grid.model[i].width);
+            $("[aria-describedby="+grid.id+"_"+grid.model[i].name+"]").width(grid.model[i].width);
+        }
+        $(".ui-jqgrid .ui-jqgrid-htable th").css({"height":"22px"},{"padding":"0 2px 0 6px"});
+        $("#" + grid.id + " td").css("padding-top","0","!important");
+    }
     function reInitializeGrid(gridId)
     {
         var ftWidth = $("#filter-form").width();
@@ -651,6 +656,7 @@ var hmsMonthsMin = ["იან", "თებ", "მარ", "აპრ", "მა�
             url: pgUrl,
             loadComplete: function(){
                 reInitializeGrid(gridId);
+
             }
         }).trigger("reloadGrid");
 

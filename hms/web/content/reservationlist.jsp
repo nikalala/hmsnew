@@ -80,6 +80,7 @@
     });
 
     function loadDefaults() {
+        resGrid.url = doFilter(true);
         initializeGrid(resGrid);
         $('.date').datepicker(<%=pickerformat1%>);
         $('.dropdown').selectpicker();
@@ -104,7 +105,7 @@
         $("#dateTo").datepicker("setDate", tomorrow);
     }
 
-    function doFilter() {
+    function doFilter(donotreload) {
 
         var filterQuery = "";
         var contQuery = " AND ";
@@ -166,7 +167,7 @@
             }
         }
 
-        filterQuery += (showMrooms.is(':checked') ? " reservationroomid is null" : "reservationroomid is not null ") + contQuery;
+        filterQuery += (showMrooms.is(':checked') ? " " : "reservationroomid is not null ") + contQuery;
 
         var retVal = "";
 
@@ -177,7 +178,8 @@
         }
 
         var url = "content/getreservationlist.jsp?where=where " + retVal;
-        reloadGrid(resGrid.id, url);
+        if(!donotreload){reloadGrid(resGrid.id, url);}
+        return url;
     }
 
     function resetFilterPanel() {

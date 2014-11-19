@@ -46,17 +46,17 @@
         <tbody>
         <tr>
             <td><b><span style="color: #598904">guestname</span></b></td>
-            <td><b>მობილური:</b></td>
+            <td><b><i class="fa fa-mobile"></i></b></td>
             <td>577 65 11 00</td>
         </tr>
         <tr>
             <td></td>
-            <td><b>ტელეფონი:</b></td>
+            <td><b><i class="fa fa-phone"></i></b></td>
             <td>2 124 755</td>
         </tr>
         <tr>
             <td></td>
-            <td><b>ელფოსტა:</b></td>
+            <td><b><i class="fa fa-envelope-o"></i></b></td>
             <td>giorgi.vashakidze@amindsolutions.com</td>
         </tr>
         <tr>
