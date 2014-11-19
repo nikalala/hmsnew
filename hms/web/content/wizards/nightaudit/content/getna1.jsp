@@ -82,3 +82,4 @@ ReservationroomBean[] reservs = ReservationroomManager.getInstance().loadByWhere
             }
 	%>
 </rows>
+

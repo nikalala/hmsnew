@@ -59,6 +59,15 @@ ReservationBean[] ress1 = ReservationManager.getInstance().loadByWhere("where ar
         
     });
 </script>
+<style>
+.ui-jqgrid .ui-jqgrid-bdiv {
+    position: absolute;
+    margin: 0em;
+    padding: 0px;
+    overflow: auto;
+    text-align: left;
+}
+</style>
 <div style="position: relative; margin-left: 210px;">
 <table id="pendingreservations" width='100%' align='center' style=""></table>
 </div>

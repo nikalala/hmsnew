@@ -9,7 +9,7 @@
     </context-param>
     <context-param>
         <param-name>url</param-name>
-        <param-value>jdbc:postgresql://localhost/hms</param-value>
+        <param-value>jdbc:postgresql://192.168.0.22/hms</param-value>
     </context-param>
     <context-param>
         <param-name>user</param-name>
