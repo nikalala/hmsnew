@@ -18,14 +18,14 @@
         colModel:[
             {width: 80, hidden:false, name:'reservationid', index:'reservationid', align:'left'},
             {width: 140, hidden:false, name:'guest', index:'guest', align:'left'},
-            {width: 120, hidden:false, name:'room', index:'room', align:'left'},
+            {width: 80, hidden:false, name:'room', index:'room', align:'right'},
             {width: 100, hidden:false, name:'rate', index:'rate', align:'right'},
-            {width: 100, hidden:false, name:'reservationtype', index:'reservationtype', align:'left'},
-            {width: 100, hidden:false, name:'bsource', index:'bsource', align:'left'},
-            {width: 100, hidden:false, name:'departure', index:'departure', align:'left'},
-            {width: 100, hidden:false, name:'total', index:'total', align:'left'},
-            {width: 100, hidden:false, name:'deposit', index:'deposit', align:'left'},
-            {width: 140, hidden:false, name:'action', index:'action', align:'left'}
+            {width: 140, hidden:false, name:'reservationtype', index:'reservationtype', align:'right'},
+            {width: 100, hidden:false, name:'bsource', index:'bsource', align:'right'},
+            {width: 100, hidden:false, name:'departure', index:'departure', align:'right'},
+            {width: 100, hidden:false, name:'total', index:'total', align:'right'},
+            {width: 100, hidden:false, name:'deposit', index:'deposit', align:'right'},
+            {width: 140, hidden:false, name:'action', index:'action', align:'right'}
         ],
         rowNum:2000,
         height: 200,
@@ -68,7 +68,17 @@
         
     });
 </script>
+<style>
+.ui-jqgrid .ui-jqgrid-bdiv {
+    position: absolute;
+    padding-left: 12px !important;
+    margin: 0em;
+    padding: 0px;
+    overflow: auto;
+    text-align: left;
+}
+</style>
 <div id="nopendingreservations" style="color: red;">მიმდინარე თარიღისთვის არ არსებობს დაუსრულებელი რეზერვაცია</div>
 <div style="position: relative; margin-left: 210px;" id="pendingreservationstbl">
-    <table id="pendingreservations" width='100%' align='center' style="" class="nalist" ></table>
+    <table id="pendingreservations" width='100%' align='center' style="" class="" ></table>
 </div>

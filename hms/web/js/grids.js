@@ -74,3 +74,38 @@
     };
     /* -------------------------------- tagentsGrid List Model ------------------------------------*/
 
+    /* -------------------------------- NightAudit List Model ------------------------------------*/
+    var pResGridModel = [];
+    pResGridModel.push(
+        colModelGenerator(80,'reservationid',0),
+        colModelGenerator(140,'guest',0),
+        colModelGenerator(120,'room',0),
+        colModelGenerator(100,'rate',2),
+        colModelGenerator(100,'reservationtype',0),
+        colModelGenerator(100,'bsource',0),
+        colModelGenerator(100,'departure',0),
+        colModelGenerator(100,'total',0),
+        colModelGenerator(100,'deposit',0),
+        colModelGenerator(140,'action',0));
+    pResGrid = {
+        id : 'list_pendingreservations',
+        url : 'content/wizards/nightaudit/content/getna1.jsp',
+        type : 'xml',
+        cols : ['რეზ. #', 'სტუმარი', 'ოთახი', 'ტარიფი', 'რეზ. ტიპი', 'წყარო','წასვლა','სულ','დეპოზიტი','მოქმედება'],
+        model : pResGridModel,
+        sort : 'reservationroomid',
+        order : 'asc',
+        altRows: true,
+        altclass: 'altrow',
+        gridComplete: function() {
+            var rows = $("#pendingreservations").getGridParam("reccount"); 
+            if(rows > 0){
+                $("#nopendingreservations").hide();
+                $("#pendingreservationstbl").show();
+            } else {
+                $("#nopendingreservations").show();
+                $("#pendingreservationstbl").hide();
+            }
+        }
+    };
+    /* -------------------------------- NightAudit List Model ------------------------------------*/

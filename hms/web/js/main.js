@@ -615,6 +615,7 @@ var hmsMonthsMin = ["იან", "თებ", "მარ", "აპრ", "მა�
                 {
                     ReDrawTable(grid);
                 },
+                gridComplete : grid.gridComplete, 
                 rowNum: 2000,
                 height: 400,
                 autowidth: true,
