@@ -609,13 +609,11 @@ var hmsMonthsMin = ["იან", "თებ", "მარ", "აპრ", "მა�
                 colModel: grid.model,
                 loadComplete: function(){
                     $("#" +grid.id+ " td:last-child").removeAttr("title");
-                    reInitializeGrid(grid.id);
+                    reInitializeGrid(grid.id,grid.isPopup);
+                    $(".ui-jqgrid-htable").css("background","#FFF").css("border-bottom","solid 1px #D1D1D1");
                 },
-                gridComplete : function()
-                {
-                    ReDrawTable(grid);
-                },
-                gridComplete : grid.gridComplete, 
+                gridComplete : grid.gridComplete,
+                beforeRequest : grid.beforeRequest,
                 rowNum: 2000,
                 height: 400,
                 autowidth: true,
@@ -634,29 +632,52 @@ var hmsMonthsMin = ["იან", "თებ", "მარ", "აპრ", "მა�
         $(".ui-jqgrid .ui-jqgrid-htable th").css({"height":"22px"},{"padding":"0 2px 0 6px"});
         $("#" + grid.id + " td").css("padding-top","0","!important");
     }
-    function reInitializeGrid(gridId)
+    function reInitializeGrid(gridId,isPopup)
     {
-        var ftWidth = $("#filter-form").width();
-        $(".first-table").width(ftWidth);
-        $("#ui-jqgrid-bdiv").width(ftWidth);
-        $("#gview_"+gridId).width(ftWidth);
-        $("#gbox_"+gridId).width(ftWidth);
-
-        $(".ui-jqgrid-bdiv").css("width",ftWidth,"!important");
-        $(".ui-jqgrid-hdiv").css("width",ftWidth,"!important");
-        $(".ui-jqgrid-htable").css("width",ftWidth,"!important");
-        $("#"+gridId).width(ftWidth);
+        if(!isPopup){
+            var ftWidth = $("#filter-form").width();
+            $(".first-table").width(ftWidth);
+            $("#ui-jqgrid-bdiv").width(ftWidth);
+            $("#gview_"+gridId).width(ftWidth);
+            $("#gbox_"+gridId).width(ftWidth);
+            $(".ui-jqgrid-bdiv").css("width",ftWidth,"!important");
+            $(".ui-jqgrid-hdiv").css("width",ftWidth,"!important");
+            $(".ui-jqgrid-htable").css("width",ftWidth,"!important");
+            $("#"+gridId).width(ftWidth);
+        }else{
+            var ftWidth = 953;
+            $("#ui-jqgrid-bdiv").width(ftWidth);
+            $("#gview_"+gridId).width(ftWidth);
+            $("#gbox_"+gridId).width(ftWidth);
+            $("#gbox_"+gridId).css("margin-top","15px");
+            $(".ui-jqgrid-bdiv").css("width",ftWidth,"!important");
+            $(".ui-jqgrid-hdiv").css("width",ftWidth,"!important");
+            $(".ui-jqgrid-htable").css("width",ftWidth,"!important");
+            $("#"+gridId).width(ftWidth);
+            $("#rootwizard-table").find('.panel-heading').each(function(){ $(this).css({
+                'position' : 'absolute',
+                'top' : '10px',
+                'width' : '953px'
+            }); });
+            $("#"+gridId).prev().css({
+                'position' : 'absolute',
+                'top' : '10px',
+                'width' : '953px'
+            });
+            $('#'+gridId).parent().parent().parent().find('.ui-jqgrid-sortable').css('white-space', 'normal');
+            $('#'+gridId).parent().parent().parent().find('.ui-jqgrid-sortable').css('height', 'auto');
+        }
         //$("#"+gridId).css("margin-left","10px");
         //$(".jqgfirstrow").remove();
     }
 
-    function reloadGrid(gridId,pgUrl)
+    function reloadGrid(gridId,pgUrl,isPopup)
     {
         console.log(pgUrl);
         jQuery("#"+gridId).jqGrid().setGridParam({
             url: pgUrl,
             loadComplete: function(){
-                reInitializeGrid(gridId);
+                reInitializeGrid(gridId,isPopup);
 
             }
         }).trigger("reloadGrid");

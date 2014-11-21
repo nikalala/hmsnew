@@ -50,58 +50,87 @@ String cldate = dt.format(dclosedate);
         *border-right-color: #ffffff;
     }
 
-    .tabs-right > .nav-tabs {
-        float: right;
-        margin-left: 19px;
-        border-left: 1px solid #ddd;
-    }
 
+    .rootwizard-ul > li {
+        float: left;
+        margin-bottom: -1px;
+        border: solid 1px #DFDFDF;
+        width: 100%;
+    }
+    .rootwizard-ul {
+        border-bottom: 0;
+    }
+    .rootwizard-ul > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
+        color: #555;
+        background-color: #fff;
+        border: 0 !important;
+        border-bottom-color: transparent;
+        cursor: default;
+    }
 </style>
 <script>
     $(document).ready(function() {
-        
         $("#myModalSave").remove();
         $("#myModalCheckin").remove();
         
-        $('#rootwizard').bootstrapWizard({'tabClass': 'nav nav-tabs'});
+        $('#rootwizard').bootstrapWizard(
+                {
+                    'tabClass': 'nav nav-tabs',
+                    onTabShow: function (tab, navigation, index) {
+
+                    }
+                }
+        );
     });
 </script>
 <div id="rootwizard" class="tabbable tabs-left">
-    <ul>
-        <%
-        for(int i=0;i<tabs.length;i++){
-            
-            %>
-            <li><a href="#tab<%=i+1%>" data-toggle="tab"><%=tabs[i]%></a></li>
-            <%
-        }
-        %>
-    </ul>
-    <div class="tab-content">
-        <%
-        for(int i=0;i<tabs.length;i++){
-            String fname = "wizards/nightaudit/na"+String.valueOf(i+1)+".jsp?cldate="+cldate;
-            %>
-        <div class="tab-pane" id="tab<%=i+1%>">
-            <div class="panel panel-primary" id='na<%=i+1%>'>
-                <div class="panel-heading" style="margin-left: 212px;">
-                    <h3 class="panel-title">
-                        ნაბიჯი <%=i+1%> - <%=tabs.length%>-დან [ <%=tabs[i]%> <%=cldate%> ]
-                    </h3>
-                </div>
-                <div class="panel-body">
-                    <jsp:include page="<%= fname %>" flush="true" />    
-                </div>
-            </div>
-        </div>
-            <%
-        }
-        %>
-        <ul class="pager wizard">
-            <li class="previous first" style="display:none;"><a href="#">პირველი</a></li>
-            <li class="previous"><a href="#">წინა</a></li>
-            <li class="next last" style="display:none;"><a href="#">ბოლო</a></li>
-            <li class="next"><a href="#">შემდეგი</a></li>
-        </ul>
-    </div>	
+    <table id="rootwizard-table">
+        <tr>
+            <td style="width:225px; vertical-align: top;">
+                <ul class="rootwizard-ul">
+                    <%
+                        for(int i=0;i<tabs.length;i++){
+
+                    %>
+                    <li><a href="#tab<%=i+1%>" data-toggle="tab"><%=tabs[i]%></a></li>
+                    <%
+                        }
+                    %>
+                </ul>
+            </td>
+            <td style="width: 953px;">
+                <div class="tab-content">
+                        <%
+                            for(int i=0;i<tabs.length;i++){
+                                String fname = "wizards/nightaudit/na"+String.valueOf(i+1)+".jsp?cldate="+cldate;
+                                %>
+                                        <div class="tab-pane" id="tab<%=i+1%>">
+                                            <div class="panel panel-primary" id='na<%=i+1%>'>
+                                                <div class="panel-heading">
+                                                    <h3 class="panel-title">
+                                                        ნაბიჯი <%=i+1%> - <%=tabs.length%>-დან [ <%=tabs[i]%> <%=cldate%> ]
+                                                    </h3>
+                                                </div>
+                                                <div class="panel-body">
+                                                    <jsp:include page="<%= fname %>" flush="true" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                            <%
+                            }
+                            %>
+            </td>
+            </tr>
+            <tr>
+            <td colspan="2">
+                <ul class="pager wizard">
+                    <li class="previous first" style="display:none;"><a href="#">პირველი</a></li>
+                    <li class="previous"><a href="#">წინა</a></li>
+                    <li class="next last" style="display:none;"><a href="#">ბოლო</a></li>
+                    <li class="next"><a href="#">შემდეგი</a></li>
+                </ul>
+            </td>
+        </tr>
+    </table>
+    </div>
 </div>

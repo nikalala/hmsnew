@@ -938,7 +938,10 @@ if(bclosedate.length == 0){
         fdt = df.format(reservs[0].getArraivaldate());
     closedate.setCldate(df.parse(fdt));
     closedate.setRegbyid(user.getPersonnelid());
-    closedate = ClosedateManager.getInstance().save(closedate);
+    if(user != null && user.getPersonnelid() != null)
+    {
+        closedate = ClosedateManager.getInstance().save(closedate);
+    }
 } else closedate = ClosedateManager.getInstance().loadByPrimaryKey(bclosedate[0].getClosedateid());
 
 long lclosedate = closedate.getCldate().getTime();

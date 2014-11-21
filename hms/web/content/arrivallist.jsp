@@ -176,7 +176,7 @@
     reInitialize();
 
     function loadDefaults() {
-        initializeGrid(resGrid);
+        initializeGrid(arrivalGrid);
         $('.date').datepicker(<%=pickerformat1%>);
         $('.dropdown').selectpicker();
         $(".btn-group").css("width", "100%", "!important");
@@ -319,7 +319,7 @@
     <table id="grid-table">
         <tr>
             <td>
-                <table id='list_reservs' class="table-striped table-hover" align='center'></table>
+                <table id='list_arrival' class="table-striped table-hover" align='center'></table>
             </td>
         </tr>
     </table>
