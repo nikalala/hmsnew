@@ -83,7 +83,8 @@ FolioitemBean[] items = FolioitemManager.getInstance().loadByWhere(sql+" "+order
                 particular = "დამრგვალება";
             }
             %>
-                <row id='<%=reservs[i].getReservationroomid()%>'>
+                <%--reservs[i].getReservationroomid()--%>
+                <row id='<%=folio.getReservationroomid()%>'>
                     <cell><![CDATA[<%=roomname%>]]></cell>
                     <cell><![CDATA[<%=guestname%>]]></cell>
                     <cell><![CDATA[<%=folio.getFolioid()%>]]></cell>

@@ -1,5 +1,3 @@
-
-
 var today = new Date();
 var tomorrow = new Date();
 tomorrow.setDate(tomorrow.getDate() + 1);
@@ -11,9 +9,8 @@ $(document).ready(function () {
 
 });
 
-function loadMainBody()
-{
-    getBody("stayviewleft","stayview",'დატვირთულობა','res1');
+function loadMainBody() {
+    getBody("stayviewleft", "stayview", 'დატვირთულობა', 'res1');
 }
 
 function sleep(milliseconds) {
@@ -124,9 +121,7 @@ function savedata(id) {
         else if (ra)    action += "&" + params[i] + "=" + $("#" + params[i]).is(':checked');
         else action += "&" + params[i] + "=" + $("#" + params[i]).val();
     }
-    $.post("content/" + action, {
-
-    }, function (data) {
+    $.post("content/" + action, {}, function (data) {
         if (data.result == 0)    BootstrapDialog.alert(data.error);
         else {
             if (callbackurl.indexOf('script:') >= 0) {
@@ -169,9 +164,7 @@ function savedataprefix(id, prefix) {
         else if (ra)    action += "&" + params[i] + "=" + $("#" + params[i]).is(':checked');
         else action += "&" + params[i] + "=" + $("#" + params[i]).val();
     }
-    $.post("content/" + action, {
-
-    }, function (data) {
+    $.post("content/" + action, {}, function (data) {
         if (data.result == 0)    BootstrapDialog.alert(data.error);
         else {
             if (callbackurl.indexOf('script:') >= 0) {
@@ -216,9 +209,7 @@ function savedata1(id, param) {
         else action += "&" + params[i] + "=" + $("#" + params[i]).val();
     }
     if (param.length > 0) action += "&" + param;
-    $.post("content/" + action, {
-
-    }, function (data) {
+    $.post("content/" + action, {}, function (data) {
         if (data.result == 0)    BootstrapDialog.alert(data.error);
         else {
             if (callbackurl != '') {
@@ -238,9 +229,7 @@ function savedata1(id, param) {
 }
 
 function infopage(fname, title, qr) {
-    $.post("content/" + fname + ".jsp?" + qr, {
-
-    }, function (data) {
+    $.post("content/" + fname + ".jsp?" + qr, {}, function (data) {
         $("#ismheader").html(title);
         $("#ismbody").html(data);
         $('#infomodal').modal();
@@ -289,19 +278,17 @@ $(function () {
         doContextMenuAction($(this), choosedid);
     });
 
-    $("body").on("click",function () {
+    $("body").on("click", function () {
         $contextMenu.hide();
     }).keyup(function (e) {
-            if (e.keyCode == 27)
-                $contextMenu.hide();
-        });
+        if (e.keyCode == 27)
+            $contextMenu.hide();
+    });
 });
 
 function newWindow(fname, title) {
     loader.show();
-    $.post("content/" + fname + ".jsp", {
-
-    }, function (data) {
+    $.post("content/" + fname + ".jsp", {}, function (data) {
         $("#mheader").html(title);
         $("#mbody").html(data);
         $('#myModal').modal();
@@ -310,9 +297,7 @@ function newWindow(fname, title) {
 }
 
 function extramodal0(fname, title) {
-    $.post("content/" + fname + ".jsp", {
-
-    }, function (data) {
+    $.post("content/" + fname + ".jsp", {}, function (data) {
         $("#extramodal0header").html(title);
         $("#extramodal0body").html(data);
         $('#extramodal0').modal();
@@ -320,9 +305,7 @@ function extramodal0(fname, title) {
 }
 
 function extramodal0(fname, title, qr) {
-    $.post("content/" + fname + ".jsp?" + qr, {
-
-    }, function (data) {
+    $.post("content/" + fname + ".jsp?" + qr, {}, function (data) {
         $("#extramodal0header").html(title);
         $("#extramodal0body").html(data);
         $('#extramodal0').modal();
@@ -330,9 +313,7 @@ function extramodal0(fname, title, qr) {
 }
 
 function newWindow1(fname, title, qr) {
-    $.post("content/" + fname + ".jsp?" + qr, {
-
-    }, function (data) {
+    $.post("content/" + fname + ".jsp?" + qr, {}, function (data) {
         $("#mheader").html(title);
         $("#mbody").html(data);
         $('#myModal').modal();
@@ -340,9 +321,7 @@ function newWindow1(fname, title, qr) {
 }
 
 function newsWindow(fname, title) {
-    $.post("content/" + fname + ".jsp", {
-
-    }, function (data) {
+    $.post("content/" + fname + ".jsp", {}, function (data) {
         $("#smheader").html(title);
         $("#smbody").html(data);
         $('#smallmodal').modal();
@@ -350,9 +329,7 @@ function newsWindow(fname, title) {
 }
 
 function newsWindow1(fname, title, qr) {
-    $.post("content/" + fname + ".jsp?" + qr, {
-
-    }, function (data) {
+    $.post("content/" + fname + ".jsp?" + qr, {}, function (data) {
         $("#smheader").html(title);
         $("#smbody").html(data);
         $('#smallmodal').modal();
@@ -360,9 +337,7 @@ function newsWindow1(fname, title, qr) {
 }
 
 function newmWindow(fname, title) {
-    $.post("content/" + fname + ".jsp", {
-
-    }, function (data) {
+    $.post("content/" + fname + ".jsp", {}, function (data) {
         $("#mdheader").html(title);
         $("#mdbody").html(data);
         $('#mediummodal').modal();
@@ -371,9 +346,7 @@ function newmWindow(fname, title) {
 
 function newmWindow1(fname, title, qr) {
     loader.show();
-    $.post("content/" + fname + ".jsp?" + qr, {
-
-    }, function (data) {
+    $.post("content/" + fname + ".jsp?" + qr, {}, function (data) {
         $("#mdheader").html(title);
         $("#mdbody").html(data);
         $('#mediummodal').modal();
@@ -386,7 +359,7 @@ function getBody(fname) {
     $.ajax({
         type: "POST",
         url: "content/" + fname + ".jsp",
-        data: { },
+        data: {},
         success: function (data) {
             $('#centercontent').html(data);
             loader.hide();
@@ -402,7 +375,7 @@ function getLBody(fname) {
     $.ajax({
         type: "POST",
         url: "content/" + fname + ".jsp",
-        data: { },
+        data: {},
         success: function (data) {
             $('#leftcontent').html(data);
         },
@@ -410,12 +383,11 @@ function getLBody(fname) {
     });
 }
 
-function checkTabs(pageName){
-    if($('.nav-tabs li').size() > 0)
-    {
+function checkTabs(pageName) {
+    if ($('.nav-tabs li').size() > 0) {
         console.log($('.nav-tabs li'));
     }
-    if(pageName !== "stayview"){
+    if (pageName !== "stayview") {
         console.log("opening tab > " + pageName);
     }
 }
@@ -429,7 +401,7 @@ function getBody(fname1, fname2, name, id, param) {
     $.ajax({
         type: "POST",
         url: "content/" + fname1 + ".jsp",
-        data: { },
+        data: {},
         success: function (data) {
             $('#leftcontent').html(data);
             loader.hide();
@@ -441,19 +413,17 @@ function getBody(fname1, fname2, name, id, param) {
     });
     removeTab(id);
     var reqParam = "";
-    if(!isNullOrEmpty(param))
-    {
+    if (!isNullOrEmpty(param)) {
         reqParam = param;
     }
     console.log(reqParam);
 
-    addTab("content/" + fname2 + ".jsp"+reqParam, name, id);
+    addTab("content/" + fname2 + ".jsp" + reqParam, name, id);
 }
 
 function removeTab(id) {
     $("#" + id).remove();
-    if($('.nav-tabs li').size() == 0)
-    {
+    if ($('.nav-tabs li').size() == 0) {
         //loadMainBody();
     }
 }
@@ -464,14 +434,14 @@ function removeAllTabs() {
 }
 
 function addTab(fname2, name, id) {
-    fname2 = fname2.replace(".jsp.jsp",".jsp");
+    fname2 = fname2.replace(".jsp.jsp", ".jsp");
     var tabname = "/content/" + fname2 + ".jsp";
-    tabname = tabname.replace(".jsp.jsp",".jsp").replace("content/content/","hms/content/");
+    tabname = tabname.replace(".jsp.jsp", ".jsp").replace("content/content/", "hms/content/");
 
     if (tabcount == 0)
-        $('#maintabs').append('<li style=""><a src='+tabname+' href="#' + id + '" data-toggle="tab" style="padding-top: 4px; background-color: #F5F5F5;">' + name + '</a></li>');
+        $('#maintabs').append('<li style=""><a src=' + tabname + ' href="#' + id + '" data-toggle="tab" style="padding-top: 4px; background-color: #F5F5F5;">' + name + '</a></li>');
     else
-        $('#maintabs').append('<li style=""><a src='+tabname+' href="#' + id + '" data-toggle="tab" style="padding-top: 3px; background-color: #F5F5F5;"><button class="close closeTab" type="button" >×</button>' + name + '</a></li>');
+        $('#maintabs').append('<li style=""><a src=' + tabname + ' href="#' + id + '" data-toggle="tab" style="padding-top: 3px; background-color: #F5F5F5;"><button class="close closeTab" type="button" >×</button>' + name + '</a></li>');
 
     $('#centerTabContent').append('<div class="tab-pane" id="' + id + '"></div>');
     loader.show();
@@ -579,137 +549,132 @@ function editNameSearch(id, cid, prefix) {
     //}
 }
 
-function isNullOrEmpty(value)
-{
-    if(value === 'NULL' || value === '' || value === null || typeof value === 'undefined')
-    {
+function isNullOrEmpty(value) {
+    if (value === 'NULL' || value === '' || value === null || typeof value === 'undefined') {
         return true;
     }
     return false;
 }
 
 function urlencode(str) {
-  return str.replace(' ', '!!!');
+    return str.replace(' ', '!!!');
 }
 
 var hmsDaysMin = ["კვი", "ორშ", "სამ", "ოთხ", "ხუთ", "პარ", "შაბ", "კვი"];
 var hmsMonthsMin = ["იან", "თებ", "მარ", "აპრ", "მაი", "ივნ", "ივლ", "აგვ", "სექ", "ოქტ", "ნოე", "დეკ"];
 
-    function initializeGrid(grid)
-    {
-       /* $("#load_list_reservs").removeAttr("class");
-        $("#load_list_reservs").html('');
-        $("#load_list_reservs").addClass( 'loading-panel' );
-        $("#load_list_reservs").css('display','block');*/
-        jQuery("#"+grid.id).jqGrid(
-            {
-                url: grid.url,
-                datatype: grid.type,
-                colNames: grid.cols,
-                colModel: grid.model,
-                loadComplete: function(){
-                    $("#" +grid.id+ " td:last-child").removeAttr("title");
-                    reInitializeGrid(grid.id,grid.isPopup);
-                    $(".ui-jqgrid-htable").css("background","#FFF").css("border-bottom","solid 1px #D1D1D1");
-                },
-                gridComplete : grid.gridComplete,
-                beforeRequest : grid.beforeRequest,
-                rowNum: 2000,
-                height: 400,
-                autowidth: true,
-                sortname: grid.sort,
-                viewrecords: true,
-                sortorder: grid.order
-            }).jqGrid('bindKeys');
-    }
-    function ReDrawTable(grid)
-    {
-        for(var i = 0; i < grid.model.length; i++)
+function initializeGrid(grid) {
+    console.log("initializing grid named > " + grid.id);
+    jQuery("#" + grid.id).jqGrid(
         {
-            $("#" + grid.id + "_" + grid.model[i].name).css("text-align", grid.model[i].align).css("width",grid.model[i].width);
-            $("[aria-describedby="+grid.id+"_"+grid.model[i].name+"]").width(grid.model[i].width);
-        }
-        $(".ui-jqgrid .ui-jqgrid-htable th").css({"height":"22px"},{"padding":"0 2px 0 6px"});
-        $("#" + grid.id + " td").css("padding-top","0","!important");
-    }
-    function reInitializeGrid(gridId,isPopup)
-    {
-        if(!isPopup){
-            var ftWidth = $("#filter-form").width();
-            $(".first-table").width(ftWidth);
-            $("#ui-jqgrid-bdiv").width(ftWidth);
-            $("#gview_"+gridId).width(ftWidth);
-            $("#gbox_"+gridId).width(ftWidth);
-            $(".ui-jqgrid-bdiv").css("width",ftWidth,"!important");
-            $(".ui-jqgrid-hdiv").css("width",ftWidth,"!important");
-            $(".ui-jqgrid-htable").css("width",ftWidth,"!important");
-            $("#"+gridId).width(ftWidth);
-        }else{
-            var ftWidth = 953;
-            $("#ui-jqgrid-bdiv").width(ftWidth);
-            $("#gview_"+gridId).width(ftWidth);
-            $("#gbox_"+gridId).width(ftWidth);
-            $("#gbox_"+gridId).css("margin-top","15px");
-            $(".ui-jqgrid-bdiv").css("width",ftWidth,"!important");
-            $(".ui-jqgrid-hdiv").css("width",ftWidth,"!important");
-            $(".ui-jqgrid-htable").css("width",ftWidth,"!important");
-            $("#"+gridId).width(ftWidth);
-            $("#rootwizard-table").find('.panel-heading').each(function(){ $(this).css({
-                'position' : 'absolute',
-                'top' : '10px',
-                'width' : '953px'
-            }); });
-            $("#"+gridId).prev().css({
-                'position' : 'absolute',
-                'top' : '10px',
-                'width' : '953px'
-            });
-            $('#'+gridId).parent().parent().parent().find('.ui-jqgrid-sortable').css('white-space', 'normal');
-            $('#'+gridId).parent().parent().parent().find('.ui-jqgrid-sortable').css('height', 'auto');
-        }
-        //$("#"+gridId).css("margin-left","10px");
-        //$(".jqgfirstrow").remove();
-    }
-
-    function reloadGrid(gridId,pgUrl,isPopup)
-    {
-        console.log(pgUrl);
-        jQuery("#"+gridId).jqGrid().setGridParam({
-            url: pgUrl,
-            loadComplete: function(){
-                reInitializeGrid(gridId,isPopup);
-
+            url: grid.url,
+            datatype: grid.type,
+            colNames: grid.cols,
+            colModel: grid.model,
+            gridComplete: grid.gridComplete,
+            beforeRequest: grid.beforeRequest,
+            rowNum: 2000,
+            height: 400,
+            autowidth: true,
+            sortname: grid.sort,
+            viewrecords: true,
+            sortorder: grid.order,
+            loadComplete: function () {
+                $("#" + grid.id + " td:last-child").removeAttr("title");
+                reInitializeGrid(grid.id, grid.isPopup);
+                $(".ui-jqgrid-htable").css("background", "#FFF").css("border-bottom", "solid 1px #D1D1D1");
+                console.log("initializing grid named > " + grid.id + " is completed successfully");
             }
-        }).trigger("reloadGrid");
+        }).jqGrid('bindKeys');
 
+}
+
+function ReDrawTable(grid) {
+    for (var i = 0; i < grid.model.length; i++) {
+        $("#" + grid.id + "_" + grid.model[i].name).css("text-align", grid.model[i].align).css("width", grid.model[i].width);
+        $("[aria-describedby=" + grid.id + "_" + grid.model[i].name + "]").width(grid.model[i].width);
     }
+    $(".ui-jqgrid .ui-jqgrid-htable th").css({"height": "22px"}, {"padding": "0 2px 0 6px"});
+    $("#" + grid.id + " td").css("padding-top", "0", "!important");
+}
 
-    function checkIfScrollBarExist(divId)
-    {
-        var val = $('#'+divId).hasScrollBar();
-        console.log(val);
-        return true;
+function reInitializeGrid(gridId, isPopup) {
+    if (!isPopup) {
+        console.log("Loading params for desktop grid named > " + gridId);
+        var ftWidth = $("#filter-form").width();
+        $(".first-table").css("width", ftWidth, "!important");
+        $("#ui-jqgrid-bdiv").css("width", ftWidth, "!important");
+        $("#gview_" + gridId).css("width", ftWidth, "!important");
+        $("#gbox_" + gridId).css("width", ftWidth, "!important");
+        $(".ui-jqgrid-bdiv").css("width", ftWidth, "!important");
+        $(".ui-jqgrid-hdiv").css("width", ftWidth, "!important");
+        $(".ui-jqgrid-htable").css("width", ftWidth, "!important");
+        $("#" + gridId).css("width", ftWidth, "!important");
+        console.log("Load completed for desktop grid named > " + gridId);
+    } else {
+        console.log("Loading params for popup grid named > " + gridId);
+        var ftWidth = 953;
+        $("#ui-jqgrid-bdiv").css("width", ftWidth, "!important");
+        $("#gview_" + gridId).css("width", ftWidth, "!important");
+        $("#gbox_" + gridId).css("width", ftWidth, "!important");
+        $("#gbox_" + gridId).css("margin-top", "15px", "!important");
+        $(".ui-jqgrid-bdiv").css("width", ftWidth, "!important");
+        $(".ui-jqgrid-hdiv").css("width", ftWidth, "!important");
+        $(".ui-jqgrid-htable").css("width", ftWidth, "!important");
+        $("#" + gridId).css("width", ftWidth, "!important");
+        $("#rootwizard-table").find('.panel-heading').each(function () {
+            $(this).css({
+                'position': 'absolute',
+                'top': '10px',
+                'width': '953px'
+            });
+        });
+        $("#" + gridId).prev().css({
+            'position': 'absolute',
+            'top': '10px',
+            'width': '953px'
+        });
+        $('#' + gridId).parent().parent().parent().find('.ui-jqgrid-sortable').css('white-space', 'normal');
+        $('#' + gridId).parent().parent().parent().find('.ui-jqgrid-sortable').css('height', 'auto');
+        console.log("Load completed for popup grid named > " + gridId);
     }
+}
 
-    (function($) {
-        $.fn.hasScrollBar = function() {
-            return this.get(0).scrollHeight > this.height();
+function reloadGrid(gridId, pgUrl, isPopup) {
+    console.log(pgUrl);
+    jQuery("#" + gridId).jqGrid().setGridParam({
+        url: pgUrl,
+        loadComplete: function () {
+            reInitializeGrid(gridId, isPopup);
+
         }
-    })(jQuery);
+    }).trigger("reloadGrid");
 
-    function colModelGenerator(width,colName,alligment)
-    {
-       var pos = "left";
-       switch(alligment)
-       {
-           case 1:
-               pos = "center";
-               break;
-           case 2:
-               pos = "right";
-               break;
-       }
-       return {width: width, hidden: false, name: colName, index: colName, align: pos};
+}
+
+function checkIfScrollBarExist(divId) {
+    var val = $('#' + divId).hasScrollBar();
+    console.log(val);
+    return true;
+}
+
+(function ($) {
+    $.fn.hasScrollBar = function () {
+        return this.get(0).scrollHeight > this.height();
     }
+})(jQuery);
+
+function colModelGenerator(width, colName, alligment) {
+    var pos = "left";
+    switch (alligment) {
+        case 1:
+            pos = "center";
+            break;
+        case 2:
+            pos = "right";
+            break;
+    }
+    return {width: width, hidden: false, name: colName, index: colName, align: pos};
+}
 
 
