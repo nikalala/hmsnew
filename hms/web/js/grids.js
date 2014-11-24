@@ -134,13 +134,13 @@ pResGridModel.push(
     colModelGenerator(65, 'reservationid', 0),
     colModelGenerator(140, 'guest', 0),
     colModelGenerator(80, 'room', 0),
-    colModelGenerator(80, 'rate', 2),
+    colModelGenerator(80, 'rate', 0),
     colModelGenerator(100, 'reservationtype', 0),
     colModelGenerator(100, 'bsource', 0),
     colModelGenerator(80, 'departure', 0),
     colModelGenerator(80, 'total', 0),
     colModelGenerator(100, 'deposit', 0),
-    colModelGenerator(140, 'action', 0));
+    colModelGenerator(80, 'action', 0));
 pResGrid = {
     id: 'list_pendingreservations',
     url: 'content/wizards/nightaudit/content/getna1.jsp',

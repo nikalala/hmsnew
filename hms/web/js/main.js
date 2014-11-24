@@ -603,25 +603,25 @@ function reInitializeGrid(gridId, isPopup) {
         console.log("Loading params for desktop grid named > " + gridId);
         var ftWidth = $("#filter-form").width();
         $(".first-table").css("width", ftWidth, "!important");
-        $("#ui-jqgrid-bdiv").css("width", ftWidth, "!important");
-        $("#gview_" + gridId).css("width", ftWidth, "!important");
-        $("#gbox_" + gridId).css("width", ftWidth, "!important");
-        $(".ui-jqgrid-bdiv").css("width", ftWidth, "!important");
-        $(".ui-jqgrid-hdiv").css("width", ftWidth, "!important");
-        $(".ui-jqgrid-htable").css("width", ftWidth, "!important");
-        $("#" + gridId).css("width", ftWidth, "!important");
+        $("#grid-table .ui-jqgrid-bdiv").css("width", ftWidth, "!important");
+        $("#grid-table #gview_" + gridId).css("width", ftWidth, "!important");
+        $("#grid-table  #gbox_" + gridId).css("width", ftWidth, "!important");
+        $("#grid-table  .ui-jqgrid-bdiv").css("width", ftWidth, "!important");
+        $("#grid-table .ui-jqgrid-hdiv").css("width", ftWidth, "!important");
+        $("#grid-table .ui-jqgrid-htable").css("width", ftWidth, "!important");
+        $("#grid-table #" + gridId).css("width", ftWidth, "!important");
         console.log("Load completed for desktop grid named > " + gridId);
     } else {
         console.log("Loading params for popup grid named > " + gridId);
         var ftWidth = 953;
-        $("#ui-jqgrid-bdiv").css("width", ftWidth, "!important");
-        $("#gview_" + gridId).css("width", ftWidth, "!important");
-        $("#gbox_" + gridId).css("width", ftWidth, "!important");
-        $("#gbox_" + gridId).css("margin-top", "15px", "!important");
-        $(".ui-jqgrid-bdiv").css("width", ftWidth, "!important");
-        $(".ui-jqgrid-hdiv").css("width", ftWidth, "!important");
-        $(".ui-jqgrid-htable").css("width", ftWidth, "!important");
-        $("#" + gridId).css("width", ftWidth, "!important");
+        $("#rootwizard-table .ui-jqgrid-bdiv").css("width", ftWidth, "!important");
+        $("#rootwizard-table #gview_" + gridId).css("width", ftWidth, "!important");
+        $("#rootwizard-table #gbox_" + gridId).css("width", ftWidth, "!important");
+        $("#rootwizard-table #gbox_" + gridId).css("margin-top", "15px", "!important");
+        $("#rootwizard-table .ui-jqgrid-bdiv").css("width", ftWidth, "!important");
+        $("#rootwizard-table .ui-jqgrid-hdiv").css("width", ftWidth, "!important");
+        $("#rootwizard-table .ui-jqgrid-htable").css("width", ftWidth, "!important");
+        $("#rootwizard-table #" + gridId).css("width", ftWidth, "!important");
         $("#rootwizard-table").find('.panel-heading').each(function () {
             $(this).css({
                 'position': 'absolute',
@@ -629,15 +629,20 @@ function reInitializeGrid(gridId, isPopup) {
                 'width': '953px'
             });
         });
-        $("#" + gridId).prev().css({
+        $("#rootwizard-table #" + gridId).prev().css({
             'position': 'absolute',
             'top': '10px',
             'width': '953px'
         });
-        $('#' + gridId).parent().parent().parent().find('.ui-jqgrid-sortable').css('white-space', 'normal');
-        $('#' + gridId).parent().parent().parent().find('.ui-jqgrid-sortable').css('height', 'auto');
+
+        $('#rootwizard-table .ui-jqgrid tr.jqgrow td').css({
+            'height': '20px',
+            'line-height': '19px',
+            'white-space': 'normal'
+        });
         console.log("Load completed for popup grid named > " + gridId);
     }
+    $(".ui-jqgrid-bdiv").css("overflow-x","hidden","!important");
 }
 
 function reloadGrid(gridId, pgUrl, isPopup) {

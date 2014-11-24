@@ -97,7 +97,6 @@
 </script>
 
 <form name="filter-form" id="filter-form">
-
     <table id="grid-table" class="first-table">
         <tr>
             <td>
@@ -108,7 +107,8 @@
                                 style="border: 0; font-weight: bold; float: right; margin: 3px 5px 0 0;">
                             ექსპორტი
                         </button>
-                        <button type="button" class="btn btn-default" id="addGuest" style="border: 0; font-weight: bold;">
+                        <button type="button" class="btn btn-default" id="addGuest"
+                                style="border: 0; font-weight: bold; float: right; margin: 3px 5px 0 0;">
                             სტუმრის დამატება
                         </button>
                     </div>
@@ -194,3 +194,4 @@
 <div align="center" id="grid-footer" style="background: transparent; width: 100%;height: 33px;line-height: 33px; margin:0 auto;">
     <div style="background-color: red; margin:10px 0 10px 0;">HELLO THIS IS THE FOOTER</div>
 </div>
+
