@@ -683,3 +683,6 @@ function colModelGenerator(width, colName, alligment) {
 }
 
 
+function reloadGrid(id){
+    $('#'+id).trigger('reloadGrid')
+}

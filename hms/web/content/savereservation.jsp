@@ -390,7 +390,6 @@ try{
                 + "arraivaldate < to_timestamp('"+dtlong.format(res.getDeparturedate())+"','DD/MM/YYYY HH24:MI') and "
                 + "departuredate > to_timestamp('"+dtlong.format(res.getArraivaldate())+"','DD/MM/YYYY HH24:MI') and "
                 + "reservationid in (select reservationid from reservationroom where roomid = "+resroom.getRoomid()+")";
-System.out.println("select * from reservation "+sqlcheck);
         if(ReservationManager.getInstance().countWhere(sqlcheck) > 0)
             throw new Exception("ოთახი ამ პერიოდში დაკავებულია");
     }

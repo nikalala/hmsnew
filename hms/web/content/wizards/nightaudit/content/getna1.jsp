@@ -2,7 +2,7 @@
 <%@page contentType="text/xml;charset=utf-8"%>
 <%@include file="../../../../includes/initxml.jsp"%>
 <%
-String sql = "where reservationid in (select reservationid from reservation where arraivaldate::date = to_date('"+df.format(dclosedate)+"','DD/MM/YYYY'))";
+String sql = "where reservationid in (select reservationid from reservation where arraivaldate::date = to_date('"+df.format(dclosedate)+"','DD/MM/YYYY') and status = 0)";
     
 int ipg = 1;
 int ilmt = 10;
@@ -57,13 +57,13 @@ ReservationroomBean[] reservs = ReservationroomManager.getInstance().loadByWhere
             double total = getSum("select sum(amount) from folioitem where particular not in (1,2) and folioid in (select folioid from folio where reservationroomid = "+reservs[i].getReservationroomid()+")");
             double deposit = getSum("select sum(amount) from payment where folioid in (select folioid from folio where reservationroomid = "+reservs[i].getReservationroomid()+")");
             String actions = "";
-            actions += "<a href=\"#\" title=\"VOID\" class=\"btn btn-xs btn-default\"><i class=\"fa fa-remove\"></i></a>";
-            actions += "<a href=\"#\" title=\"CANCEL\" class=\"btn btn-xs btn-default\"><i class=\"fa fa-minus\"></i></a>";
-            actions += "<a href=\"#\" title=\"NO SHOW\" class=\"btn btn-xs btn-default\"><i class=\"fa fa-plane\"></i></a>";
+            actions += "<a href=\"javascript:newmWindow1('void','რეზერვაციის განულება','rid="+reservs[i].getReservationroomid()+"')\" title=\"VOID\" class=\"btn btn-xs btn-default\"><i class=\"fa fa-remove\"></i></a>";
+            actions += "<a href=\"javascript:newmWindow1('cancel','რეზერვაციის გაუქმება','rid="+reservs[i].getReservationroomid()+"')\" title=\"CANCEL\" class=\"btn btn-xs btn-default\"><i class=\"fa fa-minus\"></i></a>";
+            actions += "<a href=\"javascript:newsWindow('construction','არ გამოცხადება')\" title=\"NO SHOW\" class=\"btn btn-xs btn-default\"><i class=\"fa fa-plane\"></i></a>";
             if(reservs[i].getRoomid() == null)
-                actions += "<a href=\"#\" title=\"ASSIGN ROOM\" class=\"btn btn-xs btn-default\"><i class=\"fa fa-bell\"></i></a>";
+                actions += "<a href=\"javascript:newsWindow('construction','ოთახის მინიჭება')\" title=\"ASSIGN ROOM\" class=\"btn btn-xs btn-default\"><i class=\"fa fa-bell\"></i></a>";
             if(rtp.getConfirmed().booleanValue()){
-                actions += "<a href=\"#\" title=\"CHECKIN\" class=\"btn btn-xs btn-default\"><i class=\"fa fa-check\"></i></a>";
+                actions += "<a href=\"javascript:newsWindow('construction','შესვლა')\" title=\"CHECKIN\" class=\"btn btn-xs btn-default\"><i class=\"fa fa-check\"></i></a>";
             }
             %>
                 <row id='<%=reservs[i].getReservationroomid()%>'>
