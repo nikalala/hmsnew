@@ -11,7 +11,9 @@ RoomBean[] rooms = RoomManager.getInstance().loadByWhere("order by name");
 RoomrateBean[] roomrates = RoomrateManager.getInstance().loadByWhere("order by ord");
 ReservationtypeBean[] resrvationtypes = ReservationtypeManager.getInstance().loadByWhere("order by name");
 Calendar arr = Calendar.getInstance();
+    arr.setTime(dclosedate);
 Calendar dep = Calendar.getInstance();
+    dep.setTime(dclosedate);
 String pkfmt = pickerformat2;
 if(wintype > 0){
     //arr.add(Calendar.DATE, 1);

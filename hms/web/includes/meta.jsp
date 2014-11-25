@@ -953,10 +953,9 @@ dtlong = new SimpleDateFormat(dateformats[dff]+" "+timeformats1[tff]);
 
 SimpleDateFormat btdt = new SimpleDateFormat("yyyy-M-d");
 String btnow = btdt.format(new Date());
-
-String pickerformat = "{autoclose: true, format: '"+dateformats1[dff]+"', weekStart: 1, endDate: new Date(), autoclose: true, language: 'ka', todayHighlight: true, allowEmpty: false}";
+String pickerformat = "{autoclose: true, format: '"+dateformats1[dff]+"', weekStart: 1, endDate: new Date("+lclosedate+"), autoclose: true, language: 'ka', todayHighlight: true, allowEmpty: false}";
 String pickerformat1 = "{autoclose: true, format: '"+dateformats1[dff]+"', weekStart: 1, autoclose: true, language: 'ka', todayHighlight: true, allowEmpty: false}";
-String pickerformat2 = "{autoclose: true, format: '"+dateformats1[dff]+"', weekStart: 1, startDate: new Date(), autoclose: true, language: 'ka', todayHighlight: true, allowEmpty: false}";
+String pickerformat2 = "{autoclose: true, format: '"+dateformats1[dff]+"', weekStart: 1, startDate: new Date("+lclosedate+"), autoclose: true, language: 'ka', todayHighlight: true, allowEmpty: false}";
 String rpickerformat = "presetRanges: ["+
 "        {text: 'დღეს', dateStart: 'today', dateEnd: 'today' },"+
 "        {text: 'ბოლო 7 დღე', dateStart: 'today-7days', dateEnd: 'today' },"+
