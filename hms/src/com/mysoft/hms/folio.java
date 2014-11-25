@@ -26,22 +26,26 @@ public class folio {
     
     private SimpleDateFormat dt = new SimpleDateFormat("dd/MM/yyyy");
     
-    int DayDiff(Calendar d1,Calendar d2){
+    int DayDiff(Calendar d1,Calendar d2)
+    {
         long diff = d2.getTimeInMillis() - d1.getTimeInMillis();
         return (int)TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
     }
     
-    double roundOff(double val, int prc){
+    double roundOff(double val, int prc)
+    {
         double[] roundtype = {0,0.1,1,10,100,1000,10000};
         return Math.round(val * roundtype[prc]) / roundtype[prc];
     }
     
-    public void folio(){
+    public void folio()
+    {
         folio = FolioManager.getInstance().createFolioBean();
         items = new FolioitemBean[0];
     }
     
-    public void folio(long folioid){
+    public void folio(long folioid)
+    {
         try{
             this.folioid = folioid;
             folio = FolioManager.getInstance().loadByPrimaryKey(folioid);
@@ -95,7 +99,8 @@ public class folio {
         return val;
     }
     
-    public void setFolio(ReservationBean res, ReservationroomBean resroom, PaymentBean pm, String dateformats2, Vector extracharges,int type,PersonnelBean user) throws Exception {
+    public void setFolio(ReservationBean res, ReservationroomBean resroom, PaymentBean pm, String dateformats2, Vector extracharges,int type,PersonnelBean user) throws Exception
+    {
         if((type == 0 || type == 3) && res.getCompanyid() == null)  throw new Exception("აირჩიეთ კომპანია");
         // main folio
         CheckinreservationsettingsBean[] checkinsettings = CheckinreservationsettingsManager.getInstance().loadByWhere("limit 1");
