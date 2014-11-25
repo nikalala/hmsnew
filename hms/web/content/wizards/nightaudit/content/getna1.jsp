@@ -62,7 +62,7 @@ ReservationroomBean[] reservs = ReservationroomManager.getInstance().loadByWhere
             actions += "<a href=\"javascript:newmWindow1('void','რეზერვაციის განულება','rid="+reservs[i].getReservationroomid()+"')\" title=\"VOID\" class=\"btn btn-xs btn-default\"><i class=\"fa fa-remove\"></i></a>";
             actions += "<a href=\"javascript:newmWindow1('cancel','რეზერვაციის გაუქმება','rid="+reservs[i].getReservationroomid()+"')\" title=\"CANCEL\" class=\"btn btn-xs btn-default\"><i class=\"fa fa-minus\"></i></a>";
             actions += "<a href=\"javascript:newmWindow1('noshow','არ გამოცხადებული რეზერვაცია','rid="+reservs[i].getReservationroomid()+"')\" title=\"NOSHOW\" class=\"btn btn-xs btn-default\"><i class=\"fa fa-plane\"></i></a>";
-            reservs[i].setRoomid(null);
+            /*reservs[i].setRoomid(null);*/
             if(reservs[i].getRoomid() == null)
                 actions += "<a href=\"javascript:newmWindow1('assignroom','ოთახის მინიჭება','rid="+reservs[i].getReservationroomid()+"')\" title=\"ASSIGN ROOM\" class=\"btn btn-xs btn-default\"><i class=\"fa fa-bell\"></i></a>";
             /*if(rtp.getConfirmed().booleanValue()){*/
