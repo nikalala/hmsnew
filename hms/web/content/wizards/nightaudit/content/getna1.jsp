@@ -3,7 +3,7 @@
 <%@include file="../../../../includes/initxml.jsp"%>
 <%
 String sql = "where reservationid in (select reservationid from reservation where arraivaldate::date = to_date('"+df.format(dclosedate)+"','DD/MM/YYYY') and status = 0)";
-    
+
 int ipg = 1;
 int ilmt = 10;
 String pg = request.getParameter("page");
@@ -43,8 +43,10 @@ ReservationroomBean[] reservs = ReservationroomManager.getInstance().loadByWhere
                 istatus = getRoomStatus(null,room.getRoomid().intValue());
                 roomname = room.getName()+" ";
             }
+            System.out.println("Roomtypeid > " + reservs[i]);
             RoomtypeBean roomtype = RoomtypeManager.getInstance().loadByPrimaryKey(reservs[i].getRoomtypeid());
-            if(roomtype != null)    roomname += roomtype.getName();
+            System.out.println("RoomType > " + roomtype);
+            if(roomtype != null)    roomname += " - " + roomtype.getCode();
             String guestname = salutation.getName()+" ";
             guestname += guest.getFname() + " " + guest.getLname();
             RatetypeBean rttype = RatetypeManager.getInstance().loadByPrimaryKey(reservs[i].getRatetypeid());
@@ -59,12 +61,13 @@ ReservationroomBean[] reservs = ReservationroomManager.getInstance().loadByWhere
             String actions = "";
             actions += "<a href=\"javascript:newmWindow1('void','რეზერვაციის განულება','rid="+reservs[i].getReservationroomid()+"')\" title=\"VOID\" class=\"btn btn-xs btn-default\"><i class=\"fa fa-remove\"></i></a>";
             actions += "<a href=\"javascript:newmWindow1('cancel','რეზერვაციის გაუქმება','rid="+reservs[i].getReservationroomid()+"')\" title=\"CANCEL\" class=\"btn btn-xs btn-default\"><i class=\"fa fa-minus\"></i></a>";
-            actions += "<a href=\"javascript:newsWindow('construction','არ გამოცხადება')\" title=\"NO SHOW\" class=\"btn btn-xs btn-default\"><i class=\"fa fa-plane\"></i></a>";
+            actions += "<a href=\"javascript:newmWindow1('noshow','არ გამოცხადებული რეზერვაცია','rid="+reservs[i].getReservationroomid()+"')\" title=\"NOSHOW\" class=\"btn btn-xs btn-default\"><i class=\"fa fa-plane\"></i></a>";
+            reservs[i].setRoomid(null);
             if(reservs[i].getRoomid() == null)
-                actions += "<a href=\"javascript:newsWindow('construction','ოთახის მინიჭება')\" title=\"ASSIGN ROOM\" class=\"btn btn-xs btn-default\"><i class=\"fa fa-bell\"></i></a>";
-            if(rtp.getConfirmed().booleanValue()){
+                actions += "<a href=\"javascript:newmWindow1('assignroom','ოთახის მინიჭება','rid="+reservs[i].getReservationroomid()+"')\" title=\"ASSIGN ROOM\" class=\"btn btn-xs btn-default\"><i class=\"fa fa-bell\"></i></a>";
+            /*if(rtp.getConfirmed().booleanValue()){*/
+            else
                 actions += "<a href=\"javascript:newsWindow('construction','შესვლა')\" title=\"CHECKIN\" class=\"btn btn-xs btn-default\"><i class=\"fa fa-check\"></i></a>";
-            }
             %>
                 <row id='<%=reservs[i].getReservationroomid()%>'>
                     <cell><![CDATA[<%=reservs[i].getReservationroomid()%>]]></cell>

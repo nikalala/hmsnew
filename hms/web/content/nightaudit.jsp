@@ -67,6 +67,9 @@ String cldate = dt.format(dclosedate);
         border-bottom-color: transparent;
         cursor: default;
     }
+    .rootwizard-ul li > a {
+        margin-right: 0px !important;
+    }
 </style>
 <script>
     $(document).ready(function() {

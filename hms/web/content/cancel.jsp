@@ -131,12 +131,12 @@ if(checkinsettings.getPostcancellationfee().intValue() == 1){
     <tr>
         <td><b>ანგარიში</b></td>
         <td>გაუქმების ანგარიში</td>
-        <td><b>გადასახადის ტიპი</b></td>
+        <td><b>დაკისრებული გადასახადი</b></td>
         <td>დღგ</td>
     </tr>
     
     <tr>
-        <td><b>გადასახადი</b></td>
+        <td><b>გადასახადის ოდენობა</b></td>
         <td><%=maincurrency.getCode()%> <%=dc.format(tax)%></td>
         <td><b>ბალანსი</b></td>
         <td><%=maincurrency.getCode()%> <%=dc.format(total-deposit)%></td>
