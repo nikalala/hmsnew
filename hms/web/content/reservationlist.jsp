@@ -6,6 +6,7 @@
 <% RoomtypeBean[] roomTypes = RoomtypeManager.getInstance().loadByWhere("ORDER BY ord"); %>
 <% ReservationtypeBean[] reservTypes = ReservationtypeManager.getInstance().loadByWhere(""); %>
 <link rel="stylesheet" type="text/css" href="css/grid-filter.css">
+
 <script type="text/javascript">
 
     var lastroomtypeId = 0;
@@ -80,9 +81,10 @@
     });
 
     function loadDefaults() {
+        AddDays(7);
         resGrid.url = doFilter(true);
         initializeGrid(resGrid);
-        $('.date').datepicker(<%=pickerformat1%>);
+        $('.date').datepicker(<%=pickerFormatForDatePickers%>);
         $('.dropdown').selectpicker();
         $(".btn-group").css("width", "100%", "!important");
         $("#grid-table label").each(function () {
@@ -98,9 +100,9 @@
     }
 
     function AddDays(arg) {
-        var today = new Date();
+        var today = new Date(<%=lclosedate%>);
         $("#dateFrom").datepicker("setDate", today);
-        var tomorrow = new Date();
+        var tomorrow = new Date(<%=lclosedate%>);
         tomorrow.setDate(today.getDate() + arg);
         $("#dateTo").datepicker("setDate", tomorrow);
     }
@@ -132,7 +134,7 @@
         }
 
         if (!isNullOrEmpty(dtFrom.val()) && !isNullOrEmpty(dtTo.val())) {
-            filterQuery += "to_date('" + dtFrom.val() + "', '<%=dateformats2[dff]%>') <= arraivaldate AND arraivaldate <= to_date('" + dtTo.val() + "','<%=dateformats2[dff]%>')" + contQuery;
+            filterQuery += "to_date('" + dtFrom.val() + "', '<%=dateformats2[6]%>') <= arraivaldate AND arraivaldate <= to_date('" + dtTo.val() + "','<%=dateformats2[6]%>')" + contQuery;
         }
 
         if (!isNullOrEmpty(reserv_dateFrom.val()) && !isNullOrEmpty(reserv_dateTo.val())) {
@@ -143,19 +145,19 @@
             filterQuery += " vouchernum LIKE '%" + reservNum.val() + "%'" + contQuery;
         }
 
-        if (!isNullOrEmpty(roomBean.val())) {
+        if (!isNullOrEmpty(roomBean.val()) && roomBean.val() != 0) {
             filterQuery += " roomid " + fitlerEquals + roomBean.val() + contQuery;
         }
 
-        if (!isNullOrEmpty(roomType.val())) {
-            filterQuery += " roomtypecode " + fitlerEquals + "'" + roomType.val() + "'" + contQuery;
+        if (!isNullOrEmpty(roomType.val()) && roomType.val() != 0) {
+            filterQuery += " roomtypeid " + fitlerEquals +  roomType.val() + contQuery;
         }
 
         if (!isNullOrEmpty(txtSource.val())) {
             filterQuery += " bsourcename LIKE '%" + txtSource.val() + "%'" + contQuery;
         }
 
-        if (!isNullOrEmpty(reservType.val())) {
+        if (!isNullOrEmpty(reservType.val()) && reservType.val() != 0) {
             filterQuery += " reservationtypeid " + fitlerEquals + reservType.val() + contQuery;
         }
 
@@ -166,19 +168,24 @@
                 filterQuery += " status " + fitlerEquals + reservStatus.val() + contQuery;
             }
         }
+        if(!showMrooms.is(':checked'))
+        {
+            filterQuery += " roomid is not null ";
+        }else{
+            filterQuery += " 1=1 ";
+        }
 
-        filterQuery += (showMrooms.is(':checked') ? " " : "reservationroomid is not null ") + contQuery;
-
-        var retVal = "";
+        var retVal = filterQuery;
 
         if (!isNullOrEmpty(checkNum.val())) {
             retVal = " reservationroomid " + fitlerEquals + checkNum.val();
-        } else {
-            retVal = filterQuery.substring(0, filterQuery.trim().lastIndexOf("AND"));
         }
 
-        var url = "content/getreservationlist.jsp?where=where " + retVal;
-        if(!donotreload){reloadGrid(resGrid.id, url);}
+        var url = "content/getreservationlist.jsp?query=" + encodeURIComponent("where " + retVal);
+        if(!donotreload){
+            console.log("Starting filtering with > " + url);
+            reloadGrid(resGrid.id, url);
+        }
         return url;
     }
 
@@ -193,14 +200,13 @@
     }
 
     function reInitialize() {
-        AddDays(7);
         $('#reservStatus').val(0);
         $('#reservStatus').change();
         $('#reserv_dateFrom').val('');
         $('#reserv_dateTo').val('');
     }
-
     reInitialize();
+
 
 </script>
 <form name="filter-form" id="filter-form">
@@ -393,6 +399,7 @@
         </tr>
     </table>
 </form>
+<%--
 <div align="center" id="grid-footer" style="background: transparent; width: 100%;height: 33px;line-height: 33px; margin:0 auto;">
     <div style="background-color: red; margin:10px 0 10px 0;">HELLO THIS IS THE FOOTER</div>
-</div>
+</div>--%>

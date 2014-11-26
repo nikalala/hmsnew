@@ -24,7 +24,11 @@ resGrid = {
     order: 'asc',
     isPopup: false,
     gridComplete: function () {
+
         ReDrawTable(resGrid);
+        //Line below makes the height of the row to be 38 px!!!
+        $(".ui-widget-content").css("height","38px");
+
     },
     beforeRequest: function () {
 

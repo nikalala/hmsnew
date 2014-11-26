@@ -3,12 +3,32 @@
 <%@include file="../includes/initxml.jsp" %>
 
 <%
+    /*request.setCharacterEncoding("UTF-8");
     String where = (String) request.getParameter("where");
     if (where == null) {
         where = "";
+    }*/
+
+    request.setCharacterEncoding("UTF-8");
+    String where = (String) request.getParameter("query");
+    if (where == null || where.equals("0")) {
+        where = "";
+    } else {
+        String strToSplit = request.getQueryString().substring(0, request.getQueryString().indexOf('&'));
+        where = URLDecoder.decode(strToSplit, "UTF-8");
+        where = where.replace("query=", "");
     }
+
+
+    System.out.println(where);
     String bc = "";
     String room = "";
+
+
+
+
+
+
     SimpleDateFormat resListDate = new SimpleDateFormat(arrdepdateformats[dff]);
     VReservationlistBean[] ReservationBeanList = VReservationlistManager.getInstance().loadByWhere(where);
 %>
@@ -21,8 +41,10 @@
         for (int i = 0; i < ReservationBeanList.length; i++) { %>
     <%
         int st = ReservationBeanList[i].getStatus();
-        if (ReservationBeanList[i].getRoomcode() != "null") {
+        if (ReservationBeanList[i].getRoomcode() != null) {
             room = ReservationBeanList[i].getRoomcode() + " - ";
+        }else{
+            room = "";
         }
         switch (st) {
             case 0:

@@ -3,6 +3,7 @@
 <%@include file="../includes/init.jsp"%>
 <%
 String s = "";
+
 for(Enumeration e=request.getParameterNames();e.hasMoreElements();){
     String name = (String)e.nextElement();
     String[] val = request.getParameterValues(name);

@@ -2,7 +2,7 @@
 <%@page pageEncoding="UTF-8"%>
 <%@include file="../includes/init.jsp"%>
 <%
-ReservationroomBean[] reservs = ReservationroomManager.getInstance().loadByWhere("where reservationid in (select reservationid from reservation where status <= 0 and arraivaldate::date <= now()::date and departuredate::date >= now()::date) and leader = true order by guestid");
+ReservationroomBean[] reservs = ReservationroomManager.getInstance().loadByWhere("where reservationid in (select reservationid from reservation where status <= 0 and arraivaldate::date <= N'"+dclosedate+"'::date and departuredate::date >= N'"+dclosedate+"'::date) and leader = true order by guestid");
 %>
 <style>
 table.lscroll tbody {
@@ -63,7 +63,7 @@ table.lscroll tr {
 </script>
     <div class="panel panel-default" id='leftpanel' style="margin-top: 0px; height: 654px">
         <div class="panel-heading  panel-title" style="text-align: center; font-size: 16px !important; height: 31px; background-color: darkgray !important;">
-            <b style='vertical-align: middle; color: #FFFFFF;'><%=dt.format(new Date())%></b>
+            <b style='vertical-align: middle; color: #FFFFFF;'><%=dt.format(dclosedate)%></b>
         </div>
         <div class="panel-body" style="background-color: #F5F5F5;">
             <div class="input-group" style="width: 98%;">

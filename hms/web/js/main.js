@@ -651,7 +651,6 @@ function reloadGrid(gridId, pgUrl, isPopup) {
         url: pgUrl,
         loadComplete: function () {
             reInitializeGrid(gridId, isPopup);
-
         }
     }).trigger("reloadGrid");
 
@@ -680,9 +679,4 @@ function colModelGenerator(width, colName, alligment) {
             break;
     }
     return {width: width, hidden: false, name: colName, index: colName, align: pos};
-}
-
-
-function reloadGrid(id){
-    $('#'+id).trigger('reloadGrid')
 }
