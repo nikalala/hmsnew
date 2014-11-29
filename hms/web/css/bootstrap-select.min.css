@@ -87,7 +87,8 @@
     display: inline-block;
     overflow: hidden;
     width: 100%;
-    text-align: left
+    text-align: left;
+    height: 13px;
 }
 
 .bootstrap-select.btn-group .btn .caret {

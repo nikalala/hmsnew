@@ -27,7 +27,7 @@
         <cell>
             <![CDATA[
              <a href="#" class="btn btn-xs btn-default"><i class="fa fa-trash"></i></a>
-             <a href="#" class="btn btn-xs btn-default"><i class="fa fa-list"></i></a>
+             <a href="#" class="btn btn-xs btn-default" onclick="addContr(<%=contragentlistBeans[i].getContragentid()%>)"><i class="fa fa-list"></i></a>
             ]]>
         </cell>
     </row>

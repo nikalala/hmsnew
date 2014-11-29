@@ -12,6 +12,19 @@ html, body {
     height: 100%;
 }
 
+@font-face {
+    font-family: 'BaseFont';
+    src: url(../fonts/segoeui.eot);
+    src: url(../fonts/segoeui.eot) format('embedded-opentype'), url(../fonts/segoeui.woff) format('woff'), url(../fonts/segoeui.ttf) format('truetype'), url('../fonts/segoeui.svg#Segoe UI') format('svg')
+}
+
+@font-face {
+    font-family: 'BGMtavr';
+    src: url(../fonts/bpg_banner_extrasquare.eot);
+    src: url(../fonts/bpg_banner_extrasquare.eot) format('embedded-opentype'), url(../fonts/bpg_banner_extrasquare.woff) format('woff'), url(../fonts/bpg_banner_extrasquare.ttf) format('truetype'), url('../fonts/bpg_banner_extrasquare.svg#BPG Banner') format('svg')
+}
+
+
 [class^="selfin-"],
 [class*=" selfin-"] {
     display: inline-block;

@@ -26,6 +26,29 @@
 
     });
 
+    function addContr(id)
+    {
+        loader.show();
+
+        $(".filter-form1").hide();
+        $("#grid-footer").hide();
+        $(".filter-form2").slideToggle();
+        var url = "content/addtagents.jsp";
+        if(!isNullOrEmpty(id))
+        {
+            url += "?tid="+id;
+        }
+        $("#tagents_add").load(url, function(){
+            loader.hide();
+        }).fadeIn('normal');
+    }
+    function cancelSaveContr()
+    {
+        $(".filter-form1").slideToggle();
+        $(".filter-form2").hide();
+        $("#grid-footer").show();
+        $("#tagents_add").html("");
+    }
     function loadDefaults() {
         tagentsGrid.url += "?query=<%=where+order%>";
         console.log(tagentsGrid.url);
@@ -103,18 +126,18 @@
     }
 
 </script>
-<form name="filter-form" id="filter-form">
+<form name="filter-form" id="filter-form" class="filter-form1">
     <table id="grid-table" class="first-table">
         <tr>
             <td>
                 <div id="status_bar" class="first-status-bar" align='center'>
                     <div style="width: 100%; float: left;">
-                        <span style="float: left; margin: 7px 0 0 10px;">ძიების კრიტერიუმები</span>
+                        <span style="float: left; margin: 11px 0 0 10px; font-family: BGMtavr;">ძიების კრიტერიუმები</span>
                         <button type="button" class="btn btn-default" id="btnExport"
                                 style="border: 0; font-weight: bold; float: right; margin: 3px 5px 0 0;">
                             ექსპორტი
                         </button>
-                        <button type="button" class="btn btn-default" id="addAgent"
+                        <button type="button" class="btn btn-default" id="addAgent" onclick="addContr()"
                                 style="border: 0; font-weight: bold; float: right; margin: 3px 5px 0 0;">
                             ტურისტული აგენტის დამატება
                         </button>
@@ -211,6 +234,40 @@
         <tr>
             <td>
                 <table id='list_tagens' class="table-striped table-hover" align='center'></table>
+            </td>
+        </tr>
+    </table>
+</form>
+<form name="filter-form" id="filter-form" class="filter-form2" style="display: none; background-color: #fff;">
+    <table id="grid-table" class="first-table">
+        <tr>
+            <td>
+                <div id="status_bar" class="first-status-bar" align='center'>
+                    <div style="width: 100%; float: left;">
+                        <span style="float: left; margin: 7px 0 0 10px;">ტურისტული აგენტის დამატება</span>
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td id="tagents_add">
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div id="status_bar" class="first-status-bar" align='center'>
+                    <div style="width: 100%; float: right;">
+                        <button type="button" class="btn btn-default" id="cancelSave" onclick="cancelSaveContr()"
+                                style="border: 0; font-weight: bold; float: right; margin: 3px 5px 0 0;">
+                            დახურვა
+                        </button>
+                        <button type="button" class="btn btn-danger" id="saveAgent"
+                                style="font-weight: bold; float: right; margin: 3px 5px 0 0;">
+                            შენახვა
+                        </button>
+                    </div>
+                </div>
             </td>
         </tr>
     </table>
