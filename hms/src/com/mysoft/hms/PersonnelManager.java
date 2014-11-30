@@ -1409,6 +1409,134 @@ public class PersonnelManager
     }
 
     /**
+     * Retrieves an array of IdtypeBean using the relation table Displaysettings given a PersonnelBean object.
+     *
+     * @param pObject the PersonnelBean pObject to be used
+     * @return an array of IdtypeBean 
+     */
+    // MANY TO MANY
+    public IdtypeBean[] loadIdtypeViaDisplaysettings(PersonnelBean pObject) throws SQLException
+    {
+         Connection c = null;
+         PreparedStatement ps = null;
+         String strSQL =      " SELECT "
+                         + "        *"
+                         + " FROM  "
+                         + "        idtype,displaysettings"
+                         + " WHERE "    
+                         + "     displaysettings.regbyid = ?"
+                         + " AND displaysettings.idtypeid = idtype.idtypeid";
+         try
+         {
+             c = getConnection();
+             ps = c.prepareStatement(strSQL,ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+             Manager.setInteger(ps, 1, pObject.getPersonnelid());
+             return IdtypeManager.getInstance().loadByPreparedStatement(ps);
+         }
+         finally
+         {
+            getManager().close(ps);
+            freeConnection(c);
+         }
+    }
+
+    /**
+     * Retrieves an array of PaymentmethodBean using the relation table Displaysettings given a PersonnelBean object.
+     *
+     * @param pObject the PersonnelBean pObject to be used
+     * @return an array of PaymentmethodBean 
+     */
+    // MANY TO MANY
+    public PaymentmethodBean[] loadPaymentmethodViaDisplaysettings(PersonnelBean pObject) throws SQLException
+    {
+         Connection c = null;
+         PreparedStatement ps = null;
+         String strSQL =      " SELECT "
+                         + "        *"
+                         + " FROM  "
+                         + "        paymentmethod,displaysettings"
+                         + " WHERE "    
+                         + "     displaysettings.regbyid = ?"
+                         + " AND displaysettings.paymentmethodid = paymentmethod.paymentmethodid";
+         try
+         {
+             c = getConnection();
+             ps = c.prepareStatement(strSQL,ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+             Manager.setInteger(ps, 1, pObject.getPersonnelid());
+             return PaymentmethodManager.getInstance().loadByPreparedStatement(ps);
+         }
+         finally
+         {
+            getManager().close(ps);
+            freeConnection(c);
+         }
+    }
+
+    /**
+     * Retrieves an array of ReservationtypeBean using the relation table Displaysettings given a PersonnelBean object.
+     *
+     * @param pObject the PersonnelBean pObject to be used
+     * @return an array of ReservationtypeBean 
+     */
+    // MANY TO MANY
+    public ReservationtypeBean[] loadReservationtypeViaDisplaysettings(PersonnelBean pObject) throws SQLException
+    {
+         Connection c = null;
+         PreparedStatement ps = null;
+         String strSQL =      " SELECT "
+                         + "        *"
+                         + " FROM  "
+                         + "        reservationtype,displaysettings"
+                         + " WHERE "    
+                         + "     displaysettings.regbyid = ?"
+                         + " AND displaysettings.reservationtypeid = reservationtype.reservationtypeid";
+         try
+         {
+             c = getConnection();
+             ps = c.prepareStatement(strSQL,ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+             Manager.setInteger(ps, 1, pObject.getPersonnelid());
+             return ReservationtypeManager.getInstance().loadByPreparedStatement(ps);
+         }
+         finally
+         {
+            getManager().close(ps);
+            freeConnection(c);
+         }
+    }
+
+    /**
+     * Retrieves an array of SalutationBean using the relation table Displaysettings given a PersonnelBean object.
+     *
+     * @param pObject the PersonnelBean pObject to be used
+     * @return an array of SalutationBean 
+     */
+    // MANY TO MANY
+    public SalutationBean[] loadSalutationViaDisplaysettings(PersonnelBean pObject) throws SQLException
+    {
+         Connection c = null;
+         PreparedStatement ps = null;
+         String strSQL =      " SELECT "
+                         + "        *"
+                         + " FROM  "
+                         + "        salutation,displaysettings"
+                         + " WHERE "    
+                         + "     displaysettings.regbyid = ?"
+                         + " AND displaysettings.salutationid = salutation.salutationid";
+         try
+         {
+             c = getConnection();
+             ps = c.prepareStatement(strSQL,ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+             Manager.setInteger(ps, 1, pObject.getPersonnelid());
+             return SalutationManager.getInstance().loadByPreparedStatement(ps);
+         }
+         finally
+         {
+            getManager().close(ps);
+            freeConnection(c);
+         }
+    }
+
+    /**
      * Retrieves an array of ContragentBean using the relation table Folio given a PersonnelBean object.
      *
      * @param pObject the PersonnelBean pObject to be used
@@ -1857,6 +1985,102 @@ public class PersonnelManager
     }
 
     /**
+     * Retrieves an array of CurrencyBean using the relation table Payment given a PersonnelBean object.
+     *
+     * @param pObject the PersonnelBean pObject to be used
+     * @return an array of CurrencyBean 
+     */
+    // MANY TO MANY
+    public CurrencyBean[] loadCurrencyViaPayment(PersonnelBean pObject) throws SQLException
+    {
+         Connection c = null;
+         PreparedStatement ps = null;
+         String strSQL =      " SELECT "
+                         + "        *"
+                         + " FROM  "
+                         + "        currency,payment"
+                         + " WHERE "    
+                         + "     payment.regbyid = ?"
+                         + " AND payment.currencyid = currency.currencyid";
+         try
+         {
+             c = getConnection();
+             ps = c.prepareStatement(strSQL,ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+             Manager.setInteger(ps, 1, pObject.getPersonnelid());
+             return CurrencyManager.getInstance().loadByPreparedStatement(ps);
+         }
+         finally
+         {
+            getManager().close(ps);
+            freeConnection(c);
+         }
+    }
+
+    /**
+     * Retrieves an array of FolioBean using the relation table Payment given a PersonnelBean object.
+     *
+     * @param pObject the PersonnelBean pObject to be used
+     * @return an array of FolioBean 
+     */
+    // MANY TO MANY
+    public FolioBean[] loadFolioViaPayment(PersonnelBean pObject) throws SQLException
+    {
+         Connection c = null;
+         PreparedStatement ps = null;
+         String strSQL =      " SELECT "
+                         + "        *"
+                         + " FROM  "
+                         + "        folio,payment"
+                         + " WHERE "    
+                         + "     payment.regbyid = ?"
+                         + " AND payment.folioid = folio.folioid";
+         try
+         {
+             c = getConnection();
+             ps = c.prepareStatement(strSQL,ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+             Manager.setInteger(ps, 1, pObject.getPersonnelid());
+             return FolioManager.getInstance().loadByPreparedStatement(ps);
+         }
+         finally
+         {
+            getManager().close(ps);
+            freeConnection(c);
+         }
+    }
+
+    /**
+     * Retrieves an array of PaymentmethodBean using the relation table Payment given a PersonnelBean object.
+     *
+     * @param pObject the PersonnelBean pObject to be used
+     * @return an array of PaymentmethodBean 
+     */
+    // MANY TO MANY
+    public PaymentmethodBean[] loadPaymentmethodViaPayment(PersonnelBean pObject) throws SQLException
+    {
+         Connection c = null;
+         PreparedStatement ps = null;
+         String strSQL =      " SELECT "
+                         + "        *"
+                         + " FROM  "
+                         + "        paymentmethod,payment"
+                         + " WHERE "    
+                         + "     payment.regbyid = ?"
+                         + " AND payment.paymentmethodid = paymentmethod.paymentmethodid";
+         try
+         {
+             c = getConnection();
+             ps = c.prepareStatement(strSQL,ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+             Manager.setInteger(ps, 1, pObject.getPersonnelid());
+             return PaymentmethodManager.getInstance().loadByPreparedStatement(ps);
+         }
+         finally
+         {
+            getManager().close(ps);
+            freeConnection(c);
+         }
+    }
+
+    /**
      * Retrieves an array of ExtrachargeBean using the relation table Paymentmethod given a PersonnelBean object.
      *
      * @param pObject the PersonnelBean pObject to be used
@@ -1880,6 +2104,38 @@ public class PersonnelManager
              ps = c.prepareStatement(strSQL,ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
              Manager.setInteger(ps, 1, pObject.getPersonnelid());
              return ExtrachargeManager.getInstance().loadByPreparedStatement(ps);
+         }
+         finally
+         {
+            getManager().close(ps);
+            freeConnection(c);
+         }
+    }
+
+    /**
+     * Retrieves an array of PreferencetypeBean using the relation table Preference given a PersonnelBean object.
+     *
+     * @param pObject the PersonnelBean pObject to be used
+     * @return an array of PreferencetypeBean 
+     */
+    // MANY TO MANY
+    public PreferencetypeBean[] loadPreferencetypeViaPreference(PersonnelBean pObject) throws SQLException
+    {
+         Connection c = null;
+         PreparedStatement ps = null;
+         String strSQL =      " SELECT "
+                         + "        *"
+                         + " FROM  "
+                         + "        preferencetype,preference"
+                         + " WHERE "    
+                         + "     preference.regbyid = ?"
+                         + " AND preference.preferencetypeid = preferencetype.preferencetypeid";
+         try
+         {
+             c = getConnection();
+             ps = c.prepareStatement(strSQL,ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+             Manager.setInteger(ps, 1, pObject.getPersonnelid());
+             return PreferencetypeManager.getInstance().loadByPreparedStatement(ps);
          }
          finally
          {
@@ -1937,7 +2193,7 @@ public class PersonnelManager
                          + "        contragent,reservation"
                          + " WHERE "    
                          + "     reservation.regbyid = ?"
-                         + " AND reservation.contractcontragentid = contragent.contragentid";
+                         + " AND reservation.companyid = contragent.contragentid";
          try
          {
              c = getConnection();
@@ -2209,6 +2465,38 @@ public class PersonnelManager
     }
 
     /**
+     * Retrieves an array of RoomtypeBean using the relation table Reservationroom given a PersonnelBean object.
+     *
+     * @param pObject the PersonnelBean pObject to be used
+     * @return an array of RoomtypeBean 
+     */
+    // MANY TO MANY
+    public RoomtypeBean[] loadRoomtypeViaReservationroom(PersonnelBean pObject) throws SQLException
+    {
+         Connection c = null;
+         PreparedStatement ps = null;
+         String strSQL =      " SELECT "
+                         + "        *"
+                         + " FROM  "
+                         + "        roomtype,reservationroom"
+                         + " WHERE "    
+                         + "     reservationroom.regbyid = ?"
+                         + " AND reservationroom.roomtypeid = roomtype.roomtypeid";
+         try
+         {
+             c = getConnection();
+             ps = c.prepareStatement(strSQL,ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+             Manager.setInteger(ps, 1, pObject.getPersonnelid());
+             return RoomtypeManager.getInstance().loadByPreparedStatement(ps);
+         }
+         finally
+         {
+            getManager().close(ps);
+            freeConnection(c);
+         }
+    }
+
+    /**
      * Retrieves an array of BedtypeBean using the relation table Room given a PersonnelBean object.
      *
      * @param pObject the PersonnelBean pObject to be used
@@ -2296,6 +2584,70 @@ public class PersonnelManager
              ps = c.prepareStatement(strSQL,ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
              Manager.setInteger(ps, 1, pObject.getPersonnelid());
              return RoomManager.getInstance().loadByPreparedStatement(ps);
+         }
+         finally
+         {
+            getManager().close(ps);
+            freeConnection(c);
+         }
+    }
+
+    /**
+     * Retrieves an array of RoomBean using the relation table Roomst given a PersonnelBean object.
+     *
+     * @param pObject the PersonnelBean pObject to be used
+     * @return an array of RoomBean 
+     */
+    // MANY TO MANY
+    public RoomBean[] loadRoomViaRoomst(PersonnelBean pObject) throws SQLException
+    {
+         Connection c = null;
+         PreparedStatement ps = null;
+         String strSQL =      " SELECT "
+                         + "        *"
+                         + " FROM  "
+                         + "        room,roomst"
+                         + " WHERE "    
+                         + "     roomst.regbyid = ?"
+                         + " AND roomst.roomid = room.roomid";
+         try
+         {
+             c = getConnection();
+             ps = c.prepareStatement(strSQL,ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+             Manager.setInteger(ps, 1, pObject.getPersonnelid());
+             return RoomManager.getInstance().loadByPreparedStatement(ps);
+         }
+         finally
+         {
+            getManager().close(ps);
+            freeConnection(c);
+         }
+    }
+
+    /**
+     * Retrieves an array of TemplatecategoryBean using the relation table Template given a PersonnelBean object.
+     *
+     * @param pObject the PersonnelBean pObject to be used
+     * @return an array of TemplatecategoryBean 
+     */
+    // MANY TO MANY
+    public TemplatecategoryBean[] loadTemplatecategoryViaTemplate(PersonnelBean pObject) throws SQLException
+    {
+         Connection c = null;
+         PreparedStatement ps = null;
+         String strSQL =      " SELECT "
+                         + "        *"
+                         + " FROM  "
+                         + "        templatecategory,template"
+                         + " WHERE "    
+                         + "     template.regbyid = ?"
+                         + " AND template.templatecategoryid = templatecategory.templatecategoryid";
+         try
+         {
+             c = getConnection();
+             ps = c.prepareStatement(strSQL,ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+             Manager.setInteger(ps, 1, pObject.getPersonnelid());
+             return TemplatecategoryManager.getInstance().loadByPreparedStatement(ps);
          }
          finally
          {

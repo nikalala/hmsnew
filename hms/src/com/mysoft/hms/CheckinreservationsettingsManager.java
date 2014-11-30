@@ -1291,11 +1291,11 @@ public class CheckinreservationsettingsManager
                 }
     
                 if (pObject.isCheckintimeModified()) {
-                    if (pObject.getCheckintime() == null) ps.setNull(++_dirtyCount, Types.TIME); else ps.setTime(++_dirtyCount, new Time(pObject.getCheckintime().getTime()));
+                    if (pObject.getCheckintime() == null) ps.setNull(++_dirtyCount, Types.TIME); else ps.setTime(++_dirtyCount, new java.sql.Time(pObject.getCheckintime().getTime()));
                 }
     
                 if (pObject.isCheckouttimeModified()) {
-                    if (pObject.getCheckouttime() == null) ps.setNull(++_dirtyCount, Types.TIME); else ps.setTime(++_dirtyCount, new Time(pObject.getCheckouttime().getTime()));
+                    if (pObject.getCheckouttime() == null) ps.setNull(++_dirtyCount, Types.TIME); else ps.setTime(++_dirtyCount, new java.sql.Time(pObject.getCheckouttime().getTime()));
                 }
     
                 if (pObject.isAutopostdayuseModified()) {
@@ -1970,11 +1970,11 @@ public class CheckinreservationsettingsManager
                 }
 
                 if (pObject.isCheckintimeModified()) {
-                      if (pObject.getCheckintime() == null) ps.setNull(++_dirtyCount, Types.TIME); else ps.setTime(++_dirtyCount, new Time(pObject.getCheckintime().getTime()));
+                      if (pObject.getCheckintime() == null) ps.setNull(++_dirtyCount, Types.TIME); else ps.setTime(++_dirtyCount, new java.sql.Time(pObject.getCheckintime().getTime()));
                 }
 
                 if (pObject.isCheckouttimeModified()) {
-                      if (pObject.getCheckouttime() == null) ps.setNull(++_dirtyCount, Types.TIME); else ps.setTime(++_dirtyCount, new Time(pObject.getCheckouttime().getTime()));
+                      if (pObject.getCheckouttime() == null) ps.setNull(++_dirtyCount, Types.TIME); else ps.setTime(++_dirtyCount, new java.sql.Time(pObject.getCheckouttime().getTime()));
                 }
 
                 if (pObject.isAutopostdayuseModified()) {
@@ -2513,11 +2513,11 @@ public class CheckinreservationsettingsManager
              }
     
              if (pObject.isCheckintimeModified()) {
-                 if (pObject.getCheckintime() == null) ps.setNull(++_dirtyCount, Types.TIME); else ps.setTime(++_dirtyCount, new Time(pObject.getCheckintime().getTime()));
+                 if (pObject.getCheckintime() == null) ps.setNull(++_dirtyCount, Types.TIME); else ps.setTime(++_dirtyCount, new java.sql.Time(pObject.getCheckintime().getTime()));
              }
     
              if (pObject.isCheckouttimeModified()) {
-                 if (pObject.getCheckouttime() == null) ps.setNull(++_dirtyCount, Types.TIME); else ps.setTime(++_dirtyCount, new Time(pObject.getCheckouttime().getTime()));
+                 if (pObject.getCheckouttime() == null) ps.setNull(++_dirtyCount, Types.TIME); else ps.setTime(++_dirtyCount, new java.sql.Time(pObject.getCheckouttime().getTime()));
              }
     
              if (pObject.isAutopostdayuseModified()) {
@@ -3107,11 +3107,11 @@ public class CheckinreservationsettingsManager
             }
     
             if (pObject.isCheckintimeInitialized()) {
-                if (pObject.getCheckintime() == null) ps.setNull(++_dirtyCount, Types.TIME); else ps.setTime(++_dirtyCount, new Time(pObject.getCheckintime().getTime()));
+                if (pObject.getCheckintime() == null) ps.setNull(++_dirtyCount, Types.TIME); else ps.setTime(++_dirtyCount, new java.sql.Time(pObject.getCheckintime().getTime()));
             }
     
             if (pObject.isCheckouttimeInitialized()) {
-                if (pObject.getCheckouttime() == null) ps.setNull(++_dirtyCount, Types.TIME); else ps.setTime(++_dirtyCount, new Time(pObject.getCheckouttime().getTime()));
+                if (pObject.getCheckouttime() == null) ps.setNull(++_dirtyCount, Types.TIME); else ps.setTime(++_dirtyCount, new java.sql.Time(pObject.getCheckouttime().getTime()));
             }
     
             if (pObject.isAutopostdayuseInitialized()) {
@@ -3685,11 +3685,11 @@ public class CheckinreservationsettingsManager
                 }
     
                 if (pObject.isCheckintimeModified()) {
-                    if (pObject.getCheckintime() == null) ps.setNull(++_dirtyCount, Types.TIME); else ps.setTime(++_dirtyCount, new Time(pObject.getCheckintime().getTime()));
+                    if (pObject.getCheckintime() == null) ps.setNull(++_dirtyCount, Types.TIME); else ps.setTime(++_dirtyCount, new java.sql.Time(pObject.getCheckintime().getTime()));
                 }
     
                 if (pObject.isCheckouttimeModified()) {
-                    if (pObject.getCheckouttime() == null) ps.setNull(++_dirtyCount, Types.TIME); else ps.setTime(++_dirtyCount, new Time(pObject.getCheckouttime().getTime()));
+                    if (pObject.getCheckouttime() == null) ps.setNull(++_dirtyCount, Types.TIME); else ps.setTime(++_dirtyCount, new java.sql.Time(pObject.getCheckouttime().getTime()));
                 }
     
                 if (pObject.isAutopostdayuseModified()) {

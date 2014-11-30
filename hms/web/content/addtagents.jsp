@@ -28,6 +28,7 @@
         $("#tsalutation").next().css("width", "70px").css("padding-right", "10px");
     });
 </script>
+<form id="tagentsfrm" name="tagentsfrm">
 <div style="float: left; margin-left: 10px;">
     <table class="ttable">
         <tr>
@@ -50,7 +51,7 @@
                                 }
 
                         %>
-                        <option <%=selected%> id="<%=object.getSalutationid()%>"><%=object.getName()%>
+                        <option <%=selected%> value="<%=object.getSalutationid()%>"><%=object.getName()%>
                         </option>
                         <%
                             }
@@ -72,8 +73,8 @@
         <tr>
             <td><label>ქვეყანა:</label></td>
             <td>
-                <select class="dropdown combobox" style="width: 100%; margin: 4px;" id="countryBean">
-                    <option value="">-აირჩიეთ-</option>
+                <select class="dropdown combobox" style="width: 100%; margin: 4px;" id="countryBean" name="tcountryid">
+                    <%--<option value="">-აირჩიეთ-</option>--%>
                     <%
                         for (int i = 0; i < country.length; i++) {
                             String selected = "";
@@ -120,7 +121,7 @@
                 <%
                     String taddtobussinesssource = "";
                     if (contragentlistBeans != null && contragentlistBeans.getBsource()) {
-                        taddtobussinesssource = "chcked";
+                        taddtobussinesssource = "checked";
                     }%>
                 <input type="checkbox" name="taddtobussinesssource" id="taddtobussinesssource" <%=taddtobussinesssource%>></td>
         </tr>
@@ -171,7 +172,7 @@
                                 selected = "";
                             }
                     %>
-                    <option <%=selected%> id="<%=tind%>"><%=item%>
+                    <option <%=selected%> value="<%=tind%>"><%=item%>
                     </option>
                     <%
                             tind++;
@@ -216,7 +217,7 @@
                 <%
                     String selected = "";
                     if (contragentlistBeans != null && contragentlistBeans.getCreateuser()) {
-                        selected = "chcked";
+                        selected = "checked";
                     }%>
                 <input type="checkbox" id="tcreateuser" name="tcreateuser" <%=selected%>></td>
         </tr>
@@ -226,9 +227,10 @@
                 <%
                     String tccblock = "";
                     if (contragentlistBeans != null && contragentlistBeans.getCcblock()) {
-                        tccblock = "chcked";
+                        tccblock = "checked";
                     }%>
-                <input type="checkbox" value="" id="tccblock" name="tccblock" <%=tccblock%>></td>
+                <input type="checkbox" id="tccblock" name="tccblock" <%=tccblock%>></td>
         </tr>
     </table>
 </div>
+</form>

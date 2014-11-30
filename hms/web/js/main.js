@@ -99,6 +99,23 @@ BootstrapDialog.confirm = function (message, callback) {
     }).open();
 };
 
+$.fn.serializeObject = function(form){
+    var o = {};
+    var a = form.serializeArray();
+    $.each(a, function() {
+        if (o[this.name]) {
+            if (!o[this.name].push) {
+                o[this.name] = [o[this.name]];
+            }
+            o[this.name].push(this.value || '');
+        } else {
+            o[this.name] = this.value || '';
+        }
+    });
+    console.log(o);
+    return o;
+};
+
 function savedata(id) {
     var callbackurl = $("#callbackurl").val();
     var callbackdata = $("#callbackdata").val();

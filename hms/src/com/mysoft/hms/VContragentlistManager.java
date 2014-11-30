@@ -36,67 +36,214 @@ public class VContragentlistManager
     public static final String NAME_CONTRAGENTID = "contragentid";
 
     /**
+     * Column type of type Types.INTEGER mapped to Integer.
+     */
+    public static final int ID_TYPE = 1;
+    public static final int TYPE_TYPE = Types.INTEGER;
+    public static final String NAME_TYPE = "type";
+
+    /**
+     * Column salutationid of type Types.INTEGER mapped to Integer.
+     */
+    public static final int ID_SALUTATIONID = 2;
+    public static final int TYPE_SALUTATIONID = Types.INTEGER;
+    public static final String NAME_SALUTATIONID = "salutationid";
+
+    /**
+     * Column fname of type Types.VARCHAR mapped to String.
+     */
+    public static final int ID_FNAME = 3;
+    public static final int TYPE_FNAME = Types.VARCHAR;
+    public static final String NAME_FNAME = "fname";
+
+    /**
+     * Column lname of type Types.VARCHAR mapped to String.
+     */
+    public static final int ID_LNAME = 4;
+    public static final int TYPE_LNAME = Types.VARCHAR;
+    public static final String NAME_LNAME = "lname";
+
+    /**
+     * Column name of type Types.VARCHAR mapped to String.
+     */
+    public static final int ID_NAME = 5;
+    public static final int TYPE_NAME = Types.VARCHAR;
+    public static final String NAME_NAME = "name";
+
+    /**
+     * Column address of type Types.VARCHAR mapped to String.
+     */
+    public static final int ID_ADDRESS = 6;
+    public static final int TYPE_ADDRESS = Types.VARCHAR;
+    public static final String NAME_ADDRESS = "address";
+
+    /**
+     * Column countryid of type Types.INTEGER mapped to Integer.
+     */
+    public static final int ID_COUNTRYID = 7;
+    public static final int TYPE_COUNTRYID = Types.INTEGER;
+    public static final String NAME_COUNTRYID = "countryid";
+
+    /**
+     * Column city of type Types.VARCHAR mapped to String.
+     */
+    public static final int ID_CITY = 8;
+    public static final int TYPE_CITY = Types.VARCHAR;
+    public static final String NAME_CITY = "city";
+
+    /**
+     * Column zip of type Types.VARCHAR mapped to String.
+     */
+    public static final int ID_ZIP = 9;
+    public static final int TYPE_ZIP = Types.VARCHAR;
+    public static final String NAME_ZIP = "zip";
+
+    /**
+     * Column phone of type Types.VARCHAR mapped to String.
+     */
+    public static final int ID_PHONE = 10;
+    public static final int TYPE_PHONE = Types.VARCHAR;
+    public static final String NAME_PHONE = "phone";
+
+    /**
+     * Column fax of type Types.VARCHAR mapped to String.
+     */
+    public static final int ID_FAX = 11;
+    public static final int TYPE_FAX = Types.VARCHAR;
+    public static final String NAME_FAX = "fax";
+
+    /**
+     * Column mobile of type Types.VARCHAR mapped to String.
+     */
+    public static final int ID_MOBILE = 12;
+    public static final int TYPE_MOBILE = Types.VARCHAR;
+    public static final String NAME_MOBILE = "mobile";
+
+    /**
+     * Column email of type Types.VARCHAR mapped to String.
+     */
+    public static final int ID_EMAIL = 13;
+    public static final int TYPE_EMAIL = Types.VARCHAR;
+    public static final String NAME_EMAIL = "email";
+
+    /**
+     * Column commissionplan of type Types.INTEGER mapped to Integer.
+     */
+    public static final int ID_COMMISSIONPLAN = 14;
+    public static final int TYPE_COMMISSIONPLAN = Types.INTEGER;
+    public static final String NAME_COMMISSIONPLAN = "commissionplan";
+
+    /**
+     * Column val of type Types.DOUBLE mapped to Double.
+     */
+    public static final int ID_VAL = 15;
+    public static final int TYPE_VAL = Types.DOUBLE;
+    public static final String NAME_VAL = "val";
+
+    /**
+     * Column rate of type Types.INTEGER mapped to Integer.
+     */
+    public static final int ID_RATE = 16;
+    public static final int TYPE_RATE = Types.INTEGER;
+    public static final String NAME_RATE = "rate";
+
+    /**
+     * Column openbalance of type Types.DOUBLE mapped to Double.
+     */
+    public static final int ID_OPENBALANCE = 17;
+    public static final int TYPE_OPENBALANCE = Types.DOUBLE;
+    public static final String NAME_OPENBALANCE = "openbalance";
+
+    /**
+     * Column roominventory of type Types.INTEGER mapped to Integer.
+     */
+    public static final int ID_ROOMINVENTORY = 18;
+    public static final int TYPE_ROOMINVENTORY = Types.INTEGER;
+    public static final String NAME_ROOMINVENTORY = "roominventory";
+
+    /**
+     * Column createuser of type Types.BIT mapped to Boolean.
+     */
+    public static final int ID_CREATEUSER = 19;
+    public static final int TYPE_CREATEUSER = Types.BIT;
+    public static final String NAME_CREATEUSER = "createuser";
+
+    /**
+     * Column bsource of type Types.BIT mapped to Boolean.
+     */
+    public static final int ID_BSOURCE = 20;
+    public static final int TYPE_BSOURCE = Types.BIT;
+    public static final String NAME_BSOURCE = "bsource";
+
+    /**
+     * Column ccblock of type Types.BIT mapped to Boolean.
+     */
+    public static final int ID_CCBLOCK = 21;
+    public static final int TYPE_CCBLOCK = Types.BIT;
+    public static final String NAME_CCBLOCK = "ccblock";
+
+    /**
+     * Column idn of type Types.VARCHAR mapped to String.
+     */
+    public static final int ID_IDN = 22;
+    public static final int TYPE_IDN = Types.VARCHAR;
+    public static final String NAME_IDN = "idn";
+
+    /**
+     * Column creditterm of type Types.INTEGER mapped to Integer.
+     */
+    public static final int ID_CREDITTERM = 23;
+    public static final int TYPE_CREDITTERM = Types.INTEGER;
+    public static final String NAME_CREDITTERM = "creditterm";
+
+    /**
+     * Column creditlimit of type Types.DOUBLE mapped to Double.
+     */
+    public static final int ID_CREDITLIMIT = 24;
+    public static final int TYPE_CREDITLIMIT = Types.DOUBLE;
+    public static final String NAME_CREDITLIMIT = "creditlimit";
+
+    /**
+     * Column regbyid of type Types.INTEGER mapped to Integer.
+     */
+    public static final int ID_REGBYID = 25;
+    public static final int TYPE_REGBYID = Types.INTEGER;
+    public static final String NAME_REGBYID = "regbyid";
+
+    /**
+     * Column regdate of type Types.TIMESTAMP mapped to java.sql.Timestamp.
+     */
+    public static final int ID_REGDATE = 26;
+    public static final int TYPE_REGDATE = Types.TIMESTAMP;
+    public static final String NAME_REGDATE = "regdate";
+
+    /**
+     * Column deleted of type Types.BIT mapped to Boolean.
+     */
+    public static final int ID_DELETED = 27;
+    public static final int TYPE_DELETED = Types.BIT;
+    public static final String NAME_DELETED = "deleted";
+
+    /**
      * Column contragent of type Types.VARCHAR mapped to String.
      */
-    public static final int ID_CONTRAGENT = 1;
+    public static final int ID_CONTRAGENT = 28;
     public static final int TYPE_CONTRAGENT = Types.VARCHAR;
     public static final String NAME_CONTRAGENT = "contragent";
 
     /**
      * Column company of type Types.VARCHAR mapped to String.
      */
-    public static final int ID_COMPANY = 2;
+    public static final int ID_COMPANY = 29;
     public static final int TYPE_COMPANY = Types.VARCHAR;
     public static final String NAME_COMPANY = "company";
 
     /**
-     * Column city of type Types.VARCHAR mapped to String.
-     */
-    public static final int ID_CITY = 3;
-    public static final int TYPE_CITY = Types.VARCHAR;
-    public static final String NAME_CITY = "city";
-
-    /**
-     * Column type of type Types.INTEGER mapped to Integer.
-     */
-    public static final int ID_TYPE = 4;
-    public static final int TYPE_TYPE = Types.INTEGER;
-    public static final String NAME_TYPE = "type";
-
-    /**
-     * Column countryid of type Types.INTEGER mapped to Integer.
-     */
-    public static final int ID_COUNTRYID = 5;
-    public static final int TYPE_COUNTRYID = Types.INTEGER;
-    public static final String NAME_COUNTRYID = "countryid";
-
-    /**
      * Column country of type Types.VARCHAR mapped to String.
      */
-    public static final int ID_COUNTRY = 6;
+    public static final int ID_COUNTRY = 30;
     public static final int TYPE_COUNTRY = Types.VARCHAR;
     public static final String NAME_COUNTRY = "country";
-
-    /**
-     * Column email of type Types.VARCHAR mapped to String.
-     */
-    public static final int ID_EMAIL = 7;
-    public static final int TYPE_EMAIL = Types.VARCHAR;
-    public static final String NAME_EMAIL = "email";
-
-    /**
-     * Column phone of type Types.VARCHAR mapped to String.
-     */
-    public static final int ID_PHONE = 8;
-    public static final int TYPE_PHONE = Types.VARCHAR;
-    public static final String NAME_PHONE = "phone";
-
-    /**
-     * Column mobile of type Types.VARCHAR mapped to String.
-     */
-    public static final int ID_MOBILE = 9;
-    public static final int TYPE_MOBILE = Types.VARCHAR;
-    public static final String NAME_MOBILE = "mobile";
 
 
     private static final String TABLE_NAME = "v_contragentlist";
@@ -107,30 +254,72 @@ public class VContragentlistManager
     private static final String[] FIELD_NAMES = 
     {
         "v_contragentlist.contragentid"
+        ,"v_contragentlist.type"
+        ,"v_contragentlist.salutationid"
+        ,"v_contragentlist.fname"
+        ,"v_contragentlist.lname"
+        ,"v_contragentlist.name"
+        ,"v_contragentlist.address"
+        ,"v_contragentlist.countryid"
+        ,"v_contragentlist.city"
+        ,"v_contragentlist.zip"
+        ,"v_contragentlist.phone"
+        ,"v_contragentlist.fax"
+        ,"v_contragentlist.mobile"
+        ,"v_contragentlist.email"
+        ,"v_contragentlist.commissionplan"
+        ,"v_contragentlist.val"
+        ,"v_contragentlist.rate"
+        ,"v_contragentlist.openbalance"
+        ,"v_contragentlist.roominventory"
+        ,"v_contragentlist.createuser"
+        ,"v_contragentlist.bsource"
+        ,"v_contragentlist.ccblock"
+        ,"v_contragentlist.idn"
+        ,"v_contragentlist.creditterm"
+        ,"v_contragentlist.creditlimit"
+        ,"v_contragentlist.regbyid"
+        ,"v_contragentlist.regdate"
+        ,"v_contragentlist.deleted"
         ,"v_contragentlist.contragent"
         ,"v_contragentlist.company"
-        ,"v_contragentlist.city"
-        ,"v_contragentlist.type"
-        ,"v_contragentlist.countryid"
         ,"v_contragentlist.country"
-        ,"v_contragentlist.email"
-        ,"v_contragentlist.phone"
-        ,"v_contragentlist.mobile"
     };
 
     /**
      * Field that contains the comma separated fields of the v_contragentlist table.
      */
     private static final String ALL_FIELDS = "v_contragentlist.contragentid"
+                            + ",v_contragentlist.type"
+                            + ",v_contragentlist.salutationid"
+                            + ",v_contragentlist.fname"
+                            + ",v_contragentlist.lname"
+                            + ",v_contragentlist.name"
+                            + ",v_contragentlist.address"
+                            + ",v_contragentlist.countryid"
+                            + ",v_contragentlist.city"
+                            + ",v_contragentlist.zip"
+                            + ",v_contragentlist.phone"
+                            + ",v_contragentlist.fax"
+                            + ",v_contragentlist.mobile"
+                            + ",v_contragentlist.email"
+                            + ",v_contragentlist.commissionplan"
+                            + ",v_contragentlist.val"
+                            + ",v_contragentlist.rate"
+                            + ",v_contragentlist.openbalance"
+                            + ",v_contragentlist.roominventory"
+                            + ",v_contragentlist.createuser"
+                            + ",v_contragentlist.bsource"
+                            + ",v_contragentlist.ccblock"
+                            + ",v_contragentlist.idn"
+                            + ",v_contragentlist.creditterm"
+                            + ",v_contragentlist.creditlimit"
+                            + ",v_contragentlist.regbyid"
+                            + ",v_contragentlist.regdate"
+                            + ",v_contragentlist.deleted"
                             + ",v_contragentlist.contragent"
                             + ",v_contragentlist.company"
-                            + ",v_contragentlist.city"
-                            + ",v_contragentlist.type"
-                            + ",v_contragentlist.countryid"
-                            + ",v_contragentlist.country"
-                            + ",v_contragentlist.email"
-                            + ",v_contragentlist.phone"
-                            + ",v_contragentlist.mobile";
+                            + ",v_contragentlist.country";
 
     private static VContragentlistManager singleton = new VContragentlistManager();
 
@@ -338,6 +527,222 @@ public class VContragentlistManager
                     _dirtyCount++;
                 }
 
+                if (pObject.isTypeModified()) {
+                    if (_dirtyCount>0) {
+                        _sql.append(",");
+                    }
+                    _sql.append("type");
+                    _dirtyCount++;
+                }
+
+                if (pObject.isSalutationidModified()) {
+                    if (_dirtyCount>0) {
+                        _sql.append(",");
+                    }
+                    _sql.append("salutationid");
+                    _dirtyCount++;
+                }
+
+                if (pObject.isFnameModified()) {
+                    if (_dirtyCount>0) {
+                        _sql.append(",");
+                    }
+                    _sql.append("fname");
+                    _dirtyCount++;
+                }
+
+                if (pObject.isLnameModified()) {
+                    if (_dirtyCount>0) {
+                        _sql.append(",");
+                    }
+                    _sql.append("lname");
+                    _dirtyCount++;
+                }
+
+                if (pObject.isNameModified()) {
+                    if (_dirtyCount>0) {
+                        _sql.append(",");
+                    }
+                    _sql.append("name");
+                    _dirtyCount++;
+                }
+
+                if (pObject.isAddressModified()) {
+                    if (_dirtyCount>0) {
+                        _sql.append(",");
+                    }
+                    _sql.append("address");
+                    _dirtyCount++;
+                }
+
+                if (pObject.isCountryidModified()) {
+                    if (_dirtyCount>0) {
+                        _sql.append(",");
+                    }
+                    _sql.append("countryid");
+                    _dirtyCount++;
+                }
+
+                if (pObject.isCityModified()) {
+                    if (_dirtyCount>0) {
+                        _sql.append(",");
+                    }
+                    _sql.append("city");
+                    _dirtyCount++;
+                }
+
+                if (pObject.isZipModified()) {
+                    if (_dirtyCount>0) {
+                        _sql.append(",");
+                    }
+                    _sql.append("zip");
+                    _dirtyCount++;
+                }
+
+                if (pObject.isPhoneModified()) {
+                    if (_dirtyCount>0) {
+                        _sql.append(",");
+                    }
+                    _sql.append("phone");
+                    _dirtyCount++;
+                }
+
+                if (pObject.isFaxModified()) {
+                    if (_dirtyCount>0) {
+                        _sql.append(",");
+                    }
+                    _sql.append("fax");
+                    _dirtyCount++;
+                }
+
+                if (pObject.isMobileModified()) {
+                    if (_dirtyCount>0) {
+                        _sql.append(",");
+                    }
+                    _sql.append("mobile");
+                    _dirtyCount++;
+                }
+
+                if (pObject.isEmailModified()) {
+                    if (_dirtyCount>0) {
+                        _sql.append(",");
+                    }
+                    _sql.append("email");
+                    _dirtyCount++;
+                }
+
+                if (pObject.isCommissionplanModified()) {
+                    if (_dirtyCount>0) {
+                        _sql.append(",");
+                    }
+                    _sql.append("commissionplan");
+                    _dirtyCount++;
+                }
+
+                if (pObject.isValModified()) {
+                    if (_dirtyCount>0) {
+                        _sql.append(",");
+                    }
+                    _sql.append("val");
+                    _dirtyCount++;
+                }
+
+                if (pObject.isRateModified()) {
+                    if (_dirtyCount>0) {
+                        _sql.append(",");
+                    }
+                    _sql.append("rate");
+                    _dirtyCount++;
+                }
+
+                if (pObject.isOpenbalanceModified()) {
+                    if (_dirtyCount>0) {
+                        _sql.append(",");
+                    }
+                    _sql.append("openbalance");
+                    _dirtyCount++;
+                }
+
+                if (pObject.isRoominventoryModified()) {
+                    if (_dirtyCount>0) {
+                        _sql.append(",");
+                    }
+                    _sql.append("roominventory");
+                    _dirtyCount++;
+                }
+
+                if (pObject.isCreateuserModified()) {
+                    if (_dirtyCount>0) {
+                        _sql.append(",");
+                    }
+                    _sql.append("createuser");
+                    _dirtyCount++;
+                }
+
+                if (pObject.isBsourceModified()) {
+                    if (_dirtyCount>0) {
+                        _sql.append(",");
+                    }
+                    _sql.append("bsource");
+                    _dirtyCount++;
+                }
+
+                if (pObject.isCcblockModified()) {
+                    if (_dirtyCount>0) {
+                        _sql.append(",");
+                    }
+                    _sql.append("ccblock");
+                    _dirtyCount++;
+                }
+
+                if (pObject.isIdnModified()) {
+                    if (_dirtyCount>0) {
+                        _sql.append(",");
+                    }
+                    _sql.append("idn");
+                    _dirtyCount++;
+                }
+
+                if (pObject.isCredittermModified()) {
+                    if (_dirtyCount>0) {
+                        _sql.append(",");
+                    }
+                    _sql.append("creditterm");
+                    _dirtyCount++;
+                }
+
+                if (pObject.isCreditlimitModified()) {
+                    if (_dirtyCount>0) {
+                        _sql.append(",");
+                    }
+                    _sql.append("creditlimit");
+                    _dirtyCount++;
+                }
+
+                if (pObject.isRegbyidModified()) {
+                    if (_dirtyCount>0) {
+                        _sql.append(",");
+                    }
+                    _sql.append("regbyid");
+                    _dirtyCount++;
+                }
+
+                if (pObject.isRegdateModified()) {
+                    if (_dirtyCount>0) {
+                        _sql.append(",");
+                    }
+                    _sql.append("regdate");
+                    _dirtyCount++;
+                }
+
+                if (pObject.isDeletedModified()) {
+                    if (_dirtyCount>0) {
+                        _sql.append(",");
+                    }
+                    _sql.append("deleted");
+                    _dirtyCount++;
+                }
+
                 if (pObject.isContragentModified()) {
                     if (_dirtyCount>0) {
                         _sql.append(",");
@@ -354,59 +759,11 @@ public class VContragentlistManager
                     _dirtyCount++;
                 }
 
-                if (pObject.isCityModified()) {
-                    if (_dirtyCount>0) {
-                        _sql.append(",");
-                    }
-                    _sql.append("city");
-                    _dirtyCount++;
-                }
-
-                if (pObject.isTypeModified()) {
-                    if (_dirtyCount>0) {
-                        _sql.append(",");
-                    }
-                    _sql.append("type");
-                    _dirtyCount++;
-                }
-
-                if (pObject.isCountryidModified()) {
-                    if (_dirtyCount>0) {
-                        _sql.append(",");
-                    }
-                    _sql.append("countryid");
-                    _dirtyCount++;
-                }
-
                 if (pObject.isCountryModified()) {
                     if (_dirtyCount>0) {
                         _sql.append(",");
                     }
                     _sql.append("country");
-                    _dirtyCount++;
-                }
-
-                if (pObject.isEmailModified()) {
-                    if (_dirtyCount>0) {
-                        _sql.append(",");
-                    }
-                    _sql.append("email");
-                    _dirtyCount++;
-                }
-
-                if (pObject.isPhoneModified()) {
-                    if (_dirtyCount>0) {
-                        _sql.append(",");
-                    }
-                    _sql.append("phone");
-                    _dirtyCount++;
-                }
-
-                if (pObject.isMobileModified()) {
-                    if (_dirtyCount>0) {
-                        _sql.append(",");
-                    }
-                    _sql.append("mobile");
                     _dirtyCount++;
                 }
 
@@ -426,6 +783,114 @@ public class VContragentlistManager
                     Manager.setLong(ps, ++_dirtyCount, pObject.getContragentid());
                 }
     
+                if (pObject.isTypeModified()) {
+                    Manager.setInteger(ps, ++_dirtyCount, pObject.getType());
+                }
+    
+                if (pObject.isSalutationidModified()) {
+                    Manager.setInteger(ps, ++_dirtyCount, pObject.getSalutationid());
+                }
+    
+                if (pObject.isFnameModified()) {
+                    ps.setString(++_dirtyCount, pObject.getFname());
+                }
+    
+                if (pObject.isLnameModified()) {
+                    ps.setString(++_dirtyCount, pObject.getLname());
+                }
+    
+                if (pObject.isNameModified()) {
+                    ps.setString(++_dirtyCount, pObject.getName());
+                }
+    
+                if (pObject.isAddressModified()) {
+                    ps.setString(++_dirtyCount, pObject.getAddress());
+                }
+    
+                if (pObject.isCountryidModified()) {
+                    Manager.setInteger(ps, ++_dirtyCount, pObject.getCountryid());
+                }
+    
+                if (pObject.isCityModified()) {
+                    ps.setString(++_dirtyCount, pObject.getCity());
+                }
+    
+                if (pObject.isZipModified()) {
+                    ps.setString(++_dirtyCount, pObject.getZip());
+                }
+    
+                if (pObject.isPhoneModified()) {
+                    ps.setString(++_dirtyCount, pObject.getPhone());
+                }
+    
+                if (pObject.isFaxModified()) {
+                    ps.setString(++_dirtyCount, pObject.getFax());
+                }
+    
+                if (pObject.isMobileModified()) {
+                    ps.setString(++_dirtyCount, pObject.getMobile());
+                }
+    
+                if (pObject.isEmailModified()) {
+                    ps.setString(++_dirtyCount, pObject.getEmail());
+                }
+    
+                if (pObject.isCommissionplanModified()) {
+                    Manager.setInteger(ps, ++_dirtyCount, pObject.getCommissionplan());
+                }
+    
+                if (pObject.isValModified()) {
+                    Manager.setDouble(ps, ++_dirtyCount, pObject.getVal());
+                }
+    
+                if (pObject.isRateModified()) {
+                    Manager.setInteger(ps, ++_dirtyCount, pObject.getRate());
+                }
+    
+                if (pObject.isOpenbalanceModified()) {
+                    Manager.setDouble(ps, ++_dirtyCount, pObject.getOpenbalance());
+                }
+    
+                if (pObject.isRoominventoryModified()) {
+                    Manager.setInteger(ps, ++_dirtyCount, pObject.getRoominventory());
+                }
+    
+                if (pObject.isCreateuserModified()) {
+                    Manager.setBoolean(ps, ++_dirtyCount, pObject.getCreateuser());
+                }
+    
+                if (pObject.isBsourceModified()) {
+                    Manager.setBoolean(ps, ++_dirtyCount, pObject.getBsource());
+                }
+    
+                if (pObject.isCcblockModified()) {
+                    Manager.setBoolean(ps, ++_dirtyCount, pObject.getCcblock());
+                }
+    
+                if (pObject.isIdnModified()) {
+                    ps.setString(++_dirtyCount, pObject.getIdn());
+                }
+    
+                if (pObject.isCredittermModified()) {
+                    Manager.setInteger(ps, ++_dirtyCount, pObject.getCreditterm());
+                }
+    
+                if (pObject.isCreditlimitModified()) {
+                    Manager.setDouble(ps, ++_dirtyCount, pObject.getCreditlimit());
+                }
+    
+                if (pObject.isRegbyidModified()) {
+                    Manager.setInteger(ps, ++_dirtyCount, pObject.getRegbyid());
+                }
+    
+                if (pObject.isRegdateModified()) {
+                    ps.setTimestamp(++_dirtyCount, pObject.getRegdate());
+                }
+    
+                if (pObject.isDeletedModified()) {
+                    Manager.setBoolean(ps, ++_dirtyCount, pObject.getDeleted());
+                }
+    
                 if (pObject.isContragentModified()) {
                     ps.setString(++_dirtyCount, pObject.getContragent());
                 }
@@ -434,32 +899,8 @@ public class VContragentlistManager
                     ps.setString(++_dirtyCount, pObject.getCompany());
                 }
     
-                if (pObject.isCityModified()) {
-                    ps.setString(++_dirtyCount, pObject.getCity());
-                }
-    
-                if (pObject.isTypeModified()) {
-                    Manager.setInteger(ps, ++_dirtyCount, pObject.getType());
-                }
-    
-                if (pObject.isCountryidModified()) {
-                    Manager.setInteger(ps, ++_dirtyCount, pObject.getCountryid());
-                }
-    
                 if (pObject.isCountryModified()) {
                     ps.setString(++_dirtyCount, pObject.getCountry());
-                }
-    
-                if (pObject.isEmailModified()) {
-                    ps.setString(++_dirtyCount, pObject.getEmail());
-                }
-    
-                if (pObject.isPhoneModified()) {
-                    ps.setString(++_dirtyCount, pObject.getPhone());
-                }
-    
-                if (pObject.isMobileModified()) {
-                    ps.setString(++_dirtyCount, pObject.getMobile());
                 }
     
                 ps.executeUpdate();
@@ -483,6 +924,249 @@ public class VContragentlistManager
                     _sql.append("contragentid").append("=?");
                 }
 
+                if (pObject.isTypeModified()) {
+                    if (useComma) {
+                        _sql.append(",");
+                    } else {
+                        useComma=true;
+                    }
+                    _sql.append("type").append("=?");
+                }
+
+                if (pObject.isSalutationidModified()) {
+                    if (useComma) {
+                        _sql.append(",");
+                    } else {
+                        useComma=true;
+                    }
+                    _sql.append("salutationid").append("=?");
+                }
+
+                if (pObject.isFnameModified()) {
+                    if (useComma) {
+                        _sql.append(",");
+                    } else {
+                        useComma=true;
+                    }
+                    _sql.append("fname").append("=?");
+                }
+
+                if (pObject.isLnameModified()) {
+                    if (useComma) {
+                        _sql.append(",");
+                    } else {
+                        useComma=true;
+                    }
+                    _sql.append("lname").append("=?");
+                }
+
+                if (pObject.isNameModified()) {
+                    if (useComma) {
+                        _sql.append(",");
+                    } else {
+                        useComma=true;
+                    }
+                    _sql.append("name").append("=?");
+                }
+
+                if (pObject.isAddressModified()) {
+                    if (useComma) {
+                        _sql.append(",");
+                    } else {
+                        useComma=true;
+                    }
+                    _sql.append("address").append("=?");
+                }
+
+                if (pObject.isCountryidModified()) {
+                    if (useComma) {
+                        _sql.append(",");
+                    } else {
+                        useComma=true;
+                    }
+                    _sql.append("countryid").append("=?");
+                }
+
+                if (pObject.isCityModified()) {
+                    if (useComma) {
+                        _sql.append(",");
+                    } else {
+                        useComma=true;
+                    }
+                    _sql.append("city").append("=?");
+                }
+
+                if (pObject.isZipModified()) {
+                    if (useComma) {
+                        _sql.append(",");
+                    } else {
+                        useComma=true;
+                    }
+                    _sql.append("zip").append("=?");
+                }
+
+                if (pObject.isPhoneModified()) {
+                    if (useComma) {
+                        _sql.append(",");
+                    } else {
+                        useComma=true;
+                    }
+                    _sql.append("phone").append("=?");
+                }
+
+                if (pObject.isFaxModified()) {
+                    if (useComma) {
+                        _sql.append(",");
+                    } else {
+                        useComma=true;
+                    }
+                    _sql.append("fax").append("=?");
+                }
+
+                if (pObject.isMobileModified()) {
+                    if (useComma) {
+                        _sql.append(",");
+                    } else {
+                        useComma=true;
+                    }
+                    _sql.append("mobile").append("=?");
+                }
+
+                if (pObject.isEmailModified()) {
+                    if (useComma) {
+                        _sql.append(",");
+                    } else {
+                        useComma=true;
+                    }
+                    _sql.append("email").append("=?");
+                }
+
+                if (pObject.isCommissionplanModified()) {
+                    if (useComma) {
+                        _sql.append(",");
+                    } else {
+                        useComma=true;
+                    }
+                    _sql.append("commissionplan").append("=?");
+                }
+
+                if (pObject.isValModified()) {
+                    if (useComma) {
+                        _sql.append(",");
+                    } else {
+                        useComma=true;
+                    }
+                    _sql.append("val").append("=?");
+                }
+
+                if (pObject.isRateModified()) {
+                    if (useComma) {
+                        _sql.append(",");
+                    } else {
+                        useComma=true;
+                    }
+                    _sql.append("rate").append("=?");
+                }
+
+                if (pObject.isOpenbalanceModified()) {
+                    if (useComma) {
+                        _sql.append(",");
+                    } else {
+                        useComma=true;
+                    }
+                    _sql.append("openbalance").append("=?");
+                }
+
+                if (pObject.isRoominventoryModified()) {
+                    if (useComma) {
+                        _sql.append(",");
+                    } else {
+                        useComma=true;
+                    }
+                    _sql.append("roominventory").append("=?");
+                }
+
+                if (pObject.isCreateuserModified()) {
+                    if (useComma) {
+                        _sql.append(",");
+                    } else {
+                        useComma=true;
+                    }
+                    _sql.append("createuser").append("=?");
+                }
+
+                if (pObject.isBsourceModified()) {
+                    if (useComma) {
+                        _sql.append(",");
+                    } else {
+                        useComma=true;
+                    }
+                    _sql.append("bsource").append("=?");
+                }
+
+                if (pObject.isCcblockModified()) {
+                    if (useComma) {
+                        _sql.append(",");
+                    } else {
+                        useComma=true;
+                    }
+                    _sql.append("ccblock").append("=?");
+                }
+
+                if (pObject.isIdnModified()) {
+                    if (useComma) {
+                        _sql.append(",");
+                    } else {
+                        useComma=true;
+                    }
+                    _sql.append("idn").append("=?");
+                }
+
+                if (pObject.isCredittermModified()) {
+                    if (useComma) {
+                        _sql.append(",");
+                    } else {
+                        useComma=true;
+                    }
+                    _sql.append("creditterm").append("=?");
+                }
+
+                if (pObject.isCreditlimitModified()) {
+                    if (useComma) {
+                        _sql.append(",");
+                    } else {
+                        useComma=true;
+                    }
+                    _sql.append("creditlimit").append("=?");
+                }
+
+                if (pObject.isRegbyidModified()) {
+                    if (useComma) {
+                        _sql.append(",");
+                    } else {
+                        useComma=true;
+                    }
+                    _sql.append("regbyid").append("=?");
+                }
+
+                if (pObject.isRegdateModified()) {
+                    if (useComma) {
+                        _sql.append(",");
+                    } else {
+                        useComma=true;
+                    }
+                    _sql.append("regdate").append("=?");
+                }
+
+                if (pObject.isDeletedModified()) {
+                    if (useComma) {
+                        _sql.append(",");
+                    } else {
+                        useComma=true;
+                    }
+                    _sql.append("deleted").append("=?");
+                }
+
                 if (pObject.isContragentModified()) {
                     if (useComma) {
                         _sql.append(",");
@@ -501,33 +1185,6 @@ public class VContragentlistManager
                     _sql.append("company").append("=?");
                 }
 
-                if (pObject.isCityModified()) {
-                    if (useComma) {
-                        _sql.append(",");
-                    } else {
-                        useComma=true;
-                    }
-                    _sql.append("city").append("=?");
-                }
-
-                if (pObject.isTypeModified()) {
-                    if (useComma) {
-                        _sql.append(",");
-                    } else {
-                        useComma=true;
-                    }
-                    _sql.append("type").append("=?");
-                }
-
-                if (pObject.isCountryidModified()) {
-                    if (useComma) {
-                        _sql.append(",");
-                    } else {
-                        useComma=true;
-                    }
-                    _sql.append("countryid").append("=?");
-                }
-
                 if (pObject.isCountryModified()) {
                     if (useComma) {
                         _sql.append(",");
@@ -536,39 +1193,120 @@ public class VContragentlistManager
                     }
                     _sql.append("country").append("=?");
                 }
-
-                if (pObject.isEmailModified()) {
-                    if (useComma) {
-                        _sql.append(",");
-                    } else {
-                        useComma=true;
-                    }
-                    _sql.append("email").append("=?");
-                }
-
-                if (pObject.isPhoneModified()) {
-                    if (useComma) {
-                        _sql.append(",");
-                    } else {
-                        useComma=true;
-                    }
-                    _sql.append("phone").append("=?");
-                }
-
-                if (pObject.isMobileModified()) {
-                    if (useComma) {
-                        _sql.append(",");
-                    } else {
-                        useComma=true;
-                    }
-                    _sql.append("mobile").append("=?");
-                }
                 _sql.append("");
                 ps = c.prepareStatement(_sql.toString(),ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
                 int _dirtyCount = 0;
 
                 if (pObject.isContragentidModified()) {
                       Manager.setLong(ps, ++_dirtyCount, pObject.getContragentid());
+                }
+
+                if (pObject.isTypeModified()) {
+                      Manager.setInteger(ps, ++_dirtyCount, pObject.getType());
+                }
+
+                if (pObject.isSalutationidModified()) {
+                      Manager.setInteger(ps, ++_dirtyCount, pObject.getSalutationid());
+                }
+
+                if (pObject.isFnameModified()) {
+                      ps.setString(++_dirtyCount, pObject.getFname());
+                }
+
+                if (pObject.isLnameModified()) {
+                      ps.setString(++_dirtyCount, pObject.getLname());
+                }
+
+                if (pObject.isNameModified()) {
+                      ps.setString(++_dirtyCount, pObject.getName());
+                }
+
+                if (pObject.isAddressModified()) {
+                      ps.setString(++_dirtyCount, pObject.getAddress());
+                }
+
+                if (pObject.isCountryidModified()) {
+                      Manager.setInteger(ps, ++_dirtyCount, pObject.getCountryid());
+                }
+
+                if (pObject.isCityModified()) {
+                      ps.setString(++_dirtyCount, pObject.getCity());
+                }
+
+                if (pObject.isZipModified()) {
+                      ps.setString(++_dirtyCount, pObject.getZip());
+                }
+
+                if (pObject.isPhoneModified()) {
+                      ps.setString(++_dirtyCount, pObject.getPhone());
+                }
+
+                if (pObject.isFaxModified()) {
+                      ps.setString(++_dirtyCount, pObject.getFax());
+                }
+
+                if (pObject.isMobileModified()) {
+                      ps.setString(++_dirtyCount, pObject.getMobile());
+                }
+
+                if (pObject.isEmailModified()) {
+                      ps.setString(++_dirtyCount, pObject.getEmail());
+                }
+
+                if (pObject.isCommissionplanModified()) {
+                      Manager.setInteger(ps, ++_dirtyCount, pObject.getCommissionplan());
+                }
+
+                if (pObject.isValModified()) {
+                      Manager.setDouble(ps, ++_dirtyCount, pObject.getVal());
+                }
+
+                if (pObject.isRateModified()) {
+                      Manager.setInteger(ps, ++_dirtyCount, pObject.getRate());
+                }
+
+                if (pObject.isOpenbalanceModified()) {
+                      Manager.setDouble(ps, ++_dirtyCount, pObject.getOpenbalance());
+                }
+
+                if (pObject.isRoominventoryModified()) {
+                      Manager.setInteger(ps, ++_dirtyCount, pObject.getRoominventory());
+                }
+
+                if (pObject.isCreateuserModified()) {
+                      Manager.setBoolean(ps, ++_dirtyCount, pObject.getCreateuser());
+                }
+
+                if (pObject.isBsourceModified()) {
+                      Manager.setBoolean(ps, ++_dirtyCount, pObject.getBsource());
+                }
+
+                if (pObject.isCcblockModified()) {
+                      Manager.setBoolean(ps, ++_dirtyCount, pObject.getCcblock());
+                }
+
+                if (pObject.isIdnModified()) {
+                      ps.setString(++_dirtyCount, pObject.getIdn());
+                }
+
+                if (pObject.isCredittermModified()) {
+                      Manager.setInteger(ps, ++_dirtyCount, pObject.getCreditterm());
+                }
+
+                if (pObject.isCreditlimitModified()) {
+                      Manager.setDouble(ps, ++_dirtyCount, pObject.getCreditlimit());
+                }
+
+                if (pObject.isRegbyidModified()) {
+                      Manager.setInteger(ps, ++_dirtyCount, pObject.getRegbyid());
+                }
+
+                if (pObject.isRegdateModified()) {
+                      ps.setTimestamp(++_dirtyCount, pObject.getRegdate());
+                }
+
+                if (pObject.isDeletedModified()) {
+                      Manager.setBoolean(ps, ++_dirtyCount, pObject.getDeleted());
                 }
 
                 if (pObject.isContragentModified()) {
@@ -579,32 +1317,8 @@ public class VContragentlistManager
                       ps.setString(++_dirtyCount, pObject.getCompany());
                 }
 
-                if (pObject.isCityModified()) {
-                      ps.setString(++_dirtyCount, pObject.getCity());
-                }
-
-                if (pObject.isTypeModified()) {
-                      Manager.setInteger(ps, ++_dirtyCount, pObject.getType());
-                }
-
-                if (pObject.isCountryidModified()) {
-                      Manager.setInteger(ps, ++_dirtyCount, pObject.getCountryid());
-                }
-
                 if (pObject.isCountryModified()) {
                       ps.setString(++_dirtyCount, pObject.getCountry());
-                }
-
-                if (pObject.isEmailModified()) {
-                      ps.setString(++_dirtyCount, pObject.getEmail());
-                }
-
-                if (pObject.isPhoneModified()) {
-                      ps.setString(++_dirtyCount, pObject.getPhone());
-                }
-
-                if (pObject.isMobileModified()) {
-                      ps.setString(++_dirtyCount, pObject.getMobile());
                 }
     
                 if (_dirtyCount == 0) {
@@ -687,6 +1401,141 @@ public class VContragentlistManager
                  _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("contragentid= ?");
              }
     
+             if (pObject.isTypeModified()) {
+                 _dirtyCount ++; 
+                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("type= ?");
+             }
+    
+             if (pObject.isSalutationidModified()) {
+                 _dirtyCount ++; 
+                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("salutationid= ?");
+             }
+    
+             if (pObject.isFnameModified()) {
+                 _dirtyCount ++; 
+                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("fname= ?");
+             }
+    
+             if (pObject.isLnameModified()) {
+                 _dirtyCount ++; 
+                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("lname= ?");
+             }
+    
+             if (pObject.isNameModified()) {
+                 _dirtyCount ++; 
+                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("name= ?");
+             }
+    
+             if (pObject.isAddressModified()) {
+                 _dirtyCount ++; 
+                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("address= ?");
+             }
+    
+             if (pObject.isCountryidModified()) {
+                 _dirtyCount ++; 
+                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("countryid= ?");
+             }
+    
+             if (pObject.isCityModified()) {
+                 _dirtyCount ++; 
+                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("city= ?");
+             }
+    
+             if (pObject.isZipModified()) {
+                 _dirtyCount ++; 
+                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("zip= ?");
+             }
+    
+             if (pObject.isPhoneModified()) {
+                 _dirtyCount ++; 
+                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("phone= ?");
+             }
+    
+             if (pObject.isFaxModified()) {
+                 _dirtyCount ++; 
+                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("fax= ?");
+             }
+    
+             if (pObject.isMobileModified()) {
+                 _dirtyCount ++; 
+                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("mobile= ?");
+             }
+    
+             if (pObject.isEmailModified()) {
+                 _dirtyCount ++; 
+                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("email= ?");
+             }
+    
+             if (pObject.isCommissionplanModified()) {
+                 _dirtyCount ++; 
+                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("commissionplan= ?");
+             }
+    
+             if (pObject.isValModified()) {
+                 _dirtyCount ++; 
+                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("val= ?");
+             }
+    
+             if (pObject.isRateModified()) {
+                 _dirtyCount ++; 
+                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("rate= ?");
+             }
+    
+             if (pObject.isOpenbalanceModified()) {
+                 _dirtyCount ++; 
+                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("openbalance= ?");
+             }
+    
+             if (pObject.isRoominventoryModified()) {
+                 _dirtyCount ++; 
+                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("roominventory= ?");
+             }
+    
+             if (pObject.isCreateuserModified()) {
+                 _dirtyCount ++; 
+                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("createuser= ?");
+             }
+    
+             if (pObject.isBsourceModified()) {
+                 _dirtyCount ++; 
+                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("bsource= ?");
+             }
+    
+             if (pObject.isCcblockModified()) {
+                 _dirtyCount ++; 
+                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("ccblock= ?");
+             }
+    
+             if (pObject.isIdnModified()) {
+                 _dirtyCount ++; 
+                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("idn= ?");
+             }
+    
+             if (pObject.isCredittermModified()) {
+                 _dirtyCount ++; 
+                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("creditterm= ?");
+             }
+    
+             if (pObject.isCreditlimitModified()) {
+                 _dirtyCount ++; 
+                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("creditlimit= ?");
+             }
+    
+             if (pObject.isRegbyidModified()) {
+                 _dirtyCount ++; 
+                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("regbyid= ?");
+             }
+    
+             if (pObject.isRegdateModified()) {
+                 _dirtyCount ++; 
+                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("regdate= ?");
+             }
+    
+             if (pObject.isDeletedModified()) {
+                 _dirtyCount ++; 
+                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("deleted= ?");
+             }
+    
              if (pObject.isContragentModified()) {
                  _dirtyCount ++; 
                  _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("contragent= ?");
@@ -697,39 +1546,9 @@ public class VContragentlistManager
                  _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("company= ?");
              }
     
-             if (pObject.isCityModified()) {
-                 _dirtyCount ++; 
-                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("city= ?");
-             }
-    
-             if (pObject.isTypeModified()) {
-                 _dirtyCount ++; 
-                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("type= ?");
-             }
-    
-             if (pObject.isCountryidModified()) {
-                 _dirtyCount ++; 
-                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("countryid= ?");
-             }
-    
              if (pObject.isCountryModified()) {
                  _dirtyCount ++; 
                  _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("country= ?");
-             }
-    
-             if (pObject.isEmailModified()) {
-                 _dirtyCount ++; 
-                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("email= ?");
-             }
-    
-             if (pObject.isPhoneModified()) {
-                 _dirtyCount ++; 
-                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("phone= ?");
-             }
-    
-             if (pObject.isMobileModified()) {
-                 _dirtyCount ++; 
-                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("mobile= ?");
              }
     
              if (_dirtyCount == 0) {
@@ -744,6 +1563,114 @@ public class VContragentlistManager
                  Manager.setLong(ps, ++_dirtyCount, pObject.getContragentid());
              }
     
+             if (pObject.isTypeModified()) {
+                 Manager.setInteger(ps, ++_dirtyCount, pObject.getType());
+             }
+    
+             if (pObject.isSalutationidModified()) {
+                 Manager.setInteger(ps, ++_dirtyCount, pObject.getSalutationid());
+             }
+    
+             if (pObject.isFnameModified()) {
+                 ps.setString(++_dirtyCount, pObject.getFname());
+             }
+    
+             if (pObject.isLnameModified()) {
+                 ps.setString(++_dirtyCount, pObject.getLname());
+             }
+    
+             if (pObject.isNameModified()) {
+                 ps.setString(++_dirtyCount, pObject.getName());
+             }
+    
+             if (pObject.isAddressModified()) {
+                 ps.setString(++_dirtyCount, pObject.getAddress());
+             }
+    
+             if (pObject.isCountryidModified()) {
+                 Manager.setInteger(ps, ++_dirtyCount, pObject.getCountryid());
+             }
+    
+             if (pObject.isCityModified()) {
+                 ps.setString(++_dirtyCount, pObject.getCity());
+             }
+    
+             if (pObject.isZipModified()) {
+                 ps.setString(++_dirtyCount, pObject.getZip());
+             }
+    
+             if (pObject.isPhoneModified()) {
+                 ps.setString(++_dirtyCount, pObject.getPhone());
+             }
+    
+             if (pObject.isFaxModified()) {
+                 ps.setString(++_dirtyCount, pObject.getFax());
+             }
+    
+             if (pObject.isMobileModified()) {
+                 ps.setString(++_dirtyCount, pObject.getMobile());
+             }
+    
+             if (pObject.isEmailModified()) {
+                 ps.setString(++_dirtyCount, pObject.getEmail());
+             }
+    
+             if (pObject.isCommissionplanModified()) {
+                 Manager.setInteger(ps, ++_dirtyCount, pObject.getCommissionplan());
+             }
+    
+             if (pObject.isValModified()) {
+                 Manager.setDouble(ps, ++_dirtyCount, pObject.getVal());
+             }
+    
+             if (pObject.isRateModified()) {
+                 Manager.setInteger(ps, ++_dirtyCount, pObject.getRate());
+             }
+    
+             if (pObject.isOpenbalanceModified()) {
+                 Manager.setDouble(ps, ++_dirtyCount, pObject.getOpenbalance());
+             }
+    
+             if (pObject.isRoominventoryModified()) {
+                 Manager.setInteger(ps, ++_dirtyCount, pObject.getRoominventory());
+             }
+    
+             if (pObject.isCreateuserModified()) {
+                 Manager.setBoolean(ps, ++_dirtyCount, pObject.getCreateuser());
+             }
+    
+             if (pObject.isBsourceModified()) {
+                 Manager.setBoolean(ps, ++_dirtyCount, pObject.getBsource());
+             }
+    
+             if (pObject.isCcblockModified()) {
+                 Manager.setBoolean(ps, ++_dirtyCount, pObject.getCcblock());
+             }
+    
+             if (pObject.isIdnModified()) {
+                 ps.setString(++_dirtyCount, pObject.getIdn());
+             }
+    
+             if (pObject.isCredittermModified()) {
+                 Manager.setInteger(ps, ++_dirtyCount, pObject.getCreditterm());
+             }
+    
+             if (pObject.isCreditlimitModified()) {
+                 Manager.setDouble(ps, ++_dirtyCount, pObject.getCreditlimit());
+             }
+    
+             if (pObject.isRegbyidModified()) {
+                 Manager.setInteger(ps, ++_dirtyCount, pObject.getRegbyid());
+             }
+    
+             if (pObject.isRegdateModified()) {
+                 ps.setTimestamp(++_dirtyCount, pObject.getRegdate());
+             }
+    
+             if (pObject.isDeletedModified()) {
+                 Manager.setBoolean(ps, ++_dirtyCount, pObject.getDeleted());
+             }
+    
              if (pObject.isContragentModified()) {
                  ps.setString(++_dirtyCount, pObject.getContragent());
              }
@@ -752,32 +1679,8 @@ public class VContragentlistManager
                  ps.setString(++_dirtyCount, pObject.getCompany());
              }
     
-             if (pObject.isCityModified()) {
-                 ps.setString(++_dirtyCount, pObject.getCity());
-             }
-    
-             if (pObject.isTypeModified()) {
-                 Manager.setInteger(ps, ++_dirtyCount, pObject.getType());
-             }
-    
-             if (pObject.isCountryidModified()) {
-                 Manager.setInteger(ps, ++_dirtyCount, pObject.getCountryid());
-             }
-    
              if (pObject.isCountryModified()) {
                  ps.setString(++_dirtyCount, pObject.getCountry());
-             }
-    
-             if (pObject.isEmailModified()) {
-                 ps.setString(++_dirtyCount, pObject.getEmail());
-             }
-    
-             if (pObject.isPhoneModified()) {
-                 ps.setString(++_dirtyCount, pObject.getPhone());
-             }
-    
-             if (pObject.isMobileModified()) {
-                 ps.setString(++_dirtyCount, pObject.getMobile());
              }
     
              ps.executeQuery();
@@ -813,6 +1716,195 @@ public class VContragentlistManager
                 _dirtyAnd ++;
             }
     
+            if (pObject.isTypeInitialized()) {
+                if (_dirtyAnd > 0)
+                    sql.append(" AND ");
+                sql.append("type").append("=?");
+                _dirtyAnd ++;
+            }
+    
+            if (pObject.isSalutationidInitialized()) {
+                if (_dirtyAnd > 0)
+                    sql.append(" AND ");
+                sql.append("salutationid").append("=?");
+                _dirtyAnd ++;
+            }
+    
+            if (pObject.isFnameInitialized()) {
+                if (_dirtyAnd > 0)
+                    sql.append(" AND ");
+                sql.append("fname").append("=?");
+                _dirtyAnd ++;
+            }
+    
+            if (pObject.isLnameInitialized()) {
+                if (_dirtyAnd > 0)
+                    sql.append(" AND ");
+                sql.append("lname").append("=?");
+                _dirtyAnd ++;
+            }
+    
+            if (pObject.isNameInitialized()) {
+                if (_dirtyAnd > 0)
+                    sql.append(" AND ");
+                sql.append("name").append("=?");
+                _dirtyAnd ++;
+            }
+    
+            if (pObject.isAddressInitialized()) {
+                if (_dirtyAnd > 0)
+                    sql.append(" AND ");
+                sql.append("address").append("=?");
+                _dirtyAnd ++;
+            }
+    
+            if (pObject.isCountryidInitialized()) {
+                if (_dirtyAnd > 0)
+                    sql.append(" AND ");
+                sql.append("countryid").append("=?");
+                _dirtyAnd ++;
+            }
+    
+            if (pObject.isCityInitialized()) {
+                if (_dirtyAnd > 0)
+                    sql.append(" AND ");
+                sql.append("city").append("=?");
+                _dirtyAnd ++;
+            }
+    
+            if (pObject.isZipInitialized()) {
+                if (_dirtyAnd > 0)
+                    sql.append(" AND ");
+                sql.append("zip").append("=?");
+                _dirtyAnd ++;
+            }
+    
+            if (pObject.isPhoneInitialized()) {
+                if (_dirtyAnd > 0)
+                    sql.append(" AND ");
+                sql.append("phone").append("=?");
+                _dirtyAnd ++;
+            }
+    
+            if (pObject.isFaxInitialized()) {
+                if (_dirtyAnd > 0)
+                    sql.append(" AND ");
+                sql.append("fax").append("=?");
+                _dirtyAnd ++;
+            }
+    
+            if (pObject.isMobileInitialized()) {
+                if (_dirtyAnd > 0)
+                    sql.append(" AND ");
+                sql.append("mobile").append("=?");
+                _dirtyAnd ++;
+            }
+    
+            if (pObject.isEmailInitialized()) {
+                if (_dirtyAnd > 0)
+                    sql.append(" AND ");
+                sql.append("email").append("=?");
+                _dirtyAnd ++;
+            }
+    
+            if (pObject.isCommissionplanInitialized()) {
+                if (_dirtyAnd > 0)
+                    sql.append(" AND ");
+                sql.append("commissionplan").append("=?");
+                _dirtyAnd ++;
+            }
+    
+            if (pObject.isValInitialized()) {
+                if (_dirtyAnd > 0)
+                    sql.append(" AND ");
+                sql.append("val").append("=?");
+                _dirtyAnd ++;
+            }
+    
+            if (pObject.isRateInitialized()) {
+                if (_dirtyAnd > 0)
+                    sql.append(" AND ");
+                sql.append("rate").append("=?");
+                _dirtyAnd ++;
+            }
+    
+            if (pObject.isOpenbalanceInitialized()) {
+                if (_dirtyAnd > 0)
+                    sql.append(" AND ");
+                sql.append("openbalance").append("=?");
+                _dirtyAnd ++;
+            }
+    
+            if (pObject.isRoominventoryInitialized()) {
+                if (_dirtyAnd > 0)
+                    sql.append(" AND ");
+                sql.append("roominventory").append("=?");
+                _dirtyAnd ++;
+            }
+    
+            if (pObject.isCreateuserInitialized()) {
+                if (_dirtyAnd > 0)
+                    sql.append(" AND ");
+                sql.append("createuser").append("=?");
+                _dirtyAnd ++;
+            }
+    
+            if (pObject.isBsourceInitialized()) {
+                if (_dirtyAnd > 0)
+                    sql.append(" AND ");
+                sql.append("bsource").append("=?");
+                _dirtyAnd ++;
+            }
+    
+            if (pObject.isCcblockInitialized()) {
+                if (_dirtyAnd > 0)
+                    sql.append(" AND ");
+                sql.append("ccblock").append("=?");
+                _dirtyAnd ++;
+            }
+    
+            if (pObject.isIdnInitialized()) {
+                if (_dirtyAnd > 0)
+                    sql.append(" AND ");
+                sql.append("idn").append("=?");
+                _dirtyAnd ++;
+            }
+    
+            if (pObject.isCredittermInitialized()) {
+                if (_dirtyAnd > 0)
+                    sql.append(" AND ");
+                sql.append("creditterm").append("=?");
+                _dirtyAnd ++;
+            }
+    
+            if (pObject.isCreditlimitInitialized()) {
+                if (_dirtyAnd > 0)
+                    sql.append(" AND ");
+                sql.append("creditlimit").append("=?");
+                _dirtyAnd ++;
+            }
+    
+            if (pObject.isRegbyidInitialized()) {
+                if (_dirtyAnd > 0)
+                    sql.append(" AND ");
+                sql.append("regbyid").append("=?");
+                _dirtyAnd ++;
+            }
+    
+            if (pObject.isRegdateInitialized()) {
+                if (_dirtyAnd > 0)
+                    sql.append(" AND ");
+                sql.append("regdate").append("=?");
+                _dirtyAnd ++;
+            }
+    
+            if (pObject.isDeletedInitialized()) {
+                if (_dirtyAnd > 0)
+                    sql.append(" AND ");
+                sql.append("deleted").append("=?");
+                _dirtyAnd ++;
+            }
+    
             if (pObject.isContragentInitialized()) {
                 if (_dirtyAnd > 0)
                     sql.append(" AND ");
@@ -827,52 +1919,10 @@ public class VContragentlistManager
                 _dirtyAnd ++;
             }
     
-            if (pObject.isCityInitialized()) {
-                if (_dirtyAnd > 0)
-                    sql.append(" AND ");
-                sql.append("city").append("=?");
-                _dirtyAnd ++;
-            }
-    
-            if (pObject.isTypeInitialized()) {
-                if (_dirtyAnd > 0)
-                    sql.append(" AND ");
-                sql.append("type").append("=?");
-                _dirtyAnd ++;
-            }
-    
-            if (pObject.isCountryidInitialized()) {
-                if (_dirtyAnd > 0)
-                    sql.append(" AND ");
-                sql.append("countryid").append("=?");
-                _dirtyAnd ++;
-            }
-    
             if (pObject.isCountryInitialized()) {
                 if (_dirtyAnd > 0)
                     sql.append(" AND ");
                 sql.append("country").append("=?");
-                _dirtyAnd ++;
-            }
-    
-            if (pObject.isEmailInitialized()) {
-                if (_dirtyAnd > 0)
-                    sql.append(" AND ");
-                sql.append("email").append("=?");
-                _dirtyAnd ++;
-            }
-    
-            if (pObject.isPhoneInitialized()) {
-                if (_dirtyAnd > 0)
-                    sql.append(" AND ");
-                sql.append("phone").append("=?");
-                _dirtyAnd ++;
-            }
-    
-            if (pObject.isMobileInitialized()) {
-                if (_dirtyAnd > 0)
-                    sql.append(" AND ");
-                sql.append("mobile").append("=?");
                 _dirtyAnd ++;
             }
     
@@ -884,6 +1934,114 @@ public class VContragentlistManager
                 Manager.setLong(ps, ++_dirtyCount, pObject.getContragentid());
             }
     
+            if (pObject.isTypeInitialized()) {
+                Manager.setInteger(ps, ++_dirtyCount, pObject.getType());
+            }
+    
+            if (pObject.isSalutationidInitialized()) {
+                Manager.setInteger(ps, ++_dirtyCount, pObject.getSalutationid());
+            }
+    
+            if (pObject.isFnameInitialized()) {
+                ps.setString(++_dirtyCount, pObject.getFname());
+            }
+    
+            if (pObject.isLnameInitialized()) {
+                ps.setString(++_dirtyCount, pObject.getLname());
+            }
+    
+            if (pObject.isNameInitialized()) {
+                ps.setString(++_dirtyCount, pObject.getName());
+            }
+    
+            if (pObject.isAddressInitialized()) {
+                ps.setString(++_dirtyCount, pObject.getAddress());
+            }
+    
+            if (pObject.isCountryidInitialized()) {
+                Manager.setInteger(ps, ++_dirtyCount, pObject.getCountryid());
+            }
+    
+            if (pObject.isCityInitialized()) {
+                ps.setString(++_dirtyCount, pObject.getCity());
+            }
+    
+            if (pObject.isZipInitialized()) {
+                ps.setString(++_dirtyCount, pObject.getZip());
+            }
+    
+            if (pObject.isPhoneInitialized()) {
+                ps.setString(++_dirtyCount, pObject.getPhone());
+            }
+    
+            if (pObject.isFaxInitialized()) {
+                ps.setString(++_dirtyCount, pObject.getFax());
+            }
+    
+            if (pObject.isMobileInitialized()) {
+                ps.setString(++_dirtyCount, pObject.getMobile());
+            }
+    
+            if (pObject.isEmailInitialized()) {
+                ps.setString(++_dirtyCount, pObject.getEmail());
+            }
+    
+            if (pObject.isCommissionplanInitialized()) {
+                Manager.setInteger(ps, ++_dirtyCount, pObject.getCommissionplan());
+            }
+    
+            if (pObject.isValInitialized()) {
+                Manager.setDouble(ps, ++_dirtyCount, pObject.getVal());
+            }
+    
+            if (pObject.isRateInitialized()) {
+                Manager.setInteger(ps, ++_dirtyCount, pObject.getRate());
+            }
+    
+            if (pObject.isOpenbalanceInitialized()) {
+                Manager.setDouble(ps, ++_dirtyCount, pObject.getOpenbalance());
+            }
+    
+            if (pObject.isRoominventoryInitialized()) {
+                Manager.setInteger(ps, ++_dirtyCount, pObject.getRoominventory());
+            }
+    
+            if (pObject.isCreateuserInitialized()) {
+                Manager.setBoolean(ps, ++_dirtyCount, pObject.getCreateuser());
+            }
+    
+            if (pObject.isBsourceInitialized()) {
+                Manager.setBoolean(ps, ++_dirtyCount, pObject.getBsource());
+            }
+    
+            if (pObject.isCcblockInitialized()) {
+                Manager.setBoolean(ps, ++_dirtyCount, pObject.getCcblock());
+            }
+    
+            if (pObject.isIdnInitialized()) {
+                ps.setString(++_dirtyCount, pObject.getIdn());
+            }
+    
+            if (pObject.isCredittermInitialized()) {
+                Manager.setInteger(ps, ++_dirtyCount, pObject.getCreditterm());
+            }
+    
+            if (pObject.isCreditlimitInitialized()) {
+                Manager.setDouble(ps, ++_dirtyCount, pObject.getCreditlimit());
+            }
+    
+            if (pObject.isRegbyidInitialized()) {
+                Manager.setInteger(ps, ++_dirtyCount, pObject.getRegbyid());
+            }
+    
+            if (pObject.isRegdateInitialized()) {
+                ps.setTimestamp(++_dirtyCount, pObject.getRegdate());
+            }
+    
+            if (pObject.isDeletedInitialized()) {
+                Manager.setBoolean(ps, ++_dirtyCount, pObject.getDeleted());
+            }
+    
             if (pObject.isContragentInitialized()) {
                 ps.setString(++_dirtyCount, pObject.getContragent());
             }
@@ -892,32 +2050,8 @@ public class VContragentlistManager
                 ps.setString(++_dirtyCount, pObject.getCompany());
             }
     
-            if (pObject.isCityInitialized()) {
-                ps.setString(++_dirtyCount, pObject.getCity());
-            }
-    
-            if (pObject.isTypeInitialized()) {
-                Manager.setInteger(ps, ++_dirtyCount, pObject.getType());
-            }
-    
-            if (pObject.isCountryidInitialized()) {
-                Manager.setInteger(ps, ++_dirtyCount, pObject.getCountryid());
-            }
-    
             if (pObject.isCountryInitialized()) {
                 ps.setString(++_dirtyCount, pObject.getCountry());
-            }
-    
-            if (pObject.isEmailInitialized()) {
-                ps.setString(++_dirtyCount, pObject.getEmail());
-            }
-    
-            if (pObject.isPhoneInitialized()) {
-                ps.setString(++_dirtyCount, pObject.getPhone());
-            }
-    
-            if (pObject.isMobileInitialized()) {
-                ps.setString(++_dirtyCount, pObject.getMobile());
             }
     
             int _rows = ps.executeUpdate();
@@ -1035,6 +2169,141 @@ public class VContragentlistManager
                     _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("contragentid= ?");
                 }
     
+                if (pObject.isTypeModified()) {
+                    _dirtyCount++; 
+                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("type= ?");
+                }
+    
+                if (pObject.isSalutationidModified()) {
+                    _dirtyCount++; 
+                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("salutationid= ?");
+                }
+    
+                if (pObject.isFnameModified()) {
+                    _dirtyCount++; 
+                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("fname= ?");
+                }
+    
+                if (pObject.isLnameModified()) {
+                    _dirtyCount++; 
+                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("lname= ?");
+                }
+    
+                if (pObject.isNameModified()) {
+                    _dirtyCount++; 
+                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("name= ?");
+                }
+    
+                if (pObject.isAddressModified()) {
+                    _dirtyCount++; 
+                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("address= ?");
+                }
+    
+                if (pObject.isCountryidModified()) {
+                    _dirtyCount++; 
+                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("countryid= ?");
+                }
+    
+                if (pObject.isCityModified()) {
+                    _dirtyCount++; 
+                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("city= ?");
+                }
+    
+                if (pObject.isZipModified()) {
+                    _dirtyCount++; 
+                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("zip= ?");
+                }
+    
+                if (pObject.isPhoneModified()) {
+                    _dirtyCount++; 
+                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("phone= ?");
+                }
+    
+                if (pObject.isFaxModified()) {
+                    _dirtyCount++; 
+                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("fax= ?");
+                }
+    
+                if (pObject.isMobileModified()) {
+                    _dirtyCount++; 
+                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("mobile= ?");
+                }
+    
+                if (pObject.isEmailModified()) {
+                    _dirtyCount++; 
+                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("email= ?");
+                }
+    
+                if (pObject.isCommissionplanModified()) {
+                    _dirtyCount++; 
+                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("commissionplan= ?");
+                }
+    
+                if (pObject.isValModified()) {
+                    _dirtyCount++; 
+                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("val= ?");
+                }
+    
+                if (pObject.isRateModified()) {
+                    _dirtyCount++; 
+                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("rate= ?");
+                }
+    
+                if (pObject.isOpenbalanceModified()) {
+                    _dirtyCount++; 
+                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("openbalance= ?");
+                }
+    
+                if (pObject.isRoominventoryModified()) {
+                    _dirtyCount++; 
+                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("roominventory= ?");
+                }
+    
+                if (pObject.isCreateuserModified()) {
+                    _dirtyCount++; 
+                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("createuser= ?");
+                }
+    
+                if (pObject.isBsourceModified()) {
+                    _dirtyCount++; 
+                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("bsource= ?");
+                }
+    
+                if (pObject.isCcblockModified()) {
+                    _dirtyCount++; 
+                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("ccblock= ?");
+                }
+    
+                if (pObject.isIdnModified()) {
+                    _dirtyCount++; 
+                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("idn= ?");
+                }
+    
+                if (pObject.isCredittermModified()) {
+                    _dirtyCount++; 
+                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("creditterm= ?");
+                }
+    
+                if (pObject.isCreditlimitModified()) {
+                    _dirtyCount++; 
+                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("creditlimit= ?");
+                }
+    
+                if (pObject.isRegbyidModified()) {
+                    _dirtyCount++; 
+                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("regbyid= ?");
+                }
+    
+                if (pObject.isRegdateModified()) {
+                    _dirtyCount++; 
+                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("regdate= ?");
+                }
+    
+                if (pObject.isDeletedModified()) {
+                    _dirtyCount++; 
+                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("deleted= ?");
+                }
+    
                 if (pObject.isContragentModified()) {
                     _dirtyCount++; 
                     _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("contragent= ?");
@@ -1045,39 +2314,9 @@ public class VContragentlistManager
                     _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("company= ?");
                 }
     
-                if (pObject.isCityModified()) {
-                    _dirtyCount++; 
-                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("city= ?");
-                }
-    
-                if (pObject.isTypeModified()) {
-                    _dirtyCount++; 
-                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("type= ?");
-                }
-    
-                if (pObject.isCountryidModified()) {
-                    _dirtyCount++; 
-                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("countryid= ?");
-                }
-    
                 if (pObject.isCountryModified()) {
                     _dirtyCount++; 
                     _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("country= ?");
-                }
-    
-                if (pObject.isEmailModified()) {
-                    _dirtyCount++; 
-                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("email= ?");
-                }
-    
-                if (pObject.isPhoneModified()) {
-                    _dirtyCount++; 
-                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("phone= ?");
-                }
-    
-                if (pObject.isMobileModified()) {
-                    _dirtyCount++; 
-                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("mobile= ?");
                 }
     
                 if (_dirtyCount == 0)
@@ -1093,6 +2332,114 @@ public class VContragentlistManager
                     Manager.setLong(ps, ++_dirtyCount, pObject.getContragentid());
                 }
     
+                if (pObject.isTypeModified()) {
+                    Manager.setInteger(ps, ++_dirtyCount, pObject.getType());
+                }
+    
+                if (pObject.isSalutationidModified()) {
+                    Manager.setInteger(ps, ++_dirtyCount, pObject.getSalutationid());
+                }
+    
+                if (pObject.isFnameModified()) {
+                    ps.setString(++_dirtyCount, pObject.getFname());
+                }
+    
+                if (pObject.isLnameModified()) {
+                    ps.setString(++_dirtyCount, pObject.getLname());
+                }
+    
+                if (pObject.isNameModified()) {
+                    ps.setString(++_dirtyCount, pObject.getName());
+                }
+    
+                if (pObject.isAddressModified()) {
+                    ps.setString(++_dirtyCount, pObject.getAddress());
+                }
+    
+                if (pObject.isCountryidModified()) {
+                    Manager.setInteger(ps, ++_dirtyCount, pObject.getCountryid());
+                }
+    
+                if (pObject.isCityModified()) {
+                    ps.setString(++_dirtyCount, pObject.getCity());
+                }
+    
+                if (pObject.isZipModified()) {
+                    ps.setString(++_dirtyCount, pObject.getZip());
+                }
+    
+                if (pObject.isPhoneModified()) {
+                    ps.setString(++_dirtyCount, pObject.getPhone());
+                }
+    
+                if (pObject.isFaxModified()) {
+                    ps.setString(++_dirtyCount, pObject.getFax());
+                }
+    
+                if (pObject.isMobileModified()) {
+                    ps.setString(++_dirtyCount, pObject.getMobile());
+                }
+    
+                if (pObject.isEmailModified()) {
+                    ps.setString(++_dirtyCount, pObject.getEmail());
+                }
+    
+                if (pObject.isCommissionplanModified()) {
+                    Manager.setInteger(ps, ++_dirtyCount, pObject.getCommissionplan());
+                }
+    
+                if (pObject.isValModified()) {
+                    Manager.setDouble(ps, ++_dirtyCount, pObject.getVal());
+                }
+    
+                if (pObject.isRateModified()) {
+                    Manager.setInteger(ps, ++_dirtyCount, pObject.getRate());
+                }
+    
+                if (pObject.isOpenbalanceModified()) {
+                    Manager.setDouble(ps, ++_dirtyCount, pObject.getOpenbalance());
+                }
+    
+                if (pObject.isRoominventoryModified()) {
+                    Manager.setInteger(ps, ++_dirtyCount, pObject.getRoominventory());
+                }
+    
+                if (pObject.isCreateuserModified()) {
+                    Manager.setBoolean(ps, ++_dirtyCount, pObject.getCreateuser());
+                }
+    
+                if (pObject.isBsourceModified()) {
+                    Manager.setBoolean(ps, ++_dirtyCount, pObject.getBsource());
+                }
+    
+                if (pObject.isCcblockModified()) {
+                    Manager.setBoolean(ps, ++_dirtyCount, pObject.getCcblock());
+                }
+    
+                if (pObject.isIdnModified()) {
+                    ps.setString(++_dirtyCount, pObject.getIdn());
+                }
+    
+                if (pObject.isCredittermModified()) {
+                    Manager.setInteger(ps, ++_dirtyCount, pObject.getCreditterm());
+                }
+    
+                if (pObject.isCreditlimitModified()) {
+                    Manager.setDouble(ps, ++_dirtyCount, pObject.getCreditlimit());
+                }
+    
+                if (pObject.isRegbyidModified()) {
+                    Manager.setInteger(ps, ++_dirtyCount, pObject.getRegbyid());
+                }
+    
+                if (pObject.isRegdateModified()) {
+                    ps.setTimestamp(++_dirtyCount, pObject.getRegdate());
+                }
+    
+                if (pObject.isDeletedModified()) {
+                    Manager.setBoolean(ps, ++_dirtyCount, pObject.getDeleted());
+                }
+    
                 if (pObject.isContragentModified()) {
                     ps.setString(++_dirtyCount, pObject.getContragent());
                 }
@@ -1101,32 +2448,8 @@ public class VContragentlistManager
                     ps.setString(++_dirtyCount, pObject.getCompany());
                 }
     
-                if (pObject.isCityModified()) {
-                    ps.setString(++_dirtyCount, pObject.getCity());
-                }
-    
-                if (pObject.isTypeModified()) {
-                    Manager.setInteger(ps, ++_dirtyCount, pObject.getType());
-                }
-    
-                if (pObject.isCountryidModified()) {
-                    Manager.setInteger(ps, ++_dirtyCount, pObject.getCountryid());
-                }
-    
                 if (pObject.isCountryModified()) {
                     ps.setString(++_dirtyCount, pObject.getCountry());
-                }
-    
-                if (pObject.isEmailModified()) {
-                    ps.setString(++_dirtyCount, pObject.getEmail());
-                }
-    
-                if (pObject.isPhoneModified()) {
-                    ps.setString(++_dirtyCount, pObject.getPhone());
-                }
-    
-                if (pObject.isMobileModified()) {
-                    ps.setString(++_dirtyCount, pObject.getMobile());
                 }
     
                 return countByPreparedStatement(ps);
@@ -1154,15 +2477,36 @@ public class VContragentlistManager
     {
         VContragentlistBean pObject = createVContragentlistBean();
         pObject.setContragentid(Manager.getLong(rs, 1));
-        pObject.setContragent(rs.getString(2));
-        pObject.setCompany(rs.getString(3));
-        pObject.setCity(rs.getString(4));
-        pObject.setType(Manager.getInteger(rs, 5));
-        pObject.setCountryid(Manager.getInteger(rs, 6));
-        pObject.setCountry(rs.getString(7));
-        pObject.setEmail(rs.getString(8));
-        pObject.setPhone(rs.getString(9));
-        pObject.setMobile(rs.getString(10));
+        pObject.setType(Manager.getInteger(rs, 2));
+        pObject.setSalutationid(Manager.getInteger(rs, 3));
+        pObject.setFname(rs.getString(4));
+        pObject.setLname(rs.getString(5));
+        pObject.setName(rs.getString(6));
+        pObject.setAddress(rs.getString(7));
+        pObject.setCountryid(Manager.getInteger(rs, 8));
+        pObject.setCity(rs.getString(9));
+        pObject.setZip(rs.getString(10));
+        pObject.setPhone(rs.getString(11));
+        pObject.setFax(rs.getString(12));
+        pObject.setMobile(rs.getString(13));
+        pObject.setEmail(rs.getString(14));
+        pObject.setCommissionplan(Manager.getInteger(rs, 15));
+        pObject.setVal(Manager.getDouble(rs, 16));
+        pObject.setRate(Manager.getInteger(rs, 17));
+        pObject.setOpenbalance(Manager.getDouble(rs, 18));
+        pObject.setRoominventory(Manager.getInteger(rs, 19));
+        pObject.setCreateuser(Manager.getBoolean(rs, 20));
+        pObject.setBsource(Manager.getBoolean(rs, 21));
+        pObject.setCcblock(Manager.getBoolean(rs, 22));
+        pObject.setIdn(rs.getString(23));
+        pObject.setCreditterm(Manager.getInteger(rs, 24));
+        pObject.setCreditlimit(Manager.getDouble(rs, 25));
+        pObject.setRegbyid(Manager.getInteger(rs, 26));
+        pObject.setRegdate(rs.getTimestamp(27));
+        pObject.setDeleted(Manager.getBoolean(rs, 28));
+        pObject.setContragent(rs.getString(29));
+        pObject.setCompany(rs.getString(30));
+        pObject.setCountry(rs.getString(31));
 
         pObject.isNew(false);
         pObject.resetIsModified();
@@ -1189,6 +2533,114 @@ public class VContragentlistManager
                     ++pos;
                     pObject.setContragentid(Manager.getLong(rs, pos));
                     break;
+                case ID_TYPE:
+                    ++pos;
+                    pObject.setType(Manager.getInteger(rs, pos));
+                    break;
+                case ID_SALUTATIONID:
+                    ++pos;
+                    pObject.setSalutationid(Manager.getInteger(rs, pos));
+                    break;
+                case ID_FNAME:
+                    ++pos;
+                    pObject.setFname(rs.getString(pos));
+                    break;
+                case ID_LNAME:
+                    ++pos;
+                    pObject.setLname(rs.getString(pos));
+                    break;
+                case ID_NAME:
+                    ++pos;
+                    pObject.setName(rs.getString(pos));
+                    break;
+                case ID_ADDRESS:
+                    ++pos;
+                    pObject.setAddress(rs.getString(pos));
+                    break;
+                case ID_COUNTRYID:
+                    ++pos;
+                    pObject.setCountryid(Manager.getInteger(rs, pos));
+                    break;
+                case ID_CITY:
+                    ++pos;
+                    pObject.setCity(rs.getString(pos));
+                    break;
+                case ID_ZIP:
+                    ++pos;
+                    pObject.setZip(rs.getString(pos));
+                    break;
+                case ID_PHONE:
+                    ++pos;
+                    pObject.setPhone(rs.getString(pos));
+                    break;
+                case ID_FAX:
+                    ++pos;
+                    pObject.setFax(rs.getString(pos));
+                    break;
+                case ID_MOBILE:
+                    ++pos;
+                    pObject.setMobile(rs.getString(pos));
+                    break;
+                case ID_EMAIL:
+                    ++pos;
+                    pObject.setEmail(rs.getString(pos));
+                    break;
+                case ID_COMMISSIONPLAN:
+                    ++pos;
+                    pObject.setCommissionplan(Manager.getInteger(rs, pos));
+                    break;
+                case ID_VAL:
+                    ++pos;
+                    pObject.setVal(Manager.getDouble(rs, pos));
+                    break;
+                case ID_RATE:
+                    ++pos;
+                    pObject.setRate(Manager.getInteger(rs, pos));
+                    break;
+                case ID_OPENBALANCE:
+                    ++pos;
+                    pObject.setOpenbalance(Manager.getDouble(rs, pos));
+                    break;
+                case ID_ROOMINVENTORY:
+                    ++pos;
+                    pObject.setRoominventory(Manager.getInteger(rs, pos));
+                    break;
+                case ID_CREATEUSER:
+                    ++pos;
+                    pObject.setCreateuser(Manager.getBoolean(rs, pos));
+                    break;
+                case ID_BSOURCE:
+                    ++pos;
+                    pObject.setBsource(Manager.getBoolean(rs, pos));
+                    break;
+                case ID_CCBLOCK:
+                    ++pos;
+                    pObject.setCcblock(Manager.getBoolean(rs, pos));
+                    break;
+                case ID_IDN:
+                    ++pos;
+                    pObject.setIdn(rs.getString(pos));
+                    break;
+                case ID_CREDITTERM:
+                    ++pos;
+                    pObject.setCreditterm(Manager.getInteger(rs, pos));
+                    break;
+                case ID_CREDITLIMIT:
+                    ++pos;
+                    pObject.setCreditlimit(Manager.getDouble(rs, pos));
+                    break;
+                case ID_REGBYID:
+                    ++pos;
+                    pObject.setRegbyid(Manager.getInteger(rs, pos));
+                    break;
+                case ID_REGDATE:
+                    ++pos;
+                    pObject.setRegdate(rs.getTimestamp(pos));
+                    break;
+                case ID_DELETED:
+                    ++pos;
+                    pObject.setDeleted(Manager.getBoolean(rs, pos));
+                    break;
                 case ID_CONTRAGENT:
                     ++pos;
                     pObject.setContragent(rs.getString(pos));
@@ -1197,33 +2649,9 @@ public class VContragentlistManager
                     ++pos;
                     pObject.setCompany(rs.getString(pos));
                     break;
-                case ID_CITY:
-                    ++pos;
-                    pObject.setCity(rs.getString(pos));
-                    break;
-                case ID_TYPE:
-                    ++pos;
-                    pObject.setType(Manager.getInteger(rs, pos));
-                    break;
-                case ID_COUNTRYID:
-                    ++pos;
-                    pObject.setCountryid(Manager.getInteger(rs, pos));
-                    break;
                 case ID_COUNTRY:
                     ++pos;
                     pObject.setCountry(rs.getString(pos));
-                    break;
-                case ID_EMAIL:
-                    ++pos;
-                    pObject.setEmail(rs.getString(pos));
-                    break;
-                case ID_PHONE:
-                    ++pos;
-                    pObject.setPhone(rs.getString(pos));
-                    break;
-                case ID_MOBILE:
-                    ++pos;
-                    pObject.setMobile(rs.getString(pos));
                     break;
             }
         }

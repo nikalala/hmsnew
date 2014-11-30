@@ -492,7 +492,7 @@ public class CurrencyrateManager
                 }
     
                 if (pObject.isRatedateModified()) {
-                    if (pObject.getRatedate() == null) ps.setNull(++_dirtyCount, Types.DATE); else ps.setDate(++_dirtyCount, new Date(pObject.getRatedate().getTime()));
+                    if (pObject.getRatedate() == null) ps.setNull(++_dirtyCount, Types.DATE); else ps.setDate(++_dirtyCount, new java.sql.Date(pObject.getRatedate().getTime()));
                 }
     
                 if (pObject.isValueModified()) {
@@ -560,7 +560,7 @@ public class CurrencyrateManager
                 }
 
                 if (pObject.isRatedateModified()) {
-                      if (pObject.getRatedate() == null) ps.setNull(++_dirtyCount, Types.DATE); else ps.setDate(++_dirtyCount, new Date(pObject.getRatedate().getTime()));
+                      if (pObject.getRatedate() == null) ps.setNull(++_dirtyCount, Types.DATE); else ps.setDate(++_dirtyCount, new java.sql.Date(pObject.getRatedate().getTime()));
                 }
 
                 if (pObject.isValueModified()) {
@@ -680,7 +680,7 @@ public class CurrencyrateManager
              }
     
              if (pObject.isRatedateModified()) {
-                 if (pObject.getRatedate() == null) ps.setNull(++_dirtyCount, Types.DATE); else ps.setDate(++_dirtyCount, new Date(pObject.getRatedate().getTime()));
+                 if (pObject.getRatedate() == null) ps.setNull(++_dirtyCount, Types.DATE); else ps.setDate(++_dirtyCount, new java.sql.Date(pObject.getRatedate().getTime()));
              }
     
              if (pObject.isValueModified()) {
@@ -757,7 +757,7 @@ public class CurrencyrateManager
             }
     
             if (pObject.isRatedateInitialized()) {
-                if (pObject.getRatedate() == null) ps.setNull(++_dirtyCount, Types.DATE); else ps.setDate(++_dirtyCount, new Date(pObject.getRatedate().getTime()));
+                if (pObject.getRatedate() == null) ps.setNull(++_dirtyCount, Types.DATE); else ps.setDate(++_dirtyCount, new java.sql.Date(pObject.getRatedate().getTime()));
             }
     
             if (pObject.isValueInitialized()) {
@@ -912,7 +912,7 @@ public class CurrencyrateManager
                 }
     
                 if (pObject.isRatedateModified()) {
-                    if (pObject.getRatedate() == null) ps.setNull(++_dirtyCount, Types.DATE); else ps.setDate(++_dirtyCount, new Date(pObject.getRatedate().getTime()));
+                    if (pObject.getRatedate() == null) ps.setNull(++_dirtyCount, Types.DATE); else ps.setDate(++_dirtyCount, new java.sql.Date(pObject.getRatedate().getTime()));
                 }
     
                 if (pObject.isValueModified()) {

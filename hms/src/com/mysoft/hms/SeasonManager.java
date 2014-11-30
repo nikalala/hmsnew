@@ -665,11 +665,11 @@ public class SeasonManager
                 }
     
                 if (pObject.isStartdateModified()) {
-                    if (pObject.getStartdate() == null) ps.setNull(++_dirtyCount, Types.DATE); else ps.setDate(++_dirtyCount, new Date(pObject.getStartdate().getTime()));
+                    if (pObject.getStartdate() == null) ps.setNull(++_dirtyCount, Types.DATE); else ps.setDate(++_dirtyCount, new java.sql.Date(pObject.getStartdate().getTime()));
                 }
     
                 if (pObject.isEnddateModified()) {
-                    if (pObject.getEnddate() == null) ps.setNull(++_dirtyCount, Types.DATE); else ps.setDate(++_dirtyCount, new Date(pObject.getEnddate().getTime()));
+                    if (pObject.getEnddate() == null) ps.setNull(++_dirtyCount, Types.DATE); else ps.setDate(++_dirtyCount, new java.sql.Date(pObject.getEnddate().getTime()));
                 }
     
                 if (pObject.isRegbyidModified()) {
@@ -850,11 +850,11 @@ public class SeasonManager
                 }
 
                 if (pObject.isStartdateModified()) {
-                      if (pObject.getStartdate() == null) ps.setNull(++_dirtyCount, Types.DATE); else ps.setDate(++_dirtyCount, new Date(pObject.getStartdate().getTime()));
+                      if (pObject.getStartdate() == null) ps.setNull(++_dirtyCount, Types.DATE); else ps.setDate(++_dirtyCount, new java.sql.Date(pObject.getStartdate().getTime()));
                 }
 
                 if (pObject.isEnddateModified()) {
-                      if (pObject.getEnddate() == null) ps.setNull(++_dirtyCount, Types.DATE); else ps.setDate(++_dirtyCount, new Date(pObject.getEnddate().getTime()));
+                      if (pObject.getEnddate() == null) ps.setNull(++_dirtyCount, Types.DATE); else ps.setDate(++_dirtyCount, new java.sql.Date(pObject.getEnddate().getTime()));
                 }
 
                 if (pObject.isRegbyidModified()) {
@@ -1051,11 +1051,11 @@ public class SeasonManager
              }
     
              if (pObject.isStartdateModified()) {
-                 if (pObject.getStartdate() == null) ps.setNull(++_dirtyCount, Types.DATE); else ps.setDate(++_dirtyCount, new Date(pObject.getStartdate().getTime()));
+                 if (pObject.getStartdate() == null) ps.setNull(++_dirtyCount, Types.DATE); else ps.setDate(++_dirtyCount, new java.sql.Date(pObject.getStartdate().getTime()));
              }
     
              if (pObject.isEnddateModified()) {
-                 if (pObject.getEnddate() == null) ps.setNull(++_dirtyCount, Types.DATE); else ps.setDate(++_dirtyCount, new Date(pObject.getEnddate().getTime()));
+                 if (pObject.getEnddate() == null) ps.setNull(++_dirtyCount, Types.DATE); else ps.setDate(++_dirtyCount, new java.sql.Date(pObject.getEnddate().getTime()));
              }
     
              if (pObject.isRegbyidModified()) {
@@ -1227,11 +1227,11 @@ public class SeasonManager
             }
     
             if (pObject.isStartdateInitialized()) {
-                if (pObject.getStartdate() == null) ps.setNull(++_dirtyCount, Types.DATE); else ps.setDate(++_dirtyCount, new Date(pObject.getStartdate().getTime()));
+                if (pObject.getStartdate() == null) ps.setNull(++_dirtyCount, Types.DATE); else ps.setDate(++_dirtyCount, new java.sql.Date(pObject.getStartdate().getTime()));
             }
     
             if (pObject.isEnddateInitialized()) {
-                if (pObject.getEnddate() == null) ps.setNull(++_dirtyCount, Types.DATE); else ps.setDate(++_dirtyCount, new Date(pObject.getEnddate().getTime()));
+                if (pObject.getEnddate() == null) ps.setNull(++_dirtyCount, Types.DATE); else ps.setDate(++_dirtyCount, new java.sql.Date(pObject.getEnddate().getTime()));
             }
     
             if (pObject.isRegbyidInitialized()) {
@@ -1564,11 +1564,11 @@ public class SeasonManager
                 }
     
                 if (pObject.isStartdateModified()) {
-                    if (pObject.getStartdate() == null) ps.setNull(++_dirtyCount, Types.DATE); else ps.setDate(++_dirtyCount, new Date(pObject.getStartdate().getTime()));
+                    if (pObject.getStartdate() == null) ps.setNull(++_dirtyCount, Types.DATE); else ps.setDate(++_dirtyCount, new java.sql.Date(pObject.getStartdate().getTime()));
                 }
     
                 if (pObject.isEnddateModified()) {
-                    if (pObject.getEnddate() == null) ps.setNull(++_dirtyCount, Types.DATE); else ps.setDate(++_dirtyCount, new Date(pObject.getEnddate().getTime()));
+                    if (pObject.getEnddate() == null) ps.setNull(++_dirtyCount, Types.DATE); else ps.setDate(++_dirtyCount, new java.sql.Date(pObject.getEnddate().getTime()));
                 }
     
                 if (pObject.isRegbyidModified()) {

@@ -1417,15 +1417,15 @@ public class GuestManager
                 }
     
                 if (pObject.isDobModified()) {
-                    if (pObject.getDob() == null) ps.setNull(++_dirtyCount, Types.DATE); else ps.setDate(++_dirtyCount, new Date(pObject.getDob().getTime()));
+                    if (pObject.getDob() == null) ps.setNull(++_dirtyCount, Types.DATE); else ps.setDate(++_dirtyCount, new java.sql.Date(pObject.getDob().getTime()));
                 }
     
                 if (pObject.isSdobModified()) {
-                    if (pObject.getSdob() == null) ps.setNull(++_dirtyCount, Types.DATE); else ps.setDate(++_dirtyCount, new Date(pObject.getSdob().getTime()));
+                    if (pObject.getSdob() == null) ps.setNull(++_dirtyCount, Types.DATE); else ps.setDate(++_dirtyCount, new java.sql.Date(pObject.getSdob().getTime()));
                 }
     
                 if (pObject.isWeddingdateModified()) {
-                    if (pObject.getWeddingdate() == null) ps.setNull(++_dirtyCount, Types.DATE); else ps.setDate(++_dirtyCount, new Date(pObject.getWeddingdate().getTime()));
+                    if (pObject.getWeddingdate() == null) ps.setNull(++_dirtyCount, Types.DATE); else ps.setDate(++_dirtyCount, new java.sql.Date(pObject.getWeddingdate().getTime()));
                 }
     
                 if (pObject.isNationalityidModified()) {
@@ -1784,15 +1784,15 @@ public class GuestManager
                 }
 
                 if (pObject.isDobModified()) {
-                      if (pObject.getDob() == null) ps.setNull(++_dirtyCount, Types.DATE); else ps.setDate(++_dirtyCount, new Date(pObject.getDob().getTime()));
+                      if (pObject.getDob() == null) ps.setNull(++_dirtyCount, Types.DATE); else ps.setDate(++_dirtyCount, new java.sql.Date(pObject.getDob().getTime()));
                 }
 
                 if (pObject.isSdobModified()) {
-                      if (pObject.getSdob() == null) ps.setNull(++_dirtyCount, Types.DATE); else ps.setDate(++_dirtyCount, new Date(pObject.getSdob().getTime()));
+                      if (pObject.getSdob() == null) ps.setNull(++_dirtyCount, Types.DATE); else ps.setDate(++_dirtyCount, new java.sql.Date(pObject.getSdob().getTime()));
                 }
 
                 if (pObject.isWeddingdateModified()) {
-                      if (pObject.getWeddingdate() == null) ps.setNull(++_dirtyCount, Types.DATE); else ps.setDate(++_dirtyCount, new Date(pObject.getWeddingdate().getTime()));
+                      if (pObject.getWeddingdate() == null) ps.setNull(++_dirtyCount, Types.DATE); else ps.setDate(++_dirtyCount, new java.sql.Date(pObject.getWeddingdate().getTime()));
                 }
 
                 if (pObject.isNationalityidModified()) {
@@ -2111,15 +2111,15 @@ public class GuestManager
              }
     
              if (pObject.isDobModified()) {
-                 if (pObject.getDob() == null) ps.setNull(++_dirtyCount, Types.DATE); else ps.setDate(++_dirtyCount, new Date(pObject.getDob().getTime()));
+                 if (pObject.getDob() == null) ps.setNull(++_dirtyCount, Types.DATE); else ps.setDate(++_dirtyCount, new java.sql.Date(pObject.getDob().getTime()));
              }
     
              if (pObject.isSdobModified()) {
-                 if (pObject.getSdob() == null) ps.setNull(++_dirtyCount, Types.DATE); else ps.setDate(++_dirtyCount, new Date(pObject.getSdob().getTime()));
+                 if (pObject.getSdob() == null) ps.setNull(++_dirtyCount, Types.DATE); else ps.setDate(++_dirtyCount, new java.sql.Date(pObject.getSdob().getTime()));
              }
     
              if (pObject.isWeddingdateModified()) {
-                 if (pObject.getWeddingdate() == null) ps.setNull(++_dirtyCount, Types.DATE); else ps.setDate(++_dirtyCount, new Date(pObject.getWeddingdate().getTime()));
+                 if (pObject.getWeddingdate() == null) ps.setNull(++_dirtyCount, Types.DATE); else ps.setDate(++_dirtyCount, new java.sql.Date(pObject.getWeddingdate().getTime()));
              }
     
              if (pObject.isNationalityidModified()) {
@@ -2441,15 +2441,15 @@ public class GuestManager
             }
     
             if (pObject.isDobInitialized()) {
-                if (pObject.getDob() == null) ps.setNull(++_dirtyCount, Types.DATE); else ps.setDate(++_dirtyCount, new Date(pObject.getDob().getTime()));
+                if (pObject.getDob() == null) ps.setNull(++_dirtyCount, Types.DATE); else ps.setDate(++_dirtyCount, new java.sql.Date(pObject.getDob().getTime()));
             }
     
             if (pObject.isSdobInitialized()) {
-                if (pObject.getSdob() == null) ps.setNull(++_dirtyCount, Types.DATE); else ps.setDate(++_dirtyCount, new Date(pObject.getSdob().getTime()));
+                if (pObject.getSdob() == null) ps.setNull(++_dirtyCount, Types.DATE); else ps.setDate(++_dirtyCount, new java.sql.Date(pObject.getSdob().getTime()));
             }
     
             if (pObject.isWeddingdateInitialized()) {
-                if (pObject.getWeddingdate() == null) ps.setNull(++_dirtyCount, Types.DATE); else ps.setDate(++_dirtyCount, new Date(pObject.getWeddingdate().getTime()));
+                if (pObject.getWeddingdate() == null) ps.setNull(++_dirtyCount, Types.DATE); else ps.setDate(++_dirtyCount, new java.sql.Date(pObject.getWeddingdate().getTime()));
             }
     
             if (pObject.isNationalityidInitialized()) {
@@ -3064,15 +3064,15 @@ public class GuestManager
                 }
     
                 if (pObject.isDobModified()) {
-                    if (pObject.getDob() == null) ps.setNull(++_dirtyCount, Types.DATE); else ps.setDate(++_dirtyCount, new Date(pObject.getDob().getTime()));
+                    if (pObject.getDob() == null) ps.setNull(++_dirtyCount, Types.DATE); else ps.setDate(++_dirtyCount, new java.sql.Date(pObject.getDob().getTime()));
                 }
     
                 if (pObject.isSdobModified()) {
-                    if (pObject.getSdob() == null) ps.setNull(++_dirtyCount, Types.DATE); else ps.setDate(++_dirtyCount, new Date(pObject.getSdob().getTime()));
+                    if (pObject.getSdob() == null) ps.setNull(++_dirtyCount, Types.DATE); else ps.setDate(++_dirtyCount, new java.sql.Date(pObject.getSdob().getTime()));
                 }
     
                 if (pObject.isWeddingdateModified()) {
-                    if (pObject.getWeddingdate() == null) ps.setNull(++_dirtyCount, Types.DATE); else ps.setDate(++_dirtyCount, new Date(pObject.getWeddingdate().getTime()));
+                    if (pObject.getWeddingdate() == null) ps.setNull(++_dirtyCount, Types.DATE); else ps.setDate(++_dirtyCount, new java.sql.Date(pObject.getWeddingdate().getTime()));
                 }
     
                 if (pObject.isNationalityidModified()) {

@@ -14,11 +14,10 @@ package com.mysoft.hms;
 
 // imports+ 
 
-import java.io.Serializable;
-
-
 // imports- 
 
+
+import java.io.Serializable;
 
 public class PersonnelBean implements Serializable
 // extends+ 

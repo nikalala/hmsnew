@@ -16,10 +16,12 @@ package com.mysoft.hms;
 
 // imports- 
 
+
 public class ClosedateBean
 // extends+ 
 
 // extends- 
+
 {
     private Long closedateid;
     private boolean closedateid_is_modified = false;
@@ -388,4 +390,5 @@ public class ClosedateBean
 // class+ 
 
 // class- 
+
 }

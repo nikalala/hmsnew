@@ -1618,7 +1618,7 @@ public class ReservationManager
                 }
     
                 if (pObject.isAdvancepaymentdateModified()) {
-                    if (pObject.getAdvancepaymentdate() == null) ps.setNull(++_dirtyCount, Types.DATE); else ps.setDate(++_dirtyCount, new Date(pObject.getAdvancepaymentdate().getTime()));
+                    if (pObject.getAdvancepaymentdate() == null) ps.setNull(++_dirtyCount, Types.DATE); else ps.setDate(++_dirtyCount, new java.sql.Date(pObject.getAdvancepaymentdate().getTime()));
                 }
     
                 if (pObject.isAdvancepaymentamountModified()) {
@@ -2037,7 +2037,7 @@ public class ReservationManager
                 }
 
                 if (pObject.isAdvancepaymentdateModified()) {
-                      if (pObject.getAdvancepaymentdate() == null) ps.setNull(++_dirtyCount, Types.DATE); else ps.setDate(++_dirtyCount, new Date(pObject.getAdvancepaymentdate().getTime()));
+                      if (pObject.getAdvancepaymentdate() == null) ps.setNull(++_dirtyCount, Types.DATE); else ps.setDate(++_dirtyCount, new java.sql.Date(pObject.getAdvancepaymentdate().getTime()));
                 }
 
                 if (pObject.isAdvancepaymentamountModified()) {
@@ -2400,7 +2400,7 @@ public class ReservationManager
              }
     
              if (pObject.isAdvancepaymentdateModified()) {
-                 if (pObject.getAdvancepaymentdate() == null) ps.setNull(++_dirtyCount, Types.DATE); else ps.setDate(++_dirtyCount, new Date(pObject.getAdvancepaymentdate().getTime()));
+                 if (pObject.getAdvancepaymentdate() == null) ps.setNull(++_dirtyCount, Types.DATE); else ps.setDate(++_dirtyCount, new java.sql.Date(pObject.getAdvancepaymentdate().getTime()));
              }
     
              if (pObject.isAdvancepaymentamountModified()) {
@@ -2774,7 +2774,7 @@ public class ReservationManager
             }
     
             if (pObject.isAdvancepaymentdateInitialized()) {
-                if (pObject.getAdvancepaymentdate() == null) ps.setNull(++_dirtyCount, Types.DATE); else ps.setDate(++_dirtyCount, new Date(pObject.getAdvancepaymentdate().getTime()));
+                if (pObject.getAdvancepaymentdate() == null) ps.setNull(++_dirtyCount, Types.DATE); else ps.setDate(++_dirtyCount, new java.sql.Date(pObject.getAdvancepaymentdate().getTime()));
             }
     
             if (pObject.isAdvancepaymentamountInitialized()) {
@@ -3369,7 +3369,7 @@ public class ReservationManager
                 }
     
                 if (pObject.isAdvancepaymentdateModified()) {
-                    if (pObject.getAdvancepaymentdate() == null) ps.setNull(++_dirtyCount, Types.DATE); else ps.setDate(++_dirtyCount, new Date(pObject.getAdvancepaymentdate().getTime()));
+                    if (pObject.getAdvancepaymentdate() == null) ps.setNull(++_dirtyCount, Types.DATE); else ps.setDate(++_dirtyCount, new java.sql.Date(pObject.getAdvancepaymentdate().getTime()));
                 }
     
                 if (pObject.isAdvancepaymentamountModified()) {

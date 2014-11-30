@@ -299,7 +299,7 @@ public class CountryBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: country.flag
-     * <li>comments: 
+     * <li>comments:  ?????
      * <li>column size: 255
      * <li>jdbc type returned by the driver: Types.VARCHAR
      * </ul>

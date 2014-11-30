@@ -17,6 +17,7 @@ import java.sql.*;
 
 // imports- 
 
+
 /**
  * Handles database calls for the closedate table.
  */
@@ -24,6 +25,7 @@ public class ClosedateManager
 // extends+ 
 
 // extends- 
+
 {
 
     /**
@@ -397,7 +399,7 @@ public class ClosedateManager
                 }
     
                 if (pObject.isCldateModified()) {
-                    if (pObject.getCldate() == null) ps.setNull(++_dirtyCount, Types.DATE); else ps.setDate(++_dirtyCount, new Date(pObject.getCldate().getTime()));
+                    if (pObject.getCldate() == null) ps.setNull(++_dirtyCount, Types.DATE); else ps.setDate(++_dirtyCount, new java.sql.Date(pObject.getCldate().getTime()));
                 }
     
                 if (pObject.isRegbyidModified()) {
@@ -465,7 +467,7 @@ public class ClosedateManager
                 }
 
                 if (pObject.isCldateModified()) {
-                      if (pObject.getCldate() == null) ps.setNull(++_dirtyCount, Types.DATE); else ps.setDate(++_dirtyCount, new Date(pObject.getCldate().getTime()));
+                      if (pObject.getCldate() == null) ps.setNull(++_dirtyCount, Types.DATE); else ps.setDate(++_dirtyCount, new java.sql.Date(pObject.getCldate().getTime()));
                 }
 
                 if (pObject.isRegbyidModified()) {
@@ -585,7 +587,7 @@ public class ClosedateManager
              }
     
              if (pObject.isCldateModified()) {
-                 if (pObject.getCldate() == null) ps.setNull(++_dirtyCount, Types.DATE); else ps.setDate(++_dirtyCount, new Date(pObject.getCldate().getTime()));
+                 if (pObject.getCldate() == null) ps.setNull(++_dirtyCount, Types.DATE); else ps.setDate(++_dirtyCount, new java.sql.Date(pObject.getCldate().getTime()));
              }
     
              if (pObject.isRegbyidModified()) {
@@ -662,7 +664,7 @@ public class ClosedateManager
             }
     
             if (pObject.isCldateInitialized()) {
-                if (pObject.getCldate() == null) ps.setNull(++_dirtyCount, Types.DATE); else ps.setDate(++_dirtyCount, new Date(pObject.getCldate().getTime()));
+                if (pObject.getCldate() == null) ps.setNull(++_dirtyCount, Types.DATE); else ps.setDate(++_dirtyCount, new java.sql.Date(pObject.getCldate().getTime()));
             }
     
             if (pObject.isRegbyidInitialized()) {
@@ -817,7 +819,7 @@ public class ClosedateManager
                 }
     
                 if (pObject.isCldateModified()) {
-                    if (pObject.getCldate() == null) ps.setNull(++_dirtyCount, Types.DATE); else ps.setDate(++_dirtyCount, new Date(pObject.getCldate().getTime()));
+                    if (pObject.getCldate() == null) ps.setNull(++_dirtyCount, Types.DATE); else ps.setDate(++_dirtyCount, new java.sql.Date(pObject.getCldate().getTime()));
                 }
     
                 if (pObject.isRegbyidModified()) {
@@ -1038,4 +1040,5 @@ public class ClosedateManager
 // class+ 
 
 // class- 
+
 }

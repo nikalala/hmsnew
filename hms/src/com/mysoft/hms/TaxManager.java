@@ -649,7 +649,7 @@ public class TaxManager
                 }
     
                 if (pObject.isStartfromModified()) {
-                    if (pObject.getStartfrom() == null) ps.setNull(++_dirtyCount, Types.DATE); else ps.setDate(++_dirtyCount, new Date(pObject.getStartfrom().getTime()));
+                    if (pObject.getStartfrom() == null) ps.setNull(++_dirtyCount, Types.DATE); else ps.setDate(++_dirtyCount, new java.sql.Date(pObject.getStartfrom().getTime()));
                 }
     
                 if (pObject.isExemptafterModified()) {
@@ -834,7 +834,7 @@ public class TaxManager
                 }
 
                 if (pObject.isStartfromModified()) {
-                      if (pObject.getStartfrom() == null) ps.setNull(++_dirtyCount, Types.DATE); else ps.setDate(++_dirtyCount, new Date(pObject.getStartfrom().getTime()));
+                      if (pObject.getStartfrom() == null) ps.setNull(++_dirtyCount, Types.DATE); else ps.setDate(++_dirtyCount, new java.sql.Date(pObject.getStartfrom().getTime()));
                 }
 
                 if (pObject.isExemptafterModified()) {
@@ -1035,7 +1035,7 @@ public class TaxManager
              }
     
              if (pObject.isStartfromModified()) {
-                 if (pObject.getStartfrom() == null) ps.setNull(++_dirtyCount, Types.DATE); else ps.setDate(++_dirtyCount, new Date(pObject.getStartfrom().getTime()));
+                 if (pObject.getStartfrom() == null) ps.setNull(++_dirtyCount, Types.DATE); else ps.setDate(++_dirtyCount, new java.sql.Date(pObject.getStartfrom().getTime()));
              }
     
              if (pObject.isExemptafterModified()) {
@@ -1211,7 +1211,7 @@ public class TaxManager
             }
     
             if (pObject.isStartfromInitialized()) {
-                if (pObject.getStartfrom() == null) ps.setNull(++_dirtyCount, Types.DATE); else ps.setDate(++_dirtyCount, new Date(pObject.getStartfrom().getTime()));
+                if (pObject.getStartfrom() == null) ps.setNull(++_dirtyCount, Types.DATE); else ps.setDate(++_dirtyCount, new java.sql.Date(pObject.getStartfrom().getTime()));
             }
     
             if (pObject.isExemptafterInitialized()) {
@@ -1676,7 +1676,7 @@ public class TaxManager
                 }
     
                 if (pObject.isStartfromModified()) {
-                    if (pObject.getStartfrom() == null) ps.setNull(++_dirtyCount, Types.DATE); else ps.setDate(++_dirtyCount, new Date(pObject.getStartfrom().getTime()));
+                    if (pObject.getStartfrom() == null) ps.setNull(++_dirtyCount, Types.DATE); else ps.setDate(++_dirtyCount, new java.sql.Date(pObject.getStartfrom().getTime()));
                 }
     
                 if (pObject.isExemptafterModified()) {

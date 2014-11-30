@@ -13,9 +13,11 @@
 package com.mysoft.hms;
 
 // imports+ 
-import java.io.*;
+
 // imports- 
 
+
+import java.io.Serializable;
 
 public class HotelBean implements Serializable
 // extends+ 
@@ -109,7 +111,7 @@ public class HotelBean implements Serializable
      * Do not use this constructor directly, please use the factory method
      * available in the associated manager.
      */
-    void HotelBean()
+   void HotelBean()
     {
     }
     
@@ -187,7 +189,7 @@ public class HotelBean implements Serializable
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: hotel.name
-     * <li>comments: დასახელება
+     * <li>comments: ??????????
      * <li>column size: 2147483647
      * <li>jdbc type returned by the driver: Types.VARCHAR
      * </ul>
@@ -244,7 +246,7 @@ public class HotelBean implements Serializable
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: hotel.address1
-     * <li>comments: მისამართი
+     * <li>comments: ?????????
      * <li>column size: 2147483647
      * <li>jdbc type returned by the driver: Types.VARCHAR
      * </ul>
@@ -301,7 +303,7 @@ public class HotelBean implements Serializable
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: hotel.address2
-     * <li>comments: მისამართი 2
+     * <li>comments: ????????? 2
      * <li>column size: 2147483647
      * <li>jdbc type returned by the driver: Types.VARCHAR
      * </ul>
@@ -359,7 +361,7 @@ public class HotelBean implements Serializable
      * <ul>
      * <li>full name: hotel.countryid
      * <li> foreign key: country.countryid
-     * <li>comments: ქვეყანა
+     * <li>comments: ???????
      * <li>column size: 10
      * <li>jdbc type returned by the driver: Types.INTEGER
      * </ul>
@@ -427,7 +429,7 @@ public class HotelBean implements Serializable
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: hotel.city
-     * <li>comments: ქალაქი
+     * <li>comments: ??????
      * <li>column size: 2147483647
      * <li>jdbc type returned by the driver: Types.VARCHAR
      * </ul>
@@ -484,7 +486,7 @@ public class HotelBean implements Serializable
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: hotel.zip
-     * <li>comments: საფოსტო ინდექსი
+     * <li>comments: ??????? ???????
      * <li>column size: 100
      * <li>jdbc type returned by the driver: Types.VARCHAR
      * </ul>
@@ -541,7 +543,7 @@ public class HotelBean implements Serializable
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: hotel.phone
-     * <li>comments: ტელეფონი
+     * <li>comments: ????????
      * <li>column size: 100
      * <li>jdbc type returned by the driver: Types.VARCHAR
      * </ul>
@@ -598,7 +600,7 @@ public class HotelBean implements Serializable
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: hotel.rphone
-     * <li>comments: რეგისტრაციის ტელეფონი
+     * <li>comments: ???????????? ????????
      * <li>column size: 100
      * <li>jdbc type returned by the driver: Types.VARCHAR
      * </ul>
@@ -655,7 +657,7 @@ public class HotelBean implements Serializable
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: hotel.fax
-     * <li>comments: ფაქსი
+     * <li>comments: ?????
      * <li>column size: 100
      * <li>jdbc type returned by the driver: Types.VARCHAR
      * </ul>
@@ -712,7 +714,7 @@ public class HotelBean implements Serializable
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: hotel.email
-     * <li>comments: ელ-ფოსტა
+     * <li>comments: ??-?????
      * <li>column size: 255
      * <li>jdbc type returned by the driver: Types.VARCHAR
      * </ul>
@@ -769,7 +771,7 @@ public class HotelBean implements Serializable
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: hotel.propertytype
-     * <li>comments: უზრავი ქონების ტიპი
+     * <li>comments: ?????? ??????? ????
      * <li>column size: 2147483647
      * <li>jdbc type returned by the driver: Types.VARCHAR
      * </ul>
@@ -826,7 +828,7 @@ public class HotelBean implements Serializable
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: hotel.logo
-     * <li>comments: ლოგო
+     * <li>comments: ????
      * <li>column size: 255
      * <li>jdbc type returned by the driver: Types.VARCHAR
      * </ul>
@@ -883,7 +885,7 @@ public class HotelBean implements Serializable
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: hotel.url
-     * <li>comments: ინტერნეტ გვერდი
+     * <li>comments: ???????? ??????
      * <li>column size: 255
      * <li>jdbc type returned by the driver: Types.VARCHAR
      * </ul>
@@ -940,7 +942,7 @@ public class HotelBean implements Serializable
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: hotel.grade
-     * <li>comments: ვარსკვლავიCODEhotelstar
+     * <li>comments: ??????????CODEhotelstar
      * <li>column size: 10
      * <li>jdbc type returned by the driver: Types.INTEGER
      * </ul>
@@ -1008,7 +1010,7 @@ public class HotelBean implements Serializable
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: hotel.idn
-     * <li>comments: საიდენთიფიკაციო ნომერი
+     * <li>comments: ??????????????? ??????
      * <li>column size: 255
      * <li>jdbc type returned by the driver: Types.VARCHAR
      * </ul>
@@ -1065,7 +1067,7 @@ public class HotelBean implements Serializable
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: hotel.regno1
-     * <li>comments: რეგისტრაციის ნომერი 1
+     * <li>comments: ???????????? ?????? 1
      * <li>column size: 255
      * <li>jdbc type returned by the driver: Types.VARCHAR
      * </ul>
@@ -1122,7 +1124,7 @@ public class HotelBean implements Serializable
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: hotel.regno2
-     * <li>comments: რეგისტრაციის ნომერი 2
+     * <li>comments: ???????????? ?????? 2
      * <li>column size: 255
      * <li>jdbc type returned by the driver: Types.VARCHAR
      * </ul>
@@ -1179,7 +1181,7 @@ public class HotelBean implements Serializable
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: hotel.regno3
-     * <li>comments: რეგისტრაციის ნომერი 3
+     * <li>comments: ???????????? ?????? 3
      * <li>column size: 255
      * <li>jdbc type returned by the driver: Types.VARCHAR
      * </ul>
@@ -1237,7 +1239,7 @@ public class HotelBean implements Serializable
      * <ul>
      * <li>full name: hotel.districtid
      * <li> foreign key: district.districtid
-     * <li>comments: რაიონი
+     * <li>comments: ??????
      * <li>column size: 10
      * <li>jdbc type returned by the driver: Types.INTEGER
      * </ul>

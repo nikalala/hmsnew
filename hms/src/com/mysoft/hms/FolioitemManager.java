@@ -1129,7 +1129,7 @@ public class FolioitemManager
                 }
     
                 if (pObject.isItemdateModified()) {
-                    if (pObject.getItemdate() == null) ps.setNull(++_dirtyCount, Types.DATE); else ps.setDate(++_dirtyCount, new Date(pObject.getItemdate().getTime()));
+                    if (pObject.getItemdate() == null) ps.setNull(++_dirtyCount, Types.DATE); else ps.setDate(++_dirtyCount, new java.sql.Date(pObject.getItemdate().getTime()));
                 }
     
                 if (pObject.isRefnoModified()) {
@@ -1379,7 +1379,7 @@ public class FolioitemManager
                 }
 
                 if (pObject.isItemdateModified()) {
-                      if (pObject.getItemdate() == null) ps.setNull(++_dirtyCount, Types.DATE); else ps.setDate(++_dirtyCount, new Date(pObject.getItemdate().getTime()));
+                      if (pObject.getItemdate() == null) ps.setNull(++_dirtyCount, Types.DATE); else ps.setDate(++_dirtyCount, new java.sql.Date(pObject.getItemdate().getTime()));
                 }
 
                 if (pObject.isRefnoModified()) {
@@ -1625,7 +1625,7 @@ public class FolioitemManager
              }
     
              if (pObject.isItemdateModified()) {
-                 if (pObject.getItemdate() == null) ps.setNull(++_dirtyCount, Types.DATE); else ps.setDate(++_dirtyCount, new Date(pObject.getItemdate().getTime()));
+                 if (pObject.getItemdate() == null) ps.setNull(++_dirtyCount, Types.DATE); else ps.setDate(++_dirtyCount, new java.sql.Date(pObject.getItemdate().getTime()));
              }
     
              if (pObject.isRefnoModified()) {
@@ -1856,7 +1856,7 @@ public class FolioitemManager
             }
     
             if (pObject.isItemdateInitialized()) {
-                if (pObject.getItemdate() == null) ps.setNull(++_dirtyCount, Types.DATE); else ps.setDate(++_dirtyCount, new Date(pObject.getItemdate().getTime()));
+                if (pObject.getItemdate() == null) ps.setNull(++_dirtyCount, Types.DATE); else ps.setDate(++_dirtyCount, new java.sql.Date(pObject.getItemdate().getTime()));
             }
     
             if (pObject.isRefnoInitialized()) {
@@ -2137,7 +2137,7 @@ public class FolioitemManager
                 }
     
                 if (pObject.isItemdateModified()) {
-                    if (pObject.getItemdate() == null) ps.setNull(++_dirtyCount, Types.DATE); else ps.setDate(++_dirtyCount, new Date(pObject.getItemdate().getTime()));
+                    if (pObject.getItemdate() == null) ps.setNull(++_dirtyCount, Types.DATE); else ps.setDate(++_dirtyCount, new java.sql.Date(pObject.getItemdate().getTime()));
                 }
     
                 if (pObject.isRefnoModified()) {

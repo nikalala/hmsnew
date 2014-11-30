@@ -856,7 +856,7 @@ public class PaymentManager
                 }
     
                 if (pObject.isPaydateModified()) {
-                    if (pObject.getPaydate() == null) ps.setNull(++_dirtyCount, Types.DATE); else ps.setDate(++_dirtyCount, new Date(pObject.getPaydate().getTime()));
+                    if (pObject.getPaydate() == null) ps.setNull(++_dirtyCount, Types.DATE); else ps.setDate(++_dirtyCount, new java.sql.Date(pObject.getPaydate().getTime()));
                 }
     
                 if (pObject.isFolioidModified()) {
@@ -1015,7 +1015,7 @@ public class PaymentManager
                 }
 
                 if (pObject.isPaydateModified()) {
-                      if (pObject.getPaydate() == null) ps.setNull(++_dirtyCount, Types.DATE); else ps.setDate(++_dirtyCount, new Date(pObject.getPaydate().getTime()));
+                      if (pObject.getPaydate() == null) ps.setNull(++_dirtyCount, Types.DATE); else ps.setDate(++_dirtyCount, new java.sql.Date(pObject.getPaydate().getTime()));
                 }
 
                 if (pObject.isFolioidModified()) {
@@ -1198,7 +1198,7 @@ public class PaymentManager
              }
     
              if (pObject.isPaydateModified()) {
-                 if (pObject.getPaydate() == null) ps.setNull(++_dirtyCount, Types.DATE); else ps.setDate(++_dirtyCount, new Date(pObject.getPaydate().getTime()));
+                 if (pObject.getPaydate() == null) ps.setNull(++_dirtyCount, Types.DATE); else ps.setDate(++_dirtyCount, new java.sql.Date(pObject.getPaydate().getTime()));
              }
     
              if (pObject.isFolioidModified()) {
@@ -1352,7 +1352,7 @@ public class PaymentManager
             }
     
             if (pObject.isPaydateInitialized()) {
-                if (pObject.getPaydate() == null) ps.setNull(++_dirtyCount, Types.DATE); else ps.setDate(++_dirtyCount, new Date(pObject.getPaydate().getTime()));
+                if (pObject.getPaydate() == null) ps.setNull(++_dirtyCount, Types.DATE); else ps.setDate(++_dirtyCount, new java.sql.Date(pObject.getPaydate().getTime()));
             }
     
             if (pObject.isFolioidInitialized()) {
@@ -1570,7 +1570,7 @@ public class PaymentManager
                 }
     
                 if (pObject.isPaydateModified()) {
-                    if (pObject.getPaydate() == null) ps.setNull(++_dirtyCount, Types.DATE); else ps.setDate(++_dirtyCount, new Date(pObject.getPaydate().getTime()));
+                    if (pObject.getPaydate() == null) ps.setNull(++_dirtyCount, Types.DATE); else ps.setDate(++_dirtyCount, new java.sql.Date(pObject.getPaydate().getTime()));
                 }
     
                 if (pObject.isFolioidModified()) {

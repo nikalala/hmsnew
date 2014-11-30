@@ -21,10 +21,44 @@
 <script type="text/javascript">
 
     $(document).ready(function () {
-        console.log("started tagents");
         loadDefaults();
 
     });
+
+    function saveTAgent()
+    {
+        var str = $.fn.serializeObject($( "#tagents_add #tagentsfrm" ));
+        for(var key in str) {
+            if(key != "taddress" && key != "tcity" && key != "tphone" && key != "tmobile" && key != "tfax")
+            {
+                if(isNullOrEmpty(str[key]))
+                {
+                    $("#"+key).addClass( "error" );
+                    //BootstrapDialog.alert("გთხოვთ სწორად შეავსოთ ყველა ველი");
+                    console.log(key);
+                    return;
+                }else{
+                    $("#"+key).removeClass( "error" );
+                }
+            }
+        }
+
+        $.ajax({
+            type: 'get', // it's easier to read GET request parameters
+            url: 'content/savetagent.jsp',
+            data: {
+                tagent:JSON.stringify(str)
+            },
+            contentType: 'application/json',
+            dataType: 'json',
+            success: function(data,optins) {
+                BootstrapDialog.alert(optins);
+            },
+            error: function(data,optins) {
+                BootstrapDialog.alert(optins);
+            }
+        });
+    }
 
     function addContr(id)
     {
@@ -51,7 +85,6 @@
     }
     function loadDefaults() {
         tagentsGrid.url += "?query=<%=where+order%>";
-        console.log(tagentsGrid.url);
         initializeGrid(tagentsGrid);
         tagentsGrid.url = 'content/getcontrlist.jsp';
         $('.date').datepicker(<%=pickerformat1%>);
@@ -262,7 +295,7 @@
                                 style="border: 0; font-weight: bold; float: right; margin: 3px 5px 0 0;">
                             დახურვა
                         </button>
-                        <button type="button" class="btn btn-danger" id="saveAgent"
+                        <button type="button" class="btn btn-danger" id="saveAgent" onclick="saveTAgent()"
                                 style="font-weight: bold; float: right; margin: 3px 5px 0 0;">
                             შენახვა
                         </button>
