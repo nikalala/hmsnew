@@ -59,7 +59,7 @@ ReservationroomBean[] reservs = ReservationroomManager.getInstance().loadByWhere
             double total = getSum("select sum(amount) from folioitem where particular not in (1,2) and folioid in (select folioid from folio where reservationroomid = "+reservs[i].getReservationroomid()+")");
             double deposit = getSum("select sum(amount) from payment where folioid in (select folioid from folio where reservationroomid = "+reservs[i].getReservationroomid()+")");
             String actions = "";
-            actions += "<a href=\"javascript:newmWindow1('void','რეზერვაციის განულება','rid="+reservs[i].getReservationroomid()+"')\" title=\"VOID\" class=\"btn btn-xs btn-default\"><i class=\"fa fa-remove\"></i></a>";
+            actions += "<a href=\"javascript:newmWindow1('void','რეზერვაციის წაშლა','rid="+reservs[i].getReservationroomid()+"')\" title=\"VOID\" class=\"btn btn-xs btn-default\"><i class=\"fa fa-remove\"></i></a>";
             actions += "<a href=\"javascript:newmWindow1('cancel','რეზერვაციის გაუქმება','rid="+reservs[i].getReservationroomid()+"')\" title=\"CANCEL\" class=\"btn btn-xs btn-default\"><i class=\"fa fa-minus\"></i></a>";
             actions += "<a href=\"javascript:newmWindow1('noshow','არ გამოცხადებული რეზერვაცია','rid="+reservs[i].getReservationroomid()+"')\" title=\"NOSHOW\" class=\"btn btn-xs btn-default\"><i class=\"fa fa-plane\"></i></a>";
             /*reservs[i].setRoomid(null);*/

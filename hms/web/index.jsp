@@ -81,6 +81,8 @@
         var dateglobalformat1 = "<%=dateformats1[dff]%>";
 
         var globalpars = <%=jschs%>;
+        
+        var lclosedate = <%=lclosedate%>;
 
         $(document).ready(function () {
 

@@ -86,36 +86,44 @@
                            </button>
                            <ul class="dropdown-menu" role="menu" style="margin-left: -220px;">
                                 <li>
-                                    <a href="#"><img src="images/grid/edit.png"> რედაქირება </a>
-								</li>
-								<li class="divider"></li>
-								<li>
-									<a href="#"><img src="images/grid/delete.png"> რეზერვაციის წაშლა</a>
-								</li>
-								<li class="divider"></li>
-								<li>
-									<a href="#"><img src="images/grid/bed_black.png"> დარჩენის ცვლილება</a>
-								</li>
-								<li class="divider"></li>
-								<li>
-									<a href="#"><img src="images/grid/calendar_delete.jpg"> გაუქმება</a>
-								</li>
-								<li class="divider"></li>
+                                    <a onclick="addTab('content/EditTransaction.jsp?reservationroomid=<%=ReservationBeanList[i].getReservationroomid()%>','<span class=\'glyphicon glyphicon-saved\'></span>&nbsp;&nbsp;<%=ReservationBeanList[i].getReservationroomid()%> - DXR','TAB_EditTransaction_<%=ReservationBeanList[i].getReservationroomid()%>');"><img src="images/grid/edit.png"> რედაქირება </a>
+                                </li>
+                                <li class="divider"></li>
                                 <li>
-									<a href="#"><img src="images/grid/calendar_icon.jpg"> რეზერვაციის ტიპის შეცვლა</a>
-								</li>
-								<li class="divider"></li>
+                                    <%if(st == 3){%>
+                                    <a onclick="newmWindow1('void','რეზერვაციის წაშლის გაუქმება','act=1&rid=<%=ReservationBeanList[i].getReservationroomid()%>')"><img src="images/grid/delete.png"> რეზერვაციის წაშლის გაუქმება</a>
+                                    <%} else {%>
+                                    <a onclick="newmWindow1('void','რეზერვაციის წაშლა','rid=<%=ReservationBeanList[i].getReservationroomid()%>')"><img src="images/grid/delete.png"> რეზერვაციის წაშლა</a>
+                                    <%}%>
+                                </li>
+                                <li class="divider"></li>
                                 <li>
-									<a href="#"><img src="images/grid/key.png"> ოთახის მინიჭება</a>
-								</li>
-								<li class="divider"></li>
+                                    <a href="#"><img src="images/grid/bed_black.png"> დარჩენის ცვლილება</a>
+                                </li>
+                                <li class="divider"></li>
                                 <li>
-									<a href="#"><img src="images/grid/list2.jpg"> რეზერვაციის კოპირება</a>
-								</li>
-								<li class="divider"></li>
+                                    <%if(st == 1){%>
+                                    <a onclick="newmWindow1('cancel','რეზერვაციის აღდგენა','act=1&rid=<%=ReservationBeanList[i].getReservationroomid()%>')"><img src="images/grid/calendar_delete.jpg"> აღდგენა</a>
+                                    <%} else {%>
+                                    <a onclick="newmWindow1('cancel','რეზერვაციის გაუქმება','rid=<%=ReservationBeanList[i].getReservationroomid()%>')"><img src="images/grid/calendar_delete.jpg"> გაუქმება</a>
+                                    <%}%>
+                                </li>
+                                <li class="divider"></li>
                                 <li>
-									<a href="#"><img src="images/grid/print.png"> ვაუჩერის ამობეჭდვა</a>
-								</li>
+                                    <a href="#"><img src="images/grid/calendar_icon.jpg"> რეზერვაციის ტიპის შეცვლა</a>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <a href="#"><img src="images/grid/key.png"> ოთახის მინიჭება</a>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <a href="#"><img src="images/grid/list2.jpg"> რეზერვაციის კოპირება</a>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <a href="#"><img src="images/grid/print.png"> ვაუჩერის ამობეჭდვა</a>
+                                </li>
                            </ul>
                         </div>
                         ]]>

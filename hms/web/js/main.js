@@ -507,8 +507,8 @@ function updateWalkinStayInfo(t) {
         $("#guestinfo_night").val(nights);
     }
     if (t == 1) {
-        if (startdate.get('date') == moment().get('date') && startdate.get('month') == moment().get('month') && startdate.get('year') == moment().get('year')) {
-            $("#guestinfo_arrivaltime").val(moment().format('HH:mm'));
+        if (startdate.get('date') == moment.unix(lclosedate).get('date') && startdate.get('month') == moment.unix(lclosedate).get('month') && startdate.get('year') == moment.unix(lclosedate).get('year')) {
+            $("#guestinfo_arrivaltime").val(moment.unix(lclosedate).format('HH:mm'));
             showButtons("myModalCheckin", true, '<button type="button" class="btn btn-danger" id="myModalCheckin" onclick="savedata1(\'myModal\',\'checkin=true\')">მიღება</button>');
         } else {
             $("#guestinfo_arrivaltime").val(globalpars.Checkintime);

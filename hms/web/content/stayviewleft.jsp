@@ -2,6 +2,7 @@
 <%@page pageEncoding="UTF-8"%>
 <%@include file="../includes/init.jsp"%>
 <%
+System.out.println("select * from reservation where reservationid in (select reservationid from reservation where status <= 0 and arraivaldate::date <= N'"+dclosedate+"'::date and departuredate::date >= N'"+dclosedate+"'::date) and leader = true order by guestid");
 ReservationroomBean[] reservs = ReservationroomManager.getInstance().loadByWhere("where reservationid in (select reservationid from reservation where status <= 0 and arraivaldate::date <= N'"+dclosedate+"'::date and departuredate::date >= N'"+dclosedate+"'::date) and leader = true order by guestid");
 %>
 <style>

@@ -55,8 +55,8 @@
 <style>
     .specialTab1,
     li.walkintabs {
-    / / position : absolute;
-    / / margin-left : 0 px;
+    // position : absolute;
+    // margin-left : 0 px;
         height: 27px;
     }
 

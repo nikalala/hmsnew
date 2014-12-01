@@ -2,6 +2,9 @@
 <%@page pageEncoding="UTF-8"%>
 <%@include file="../includes/init.jsp"%>
 <%
+boolean act = false;
+if(request.getParameter("act") != null)
+    act = true;
 ReservationroomBean reserv = ReservationroomManager.getInstance().loadByPrimaryKey(new Long(request.getParameter("rid")));
 ReservationBean res = ReservationManager.getInstance().loadByPrimaryKey(reserv.getReservationid());
 GuestBean guest = GuestManager.getInstance().loadByPrimaryKey(reserv.getGuestid());
@@ -68,9 +71,28 @@ if(checkinsettings.getPostcancellationfee().intValue() == 1){
     tax = ddt*total0/dday;
 }
 %>
+<script>
+    
+    $(document).ready(function () {
+        $("#cancel_cancellationfee").on("change",function(){
+            var val = Number($("#cancel_cancellationfee").val());
+            var valtax = val*0.18;
+            var total = <%=total-deposit%>+val*1.18;
+            $("#cancel_taxvalue").html("<%=maincurrency.getCode()%> "+valtax.toFixed(2));
+            $("#cancel_totalvalue").html("<%=maincurrency.getCode()%> "+total.toFixed(2));
+        });
+    });
+    
+    
+</script>
+<%if(act){%>
+<input type="hidden" id="action" value="savecancel.jsp?act=1&rid=<%=reserv.getReservationroomid()%>"/>
+<input type="hidden" id="callbackurl" value="script:reloadGrid(resGrid.id)"/>
+<%} else {%>
 <input type="hidden" id="action" value="savecancel.jsp?rid=<%=reserv.getReservationroomid()%>"/>
 <input type="hidden" id="controls" value="cancel_reasonid,cancel_cancellationfee"/>
 <input type="hidden" id="callbackurl" value="script:reloadGrid('list_pendingreservations')"/>
+<%}%>
 <table width="100%" class="table table-borderless">
     <tr>
         <td><b>რეზერვაციის #</b></td>
@@ -105,7 +127,7 @@ if(checkinsettings.getPostcancellationfee().intValue() == 1){
     <tr>
         <td><b>ფოლიო</b></td>
         <td><%=(folio.length > 0) ? folio[0].getFolioid():""%></td>
-        <td><b>მომხმარებელი</b></td>
+        <td><b>ოპერატორი</b></td>
         <td><%=user.getFname()%> <%=user.getLname()%></td>
     </tr>
     
@@ -137,8 +159,8 @@ if(checkinsettings.getPostcancellationfee().intValue() == 1){
     
     <tr>
         <td><b>გადასახადის ოდენობა</b></td>
-        <td><%=maincurrency.getCode()%> <%=dc.format(tax)%></td>
+        <td id="cancel_taxvalue"><%=maincurrency.getCode()%> <%=dc.format(tax*0.18)%></td>
         <td><b>ბალანსი</b></td>
-        <td><%=maincurrency.getCode()%> <%=dc.format(total-deposit)%></td>
+        <td id="cancel_totalvalue"><%=maincurrency.getCode()%> <%=dc.format(tax*1.18+total-deposit)%></td>
     </tr>
 </table>

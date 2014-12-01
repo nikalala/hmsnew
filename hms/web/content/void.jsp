@@ -2,6 +2,9 @@
 <%@page pageEncoding="UTF-8"%>
 <%@include file="../includes/init.jsp"%>
 <%
+boolean act = false;
+if(request.getParameter("act") != null)
+    act = true;
 ReservationroomBean reserv = ReservationroomManager.getInstance().loadByPrimaryKey(new Long(request.getParameter("rid")));
 ReservationBean res = ReservationManager.getInstance().loadByPrimaryKey(reserv.getReservationid());
 GuestBean guest = GuestManager.getInstance().loadByPrimaryKey(reserv.getGuestid());
@@ -43,12 +46,17 @@ if(res.getBsourceid() != null){
 double total = getSum("select sum(amount) from folioitem where particular not in (1,2) and folioid in (select folioid from folio where reservationroomid = "+reserv.getReservationroomid()+")");
 double deposit = getSum("select sum(amount) from payment where folioid in (select folioid from folio where reservationroomid = "+reserv.getReservationroomid()+")");
 
-ReasonBean[] reasons = ReasonManager.getInstance().loadByWhere("where deleted = false and active = true and reasoncategory = 1 order by name");
+ReasonBean[] reasons = ReasonManager.getInstance().loadByWhere("where deleted = false and active = true and reasoncategory = 13 order by name");
 FolioBean[] folio = FolioManager.getInstance().loadByWhere("where reservationroomid = "+reserv.getReservationroomid());
 %>
+<%if(act){%>
+<input type="hidden" id="action" value="savevoid.jsp?act=1&rid=<%=reserv.getReservationroomid()%>"/>
+<input type="hidden" id="callbackurl" value="script:reloadGrid(resGrid.id)"/>
+<%} else {%>
 <input type="hidden" id="action" value="savevoid.jsp?rid=<%=reserv.getReservationroomid()%>"/>
 <input type="hidden" id="controls" value="reasonid"/>
 <input type="hidden" id="callbackurl" value="script:reloadGrid('list_pendingreservations')"/>
+<%}%>
 <table width="100%" class="table table-borderless">
     <tr>
         <td><b>რეზერვაციის #</b></td>
