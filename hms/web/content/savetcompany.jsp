@@ -13,74 +13,79 @@
         if (jsonString != null && jsonString.length() > 0) {
             JSONObject json = (JSONObject) JSONSerializer.toJSON(jsonString);
             ContragentBean c = ContragentManager.getInstance().createContragentBean();
-            System.out.println(json);
+
             if (((String) json.get("taddress")).trim() != null) {
                 c.setAddress((String) json.get("taddress"));
             }
+
             if (json.get("taddtobussinesssource") != null && json.get("taddtobussinesssource").toString().length() > 0) {
                 c.setBsource(json.get("taddtobussinesssource").equals("on") ? true : false);
             }
-            if (json.get("tccblock") != null && json.get("tccblock").toString().length() > 0) {
-                c.setCcblock(json.get("tccblock").equals("on") ? true : false);
-            }
+
             if (json.get("tcreateuser") != null && json.get("tcreateuser").toString().length() > 0) {
                 c.setCreateuser(json.get("tcreateuser").equals("on") ? true : false);
             }
+
             if (json.get("tcity") != null) {
                 c.setCity((String) json.get("tcity"));
             }
-            if (json.get("tcommissionplan") != null) {
-                c.setCommissionplan(new Integer(json.get("tcommissionplan").toString()));
-            }
+
             c.setRegbyid(user.getPersonnelid());
-            c.setType(2);
-            if (json.get("tcontragentid") != null) {
+            c.setType(1);
+
+            if (json.get("tcontragentid") != null && ((String)json.get("tcontragentid")).length() > 0) {
                 Long tcontragentid = Long.parseLong((String) json.get("tcontragentid"));
                 if (tcontragentid != null && tcontragentid > 0) {
                     c.setContragentid(tcontragentid);
                 }
             }
 
+            if (json.get("tcterm") != null && ((String)json.get("tcterm")).length() > 0) {
+                Integer tcterm = Integer.parseInt((String) json.get("tcterm"));
+                if (tcterm != null && tcterm > 0) {
+                    c.setCreditterm(tcterm);
+                }
+            }
 
-            if (json.get("tcountryid") != null) {
+            if (json.get("tclimit") != null && ((String)json.get("tclimit")).length() > 0) {
+                Long tclimit = Long.parseLong((String) json.get("tclimit"));
+                if (tclimit != null && tclimit > 0) {
+                    c.setCreditlimit(tclimit);
+                }
+            }
+
+            if (json.get("tcountryid") != null && ((String)json.get("tcountryid")).length() > 0) {
                 Integer countryId = Integer.parseInt((String) json.get("tcountryid"));
                 if (countryId != null) {
                     c.setCountryid(countryId);
                 }
             }
 
-            if (json.get("tsalutation") != null) {
+            if (json.get("tsalutation") != null && ((String)json.get("tsalutation")).length() > 0) {
                 Integer setSalutationid = Integer.parseInt((String) json.get("tsalutation"));
                 if (setSalutationid != null) {
                     c.setCountryid(setSalutationid);
                 }
             }
 
-            if (json.get("rinve") != null) {
+            if (json.get("rinve") != null && ((String)json.get("rinve")).length() > 0) {
                 Integer rinve = Integer.parseInt((String) json.get("rinve"));
                 if (rinve != null) {
                     c.setRoominventory(rinve);
                 }
             }
 
-            if (json.get("topenbal") != null) {
+            if (json.get("topenbal") != null  && ((String)json.get("topenbal")).length() > 0) {
                 Double topenbal = Double.parseDouble((String) json.get("topenbal"));
                 if (topenbal != null) {
                     c.setOpenbalance(topenbal);
                 }
             }
 
-            if (json.get("trate") != null) {
+            if (json.get("trate") != null && ((String)json.get("trate")).length() > 0) {
                 Integer trate = Integer.parseInt((String) json.get("trate"));
                 if (trate != null) {
                     c.setRate(trate);
-                }
-            }
-
-            if (json.get("tvalue") != null) {
-                Double tvalue = Double.parseDouble((String) json.get("tvalue"));
-                if (tvalue != null) {
-                    c.setVal(tvalue);
                 }
             }
 
@@ -99,17 +104,18 @@
             if (json.get("tcompany") != null) {
                 c.setName((String) json.get("tcompany"));
             }
+
             if ((String) json.get("tcontrname") != null && ((String) json.get("tcontrname")).length() > 0) {
                 String[] contr = ((String) json.get("tcontrname")).split(" ");
                 if (contr != null && contr.length == 2) {
                     c.setFname(contr[0]);
                     c.setLname(contr[1]);
                 } else {
-                    errorContrName = "სწორად შეიყვანეთ ტურისტული აგენტის სახელი და გვარი. მაგ(დავით ბერძენიშვილი)";
+                    errorContrName = "სწორად შეიყვანეთ საკონტაქტო პირის სახელი და გვარი. მაგ(დავით ბერძენიშვილი)";
                 }
 
             } else {
-                errorContrName = "სწორად შეიყვანეთ ტურისტული აგენტის სახელი და გვარი. მაგ(დავით ბერძენიშვილი)";
+                errorContrName = "სწორად შეიყვანეთ საკონტაქტო პირის სახელი და გვარი. მაგ(დავით ბერძენიშვილი)";
             }
 
             if (errorContrName.length() > 0) {

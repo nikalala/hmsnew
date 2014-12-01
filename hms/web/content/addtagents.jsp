@@ -26,6 +26,7 @@
         $('.dropdown').selectpicker();
         $(".ttable input[type=text]").height($(".ttable .btn-group").height() - 6, "!important");
         $("#tsalutation").next().css("width", "70px").css("padding-right", "10px");
+        $("#tphone, #tmobile, #tfax, #tvalue, #topenbal").ForceNumericOnly();
     });
 </script>
 <form id="tagentsfrm" name="tagentsfrm">
@@ -73,8 +74,8 @@
         <tr>
             <td><label>ქვეყანა:</label></td>
             <td>
-                <select class="dropdown combobox" style="width: 100%; margin: 4px;" id="countryBean" name="tcountryid">
-                    <%--<option value="">-აირჩიეთ-</option>--%>
+                <select class="dropdown combobox" style="width: 100%; margin: 4px;" id="tcountryid" name="tcountryid">
+                    <option value="">--აირჩიეთ--</option>
                     <%
                         for (int i = 0; i < country.length; i++) {
                             String selected = "";
@@ -102,10 +103,14 @@
                 <%
                     for (int i = 0; i < rate.length; i++) {
                         String selected = "";
-                        if (contragentlistBeans != null && contragentlistBeans.getRate() == i) {
+                        if ( (contragentlistBeans != null && contragentlistBeans.getRate() == i)) {
                             selected = "checked";
                         } else {
                             selected = "";
+                            if(contragentlistBeans == null && i == 0)
+                            {
+                                selected = "checked";
+                            }
                         }
                 %>
                 <input type="radio" name="trate" value="<%=i%>" <%=selected%>><label><%=rate[i]%>
@@ -160,6 +165,7 @@
             <td><label>საკომისიოს გეგმა:</label></td>
             <td>
                 <select class="dropdown" id="tcommissionplan" name="tcommissionplan">
+                    <option value="">--აირჩიეთ--</option>
                     <%
                         int tind = 0;
                         for (String item : commissionplan) {
@@ -202,6 +208,10 @@
                             selected = "checked";
                         } else {
                             selected = "";
+                            if(contragentlistBeans == null && i == 0)
+                            {
+                                selected = "checked";
+                            }
                         }
                 %>
                 <input type="radio" name="rinve" value="<%=i%>" <%=selected%>><label><%=roominventory[i]%></label>

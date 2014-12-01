@@ -6,13 +6,16 @@
     String type = (String) request.getParameter("type");
     String where = "";
     String order = "";
-    if(type == null || type.equals("1"))
-    {
+    String _page = "";
+    if (type == null || type.equals("1")) {
         where = "where type = 1 ";
         order = " order by company";
-    }else{
+        _page = "content/savetcompany.jsp";
+    }
+    if (type == null || type.equals("2")) {
         where = "where type = 2 ";
         order = " order by contragent";
+        _page = "content/savetagent.jsp";
     }
     CountryBean[] country = CountryManager.getInstance().loadByWhere("order by name");
 %>
@@ -22,62 +25,114 @@
 
     $(document).ready(function () {
         loadDefaults();
-
     });
 
-    function saveTAgent()
-    {
-        var str = $.fn.serializeObject($( "#tagents_add #tagentsfrm" ));
-        for(var key in str) {
-            if(key != "taddress" && key != "tcity" && key != "tphone" && key != "tmobile" && key != "tfax")
-            {
-                if(isNullOrEmpty(str[key]))
-                {
-                    $("#"+key).addClass( "error" );
-                    //BootstrapDialog.alert("გთხოვთ სწორად შეავსოთ ყველა ველი");
-                    console.log(key);
-                    return;
-                }else{
-                    $("#"+key).removeClass( "error" );
+    function saveTAgent() {
+        var str = $.fn.serializeObject($("#tagents_add #tagentsfrm"));
+        var errorExist = false;
+        for (var key in str) {
+            console.log(key + " - " + str[key]);
+            if (key != "taddress" && key != "tcity" && key != "tphone" && key != "tmobile" && key != "tfax" && key != "tclimit" && key != "tcterm" && key != "topenbal" && key != "tvalue") {
+                if (isNullOrEmpty(str[key])) {
+                    if (key == "tcountryid") {
+                        $("#" + key).next().addClass("error");
+                    } else {
+                        $("#" + key).addClass("error");
+                    }
+                    errorExist = true;
+                } else {
+                    if (key == "tcountryid" || key == "tcommissionplan") {
+                        $("#" + key).next().removeClass("error");
+                    } else {
+                        $("#" + key).removeClass("error");
+                    }
+                    if (key == "tcontrname") {
+                        var contr = str[key].split(' ');
+                        if (contr.length != 2) {
+                            errorExist = true;
+                            $("#" + key).addClass("error");
+                            BootstrapDialog.alert("სწორად შეიყვანეთ სახელი და გვარი. მაგ(დავით ბერძენიშვილი)");
+                        }
+                    }
+                    if (key == "temail") {
+                        if (!isValidEmailAddress(str[key])) {
+                            errorExist = true;
+                            $("#" + key).addClass("error");
+                            BootstrapDialog.alert("სწორად შეიყვანეთ ელ-ფოსტა.მაგ(tourist@selfin.ge)");
+                        }
+                    }
                 }
             }
         }
-
+        if (errorExist) {
+            return;
+        }
         $.ajax({
             type: 'get', // it's easier to read GET request parameters
-            url: 'content/savetagent.jsp',
+            url: '<%=_page%>',
             data: {
-                tagent:JSON.stringify(str)
+                tagent: encodeURIComponent(JSON.stringify(str))
             },
             contentType: 'application/json',
             dataType: 'json',
-            success: function(data,optins) {
-                BootstrapDialog.alert(optins);
+            success: function (data) {
+                console.log(data);
+                if (data.status == "ok") {
+
+                    <%
+                        if(type.equals("1"))
+                        {
+                    %>
+                    var t = "კომპანიის";
+                    <%
+                        }
+                        if(type.equals("2"))
+                        {
+                    %>
+                    var t = "ტურისტული აგენტის";
+                    <%
+                        }
+                    %>
+                    BootstrapDialog.alert(t + " დამატება წარმატებით დასრულდა");
+                    cancelSaveContr();
+                    doFilter(true);
+                }
             },
-            error: function(data,optins) {
-                BootstrapDialog.alert(optins);
+            error: function (data) {
+                BootstrapDialog.alert("დაფიქსირდა შეცდომა. შეამოწმეთ ყველა ველი და შეცდომის განმეორების შემთხვევაში დაუკავშირდით ადმინისტრატორს");
             }
         });
     }
 
-    function addContr(id)
-    {
+    function addContr(id) {
         loader.show();
 
         $(".filter-form1").hide();
         $("#grid-footer").hide();
         $(".filter-form2").slideToggle();
         var url = "content/addtagents.jsp";
-        if(!isNullOrEmpty(id))
-        {
-            url += "?tid="+id;
+        if (!isNullOrEmpty(id)) {
+            url += "?tid=" + id;
         }
-        $("#tagents_add").load(url, function(){
+        $("#tagents_add").load(url, function () {
             loader.hide();
         }).fadeIn('normal');
     }
-    function cancelSaveContr()
-    {
+    function addCompany(id) {
+        loader.show();
+
+        $(".filter-form1").hide();
+        $("#grid-footer").hide();
+        $(".filter-form2").slideToggle();
+        var url = "content/addtcompany.jsp";
+        if (!isNullOrEmpty(id)) {
+            url += "?tid=" + id;
+        }
+        $("#tagents_add").load(url, function () {
+            loader.hide();
+        }).fadeIn('normal');
+    }
+    function cancelSaveContr() {
         $(".filter-form1").slideToggle();
         $(".filter-form2").hide();
         $("#grid-footer").show();
@@ -108,7 +163,7 @@
         var fitlerEquals = " = ";
         var filterQuery = "";
 
-        if(bool){
+        if (bool) {
             resetFilterPanel();
             var uri = "content/getcontrlist.jsp?query=<%=where+order%>";
             reloadGrid(tagentsGrid.id, uri);
@@ -136,7 +191,7 @@
             filterQuery += " mobile LIKE '%" + phone.val() + "%' OR phone LIKE '%" + phone.val() + "%'" + contQuery;
         }
 
-        var retVal = filterQuery.substring(0,filterQuery.trim().lastIndexOf("AND"));
+        var retVal = filterQuery.substring(0, filterQuery.trim().lastIndexOf("AND"));
         if (!isNullOrEmpty(retVal)) {
             var url = "content/getcontrlist.jsp?query=" + encodeURIComponent("<%=where%> AND " + retVal + "<%=order%>");
             reloadGrid(tagentsGrid.id, url);
@@ -170,9 +225,21 @@
                                 style="border: 0; font-weight: bold; float: right; margin: 3px 5px 0 0;">
                             ექსპორტი
                         </button>
-                        <button type="button" class="btn btn-default" id="addAgent" onclick="addContr()"
+                        <button type="button" class="btn btn-default" id="addAgent"
+                                onclick="<%if(type.equals("1")){%>  addCompany(); <%}else{%> addContr() <%}%>"
                                 style="border: 0; font-weight: bold; float: right; margin: 3px 5px 0 0;">
+                            <%
+                                if (type.equals("1")) {
+                            %>
+                            კომპანიის დამატება
+                            <%
+                                }
+                                if (type.equals("2")) {
+                            %>
                             ტურისტული აგენტის დამატება
+                            <%
+                                }
+                            %>
                         </button>
                     </div>
                 </div>
@@ -182,7 +249,7 @@
             <td>
                 <div style="width: 100%;float: left;">
 
-                    <% if(type.equals("2")){ %>
+                    <% if (type.equals("2")) { %>
 
                     <div class="col-md-2">
                         <label>სახელი:</label>
@@ -197,7 +264,7 @@
                         <input type="text" style="width: 100% !important;" id="company">
                     </div>
 
-                    <% }else{ %>
+                    <% } else { %>
 
                     <div class="col-md-2">
                         <label>კომპანია:</label>
@@ -305,6 +372,7 @@
         </tr>
     </table>
 </form>
-<div align="center" id="grid-footer" style="background: transparent; width: 100%;height: 33px;line-height: 33px; margin:0 auto;">
+<div align="center" id="grid-footer"
+     style="background: transparent; width: 100%;height: 33px;line-height: 33px; margin:0 auto;">
     <div style="background-color: red; margin:10px 0 10px 0;">HELLO THIS IS THE FOOTER</div>
 </div>
