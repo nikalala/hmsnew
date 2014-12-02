@@ -2,6 +2,9 @@
 <%@page pageEncoding="UTF-8" %>
 <%@include file="../includes/init.jsp" %>
 <%
+    boolean act = false;
+    if(request.getParameter("act") != null)
+        act = true;
     ReservationroomBean reserv = ReservationroomManager.getInstance().loadByPrimaryKey(new Long(request.getParameter("rid")));
     ReservationBean res = ReservationManager.getInstance().loadByPrimaryKey(reserv.getReservationid());
     GuestBean guest = GuestManager.getInstance().loadByPrimaryKey(reserv.getGuestid());
@@ -51,22 +54,48 @@
     double total0 = getSum("select sum(amount) from folioitem where particular = 6 and folioid in (select folioid from folio where reservationroomid = " + reserv.getReservationroomid() + ")");
 
     FolioBean[] folio = FolioManager.getInstance().loadByWhere("where reservationroomid = " + reserv.getReservationroomid());
-    double ddt = checkinsettings.getAmountcancell().doubleValue();
+    
+    boolean totalchargenoshow = true;
+    if(checkinsettings.getTotalchargenoshow().booleanValue())
+        totalchargenoshow = false;
+    
+    double ddt = checkinsettings.getAmountnoshow().doubleValue();
     double tax = 0;
-    if (checkinsettings.getPostcancellationfee().intValue() == 1) {
-        if (checkinsettings.getTotalchargecancell().booleanValue())
-            tax = total * checkinsettings.getAmountcancell().doubleValue() / 100;
-        else
-            tax = total0 * checkinsettings.getAmountcancell().doubleValue() / 100;
-    } else if (checkinsettings.getPostcancellationfee().intValue() == 2) {
-        tax = checkinsettings.getAmountcancell().doubleValue();
-    } else if (checkinsettings.getPostcancellationfee().intValue() == 3 && dday > 0) {
-        tax = ddt * total0 / dday;
+    if(totalchargenoshow){
+        if (checkinsettings.getPostnoshowfee().intValue() == 1) {
+            if (!checkinsettings.getTotalchargenoshow().booleanValue())
+                tax = total * checkinsettings.getAmountnoshow().doubleValue() / 100;
+            else
+                tax = total0 * checkinsettings.getAmountnoshow().doubleValue() / 100;
+        } else if (checkinsettings.getPostnoshowfee().intValue() == 2) {
+            tax = checkinsettings.getAmountnoshow().doubleValue();
+        } else if (checkinsettings.getPostnoshowfee().intValue() == 3 && dday > 0) {
+            tax = ddt * total0 / dday;
+        }
     }
 %>
-<input type="hidden" id="action" value="savevoid.jsp?rid=<%=reserv.getReservationroomid()%>"/>
-<input type="hidden" id="controls" value="reasonid"/>
+<script>
+    
+    $(document).ready(function () {
+        $("#nowshow_cancellationfee").on("change",function(){
+            var val = Number($("#nowshow_cancellationfee").val());
+            var valtax = val*0.18;
+            var total = <%=total-deposit%>+val*1.18;
+            $("#nowshow_taxvalue").html("<%=maincurrency.getCode()%> "+valtax.toFixed(2));
+            $("#nowshow_totalvalue").html("<%=maincurrency.getCode()%> "+total.toFixed(2));
+        });
+    });
+    
+    
+</script>
+<%if(act){%>
+<input type="hidden" id="action" value="savenowshow.jsp?rid=<%=reserv.getReservationroomid()%>"/>
+<input type="hidden" id="callbackurl" value="script:reloadGrid(resGrid.id)"/>
+<%} else {%>
+<input type="hidden" id="action" value="savecancel.jsp?rid=<%=reserv.getReservationroomid()%>"/>
+<input type="hidden" id="controls" value="nowshow_reasonid,nowshow_cancellationfee"/>
 <input type="hidden" id="callbackurl" value="script:reloadGrid('list_pendingreservations')"/>
+<%}%>
 <table width="100%" class="table table-borderless">
     <tr>
         <td><b>რეზერვაციის #</b></td>
@@ -111,11 +140,13 @@
         <td><%=user.getFname()%> <%=user.getLname()%></td>
     </tr>
     <tr>
-        <td><b>ანგარიში</b></td>
-        <td>არ გამოცხადების ანგარიში</td>
+        <td><b>არ გამოცხადების გადასახადი</b></td>
+        <td>
+            <%=maincurrency.getCode()%> <input type='text' name='nowshow_cancellationfee' id='nowshow_cancellationfee' size="10" value='<%=dc.format(tax)%>'/>
+        </td>
         <td><b>მიზეზი</b></td>
         <td>
-            <select name="cancel_reasonid" id="cancel_reasonid">
+            <select name="nowshow_reasonid" id="cancel_reasonid">
                 <option value="0">-- აირჩიეთ --</option>
                 <%
                     for(int i=0;i<reasons.length;i++){
@@ -128,16 +159,16 @@
         </td>
     </tr>
     <tr>
-        <td><b>გადასახადის ოდენობა</b></td>
-        <td><%=maincurrency.getCode()%> <%=dc.format(tax)%>
+        <td><b>ანგარიში</b></td>
+        <td>არ გამოცხადების ანგარიში</td>
         </td>
         <td><b>დაკისრებული გადასახადი</b></td>
         <td>დღგ</td>
     </tr>
     <tr>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
+        <td><b>გადასახადის ოდენობა</b></td>
+        <td id="nowshow_taxvalue"><%=maincurrency.getCode()%> <%=dc.format(tax*0.18)%>
         <td><b>ბალანსი</b></td>
-        <td><%=maincurrency.getCode()%> <%=dc.format(total-deposit)%></td>
+        <td id="nowshow_totalvalue"><%=maincurrency.getCode()%> <%=dc.format(tax*1.18+total-deposit)%></td>
     </tr>
 </table>

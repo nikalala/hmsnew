@@ -74,9 +74,9 @@ for(int i=0;i<items.length;i++){
         PaymentmethodBean pmethod = PaymentmethodManager.getInstance().loadByPrimaryKey(payment.getPaymentmethodid());
         particular += pmethod.getCode();
         koeff = -1;
-    } else if(items[i].getParticular().intValue() == 1){
+    } else if(items[i].getParticular().intValue() == 6){
         noroom = false;
-        particular = "გაუქმება";
+        particular = accounts[items[i].getRoomoper()];
     } else {
         noroom = true;
         particular = "დამრგვალება";

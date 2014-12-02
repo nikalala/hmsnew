@@ -68,7 +68,7 @@
         tax = ddt * total0 / dday;
     }
 %>
-<% RoomBean[] roomBeans = RoomManager.getInstance().loadByWhere("ORDER BY ord"); %>
+<% RoomBean[] roomBeans = RoomManager.getInstance().loadByWhere("where getroomstatus(roomid,'"+dflong.format(lclosedate)+"') = 8 ORDER BY ord"); %>
 <% RoomtypeBean[] roomTypes = RoomtypeManager.getInstance().loadByWhere("ORDER BY ord"); %>
 <script>
     var lastroomtypeId = 0;
@@ -91,8 +91,8 @@
         $("#roomBean").html(html);
     });
 </script>
-<input type="hidden" id="action" value="savecancel.jsp?rid=<%=reserv.getReservationroomid()%>"/>
-<input type="hidden" id="controls" value="cancel_reasonid,cancel_cancellationfee"/>
+<input type="hidden" id="action" value="saveassignroom.jsp?rid=<%=reserv.getReservationroomid()%>"/>
+<input type="hidden" id="controls" value="assignroom_roomid"/>
 <input type="hidden" id="callbackurl" value="script:reloadGrid('list_pendingreservations')"/>
 <table width="100%" class="table table-borderless">
     <tr>
@@ -139,7 +139,7 @@
                 </option>
                 <% } %>
             </select>
-            <select class="dropdown" id="roomBean">
+            <select class="dropdown" id="assignroom_roomid">
                 <option value="0">-ოთახის #-</option>
                 <% for (int i = 0; i < roomBeans.length; i++) { %>
                 <option value="<%=roomBeans[i].getRoomid()%>"

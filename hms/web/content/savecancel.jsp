@@ -13,11 +13,11 @@ try{
     ReservationBean res = ReservationManager.getInstance().loadByPrimaryKey(reserv.getReservationid());
     FolioBean[] folio = FolioManager.getInstance().loadByWhere("where reservationroomid = "+reserv.getReservationroomid());
     if(act){
-        res.setStatus(0);
-        res = ReservationManager.getInstance().save(res);
-        ReservationreasonManager.getInstance().deleteByReservationid(res.getReservationid());
-        String sql = "where (particular = 1 || particuler = -1) and length(note) > 0 and itemdate = to_date('DD/MM/YYYY','"+dttt.format(res.getArraivaldate())+"') and folioid = "+folio[0].getFolioid();
-        FolioitemManager.getInstance().deleteByWhere(sql);
+        //res.setStatus(0);
+        //res = ReservationManager.getInstance().save(res);
+        //ReservationreasonManager.getInstance().deleteByReservationid(res.getReservationid());
+        //String sql = "where (particular = 1 || particuler = -1) and length(note) > 0 and itemdate = to_date('DD/MM/YYYY','"+dttt.format(res.getArraivaldate())+"') and folioid = "+folio[0].getFolioid();
+        //FolioitemManager.getInstance().deleteByWhere(sql);
     } else {
     
         int reasonid = Integer.parseInt(request.getParameter("cancel_reasonid"));
@@ -36,7 +36,14 @@ try{
         rs.setReservationid(res.getReservationid());
         rs = ReservationreasonManager.getInstance().save(rs);
 
-        
+        if(reserv.getRoomid() != null){
+            RoomstBean roomst = RoomstManager.getInstance().createRoomstBean();
+            roomst.setRegbyid(user.getPersonnelid());
+            roomst.setRoomid(reserv.getRoomid());
+            roomst.setStatusdate(res.getArraivaldate());
+            roomst.setSt(8);
+            roomst = RoomstManager.getInstance().save(roomst);
+        }
 
         ReasonBean reason = ReasonManager.getInstance().loadByPrimaryKey(reasonid);
 
@@ -47,7 +54,8 @@ try{
             fb.setRegbyid(user.getPersonnelid());
             fb.setAmount(cancellationfee);
             fb.setDone(false);
-            fb.setParticular(1);
+            fb.setParticular(6);
+            fb.setRoomoper(0);
             fb.setNote(reason.getName());
             fb = FolioitemManager.getInstance().save(fb);
 

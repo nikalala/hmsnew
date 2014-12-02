@@ -86,7 +86,7 @@ if(checkinsettings.getPostcancellationfee().intValue() == 1){
     
 </script>
 <%if(act){%>
-<input type="hidden" id="action" value="savecancel.jsp?act=1&rid=<%=reserv.getReservationroomid()%>"/>
+<input type="hidden" id="action" value="savecancel.jsp?rid=<%=reserv.getReservationroomid()%>"/>
 <input type="hidden" id="callbackurl" value="script:reloadGrid(resGrid.id)"/>
 <%} else {%>
 <input type="hidden" id="action" value="savecancel.jsp?rid=<%=reserv.getReservationroomid()%>"/>

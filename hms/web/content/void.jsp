@@ -50,7 +50,7 @@ ReasonBean[] reasons = ReasonManager.getInstance().loadByWhere("where deleted = 
 FolioBean[] folio = FolioManager.getInstance().loadByWhere("where reservationroomid = "+reserv.getReservationroomid());
 %>
 <%if(act){%>
-<input type="hidden" id="action" value="savevoid.jsp?act=1&rid=<%=reserv.getReservationroomid()%>"/>
+<input type="hidden" id="action" value="savevoid.jsp?rid=<%=reserv.getReservationroomid()%>"/>
 <input type="hidden" id="callbackurl" value="script:reloadGrid(resGrid.id)"/>
 <%} else {%>
 <input type="hidden" id="action" value="savevoid.jsp?rid=<%=reserv.getReservationroomid()%>"/>
