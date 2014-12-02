@@ -67,7 +67,7 @@ ReservationroomBean[] reservs = ReservationroomManager.getInstance().loadByWhere
                 actions += "<a href=\"javascript:newmWindow1('assignroom','ოთახის მინიჭება','rid="+reservs[i].getReservationroomid()+"')\" title=\"ASSIGN ROOM\" class=\"btn btn-xs btn-default\"><i class=\"fa fa-bell\"></i></a>";
             /*if(rtp.getConfirmed().booleanValue()){*/
             else
-                actions += "<a href=\"javascript:newsWindow('construction','შესვლა')\" title=\"CHECKIN\" class=\"btn btn-xs btn-default\"><i class=\"fa fa-check\"></i></a>";
+                actions += "<a href=\"javascript:newsWindow1('checkin','შესვლა','rid="+reservs[i].getRoomid()+"')\" title=\"CHECKIN\" class=\"btn btn-xs btn-default\"><i class=\"fa fa-check\"></i></a>";
             %>
                 <row id='<%=reservs[i].getReservationroomid()%>'>
                     <cell><![CDATA[<%=reservs[i].getReservationroomid()%>]]></cell>
