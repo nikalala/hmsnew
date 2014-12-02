@@ -67,18 +67,22 @@
     } else if (checkinsettings.getPostcancellationfee().intValue() == 3 && dday > 0) {
         tax = ddt * total0 / dday;
     }
-%>
-<% RoomBean[] roomBeans = RoomManager.getInstance().loadByWhere("where getroomstatus(roomid,'"+dflong.format(lclosedate)+"') = 8 ORDER BY ord"); %>
+    String roomWhere = "where getroomstatus(roomid,'"+dflong.format(lclosedate)+"') = 8 ORDER BY ord";
+    System.out.println(roomWhere);
+    RoomBean[] roomBeans = RoomManager.getInstance().loadByWhere(roomWhere); %>
 <% RoomtypeBean[] roomTypes = RoomtypeManager.getInstance().loadByWhere("ORDER BY ord"); %>
 <script>
     var lastroomtypeId = 0;
+    $("#mediummodalsave").attr('disabled','disabled');
     $("#roomType").on('change', function () {
         var id = $(this).val();
+        modifyRate(id != <%=reserv.getRoomtypeid()%>);
         if (id > 0) {
             var html = "<option value='0'>-ოთახის #-</option>";
             <% for (int i = 0; i < roomBeans.length; i++) {%>
             var value = "<%=roomBeans[i].getRoomtypeid()%>";
             if (id == value) {
+
                 html += "<option value='<%=roomBeans[i].getRoomid()%>' roomtypeid='<%=roomBeans[i].getRoomtypeid()%>'><%=roomBeans[i].getName()%></option>";
             }
             <% } %>
@@ -88,10 +92,50 @@
             html += "<option value='<%=roomBeans[i].getRoomid()%>' roomtypeid='<%=roomBeans[i].getRoomtypeid()%>'><%=roomBeans[i].getName()%></option>";
             <% }%>
         }
-        $("#roomBean").html(html);
+        $("#assignroom_roomid").html(html);
     });
+    $("#assignroom_roomid").on('change', function () {
+        var id = $(this).val();
+        console.log("room numb > " + id);
+        if(id > 0)
+        {
+            $("#mediummodalsave").removeAttr('disabled');
+            $(".assignroomURL").val(generateUrl(id));
+        }else{
+            $("#mediummodalsave").attr('disabled','disabled');
+        }
+    });
+    function modifyRate(bool)
+    {
+        if(bool){
+            $("#renewRoomPrice").css("display","block");
+        }else{
+            $("#renewRoomPrice").css("display","none");
+        }
+    }
+
+    function populateRoomFirst(id)
+    {
+        var html = "<option value='0'>-ოთახის #-</option>";
+        <% for (int i = 0; i < roomBeans.length; i++) {%>
+        var value = "<%=roomBeans[i].getRoomtypeid()%>";
+        if (id == value) {
+
+            html += "<option value='<%=roomBeans[i].getRoomid()%>' roomtypeid='<%=roomBeans[i].getRoomtypeid()%>'><%=roomBeans[i].getName()%></option>";
+        }
+        <% } %>
+        $("#assignroom_roomid").html(html);
+    }
+    $(document).ready(function(){
+        populateRoomFirst($("#roomType").val());
+    });
+
+    function generateUrl(value)
+    {
+        return "saveassignroom.jsp?rrid=<%=reserv.getReservationroomid()%>&rid="+value+"&rti=<%=res.getReservationtypeid()%>";
+    }
 </script>
-<input type="hidden" id="action" value="saveassignroom.jsp?rid=<%=reserv.getReservationroomid()%>"/>
+<input type="hidden" id="action" class="assignroomURL"/>
 <input type="hidden" id="controls" value="assignroom_roomid"/>
 <input type="hidden" id="callbackurl" value="script:reloadGrid('list_pendingreservations')"/>
 <table width="100%" class="table table-borderless">
@@ -168,6 +212,12 @@
         <td><b>ღამეები</b></td>
         <td>
             <%=DayDiff(cal1, cal2) + 1%>
+        </td>
+    </tr>
+    <tr id="renewRoomPrice"  style="display: none;" >
+        <td><b>ოთახის ტარიფის განახლება</b></td>
+        <td>
+            <input type="checkbox" id="renewRoomPricech" name="renewRoomPricech"/>
         </td>
     </tr>
 </table>
