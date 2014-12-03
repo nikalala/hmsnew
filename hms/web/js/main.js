@@ -355,6 +355,14 @@ function newsWindow1(fname, title, qr) {
     });
 }
 
+function modalWindow(fname, title, qr, callback, callbackparam) {
+    $.post("content/" + fname + ".jsp?" + qr, {}, function (data) {
+        callback(callbackparam);
+        BootstrapDialog.alert(data.trim());
+    });
+}
+
+
 function newmWindow(fname, title) {
     $.post("content/" + fname + ".jsp", {}, function (data) {
         $("#mdheader").html(title);

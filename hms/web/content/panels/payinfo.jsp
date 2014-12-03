@@ -87,7 +87,7 @@ ReservationtypeBean[] resrvationtypes = ReservationtypeManager.getInstance().loa
         $("#payinfo_hasrelesedate").click(function(){
             if($(this).is(':checked')){
                 $("#payinfo_relesedate").attr("readonly",false);
-                $("#payinfo_relesedate").datepicker().on('changeDate', function(ev){
+                $("#payinfo_relesedate").datepicker(<%=pickerformat2%>).on('changeDate', function(ev){
                     $("#payinfo_term").attr("readonly",false);
                     $("#payinfo_relesedate").datepicker("hide");
                     $("#payinfo_term").focus();
@@ -262,7 +262,7 @@ ReservationtypeBean[] resrvationtypes = ReservationtypeManager.getInstance().loa
                 </div>
                 <div class="form-group">
                     <div class="input-group-xs">
-                        <div class="input-append date" data-date="" data-date-format="dd-mm-yyyy">
+                        <div class="input-append date" data-date="" data-date-format="dd-MM-yyyy">
                             <input class="span2 form-control" size="10" value="" readonly="" type="text" id="payinfo_relesedate">
                         </div>
                     </div>

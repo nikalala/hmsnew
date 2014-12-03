@@ -1,12 +1,12 @@
-<%@page contentType="text/html; charset=UTF-8"%>
-<%@page pageEncoding="UTF-8"%>
-<%@include file="../includes/init.jsp"%>
+<%@page contentType="text/html; charset=UTF-8" %>
+<%@page pageEncoding="UTF-8" %>
+<%@include file="../includes/init.jsp" %>
 <%
 
-String[] tabs = {"დაუსრულებელი რეზერვაციები","დასრულებული რეზერვაციები","ოთახის სტატუსი","დაურეგულირებელი ფოლიო","ღამის გადასახადი","დღის დახურვა"};
+    String[] tabs = {"დაუსრულებელი რეზერვაციები", "დასრულებული რეზერვაციები", "ოთახის სტატუსი", "დაურეგულირებელი ფოლიო", "ღამის გადასახადი", "დღის დახურვა"};
 
 
-String cldate = dt.format(dclosedate);
+    String cldate = dt.format(dclosedate);
 %>
 <style>
     /* custom inclusion of right, left and below tabs */
@@ -50,16 +50,17 @@ String cldate = dt.format(dclosedate);
         *border-right-color: #ffffff;
     }
 
-
     .rootwizard-ul > li {
         float: left;
         margin-bottom: -1px;
         border: solid 1px #DFDFDF;
         width: 100%;
     }
+
     .rootwizard-ul {
         border-bottom: 0;
     }
+
     .rootwizard-ul > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
         color: #555;
         background-color: #fff;
@@ -67,24 +68,31 @@ String cldate = dt.format(dclosedate);
         border-bottom-color: transparent;
         cursor: default;
     }
+
     .rootwizard-ul li > a {
         margin-right: 0px !important;
     }
 </style>
 <script>
-    $(document).ready(function() {
+    $(document).ready(function () {
         $("#myModalSave").remove();
         $("#myModalCheckin").remove();
-        
+
         $('#rootwizard').bootstrapWizard(
                 {
                     'tabClass': 'nav nav-tabs',
                     onTabShow: function (tab, navigation, index) {
 
+                    },
+                    onTabClick:function(tab, navigation, index)
+                    {
+                        //return false here....
                     }
                 }
         );
     });
+
+
 </script>
 <div id="rootwizard" class="tabbable tabs-left">
     <table id="rootwizard-table">
@@ -92,10 +100,11 @@ String cldate = dt.format(dclosedate);
             <td style="width:225px; vertical-align: top;">
                 <ul class="rootwizard-ul">
                     <%
-                        for(int i=0;i<tabs.length;i++){
+                        for (int i = 0; i < tabs.length; i++) {
 
                     %>
-                    <li><a href="#tab<%=i+1%>" data-toggle="tab"><%=tabs[i]%></a></li>
+                    <li index="<%=i%>"><a href="#tab<%=i+1%>" data-toggle="tab"><%=tabs[i]%>
+                    </a></li>
                     <%
                         }
                     %>
@@ -107,24 +116,24 @@ String cldate = dt.format(dclosedate);
                             for(int i=0;i<tabs.length;i++){
                                 String fname = "wizards/nightaudit/na"+String.valueOf(i+1)+".jsp?cldate="+cldate;
                                 %>
-                                        <div class="tab-pane" id="tab<%=i+1%>">
-                                            <div class="panel panel-primary" id='na<%=i+1%>'>
-                                                <div class="panel-heading">
-                                                    <h3 class="panel-title">
-                                                        ნაბიჯი <%=i+1%> - <%=tabs.length%>-დან [ <%=tabs[i]%> <%=cldate%> ]
-                                                    </h3>
-                                                </div>
-                                                <div class="panel-body">
-                                                    <jsp:include page="<%= fname %>" flush="true" />
-                                                </div>
-                                            </div>
-                                        </div>
-                                            <%
+                    <div class="tab-pane" id="tab<%=i+1%>">
+                        <div class="panel panel-primary" id='na<%=i+1%>'>
+                            <div class="panel-heading">
+                                <h3 class="panel-title">
+                                    ნაბიჯი <%=i + 1%> - <%=tabs.length%>-დან [ <%=tabs[i]%> <%=cldate%> ]
+                                </h3>
+                            </div>
+                            <div class="panel-body">
+                                <jsp:include page="<%= fname %>" flush="true"/>
+                            </div>
+                        </div>
+                    </div>
+                        <%
                             }
                             %>
             </td>
-            </tr>
-            <tr>
+        </tr>
+        <tr>
             <td colspan="2">
                 <ul class="pager wizard">
                     <li class="previous first" style="display:none;"><a href="#">პირველი</a></li>
@@ -135,5 +144,5 @@ String cldate = dt.format(dclosedate);
             </td>
         </tr>
     </table>
-    </div>
+</div>
 </div>

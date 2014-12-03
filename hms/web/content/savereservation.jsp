@@ -176,6 +176,7 @@ try{
         } else if(name.equalsIgnoreCase("payinfo_relesedate")){
             Boolean payinfo_hasrelesedate = new Boolean(request.getParameter("payinfo_hasrelesedate"));
             if(payinfo_hasrelesedate){
+                System.out.println(val);
                 try{ res.setAdvancepaymentdate(dt.parse(val)); } catch(Exception ex){
                     throw new Exception("არასწორი რელიზის თარიღი");
                 }
