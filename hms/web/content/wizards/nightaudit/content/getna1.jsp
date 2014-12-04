@@ -33,42 +33,61 @@
     <%
         double am = 0;
         for (int i = 0; i < reservs.length; i++) {
-            ReservationBean res = ReservationManager.getInstance().loadByPrimaryKey(reservs[i].getReservationid());
-            GuestBean guest = GuestManager.getInstance().loadByPrimaryKey(reservs[i].getGuestid());
-            SalutationBean salutation = SalutationManager.getInstance().loadByPrimaryKey(guest.getSalutationid());
-            int istatus = 0;
-            String roomname = "";
-            if (reservs[i].getRoomid() != null) {
-                RoomBean room = RoomManager.getInstance().loadByPrimaryKey(reservs[i].getRoomid());
-                istatus = getRoomStatus(null, room.getRoomid().intValue());
-                roomname = room.getName() + " ";
-            }
-            System.out.println("Roomtypeid > " + reservs[i]);
-            RoomtypeBean roomtype = RoomtypeManager.getInstance().loadByPrimaryKey(reservs[i].getRoomtypeid());
-            System.out.println("RoomType > " + roomtype);
-            if (roomtype != null) roomname += " - " + roomtype.getCode();
-            String guestname = salutation.getName() + " ";
-            guestname += guest.getFname() + " " + guest.getLname();
-            RatetypeBean rttype = RatetypeManager.getInstance().loadByPrimaryKey(reservs[i].getRatetypeid());
-            ReservationtypeBean rtp = ReservationtypeManager.getInstance().loadByPrimaryKey(res.getReservationtypeid());
-            String bsname = "";
-            if (res.getBsourceid() != null) {
-                BsourceBean bs = BsourceManager.getInstance().loadByPrimaryKey(res.getBsourceid());
-                bsname = bs.getName();
-            }
-            double total = getSum("select sum(amount) from folioitem where particular not in (1,2) and folioid in (select folioid from folio where reservationroomid = " + reservs[i].getReservationroomid() + ")");
-            double deposit = getSum("select sum(amount) from payment where folioid in (select folioid from folio where reservationroomid = " + reservs[i].getReservationroomid() + ")");
-            String actions = "";
-            actions += "<a href=\"javascript:newmWindow1('void','რეზერვაციის წაშლა','rid=" + reservs[i].getReservationroomid() + "')\" title=\"VOID\" class=\"btn btn-xs btn-default\"><i class=\"fa fa-remove\"></i></a>";
-            actions += "<a href=\"javascript:newmWindow1('cancel','რეზერვაციის გაუქმება','rid=" + reservs[i].getReservationroomid() + "')\" title=\"CANCEL\" class=\"btn btn-xs btn-default\"><i class=\"fa fa-minus\"></i></a>";
-            actions += "<a href=\"javascript:newmWindow1('noshow','არ გამოცხადებული რეზერვაცია','rid=" + reservs[i].getReservationroomid() + "')\" title=\"NOSHOW\" class=\"btn btn-xs btn-default\"><i class=\"fa fa-plane\"></i></a>";
+
+            ReservationBean rb = ReservationManager.getInstance().loadByPrimaryKey(reservs[i].getReservationid());
+            if (rb.getAdvancepaymentamount() != null) {
+
+                double balance = getBalance(reservs[i].getReservationroomid());
+                System.out.println("BALANCE > " + balance);
+
+                double releaseMoney = (getTotal(reservs[i].getReservationroomid()) * rb.getAdvancepaymentamount() / 100);
+                System.out.println("RELEASE MONEY > " + releaseMoney);
+
+                Date releaseDate = rb.getAdvancepaymentdate();
+                System.out.println("RELEASE DATE > " + releaseDate);
+
+                if (
+                        (releaseDate != null &&
+                                balance >= releaseMoney &&
+                                releaseDate.getTime() == lclosedate) || releaseDate == null
+                        ) {
+
+                    ReservationBean res = ReservationManager.getInstance().loadByPrimaryKey(reservs[i].getReservationid());
+                    GuestBean guest = GuestManager.getInstance().loadByPrimaryKey(reservs[i].getGuestid());
+                    SalutationBean salutation = SalutationManager.getInstance().loadByPrimaryKey(guest.getSalutationid());
+                    int istatus = 0;
+                    String roomname = "";
+                    if (reservs[i].getRoomid() != null) {
+                        RoomBean room = RoomManager.getInstance().loadByPrimaryKey(reservs[i].getRoomid());
+                        istatus = getRoomStatus(null, room.getRoomid().intValue());
+                        roomname = room.getName() + " ";
+                    }
+                    System.out.println("Roomtypeid > " + reservs[i]);
+                    RoomtypeBean roomtype = RoomtypeManager.getInstance().loadByPrimaryKey(reservs[i].getRoomtypeid());
+                    System.out.println("RoomType > " + roomtype);
+                    if (roomtype != null) roomname += " - " + roomtype.getCode();
+                    String guestname = salutation.getName() + " ";
+                    guestname += guest.getFname() + " " + guest.getLname();
+                    RatetypeBean rttype = RatetypeManager.getInstance().loadByPrimaryKey(reservs[i].getRatetypeid());
+                    ReservationtypeBean rtp = ReservationtypeManager.getInstance().loadByPrimaryKey(res.getReservationtypeid());
+                    String bsname = "";
+                    if (res.getBsourceid() != null) {
+                        BsourceBean bs = BsourceManager.getInstance().loadByPrimaryKey(res.getBsourceid());
+                        bsname = bs.getName();
+                    }
+                    double total = getSum("select sum(amount) from folioitem where particular not in (1,2) and folioid in (select folioid from folio where reservationroomid = " + reservs[i].getReservationroomid() + ")");
+                    double deposit = getSum("select sum(amount) from payment where folioid in (select folioid from folio where reservationroomid = " + reservs[i].getReservationroomid() + ")");
+                    String actions = "";
+                    actions += "<a href=\"javascript:newmWindow1('void','რეზერვაციის წაშლა','rid=" + reservs[i].getReservationroomid() + "')\" title=\"VOID\" class=\"btn btn-xs btn-default\"><i class=\"fa fa-remove\"></i></a>";
+                    actions += "<a href=\"javascript:newmWindow1('cancel','რეზერვაციის გაუქმება','rid=" + reservs[i].getReservationroomid() + "')\" title=\"CANCEL\" class=\"btn btn-xs btn-default\"><i class=\"fa fa-minus\"></i></a>";
+                    actions += "<a href=\"javascript:newmWindow1('noshow','არ გამოცხადებული რეზერვაცია','rid=" + reservs[i].getReservationroomid() + "')\" title=\"NOSHOW\" class=\"btn btn-xs btn-default\"><i class=\"fa fa-plane\"></i></a>";
             /*reservs[i].setRoomid(null);*/
-            if (reservs[i].getRoomid() == null)
-                actions += "<a href=\"javascript:newmWindow1('assignroom','ოთახის მინიჭება','rid=" + reservs[i].getReservationroomid() + "')\" title=\"ASSIGN ROOM\" class=\"btn btn-xs btn-default\"><i class=\"fa fa-bell\"></i></a>";
-            else {
-                String params = "&resid=" + reservs[i].getReservationid();
-                actions += "<a href=\"javascript:modalWindow('checkin','CheckIn','rid=" + reservs[i].getRoomid() + params + "',reloadGrid,'list_pendingreservations');\" title=\"CHECKIN\" class=\"btn btn-xs btn-default\"><i class=\"fa fa-check\"></i></a>";
-            }
+                    if (reservs[i].getRoomid() == null)
+                        actions += "<a href=\"javascript:newmWindow1('assignroom','ოთახის მინიჭება','rid=" + reservs[i].getReservationroomid() + "')\" title=\"ASSIGN ROOM\" class=\"btn btn-xs btn-default\"><i class=\"fa fa-bell\"></i></a>";
+                    else {
+                        String params = "&resid=" + reservs[i].getReservationid();
+                        actions += "<a href=\"javascript:modalWindow('checkin','CheckIn','rid=" + reservs[i].getRoomid() + params + "',reloadGrid,'list_pendingreservations');\" title=\"CHECKIN\" class=\"btn btn-xs btn-default\"><i class=\"fa fa-check\"></i></a>";
+                    }
     %>
     <row id='<%=reservs[i].getReservationroomid()%>'>
         <cell><![CDATA[<%=reservs[i].getReservationroomid()%>]]></cell>
@@ -83,6 +102,8 @@
         <cell><![CDATA[<%=actions%>]]></cell>
     </row>
     <%
+                }
+            }
         }
     %>
 </rows>

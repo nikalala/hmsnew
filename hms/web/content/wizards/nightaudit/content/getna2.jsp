@@ -51,16 +51,16 @@ ReservationroomBean[] reservs = ReservationroomManager.getInstance().loadByWhere
             guestname += guest.getFname() + " " + guest.getLname();
             RatetypeBean rttype = RatetypeManager.getInstance().loadByPrimaryKey(reservs[i].getRatetypeid());
             ReservationtypeBean rtp = ReservationtypeManager.getInstance().loadByPrimaryKey(res.getReservationtypeid());
-            double total = getSum("select sum(amount) from folioitem where particular not in (1,2) and folioid in (select folioid from folio where reservationroomid = "+reservs[i].getReservationroomid()+")");
-            double deposit = getSum("select sum(amount) from payment where folioid in (select folioid from folio where reservationroomid = "+reservs[i].getReservationroomid()+")");
-            double total1 = getSum("select sum(amount) from folioitem where particular not in (1,2,5) and folioid in (select folioid from folio where reservationroomid = "+reservs[i].getReservationroomid()+")");
+            double total = getTotal(reservs[i].getReservationroomid());
+            double deposit = getDeposit(reservs[i].getReservationroomid());
+            double total1 = getTotalWithExtra(reservs[i].getReservationroomid());
             double term = 0;
             if(res.getAdvancepaymentamount() != null)   term = res.getAdvancepaymentamount().doubleValue();
             if(total1 == 0 || deposit*100/total1 >= term) continue;
             
             
             String actions = "<a href=\"#\" title=\"CANCEL\" class=\"btn btn-xs btn-default\"><i class=\"fa fa-remove\"></i></a>";
-            
+
             %>
                 <row id='<%=reservs[i].getReservationroomid()%>'>
                     <cell><![CDATA[<%=reservs[i].getReservationroomid()%>]]></cell>
