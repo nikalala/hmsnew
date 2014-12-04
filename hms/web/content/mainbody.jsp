@@ -1662,7 +1662,9 @@ function loadActivePopup(popupid,pageurl,height,width)
 		hideWait(); // Jignesh - 30 sep 2011
 	}
 	catch(e)
-	{console.log(e);}
+	{
+	//console.log(e);
+	}
 }
 function transactionNotActive(msg,refreshpage)
 {

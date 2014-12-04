@@ -131,7 +131,7 @@ public class PreferencetypeBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: preferencetype.name
-     * <li>comments: დასახელება
+     * <li>comments: ??????????
      * <li>column size: 2147483647
      * <li>jdbc type returned by the driver: Types.VARCHAR
      * </ul>
@@ -189,7 +189,7 @@ public class PreferencetypeBean
      * <ul>
      * <li>full name: preferencetype.regbyid
      * <li> foreign key: personnel.personnelid
-     * <li>comments: ავტორი
+     * <li>comments: ??????
      * <li>column size: 10
      * <li>jdbc type returned by the driver: Types.INTEGER
      * </ul>
@@ -257,7 +257,7 @@ public class PreferencetypeBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: preferencetype.regdate
-     * <li>comments: რეგისტრაციის თარიღი
+     * <li>comments: ???????????? ??????
      * <li>column size: 29
      * <li>jdbc type returned by the driver: Types.TIMESTAMP
      * </ul>
@@ -325,7 +325,7 @@ public class PreferencetypeBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: preferencetype.active
-     * <li>comments: აქტიური
+     * <li>comments: ???????
      * <li>default value: true
      * <li>column size: 1
      * <li>jdbc type returned by the driver: Types.BIT
@@ -393,7 +393,7 @@ public class PreferencetypeBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: preferencetype.deteted
-     * <li>comments: წაშლილი
+     * <li>comments: ???????
      * <li>default value: false
      * <li>column size: 1
      * <li>jdbc type returned by the driver: Types.BIT

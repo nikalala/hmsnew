@@ -258,3 +258,11 @@ ol, ul {
 .error {
     border: 1px solid #f00;
 }
+.span-header
+{
+    float: left;
+    margin: 8px 0 0 10px;
+    font-family: BGMtavr;
+    color: #0F83D7;
+    font-weight: bold;
+}

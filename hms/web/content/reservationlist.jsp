@@ -24,7 +24,6 @@
             var value = "<%=roomBeans[i].getRoomtypeid()%>";
             var roomid = "<%=roomBeans[i].getRoomid()%>";
             if (roomid == lastroomtypeId) {
-                console.log(roomid);
                 selected = 'selected="selected"';
             } else {
                 selected = '';
@@ -183,7 +182,7 @@
 
         var url = "content/getreservationlist.jsp?query=" + encodeURIComponent("where " + retVal);
         if(!donotreload){
-            console.log("Starting filtering with > " + url);
+            //console.log("Starting filtering with > " + url);
             reloadGrid(resGrid.id, url);
         }
         return url;

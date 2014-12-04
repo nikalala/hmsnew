@@ -24,7 +24,6 @@
             var value = "<%=roomBeans[i].getRoomtypeid()%>";
             var roomid = "<%=roomBeans[i].getRoomid()%>";
             if (roomid == lastroomtypeId) {
-                console.log(roomid);
                 selected = 'selected="selected"';
             } else {
                 selected = '';

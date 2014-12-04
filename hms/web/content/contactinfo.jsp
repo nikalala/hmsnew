@@ -8,7 +8,7 @@
 </script>
 <div class="panel-heading" style="height: 34px;">
     <h3 class="panel-title">
-        <div style="float: left; margin: 5px 0 0 10px;">კონტაქტი</div>
+        <div class="span-header">კონტაქტი</div>
         <div style="float: right; margin: -2px 0 0 10px;">
             <table>
                 <tr>

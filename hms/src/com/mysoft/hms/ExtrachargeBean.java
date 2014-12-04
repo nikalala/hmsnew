@@ -175,7 +175,7 @@ public class ExtrachargeBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: extracharge.code
-     * <li>comments: მოკლე სახელწოდება
+     * <li>comments: ????? ???????????
      * <li>column size: 100
      * <li>jdbc type returned by the driver: Types.VARCHAR
      * </ul>
@@ -232,7 +232,7 @@ public class ExtrachargeBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: extracharge.name
-     * <li>comments: დასახელება
+     * <li>comments: ??????????
      * <li>column size: 2147483647
      * <li>jdbc type returned by the driver: Types.VARCHAR
      * </ul>
@@ -289,7 +289,7 @@ public class ExtrachargeBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: extracharge.rate
-     * <li>comments: ფასი
+     * <li>comments: ????
      * <li>column size: 17
      * <li>jdbc type returned by the driver: Types.DOUBLE
      * </ul>
@@ -357,7 +357,7 @@ public class ExtrachargeBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: extracharge.fixedprice
-     * <li>comments: ფიქსირებული ფასი
+     * <li>comments: ??????????? ????
      * <li>default value: false
      * <li>column size: 1
      * <li>jdbc type returned by the driver: Types.BIT
@@ -425,7 +425,7 @@ public class ExtrachargeBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: extracharge.ord
-     * <li>comments: სორტირება
+     * <li>comments: ?????????
      * <li>default value: 0
      * <li>column size: 10
      * <li>jdbc type returned by the driver: Types.INTEGER
@@ -494,7 +494,7 @@ public class ExtrachargeBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: extracharge.voucherno
-     * <li>comments: ქვითრის ნუმერაციის წესიCODEdocumentnumbering
+     * <li>comments: ??????? ?????????? ????CODEdocumentnumbering
      * <li>column size: 10
      * <li>jdbc type returned by the driver: Types.INTEGER
      * </ul>
@@ -562,7 +562,7 @@ public class ExtrachargeBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: extracharge.web
-     * <li>comments: პუბლიკაცია ვებზე
+     * <li>comments: ?????????? ?????
      * <li>default value: false
      * <li>column size: 1
      * <li>jdbc type returned by the driver: Types.BIT
@@ -630,7 +630,7 @@ public class ExtrachargeBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: extracharge.webdescription
-     * <li>comments: აღწერილობა ვებისთვის
+     * <li>comments: ?????????? ?????????
      * <li>column size: 2147483647
      * <li>jdbc type returned by the driver: Types.VARCHAR
      * </ul>
@@ -687,7 +687,7 @@ public class ExtrachargeBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: extracharge.chargeapplieson
-     * <li>comments: სერვისი ვრცელდებაCODEchargeapplieson
+     * <li>comments: ??????? ?????????CODEchargeapplieson
      * <li>column size: 10
      * <li>jdbc type returned by the driver: Types.INTEGER
      * </ul>
@@ -755,7 +755,7 @@ public class ExtrachargeBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: extracharge.extrapostingtype
-     * <li>comments: დაბეგვრის დაკისრების წესიCODEextrachargepostingtype
+     * <li>comments: ????????? ?????????? ????CODEextrachargepostingtype
      * <li>column size: 10
      * <li>jdbc type returned by the driver: Types.INTEGER
      * </ul>
@@ -823,7 +823,7 @@ public class ExtrachargeBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: extracharge.applychargealways
-     * <li>comments: დააკისრე სერვისის საფასური ყოველთვის
+     * <li>comments: ???????? ???????? ???????? ?????????
      * <li>column size: 1
      * <li>jdbc type returned by the driver: Types.BIT
      * </ul>
@@ -890,7 +890,7 @@ public class ExtrachargeBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: extracharge.webord
-     * <li>comments: ვებ სორტირება
+     * <li>comments: ??? ?????????
      * <li>column size: 10
      * <li>jdbc type returned by the driver: Types.INTEGER
      * </ul>
@@ -959,7 +959,7 @@ public class ExtrachargeBean
      * <ul>
      * <li>full name: extracharge.regbyid
      * <li> foreign key: personnel.personnelid
-     * <li>comments: ავტორი
+     * <li>comments: ??????
      * <li>column size: 10
      * <li>jdbc type returned by the driver: Types.INTEGER
      * </ul>
@@ -1027,7 +1027,7 @@ public class ExtrachargeBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: extracharge.regdate
-     * <li>comments: რეგისტრაციის თარიღი
+     * <li>comments: ???????????? ??????
      * <li>default value: now()
      * <li>column size: 29
      * <li>jdbc type returned by the driver: Types.TIMESTAMP
@@ -1096,7 +1096,7 @@ public class ExtrachargeBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: extracharge.active
-     * <li>comments: აქტიური
+     * <li>comments: ???????
      * <li>default value: true
      * <li>column size: 1
      * <li>jdbc type returned by the driver: Types.BIT
@@ -1164,7 +1164,7 @@ public class ExtrachargeBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: extracharge.deleted
-     * <li>comments: წაშლილი
+     * <li>comments: ???????
      * <li>default value: false
      * <li>column size: 1
      * <li>jdbc type returned by the driver: Types.BIT

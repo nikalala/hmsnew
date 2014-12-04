@@ -120,7 +120,7 @@ public class DistrictBean
      * <ul>
      * <li>full name: district.cityid
      * <li> foreign key: city.cityid
-     * <li>comments: ქალაქი
+     * <li>comments: ??????
      * <li>column size: 10
      * <li>jdbc type returned by the driver: Types.INTEGER
      * </ul>
@@ -188,7 +188,7 @@ public class DistrictBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: district.name
-     * <li>comments: დასახელება
+     * <li>comments: ??????????
      * <li>column size: 2147483647
      * <li>jdbc type returned by the driver: Types.VARCHAR
      * </ul>

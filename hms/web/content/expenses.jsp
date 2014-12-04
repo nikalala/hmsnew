@@ -13,19 +13,19 @@
         loadDefaults();
     });
 
-   function loadDefaults() {
-    $('.date').datepicker(<%=pickerformat1%>);
-    $('.dropdown').selectpicker();
-    $(".btn-group").css("width", "100%", "!important");
-    $("#grid-table label").each(function () {
-        $(this).css("float", "right", "!important");
-        $(this).css("line-height", "27px", "!important");
-    });
-    $("#filter-form input[type='text']").css("width", "100%", "!important");
-    $(".date input[type='text']").css("position", "relative");
-    $("#res1").css("margin", "0px 10px 10px 10px");
-    $("#grid-table").width($("#filter-form").width());
-}
+    function loadDefaults() {
+        $('.date').datepicker(<%=pickerformat1%>);
+        $('.dropdown').selectpicker();
+        $(".btn-group").css("width", "100%", "!important");
+        $("#grid-table label").each(function () {
+            $(this).css("float", "right", "!important");
+            $(this).css("line-height", "27px", "!important");
+        });
+        $("#filter-form input[type='text']").css("width", "100%", "!important");
+        $(".date input[type='text']").css("position", "relative");
+        $("#res1").css("margin", "0px 10px 10px 10px");
+        $("#grid-table").width($("#filter-form").width());
+    }
 
 </script>
 
@@ -61,6 +61,17 @@
             </div>
         </div>
     </div>
+
+    <div class="row" style="margin-top: 10px; margin-bottom: 0px; padding-left: 5px;  padding-right: 5px;">
+        <div class="col-md-16" style="height: 165px;">
+            <div class="panel panel-primary" id='chargerinfo'>
+                <jsp:include page="chargerinfo.jsp">
+                    <jsp:param name="none" value="none"/>
+                </jsp:include>
+            </div>
+        </div>
+    </div>
+
 </form>
 <div align="center" id="grid-footer"
      style="background: transparent; width: 100%;height: 33px;line-height: 33px; margin:0 auto;">

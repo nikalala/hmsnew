@@ -99,10 +99,10 @@ BootstrapDialog.confirm = function (message, callback) {
     }).open();
 };
 
-$.fn.serializeObject = function(form){
+$.fn.serializeObject = function (form) {
     var o = {};
     var a = form.serializeArray();
-    $.each(a, function() {
+    $.each(a, function () {
         if (o[this.name]) {
             if (!o[this.name].push) {
                 o[this.name] = [o[this.name]];
@@ -112,7 +112,7 @@ $.fn.serializeObject = function(form){
             o[this.name] = this.value || '';
         }
     });
-    console.log(o);
+    //console.log(o);
     return o;
 };
 
@@ -412,10 +412,10 @@ function getLBody(fname) {
 
 function checkTabs(pageName) {
     if ($('.nav-tabs li').size() > 0) {
-        console.log($('.nav-tabs li'));
+        ////console.log($('.nav-tabs li'));
     }
     if (pageName !== "stayview") {
-        console.log("opening tab > " + pageName);
+        ////console.log("opening tab > " + pageName);
     }
 }
 
@@ -424,7 +424,7 @@ function getBody(fname1, fname2, name, id, param) {
     checkTabs(fname2);
 
     loader.show();
-    console.log("started method getBody");
+    ////console.log("started method getBody");
     $.ajax({
         type: "POST",
         url: "content/" + fname1 + ".jsp",
@@ -443,7 +443,7 @@ function getBody(fname1, fname2, name, id, param) {
     if (!isNullOrEmpty(param)) {
         reqParam = param;
     }
-    console.log(reqParam);
+    //console.log(reqParam);
 
     addTab("content/" + fname2 + ".jsp" + reqParam, name, id);
 }
@@ -472,9 +472,9 @@ function addTab(fname2, name, id) {
 
     $('#centerTabContent').append('<div class="tab-pane" id="' + id + '"></div>');
     loader.show();
-    console.log(fname2);
+    //console.log(fname2);
     $.get(fname2, function (data) {
-        console.log("#" + id);
+        //console.log("#" + id);
         $("#" + id).html(data);
         loader.hide();
     });
@@ -591,7 +591,7 @@ var hmsDaysMin = ["კვი", "ორშ", "სამ", "ოთხ", "ხუთ
 var hmsMonthsMin = ["იან", "თებ", "მარ", "აპრ", "მაი", "ივნ", "ივლ", "აგვ", "სექ", "ოქტ", "ნოე", "დეკ"];
 
 function initializeGrid(grid) {
-    console.log("initializing grid named > " + grid.id);
+    //console.log("initializing grid named > " + grid.id);
     jQuery("#" + grid.id).jqGrid(
         {
             url: grid.url,
@@ -610,7 +610,7 @@ function initializeGrid(grid) {
                 $("#" + grid.id + " td:last-child").removeAttr("title");
                 reInitializeGrid(grid.id, grid.isPopup);
                 $(".ui-jqgrid-htable").css("background", "#FFF").css("border-bottom", "solid 1px #D1D1D1");
-                console.log("initializing grid named > " + grid.id + " is completed successfully");
+                //console.log("initializing grid named > " + grid.id + " is completed successfully");
             }
         }).jqGrid('bindKeys');
 
@@ -627,7 +627,7 @@ function ReDrawTable(grid) {
 
 function reInitializeGrid(gridId, isPopup) {
     if (!isPopup) {
-        console.log("Loading params for desktop grid named > " + gridId);
+        //console.log("Loading params for desktop grid named > " + gridId);
         var ftWidth = $("#filter-form").width();
         $(".first-table").css("width", ftWidth, "!important");
         $("#grid-table .ui-jqgrid-bdiv").css("width", ftWidth, "!important");
@@ -637,9 +637,9 @@ function reInitializeGrid(gridId, isPopup) {
         $("#grid-table .ui-jqgrid-hdiv").css("width", ftWidth, "!important");
         $("#grid-table .ui-jqgrid-htable").css("width", ftWidth, "!important");
         $("#grid-table #" + gridId).css("width", ftWidth, "!important");
-        console.log("Load completed for desktop grid named > " + gridId);
+        //console.log("Load completed for desktop grid named > " + gridId);
     } else {
-        console.log("Loading params for popup grid named > " + gridId);
+        //console.log("Loading params for popup grid named > " + gridId);
         var ftWidth = 953;
         $("#rootwizard-table .ui-jqgrid-bdiv").css("width", ftWidth, "!important");
         $("#rootwizard-table #gview_" + gridId).css("width", ftWidth, "!important");
@@ -667,13 +667,13 @@ function reInitializeGrid(gridId, isPopup) {
             'line-height': '19px',
             'white-space': 'normal'
         });
-        console.log("Load completed for popup grid named > " + gridId);
+        //console.log("Load completed for popup grid named > " + gridId);
     }
-    $(".ui-jqgrid-bdiv").css("overflow-x","hidden","!important");
+    $(".ui-jqgrid-bdiv").css("overflow-x", "hidden", "!important");
 }
 
 function reloadGrid(gridId, pgUrl, isPopup) {
-    console.log(pgUrl);
+    //console.log(pgUrl);
     jQuery("#" + gridId).jqGrid().setGridParam({
         url: pgUrl,
         loadComplete: function () {
@@ -685,7 +685,7 @@ function reloadGrid(gridId, pgUrl, isPopup) {
 
 function checkIfScrollBarExist(divId) {
     var val = $('#' + divId).hasScrollBar();
-    console.log(val);
+    //console.log(val);
     return true;
 }
 
@@ -710,25 +710,22 @@ function colModelGenerator(width, colName, alligment) {
 
 // Numeric only control handler
 jQuery.fn.ForceNumericOnly =
-    function()
-    {
-        return this.each(function()
-        {
-            $(this).keydown(function(e)
-            {
+    function () {
+        return this.each(function () {
+            $(this).keydown(function (e) {
                 var key = e.charCode || e.keyCode || 0;
                 // allow backspace, tab, delete, enter, arrows, numbers and keypad numbers ONLY
                 // home, end, period, and numpad decimal
                 return (
-                    key == 8 ||
-                    key == 9 ||
-                    key == 13 ||
-                    key == 46 ||
-                    key == 110 ||
-                    key == 190 ||
-                    (key >= 35 && key <= 40) ||
-                    (key >= 48 && key <= 57) ||
-                    (key >= 96 && key <= 105)
+                key == 8 ||
+                key == 9 ||
+                key == 13 ||
+                key == 46 ||
+                key == 110 ||
+                key == 190 ||
+                (key >= 35 && key <= 40) ||
+                (key >= 48 && key <= 57) ||
+                (key >= 96 && key <= 105)
                 );
             });
         });

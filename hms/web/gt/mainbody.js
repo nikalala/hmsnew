@@ -61,7 +61,7 @@ if (i < 10)
 }
 timedCount();
 
-function get_GroupCount(tran_id,groupid,res_no,ownership,popup,action,tranflag,tran_status) <!--Manali - 1.0.37.42 - 02 Dec 2013, Purpose : Added tran_status, Part Of Advance Room Move -->
+function get_GroupCount(tran_id,groupid,res_no,ownership,popup,action,tranflag,tran_status)
 {
 	//console.log("get_GroupCount :"+tran_id+"--"+groupid+"--"+res_no+"--"+ownership+"--"+action+"--"+tranflag);
 
@@ -90,7 +90,7 @@ function ChangeGroupOwner(tran_id,groupid,res_no,popup,action,tranid_notin,statu
 }
 <!--Manali - 1.0.37.42 - 02 Dec 2013 - END -->
 
-function callAction(tran_id,res_no,popup,action,tranflag,groupid,tran_status) <!--Manali - 1.0.37.42 - 02 Dec 2013, Purpose : Added tran_status, Part Of Advance Room Move -->
+function callAction(tran_id,res_no,popup,action,tranflag,groupid,tran_status)
 {
 	try
 	{
@@ -1463,7 +1463,9 @@ function loadActivePopup(popupid,pageurl,height,width)
 		hideWait(); // Jignesh - 30 sep 2011
 	}
 	catch(e)
-	{console.log(e);}
+	{
+		//console.log(e);
+	}
 }
 function transactionNotActive(msg,refreshpage)
 {
@@ -1739,7 +1741,7 @@ function assign_room(tranid,popupname)
 
 	parent.loadPopup('AssignRoom','assignroom/tranunkid/'+tranid+'/popup/'+popupname,350,600);
 }
-function unassign_room(tranid,roomtypeid,issplitflag)<!--Manali - 1.0.37.42 - 29 Nov 2013,Purpose : Part Of Advance Room Move, added  issplitflag-->
+function unassign_room(tranid,roomtypeid,issplitflag)
 {
 	<!--Manali - 1.0.37.42 - 29 Nov 2013 - START -->
 	<!--Purpose : Part Of Advance Room Move, added  issplitflag-->

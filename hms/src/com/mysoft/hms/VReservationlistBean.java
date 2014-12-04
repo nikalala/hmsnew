@@ -67,6 +67,14 @@ public class VReservationlistBean
     private boolean guestid_is_modified = false;
     private boolean guestid_is_initialized = false;
     
+    private java.util.Date advancepaymentdate;
+    private boolean advancepaymentdate_is_modified = false;
+    private boolean advancepaymentdate_is_initialized = false;
+    
+    private Double advancepaymentamount;
+    private boolean advancepaymentamount_is_modified = false;
+    private boolean advancepaymentamount_is_initialized = false;
+    
     private String guest;
     private boolean guest_is_modified = false;
     private boolean guest_is_initialized = false;
@@ -859,6 +867,140 @@ public class VReservationlistBean
     }
 
     /**
+     * Getter method for advancepaymentdate.
+     * <br>
+     * Meta Data Information (in progress):
+     * <ul>
+     * <li>full name: v_reservationlist.advancepaymentdate
+     * <li>column size: 13
+     * <li>jdbc type returned by the driver: Types.DATE
+     * </ul>
+     *
+     * @return the value of advancepaymentdate
+     */
+    public java.util.Date getAdvancepaymentdate()
+    {
+        return advancepaymentdate; 
+    }
+
+    /**
+     * Setter method for advancepaymentdate.
+     * <br>
+     * The new value is set only if compareTo() says it is different,
+     * or if one of either the new value or the current value is null.
+     * In case the new value is different, it is set and the field is marked as 'modified'.
+     *
+     * @param newVal the new value to be assigned to advancepaymentdate
+     */
+    public void setAdvancepaymentdate(java.util.Date newVal) {
+        if ((newVal != null && this.advancepaymentdate != null && (newVal.compareTo(this.advancepaymentdate) == 0)) || 
+            (newVal == null && this.advancepaymentdate == null && advancepaymentdate_is_initialized)) {
+            return; 
+        } 
+        this.advancepaymentdate = newVal; 
+        advancepaymentdate_is_modified = true; 
+        advancepaymentdate_is_initialized = true; 
+    }
+
+    /**
+     * Setter method for advancepaymentdate.
+     * <br>
+     * Convenient for those who do not want to deal with Objects for primary types.
+     *
+     * @param newVal the new value to be assigned to advancepaymentdate
+     */
+    public void setAdvancepaymentdate(long newVal) {
+        setAdvancepaymentdate(new java.util.Date(newVal));
+    }
+
+    /**
+     * Determines if the advancepaymentdate has been modified.
+     *
+     * @return true if the field has been modified, false if the field has not been modified
+     */
+    public boolean isAdvancepaymentdateModified() {
+        return advancepaymentdate_is_modified; 
+    }
+
+    /**
+     * Determines if the advancepaymentdate has been initialized.
+     * <br>
+     * It is useful to determine if a field is null on purpose or just because it has not been initialized.
+     *
+     * @return true if the field has been initialized, false otherwise
+     */
+    public boolean isAdvancepaymentdateInitialized() {
+        return advancepaymentdate_is_initialized; 
+    }
+
+    /**
+     * Getter method for advancepaymentamount.
+     * <br>
+     * Meta Data Information (in progress):
+     * <ul>
+     * <li>full name: v_reservationlist.advancepaymentamount
+     * <li>column size: 17
+     * <li>jdbc type returned by the driver: Types.DOUBLE
+     * </ul>
+     *
+     * @return the value of advancepaymentamount
+     */
+    public Double getAdvancepaymentamount()
+    {
+        return advancepaymentamount; 
+    }
+
+    /**
+     * Setter method for advancepaymentamount.
+     * <br>
+     * The new value is set only if compareTo() says it is different,
+     * or if one of either the new value or the current value is null.
+     * In case the new value is different, it is set and the field is marked as 'modified'.
+     *
+     * @param newVal the new value to be assigned to advancepaymentamount
+     */
+    public void setAdvancepaymentamount(Double newVal) {
+        if ((newVal != null && this.advancepaymentamount != null && (newVal.compareTo(this.advancepaymentamount) == 0)) || 
+            (newVal == null && this.advancepaymentamount == null && advancepaymentamount_is_initialized)) {
+            return; 
+        } 
+        this.advancepaymentamount = newVal; 
+        advancepaymentamount_is_modified = true; 
+        advancepaymentamount_is_initialized = true; 
+    }
+
+    /**
+     * Setter method for advancepaymentamount.
+     * <br>
+     * Convenient for those who do not want to deal with Objects for primary types.
+     *
+     * @param newVal the new value to be assigned to advancepaymentamount
+     */
+    public void setAdvancepaymentamount(double newVal) {
+        setAdvancepaymentamount(new Double(newVal));
+    }
+
+    /**
+     * Determines if the advancepaymentamount has been modified.
+     *
+     * @return true if the field has been modified, false if the field has not been modified
+     */
+    public boolean isAdvancepaymentamountModified() {
+        return advancepaymentamount_is_modified; 
+    }
+
+    /**
+     * Determines if the advancepaymentamount has been initialized.
+     * <br>
+     * It is useful to determine if a field is null on purpose or just because it has not been initialized.
+     *
+     * @return true if the field has been initialized, false otherwise
+     */
+    public boolean isAdvancepaymentamountInitialized() {
+        return advancepaymentamount_is_initialized; 
+    }
+
+    /**
      * Getter method for guest.
      * <br>
      * Meta Data Information (in progress):
@@ -1544,6 +1686,8 @@ public class VReservationlistBean
 		reservationtypeid_is_modified || 
 		status_is_modified || 
 		guestid_is_modified || 
+		advancepaymentdate_is_modified || 
+		advancepaymentamount_is_modified || 
 		guest_is_modified || 
 		roomcode_is_modified || 
 		roomtypecode_is_modified || 
@@ -1572,6 +1716,8 @@ public class VReservationlistBean
         reservationtypeid_is_modified = false;
         status_is_modified = false;
         guestid_is_modified = false;
+        advancepaymentdate_is_modified = false;
+        advancepaymentamount_is_modified = false;
         guest_is_modified = false;
         roomcode_is_modified = false;
         roomtypecode_is_modified = false;
@@ -1602,6 +1748,8 @@ public class VReservationlistBean
         setReservationtypeid(bean.getReservationtypeid());
         setStatus(bean.getStatus());
         setGuestid(bean.getGuestid());
+        setAdvancepaymentdate(bean.getAdvancepaymentdate());
+        setAdvancepaymentamount(bean.getAdvancepaymentamount());
         setGuest(bean.getGuest());
         setRoomcode(bean.getRoomcode());
         setRoomtypecode(bean.getRoomtypecode());
@@ -1633,6 +1781,8 @@ public class VReservationlistBean
                  + "\n - v_reservationlist.reservationtypeid = " + (reservationtypeid_is_initialized ? ("[" + (reservationtypeid == null ? null : reservationtypeid.toString()) + "]") : "not initialized") + ""
                  + "\n - v_reservationlist.status = " + (status_is_initialized ? ("[" + (status == null ? null : status.toString()) + "]") : "not initialized") + ""
                  + "\n - v_reservationlist.guestid = " + (guestid_is_initialized ? ("[" + (guestid == null ? null : guestid.toString()) + "]") : "not initialized") + ""
+                 + "\n - v_reservationlist.advancepaymentdate = " + (advancepaymentdate_is_initialized ? ("[" + (advancepaymentdate == null ? null : advancepaymentdate.toString()) + "]") : "not initialized") + ""
+                 + "\n - v_reservationlist.advancepaymentamount = " + (advancepaymentamount_is_initialized ? ("[" + (advancepaymentamount == null ? null : advancepaymentamount.toString()) + "]") : "not initialized") + ""
                  + "\n - v_reservationlist.guest = " + (guest_is_initialized ? ("[" + (guest == null ? null : guest.toString()) + "]") : "not initialized") + ""
                  + "\n - v_reservationlist.roomcode = " + (roomcode_is_initialized ? ("[" + (roomcode == null ? null : roomcode.toString()) + "]") : "not initialized") + ""
                  + "\n - v_reservationlist.roomtypecode = " + (roomtypecode_is_initialized ? ("[" + (roomtypecode == null ? null : roomtypecode.toString()) + "]") : "not initialized") + ""

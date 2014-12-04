@@ -96,7 +96,6 @@
     });
     $("#assignroom_roomid").on('change', function () {
         var id = $(this).val();
-        console.log("room numb > " + id);
         if(id > 0)
         {
             $("#mediummodalsave").removeAttr('disabled');

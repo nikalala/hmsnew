@@ -31,7 +31,6 @@
         var str = $.fn.serializeObject($("#tagents_add #tagentsfrm"));
         var errorExist = false;
         for (var key in str) {
-            console.log(key + " - " + str[key]);
             if (key != "taddress" && key != "tcity" && key != "tphone" && key != "tmobile" && key != "tfax" && key != "tclimit" && key != "tcterm" && key != "topenbal" && key != "tvalue") {
                 if (isNullOrEmpty(str[key])) {
                     if (key == "tcountryid") {
@@ -76,7 +75,6 @@
             contentType: 'application/json',
             dataType: 'json',
             success: function (data) {
-                console.log(data);
                 if (data.status == "ok") {
 
                     <%

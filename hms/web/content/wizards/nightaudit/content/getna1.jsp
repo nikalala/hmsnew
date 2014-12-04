@@ -40,15 +40,15 @@
                 double balance = getBalance(reservs[i].getReservationroomid());
                 System.out.println("BALANCE > " + balance);
 
-                double releaseMoney = (getTotal(reservs[i].getReservationroomid()) * rb.getAdvancepaymentamount() / 100);
-                System.out.println("RELEASE MONEY > " + releaseMoney);
+                double releaseTerm = (getTotalWithExtra(reservs[i].getReservationroomid()) * rb.getAdvancepaymentamount() / 100);
+                System.out.println("RELEASE MONEY > " + releaseTerm);
 
                 Date releaseDate = rb.getAdvancepaymentdate();
                 System.out.println("RELEASE DATE > " + releaseDate);
 
                 if (
                         (releaseDate != null &&
-                                balance >= releaseMoney &&
+                                balance >= releaseTerm &&
                                 releaseDate.getTime() == lclosedate) || releaseDate == null
                         ) {
 

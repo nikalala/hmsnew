@@ -134,7 +134,7 @@ $(document).ready(function(){
        var aval = $("#folio_actionvalue").val();
        if(action == 4){
            $.post("content/ajax/getBeanPars.jsp",{ objname: "Discount", id: aval },function(data){
-                console.log(data);
+                //console.log(data);
             },"json");
        }
    });

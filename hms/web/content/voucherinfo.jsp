@@ -5,27 +5,26 @@
 <script type="text/javascript">
     $(document).ready(function () {
         $("#contrbean").next().css("min-width", "170px");
-        var today = new Date();
+        var today = new Date(<%=lclosedate%>);
         $("#dateFrom").datepicker("setDate", today);
-        $("#dateFrom").prop('disabled',true);
-        $("#arrival_dateFrom").prop('disabled',true);
 
+        $("#voucher-panel-body input").css("margin", "0");
     });
 
 </script>
 <div class="panel-heading" style="height: 34px;">
     <h3 class="panel-title">
-        <div style="float: left; margin: 5px 0 0 10px;">ქვითრის ინფორმაცია</div>
+        <div class="span-header">ქვითრის ინფორმაცია</div>
     </h3>
 </div>
-<div class="panel-body" style="height:110px;">
+<div class="panel-body" id="voucher-panel-body" style="height:110px;">
     <table width="100%" class="table table-borderless" style="text-align: right;">
         <tbody>
         <tr>
             <td><b><span style="color: #598904">ქვითრის ნომერი</span></b></td>
             <td><input type="text" id="voucherTxtField"/></td>
             <td><label>შექმნილია:</label></td>
-            <td><input type="text" id="userTxtField" disabled="disabled"/></td>
+            <td><input type="text" id="userTxtField" value="<%=user.getLoginid()%>" disabled="disabled"/></td>
         </tr>
         <tr>
             <td><b><span style="color: #598904">ქვითრის თარიღი</span></b></td>
@@ -38,7 +37,23 @@
                         <i class="glyphicon glyphicon-calendar"></i></span>
                 </div>
             </td>
-            <td>2 124 755</td>
+            <td>
+                <label>გადახდის მეთოდი</label>
+            </td>
+            <td>
+                <select class="dropdown" name="paymentmethod" style="width: 100%;">
+                    <option value="">--აირჩიეთ--</option>
+                    <%
+                        PaymentmethodBean[] paymentmethodBean = PaymentmethodManager.getInstance().loadByWhere("where paymentmode = 0");
+                        for (PaymentmethodBean item : paymentmethodBean) {
+                    %>
+                    <option value="<%=item.getPaymentmethodid()%>"><%=item.getName()%>
+                    </option>
+                    <%
+                        }
+                    %>
+                </select>
+            </td>
         </tr>
         <tr>
             <td><b><span style="color: #598904">ტიპი</span></b></td>
