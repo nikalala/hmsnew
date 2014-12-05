@@ -58,7 +58,20 @@ FolioBean[] folios = FolioManager.getInstance().loadByWhere("where reservationro
         },
         function(data){
             if(data.result == 0)    BootstrapDialog.alert(data.error);
-            else refreshFoliolist(<%=rroom.getReservationroomid()%>);
+            else {
+                $("#foliodate").val("<%=dt.format(dclosedate)%>");
+                $("#folio_actiontype").val("-1");
+                $("#folio_actionvalue").val("-1");
+                $("#folio_currencyid").val("<%=maincurrency.getCurrencyid().intValue()%>");
+                $("#folio_amount").val("");
+                $("#folio_qty").val("");
+                $("#folio_voucher").val("");
+                $("#folio_comment").val("");
+                //$("#folio_folioid").val();
+                $("#folio_discountid").val("-1");
+                $("#folio_discount_amount").val("");
+                refreshFoliolist(<%=rroom.getReservationroomid()%>);
+            }
         },"json");
     }
     
@@ -205,7 +218,7 @@ $(document).ready(function(){
         <tr>
             <td style="padding-left: 5px; width: 80px;"><b>თარიღი</b></td>
             <td style="padding-left: 5px; width: 120px;">
-                <input class="span2" style="width: 100px;" value="<%=dt.format(new Date())%>" readonly="" type="text" id="foliodate">
+                <input class="span2" style="width: 100px;" value="<%=dt.format(dclosedate)%>" readonly="" type="text" id="foliodate">
             </td>
             <td style="padding-left: 5px; width: 100px;"><b>ტიპი</b></td>
             <td style="padding-left: 5px; width: 350px;" nowrap>
@@ -361,9 +374,9 @@ $(document).ready(function(){
                 <div class="btn-group">
                     <button type="button" class="btn btn-md btn-primary dropdown-toggle" data-toggle="dropdown" id="service">ოპერაციები <span class="glyphicon glyphicon-chevron-down"></span></button>
                     <ul class="dropdown-menu" style="background-color: #F9F9F9; width: 50px;">
-                        <li><a href="javascript:alert('ჰაჰა');">ფოლიო</a></li>
-                        <li><a href="javascript:alert('ჰაჰა');">გადასახადები</a></li>
-                        <li><a href="javascript:alert('ჰაჰა');">მიკვლევა</a></li>
+                        <li><a href="javascript:alert('');">ფოლიო</a></li>
+                        <li><a href="javascript:alert('');">გადასახადები</a></li>
+                        <li><a href="javascript:alert('');">მიკვლევა</a></li>
                     </ul>
                 </div>
             </td>

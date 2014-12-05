@@ -24,13 +24,18 @@ if(guest.getCity() != null) guestaddress += guest.getCity()+" ";
 if(guest.getZip() != null)  guestaddress += guest.getZip();
 
 RatetypeBean rtp = RatetypeManager.getInstance().loadByPrimaryKey(rroom.getRatetypeid());
-RoomBean room = RoomManager.getInstance().loadByPrimaryKey(rroom.getRoomid());
-String rname = room.getName();
-if(rname == null)   rname = room.getName();
-if(rname == null || rname.trim().length() == 0) rname = "ნომრის გარეშე";
 
-RoomtypeBean roomtype = RoomtypeManager.getInstance().loadByPrimaryKey(room.getRoomtypeid());
-int sts = getRoomStatus(new Date(), room.getRoomid().intValue());
+int sts = 0;
+String rname = "ნომრის გარეშე";
+if(rroom.getRoomid() != null){
+    RoomBean room = RoomManager.getInstance().loadByPrimaryKey(rroom.getRoomid());
+    rname = room.getCode();
+    if(rname == null)   rname = room.getName();
+    if(rname == null || rname.trim().length() == 0) rname = "ნომრის გარეშე";
+    sts = getRoomStatus(new Date(), room.getRoomid().intValue());
+}
+
+RoomtypeBean roomtype = RoomtypeManager.getInstance().loadByPrimaryKey(rroom.getRoomtypeid());
 FolioBean[] folio = FolioManager.getInstance().loadByReservationroomid(rroom.getReservationroomid());
 String fnum = "0";
 if(folio.length > 0)    fnum = folio[0].getFolioid().toString();

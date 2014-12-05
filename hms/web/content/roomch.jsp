@@ -7,10 +7,10 @@ ReservationBean reserv = ReservationManager.getInstance().loadByPrimaryKey(rroom
 //ViewReservationconditionalrateslistBean[] rlist = ViewReservationconditionalrateslistManager.getInstance().loadByWhere(" where reservationid="+reserv.getReservationid()+" order by daynumber asc");
 
 GuestBean guest = GuestManager.getInstance().loadByPrimaryKey(rroom.getGuestid());
-RoomBean room = RoomManager.getInstance().loadByPrimaryKey(rroom.getRoomid());
-RoomtypeBean roomtype = RoomtypeManager.getInstance().loadByPrimaryKey(room.getRoomtypeid());
+//RoomBean room = RoomManager.getInstance().loadByPrimaryKey(rroom.getRoomid());
+RoomtypeBean roomtype = RoomtypeManager.getInstance().loadByPrimaryKey(rroom.getRoomtypeid());
 RatetypeBean rtp = RatetypeManager.getInstance().loadByPrimaryKey(rroom.getRatetypeid());
-RatetypeBean[] rates = RatetypeManager.getInstance().loadByWhere("where ratetypeid in (select ratetypeid from ratetyperoomtype where roomtypeid = "+room.getRoomtypeid()+") order by ord");
+RatetypeBean[] rates = RatetypeManager.getInstance().loadByWhere("where ratetypeid in (select ratetypeid from ratetyperoomtype where roomtypeid = "+rroom.getRoomtypeid()+") order by ord");
 
 DiscountBean disc = null;
 if(reserv.getDiscountid() != null)

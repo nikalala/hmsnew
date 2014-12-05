@@ -4,8 +4,12 @@
 <%
 ReservationroomBean rroom = ReservationroomManager.getInstance().loadByPrimaryKey(new Long(request.getParameter("reservationroomid")));
 ReservationBean reserv = ReservationManager.getInstance().loadByPrimaryKey(rroom.getReservationid());
-RoomBean room = RoomManager.getInstance().loadByPrimaryKey(rroom.getRoomid());
-RoomtypeBean roomtype = RoomtypeManager.getInstance().loadByPrimaryKey(room.getRoomtypeid());
+String roomname = "";
+if(rroom.getRoomid() != null){
+    RoomBean room = RoomManager.getInstance().loadByPrimaryKey(rroom.getRoomid());
+    roomname = room.getName();
+}
+RoomtypeBean roomtype = RoomtypeManager.getInstance().loadByPrimaryKey(rroom.getRoomtypeid());
 RatetypeBean rtp = RatetypeManager.getInstance().loadByPrimaryKey(rroom.getRatetypeid());
 Calendar calstart = Calendar.getInstance();
 Calendar calend = Calendar.getInstance();
@@ -67,7 +71,7 @@ for(int i=0;calstart.before(calend);i++){
 %>
     <row id='roomch<%=i%>'>
         <cell><![CDATA[<%=dt.format(calstart.getTime())%>]]></cell>
-        <cell><![CDATA[<%=roomtype.getCode()%>-<%=room.getName()%>]]></cell>
+        <cell><![CDATA[<%=roomtype.getCode()%>-<%=roomname%>]]></cell>
         <cell><![CDATA[<%=rtp.getName()%>]]></cell>
         <cell><![CDATA[<%=rroom.getAdult()%> / <%=rroom.getChild()%>]]></cell>
         <cell><![CDATA[<%=dc.format(roomrate)%>]]></cell>

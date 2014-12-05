@@ -18,13 +18,18 @@ if(guest.getCountryid() != null){
 if(guest.getCity() != null) guestaddress += guest.getCity()+" ";
 if(guest.getZip() != null)  guestaddress += guest.getZip();
 
-RoomBean room = RoomManager.getInstance().loadByPrimaryKey(rroom.getRoomid());
-String rname = room.getCode();
-if(rname == null)   rname = room.getName();
-if(rname == null || rname.trim().length() == 0) rname = "ნომრის გარეშე";
+int sts = 0;
+String rname = "ნომრის გარეშე";
+if(rroom.getRoomid() != null){
+    RoomBean room = RoomManager.getInstance().loadByPrimaryKey(rroom.getRoomid());
+    rname = room.getCode();
+    if(rname == null)   rname = room.getName();
+    if(rname == null || rname.trim().length() == 0) rname = "ნომრის გარეშე";
+    sts = getRoomStatus(new Date(), room.getRoomid().intValue());
+}
 
-RoomtypeBean roomtype = RoomtypeManager.getInstance().loadByPrimaryKey(room.getRoomtypeid());
-int sts = getRoomStatus(new Date(), room.getRoomid().intValue());
+RoomtypeBean roomtype = RoomtypeManager.getInstance().loadByPrimaryKey(rroom.getRoomtypeid());
+
 StcolorBean[] stcolor = StcolorManager.getInstance().loadByWhere("where active = true and deleted = false and roomstatus = "+sts);
 String statuscolor = "#FFFFFF";
 if(stcolor.length > 0)

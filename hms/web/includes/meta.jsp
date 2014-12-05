@@ -343,8 +343,8 @@ System.out.println(rid+" = "+statusid);
         ReservationroomBean rroom = ReservationroomManager.getInstance().loadByPrimaryKey(reservationroomid);
         ReservationBean reserv = ReservationManager.getInstance().loadByPrimaryKey(rroom.getReservationid());
         GuestBean guest = GuestManager.getInstance().loadByPrimaryKey(rroom.getGuestid());
-        RoomBean room = RoomManager.getInstance().loadByPrimaryKey(rroom.getRoomid());
-        RoomtypeBean roomtype = RoomtypeManager.getInstance().loadByPrimaryKey(room.getRoomtypeid());
+        //RoomBean room = RoomManager.getInstance().loadByPrimaryKey(rroom.getRoomid());
+        RoomtypeBean roomtype = RoomtypeManager.getInstance().loadByPrimaryKey(rroom.getRoomtypeid());
         DiscountBean disc = null;
         if (reserv.getDiscountid() != null)
             disc = DiscountManager.getInstance().loadByPrimaryKey(reserv.getDiscountid());
@@ -386,7 +386,7 @@ System.out.println(rid+" = "+statusid);
                     seasonid = ses[0].getSeasonid().intValue();
                 long cid = 0;
                 if (guest.getContragentid() != null) cid = guest.getContragentid().intValue();
-                String sqlrmr = "where ratetypeid = " + rroom.getRatetypeid() + " and roomtypeid = " + room.getRoomtypeid() + " and seasonid = " + seasonid + " and contragentid = " + cid;
+                String sqlrmr = "where ratetypeid = " + rroom.getRatetypeid() + " and roomtypeid = " + rroom.getRoomtypeid() + " and seasonid = " + seasonid + " and contragentid = " + cid;
                 RoomrateBean[] rmr = RoomrateManager.getInstance().loadByWhere(sqlrmr);
                 if (rmr.length > 0) {
                     roomrate = rmr[0].getRate().doubleValue() * (baseadult + basechild);
@@ -869,7 +869,7 @@ System.out.println(rid+" = "+statusid);
     String[] reasoncategory = {"ოთახის დაბლოკვა", "რეზერვაციის გაუქმება", "სტუმრის მიღება", "სტუმრის გაწერა", "ფოლიოს ტრანზაქცია", "სტუმრის ფოლიო",
             "დალაგება", "არ გამოცხადებული რეზერვაცია", "პაკეტი", "პრომო აქცია", "რეზერვაცია", "ოთახის გადატანის შეჩერება", "მიღების წაშლა", "რეზერვაციის წაშლა", "ნედლეულის ჩამოწერა", "კერძის ჩამოწერა", "შავი სიის მიზეზი"};
     String[] folioactiontype = {"შესწორება", "ბანკი", "ნაღდი", "კონტრაქტორი", "ფასდაკლება", "მომსახურება", "ოთახის გადასახადი", "გადატანა"};
-//                          0           1       2       3               4           5               6                   7
+//                                  0           1       2       3               4           5               6                   7
 
 //                                              8
     int[] reasoncategory_walkin = {2, 3, 5, 6, 8, 9, 10, 12};
