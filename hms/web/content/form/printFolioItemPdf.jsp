@@ -1,18 +1,6 @@
 <%@page contentType="application/pdf"%>
 <%@page pageEncoding="UTF-8"%>
-<%@page import="java.util.*"%>
-<%@page import="java.text.*"%>
-<%@page import="java.io.*"%>
-<%@page import="com.mysoft.*"%>
-<%@page import="com.mysoft.hms.*"%>
-<%@page import="javax.imageio.*"%>
-<%@page import="java.awt.*"%>
-<%@page import="java.awt.image.*"%>
-<%@page import="com.itextpdf.text.*" %>
-<%@page import="com.itextpdf.text.pdf.*" %>
-<%@page import="com.itextpdf.text.pdf.draw.*" %>
-<jsp:useBean id="user" scope="session" class="com.mysoft.hms.PersonnelBean"/>
-<jsp:useBean id="hotel" scope="session" class="com.mysoft.hms.HotelBean"/>
+<%@include file="../../includes/meta.jsp"%>
 <%!
 class TableHeader extends PdfPageEventHelper {
         /** The header text. */
@@ -168,13 +156,15 @@ public static void addImage(PdfStamper stamper,AcroFields form,String field,Stri
         com.itextpdf.text.Rectangle rect= photograph.get(0).position;
         //if(StringUtils.isNotBlank(fieldValue)){
         com.itextpdf.text.Image img = com.itextpdf.text.Image.getInstance(fieldValue);
-        img.scaleToFit(rect.getWidth(), rect.getHeight());
-        img.setBorder(2);
+        //img.scaleToFit(rect.getWidth(), rect.getHeight());
+        float scaler = 6.23f;
+        img.scalePercent(scaler);
+        //img.setBorder(2);
         img.setAbsolutePosition(
         photograph.get(0).position.getLeft() + (rect.getWidth() - img.getScaledWidth() )
         , photograph.get(0).position.getTop() - (rect.getHeight()));
         PdfContentByte cb = stamper.getOverContent((int)photograph.get(0).page);
-        cb.addImage(img);
+        //cb.addImage(img);
         //}
         }
     }catch(Exception e){
@@ -184,32 +174,64 @@ public static void addImage(PdfStamper stamper,AcroFields form,String field,Stri
    
 %>
 <%
-java.text.NumberFormat dc1 = new DecimalFormat("0.0");
-
 Manager.getInstance().setJdbcDriver(getServletContext().getInitParameter("driver"));
 Manager.getInstance().setJdbcUrl(getServletContext().getInitParameter("url"));
 Manager.getInstance().setJdbcUsername(getServletContext().getInitParameter("user"));
 Manager.getInstance().setJdbcPassword(getServletContext().getInitParameter("pass"));
 
-FolioitemBean folioitem = FolioitemManager.getInstance().loadByPrimaryKey(new Long(request.getParameter("id")));
+FolioitemBean fi = FolioitemManager.getInstance().loadByPrimaryKey(new Long(request.getParameter("id")));
+FolioBean folio = FolioManager.getInstance().loadByPrimaryKey(fi.getFolioid());
+ReservationroomBean rres = ReservationroomManager.getInstance().loadByPrimaryKey(folio.getReservationroomid());
+ReservationBean res = ReservationManager.getInstance().loadByPrimaryKey(rres.getReservationid());
+GuestBean guest = GuestManager.getInstance().loadByPrimaryKey(rres.getGuestid());
+SalutationBean slt = SalutationManager.getInstance().loadByPrimaryKey(guest.getSalutationid());
+PaymentBean payment = PaymentManager.getInstance().loadByPrimaryKey(fi.getPaymentid());
+PaymentmethodBean pmethod = PaymentmethodManager.getInstance().loadByPrimaryKey(payment.getPaymentmethodid());
+PersonnelBean pers = PersonnelManager.getInstance().loadByPrimaryKey(payment.getRegbyid());
+CurrencyBean cr = CurrencyManager.getInstance().loadByPrimaryKey(payment.getCurrencyid());
+RoomtypeBean roomtype = RoomtypeManager.getInstance().loadByPrimaryKey(rres.getRoomtypeid());
+String sroom = roomtype.getCode();
+if(rres.getRoomid() != null){
+    RoomBean room = RoomManager.getInstance().loadByPrimaryKey(rres.getRoomid());
+    sroom = room.getName()+" "+sroom;
+}
+
+String[] names = {
+    "hotelname",                //  0
+    "hoteladdress",             //  1
+    "hotelphome",               //  2
+    "hotelemail",               //  3
+    "roomnumber+roomtype",      //  4
+    "guestname",                //  5
+    "paymentdate",              //  6
+    "paymethod",                //  7
+    "remark",                   //  8
+    "receiptno",                //  9
+    "foliono",                  // 10
+    "enteredon",                // 11
+    "amount",                   // 12
+    "username"                  // 13
+};
+
+String[] values = {
+    hotel.getName(),                                            //  0
+    hotel.getAddress1(),                                        //  1
+    hotel.getPhone(),                                           //  2
+    hotel.getEmail(),                                           //  3
+    sroom,                                                      //  4
+    slt.getName()+" "+ guest.getFname()+" "+guest.getLname(),   //  5
+    dt.format(payment.getPaydate()),                            //  6
+    pmethod.getName(),                                          //  7
+    payment.getNote(),                                          //  8
+    payment.getPaymentid().toString(),                          //  9
+    folio.getNum(),                                             // 10
+    "",                                                         // 11
+    cr.getCode() +" "+dc.format(payment.getAmount()),           // 12
+    pers.getFname()+" "+pers.getLname()                         // 13
+};
 
 String basedir = session.getServletContext().getRealPath("/");
 
-DecimalFormatSymbols dfs = new DecimalFormatSymbols(Locale.US);
-
-SimpleDateFormat dt = new SimpleDateFormat("dd/MM/yyyy");
-SimpleDateFormat df = new SimpleDateFormat("dd.MM.yyyy");
-SimpleDateFormat sdf0 = new SimpleDateFormat("yyyy/MM/dd");
-SimpleDateFormat dtlong = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-SimpleDateFormat dtime = new SimpleDateFormat("HH:mm");
-SimpleDateFormat defcal = new SimpleDateFormat("[yyyy,MM,dd]");
-
-java.text.NumberFormat dc = new DecimalFormat("0.00",dfs);
-java.text.NumberFormat dcc = new DecimalFormat("0.0000",dfs);
-java.text.NumberFormat dcl = new DecimalFormat("#,##0.00",dfs);
-java.text.NumberFormat dcint = new DecimalFormat("0");
-java.text.NumberFormat dclkb = new DecimalFormat("#,##0",dfs);
-java.text.NumberFormat dclong = new DecimalFormat("#,##0.0000",dfs);
 
 float tinysize = 6;
 float smallsize = 8;
@@ -253,21 +275,28 @@ ad.setLayout(PushbuttonField.LAYOUT_ICON_ONLY);
 ad.setProportionalIcon(true);
 ad.setImage(com.itextpdf.text.Image.getInstance(basedir+"/logos/logo1.png"));
 form1.replacePushbuttonField("hotellogo", ad.getField());
-//addImage(stamper,form1,"hotellogo",basedir+"/logos/logo1.png");
-        
-form1.setFieldProperty("hotelname", "textfont", utf, null);
-form1.setFieldProperty("hoteladdress", "textfont", utf, null);
-form1.setField("hotelname", hotel.getName());
-form1.setField("hoteladdress", hotel.getAddress1());
 
-form1.setField("hotelphone", hotel.getPhone());
-form1.setField("hotelemail", hotel.getEmail());
+PushbuttonField ad1 = form1.getNewPushbuttonFromField("hotellogo1");
+ad1.setLayout(PushbuttonField.LAYOUT_ICON_ONLY);
+ad1.setProportionalIcon(true);
+ad1.setImage(com.itextpdf.text.Image.getInstance(basedir+"/logos/logo1.png"));
+form1.replacePushbuttonField("hotellogo1", ad1.getField());
+
+addImage(stamper,form1,"hotellogo",basedir+"/logos/logo1.png");
+addImage(stamper,form1,"hotellogo1",basedir+"/logos/logo1.png");
+
+for(int i=0;i<names.length;i++){
+    form1.setFieldProperty(names[i], "textfont", utf, null);
+    form1.setField(names[i], values[i]);
+    form1.setFieldProperty(names[i]+"1", "textfont", utf, null);
+    form1.setField(names[i]+"1", values[i]);
+}
 
 stamper.close();
 pdfTemplate.close();
 
 response.setContentType("application/pdf");
-response.addHeader("Content-Disposition","filename=receipt_"+folioitem.getFolioitemid() +".pdf");
+response.addHeader("Content-Disposition","filename=rrrr.pdf");
 OutputStream oout0 = response.getOutputStream();
 oout0.write(oout.toByteArray());
 oout0.close();

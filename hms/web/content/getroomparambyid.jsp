@@ -5,13 +5,25 @@
 String[] params = request.getParameter("param").split(",");
 ReservationroomBean rroom = ReservationroomManager.getInstance().loadByPrimaryKey(new Long(request.getParameter("reservationroomid")));
 ReservationBean reserv = ReservationManager.getInstance().loadByPrimaryKey(rroom.getReservationid());
-RoomBean room = RoomManager.getInstance().loadByPrimaryKey(rroom.getRoomid());
+RoomBean room = null;
+if(rroom.getRoomid() != null)
+    room = RoomManager.getInstance().loadByPrimaryKey(rroom.getRoomid());
 JSONObject obj = new JSONObject();
 for(int i=0;i<params.length;i++){
-    if(params[i].equalsIgnoreCase("name"))  obj.element(params[i], room.getName());
-    if(params[i].equalsIgnoreCase("nickname"))  obj.element(params[i], room.getCode());
+    if(params[i].equalsIgnoreCase("name"))  {
+        if(room != null)
+            obj.element(params[i], room.getName());
+        else
+            obj.element(params[i], "N/A");
+    }
+    if(params[i].equalsIgnoreCase("nickname"))  {
+        if(room != null)
+            obj.element(params[i], room.getCode());
+        else
+            obj.element(params[i], "N/A");
+    }
     if(params[i].equalsIgnoreCase("roomtype")){
-        RoomtypeBean roomtype = RoomtypeManager.getInstance().loadByPrimaryKey(room.getRoomtypeid());
+        RoomtypeBean roomtype = RoomtypeManager.getInstance().loadByPrimaryKey(rroom.getRoomtypeid());
         obj.element(params[i], roomtype.getCode());
     }
 }

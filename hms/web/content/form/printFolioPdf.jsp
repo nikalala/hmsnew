@@ -168,22 +168,41 @@ public static void addImage(PdfStamper stamper,AcroFields form,String field,Stri
         com.itextpdf.text.Rectangle rect= photograph.get(0).position;
         //if(StringUtils.isNotBlank(fieldValue)){
         com.itextpdf.text.Image img = com.itextpdf.text.Image.getInstance(fieldValue);
-        img.scaleToFit(rect.getWidth(), rect.getHeight());
-        img.setBorder(2);
+        //img.scaleToFit(rect.getWidth(), rect.getHeight());
+        float scaler = 6.23f;
+        img.scalePercent(scaler);
+        //img.setBorder(2);
         img.setAbsolutePosition(
         photograph.get(0).position.getLeft() + (rect.getWidth() - img.getScaledWidth() )
         , photograph.get(0).position.getTop() - (rect.getHeight()));
         PdfContentByte cb = stamper.getOverContent((int)photograph.get(0).page);
-        cb.addImage(img);
+        //cb.addImage(img);
         //}
         }
     }catch(Exception e){
         e.printStackTrace();
     }
 }
+
+public static PdfPTable getHeaderTable(int x, int y) {
+        PdfPTable table = new PdfPTable(2);
+        table.setTotalWidth(527);
+        table.setLockedWidth(true);
+        table.getDefaultCell().setFixedHeight(20);
+        //table.getDefaultCell().setBorder(Rectangle.BOTTOM);
+        table.addCell("FOOBAR FILMFESTIVAL");
+        table.getDefaultCell().setHorizontalAlignment(Element.ALIGN_RIGHT);
+        table.addCell(String.format("Page %d of %d", x, y));
+        return table;
+    }
    
 %>
 <%
+String language = "en";
+String fontname = "arial.ttf";
+if(language.equalsIgnoreCase("ka"))
+    fontname = "sylfaen.ttf";
+    
 java.text.NumberFormat dc1 = new DecimalFormat("0.0");
 
 Manager.getInstance().setJdbcDriver(getServletContext().getInitParameter("driver"));
@@ -191,44 +210,30 @@ Manager.getInstance().setJdbcUrl(getServletContext().getInitParameter("url"));
 Manager.getInstance().setJdbcUsername(getServletContext().getInitParameter("user"));
 Manager.getInstance().setJdbcPassword(getServletContext().getInitParameter("pass"));
 
-FolioitemBean folioitem = FolioitemManager.getInstance().loadByPrimaryKey(new Long(request.getParameter("id")));
+FolioBean folio = FolioManager.getInstance().loadByPrimaryKey(new Long(request.getParameter("id")));
+ReservationroomBean rroom = ReservationroomManager.getInstance().loadByPrimaryKey(new Long(request.getParameter("reservationroomid")));
+RoomtypeBean rtp = RoomtypeManager.getInstance().loadByPrimaryKey(rroom.getRoomtypeid());
+ReservationBean reserv = ReservationManager.getInstance().loadByPrimaryKey(rroom.getReservationid());
+String roomname = rtp.getCode();
+if(rroom.getRoomid() != null){
+    RoomBean room = RoomManager.getInstance().loadByPrimaryKey(rroom.getRoomid());
+    roomname = " - "+room.getName();
+}
+String sql = "where folioid = "+folio.getFolioid();
+sql += " order by itemdate, (case when particular = 6 then 1 when particular = -1 then 2 when particular = 0 then 3 when particular = 1 then 4 when particular = 2 then 5 when particular = 4 then 6 when particular = 5 then 7 else 8 end)";
+FolioitemBean[] items = FolioitemManager.getInstance().loadByWhere(sql);
 
-String[] names = {
-"hotelname",
-"hoteladdress",
-"hotelphome",
-"hotelemail",
-"registrationcardnumber",
-"guestname",
-"guestphone",
-"guestmobile",
-"guestaddress",
-"guestemail",
-"guestfax",
-"guestcity",
-"guestcountry",
-"guestidtype+idnumber",
-"company",
-"bsource",
-"arrivaldate",
-"departuredate",
-"totnights",
-"roomnumber+roomtype",
-"rateamountperday",
-"taxamountparday",
-"discountamountperday",
-"adjustmentperday",
-"netperday",
-"arrivaltime",
-"departuretime",
-"pax (a/c)",
-"ratetype",
-"totalcharge+currencyshortcode",
-"depositpaid+currencyshortcode",
-"amountleft+currencyshortcode",
-"paymenttype",
-"peymentmethod"};
+String[] names = {"hotelname","hoteladdress","hotelphome","hotelemail","registrationcardnumber","guestname","guestphone","guestmobile",
+"guestaddress","guestemail","guestfax","guestcity","guestcountry","guestidtype+idnumber","company","bsource","arrivaldate","departuredate",
+"totnights","roomnumber+roomtype","rateamountperday","taxamountparday","discountamountperday","adjustmentperday","netperday",
+"arrivaltime","departuretime","pax (a/c)","ratetype","totalcharge+currencyshortcode","depositpaid+currencyshortcode","amountleft+currencyshortcode",
+"paymenttype","peymentmethod"};
 
+String[] values = {
+    hotel.getName(), hotel.getAddress1(), hotel.getPhone(), hotel.getEmail()
+};
+
+String[] headers = {"Date","Ref.No.","Particular","Charges","Payment","Balance"};
 
 String basedir = session.getServletContext().getRealPath("/");
 
@@ -254,7 +259,7 @@ float bigsize = 10;
 float biggersize = 12;
 float logosize = 16;
 
-BaseFont utf = BaseFont.createFont(basedir+"/sylfaen.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
+BaseFont utf = BaseFont.createFont(basedir+"/"+fontname, BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
 com.itextpdf.text.Font biggerboldfont = new com.itextpdf.text.Font(utf, biggersize,com.itextpdf.text.Font.BOLD);
 
 com.itextpdf.text.Font tfont = new com.itextpdf.text.Font(utf, tinysize);
@@ -278,21 +283,139 @@ com.itextpdf.text.Font pfont = new com.itextpdf.text.Font(utf, bigsize,com.itext
 com.itextpdf.text.Chunk tab1 = new com.itextpdf.text.Chunk(new VerticalPositionMark(), 8, false);
 com.itextpdf.text.Chunk tab2 = new com.itextpdf.text.Chunk(new VerticalPositionMark(), 4, false);
 
-PdfReader pdfTemplate = new PdfReader(basedir+"/templates/Guest_Registration_Card.pdf");
+PdfReader pdfTemplate = new PdfReader(basedir+"/templates/folioInvoice.pdf");
 ByteArrayOutputStream oout = new ByteArrayOutputStream();
 PdfStamper stamper = new PdfStamper(pdfTemplate, oout);
 stamper.setFormFlattening(true);
 
 AcroFields form1 = stamper.getAcroFields();
 
-//PushbuttonField ad = form1.getNewPushbuttonFromField("hotellogo");
-//ad.setLayout(PushbuttonField.LAYOUT_ICON_ONLY);
-//ad.setProportionalIcon(true);
-//ad.setImage(com.itextpdf.text.Image.getInstance(basedir+"/logos/logo1.png"));
-//form1.replacePushbuttonField("hotellogo", ad.getField());
-
-//addImage(stamper,form1,"hotellogo",basedir+"/logos/logo1.png");
+PushbuttonField ad = form1.getNewPushbuttonFromField("hotellogo");
+ad.setLayout(PushbuttonField.LAYOUT_ICON_ONLY);
+ad.setProportionalIcon(true);
+ad.setImage(com.itextpdf.text.Image.getInstance(basedir+"/logos/logo1.png"));
+form1.replacePushbuttonField("hotellogo", ad.getField());
+addImage(stamper,form1,"hotellogo",basedir+"/logos/logo1.png");
         
+float[] wds0 = {15.7f,13.2f,31.1f,13f,14f,12f};
+int[] aligns = {
+    com.itextpdf.text.Phrase.ALIGN_LEFT,
+    com.itextpdf.text.Phrase.ALIGN_LEFT,
+    com.itextpdf.text.Phrase.ALIGN_LEFT,
+    com.itextpdf.text.Phrase.ALIGN_RIGHT,
+    com.itextpdf.text.Phrase.ALIGN_RIGHT,
+    com.itextpdf.text.Phrase.ALIGN_RIGHT
+};
+PdfPTable table = new PdfPTable(wds0.length);
+table.setWidths(wds0);
+table.setTotalWidth(550);
+table.setLockedWidth(true);
+table.getDefaultCell().setFixedHeight(15);
+//table.getDefaultCell().setBorder(Rectangle.BOTTOM);
+for(int i=0;i<headers.length;i++){
+    PdfPCell cell = new PdfPCell(new com.itextpdf.text.Phrase(new com.itextpdf.text.Chunk("  "+headers[i],bfont)));
+    //cell.setBorderColorTop(new BaseColor(0, 0, 0));
+    //cell.setBorderColorBottom(new BaseColor(0, 0, 0));
+    //cell.setBorderColorLeft(new BaseColor(255, 255, 255));
+    //cell.setBorderColorRight(new BaseColor(255, 255, 255));
+    //cell.setBorderWidthTop(2f);
+    cell.setHorizontalAlignment(aligns[i]);
+    cell.setPaddingBottom(2);
+    table.addCell(cell);
+}
+
+for(int i=0;i<items.length;i++){
+    double koeff = 1;
+    String particular = "";
+    boolean noroom = false;
+    switch(items[i].getParticular().intValue()){
+        case -1:
+            TaxBean tax = TaxManager.getInstance().loadByPrimaryKey(items[i].getTaxid());
+            particular = tax.getName() + " " + dc.format(tax.getAmount().doubleValue());
+            if(tax.getPostingtype().intValue() == 0)    particular += "%";
+            noroom = true;
+            break;
+        case 0:
+            noroom = true;
+            particular = "დამრგვალება";
+            break;
+        case 1:
+            PaymentBean payment = PaymentManager.getInstance().loadByPrimaryKey(items[i].getPaymentid());
+            PaymentmethodBean pmethod = PaymentmethodManager.getInstance().loadByPrimaryKey(payment.getPaymentmethodid());
+            particular = pmethod.getCode();
+            koeff = -1;
+            break;
+        case 2:
+            payment = PaymentManager.getInstance().loadByPrimaryKey(items[i].getPaymentid());
+            pmethod = PaymentmethodManager.getInstance().loadByPrimaryKey(payment.getPaymentmethodid());
+            particular = pmethod.getCode();
+            koeff = -1;
+            break;
+        case 3:
+            payment = PaymentManager.getInstance().loadByPrimaryKey(items[i].getPaymentid());
+            pmethod = PaymentmethodManager.getInstance().loadByPrimaryKey(payment.getPaymentmethodid());
+            particular = pmethod.getCode();
+            koeff = -1;
+            break;
+        case 4:
+            DiscountBean discount = DiscountManager.getInstance().loadByPrimaryKey(items[i].getDiscountid());
+            particular = discount.getName();
+            noroom = true;
+            break;
+        case 5:
+            ExtrachargeBean extracharge = ExtrachargeManager.getInstance().loadByPrimaryKey(items[i].getExtrachargeid());
+            particular = extracharge.getName();
+            if(items[i].getOrdermainid() != null)   particular = "კვება";
+            break;
+        case 6:
+            particular = "ოთახის გადასახადი";
+            if(items[i].getRoomoper() != null){
+                particular = accounts[items[i].getRoomoper()];
+            }
+            break;
+        default:
+            break;
+    }
+    
+    if(items[i].getManual().booleanValue())
+        noroom = false;
+    PersonnelBean regby = PersonnelManager.getInstance().loadByPrimaryKey(items[i].getRegbyid());
+    int st = 0;
+    String sact = "";
+    if(!noroom){
+        sact = "<span onclick=\"editFolioAction("+items[i].getFolioitemid()+")\" style=\"cursor: pointer;\" class=\"glyphicon glyphicon-pencil\" data-toggle=\"tooltip\" title=\"ტარიფის ოპერაცია\"></span>";
+        if(items[i].getPaymentid() != null)
+            sact += "<span onclick=\"printFolioAction("+items[i].getFolioitemid()+")\" style=\"padding-left: 5px; cursor: pointer;\" class=\"glyphicon glyphicon-print\" data-toggle=\"tooltip\" title=\"ბეჭდვა\"></span>";
+        st = 1;
+    }
+    String note = items[i].getNote();
+    double amt = items[i].getAmount();
+    
+    ss[n][0] = items[i].getFolioitemid().toString();
+    ss[n][1] = roomname;
+    ss[n][2] = dt.format(items[i].getItemdate());
+    ss[n][3] = (items[i].getRefno() != null) ? items[i].getRefno():items[i].getFolioitemid().toString();
+    ss[n][4] = particular;
+    ss[n][5] = note;
+    ss[n][6] = regby.getFname()+" "+regby.getLname();
+    ss[n][7] = sact;
+    ss[n][8] = maincurrency.getCode();
+    ss[n][9] = dc.format(amt*koeff);
+    ss[n][10] = String.valueOf(st);
+    //System.out.println(i+" = "+n+" = "+amt);
+    PdfPCell cell = new PdfPCell(new com.itextpdf.text.Phrase(new com.itextpdf.text.Chunk("  "+headers[i],bfont)));
+    //cell.setBorderColorTop(new BaseColor(0, 0, 0));
+    //cell.setBorderColorBottom(new BaseColor(0, 0, 0));
+    //cell.setBorderColorLeft(new BaseColor(255, 255, 255));
+    //cell.setBorderColorRight(new BaseColor(255, 255, 255));
+    //cell.setBorderWidthTop(2f);
+    cell.setHorizontalAlignment(aligns[i]);
+    cell.setPaddingBottom(2);
+    table.addCell(cell);
+    }
+        
+table.writeSelectedRows(0, -1, 22, 590, stamper.getOverContent(1));
+
 form1.setFieldProperty("hotelname", "textfont", utf, null);
 form1.setFieldProperty("hoteladdress", "textfont", utf, null);
 form1.setField("hotelname", hotel.getName());
@@ -303,6 +426,8 @@ form1.setField("hotelemail", hotel.getEmail());
 
 stamper.close();
 pdfTemplate.close();
+
+
 
 response.setContentType("application/pdf");
 response.addHeader("Content-Disposition","filename=rrrr.pdf");

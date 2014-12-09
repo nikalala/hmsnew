@@ -71,6 +71,11 @@ $(document).ready(function(){
     //$("#tabpane").height(edittransactionheight-24-145-93);
     //$("#tabpane").height(edittransactionheight*0.58);
 });
+
+function printRegCard(id){
+        addTab("content/form/printInvoiceFolioItem.jsp?act=regcard&id="+id,"სარეგისტრაციო ბარათის ბეჭდვა","regcard_"+id);
+    }
+
 </script>
 <div class="container-fluid" id="edittransaction0" style="padding-top: 4px; height: 100%;">
     <div class="row" style="margin-bottom: 0px; padding-left: 5px;  padding-right: 5px;">
