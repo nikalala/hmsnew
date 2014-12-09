@@ -26,16 +26,16 @@
                             <a href="javascript:newWindow1('walkin','ტრანზაქციის ჩამატება','wintype=2');">ტრანზაქციის ჩამატება</a>
                         </li>
                         <li>
-                            <a href="javascript:getBody('stayviewleft','reservationlist','რეზერვაციის სია','res1');">რეზერვაციების სია</a>
+                            <a href="javascript:getBody('stayviewleft','reservationlist','რეზერვაციის სია','res1','',true);">რეზერვაციების სია</a>
                         </li>
                         <li>
-                            <a href="javascript:getBody('stayviewleft','arrivallist','ჩამომსვლელთა სია','res1');">ჩამომსვლელთა სია</a>
+                            <a href="javascript:getBody('stayviewleft','arrivallist','ჩამომსვლელთა სია','res1','',true);">ჩამომსვლელთა სია</a>
                         </li>
                         <li>
-                            <a href="javascript:getBody('stayviewleft','deplist','წამსვლელთა სია','res1');">წამსვლელთა სია</a>
+                            <a href="javascript:getBody('stayviewleft','deplist','წამსვლელთა სია','res1','',true);">წამსვლელთა სია</a>
                         </li>
                         <li>
-                            <a href="javascript:getBody('stayviewleft','guestdblist','სტუმრების მონაცემთა ბაზა','res1');">სტუმრების მონაცემთა ბაზა</a>
+                            <a href="javascript:getBody('stayviewleft','guestdblist','სტუმრების მონაცემთა ბაზა','res1','',true);">სტუმრების მონაცემთა ბაზა</a>
                         </li>
                         <li>
                             <a href="javascript:newWindow('nightaudit','ღამის აუდიტი');">ღამის აუდიტი</a>
@@ -65,13 +65,13 @@
                     <a href="#mb59" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-usd" style="padding-right: 10px;"></span> სალარო <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li>
-                            <a href="javascript:getBody('stayviewleft','tagents','ტურისტული აგენტები','res1','?type=2');">ტურისტული აგენტები</a>
+                            <a href="javascript:getBody('stayviewleft','tagents','ტურისტული აგენტები','res1','?type=2',true);">ტურისტული აგენტები</a>
                         </li>
                         <li>
-                            <a href="javascript:getBody('stayviewleft','tagents','კომპანიები','res1','?type=1');">კომპანიები</a>
+                            <a href="javascript:getBody('stayviewleft','tagents','კომპანიები','res1','?type=1',true);">კომპანიები</a>
                         </li>
                         <li>
-                            <a href="javascript:getBody('construction','expenses','ხარჯები','res1');">ხარჯები</a>
+                            <a href="javascript:getBody('construction','expenses','ხარჯები','res1','',true);">ხარჯები</a>
                         </li>
                         <li>
                             <a href="javascript:newWindow('construction','მოლარე');">მოლარე</a>
@@ -103,7 +103,7 @@
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li>
-                    <a href="javascript:getBody('stayviewleft','construction');" data-toggle="tooltip" title="დატვირთულობა"><span class="glyphicon glyphicon-inbox"></span></a>
+                    <a href="javascript:getBody('stayviewleft', 'stayview', 'დატვირთულობა', 'res1','',true);" data-toggle="tooltip" title="დატვირთულობა"><span class="glyphicon glyphicon-inbox"></span></a>
                 </li>
                 <li>
                     <a href="javascript:getBody('stayviewleft','construction');" data-toggle="tooltip" title="სწრაფი ნახვა"><span class="glyphicon glyphicon-eye-open"></span></a>

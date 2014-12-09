@@ -410,21 +410,9 @@ function getLBody(fname) {
     });
 }
 
-function checkTabs(pageName) {
-    if ($('.nav-tabs li').size() > 0) {
-        ////console.log($('.nav-tabs li'));
-    }
-    if (pageName !== "stayview") {
-        ////console.log("opening tab > " + pageName);
-    }
-}
-
-function getBody(fname1, fname2, name, id, param) {
-
-    checkTabs(fname2);
+function getBody(fname1, fname2, name, id, param,isFirst) {
 
     loader.show();
-    ////console.log("started method getBody");
     $.ajax({
         type: "POST",
         url: "content/" + fname1 + ".jsp",
@@ -438,14 +426,12 @@ function getBody(fname1, fname2, name, id, param) {
         },
         async: false
     });
-    removeTab(id);
+    /*removeTab(id);*/
     var reqParam = "";
     if (!isNullOrEmpty(param)) {
         reqParam = param;
     }
-    //console.log(reqParam);
-
-    addTab("content/" + fname2 + ".jsp" + reqParam, name, id);
+    addTab("content/" + fname2 + ".jsp" + reqParam, name, id, isFirst);
 }
 
 function removeTab(id) {
@@ -456,36 +442,84 @@ function removeTab(id) {
 }
 
 function removeAllTabs() {
-    /*$('.tab-pane ul li').remove();*/
     $('.nav-tabs li').remove();
 }
 
-function addTab(fname2, name, id) {
+
+function addTab(fname2, name, id, isFirst) {
     fname2 = fname2.replace(".jsp.jsp", ".jsp");
+
+
     var tabname = "/content/" + fname2 + ".jsp";
     tabname = tabname.replace(".jsp.jsp", ".jsp").replace("content/content/", "hms/content/");
+    console.log(tabname);
 
-    if (tabcount == 0)
-        $('#maintabs').append('<li style=""><a src=' + tabname + ' href="#' + id + '" data-toggle="tab" style="padding-top: 4px; background-color: #F5F5F5;">' + name + '</a></li>');
-    else
-        $('#maintabs').append('<li style=""><a src=' + tabname + ' href="#' + id + '" data-toggle="tab" style="padding-top: 3px; background-color: #F5F5F5;"><button class="close closeTab" type="button" >×</button>' + name + '</a></li>');
+    var id = "#tabs-" + makeid(name);
+    if(!isFirst)
+    {
+        var lastLi = $("#tabs li").last();
+        if (lastLi && lastLi.length > 0) {
+            $('<li><a href="' + id + '" data-toggle="tab" style="padding-top: 4px; background-color: #F5F5F5;" title="' + name + '">' + name + '</a></li>').insertAfter(lastLi);
+        } else {
+            $("#tabs ul").append('<li><a href="' + id + '" data-toggle="tab" style="padding-top: 4px; background-color: #F5F5F5;" title="' + name + '">' + name + '</a></li>');
+        }
+        var lastDiv = $("#centerTabContent .tab-pane").last();
+        if (lastDiv && lastDiv.length > 0) {
+            $('<div class="tab-pane" id="' + id.replace("#", "") + '"></div>').insertAfter(lastDiv);
+        } else {
+            $("#centerTabContent").append('<div class="tab-pane" id="' + id.replace('#', '') + '"></div>');
+        }
+    }else{
+        $("#tabs ul").first().html('<li><a href="' + id + '" data-toggle="tab" style="padding-top: 4px; background-color: #F5F5F5;" title="' + name + '">' + name + '</a></li>');
+        $("#centerTabContent").html('<div class="tab-pane" id="' + id.replace('#', '') + '"></div>');
+    }
 
-    $('#centerTabContent').append('<div class="tab-pane" id="' + id + '"></div>');
+
+    $('#tabs').tabulous();
+    $("#tabs li").last().find('a').click();
     loader.show();
-    //console.log(fname2);
     $.get(fname2, function (data) {
-        //console.log("#" + id);
-        $("#" + id).html(data);
+        $(id).html(data);
+        reloadMenu();
         loader.hide();
     });
-    $(this).tab('show');
-    showTab(id);
-    registerCloseEvent();
-    tabcount++;
+    reloadMenu();
     loader.hide();
 }
 
+function reloadMenu() {
+    $('.nav li').css("float", null);
+    $('.nav li').css("float", "left;");
+}
+
+/*
+ function addTab(fname2, name, id) {
+ fname2 = fname2.replace(".jsp.jsp", ".jsp");
+ var tabname = "/content/" + fname2 + ".jsp";
+ tabname = tabname.replace(".jsp.jsp", ".jsp").replace("content/content/", "hms/content/");
+
+ if (tabcount == 0)
+ $('#maintabs').append('<li style=""><a src=' + tabname + ' href="#' + id + '" data-toggle="tab" style="padding-top: 4px; background-color: #F5F5F5;">' + name + '</a></li>');
+ else
+ $('#maintabs').append('<li style=""><a src=' + tabname + ' href="#' + id + '" data-toggle="tab" style="padding-top: 3px; background-color: #F5F5F5;"><button class="close closeTab" type="button" >×</button>' + name + '</a></li>');
+
+ $('#centerTabContent').append('<div class="tab-pane" id="' + id + '"></div>');
+ loader.show();
+ //console.log(fname2);
+ $.get(fname2, function (data) {
+ //console.log("#" + id);
+ $("#" + id).html(data);
+ loader.hide();
+ });
+ $(this).tab('show');
+ showTab(id);
+ registerCloseEvent();
+ tabcount++;
+ loader.hide();
+ }*/
+
 function registerCloseEvent() {
+    return false;
     $(".closeTab").click(function () {
         var tabContentId = $(this).parent().attr("href");
         $(this).parent().parent().remove();
@@ -505,6 +539,14 @@ function showButtons(btn, st, html) {
         var r = $(html);
         $("#myModalFooter").append(r);
     } else $("#" + btn).remove();
+}
+
+function makeid() {
+    var text = "";
+    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    for (var i = 0; i < 10; i++)
+        text += possible.charAt(Math.floor(Math.random() * possible.length));
+    return text;
 }
 
 function updateWalkinStayInfo(t) {

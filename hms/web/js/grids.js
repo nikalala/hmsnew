@@ -366,3 +366,41 @@ closedayGrid = {
     }
 };
 /* -------------------------------- NightAudit NA5 List Model ------------------------------------*/
+
+
+/* -------------------------------- NightAudit NA6 List Model ------------------------------------*/
+var chargesGridModel = [];
+chargesGridModel.push(
+    colModelGenerator(120, 'srno', 0),
+    colModelGenerator(120, 'refno', 0),
+    colModelGenerator(120, 'particular', 0),
+    colModelGenerator(160, 'comment', 0),
+    colModelGenerator(120, 'amount', 0));
+
+chargesGrid = {
+    id: 'list_chargesGrid',
+    url: 'content/getcharges.jsp',
+    type: 'xml',
+    cols: ['Sr. #', 'RefNo', 'Particular', 'Comment', 'Amount'],
+    model: chargesGridModel,
+    sort: 'srno',
+    order: 'asc',
+    altRows: true,
+    altclass: 'altrow',
+    isPopup: false,
+    gridComplete: function () {
+        var rows = $("#postcharges").getGridParam("reccount");
+        if (rows > 0) {
+            $("#nopostcharges").hide();
+            $("#postchargestbl").show();
+        } else {
+            $("#nopostcharges").show();
+            $("#postchargestbl").hide();
+        }
+        ReDrawTable(closedayGrid);
+    },
+    beforeRequest: function () {
+
+    }
+};
+/* -------------------------------- NightAudit NA5 List Model ------------------------------------*/

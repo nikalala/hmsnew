@@ -37,7 +37,7 @@
                     <div style="width: 100%; float: left;">
                         <span style="float: left; margin: 7px 0 0 10px;color: #67A338;">რეჟიმი:</span>
                         <button type="button" class="btn btn-default" id="addnewexps"
-                                style="border: 0; font-weight: bold; float: right; margin: 3px 5px 0 0;">
+                                style="border: 0; font-weight: bold; float: right; margin: 3px 5px 0 0; font-family: BGMtavr; color: #0F83D7; font-weight: bold;">
                             ახლის დამატება
                         </button>
                     </div>
@@ -73,7 +73,3 @@
     </div>
 
 </form>
-<div align="center" id="grid-footer"
-     style="background: transparent; width: 100%;height: 33px;line-height: 33px; margin:0 auto;">
-    <div style="background-color: red; margin:10px 0 10px 0;">HELLO THIS IS THE FOOTER</div>
-</div>

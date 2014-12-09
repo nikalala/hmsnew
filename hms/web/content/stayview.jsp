@@ -189,10 +189,10 @@ StcolorBean[] colors = StcolorManager.getInstance().loadByWhere("where active = 
         resourceStore   : resourceStore,
         eventStore      : eventStore,
         
-        enableDragCreation : false,
-        enableEventDragDrop : false,
+        enableDragCreation : true,
+        enableEventDragDrop : true,
     
-        trackMouseOver: false,
+        trackMouseOver: true,
         stripeRows: true,
         startParamName: 'StartDate',
         endParamName: 'EndDate',
@@ -214,11 +214,11 @@ StcolorBean[] colors = StcolorManager.getInstance().loadByWhere("where active = 
         ).compile(),
         
         eventRenderer: function (eventRecord, resourceRecord, tplData, row, col) {
-            tplData.style = 'background-color: ' + eventRecord.raw.Bgcolor+' !important; color: ' + eventRecord.raw.Color+' !important;';
             //return {
             //  Description : eventRecord.raw.Description,
             //  ReservedTo: eventRecord.raw.ReservedTo
             //};
+            tplData.style = 'background-color: ' + eventRecord.raw.Bgcolor+' !important; color: ' + eventRecord.raw.Color+' !important;';
             return eventRecord.raw.ReservedTo;
           }
     });
