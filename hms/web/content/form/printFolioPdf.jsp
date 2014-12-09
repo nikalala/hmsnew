@@ -1,18 +1,6 @@
 <%@page contentType="application/pdf"%>
 <%@page pageEncoding="UTF-8"%>
-<%@page import="java.util.*"%>
-<%@page import="java.text.*"%>
-<%@page import="java.io.*"%>
-<%@page import="com.mysoft.*"%>
-<%@page import="com.mysoft.hms.*"%>
-<%@page import="javax.imageio.*"%>
-<%@page import="java.awt.*"%>
-<%@page import="java.awt.image.*"%>
-<%@page import="com.itextpdf.text.*" %>
-<%@page import="com.itextpdf.text.pdf.*" %>
-<%@page import="com.itextpdf.text.pdf.draw.*" %>
-<jsp:useBean id="user" scope="session" class="com.mysoft.hms.PersonnelBean"/>
-<jsp:useBean id="hotel" scope="session" class="com.mysoft.hms.HotelBean"/>
+<%@include file="../../includes/meta.jsp"%>
 <%!
 class TableHeader extends PdfPageEventHelper {
         /** The header text. */
@@ -184,18 +172,6 @@ public static void addImage(PdfStamper stamper,AcroFields form,String field,Stri
     }
 }
 
-public static PdfPTable getHeaderTable(int x, int y) {
-        PdfPTable table = new PdfPTable(2);
-        table.setTotalWidth(527);
-        table.setLockedWidth(true);
-        table.getDefaultCell().setFixedHeight(20);
-        //table.getDefaultCell().setBorder(Rectangle.BOTTOM);
-        table.addCell("FOOBAR FILMFESTIVAL");
-        table.getDefaultCell().setHorizontalAlignment(Element.ALIGN_RIGHT);
-        table.addCell(String.format("Page %d of %d", x, y));
-        return table;
-    }
-   
 %>
 <%
 String language = "en";
@@ -203,15 +179,8 @@ String fontname = "arial.ttf";
 if(language.equalsIgnoreCase("ka"))
     fontname = "sylfaen.ttf";
     
-java.text.NumberFormat dc1 = new DecimalFormat("0.0");
-
-Manager.getInstance().setJdbcDriver(getServletContext().getInitParameter("driver"));
-Manager.getInstance().setJdbcUrl(getServletContext().getInitParameter("url"));
-Manager.getInstance().setJdbcUsername(getServletContext().getInitParameter("user"));
-Manager.getInstance().setJdbcPassword(getServletContext().getInitParameter("pass"));
-
 FolioBean folio = FolioManager.getInstance().loadByPrimaryKey(new Long(request.getParameter("id")));
-ReservationroomBean rroom = ReservationroomManager.getInstance().loadByPrimaryKey(new Long(request.getParameter("reservationroomid")));
+ReservationroomBean rroom = ReservationroomManager.getInstance().loadByPrimaryKey(folio.getReservationroomid());
 RoomtypeBean rtp = RoomtypeManager.getInstance().loadByPrimaryKey(rroom.getRoomtypeid());
 ReservationBean reserv = ReservationManager.getInstance().loadByPrimaryKey(rroom.getReservationid());
 String roomname = rtp.getCode();
@@ -220,7 +189,7 @@ if(rroom.getRoomid() != null){
     roomname = " - "+room.getName();
 }
 String sql = "where folioid = "+folio.getFolioid();
-sql += " order by itemdate, (case when particular = 6 then 1 when particular = -1 then 2 when particular = 0 then 3 when particular = 1 then 4 when particular = 2 then 5 when particular = 4 then 6 when particular = 5 then 7 else 8 end)";
+sql += " and amount != 0 order by itemdate, (case when particular = 6 then 1 when particular = -1 then 2 when particular = 0 then 3 when particular = 1 then 4 when particular = 2 then 5 when particular = 4 then 6 when particular = 5 then 7 else 8 end)";
 FolioitemBean[] items = FolioitemManager.getInstance().loadByWhere(sql);
 
 String[] names = {"hotelname","hoteladdress","hotelphome","hotelemail","registrationcardnumber","guestname","guestphone","guestmobile",
@@ -236,22 +205,6 @@ String[] values = {
 String[] headers = {"Date","Ref.No.","Particular","Charges","Payment","Balance"};
 
 String basedir = session.getServletContext().getRealPath("/");
-
-DecimalFormatSymbols dfs = new DecimalFormatSymbols(Locale.US);
-
-SimpleDateFormat dt = new SimpleDateFormat("dd/MM/yyyy");
-SimpleDateFormat df = new SimpleDateFormat("dd.MM.yyyy");
-SimpleDateFormat sdf0 = new SimpleDateFormat("yyyy/MM/dd");
-SimpleDateFormat dtlong = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-SimpleDateFormat dtime = new SimpleDateFormat("HH:mm");
-SimpleDateFormat defcal = new SimpleDateFormat("[yyyy,MM,dd]");
-
-java.text.NumberFormat dc = new DecimalFormat("0.00",dfs);
-java.text.NumberFormat dcc = new DecimalFormat("0.0000",dfs);
-java.text.NumberFormat dcl = new DecimalFormat("#,##0.00",dfs);
-java.text.NumberFormat dcint = new DecimalFormat("0");
-java.text.NumberFormat dclkb = new DecimalFormat("#,##0",dfs);
-java.text.NumberFormat dclong = new DecimalFormat("#,##0.0000",dfs);
 
 float tinysize = 6;
 float smallsize = 8;
@@ -324,6 +277,11 @@ for(int i=0;i<headers.length;i++){
     table.addCell(cell);
 }
 
+long datelong = 0;
+if(items.length > 0)
+    datelong = items[0].getItemdate().getTime();
+double bal = 0;
+double total = 0;
 for(int i=0;i<items.length;i++){
     double koeff = 1;
     String particular = "";
@@ -380,38 +338,139 @@ for(int i=0;i<items.length;i++){
     if(items[i].getManual().booleanValue())
         noroom = false;
     PersonnelBean regby = PersonnelManager.getInstance().loadByPrimaryKey(items[i].getRegbyid());
-    int st = 0;
-    String sact = "";
-    if(!noroom){
-        sact = "<span onclick=\"editFolioAction("+items[i].getFolioitemid()+")\" style=\"cursor: pointer;\" class=\"glyphicon glyphicon-pencil\" data-toggle=\"tooltip\" title=\"ტარიფის ოპერაცია\"></span>";
-        if(items[i].getPaymentid() != null)
-            sact += "<span onclick=\"printFolioAction("+items[i].getFolioitemid()+")\" style=\"padding-left: 5px; cursor: pointer;\" class=\"glyphicon glyphicon-print\" data-toggle=\"tooltip\" title=\"ბეჭდვა\"></span>";
-        st = 1;
-    }
-    String note = items[i].getNote();
-    double amt = items[i].getAmount();
     
-    ss[n][0] = items[i].getFolioitemid().toString();
-    ss[n][1] = roomname;
-    ss[n][2] = dt.format(items[i].getItemdate());
-    ss[n][3] = (items[i].getRefno() != null) ? items[i].getRefno():items[i].getFolioitemid().toString();
-    ss[n][4] = particular;
-    ss[n][5] = note;
-    ss[n][6] = regby.getFname()+" "+regby.getLname();
-    ss[n][7] = sact;
-    ss[n][8] = maincurrency.getCode();
-    ss[n][9] = dc.format(amt*koeff);
-    ss[n][10] = String.valueOf(st);
+    double amt = items[i].getAmount();
+    double charges = 0;
+    double payment = 0;
+    double balance = 0;
+    if(koeff < 0) payment = amt*koeff;
+    else          charges = amt*koeff;
+    balance = amt*koeff;
+    bal += balance;
+    total += balance;
+    
+    PdfPCell cell = null;
+    
+    String refno = (items[i].getRefno() != null) ? items[i].getRefno():items[i].getFolioitemid().toString();
+    
     //System.out.println(i+" = "+n+" = "+amt);
-    PdfPCell cell = new PdfPCell(new com.itextpdf.text.Phrase(new com.itextpdf.text.Chunk("  "+headers[i],bfont)));
+    cell = new PdfPCell(new com.itextpdf.text.Phrase(new com.itextpdf.text.Chunk(dt.format(items[i].getItemdate()),font)));
+    cell.setBorder(Rectangle.NO_BORDER);
     //cell.setBorderColorTop(new BaseColor(0, 0, 0));
     //cell.setBorderColorBottom(new BaseColor(0, 0, 0));
     //cell.setBorderColorLeft(new BaseColor(255, 255, 255));
     //cell.setBorderColorRight(new BaseColor(255, 255, 255));
     //cell.setBorderWidthTop(2f);
-    cell.setHorizontalAlignment(aligns[i]);
+    cell.setHorizontalAlignment(com.itextpdf.text.Phrase.ALIGN_LEFT);
     cell.setPaddingBottom(2);
     table.addCell(cell);
+    
+    cell = new PdfPCell(new com.itextpdf.text.Phrase(new com.itextpdf.text.Chunk(refno,font)));
+    //cell.setBorderColorTop(new BaseColor(0, 0, 0));
+    //cell.setBorderColorBottom(new BaseColor(0, 0, 0));
+    //cell.setBorderColorLeft(new BaseColor(255, 255, 255));
+    //cell.setBorderColorRight(new BaseColor(255, 255, 255));
+    //cell.setBorderWidthTop(2f);
+    cell.setBorder(Rectangle.NO_BORDER);
+    cell.setHorizontalAlignment(com.itextpdf.text.Phrase.ALIGN_LEFT);
+    cell.setPaddingBottom(2);
+    table.addCell(cell);
+    
+    cell = new PdfPCell(new com.itextpdf.text.Phrase(new com.itextpdf.text.Chunk(particular,font)));
+    //cell.setBorderColorTop(new BaseColor(0, 0, 0));
+    //cell.setBorderColorBottom(new BaseColor(0, 0, 0));
+    //cell.setBorderColorLeft(new BaseColor(255, 255, 255));
+    //cell.setBorderColorRight(new BaseColor(255, 255, 255));
+    //cell.setBorderWidthTop(2f);
+    cell.setBorder(Rectangle.NO_BORDER);
+    cell.setHorizontalAlignment(com.itextpdf.text.Phrase.ALIGN_LEFT);
+    cell.setPaddingBottom(2);
+    table.addCell(cell);
+    
+    cell = new PdfPCell(new com.itextpdf.text.Phrase(new com.itextpdf.text.Chunk(dc.format(charges),font)));
+    //cell.setBorderColorTop(new BaseColor(0, 0, 0));
+    //cell.setBorderColorBottom(new BaseColor(0, 0, 0));
+    //cell.setBorderColorLeft(new BaseColor(255, 255, 255));
+    //cell.setBorderColorRight(new BaseColor(255, 255, 255));
+    //cell.setBorderWidthTop(2f);
+    cell.setBorder(Rectangle.NO_BORDER);
+    cell.setHorizontalAlignment(com.itextpdf.text.Phrase.ALIGN_RIGHT);
+    cell.setPaddingBottom(2);
+    table.addCell(cell);
+    
+    cell = new PdfPCell(new com.itextpdf.text.Phrase(new com.itextpdf.text.Chunk(dc.format(payment),font)));
+    //cell.setBorderColorTop(new BaseColor(0, 0, 0));
+    //cell.setBorderColorBottom(new BaseColor(0, 0, 0));
+    //cell.setBorderColorLeft(new BaseColor(255, 255, 255));
+    //cell.setBorderColorRight(new BaseColor(255, 255, 255));
+    //cell.setBorderWidthTop(2f);
+    cell.setBorder(Rectangle.NO_BORDER);
+    cell.setHorizontalAlignment(com.itextpdf.text.Phrase.ALIGN_RIGHT);
+    cell.setPaddingBottom(2);
+    table.addCell(cell);
+
+    cell = new PdfPCell(new com.itextpdf.text.Phrase(new com.itextpdf.text.Chunk(dc.format(balance),font)));
+    //cell.setBorderColorTop(new BaseColor(0, 0, 0));
+    //cell.setBorderColorBottom(new BaseColor(0, 0, 0));
+    //cell.setBorderColorLeft(new BaseColor(255, 255, 255));
+    //cell.setBorderColorRight(new BaseColor(255, 255, 255));
+    //cell.setBorderWidthTop(2f);
+    cell.setBorder(Rectangle.NO_BORDER);
+    cell.setHorizontalAlignment(com.itextpdf.text.Phrase.ALIGN_RIGHT);
+    cell.setPaddingBottom(2);
+    table.addCell(cell);
+
+    if((items.length > (i+1) && items[i+1].getItemdate().getTime() != datelong) || items.length == (i+1)){
+        if(items.length > (i+1))   datelong = items[i+1].getItemdate().getTime();
+        //pmt = 0;
+        //chr = 0;
+        cell = new PdfPCell(new com.itextpdf.text.Phrase(new com.itextpdf.text.Chunk("",bfont)));
+        //cell.setBorderColorTop(new BaseColor(0, 0, 0));
+        //cell.setBorderColorBottom(new BaseColor(0, 0, 0));
+        //cell.setBorderColorLeft(new BaseColor(255, 255, 255));
+        //cell.setBorderColorRight(new BaseColor(255, 255, 255));
+        //cell.setBorderWidthTop(2f);
+        cell.setBorder(Rectangle.NO_BORDER);
+        cell.setColspan(4);
+        cell.setHorizontalAlignment(com.itextpdf.text.Phrase.ALIGN_RIGHT);
+        cell.setPaddingBottom(2);
+        table.addCell(cell);
+        
+        cell = new PdfPCell(new com.itextpdf.text.Phrase(new com.itextpdf.text.Chunk("Day Total",bfont)));
+        //cell.setBorderColorTop(new BaseColor(0, 0, 0));
+        //cell.setBorderColorBottom(new BaseColor(0, 0, 0));
+        //cell.setBorderColorLeft(new BaseColor(255, 255, 255));
+        //cell.setBorderColorRight(new BaseColor(255, 255, 255));
+        //cell.setBorderWidthTop(2f);
+        cell.setBorder(Rectangle.BOTTOM | Rectangle.TOP);
+        cell.setHorizontalAlignment(com.itextpdf.text.Phrase.ALIGN_RIGHT);
+        cell.setPaddingBottom(2);
+        table.addCell(cell);
+        
+        cell = new PdfPCell(new com.itextpdf.text.Phrase(new com.itextpdf.text.Chunk(dc.format(bal),bfont)));
+        //cell.setBorderColorTop(new BaseColor(0, 0, 0));
+        //cell.setBorderColorBottom(new BaseColor(0, 0, 0));
+        //cell.setBorderColorLeft(new BaseColor(255, 255, 255));
+        //cell.setBorderColorRight(new BaseColor(255, 255, 255));
+        //cell.setBorderWidthTop(2f);
+        cell.setBorder(Rectangle.BOTTOM | Rectangle.TOP);
+        cell.setHorizontalAlignment(com.itextpdf.text.Phrase.ALIGN_RIGHT);
+        cell.setPaddingBottom(2);
+        table.addCell(cell);
+        
+        cell = new PdfPCell(new com.itextpdf.text.Phrase(new com.itextpdf.text.Chunk(" ",font)));
+        //cell.setBorderColorTop(new BaseColor(0, 0, 0));
+        //cell.setBorderColorBottom(new BaseColor(0, 0, 0));
+        //cell.setBorderColorLeft(new BaseColor(255, 255, 255));
+        //cell.setBorderColorRight(new BaseColor(255, 255, 255));
+        //cell.setBorderWidthTop(2f);
+        cell.setBorder(Rectangle.NO_BORDER);
+        cell.setColspan(6);
+        cell.setHorizontalAlignment(com.itextpdf.text.Phrase.ALIGN_RIGHT);
+        cell.setPaddingBottom(2);
+        table.addCell(cell);
+        bal = 0;
+    }
     }
         
 table.writeSelectedRows(0, -1, 22, 590, stamper.getOverContent(1));

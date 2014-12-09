@@ -355,7 +355,7 @@ $(document).ready(function(){
     </table>
     <table width="100%" style="border-color: #BEBEBE; border-style: solid; border-width: 1px;">
         <tr>
-            <td class='pseudobutton' onclick="printFolio(<%=rroom.getReservationroomid()%>)" style="background-color: #F9F9F9; text-align: center; width: 70px; border-right-color: #BEBEBE; border-right-style: solid; border-right-width: 1px;">
+            <td class='pseudobutton' onclick="printFolio($('#folio_folioid').val())" style="background-color: #F9F9F9; text-align: center; width: 70px; border-right-color: #BEBEBE; border-right-style: solid; border-right-width: 1px;">
                 <b>ბეჭდვა</b>
             </td>
             <td class='pseudobutton' style="background-color: #F9F9F9; text-align: center; width: 70px; border-right-color: #BEBEBE; border-right-style: solid; border-right-width: 1px;">
