@@ -75,6 +75,8 @@
     <script src="js/ext/1/ext-all-src.js" type="text/javascript"></script>
     <script src="js/ext/1/sch-all.js" type="text/javascript"></script>
 
+    <script src="js/tabulous.js" type="text/javascript"></script>
+
     <script>
 
         var dateglobalformat = "<%=dateformats2[dff]%>";
@@ -87,16 +89,17 @@
         $(document).ready(function () {
 
 
+            $('#tabs').tabulous({
+                effect: 'scale'
+            });
 
-
-            //loadMainBody();
-            getBody("stayviewleft", "stayview", 'დატვირთულობა', 'res1');
+            getBody("stayviewleft", "stayview", 'დატვირთულობა', 'res1','',true);
 
             if ($("#maincontent").height() > 652)
                 $("#mainpanel0").height($("#maincontent").height() - 2);
 
 
-            $("[data-toggle='tooltip']").tooltip({
+          /*  $("[data-toggle='tooltip']").tooltip({
                 //html: true, 
                 placement: "bottom"
             });
@@ -115,7 +118,7 @@
             });
 
             registerCloseEvent();
-
+*/
             $('#myModal').on('hidden.bs.modal', function () {
                 $("#callbackurl").remove();
                 $("#callbackdata").remove();
@@ -148,8 +151,10 @@
                 <div class="panel-heading  panel-title"
                      style="text-align: center; height: 31px; background-color: darkgray !important;">
                         <span class="pull-left">
+                            <div id="tabs">
                             <ul class="nav nav-tabs toptab" role="tablist" id='maintabs'
                                 style="padding-top: 0px; padding-left: 0px; padding-bottom: 0px;"></ul>
+                            </div>
                         </span>
                 </div>
                 <div class="tab-content" id="centerTabContent" style="height: 95%; background-color: <%=bgcol%>;"></div>
