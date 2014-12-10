@@ -91,28 +91,28 @@ public String Num2Text(double val)
         }
         return ss;
    }
-   
+
    public String get1000(double val)
    {
        DecimalFormat nmf = new DecimalFormat("#,##0.00");
-       String[] s10 = 
+       String[] s10 =
        {
            "ერთი","ორი","სამი","ოთხი","ხუთი","ექვსი","შვიდი","რვა","ცხრა","ათი",
            "თერთმეტი","თორმეტი","ცამეტი","თოთხმეტი","თხუთმეტი","თექვსმეტი","ჩვიდმეტი","თვრამეტი","ცხრამეტი"
        };
 
-       String[] s100 = 
+       String[] s100 =
        {
            "ოცი","ორმოცი","სამოცი","ოთხმოცი"
        };
 
-       String[] s1000 = 
+       String[] s1000 =
        {
            "ასი","ორასი","სამასი","ოთხასი","ხუთასი","ექვსასი","შვიდასი","რვაასი","ცხრაასი"
        };
 
        String sval = nmf.format(val);
-   
+
        String[] sv1 = sval.split("\\.");
        String snum = sv1[0];
 
@@ -147,10 +147,10 @@ public String Num2Text(double val)
        }
        return ss;
    }
-   
+
 public static void addImage(PdfStamper stamper,AcroFields form,String field,String fieldValue){
     try{
-        
+
         java.util.List<AcroFields.FieldPosition> photograph = form.getFieldPositions(field);
         if(photograph!=null && photograph.size()>0){
         com.itextpdf.text.Rectangle rect= photograph.get(0).position;
@@ -171,7 +171,7 @@ public static void addImage(PdfStamper stamper,AcroFields form,String field,Stri
         e.printStackTrace();
     }
 }
-   
+
 %>
 <%
 Manager.getInstance().setJdbcDriver(getServletContext().getInitParameter("driver"));

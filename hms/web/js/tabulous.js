@@ -55,8 +55,6 @@
             links.bind('click', {myOptions: this.options}, function(e) {
                 e.preventDefault();
 
-
-
                 var $options = e.data.myOptions;
                 var effect = $options.effect;
 
@@ -86,9 +84,8 @@
                     thisform.find('div'+thislink).addClass('make_transist').addClass('showflip');
                 }
 
-
                 firstdiv.css('height',thisdivwidth+'px');
-                $("#"+thislink).show();
+                $("#"+thislink).css('display','block');
             });
 
         },

@@ -410,7 +410,7 @@ function getLBody(fname) {
     });
 }
 
-function getBody(fname1, fname2, name, id, param,isFirst) {
+function getBody(fname1, fname2, name, id, param, isFirst) {
 
     loader.show();
     $.ajax({
@@ -445,19 +445,27 @@ function removeAllTabs() {
     $('.nav-tabs li').remove();
 }
 
+function addTab(fname2, name, itemId, isFirst) {
 
-function addTab(fname2, name, id, isFirst) {
+    $('.nav-tabs').css('float', null);
+
+    var tabItems = $("#tabs li");
+
+
+    if (tabItems.size() > 1 && !isFirst) {
+        BootstrapDialog.alert("გთხოვთ დაასრულეთ წინამდებარე ტრანზაცია")
+        return false;
+    }
+
     fname2 = fname2.replace(".jsp.jsp", ".jsp");
 
 
     var tabname = "/content/" + fname2 + ".jsp";
     tabname = tabname.replace(".jsp.jsp", ".jsp").replace("content/content/", "hms/content/");
-    console.log(tabname);
 
     var id = "#tabs-" + makeid(name);
-    if(!isFirst)
-    {
-        var lastLi = $("#tabs li").last();
+    if (!isFirst) {
+        var lastLi = tabItems.last();
         if (lastLi && lastLi.length > 0) {
             $('<li><a href="' + id + '" data-toggle="tab" style="padding-top: 4px; background-color: #F5F5F5;" title="' + name + '">' + name + '</a></li>').insertAfter(lastLi);
         } else {
@@ -469,28 +477,67 @@ function addTab(fname2, name, id, isFirst) {
         } else {
             $("#centerTabContent").append('<div class="tab-pane" id="' + id.replace('#', '') + '"></div>');
         }
-    }else{
-        $("#tabs ul").first().html('<li><a href="' + id + '" data-toggle="tab" style="padding-top: 4px; background-color: #F5F5F5;" title="' + name + '">' + name + '</a></li>');
-        $("#centerTabContent").html('<div class="tab-pane" id="' + id.replace('#', '') + '"></div>');
+    } else {
+
+        var firstLi = $("#tabs ul li")[0];
+        if(firstLi)
+        {
+            $("#tabs ul li").first().html('<a href="' + id + '" data-toggle="tab" style="padding-top: 4px; background-color: #F5F5F5;" title="' + name + '">' + name + '</a>');
+            $('#tabs').tabulous();
+            $("#centerTabContent").children().first().attr('id',id.replace('#', ''));
+
+            $("#tabs li").first().find('a').click();
+            $.get(fname2, function (data) {
+                $(id).html(data);
+                reloadMenu();
+                $(id).css('display','block','!important');
+                loader.hide();
+
+            });
+            reloadMenu();
+            return;
+        }else{
+            $("#tabs ul").first().html('<li><a href="' + id + '" data-toggle="tab" style="padding-top: 4px; background-color: #F5F5F5;" title="' + name + '">' + name + '</a></li>');
+            $("#centerTabContent").html('<div class="tab-pane" id="' + id.replace('#', '') + '"></div>');
+        }
+
     }
 
 
     $('#tabs').tabulous();
+
+    $("#tabs li a").each(function (index, obj) {
+        if (index != 0) {
+            var html = $(this).html();
+            var closeBtn = $(this).find('.closeTab');
+            if(closeBtn && closeBtn.size() > 0)
+            {
+
+            }else{
+                html += '<button class="close closeTab" contentid="' + id + '" type="button" >×</button>';
+                $(this).html(html);
+            }
+        }
+    });
+
     $("#tabs li").last().find('a').click();
     loader.show();
+
     $.get(fname2, function (data) {
         $(id).html(data);
         reloadMenu();
         loader.hide();
     });
     reloadMenu();
+    registerCloseEvent();
     loader.hide();
 }
 
 function reloadMenu() {
     $('.nav li').css("float", null);
-    $('.nav li').css("float", "left;");
+    $('.nav li').css("float", "left");
 }
+
 
 /*
  function addTab(fname2, name, id) {
@@ -519,13 +566,13 @@ function reloadMenu() {
  }*/
 
 function registerCloseEvent() {
-    return false;
     $(".closeTab").click(function () {
-        var tabContentId = $(this).parent().attr("href");
-        $(this).parent().parent().remove();
-        $('#maintabs a:last').tab('show');
-        $(tabContentId).remove();
-        tabcount--;
+        var li = $(this).parent().parent();
+        var id = $(this).attr("contentid");
+        var prev = li.prev();
+        li.remove();
+        $(id).remove();
+        prev.find('a').click();
     });
 }
 
