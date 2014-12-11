@@ -37,19 +37,18 @@
 
     function loadDefaults() {
         initializeGrid(guestGrid);
-        $('.date').datepicker(<%=pickerformat1%>);
-        $('.dropdown').selectpicker();
-        $(".btn-group").css("width", "100%", "!important");
+        $('#grid-table .date').datepicker(<%=pickerformat1%>);
+        $('#grid-table .dropdown').selectpicker();
+        $("#grid-table .btn-group").css("width", "100%", "!important");
         $("#grid-table label").each(function () {
             $(this).css("float", "right", "!important");
             $(this).css("line-height", "27px", "!important");
         });
         $("#grid-table input").height($("#grid-table .btn-group").height() - 6, "!important");
         $("#filter-form input[type='text']").css("width", "100%", "!important");
-        $(".date input[type='text']").css("position", "relative");
-        $("#roomBean").next().css("padding-left", "0");
-        $("#roomType").next().css("padding-right", "0");
-        $("#res1").css("margin", "0px 10px 10px 10px");
+        $("#grid-table .date input[type='text']").css("position", "relative");
+        $("#grid-table #roomBean").next().css("padding-left", "0");
+        $("#grid-table #roomType").next().css("padding-right", "0");
     }
 
     function doFilter(bool) {

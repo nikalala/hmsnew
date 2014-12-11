@@ -176,19 +176,18 @@
 
     function loadDefaults() {
         initializeGrid(arrivalGrid);
-        $('.date').datepicker(<%=pickerformat1%>);
-        $('.dropdown').selectpicker();
-        $(".btn-group").css("width", "100%", "!important");
+        $('#grid-table .date').datepicker(<%=pickerformat1%>);
+        $('#grid-table .dropdown').selectpicker();
+        $("#grid-table .btn-group").css("width", "100%", "!important");
         $("#grid-table label").each(function () {
             $(this).css("float", "right", "!important");
             $(this).css("line-height", "27px", "!important");
         });
         $("#grid-table input").height($("#grid-table .btn-group").height() - 6, "!important");
         $("#filter-form input[type='text']").css("width", "100%", "!important");
-        $(".date input[type='text']").css("position", "relative");
-        $("#roomBean").next().css("padding-left", "0");
-        $("#roomType").next().css("padding-right", "0");
-        $("#res1").css("margin", "0px 10px 10px 10px");
+        $("#grid-table .date input[type='text']").css("position", "relative");
+        $("#grid-table #roomBean").next().css("padding-left", "0");
+        $("#grid-table #roomType").next().css("padding-right", "0");
     }
 
 </script>
@@ -323,7 +322,3 @@
         </tr>
     </table>
 </form>
-<div align="center" id="grid-footer"
-     style="background: transparent; width: 100%;height: 33px;line-height: 33px; margin:0 auto;">
-    <div style="background-color: red; margin:10px 0 10px 0;">HELLO THIS IS THE FOOTER</div>
-</div>

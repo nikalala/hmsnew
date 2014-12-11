@@ -3,6 +3,25 @@
 <%@include file="../includes/init.jsp" %>
 <%
 
+    int req_roomId = 0;
+    int req_roomTypeId = 0;
+    String req_dtStart = null;
+    String req_dtEnd = null;
+
+    if (request.getParameter("req_roomId") != null) {
+        req_roomId = Integer.parseInt(request.getParameter("req_roomId"));
+        RoomBean roomBean = RoomManager.getInstance().loadByPrimaryKey(req_roomId);
+        req_roomTypeId = roomBean.getRoomtypeid();
+    }
+
+    if (request.getParameter("req_dtStart") != null) {
+        req_dtStart = (String)request.getParameter("req_dtStart");
+    }
+
+    if (request.getParameter("req_dtEnd") != null) {
+        req_dtEnd = (String)request.getParameter("req_dtEnd");
+    }
+
     int wintype = 0;
     if (request.getParameter("wintype") != null) {
         wintype = Integer.parseInt(request.getParameter("wintype"));
@@ -200,7 +219,50 @@
             //    });
         });
 
+
+        <%
+            SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy");
+            Date req_dtStart_date = (Date)formatter.parse(req_dtStart);
+            long req_dtStart_long = req_dtStart_date.getTime();
+
+            Date req_dtEnd_date = (Date)formatter.parse(req_dtEnd);
+            long req_dtEnd_long = req_dtEnd_date.getTime();
+        %>
+
+        var roomTypeId = '<%=req_roomTypeId%>';
+        var roomId = '<%=req_roomId%>';
+        var dtStart = '<%=dt.format(req_dtStart_long)%>';
+        var dtEnd = '<%=dt.format(req_dtEnd_long)%>';
+
+        if(!isNullOrEmpty(roomTypeId)){
+            loader.show();
+            $("#guestinfo_roomtypeid").val(roomTypeId);
+            $("#guestinfo_arrivaldate").datepicker("update", dtStart);
+            $("#guestinfo_departuredate").datepicker("update", dtEnd);
+            setTimeout(function (){
+                $("#guestinfo_roomtypeid").trigger( "change" );
+                loadRooms(roomId);
+            }, 1000);
+            loader.hide();
+        }
+
     });
+
+    function loadRooms(id)
+    {
+        //newWindowWithParams('walkin','dasdasdada','?req_roomId=3&req_dtStart=10.10.2014&req_dtEnd=12.12.2014')
+        setTimeout(function (){
+            var guestRoomId = $("#guestinfo_roomid");
+            if(guestRoomId.size() == 0 || guestRoomId.val() == null){
+                loadRooms(id);
+            }
+            if(guestRoomId.val() == "0" || isNullOrEmpty(guestRoomId.val())){
+                guestRoomId.val(id);
+                /*$('#guestinfo_arrivaldate').trigger('changeDate');*/
+                $('#guestinfo_departuredate').trigger('changeDate');
+            }
+        }, 100);
+    }
 
     function walkinRoomType(id) {
         $.post(
