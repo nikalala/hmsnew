@@ -680,6 +680,12 @@ var hmsMonthsMin = ["იან", "თებ", "მარ", "აპრ", "მა�
 
 function initializeGrid(grid) {
     //console.log("initializing grid named > " + grid.id);
+
+    var gridHeight =$("#centerTabContent").height() - 40 - $(".first-table").height();
+    if($("#centercontent").height() <= gridHeight )
+    {
+        gridHeight -= 300;
+    }
     jQuery("#" + grid.id).jqGrid(
         {
             url: grid.url,
@@ -689,7 +695,7 @@ function initializeGrid(grid) {
             gridComplete: grid.gridComplete,
             beforeRequest: grid.beforeRequest,
             rowNum: 2000,
-            height: 400,
+            height: gridHeight,
             autowidth: true,
             sortname: grid.sort,
             viewrecords: true,
@@ -698,7 +704,7 @@ function initializeGrid(grid) {
                 $("#" + grid.id + " td:last-child").removeAttr("title");
                 reInitializeGrid(grid.id, grid.isPopup);
                 $(".ui-jqgrid-htable").css("background", "#FFF").css("border-bottom", "solid 1px #D1D1D1");
-                //console.log("initializing grid named > " + grid.id + " is completed successfully");
+
             }
         }).jqGrid('bindKeys');
 

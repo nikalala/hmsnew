@@ -369,7 +369,3 @@
         </tr>
     </table>
 </form>
-<div align="center" id="grid-footer"
-     style="background: transparent; width: 100%;height: 33px;line-height: 33px; margin:0 auto;">
-    <div style="background-color: red; margin:10px 0 10px 0;">HELLO THIS IS THE FOOTER</div>
-</div>

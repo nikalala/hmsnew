@@ -16,6 +16,7 @@
 %>
 <rows>
     <%
+        for (int a = 0; a < 100; a++) {
         for (int i = 0; i < contragentlistBeans.length; i++) { %>
     <row id='<%=contragentlistBeans[i].getContragentid()%>'>
         <cell><![CDATA[<%=contragentlistBeans[i].getCompany()%>]]></cell>
@@ -31,5 +32,5 @@
             ]]>
         </cell>
     </row>
-    <% } %>
+    <% }} %>
 </rows>
