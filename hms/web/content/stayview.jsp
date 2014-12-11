@@ -171,35 +171,55 @@ StcolorBean[] colors = StcolorManager.getInstance().loadByWhere("where active = 
 
     var startDate = new Date(<%=cal1.get(Calendar.YEAR)%>, <%=cal1.get(Calendar.MONTH)%>, <%=cal1.get(Calendar.DATE)%>);
     var endDate = new Date(<%=cal2.get(Calendar.YEAR)%>, <%=cal2.get(Calendar.MONTH)%>, <%=cal2.get(Calendar.DATE)%>);
+var onEventContextMenu = function(s, rec, e){
+    e.stopEvent();
 
-    var scheduler = new Sch.panel.SchedulerGrid({
+    if (!s.ctx) {
+        s.ctx = new Ext.menu.Menu({
+            items: [{
+                text: 'Delete event',
+                iconCls: 'icon-delete',
+                handler : function() {
+                    s.eventStore.remove(s.ctx.rec);
+                }
+            }]
+        });
+    }
+    s.ctx.rec = rec;
+    s.ctx.showAt(e.getXY());
+}
+    var scheduler = Ext.create("Sch.panel.SchedulerGrid",{
         width       : "100%",
         height      : height,
         renderTo    : 'stayview-container',
-        
         startDate   : startDate,
         endDate     : endDate,
-
+        loadMask  : { store : eventStore },
         viewPreset  : 'roomReservation',
 
         columns     : [
-            { header : 'ოთახები', width : 130, dataIndex : 'Name'}
+            { header : 'ოთახები', width : 130, dataIndex : 'Name',menuDisabled: true,sortable: false}
         ],
 
         resourceStore   : resourceStore,
         eventStore      : eventStore,
         
         enableDragCreation : true,
-        enableEventDragDrop : true,
-    
-        trackMouseOver: true,
+        stripeRows: true,
+        eventResizeHandles : 'none',
+        enableEventDragDrop : false,
+        allowOverlap:false,
+
         stripeRows: true,
         startParamName: 'StartDate',
         endParamName: 'EndDate',
         viewConfig: {
             forceFit: true
         },
-        
+        // Simple template with header and footer
+        eventBodyTemplate : new Ext.Template(
+                        '<span class="sch-event-header">{ReservedTo}</span>'
+        ),
         eventTemplate: new Ext.Template(
             '<div id="{id}" style="width:{width}px;left:{leftOffset}px" class="sch-event {cls}">',
                 '<div class="sch-event-inner">{text}</div>',
@@ -208,24 +228,57 @@ StcolorBean[] colors = StcolorManager.getInstance().loadByWhere("where active = 
 
         tooltipTpl: new Ext.XTemplate(
             '<div class="eventTip">',
-            '<div><b>{Description}</b></div>',
-            '<div>სტუმარი: {ReservedTo}</div>',
+            '<div>თარიღიდან: {[Ext.Date.format(values.StartDate, "d.m.Y")]}</div>',
+            '<div>თარიღამდე: {[Ext.Date.format(values.EndDate, "d.m.Y")]}</div>',
+            '<div>სტუმარი: {Name}</div>',
             '</div>'
         ).compile(),
         
         eventRenderer: function (eventRecord, resourceRecord, tplData, row, col) {
-            //return {
-            //  Description : eventRecord.raw.Description,
-            //  ReservedTo: eventRecord.raw.ReservedTo
-            //};
-            tplData.style = 'background-color: ' + eventRecord.raw.Bgcolor+' !important; color: ' + eventRecord.raw.Color+' !important;';
-            return eventRecord.raw.ReservedTo;
-          }
+            console.log(eventRecord)//here will goes colors from db
+            if(eventRecord.raw){
+                tplData.style = 'background-color: ' + eventRecord.raw.Bgcolor+' !important; color: ' + eventRecord.raw.Color+' !important;';
+            }
+
+            return {
+              ReservedTo : eventRecord.data.Name
+            };
+
+          },
+        onEventCreated : function (newEventRecord) {
+            console.log(newEventRecord)
+            newEventRecord.set({
+                Name : "სტუმარი"
+            });
+        },
+        listeners       : {
+            eventcontextmenu    : onEventContextMenu,
+
+            beforedragcreatefinalize : function (sched, data, e) {
+                var start = Ext.Date.format(data.start, "d.m.Y");
+                var end = Ext.Date.format(data.end, "d.m.Y");
+                var roomAndType = data.resourceRecord.data.Id;
+                var tempArr = roomAndType.split('_');
+                var type = tempArr[0];
+                var roomId = tempArr[1];
+
+                console.log(type,roomId,start,end)
+                newWindowWithParams('walkin','dasdasdada','?req_roomId='+roomId+'&req_dtStart='+start+'&req_dtEnd='+end);
+                console.log(sched, data, e)
+                /*var w = new ResourcePicker({
+                    resourceStore : resourceStore,
+                    dragContext   : context
+                });
+                w.showAt(e.getX(), e.getY());*/
+
+                return false;
+            }
+        }
     });
 
     //scheduler.render(Ext.getBody());
-    
-    
+
+
 });
 </script>
 <table width="100%" style="border-color: #BEBEBE; border-style: solid; border-width: 1px;">
