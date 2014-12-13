@@ -11,7 +11,11 @@
     RoomrateBean[] roomrates = RoomrateManager.getInstance().loadByWhere("order by ord");
     ReservationtypeBean[] resrvationtypes = ReservationtypeManager.getInstance().loadByWhere("order by name");
     Calendar arr = Calendar.getInstance();
+    int hour = arr.get(Calendar.HOUR_OF_DAY);
+    int minute = arr.get(Calendar.MINUTE);
     arr.setTime(dclosedate);
+    arr.set(Calendar.HOUR_OF_DAY,hour);
+    arr.set(Calendar.MINUTE,minute);
     Calendar dep = Calendar.getInstance();
     dep.setTime(dclosedate);
     String pkfmt = pickerformat2;
@@ -28,6 +32,12 @@
     int nights = 1;
     if (checkinsettings != null) {
         Calendar tm = Calendar.getInstance();
+        tm.setTime(checkinsettings.getCheckintime());
+        hour = tm.get(Calendar.HOUR_OF_DAY);
+        minute = tm.get(Calendar.MINUTE);
+        tm.setTime(dclosedate);
+        tm.set(Calendar.HOUR_OF_DAY,hour);
+        tm.set(Calendar.MINUTE,minute);
         if (!checkinsettings.getHours24().booleanValue())
             tm.setTime(checkinsettings.getCheckouttime());
         dep.set(Calendar.HOUR_OF_DAY, tm.get(Calendar.HOUR_OF_DAY));
@@ -45,6 +55,7 @@
         } else
             nights = DayDiff(arr, dep);
     }
+    System.out.println("arr.getTime() = "+dt.format(arr.getTime()));
 %>
 <script>
     $(document).ready(function () {
@@ -178,7 +189,7 @@
             <form class="form-inline" role="form">
                 <div class="form-group">
                     <div class="input-group-xs">
-                        <div class="input-append date" data-date="" data-date-format="dd-mm-yyyy">
+                        <div class="input-append date">
                             <input class="span2 form-control" readonly="" size="10"
                                    value="<%=dt.format(arr.getTime())%>" type="text" id="guestinfo_arrivaldate">
                             <input class="form-control" type="text" size="5" maxlength="5"
@@ -206,7 +217,7 @@
             <form class="form-inline" role="form">
                 <div class="form-group">
                     <div class="input-group-xs">
-                        <div class="input-append date" data-date="" data-date-format="dd-mm-yyyy">
+                        <div class="input-append date">
                             <input class="span2 form-control" readonly="" size="10"
                                    value="<%=dt.format(depDate.getTime())%>" type="text" id="guestinfo_departuredate">
                             <input class="form-control" type="text" size="5" maxlength="5"

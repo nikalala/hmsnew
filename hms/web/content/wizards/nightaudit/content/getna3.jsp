@@ -58,7 +58,7 @@ ReservationroomBean[] reservs = ReservationroomManager.getInstance().loadByWhere
             String actions = "";
             actions += "<a href=\"#\" title=\"AMEND STAY\" class=\"btn btn-xs btn-default\"><i class=\"fa fa-remove\"></i></a>";
             if(total-deposit <= 0)
-                actions += "<a href=\"#\" title=\"CHECK OUT\" class=\"btn btn-xs btn-default\"><i class=\"fa fa-remove\"></i></a>";
+                actions += "<a href=\"javascript:checkOut(" + reservs[i].getReservationroomid() + ",'list_roomstatus')\" title=\"CHECK OUT\" class=\"btn btn-xs btn-default\"><i class=\"fa fa-check\"></i></a>";
             %>
                 <row id='<%=reservs[i].getReservationroomid()%>'>
                     <cell><![CDATA[<%=roomname%>]]></cell>
@@ -71,6 +71,7 @@ ReservationroomBean[] reservs = ReservationroomManager.getInstance().loadByWhere
                     <cell><![CDATA[<%=actions%>]]></cell>
                 </row>
             <%
+            System.out.println("i = "+i);
             }
 	%>
 </rows>

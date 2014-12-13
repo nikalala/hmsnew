@@ -5,6 +5,7 @@
 
     int req_roomId = 0;
     int req_roomTypeId = 0;
+
     String req_dtStart = null;
     String req_dtEnd = null;
 
@@ -221,11 +222,12 @@
 
 
         <%
-            SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy");
-            Date req_dtStart_date = (Date)formatter.parse(req_dtStart);
+        // ეს აუცილებელია!!!!
+        if(req_dtStart != null && req_dtEnd != null){
+            Date req_dtStart_date = (Date)dt.parse(req_dtStart);
             long req_dtStart_long = req_dtStart_date.getTime();
 
-            Date req_dtEnd_date = (Date)formatter.parse(req_dtEnd);
+            Date req_dtEnd_date = (Date)dt.parse(req_dtEnd);
             long req_dtEnd_long = req_dtEnd_date.getTime();
         %>
 
@@ -245,7 +247,7 @@
             }, 1000);
             loader.hide();
         }
-
+        <%}%>
     });
 
     function loadRooms(id)

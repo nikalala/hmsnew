@@ -4,7 +4,7 @@
 <%
 String sql = "where reservationid in ("
         + "select reservationid from reservation where advancepaymentdate::date = to_date('"+df.format(dclosedate)+"','DD/MM/YYYY')"
-        + ") ";
+        + " and status = 0) ";
     
 int ipg = 1;
 int ilmt = 10;
@@ -59,7 +59,10 @@ ReservationroomBean[] reservs = ReservationroomManager.getInstance().loadByWhere
             if(total1 == 0 || deposit*100/total1 >= term) continue;
             
             
-            String actions = "<a href=\"#\" title=\"CANCEL\" class=\"btn btn-xs btn-default\"><i class=\"fa fa-remove\"></i></a>";
+            String actions = "";
+            actions += "<a href=\"javascript:newmWindow1('void','რეზერვაციის წაშლა','rid=" + reservs[i].getReservationroomid() + "')\" title=\"VOID\" class=\"btn btn-xs btn-default\"><i class=\"fa fa-remove\"></i></a>";
+            actions += "<a href=\"javascript:newmWindow1('cancel','რეზერვაციის გაუქმება','rid=" + reservs[i].getReservationroomid() + "')\" title=\"CANCEL\" class=\"btn btn-xs btn-default\"><i class=\"fa fa-minus\"></i></a>";
+            actions += "<a href=\"javascript:newmWindow1('noshow','არ გამოცხადებული რეზერვაცია','rid=" + reservs[i].getReservationroomid() + "')\" title=\"NOSHOW\" class=\"btn btn-xs btn-default\"><i class=\"fa fa-plane\"></i></a>";
 
             %>
                 <row id='<%=reservs[i].getReservationroomid()%>'>

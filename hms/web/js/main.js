@@ -842,3 +842,13 @@ function newWindowWithParams(fname, title,params) {
         loader.hide();
     });
 }
+
+function checkOut(rid,reloadid){
+    $.post("content/checkout.jsp", { rid: rid }, function (data) {
+        if (data.result == 0)    BootstrapDialog.alert(data.error);
+        else {
+            reloadGrid(reloadid);
+            BootstrapDialog.info("ოპერაცია წარმატებით შესრულდა");
+        }
+    }, "json");
+}

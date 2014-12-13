@@ -236,14 +236,15 @@ roomStatusGrid = {
     altRows: true,
     altclass: 'altrow',
     isPopup: true,
+    height: 500,
     gridComplete: function () {
-        var rows = $("#roomstatus").getGridParam("reccount");
+        var rows = $("#list_roomstatus").getGridParam("reccount");
         if (rows > 0) {
             $("#noroomstatus").hide();
-            $("#roomstatustbl").show();
+            $("#list_roomstatus").show();
         } else {
             $("#noroomstatus").show();
-            $("#roomstatustbl").hide();
+            $("#list_roomstatus").hide();
         }
         ReDrawTable(roomStatusGrid);
     },

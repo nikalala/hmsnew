@@ -25,6 +25,7 @@
     String order = "order by " + sidx + " " + sord;
     System.out.println(sql + " " + order);
     ReservationroomBean[] reservs = ReservationroomManager.getInstance().loadByWhere(sql + " " + order);
+
 %>
 <rows>
     <page><%=ipg%></page>
@@ -35,20 +36,24 @@
         for (int i = 0; i < reservs.length; i++) {
 
             ReservationBean rb = ReservationManager.getInstance().loadByPrimaryKey(reservs[i].getReservationid());
+            double advancedpaymentamount = 0;
             if (rb.getAdvancepaymentamount() != null) {
+                advancedpaymentamount = rb.getAdvancepaymentamount().doubleValue();
+                
+            }
 
                 double balance = getBalance(reservs[i].getReservationroomid());
                 System.out.println("BALANCE > " + balance);
 
-                double releaseTerm = (getTotalWithExtra(reservs[i].getReservationroomid()) * rb.getAdvancepaymentamount() / 100);
+                double releaseTerm = (getTotalWithExtra(reservs[i].getReservationroomid()) * advancedpaymentamount / 100);
                 System.out.println("RELEASE MONEY > " + releaseTerm);
 
                 Date releaseDate = rb.getAdvancepaymentdate();
                 System.out.println("RELEASE DATE > " + releaseDate);
-
+                double deposit = getSum("select sum(amount) from payment where folioid in (select folioid from folio where reservationroomid = " + reservs[i].getReservationroomid() + ")");
                 if (
                         (releaseDate != null &&
-                                balance >= releaseTerm &&
+                                deposit >= releaseTerm &&
                                 releaseDate.getTime() == lclosedate) || releaseDate == null
                         ) {
 
@@ -76,7 +81,6 @@
                         bsname = bs.getName();
                     }
                     double total = getSum("select sum(amount) from folioitem where particular not in (1,2) and folioid in (select folioid from folio where reservationroomid = " + reservs[i].getReservationroomid() + ")");
-                    double deposit = getSum("select sum(amount) from payment where folioid in (select folioid from folio where reservationroomid = " + reservs[i].getReservationroomid() + ")");
                     String actions = "";
                     actions += "<a href=\"javascript:newmWindow1('void','რეზერვაციის წაშლა','rid=" + reservs[i].getReservationroomid() + "')\" title=\"VOID\" class=\"btn btn-xs btn-default\"><i class=\"fa fa-remove\"></i></a>";
                     actions += "<a href=\"javascript:newmWindow1('cancel','რეზერვაციის გაუქმება','rid=" + reservs[i].getReservationroomid() + "')\" title=\"CANCEL\" class=\"btn btn-xs btn-default\"><i class=\"fa fa-minus\"></i></a>";
@@ -103,7 +107,6 @@
     </row>
     <%
                 }
-            }
         }
     %>
 </rows>
