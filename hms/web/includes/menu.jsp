@@ -98,7 +98,7 @@
                     <a href="javascript:getBody('construction','construction');">POS</a>
                 </li>
                 <li>
-                    <a href="javascript:getBody('construction','construction');"><span class="glyphicon glyphicon-folder-close" style="padding-right: 10px;"></span> სტატისტიკა</a>
+                    <a href="javascript:getBody('statsleft','stats','სტატისტიკა','res1','',true);"><span class="glyphicon glyphicon-folder-close" style="padding-right: 10px;"></span> სტატისტიკა</a>
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
