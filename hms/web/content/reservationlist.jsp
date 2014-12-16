@@ -132,7 +132,7 @@
         }
 
         if (!isNullOrEmpty(dtFrom.val()) && !isNullOrEmpty(dtTo.val())) {
-            filterQuery += "to_date('" + dtFrom.val() + "', '<%=dateformats2[6]%>') <= arraivaldate AND arraivaldate <= to_date('" + dtTo.val() + "','<%=dateformats2[6]%>')" + contQuery;
+            filterQuery += "to_date('" + dtFrom.val() + "', '<%=dateformats2[6]%>') <= arraivaldate::date AND arraivaldate::date <= to_date('" + dtTo.val() + "','<%=dateformats2[6]%>')" + contQuery;
         }
 
         if (!isNullOrEmpty(reserv_dateFrom.val()) && !isNullOrEmpty(reserv_dateTo.val())) {
@@ -166,9 +166,11 @@
                 filterQuery += " status " + fitlerEquals + reservStatus.val() + contQuery;
             }
         }
-        if(!showMrooms.is(':checked'))
+        if(!showMrooms.is(':checked') && donotreload)
         {
-            filterQuery += " roomid is not null ";
+            filterQuery += "  1=1 "; //
+        }else if(showMrooms.is(':checked') && !donotreload) {
+            filterQuery += " roomid is null ";
         }else{
             filterQuery += " 1=1 ";
         }
@@ -194,7 +196,10 @@
         //clean dropdowns
         $('#filter-form .dropdown option').removeAttr('selected');
         $("#filter-form .dropdown").change();
+        $("#showMrooms").attr('checked', false);
+        $("#showIncomplOrders").attr('checked', false);
         reInitialize();
+        doFilter(false);
     }
 
     function reInitialize() {

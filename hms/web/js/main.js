@@ -867,7 +867,9 @@ function isValidEmailAddress(emailAddress) {
 
 function newWindowWithParams(fname, title,params) {
     loader.show();
-    $.post("content/" + fname + ".jsp"+params, {}, function (data) {
+    var uri = "content/" + fname + ".jsp"+params;
+    console.log(uri);
+    $.post(uri, {}, function (data) {
         $("#mheader").html(title);
         $("#mbody").html(data);
         $('#myModal').modal();

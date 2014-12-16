@@ -79,7 +79,7 @@ StcolorBean[] colors = StcolorManager.getInstance().loadByWhere("where active = 
             data: { days: d, calstart: s },
             success: function(data)
             {
-                $('#res1').html(data);
+               $("#centerTabContent .tab-pane").first().html(data);
             },
             async: false
         });

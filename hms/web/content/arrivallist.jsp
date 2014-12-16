@@ -11,6 +11,8 @@
 
     var lastroomtypeId = 0;
     $(document).ready(function () {
+        $('#reserv_dateTo').datepicker(<%=pickerFormatForDatePickers%>);
+        $('#reserv_dateFrom').datepicker(<%=pickerFormatForDatePickers%>);
         loadDefaults();
     });
 
@@ -79,7 +81,11 @@
         }
     });
 
-    function doFilter() {
+    function doFilter(reload) {
+
+        if (reload) {
+            resetDates();
+        }
 
         var filterQuery = "";
         var contQuery = " AND ";
@@ -106,23 +112,23 @@
         }
 
         if (!isNullOrEmpty(dtFrom.val()) && !isNullOrEmpty(dtTo.val())) {
-            filterQuery += "to_date('" + dtFrom.val() + "', '<%=dateformats2[dff]%>') <= arraivaldate AND arraivaldate <= to_date('" + dtTo.val() + "','<%=dateformats2[dff]%>')" + contQuery;
+            filterQuery += "to_date('" + dtFrom.val() + "', '<%=dateformats2[dff]%>') <= arraivaldate::date AND arraivaldate::date <= to_date('" + dtTo.val() + "','<%=dateformats2[dff]%>')" + contQuery;
         }
 
         if (!isNullOrEmpty(reserv_dateFrom.val()) && !isNullOrEmpty(reserv_dateTo.val())) {
-            filterQuery += "to_date('" + reserv_dateFrom.val() + "', '<%=dateformats2[dff]%>') <= regdate AND regdate <= to_date('" + reserv_dateTo.val() + "','<%=dateformats2[dff]%>')" + contQuery;
+            filterQuery += "to_date('" + reserv_dateFrom.val() + "', '<%=dateformats2[dff]%>') <= arraivaldate::date AND arraivaldate::date <= to_date('" + reserv_dateTo.val() + "','<%=dateformats2[dff]%>')" + contQuery;
         }
 
         if (!isNullOrEmpty(reservNum.val())) {
             filterQuery += " vouchernum LIKE '%" + reservNum.val() + "%'" + contQuery;
         }
 
-        if (!isNullOrEmpty(roomBean.val())) {
+        if (!isNullOrEmpty(roomBean.val()) && roomBean.val() != 0) {
             filterQuery += " roomid " + fitlerEquals + roomBean.val() + contQuery;
         }
 
-        if (!isNullOrEmpty(roomType.val())) {
-            filterQuery += " roomtypecode " + fitlerEquals + "'" + roomType.val() + "'" + contQuery;
+        if (!isNullOrEmpty(roomType.val()) && roomType.val() != 0) {
+            filterQuery += " roomtypeid " + fitlerEquals +  roomType.val() + contQuery;
         }
 
         if (!isNullOrEmpty(txtSource.val())) {
@@ -141,8 +147,6 @@
             }
         }
 
-        filterQuery += (showMrooms.is(':checked') ? " reservationroomid is null" : "reservationroomid is not null ") + contQuery;
-
         var retVal = "";
 
         if (!isNullOrEmpty(checkNum.val())) {
@@ -151,32 +155,71 @@
             retVal = filterQuery.substring(0, filterQuery.trim().lastIndexOf("AND"));
         }
 
-        var url = "content/getreservationlist.jsp?where=where " + retVal;
-        reloadGrid(resGrid.id, url);
+        var url = "content/getarrivallist.jsp?where=where " + retVal;
+        console.log(url);
+        if(!reload){
+            reloadGrid(arrivalGrid.id, url);
+        }
+        return url;
+
+
     }
 
     function resetFilterPanel() {
         $("#filter-form :input").each(function () {
-            $(this).val('');
+            console.log($(this).attr('id'))
+            if($(this).attr('id') !== "reserv_dateFrom" && $(this).attr('id') !== "reserv_dateTo")
+            {
+                $(this).val('');
+            }
         });
         //clean dropdowns
         $('#filter-form .dropdown option').removeAttr('selected');
         $("#filter-form .dropdown").change();
         reInitialize();
+        arrivalGrid.url = doFilter(true);
+        reloadGrid(arrivalGrid.id,arrivalGrid.url);
     }
 
     function reInitialize() {
         $('#reservStatus').val(0);
         $('#reservStatus').change();
-        $('#reserv_dateFrom').val('');
-        $('#reserv_dateTo').val('');
+        resetDates();
+    }
+
+
+
+    $("#reserv_dateFrom").on('change', function () {
+        var value = $(this).val();
+        $("#reserv_dateTo").val(value);
+    });
+
+    $("#todaycheckedinlist").change(function () {
+        if (this.checked) {
+            var url = "content/getarrivallist.jsp?where=where roomstatus = -1 and arraivaldate::date = to_date('<%=df.format(dclosedate)%>','DD/MM/YYYY')";
+            console.log(url);
+            reloadGrid(arrivalGrid.id,url);
+            resetDates();
+            $('#reserv_dateFrom, #reserv_dateTo').prop("disabled", true);
+            $('#grid-table .date .glyphicon-calendar').css("display", "none");
+        } else {
+            $('#reserv_dateFrom, #reserv_dateTo').prop("disabled", false);
+            $('#grid-table .date .glyphicon-calendar').css("display", "block");
+            resetFilterPanel();
+        }
+    });
+
+    function resetDates() {
+        var today = new Date(<%=lclosedate%>);
+        $("#reserv_dateTo").datepicker("setDate", today);
+        $("#reserv_dateFrom").datepicker("setDate", today);
     }
 
     reInitialize();
 
     function loadDefaults() {
+        arrivalGrid.url = doFilter(true);
         initializeGrid(arrivalGrid);
-        $('#grid-table .date').datepicker(<%=pickerformat1%>);
         $('#grid-table .dropdown').selectpicker();
         $("#grid-table .btn-group").css("width", "100%", "!important");
         $("#grid-table label").each(function () {
@@ -298,14 +341,16 @@
                         </select>
                     </div>
                     <div class="col-md-2">
-                        <button type="button" class="btn btn-default" style="width: 100%;" id="showAllGuests" onclick="doFilter(true);">
+                        <button type="button" class="btn btn-default" style="width: 100%;" id="showAllGuests"
+                                onclick="resetFilterPanel()">
                             მაჩვენე ყველა
                         </button>
                     </div>
                 </div>
                 <div style="width: 100%; float:left;">
                     <div style="float: left;">
-                        <input type="checkbox" id="todaycheckedinlist" style="color: #818181;font-weight: normal; margin-left: 15px;">
+                        <input type="checkbox" id="todaycheckedinlist"
+                               style="color: #818181;font-weight: normal; margin-left: 15px;">
                     </div>
                     <div style="float: left;margin-top: 6px;">
                         &nbsp;დღეს მიღებული სტუმრები

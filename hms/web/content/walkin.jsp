@@ -5,14 +5,15 @@
 
     int req_roomId = 0;
     int req_roomTypeId = 0;
-
     String req_dtStart = null;
     String req_dtEnd = null;
 
     if (request.getParameter("req_roomId") != null) {
         req_roomId = Integer.parseInt(request.getParameter("req_roomId"));
         RoomBean roomBean = RoomManager.getInstance().loadByPrimaryKey(req_roomId);
-        req_roomTypeId = roomBean.getRoomtypeid();
+        if(roomBean.getRoomtypeid() != null){
+            req_roomTypeId = roomBean.getRoomtypeid();
+        }
     }
 
     if (request.getParameter("req_dtStart") != null) {
@@ -222,19 +223,21 @@
 
 
         <%
-        // ეს აუცილებელია!!!!
-        if(req_dtStart != null && req_dtEnd != null){
-            Date req_dtStart_date = (Date)dt.parse(req_dtStart);
-            long req_dtStart_long = req_dtStart_date.getTime();
+       // ეს აუცილებელია!!!!
+       if(req_dtStart != null && req_dtEnd != null){
+           Date req_dtStart_date = (Date)dt.parse(req_dtStart);
+           long req_dtStart_long = req_dtStart_date.getTime();
 
-            Date req_dtEnd_date = (Date)dt.parse(req_dtEnd);
-            long req_dtEnd_long = req_dtEnd_date.getTime();
-        %>
+           Date req_dtEnd_date = (Date)dt.parse(req_dtEnd);
+           long req_dtEnd_long = req_dtEnd_date.getTime();
+       %>
 
         var roomTypeId = '<%=req_roomTypeId%>';
         var roomId = '<%=req_roomId%>';
         var dtStart = '<%=dt.format(req_dtStart_long)%>';
         var dtEnd = '<%=dt.format(req_dtEnd_long)%>';
+
+        
 
         if(!isNullOrEmpty(roomTypeId)){
             loader.show();
@@ -247,7 +250,7 @@
             }, 1000);
             loader.hide();
         }
-        <%}%>
+       <% } %>
     });
 
     function loadRooms(id)
