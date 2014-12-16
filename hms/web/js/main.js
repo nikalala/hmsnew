@@ -445,6 +445,8 @@ function removeAllTabs() {
     $('.nav-tabs li').remove();
 }
 
+
+
 function addTab(fname2, name, itemId, isFirst) {
 
     //Davit aq araferi ar shecvalo gtxov :D:D:D:D

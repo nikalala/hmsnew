@@ -188,6 +188,8 @@ var onEventContextMenu = function(s, rec, e){
     s.ctx.rec = rec;
     s.ctx.showAt(e.getXY());
 }
+
+
     var scheduler = Ext.create("Sch.panel.SchedulerGrid",{
         width       : "100%",
         height      : height,
@@ -203,9 +205,9 @@ var onEventContextMenu = function(s, rec, e){
 
         resourceStore   : resourceStore,
         eventStore      : eventStore,
-        
-        enableDragCreation : true,
-        stripeRows: true,
+
+        //This is now disabled. User can't draw on table
+        enableDragCreation : false,
         eventResizeHandles : 'none',
         enableEventDragDrop : false,
         allowOverlap:false,
@@ -275,6 +277,8 @@ var onEventContextMenu = function(s, rec, e){
             }
         }
     });
+
+
 
     //scheduler.render(Ext.getBody());
 

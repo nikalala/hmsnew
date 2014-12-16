@@ -79,12 +79,9 @@ function printRegCard(id){
 
 function checkInEdit(){
     $.post("content/checkin.jsp", { rid: <%=rroom.getRoomid()%>, resid: <%=rroom.getReservationid()%> }, function (data) {
-        //if (data.result == 0)    BootstrapDialog.alert(data.error);
-        //else {
-            getBody("stayviewleft", "stayview", 'დატვირთულობა', 'res1','',true);
-            BootstrapDialog.alert(data.trim());
-            //BootstrapDialog.info("ოპერაცია წარმატებით შესრულდა");
-        //}
+        getBody("stayviewleft", "stayview", 'დატვირთულობა', 'res1','',true);
+        BootstrapDialog.alert(data.trim());
+        $(".closeTab").click();
     });
 }
 
