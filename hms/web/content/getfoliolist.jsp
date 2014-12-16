@@ -3,6 +3,9 @@
 <%@include file="../includes/initxml.jsp"%>
 <%
 boolean itemize = new java.lang.Boolean(request.getParameter("itemize"));
+boolean hideunposted = new java.lang.Boolean(request.getParameter("hideunposted"));
+boolean hidevoid = new java.lang.Boolean(request.getParameter("hidevoid"));
+
 FolioBean folio = FolioManager.getInstance().loadByPrimaryKey(new Long(request.getParameter("folioid")));
 ReservationroomBean rroom = ReservationroomManager.getInstance().loadByPrimaryKey(new Long(request.getParameter("reservationroomid")));
 RoomtypeBean rtp = RoomtypeManager.getInstance().loadByPrimaryKey(rroom.getRoomtypeid());
@@ -18,6 +21,8 @@ if(reserv.getBillto() == 0) bid = reserv.getCompanyid().longValue();
 //if(reserv.getBillto() == 2) bid = rroom.getGuestid().longValue();
 //if(reserv.getBillto() == 3) bid = rroom.getGuestid().longValue();
 String sql = "where folioid = "+folio.getFolioid();
+if(hideunposted)
+    sql += " and done = true ";
 /*
         + "(select folioid from folio where "
         + "reservationroomid = "+rroom.getReservationroomid()+" and ";
@@ -28,6 +33,8 @@ sql += "guestid = "+rroom.getGuestid()+") ";
 sql += " order by itemdate, (case when particular = 6 then 1 when particular = -1 then 2 when particular = 0 then 3 when particular = 1 then 4 when particular = 2 then 5 when particular = 4 then 6 when particular = 5 then 7 else 8 end)";
 
 //System.out.println(sql);
+
+
 
 FolioitemBean[] items = FolioitemManager.getInstance().loadByWhere(sql);
 

@@ -4,9 +4,9 @@
 
 <script>
     $(document).ready(function () {
-        initializeGrid(unsettledFolioGrid);
+        initializeGridNa(unsettledFolioGrid);
     });
 </script>
-<div id="nounsettledfolio" style="color: red;">მიმდინარე თარიღისთვის არ არსებობს დაუსრულებელი რეზერვაცია</div>
+<div id="nolist_unsettledfolio" style="color: red;">მიმდინარე თარიღისთვის არ არსებობს დაუსრულებელი რეზერვაცია</div>
 <table id='list_unsettledfolio' class="table-striped table-hover" align='center'></table>
 

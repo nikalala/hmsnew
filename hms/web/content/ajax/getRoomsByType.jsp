@@ -21,7 +21,7 @@ if(roomtype != null){
 
     for(int i=0;i<=roomtype.getMchild().intValue();i++){
         String sel = "";
-        if(i == roomtype.getBadult().intValue())
+        if(i == roomtype.getBchild().intValue())
             sel = "selected";
         selectcild += "<option value=\""+i+"\" "+sel+">"+i+"</option>";
     }

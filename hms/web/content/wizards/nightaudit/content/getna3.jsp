@@ -56,7 +56,7 @@ ReservationroomBean[] reservs = ReservationroomManager.getInstance().loadByWhere
             
             String status = roomstatus[(int)getSum("select getroomstatus("+reservs[i].getRoomid()+", '"+dflong.format(dclosedate)+"')")];
             String actions = "";
-            actions += "<a href=\"#\" title=\"AMEND STAY\" class=\"btn btn-xs btn-default\"><i class=\"fa fa-remove\"></i></a>";
+            actions += "<a href=\"javascript:newmWindow1('amendstay','ვადის გაგრძელება','rid=" + reservs[i].getReservationroomid() + "')\" title=\"AMEND STAY\" class=\"btn btn-xs btn-default\"><i class=\"fa fa-share\"></i></a>";
             if(total-deposit <= 0)
                 actions += "<a href=\"javascript:checkOut(" + reservs[i].getReservationroomid() + ",'list_roomstatus')\" title=\"CHECK OUT\" class=\"btn btn-xs btn-default\"><i class=\"fa fa-check\"></i></a>";
             %>

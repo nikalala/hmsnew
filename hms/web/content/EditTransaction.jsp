@@ -73,8 +73,21 @@ $(document).ready(function(){
 });
 
 function printRegCard(id){
-        addTab("content/form/printInvoiceFolioItem.jsp?act=regcard&id="+id,"სარეგისტრაციო ბარათის ბეჭდვა","regcard_"+id);
+        window.open("content/form/printRegCardPdf.jsp?id="+id);
+        //addTab("content/form/printInvoiceFolioItem.jsp?act=regcard&id="+id,"სარეგისტრაციო ბარათის ბეჭდვა","regcard_"+id);
     }
+
+function checkInEdit(){
+    $.post("content/checkin.jsp", { rid: <%=rroom.getRoomid()%>, resid: <%=rroom.getReservationid()%> }, function (data) {
+        //if (data.result == 0)    BootstrapDialog.alert(data.error);
+        //else {
+            getBody("stayviewleft", "stayview", 'დატვირთულობა', 'res1','',true);
+            BootstrapDialog.alert(data.trim());
+            //BootstrapDialog.info("ოპერაცია წარმატებით შესრულდა");
+        //}
+    });
+}
+
 
 </script>
 <div class="container-fluid" id="edittransaction0" style="padding-top: 4px; height: 100%;">
@@ -179,7 +192,9 @@ function printRegCard(id){
                     <button type="button" class="btn btn-sm btn-primary navbar-btn">აუდიტი</button>
                     <button type="button" class="btn btn-sm btn-default navbar-btn">შენახვა</button>
                     <button type="button" class="btn btn-sm btn-default navbar-btn">გაუქმება</button>
-                    <button type="button" class="btn btn-sm btn-danger navbar-btn">მიღება</button>
+                    <%if(sts == 0){%>
+                    <button type="button" onclick="checkInEdit()" class="btn btn-sm btn-danger navbar-btn">მიღება</button>
+                    <%}%>
                 </td>
             </tr>
         </tbody>

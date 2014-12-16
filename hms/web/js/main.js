@@ -698,7 +698,39 @@ function initializeGrid(grid) {
             height: gridHeight,
             autowidth: true,
             sortname: grid.sort,
-            viewrecords: true,
+            //viewrecords: true,
+            sortorder: grid.order,
+            loadComplete: function () {
+                $("#" + grid.id + " td:last-child").removeAttr("title");
+                reInitializeGrid(grid.id, grid.isPopup);
+                $(".ui-jqgrid-htable").css("background", "#FFF").css("border-bottom", "solid 1px #D1D1D1");
+
+            }
+        }).jqGrid('bindKeys');
+
+}
+
+function initializeGridNa(grid) {
+    //console.log("initializing grid named > " + grid.id);
+
+    var gridHeight =$("#centerTabContent").height() - 40 - $(".first-table").height();
+    if($("#centercontent").height() <= gridHeight )
+    {
+        gridHeight -= 300;
+    }
+    jQuery("#" + grid.id).jqGrid(
+        {
+            url: grid.url,
+            datatype: grid.type,
+            colNames: grid.cols,
+            colModel: grid.model,
+            gridComplete: grid.gridComplete,
+            beforeRequest: grid.beforeRequest,
+            rowNum: 2000,
+            height: 360,
+            autowidth: true,
+            sortname: grid.sort,
+            //viewrecords: true,
             sortorder: grid.order,
             loadComplete: function () {
                 $("#" + grid.id + " td:last-child").removeAttr("title");
@@ -845,6 +877,16 @@ function newWindowWithParams(fname, title,params) {
 
 function checkOut(rid,reloadid){
     $.post("content/checkout.jsp", { rid: rid }, function (data) {
+        if (data.result == 0)    BootstrapDialog.alert(data.error);
+        else {
+            reloadGrid(reloadid);
+            BootstrapDialog.info("ოპერაცია წარმატებით შესრულდა");
+        }
+    }, "json");
+}
+
+function checkOut1(rid,reloadid){
+    $.post("content/amendstay.jsp", { rid: rid }, function (data) {
         if (data.result == 0)    BootstrapDialog.alert(data.error);
         else {
             reloadGrid(reloadid);

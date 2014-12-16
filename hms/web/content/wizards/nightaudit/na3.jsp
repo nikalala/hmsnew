@@ -3,8 +3,8 @@
 <%@include file="../../../includes/init.jsp"%>
 <script>
     $(document).ready(function() {
-        initializeGrid(roomStatusGrid);
+        initializeGridNa(roomStatusGrid);
     });
 </script>
-<div id="noroomstatus" style="color: red;">მიმდინარე თარიღისთვის არ არსებობს დაუსრულებელი რეზერვაცია</div>
+<div id="nolist_roomstatus" style="color: red;">მიმდინარე თარიღისთვის არ არსებობს დაუსრულებელი რეზერვაცია</div>
 <table id='list_roomstatus' class="table-striped table-hover" align='center'></table>

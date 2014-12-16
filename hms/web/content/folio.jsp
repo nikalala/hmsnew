@@ -26,16 +26,18 @@ FolioBean[] folios = FolioManager.getInstance().loadByWhere("where reservationro
     }
     
     function printFolioAction(itemid){
-        addTab("content/form/printInvoiceFolioItem.jsp?act=folioitem&id="+itemid,"გადახდის ინვოისი","folioiteminvoice_"+itemid);
+        window.open("content/form/printFolioItemPdf.jsp?id="+itemid);
+        //addTab("content/form/printInvoiceFolioItem.jsp?act=folioitem&id="+itemid,"გადახდის ინვოისი","folioiteminvoice_"+itemid);
     }
     
     function printFolio(id){
-        addTab("content/form/printInvoiceFolioItem.jsp?act=folio&id="+id,"ფოლიოს ბეჭდვა","foliovoice_"+id);
+        window.open("content/form/printFolioPdf.jsp?id="+id);
+        //addTab("content/form/printInvoiceFolioItem.jsp?act=folio&id="+id,"ფოლიოს ბეჭდვა","foliovoice_"+id);
     }
     
     function refreshFoliolist(id){
         jQuery("#listfolio").jqGrid().setGridParam({
-            url:"content/getfoliolist.jsp?reservationroomid="+id+"&itemize="+$("#itemizelist").prop('checked')+"&folioid="+$("#folio_folioid").val()
+            url:"content/getfoliolist.jsp?reservationroomid="+id+"&itemize="+$("#itemizelist").prop('checked')+"&folioid="+$("#folio_folioid").val()+"&hideunposted="+$("#hideunposted").prop('checked')+"&hidevoid="+$("#hidevoid").prop('checked')
         }).trigger("reloadGrid");
     }
     
@@ -116,6 +118,8 @@ $(document).ready(function(){
     */
    
    $("#itemizelist").on('click',function(){ refreshFoliolist(<%=rroom.getReservationroomid()%>); });
+   $("#hideunposted").on('click',function(){ refreshFoliolist(<%=rroom.getReservationroomid()%>); });
+   $("#hidevoid").on('click',function(){ refreshFoliolist(<%=rroom.getReservationroomid()%>); });
    
    $("#folio_folioid").on('change',function(){ refreshFoliolist(<%=rroom.getReservationroomid()%>); });
    
@@ -158,7 +162,7 @@ $(document).ready(function(){
    
    jQuery('#listfolio').jqGrid(
     {
-        url:'content/getfoliolist.jsp?reservationroomid=<%=rroom.getReservationroomid()%>&itemize=true&folioid=<%=folios[0].getFolioid()%>',
+        url:'content/getfoliolist.jsp?reservationroomid=<%=rroom.getReservationroomid()%>&itemize=true&folioid=<%=folios[0].getFolioid()%>&hideunposted=false&hidevoid=false',
         datatype: 'xml',
         colNames:['ოთახი', 'თარიღი', 'ნომერი', 'ტიპი', 'აღწერა', 'მომხმარებელი','მოქმედება','','ფასი','st'],
         colModel:[
@@ -341,7 +345,7 @@ $(document).ready(function(){
                 <label for="itemizelist"><b>დაჯგუფება</b></label>&nbsp;&nbsp;&nbsp;
                 <input type="checkbox" class="allitems" name="hidevoid" id="hidevoid" value="yes"/>
                 <label for="hidevoid"><b>გაუქმ. დამალვა</b></label>&nbsp;&nbsp;&nbsp;
-                <input type="checkbox" class="allitems" name="hideunposted" id="hideunposted" value="yes" checked/>
+                <input type="checkbox" class="allitems" name="hideunposted" id="hideunposted" value="yes"/>
                 <label for="hideunposted"><b>შეუსრ. დამალვა</b></label>
                 
             </td>

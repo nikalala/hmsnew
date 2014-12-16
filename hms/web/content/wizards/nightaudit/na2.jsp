@@ -6,8 +6,8 @@
 %>
 <script>
     $(document).ready(function() {
-        initializeGrid(finishedResGrid);
+        initializeGridNa(finishedResGrid);
     });
 </script>
-<div id="norelasereservations" style="color: red !important;">მიმდინარე თარიღისთვის არ არსებობს დასრულებელი რეზერვაცია</div>
+<div id="nolist_relasereservations" style="color: red !important;">მიმდინარე თარიღისთვის არ არსებობს დასრულებელი რეზერვაცია</div>
 <table id='list_relasereservations' class="table-striped table-hover" align='center'></table>

@@ -34,6 +34,7 @@ try{
     FolioitemBean[] items = FolioitemManager.getInstance().loadByWhere(foliosql);
     items[0].setAmount(manualrate);
     //items[0].set
+    items[0].setDone(true);
     items[0] = FolioitemManager.getInstance().save(items[0]);
     Manager.getInstance().endTransaction(true);
     msg = "{\"result\":1}";

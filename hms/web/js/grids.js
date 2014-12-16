@@ -157,14 +157,15 @@ pResGrid = {
     altclass: 'altrow',
     isPopup: true,
     gridComplete: function () {
-        var rows = $("#pendingreservations").getGridParam("reccount");
+        var rows = $("#list_pendingreservations").getGridParam("records");
         if (rows > 0) {
-            $("#nopendingreservations").hide();
-            $("#pendingreservationstbl").show();
+            $("#nolist_pendingreservations").hide();
+            $("#list_pendingreservations").show();
         } else {
-            $("#nopendingreservations").show();
-            $("#pendingreservationstbl").hide();
+            $("#nolist_pendingreservations").show();
+            $("#list_pendingreservations").hide();
         }
+        $("#nastp1").val(rows);
         ReDrawTable(pResGrid);
     },
     beforeRequest: function () {
@@ -198,14 +199,15 @@ finishedResGrid = {
     altclass: 'altrow',
     isPopup: true,
     gridComplete: function () {
-        var rows = $("#relasereservations").getGridParam("reccount");
+        var rows = $("#list_relasereservations").getGridParam("records");
         if (rows > 0) {
-            $("#norelasereservations").hide();
-            $("#relasereservationstbl").show();
+            $("#nolist_relasereservations").hide();
+            $("#list_relasereservations").show();
         } else {
             $("#norelasereservations").show();
-            $("#relasereservationstbl").hide();
+            $("#list_relasereservations").hide();
         }
+        $("#nastp2").val(rows);
         ReDrawTable(finishedResGrid);
     },
     beforeRequest: function () {
@@ -238,14 +240,15 @@ roomStatusGrid = {
     isPopup: true,
     height: 500,
     gridComplete: function () {
-        var rows = $("#list_roomstatus").getGridParam("reccount");
+        var rows = $("#list_roomstatus").getGridParam("records");
         if (rows > 0) {
-            $("#noroomstatus").hide();
+            $("#nolist_roomstatus").hide();
             $("#list_roomstatus").show();
         } else {
-            $("#noroomstatus").show();
+            $("#nolist_roomstatus").show();
             $("#list_roomstatus").hide();
         }
+        $("#nastp3").val(rows);
         ReDrawTable(roomStatusGrid);
     },
     beforeRequest: function () {
@@ -281,6 +284,15 @@ unsettledFolioGrid = {
     altclass: 'altrow',
     isPopup: true,
     gridComplete: function () {
+        var rows = $("#list_unsettledfolio").getGridParam("records");
+        if (rows > 0) {
+            $("#nolist_unsettledfolio").hide();
+            $("#list_unsettledfolio").show();
+        } else {
+            $("#nolist_unsettledfolio").show();
+            $("#list_unsettledfolio").hide();
+        }
+        $("#nastp4").val(rows);
         ReDrawTable(unsettledFolioGrid);
     },
     beforeRequest: function () {
@@ -296,13 +308,14 @@ postchargesGridModel.push(
     colModelGenerator(120, 'guest', 0),
     colModelGenerator(80, 'folio', 0),
     colModelGenerator(100, 'description', 2),
-    colModelGenerator(100, 'amount', 0),
-    colModelGenerator(100, 'net', 0));
+    colModelGenerator(100, 'amount', 0)
+    //colModelGenerator(100, 'net', 0)
+            );
 postchargesGrid = {
     id: 'list_postcharges',
     url: 'content/wizards/nightaudit/content/getna5.jsp',
     type: 'xml',
-    cols: ['ოთახი', 'სტუმარი', 'ფოლიო', 'აღწერა', 'მოცულობა', 'Net'],
+    cols: ['ოთახი', 'სტუმარი', 'ფოლიო', 'აღწერა', 'თანხა'], //'Net'],
     model: postchargesGridModel,
     sort: 'folioitemid',
     order: 'asc',
@@ -310,13 +323,13 @@ postchargesGrid = {
     altclass: 'altrow',
     isPopup: true,
     gridComplete: function () {
-        var rows = $("#postcharges").getGridParam("reccount");
+        var rows = $("#list_postcharges").getGridParam("records");
         if (rows > 0) {
-            $("#nopostcharges").hide();
-            $("#postchargestbl").show();
+            $("#nolist_postcharges").hide();
+            $("#list_postcharges").show();
         } else {
-            $("#nopostcharges").show();
-            $("#postchargestbl").hide();
+            $("#nolist_postcharges").show();
+            $("#list_postcharges").hide();
         }
         ReDrawTable(postchargesGrid);
     },

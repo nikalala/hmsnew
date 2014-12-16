@@ -4,7 +4,7 @@
 
 <script>
     $(document).ready(function () {
-        initializeGrid(pResGrid);
+        initializeGridNa(pResGrid);
     });
 </script>
 

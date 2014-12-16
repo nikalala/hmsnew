@@ -120,6 +120,7 @@ try{
             
         }
         
+        fitem.setDone(true);
         fitem = FolioitemManager.getInstance().save(fitem);
         if(ex != null){
             ex.setFolioitemid(fitem.getFolioitemid());

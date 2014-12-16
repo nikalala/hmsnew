@@ -2,7 +2,7 @@
 <%@page contentType="text/xml;charset=utf-8"%>
 <%@include file="../../../../includes/initxml.jsp"%>
 <%
-String sql = "where roomid is not null and itemdate = to_date('"+df.format(dclosedate)+"','DD/MM/YYYY')";
+String sql = "where roomid is not null and itemdate = to_date('"+df.format(dclosedate)+"','DD/MM/YYYY') and done = false";
     
 int ipg = 1;
 int ilmt = 10;
@@ -84,13 +84,13 @@ FolioitemBean[] items = FolioitemManager.getInstance().loadByWhere(sql+" "+order
             }
             %>
                 <%--reservs[i].getReservationroomid()--%>
-                <row id='<%=folio.getReservationroomid()%>'>
+                <row id='<%=items[i].getFolioitemid()%>'>
                     <cell><![CDATA[<%=roomname%>]]></cell>
                     <cell><![CDATA[<%=guestname%>]]></cell>
                     <cell><![CDATA[<%=folio.getFolioid()%>]]></cell>
                     <cell><![CDATA[<%=particular%>]]></cell>
                     <cell><![CDATA[<%=maincurrency.getCode()%> <%=dc.format(items[i].getAmount().doubleValue()*koeff)%>]]></cell>
-                    <cell><![CDATA[<%=maincurrency.getCode()%> <%=dc.format(0)%>]]></cell>
+                    <%--cell><![CDATA[<%=maincurrency.getCode()%> <%=dc.format(0)%>]]></cell--%>
                 </row>
             <%
             }

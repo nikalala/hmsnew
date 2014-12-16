@@ -14,7 +14,7 @@ try{
     
     folioitem.setAmount(amount);
     folioitem.setNote(note);
-    
+    folioitem.setDone(true);
     folioitem = FolioitemManager.getInstance().save(folioitem);
     id = folioitem.getFolioitemid().longValue();
     

@@ -54,7 +54,7 @@ try{
             fb.setItemdate(res.getArraivaldate());
             fb.setRegbyid(user.getPersonnelid());
             fb.setAmount(cancellationfee);
-            fb.setDone(false);
+            fb.setDone(true);
             fb.setParticular(6);
             fb.setRoomoper(4);
             fb.setNote(reason.getName());
@@ -69,7 +69,7 @@ try{
             fb.setRegbyid(user.getPersonnelid());
             fb.setTaxid(trf.taxid);
             fb.setAmount(trf.tariff_tax);
-            fb.setDone(false);
+            fb.setDone(true);
             fb.setParticular(-1);
             fb.setNote(reason.getName());
             fb = FolioitemManager.getInstance().save(fb);
