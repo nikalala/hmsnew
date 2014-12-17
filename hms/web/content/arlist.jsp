@@ -13,7 +13,6 @@
 <% ContragentBean[] bSources = ContragentManager.getInstance().loadByWhere("where deleted = false and bsource = true"); %>
 
 
-
 <link rel="stylesheet" type="text/css" href="css/grid-filter.css">
 
 <script type="text/javascript">
@@ -221,7 +220,7 @@
 
     function loadDefaults() {
         $('#grid-table .dropdown').selectpicker();
-        $("#grid-table .btn-group").css("width", "100%", "!important").css("padding-left","0px").css("padding-right","0px");
+        $("#grid-table .btn-group").css("width", "100%", "!important").css("padding-left", "0px").css("padding-right", "0px");
         $("#grid-table label").each(function () {
             $(this).css("float", "left", "!important");
             $(this).css("line-height", "27px", "!important");
@@ -372,7 +371,7 @@
                 <label>ბიზნეს წყარო:</label>
             </td>
             <td colspan="2">
-                <select class="dropdown" id="CompanyBeans">
+                <select class="dropdown" id="bSources">
                     <option value="">-აირჩიეთ-</option>
                     <% for (int i = 0; i <= bSources.length - 1; i++) { %>
                     <option value="<%=bSources[i].getContragentid()%>"><%=bSources[i].getName()%>
@@ -387,7 +386,8 @@
                 onclick="resetFilterPanel()">
             Reset
         </button>
-        <button type="button" class="btn btn-danger" style="margin-top: 5px; margin-right: 7px; float: right;" id="search_reserve_filer"
+        <button type="button" class="btn btn-danger" style="margin-top: 5px; margin-right: 7px; float: right;"
+                id="search_reserve_filer"
                 onclick="doFilter()"
                 style="width: 69px;">ძებნა
         </button>

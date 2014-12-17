@@ -5,6 +5,7 @@
 <% RoomBean[] roomBeans = RoomManager.getInstance().loadByWhere("ORDER BY ord"); %>
 <% RoomtypeBean[] roomTypes = RoomtypeManager.getInstance().loadByWhere("ORDER BY ord"); %>
 <% ReservationtypeBean[] reservTypes = ReservationtypeManager.getInstance().loadByWhere(""); %>
+
 <link rel="stylesheet" type="text/css" href="css/grid-filter.css">
 
 <script type="text/javascript">
@@ -49,8 +50,34 @@
         $("#roomBean").html(html);
         $('#roomBean').selectpicker("refresh");
         $('#roomBean').next().css("width", "100%").css("padding-left", "0px");
-        /**/
-        /*$('#roomBean').change();*/
+    });
+
+
+    $("#contrTypes").on('change', function () {
+        var element = $("option:selected", this);
+        var val = element.val();
+        if (!isNullOrEmpty(val) && val > 0) {
+            loader.show();
+            var where = "?contrid=" + val;
+            if (val == 4) {
+                where = "?guestid=" + val;
+            }
+            var url = "content/getcontrcontact.jsp" + where;
+            $.get(url, function (data) {
+
+                var html = "<option value='0' selected='selected'>-ტიპი-</option>";
+                html += data;
+                $("#filteredContrs").html(html);
+                $('#filteredContrs').selectpicker("refresh");
+                $('#filteredContrs').next().css("width", "100%").css("padding-left", "0px");
+                loader.hide();
+            });
+        } else {
+            var html = "<option value='0' selected='selected'>-ტიპი-</option>";
+            $("#filteredContrs").html(html);
+            $('#filteredContrs').selectpicker("refresh");
+            $('#filteredContrs').next().css("width", "100%").css("padding-left", "0px");
+        }
     });
 
     $("#roomBean").on('change', function () {
@@ -128,7 +155,7 @@
         }
 
         if (!isNullOrEmpty(roomType.val()) && roomType.val() != 0) {
-            filterQuery += " roomtypeid " + fitlerEquals +  roomType.val() + contQuery;
+            filterQuery += " roomtypeid " + fitlerEquals + roomType.val() + contQuery;
         }
 
         if (!isNullOrEmpty(txtSource.val())) {
@@ -157,7 +184,7 @@
 
         var url = "content/getarrivallist.jsp?where=where " + retVal;
         console.log(url);
-        if(!reload){
+        if (!reload) {
             reloadGrid(arrivalGrid.id, url);
         }
         return url;
@@ -168,8 +195,7 @@
     function resetFilterPanel() {
         $("#filter-form :input").each(function () {
             console.log($(this).attr('id'))
-            if($(this).attr('id') !== "reserv_dateFrom" && $(this).attr('id') !== "reserv_dateTo")
-            {
+            if ($(this).attr('id') !== "reserv_dateFrom" && $(this).attr('id') !== "reserv_dateTo") {
                 $(this).val('');
             }
         });
@@ -178,7 +204,7 @@
         $("#filter-form .dropdown").change();
         reInitialize();
         arrivalGrid.url = doFilter(true);
-        reloadGrid(arrivalGrid.id,arrivalGrid.url);
+        reloadGrid(arrivalGrid.id, arrivalGrid.url);
     }
 
     function reInitialize() {
@@ -186,7 +212,6 @@
         $('#reservStatus').change();
         resetDates();
     }
-
 
 
     $("#reserv_dateFrom").on('change', function () {
@@ -198,7 +223,7 @@
         if (this.checked) {
             var url = "content/getarrivallist.jsp?where=where roomstatus = -1 and arraivaldate::date = to_date('<%=df.format(dclosedate)%>','DD/MM/YYYY')";
             console.log(url);
-            reloadGrid(arrivalGrid.id,url);
+            reloadGrid(arrivalGrid.id, url);
             resetDates();
             $('#reserv_dateFrom, #reserv_dateTo').prop("disabled", true);
             $('#grid-table .date .glyphicon-calendar').css("display", "none");
@@ -334,10 +359,6 @@
                     <div class="col-md-2">
                         <select class="dropdown" id="filteredContrs">
                             <option value="">-აირჩიეთ-</option>
-                            <% for (int i = 0; i <= contragenttype.length - 1; i++) { %>
-                            <option value="<%=i%>"><%=contragenttype[i]%>
-                            </option>
-                            <% } %>
                         </select>
                     </div>
                     <div class="col-md-2">

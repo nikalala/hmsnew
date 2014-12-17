@@ -24,13 +24,13 @@ resGrid = {
     order: 'asc',
     isPopup: false,
     gridComplete: function () {
-
         ReDrawTable(resGrid);
         //Line below makes the height of the row to be 38 px!!!
         $("#grid-table .ui-widget-content").css("height","38px");
+        /*<div align="center" id="grid-footer" style="background: transparent; margin-left: -4px; width: 100%;height: 33px;line-height: 33px; position: absolute;bottom: 0;">*/
+        $(".ui-jqgrid-bdiv").height($(".ui-jqgrid-bdiv").height() - 50);
     },
     beforeRequest: function () {
-
     }
 };
 /* -------------------------------- Reservation List Model ------------------------------------*/

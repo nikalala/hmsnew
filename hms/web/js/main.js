@@ -688,6 +688,7 @@ function initializeGrid(grid) {
     {
         gridHeight -= 300;
     }
+    griddata = null;
     jQuery("#" + grid.id).jqGrid(
         {
             url: grid.url,
@@ -702,7 +703,8 @@ function initializeGrid(grid) {
             sortname: grid.sort,
             //viewrecords: true,
             sortorder: grid.order,
-            loadComplete: function () {
+            loadComplete: function (data) {
+                griddata = $(data);
                 $("#" + grid.id + " td:last-child").removeAttr("title");
                 reInitializeGrid(grid.id, grid.isPopup);
                 $(".ui-jqgrid-htable").css("background", "#FFF").css("border-bottom", "solid 1px #D1D1D1");

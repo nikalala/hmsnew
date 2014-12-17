@@ -83,6 +83,21 @@
         AddDays(7);
         resGrid.url = doFilter(true);
         initializeGrid(resGrid);
+        var html = '<div class="panel-footer" style="height: 50px !important; display:table; width: 100%; padding-bottom: 1px; background-color: #FFF;">' +
+                '<div>' +
+                '<span style="margin: 15px 10px 0 10px; float: left;">ჩანაწერების რაოდენობა გცერდზე</span>' +
+                '<select style="float: left; margin: 15px 10px 0 10px;">' +
+                '<option value="15">15</option>' +
+                '<option value="25">25</option>' +
+                '<option value="50">50</option>' +
+                '</select>' +
+                '<button type="button" class="btn btn-default" id="btnNext" style="font-weight: bold; float: right; margin: 9px 10px 0 0;">' +
+                'შემდეგი</button>' +
+                '<button type="button" class="btn btn-danger" id="btnPrev" style="font-weight: bold; float: right; margin: 9px 10px 0 0;">' +
+                'წინა</button>' +
+                '</div></div>';
+          $(".ui-jqgrid-view").find(".panel-footer").remove();
+         $(".ui-jqgrid-view").append(html);
         $('#grid-table .date').datepicker(<%=pickerFormatForDatePickers%>);
         $('#grid-table .dropdown').selectpicker();
         $("#grid-table .btn-group").css("width", "100%", "!important");
@@ -148,7 +163,7 @@
         }
 
         if (!isNullOrEmpty(roomType.val()) && roomType.val() != 0) {
-            filterQuery += " roomtypeid " + fitlerEquals +  roomType.val() + contQuery;
+            filterQuery += " roomtypeid " + fitlerEquals + roomType.val() + contQuery;
         }
 
         if (!isNullOrEmpty(txtSource.val())) {
@@ -166,12 +181,11 @@
                 filterQuery += " status " + fitlerEquals + reservStatus.val() + contQuery;
             }
         }
-        if(!showMrooms.is(':checked') && donotreload)
-        {
+        if (!showMrooms.is(':checked') && donotreload) {
             filterQuery += "  1=1 "; //
-        }else if(showMrooms.is(':checked') && !donotreload) {
+        } else if (showMrooms.is(':checked') && !donotreload) {
             filterQuery += " roomid is null ";
-        }else{
+        } else {
             filterQuery += " 1=1 ";
         }
 
@@ -182,7 +196,7 @@
         }
 
         var url = "content/getreservationlist.jsp?query=" + encodeURIComponent("where " + retVal);
-        if(!donotreload){
+        if (!donotreload) {
             //console.log("Starting filtering with > " + url);
             reloadGrid(resGrid.id, url);
         }
@@ -213,186 +227,188 @@
 
 </script>
 <form name="filter-form" id="filter-form">
-<table id="grid-table" class="first-table">
-    <tr>
-        <td>
-            <div id="status_bar" class="first-status-bar" align='center'>
-                <div style="width: 100%; float: left;">
-                    <span style="float: left; margin: 7px 0 0 10px;">ძიების კრიტერიუმები</span>
-                    <button type="button" class="btn btn-default" id="btnExport"
-                            style="border: 0; font-weight: bold; float: right; margin: 3px 5px 0 0;">
-                        ექსპორტი
-                    </button>
+    <table id="grid-table" class="first-table">
+        <tr>
+            <td>
+                <div id="status_bar" class="first-status-bar" align='center'>
+                    <div style="width: 100%; float: left;">
+                        <span style="float: left; margin: 7px 0 0 10px;">ძიების კრიტერიუმები</span>
+                        <button type="button" class="btn btn-default" id="btnExport"
+                                style="border: 0; font-weight: bold; float: right; margin: 3px 5px 0 0;">
+                            ექსპორტი
+                        </button>
+                    </div>
                 </div>
-            </div>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <div style="width: 100%;float: left;">
-                <div class="col-md-3">
-                    <input type="text" id="checkNumb" placeholder=" რეზერვაციის #"/>
-                </div>
-                <div class="col-md-1">
-                    &nbsp;
-                </div>
-                <div class="col-md-4">
-                    <input type="text" id="firstlast" placeholder=" სახელი გვარი"/>
-                </div>
-                <div class="col-md-2">
-                    <label>ჩამოსვლა:</label>
-                </div>
-                <div class="col-md-2">
-                    <div class="input-append date" id="dateFrom">
-                        <input type="text" class="span2 " id="arrival_dateFrom" placeholder=" თარიღიდან"
-                               style="">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div style="width: 100%;float: left;">
+                    <div class="col-md-3">
+                        <input type="text" id="checkNumb" placeholder=" რეზერვაციის #"/>
+                    </div>
+                    <div class="col-md-1">
+                        &nbsp;
+                    </div>
+                    <div class="col-md-4">
+                        <input type="text" id="firstlast" placeholder=" სახელი გვარი"/>
+                    </div>
+                    <div class="col-md-2">
+                        <label>ჩამოსვლა:</label>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="input-append date" id="dateFrom">
+                            <input type="text" class="span2 " id="arrival_dateFrom" placeholder=" თარიღიდან"
+                                   style="">
                     <span class="add-on"
                           style="position:absolute !important; right : 4px  !important;background : none  !important;border: none !important;top: 1px;">
                         <i class="glyphicon glyphicon-calendar"></i></span>
+                        </div>
                     </div>
-                </div>
-                <div class="col-md-2">
-                    <div class="input-append date" id="dateTo">
-                        <input type="text" class="span2 " id="arrival_dateTo" placeholder=" თარიღამდე">
+                    <div class="col-md-2">
+                        <div class="input-append date" id="dateTo">
+                            <input type="text" class="span2 " id="arrival_dateTo" placeholder=" თარიღამდე">
                     <span class="add-on"
                           style="position:absolute !important; right : 4px  !important;background : none  !important;border: none !important;top: 1px;">
                         <i class="glyphicon glyphicon-calendar"></i></span>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <button type="button" class="btn btn-danger" style="width: 100%;" id="search_reserve_filer"
+                                onclick="doFilter()"
+                                style="width: 69px;">ძებნა
+                        </button>
                     </div>
                 </div>
-                <div class="col-md-2">
-                    <button type="button" class="btn btn-danger" style="width: 100%;" id="search_reserve_filer" onclick="doFilter()"
-                            style="width: 69px;">ძებნა
-                    </button>
-                </div>
-            </div>
-            <div style="width: 100%;float: left;">
-                <div class="col-md-3">
-                    <input class="col-md-2" type="text" id="reservNumb" placeholder=" ქვითრის #"/>
-                </div>
-                <div class="col-md-1">
-                    <label>ოთახი</label>
-                </div>
-                <div class="col-md-2">
-                    <select class="dropdown col-md-2" id="roomBean">
-                        <option value="0">-ოთახის #-</option>
-                        <% for (int i = 0; i < roomBeans.length; i++) { %>
-                        <option value="<%=roomBeans[i].getRoomid()%>"
-                                roomtypeid="<%=roomBeans[i].getRoomtypeid()%>"><%=roomBeans[i].getName()%>
-                        </option>
-                        <% } %>
-                    </select>
-                </div>
-                <div class="col-md-2">
-                    <select class="dropdown col-md-2" id="roomType">
-                        <option value="0">-ოთახის ტიპი-</option>
-                        <% for (int i = 0; i < roomTypes.length; i++) { %>
-                        <option value="<%=roomTypes[i].getRoomtypeid()%>"><%=roomTypes[i].getName()%>
-                        </option>
-                        <% } %>
-                    </select>
-                </div>
-                <div class="col-md-2">
-                    <label>რეზერვაცია:</label>
-                </div>
-                <div class="col-md-2">
-                    <div class="input-append date">
-                        <input type="text" class="span2 " id="reserv_dateFrom" placeholder=" თარიღიდან">
+                <div style="width: 100%;float: left;">
+                    <div class="col-md-3">
+                        <input class="col-md-2" type="text" id="reservNumb" placeholder=" ქვითრის #"/>
+                    </div>
+                    <div class="col-md-1">
+                        <label>ოთახი</label>
+                    </div>
+                    <div class="col-md-2">
+                        <select class="dropdown col-md-2" id="roomBean">
+                            <option value="0">-ოთახის #-</option>
+                            <% for (int i = 0; i < roomBeans.length; i++) { %>
+                            <option value="<%=roomBeans[i].getRoomid()%>"
+                                    roomtypeid="<%=roomBeans[i].getRoomtypeid()%>"><%=roomBeans[i].getName()%>
+                            </option>
+                            <% } %>
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <select class="dropdown col-md-2" id="roomType">
+                            <option value="0">-ოთახის ტიპი-</option>
+                            <% for (int i = 0; i < roomTypes.length; i++) { %>
+                            <option value="<%=roomTypes[i].getRoomtypeid()%>"><%=roomTypes[i].getName()%>
+                            </option>
+                            <% } %>
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <label>რეზერვაცია:</label>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="input-append date">
+                            <input type="text" class="span2 " id="reserv_dateFrom" placeholder=" თარიღიდან">
                     <span class="add-on"
                           style="position:absolute !important; right : 4px  !important;background : none  !important;border: none !important;top: 1px;">
                         <i class="glyphicon glyphicon-calendar"></i></span>
+                        </div>
                     </div>
-                </div>
-                <div class="col-md-2">
-                    <div class="input-append date">
-                        <input type="text" class="span2" id="reserv_dateTo" placeholder=" თარიღამდე">
+                    <div class="col-md-2">
+                        <div class="input-append date">
+                            <input type="text" class="span2" id="reserv_dateTo" placeholder=" თარიღამდე">
                     <span class="add-on"
                           style="position:absolute !important; right : 4px  !important;background : none  !important;border: none !important;top: 1px;">
                         <i class="glyphicon glyphicon-calendar"></i></span>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <button type="button" class="btn btn-default" style="width: 100%;" id="cancel_reserve_filer"
+                                onclick="resetFilterPanel()" data-dismiss="modal">გაუქმება
+                        </button>
                     </div>
                 </div>
-                <div class="col-md-2">
-                    <button type="button" class="btn btn-default" style="width: 100%;" id="cancel_reserve_filer"
-                            onclick="resetFilterPanel()" data-dismiss="modal">გაუქმება
-                    </button>
+                <div style="width: 100%;float: left;">
+                    <div class="col-md-3">
+                        <input type="text" placeholder=" გაუქმების #" id="cancelNumb"/>
+                    </div>
+                    <div class="col-md-1">
+                        <label>წყარო</label>
+                    </div>
+                    <div class="col-md-4">
+                        <input type="text" id="txtSource"/>
+                    </div>
+                    <div class="col-md-2">
+                        <label>ტიპი</label>
+                    </div>
+                    <div class="col-md-2">
+                        <select class="dropdown" id="reservStatus" name="rStatus">
+                            <% for (int i = 0; i <= reservationstatus.length - 1; i++) { %>
+                            <option value="<%=i%>"><%=reservationstatus[i]%>
+                            </option>
+                            <% } %>
+                            <option value="4">ყველა</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <select class="dropdown" id="reservType">
+                            <option value="">-რეზერვაციის ტიპი-</option>
+                            <% for (int i = 0; i <= reservTypes.length - 1; i++) { %>
+                            <option value="<%=reservTypes[i].getReservationtypeid()%>"><%=reservTypes[i].getName()%>
+                            </option>
+                            <% } %>
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <button type="button" class="btn btn-danger" style="width: 100%;"
+                                id="create_group_reserve_filer"
+                                style="white-space: normal !important;">ჯგუფის შექმნა
+                        </button>
+                    </div>
                 </div>
-            </div>
-            <div style="width: 100%;float: left;">
-                <div class="col-md-3">
-                    <input type="text" placeholder=" გაუქმების #" id="cancelNumb"/>
+                <div style="width: 100%;float: left; height: 18px; line-height: 24px;">
+                    <div style="float: left;">
+                        <input type="checkbox" name="showMrooms" id="showMrooms"
+                               style="color: #818181;font-weight: normal; margin-left: 5px;"/>
+                    </div>
+                    <div style="float: left;">
+                        &nbsp;აჩვენე მიუკუთვნილებელი ნომერი
+                    </div>
+                    <div style="float: left;">
+                        <input type="checkbox" name="showIncomplOrders" id="showIncomplOrders"
+                               style="color: #818181;font-weight: normal; margin-left: 15px;"/>
+                    </div>
+                    <div style="float: left;">
+                        &nbsp;აჩვენე ჩავარდნილი/დაუსრულებელი ვებ ჯავშნები
+                    </div>
                 </div>
-                <div class="col-md-1">
-                    <label>წყარო</label>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div id="status_bar" align='center' class="middle-status-bar">
+                    <div class="reserv_status">
+                        <div class="status-box" style="background-color: red;"></div>
+                        წაშლილი
+                    </div>
+                    <div class="reserv_status">
+                        <div class="status-box" style="background-color: rgb(236, 13, 174);"></div>
+                        არ გამოცხადებული
+                    </div>
+                    <div class="reserv_status">
+                        <div class="status-box" style="background-color: rgb(24, 57, 190);"></div>
+                        გაუქმებული
+                    </div>
+                    <div class="reserv_status">
+                        <div class="status-box" style="background-color: rgb(77, 190, 24);"></div>
+                        აქტიური
+                    </div>
                 </div>
-                <div class="col-md-4">
-                    <input type="text" id="txtSource"/>
-                </div>
-                <div class="col-md-2">
-                    <label>ტიპი</label>
-                </div>
-                <div class="col-md-2">
-                    <select class="dropdown" id="reservStatus" name="rStatus">
-                        <% for (int i = 0; i <= reservationstatus.length - 1; i++) { %>
-                        <option value="<%=i%>"><%=reservationstatus[i]%>
-                        </option>
-                        <% } %>
-                        <option value="4">ყველა</option>
-                    </select>
-                </div>
-                <div class="col-md-2">
-                    <select class="dropdown" id="reservType">
-                        <option value="">-რეზერვაციის ტიპი-</option>
-                        <% for (int i = 0; i <= reservTypes.length - 1; i++) { %>
-                        <option value="<%=reservTypes[i].getReservationtypeid()%>"><%=reservTypes[i].getName()%>
-                        </option>
-                        <% } %>
-                    </select>
-                </div>
-                <div class="col-md-2">
-                    <button type="button" class="btn btn-danger" style="width: 100%;" id="create_group_reserve_filer"
-                            style="white-space: normal !important;">ჯგუფის შექმნა
-                    </button>
-                </div>
-            </div>
-            <div style="width: 100%;float: left; height: 18px; line-height: 24px;">
-                <div style="float: left;">
-                    <input type="checkbox" name="showMrooms" id="showMrooms"
-                           style="color: #818181;font-weight: normal; margin-left: 5px;"/>
-                </div>
-                <div style="float: left;">
-                    &nbsp;აჩვენე მიუკუთვნილებელი ნომერი
-                </div>
-                <div style="float: left;">
-                    <input type="checkbox" name="showIncomplOrders" id="showIncomplOrders"
-                           style="color: #818181;font-weight: normal; margin-left: 15px;"/>
-                </div>
-                <div style="float: left;">
-                    &nbsp;აჩვენე ჩავარდნილი/დაუსრულებელი ვებ ჯავშნები
-                </div>
-            </div>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <div id="status_bar" align='center' class="middle-status-bar">
-                <div class="reserv_status">
-                    <div class="status-box" style="background-color: red;"></div>
-                    წაშლილი
-                </div>
-                <div class="reserv_status">
-                    <div class="status-box" style="background-color: rgb(236, 13, 174);"></div>
-                    არ გამოცხადებული
-                </div>
-                <div class="reserv_status">
-                    <div class="status-box" style="background-color: rgb(24, 57, 190);"></div>
-                    გაუქმებული
-                </div>
-                <div class="reserv_status">
-                    <div class="status-box" style="background-color: rgb(77, 190, 24);"></div>
-                    აქტიური
-                </div>
-            </div>
-        </td>
-    </tr>
+            </td>
+        </tr>
     </table>
     <table id="grid-table">
         <tr>
@@ -402,7 +418,3 @@
         </tr>
     </table>
 </form>
-<%--
-<div align="center" id="grid-footer" style="background: transparent; width: 100%;height: 33px;line-height: 33px; margin:0 auto;">
-    <div style="background-color: red; margin:10px 0 10px 0;">HELLO THIS IS THE FOOTER</div>
-</div>--%>

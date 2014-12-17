@@ -11,7 +11,7 @@
     SimpleDateFormat resListDate = new SimpleDateFormat(arrdepdateformats[dff]);
     
     
-    int ipg = 1;
+int ipg = 1;
 int ilmt = 10;
 String pg = request.getParameter("page");
 if(pg != null)  ipg = Integer.parseInt(pg);
