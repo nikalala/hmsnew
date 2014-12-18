@@ -120,11 +120,11 @@
             filterQuery += " vouchernum LIKE '%" + reservNum.val() + "%'" + contQuery;
         }
 
-        if (!isNullOrEmpty(roomBean.val())) {
+        if (!isNullOrEmpty(roomBean.val()) && roomBean.val() > 0) {
             filterQuery += " roomid " + fitlerEquals + roomBean.val() + contQuery;
         }
 
-        if (!isNullOrEmpty(roomType.val())) {
+        if (!isNullOrEmpty(roomType.val()) && roomBean.val() > 0) {
             filterQuery += " roomtypecode " + fitlerEquals + "'" + roomType.val() + "'" + contQuery;
         }
 
@@ -136,13 +136,13 @@
             filterQuery += " reservationtypeid " + fitlerEquals + reservType.val() + contQuery;
         }
 
-        if (!isNullOrEmpty(reservStatus.val())) {
+       /* if (!isNullOrEmpty(reservStatus.val())) {
             if (reservStatus.val() == 4) {
                 filterQuery += " status IN(0,1,2,3) " + contQuery;
             } else {
                 filterQuery += " status " + fitlerEquals + reservStatus.val() + contQuery;
             }
-        }
+        }*/
 
         var retVal = filterQuery.substring(0, filterQuery.trim().lastIndexOf("AND"));
         var url = "content/getdeplist.jsp?query=where " + retVal;
