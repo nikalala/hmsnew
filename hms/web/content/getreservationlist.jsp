@@ -44,7 +44,6 @@
     String limit = "limit "+ilmt+" offset "+start;
     String order = "order by "+sidx+" "+sord;
 
-
     SimpleDateFormat resListDate = new SimpleDateFormat(arrdepdateformats[dff]);
     VReservationlistBean[] ReservationBeanList = VReservationlistManager.getInstance().loadByWhere(where + " " + order);
 

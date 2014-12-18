@@ -8,6 +8,8 @@
         where = "";
     }
     String room = "";
+    String source = "";
+    String company = "";
     SimpleDateFormat resListDate = new SimpleDateFormat(arrdepdateformats[dff]);
     VArrivallistBean[] ArrivalBeanList = VArrivallistManager.getInstance().loadByWhere(where);
 %>
@@ -22,8 +24,20 @@
             <%
                 for (int i = 0; i < ArrivalBeanList.length; i++) { %>
             <%
-                if (ArrivalBeanList[i].getRoomcode() != "null") {
+                if (ArrivalBeanList[i].getRoomcode() != null) {
                     room = ArrivalBeanList[i].getRoomcode() + " - ";
+                }else{
+                    room = "";
+                }
+                if (ArrivalBeanList[i].getBsourcename() != null) {
+                    source = ArrivalBeanList[i].getBsourcename();
+                }else{
+                    source = "";
+                }
+                if (ArrivalBeanList[i].getCompanyname() != null) {
+                    company = ArrivalBeanList[i].getCompanyname();
+                }else{
+                    company = "";
                 }
             %>
             <row id='<%=ArrivalBeanList[i].getReservationid()%>'>
@@ -36,8 +50,8 @@
                     <![CDATA[<%=room%>
                             <%=ArrivalBeanList[i].getRoomtypecode()%> ]]>
                 </cell>
-                <cell><![CDATA[<%=ArrivalBeanList[i].getBsourcename()%>]]></cell>
-                <cell><![CDATA[<%=ArrivalBeanList[i].getCompanyname()%>]]></cell>
+                <cell><![CDATA[<%=source%>]]></cell>
+                <cell><![CDATA[<%=company%>]]></cell>
                 <cell><![CDATA[<%=ArrivalBeanList[i].getAdult()%>]]></cell>
                 <cell><![CDATA[<%=ArrivalBeanList[i].getChild()%>]]></cell>
                 <cell><![CDATA[<%=ArrivalBeanList[i].getReservtype()%>]]></cell>

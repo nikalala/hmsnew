@@ -11,7 +11,11 @@
 
     var lastroomtypeId = 0;
     $(document).ready(function () {
+        $('#reserv_dateTo').datepicker(<%=pickerFormatForDatePickers%>);
+        $('#reserv_dateFrom').datepicker(<%=pickerFormatForDatePickers%>);
         loadDefaults();
+        drawFooter();
+        resetDates();
     });
 
     $("#roomType").on('change', function () {
@@ -79,7 +83,11 @@
         }
     });
 
-    function doFilter() {
+    function doFilter(doReload) {
+
+        if(doReload){
+            resetFilterPanel();
+        }
 
         var filterQuery = "";
         var contQuery = " AND ";
@@ -105,14 +113,9 @@
             filterQuery += " guest LIKE '%" + name.val() + "%'" + contQuery;
         }
 
-        if (!isNullOrEmpty(dtFrom.val()) && !isNullOrEmpty(dtTo.val())) {
-            filterQuery += "to_date('" + dtFrom.val() + "', '<%=dateformats2[dff]%>') <= arraivaldate AND arraivaldate <= to_date('" + dtTo.val() + "','<%=dateformats2[dff]%>')" + contQuery;
-        }
-
         if (!isNullOrEmpty(reserv_dateFrom.val()) && !isNullOrEmpty(reserv_dateTo.val())) {
-            filterQuery += "to_date('" + reserv_dateFrom.val() + "', '<%=dateformats2[dff]%>') <= regdate AND regdate <= to_date('" + reserv_dateTo.val() + "','<%=dateformats2[dff]%>')" + contQuery;
+            filterQuery += "to_date('" + reserv_dateFrom.val() + "', '<%=dateformats2[0]%>') <= departuredate::date AND departuredate::date <= to_date('" + reserv_dateTo.val() + "','<%=dateformats2[0]%>')" + contQuery;
         }
-
         if (!isNullOrEmpty(reservNum.val())) {
             filterQuery += " vouchernum LIKE '%" + reservNum.val() + "%'" + contQuery;
         }
@@ -141,23 +144,32 @@
             }
         }
 
-        filterQuery += (showMrooms.is(':checked') ? " reservationroomid is null" : "reservationroomid is not null ") + contQuery;
-
-        var retVal = "";
-
-        if (!isNullOrEmpty(checkNum.val())) {
-            retVal = " reservationroomid " + fitlerEquals + checkNum.val();
-        } else {
-            retVal = filterQuery.substring(0, filterQuery.trim().lastIndexOf("AND"));
+        var retVal = filterQuery.substring(0, filterQuery.trim().lastIndexOf("AND"));
+        var url = "content/getdeplist.jsp?query=where " + retVal;
+        console.log(url);
+        if (!doReload) {
+            reloadGrid(depGrid.id, url);
         }
+        return url;
 
-        var url = "content/getreservationlist.jsp?where=where " + retVal;
-        reloadGrid(resGrid.id, url);
+    }
+
+    $("#reserv_dateFrom").on('change', function () {
+        var value = $(this).val();
+        $("#reserv_dateTo").val(value);
+    });
+
+    function resetDates() {
+        var today = new Date(<%=lclosedate%>);
+        $("#reserv_dateTo").datepicker("setDate", today);
+        $("#reserv_dateFrom").datepicker("setDate", today);
     }
 
     function resetFilterPanel() {
         $("#filter-form :input").each(function () {
-            $(this).val('');
+            if ($(this).attr('id') !== "reserv_dateFrom" && $(this).attr('id') !== "reserv_dateTo") {
+                $(this).val('');
+            }
         });
         //clean dropdowns
         $('#filter-form .dropdown option').removeAttr('selected');
@@ -168,14 +180,14 @@
     function reInitialize() {
         $('#reservStatus').val(0);
         $('#reservStatus').change();
-        $('#reserv_dateFrom').val('');
-        $('#reserv_dateTo').val('');
+        resetDates();
     }
 
     reInitialize();
 
     function loadDefaults() {
-        initializeGrid(resGrid);
+        depGrid.url = doFilter(true);
+        initializeGrid(depGrid);
         $('#grid-table .date').datepicker(<%=pickerformat1%>);
         $('#grid-table .dropdown').selectpicker();
         $("#grid-table .btn-group").css("width", "100%", "!important");

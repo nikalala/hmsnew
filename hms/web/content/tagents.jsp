@@ -25,6 +25,7 @@
 
     $(document).ready(function () {
         loadDefaults();
+        drawFooter();
     });
 
     function saveTAgent() {

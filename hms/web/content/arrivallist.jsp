@@ -15,6 +15,7 @@
         $('#reserv_dateTo').datepicker(<%=pickerFormatForDatePickers%>);
         $('#reserv_dateFrom').datepicker(<%=pickerFormatForDatePickers%>);
         loadDefaults();
+        drawFooter();
     });
 
     $("#roomType").on('change', function () {

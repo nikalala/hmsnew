@@ -28,12 +28,52 @@ resGrid = {
         //Line below makes the height of the row to be 38 px!!!
         $("#grid-table .ui-widget-content").css("height","38px");
         /*<div align="center" id="grid-footer" style="background: transparent; margin-left: -4px; width: 100%;height: 33px;line-height: 33px; position: absolute;bottom: 0;">*/
-        $(".ui-jqgrid-bdiv").height($(".ui-jqgrid-bdiv").height() - 50);
+
     },
     beforeRequest: function () {
     }
 };
 /* -------------------------------- Reservation List Model ------------------------------------*/
+
+
+
+/* -------------------------------- Reservation List Model ------------------------------------*/
+var depGridModel = [];
+depGridModel.push(
+    colModelGenerator(50, 'reservationroomid', 0),
+    colModelGenerator(60, 'arraivaldate', 0),
+    colModelGenerator(60, 'departuredate', 0),
+    colModelGenerator(120, 'guest', 0),
+    colModelGenerator(90, 'roomcode', 0),
+    colModelGenerator(90, 'bsourcename', 0),
+    colModelGenerator(85, 'companyname', 0),
+    colModelGenerator(60, 'price', 0),
+    colModelGenerator(80, 'paid', 0),
+    colModelGenerator(110, 'user', 0),
+    colModelGenerator(94, 'reservationtype', 0),
+    colModelGenerator(40, 'action', 0));
+depGrid = {
+    id: 'list_reservs',
+    url: 'content/getdeplist.jsp',
+    type: 'xml',
+    cols: ['რეზ#', 'ჩამოსვლა', 'წასვლა', 'სტუმრის სახელი', 'ოთახი', 'წყარო',
+        'კომპანია', 'ჯამი', 'დეპოზიტი', 'მომხმარებელი', 'რეზ.ტიპი', ''],
+    model: depGridModel,
+    sort: 'arraivaldate',
+    order: 'asc',
+    isPopup: false,
+    gridComplete: function () {
+        ReDrawTable(depGrid);
+        //Line below makes the height of the row to be 38 px!!!
+        $("#grid-table .ui-widget-content").css("height","38px");
+        /*<div align="center" id="grid-footer" style="background: transparent; margin-left: -4px; width: 100%;height: 33px;line-height: 33px; position: absolute;bottom: 0;">*/
+
+    },
+    beforeRequest: function () {
+    }
+};
+/* -------------------------------- Reservation List Model ------------------------------------*/
+
 
 
 /* -------------------------------- Reservation List Model ------------------------------------*/

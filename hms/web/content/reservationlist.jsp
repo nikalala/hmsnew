@@ -12,6 +12,7 @@
     var lastroomtypeId = 0;
     $(document).ready(function () {
         loadDefaults();
+        drawFooter();
     });
 
     $("#roomType").on('change', function () {
@@ -81,23 +82,10 @@
 
     function loadDefaults() {
         AddDays(7);
+        
         resGrid.url = doFilter(true);
         initializeGrid(resGrid);
-        var html = '<div class="panel-footer" style="height: 50px !important; display:table; width: 100%; padding-bottom: 1px; background-color: #FFF;">' +
-                '<div>' +
-                '<span style="margin: 15px 10px 0 10px; float: left;">ჩანაწერების რაოდენობა გცერდზე</span>' +
-                '<select style="float: left; margin: 15px 10px 0 10px;">' +
-                '<option value="15">15</option>' +
-                '<option value="25">25</option>' +
-                '<option value="50">50</option>' +
-                '</select>' +
-                '<button type="button" class="btn btn-default" id="btnNext" style="font-weight: bold; float: right; margin: 9px 10px 0 0;">' +
-                'შემდეგი</button>' +
-                '<button type="button" class="btn btn-danger" id="btnPrev" style="font-weight: bold; float: right; margin: 9px 10px 0 0;">' +
-                'წინა</button>' +
-                '</div></div>';
-          $(".ui-jqgrid-view").find(".panel-footer").remove();
-         $(".ui-jqgrid-view").append(html);
+
         $('#grid-table .date').datepicker(<%=pickerFormatForDatePickers%>);
         $('#grid-table .dropdown').selectpicker();
         $("#grid-table .btn-group").css("width", "100%", "!important");
@@ -113,6 +101,13 @@
     }
 
     function AddDays(arg) {
+
+        $('#dateFrom').datepicker(<%=pickerFormatForDatePickers%>);
+        $('#dateTo').datepicker(<%=pickerFormatForDatePickers%>);
+/*        $('#reserv_dateFrom').datepicker(<%=pickerFormatForDatePickers%>);
+        $('#reserv_dateTo').datepicker(<%=pickerFormatForDatePickers%>);*/
+
+
         var today = new Date(<%=lclosedate%>);
         $("#dateFrom").datepicker("setDate", today);
         var tomorrow = new Date(<%=lclosedate%>);
@@ -147,11 +142,11 @@
         }
 
         if (!isNullOrEmpty(dtFrom.val()) && !isNullOrEmpty(dtTo.val())) {
-            filterQuery += "to_date('" + dtFrom.val() + "', '<%=dateformats2[6]%>') <= arraivaldate::date AND arraivaldate::date <= to_date('" + dtTo.val() + "','<%=dateformats2[6]%>')" + contQuery;
+            filterQuery += "to_date('" + dtFrom.val() + "', '<%=dateformats2[0]%>') <= arraivaldate::date AND arraivaldate::date <= to_date('" + dtTo.val() + "','<%=dateformats2[0]%>')" + contQuery;
         }
 
         if (!isNullOrEmpty(reserv_dateFrom.val()) && !isNullOrEmpty(reserv_dateTo.val())) {
-            filterQuery += "to_date('" + reserv_dateFrom.val() + "', '<%=dateformats2[dff]%>') <= regdate AND regdate <= to_date('" + reserv_dateTo.val() + "','<%=dateformats2[dff]%>')" + contQuery;
+            filterQuery += "to_date('" + reserv_dateFrom.val() + "', '<%=dateformats2[0]%>') <= regdate::date AND regdate::date <= to_date('" + reserv_dateTo.val() + "','<%=dateformats2[0]%>')" + contQuery;
         }
 
         if (!isNullOrEmpty(reservNum.val())) {
@@ -214,6 +209,7 @@
         $("#showIncomplOrders").attr('checked', false);
         reInitialize();
         doFilter(false);
+        AddDays(7);
     }
 
     function reInitialize() {
