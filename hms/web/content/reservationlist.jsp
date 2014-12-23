@@ -14,6 +14,37 @@
         loadDefaults();
         drawFooter();
     });
+    var page = resGrid.page;
+    function getNextRecords() {
+        page += 1;
+        resGrid.limit = $("#limitselectbox").val();
+        var items_per_page = resGrid.limit;
+        var offset = (page - 1) * items_per_page;
+        var limit = " LIMIT " + items_per_page + " OFFSET " + offset;
+        var url = doFilter(true,limit);
+        reloadGrid(resGrid.id, url);
+
+    }
+    function getPrevRecords() {
+        page -= 1;
+        if(page < 1){
+            page = 1;
+            return;
+        }
+        resGrid.limit = $("#limitselectbox").val();
+        var items_per_page = resGrid.limit;
+        var offset = (page - 1) * items_per_page;
+        var limit = " LIMIT " + items_per_page + " OFFSET " + offset;
+        var url = doFilter(true,limit);
+        reloadGrid(resGrid.id, url);
+    }
+
+    $("#btnNext").click(function(){
+        getNextRecords();
+    });
+    $("#btnPrev").click(function(){
+        getPrevRecords();
+    });
 
     $("#roomType").on('change', function () {
         var element = $("option:selected", this);
@@ -82,8 +113,8 @@
 
     function loadDefaults() {
         AddDays(7);
-        
-        resGrid.url = doFilter(true);
+        var limit = " LIMIT " + resGrid.limit + " OFFSET " + 0;
+        resGrid.url = doFilter(true,limit);
         initializeGrid(resGrid);
 
         $('#grid-table .date').datepicker(<%=pickerFormatForDatePickers%>);
@@ -104,8 +135,10 @@
 
         $('#dateFrom').datepicker(<%=pickerFormatForDatePickers%>);
         $('#dateTo').datepicker(<%=pickerFormatForDatePickers%>);
-/*        $('#reserv_dateFrom').datepicker(<%=pickerFormatForDatePickers%>);
-        $('#reserv_dateTo').datepicker(<%=pickerFormatForDatePickers%>);*/
+        /*        $('#reserv_dateFrom').datepicker(
+        <%=pickerFormatForDatePickers%>);
+         $('#reserv_dateTo').datepicker(
+        <%=pickerFormatForDatePickers%>);*/
 
 
         var today = new Date(<%=lclosedate%>);
@@ -115,7 +148,7 @@
         $("#dateTo").datepicker("setDate", tomorrow);
     }
 
-    function doFilter(donotreload) {
+    function doFilter(donotreload, limit) {
 
         var filterQuery = "";
         var contQuery = " AND ";
@@ -190,7 +223,11 @@
             retVal = " reservationroomid " + fitlerEquals + checkNum.val();
         }
 
-        var url = "content/getreservationlist.jsp?query=" + encodeURIComponent("where " + retVal);
+        var l = "";
+        if (!isNullOrEmpty(limit)) {
+            l = "&limit=" + limit;
+        }
+        var url = "content/getreservationlist.jsp?query=" + encodeURIComponent("where " + retVal) + l;
         if (!donotreload) {
             //console.log("Starting filtering with > " + url);
             reloadGrid(resGrid.id, url);

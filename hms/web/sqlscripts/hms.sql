@@ -3,6 +3,7 @@
 --
 
 SET statement_timeout = 0;
+SET lock_timeout = 0;
 SET client_encoding = 'UTF8';
 SET standard_conforming_strings = on;
 SET check_function_bodies = false;
@@ -3587,7 +3588,15 @@ COMMENT ON COLUMN season.deleted IS 'წაშლილი';
 --
 
 CREATE VIEW roomrates AS
-    SELECT roomtype.roomtypeid, ratetype.ratetypeid, season.seasonid, contragent.contragentid FROM contragent, ratetype, roomtype, season WHERE (((((((contragent.rate = 1) AND (roomtype.deleted = false)) AND (ratetype.deleted = false)) AND (season.deleted = false)) AND (roomtype.active = true)) AND (ratetype.active = true)) AND (season.active = true));
+ SELECT roomtype.roomtypeid,
+    ratetype.ratetypeid,
+    season.seasonid,
+    contragent.contragentid
+   FROM contragent,
+    ratetype,
+    roomtype,
+    season
+  WHERE (((((((contragent.rate = 1) AND (roomtype.deleted = false)) AND (ratetype.deleted = false)) AND (season.deleted = false)) AND (roomtype.active = true)) AND (ratetype.active = true)) AND (season.active = true));
 
 
 ALTER TABLE public.roomrates OWNER TO hms;
@@ -4255,7 +4264,44 @@ ALTER TABLE public.transportationmodeid_seq OWNER TO hms;
 --
 
 CREATE VIEW v_arrivallist AS
-    SELECT r.reservationid, m.reservationroomid, m.roomid, COALESCE(t.roomtypeid, o.roomtypeid) AS roomtypeid, r.arraivaldate, r.departuredate, r.regbyid, r.reservationtypeid, g.guestid, ((g.fname || ' '::text) || g.lname) AS guest, o.roomcode, CASE WHEN (o.roomid IS NOT NULL) THEN o.roomtypecode ELSE t.code END AS roomtypecode, b.name AS bsourcename, b.bsourceid, c.name AS companyname, m.adult, m.child, v.name AS reservtype FROM ((reservationroom m LEFT JOIN (SELECT oo.roomid, oo.code AS roomcode, tt.code AS roomtypecode, tt.roomtypeid FROM room oo, roomtype tt WHERE (oo.roomtypeid = tt.roomtypeid)) o ON ((o.roomid = m.roomid))) LEFT JOIN roomtype t ON ((t.roomtypeid = m.roomtypeid))), (reservation r LEFT JOIN bsource b ON ((b.bsourceid = r.bsourceid))), (guest g LEFT JOIN contragent c ON (((c.contragentid = g.contragentid) AND (c.type = 1)))), personnel l, reservationtype v WHERE (((((m.reservationid = r.reservationid) AND (g.guestid = m.guestid)) AND (l.personnelid = r.regbyid)) AND (r.status >= 0)) AND (v.reservationtypeid = r.reservationtypeid));
+ SELECT r.reservationid,
+    m.reservationroomid,
+    m.roomid,
+    COALESCE(t.roomtypeid, o.roomtypeid) AS roomtypeid,
+    r.arraivaldate,
+    r.departuredate,
+    r.regbyid,
+    r.reservationtypeid,
+    g.guestid,
+    ((g.fname || ' '::text) || g.lname) AS guest,
+    o.roomcode,
+        CASE
+            WHEN (o.roomid IS NOT NULL) THEN o.roomtypecode
+            ELSE t.code
+        END AS roomtypecode,
+    b.name AS bsourcename,
+    b.bsourceid,
+    c.name AS companyname,
+    m.adult,
+    m.child,
+    v.name AS reservtype,
+    r.status AS roomstatus
+   FROM ((reservationroom m
+     LEFT JOIN ( SELECT oo.roomid,
+            oo.code AS roomcode,
+            tt.code AS roomtypecode,
+            tt.roomtypeid
+           FROM room oo,
+            roomtype tt
+          WHERE (oo.roomtypeid = tt.roomtypeid)) o ON ((o.roomid = m.roomid)))
+     LEFT JOIN roomtype t ON ((t.roomtypeid = m.roomtypeid))),
+    (reservation r
+     LEFT JOIN bsource b ON ((b.bsourceid = r.bsourceid))),
+    (guest g
+     LEFT JOIN contragent c ON (((c.contragentid = g.contragentid) AND (c.type = 1)))),
+    personnel l,
+    reservationtype v
+  WHERE (((((m.reservationid = r.reservationid) AND (g.guestid = m.guestid)) AND (l.personnelid = r.regbyid)) AND (r.status >= 0)) AND (v.reservationtypeid = r.reservationtypeid));
 
 
 ALTER TABLE public.v_arrivallist OWNER TO hms;
@@ -4265,10 +4311,105 @@ ALTER TABLE public.v_arrivallist OWNER TO hms;
 --
 
 CREATE VIEW v_contragentlist AS
-    SELECT c.contragentid, c.type, c.salutationid, c.fname, c.lname, c.name, c.address, c.countryid, c.city, c.zip, c.phone, c.fax, c.mobile, c.email, c.commissionplan, c.val, c.rate, c.openbalance, c.roominventory, c.createuser, c.bsource, c.ccblock, c.idn, c.creditterm, c.creditlimit, c.regbyid, c.regdate, c.deleted, ((c.fname || ' '::text) || c.lname) AS contragent, c.name AS company, cc.name AS country FROM (contragent c LEFT JOIN country cc ON ((cc.countryid = c.countryid)));
+ SELECT c.contragentid,
+    c.type,
+    c.salutationid,
+    c.fname,
+    c.lname,
+    c.name,
+    c.address,
+    c.countryid,
+    c.city,
+    c.zip,
+    c.phone,
+    c.fax,
+    c.mobile,
+    c.email,
+    c.commissionplan,
+    c.val,
+    c.rate,
+    c.openbalance,
+    c.roominventory,
+    c.createuser,
+    c.bsource,
+    c.ccblock,
+    c.idn,
+    c.creditterm,
+    c.creditlimit,
+    c.regbyid,
+    c.regdate,
+    c.deleted,
+    ((c.fname || ' '::text) || c.lname) AS contragent,
+    c.name AS company,
+    cc.name AS country
+   FROM (contragent c
+     LEFT JOIN country cc ON ((cc.countryid = c.countryid)));
 
 
 ALTER TABLE public.v_contragentlist OWNER TO hms;
+
+--
+-- Name: v_deplist; Type: VIEW; Schema: public; Owner: hms
+--
+
+CREATE VIEW v_deplist AS
+ SELECT r.reservationid,
+    m.reservationroomid,
+    m.roomid,
+    COALESCE(t.roomtypeid, o.roomtypeid) AS roomtypeid,
+    r.arraivaldate,
+    r.departuredate,
+    r.regdate,
+    r.regbyid,
+    r.reservationtypeid,
+    r.status,
+    g.guestid,
+    ((g.fname || ' '::text) || g.lname) AS guest,
+    o.roomcode,
+        CASE
+            WHEN (o.roomid IS NOT NULL) THEN o.roomtypecode
+            ELSE t.code
+        END AS roomtypecode,
+    COALESCE(b.name, (' '::bpchar)::text) AS bsourcename,
+    b.bsourceid,
+    COALESCE(c.name, (' '::bpchar)::text) AS companyname,
+    COALESCE(a.price, (0)::double precision) AS price,
+    COALESCE(d.paid, (0)::double precision) AS paid,
+    d.vouchernum,
+    l.loginid AS "user",
+    v.name AS reservationtype
+   FROM ((((reservationroom m
+     LEFT JOIN ( SELECT oo.roomid,
+            oo.code AS roomcode,
+            tt.code AS roomtypecode,
+            tt.roomtypeid
+           FROM room oo,
+            roomtype tt
+          WHERE (oo.roomtypeid = tt.roomtypeid)) o ON ((o.roomid = m.roomid)))
+     LEFT JOIN roomtype t ON ((t.roomtypeid = m.roomtypeid)))
+     LEFT JOIN ( SELECT sum(pm.amount) AS paid,
+            fl.reservationroomid,
+            string_agg(pm.voucherno, ','::text) AS vouchernum
+           FROM payment pm,
+            folio fl
+          WHERE (pm.folioid = fl.folioid)
+          GROUP BY fl.reservationroomid) d ON ((d.reservationroomid = m.reservationroomid)))
+     LEFT JOIN ( SELECT sum(fi.amount) AS price,
+            fl.reservationroomid
+           FROM folioitem fi,
+            folio fl
+          WHERE (fi.folioid = fl.folioid)
+          GROUP BY fl.reservationroomid) a ON ((a.reservationroomid = m.reservationroomid))),
+    (reservation r
+     LEFT JOIN bsource b ON ((b.bsourceid = r.bsourceid))),
+    (guest g
+     LEFT JOIN contragent c ON (((c.contragentid = g.contragentid) AND (c.type = 1)))),
+    personnel l,
+    reservationtype v
+  WHERE (((((m.reservationid = r.reservationid) AND (g.guestid = m.guestid)) AND (l.personnelid = r.regbyid)) AND (r.status = ANY (ARRAY[(-1), 0]))) AND (v.reservationtypeid = r.reservationtypeid));
+
+
+ALTER TABLE public.v_deplist OWNER TO hms;
 
 --
 -- Name: vipstatus; Type: TABLE; Schema: public; Owner: hms; Tablespace: 
@@ -4317,7 +4458,21 @@ COMMENT ON COLUMN vipstatus.deleted IS 'წაშლილი';
 --
 
 CREATE VIEW v_guestdblist AS
-    SELECT (((s.name || ' '::text) || (g.fname || ' '::text)) || g.lname) AS guest, g.guestid, g.city, g.phone, g.mobile, g.email, c.name AS country, v.name AS vipstatus, g.salutationid, g.countryid, g.vipstatusid FROM (((guest g JOIN salutation s ON ((s.salutationid = g.salutationid))) LEFT JOIN country c ON ((c.countryid = g.countryid))) LEFT JOIN vipstatus v ON ((v.vipstatusid = g.vipstatusid)));
+ SELECT (((s.name || ' '::text) || (g.fname || ' '::text)) || g.lname) AS guest,
+    g.guestid,
+    g.city,
+    g.phone,
+    g.mobile,
+    g.email,
+    c.name AS country,
+    v.name AS vipstatus,
+    g.salutationid,
+    g.countryid,
+    g.vipstatusid
+   FROM (((guest g
+     JOIN salutation s ON ((s.salutationid = g.salutationid)))
+     LEFT JOIN country c ON ((c.countryid = g.countryid)))
+     LEFT JOIN vipstatus v ON ((v.vipstatusid = g.vipstatusid)));
 
 
 ALTER TABLE public.v_guestdblist OWNER TO hms;
@@ -4327,7 +4482,60 @@ ALTER TABLE public.v_guestdblist OWNER TO hms;
 --
 
 CREATE VIEW v_reservationlist AS
-    SELECT r.reservationid, m.reservationroomid, m.roomid, COALESCE(t.roomtypeid, o.roomtypeid) AS roomtypeid, r.arraivaldate, r.departuredate, r.regdate, r.regbyid, r.reservationtypeid, r.status, g.guestid, ((g.fname || ' '::text) || g.lname) AS guest, o.roomcode, CASE WHEN (o.roomid IS NOT NULL) THEN o.roomtypecode ELSE t.code END AS roomtypecode, COALESCE(b.name, (' '::bpchar)::text) AS bsourcename, b.bsourceid, COALESCE(c.name, (' '::bpchar)::text) AS companyname, COALESCE(a.price, (0)::double precision) AS price, COALESCE(d.paid, (0)::double precision) AS paid, d.vouchernum, l.loginid AS "user", v.name AS reservationtype FROM ((((reservationroom m LEFT JOIN (SELECT oo.roomid, oo.code AS roomcode, tt.code AS roomtypecode, tt.roomtypeid FROM room oo, roomtype tt WHERE (oo.roomtypeid = tt.roomtypeid)) o ON ((o.roomid = m.roomid))) LEFT JOIN roomtype t ON ((t.roomtypeid = m.roomtypeid))) LEFT JOIN (SELECT sum(pm.amount) AS paid, fl.reservationroomid, string_agg(pm.voucherno, ','::text) AS vouchernum FROM payment pm, folio fl WHERE (pm.folioid = fl.folioid) GROUP BY fl.reservationroomid) d ON ((d.reservationroomid = m.reservationroomid))) LEFT JOIN (SELECT sum(fi.amount) AS price, fl.reservationroomid FROM folioitem fi, folio fl WHERE (fi.folioid = fl.folioid) GROUP BY fl.reservationroomid) a ON ((a.reservationroomid = m.reservationroomid))), (reservation r LEFT JOIN bsource b ON ((b.bsourceid = r.bsourceid))), (guest g LEFT JOIN contragent c ON (((c.contragentid = g.contragentid) AND (c.type = 1)))), personnel l, reservationtype v WHERE (((((m.reservationid = r.reservationid) AND (g.guestid = m.guestid)) AND (l.personnelid = r.regbyid)) AND (r.status >= 0)) AND (v.reservationtypeid = r.reservationtypeid));
+ SELECT r.reservationid,
+    m.reservationroomid,
+    m.roomid,
+    COALESCE(t.roomtypeid, o.roomtypeid) AS roomtypeid,
+    r.arraivaldate,
+    r.departuredate,
+    r.regdate,
+    r.regbyid,
+    r.reservationtypeid,
+    r.status,
+    g.guestid,
+    ((g.fname || ' '::text) || g.lname) AS guest,
+    o.roomcode,
+        CASE
+            WHEN (o.roomid IS NOT NULL) THEN o.roomtypecode
+            ELSE t.code
+        END AS roomtypecode,
+    COALESCE(b.name, (' '::bpchar)::text) AS bsourcename,
+    b.bsourceid,
+    COALESCE(c.name, (' '::bpchar)::text) AS companyname,
+    COALESCE(a.price, (0)::double precision) AS price,
+    COALESCE(d.paid, (0)::double precision) AS paid,
+    d.vouchernum,
+    l.loginid AS "user",
+    v.name AS reservationtype
+   FROM ((((reservationroom m
+     LEFT JOIN ( SELECT oo.roomid,
+            oo.code AS roomcode,
+            tt.code AS roomtypecode,
+            tt.roomtypeid
+           FROM room oo,
+            roomtype tt
+          WHERE (oo.roomtypeid = tt.roomtypeid)) o ON ((o.roomid = m.roomid)))
+     LEFT JOIN roomtype t ON ((t.roomtypeid = m.roomtypeid)))
+     LEFT JOIN ( SELECT sum(pm.amount) AS paid,
+            fl.reservationroomid,
+            string_agg(pm.voucherno, ','::text) AS vouchernum
+           FROM payment pm,
+            folio fl
+          WHERE (pm.folioid = fl.folioid)
+          GROUP BY fl.reservationroomid) d ON ((d.reservationroomid = m.reservationroomid)))
+     LEFT JOIN ( SELECT sum(fi.amount) AS price,
+            fl.reservationroomid
+           FROM folioitem fi,
+            folio fl
+          WHERE (fi.folioid = fl.folioid)
+          GROUP BY fl.reservationroomid) a ON ((a.reservationroomid = m.reservationroomid))),
+    (reservation r
+     LEFT JOIN bsource b ON ((b.bsourceid = r.bsourceid))),
+    (guest g
+     LEFT JOIN contragent c ON (((c.contragentid = g.contragentid) AND (c.type = 1)))),
+    personnel l,
+    reservationtype v
+  WHERE (((((m.reservationid = r.reservationid) AND (g.guestid = m.guestid)) AND (l.personnelid = r.regbyid)) AND (r.status >= 0)) AND (v.reservationtypeid = r.reservationtypeid));
 
 
 ALTER TABLE public.v_reservationlist OWNER TO hms;
@@ -4514,6 +4722,7 @@ COPY contragent (contragentid, type, salutationid, fname, lname, name, address, 
 39	1	\N	das	dasdas	dasdas	                	1		\N				dasd@dasdas.ge	\N	\N	0	\N	0	\N	\N	\N	\N	\N	\N	1	2014-12-01 20:53:27.236	f
 40	1	\N	ნიკოლოზ	ბარბაქაძე	შპს ნიკე	                	1		\N				nika@selfin.ge	\N	\N	0	\N	0	\N	\N	\N	\N	\N	\N	1	2014-12-01 20:54:28.183	f
 41	2	\N	giorgi	vashakidze	vashli	            	1		\N	132	113	123	dasdasdas@dfaadf.com	0	123	0	123	0	t	t	t	\N	\N	\N	1	2014-12-01 22:06:25.024229	f
+42	1	\N	axali	saxeli	axali kompania	dadfasfasd	1	dsafasdf	\N	324123	32413241	432143241	ragaca@gmail.com	\N	\N	0	1000	0	\N	t	\N	\N	20	2000	1	2014-12-22 14:59:16.917	f
 \.
 
 
@@ -4521,7 +4730,7 @@ COPY contragent (contragentid, type, salutationid, fname, lname, name, address, 
 -- Name: contragentid_seq; Type: SEQUENCE SET; Schema: public; Owner: hms
 --
 
-SELECT pg_catalog.setval('contragentid_seq', 41, true);
+SELECT pg_catalog.setval('contragentid_seq', 42, true);
 
 
 --
@@ -4763,7 +4972,7 @@ SELECT pg_catalog.setval('currencyid_seq', 2, true);
 --
 
 COPY currencyrate (currencyrateid, currencyid, ratedate, value) FROM stdin;
-2	2	2014-08-13	1.77000000000000002
+2	2	2014-08-13	1.77
 3	2	2014-08-06	2
 \.
 
@@ -4862,9 +5071,18 @@ COPY extrachargetax (extrachargeid, taxid) FROM stdin;
 --
 
 COPY folio (folioid, num, guestid, contragentid, reservationroomid, status, regbyid, regdate) FROM stdin;
-56	56	35	\N	75	0	1	2014-12-04 21:20:21.237069
-57	57	36	\N	76	0	1	2014-12-09 15:05:24.378929
-58	58	37	\N	77	0	1	2014-12-09 15:10:37.790006
+66	66	45	\N	85	0	1	2014-12-18 19:11:24.093
+67	67	46	\N	86	0	1	2014-12-18 19:12:40.921
+68	68	47	\N	87	0	1	2014-12-18 19:13:22.347
+69	69	48	\N	88	0	1	2014-12-18 19:17:21.372
+70	70	49	\N	89	0	1	2014-12-18 19:54:33.632
+71	71	50	\N	90	0	1	2014-12-22 14:22:06.818
+72	72	51	\N	91	0	1	2014-12-22 14:22:59.917
+73	73	52	\N	92	0	1	2014-12-22 14:30:42.736
+74	74	53	\N	93	0	1	2014-12-22 14:31:39.293
+75	75	\N	0	94	0	1	2014-12-22 14:32:34.906
+76	76	54	\N	94	0	1	2014-12-22 14:32:34.906
+77	77	55	\N	95	0	1	2014-12-22 18:29:09.763
 \.
 
 
@@ -4872,7 +5090,7 @@ COPY folio (folioid, num, guestid, contragentid, reservationroomid, status, regb
 -- Name: folioid_seq; Type: SEQUENCE SET; Schema: public; Owner: hms
 --
 
-SELECT pg_catalog.setval('folioid_seq', 58, true);
+SELECT pg_catalog.setval('folioid_seq', 77, true);
 
 
 --
@@ -4880,66 +5098,51 @@ SELECT pg_catalog.setval('folioid_seq', 58, true);
 --
 
 COPY folioitem (folioitemid, folioid, roomid, itemdate, refno, particular, amount, extrachargeid, ordermainid, discountid, taxid, paymentid, zvoid, done, regbyid, regdate, note, manual, roomoper) FROM stdin;
-604	56	\N	2014-10-23	\N	6	100	\N	\N	\N	\N	\N	f	f	1	2014-12-04 21:20:21.237069		f	\N
-605	56	\N	2014-10-23	\N	-1	18	\N	\N	\N	1	\N	f	f	1	2014-12-04 21:20:21.237069		f	\N
-606	56	\N	2014-10-23	\N	0	0	\N	\N	\N	\N	\N	f	f	1	2014-12-04 21:20:21.237069		f	\N
-607	56	\N	2014-10-24	\N	6	100	\N	\N	\N	\N	\N	f	f	1	2014-12-04 21:20:21.237069		f	\N
-608	56	\N	2014-10-24	\N	-1	18	\N	\N	\N	1	\N	f	f	1	2014-12-04 21:20:21.237069		f	\N
-609	56	\N	2014-10-24	\N	0	0	\N	\N	\N	\N	\N	f	f	1	2014-12-04 21:20:21.237069		f	\N
-610	56	\N	2014-10-23	\N	2	20	\N	\N	\N	\N	18	f	f	1	2014-12-04 23:44:18.8344		t	\N
-611	56	\N	2014-10-23	\N	1	30	\N	\N	\N	\N	19	f	f	1	2014-12-05 00:10:10.160357		t	\N
-612	57	10	2014-10-23	\N	6	100	\N	\N	\N	\N	\N	f	f	1	2014-12-09 15:05:24.378929		f	\N
-613	57	\N	2014-10-23	\N	-1	18	\N	\N	\N	1	\N	f	f	1	2014-12-09 15:05:24.378929		f	\N
-614	57	\N	2014-10-23	\N	0	0	\N	\N	\N	\N	\N	f	f	1	2014-12-09 15:05:24.378929		f	\N
-615	57	10	2014-10-24	\N	6	100	\N	\N	\N	\N	\N	f	f	1	2014-12-09 15:05:24.378929		f	\N
-616	57	\N	2014-10-24	\N	-1	18	\N	\N	\N	1	\N	f	f	1	2014-12-09 15:05:24.378929		f	\N
-617	57	\N	2014-10-24	\N	0	0	\N	\N	\N	\N	\N	f	f	1	2014-12-09 15:05:24.378929		f	\N
-618	58	21	2014-10-23	\N	6	100	\N	\N	\N	\N	\N	f	f	1	2014-12-09 15:10:37.790006		f	\N
-619	58	\N	2014-10-23	\N	4	-20	\N	\N	2	\N	\N	f	f	1	2014-12-09 15:10:37.790006		f	\N
-620	58	\N	2014-10-23	\N	-1	14.4000000000000004	\N	\N	\N	1	\N	f	f	1	2014-12-09 15:10:37.790006		f	\N
-621	58	\N	2014-10-23	\N	5	20	1	\N	\N	\N	\N	f	f	1	2014-12-09 15:10:37.790006		f	\N
-622	58	\N	2014-10-23	\N	0	-0.400000000000005684	\N	\N	\N	\N	\N	f	f	1	2014-12-09 15:10:37.790006		f	\N
-623	58	21	2014-10-24	\N	6	100	\N	\N	\N	\N	\N	f	f	1	2014-12-09 15:10:37.790006		f	\N
-624	58	\N	2014-10-24	\N	4	-20	\N	\N	2	\N	\N	f	f	1	2014-12-09 15:10:37.790006		f	\N
-625	58	\N	2014-10-24	\N	-1	14.4000000000000004	\N	\N	\N	1	\N	f	f	1	2014-12-09 15:10:37.790006		f	\N
-626	58	\N	2014-10-24	\N	5	20	1	\N	\N	\N	\N	f	f	1	2014-12-09 15:10:37.790006		f	\N
-627	58	\N	2014-10-24	\N	0	-0.400000000000005684	\N	\N	\N	\N	\N	f	f	1	2014-12-09 15:10:37.790006		f	\N
-628	58	21	2014-10-25	\N	6	100	\N	\N	\N	\N	\N	f	f	1	2014-12-09 15:10:37.790006		f	\N
-629	58	\N	2014-10-25	\N	4	-20	\N	\N	2	\N	\N	f	f	1	2014-12-09 15:10:37.790006		f	\N
-630	58	\N	2014-10-25	\N	-1	14.4000000000000004	\N	\N	\N	1	\N	f	f	1	2014-12-09 15:10:37.790006		f	\N
-631	58	\N	2014-10-25	\N	5	20	1	\N	\N	\N	\N	f	f	1	2014-12-09 15:10:37.790006		f	\N
-632	58	\N	2014-10-25	\N	0	-0.400000000000005684	\N	\N	\N	\N	\N	f	f	1	2014-12-09 15:10:37.790006		f	\N
-633	58	21	2014-10-26	\N	6	100	\N	\N	\N	\N	\N	f	f	1	2014-12-09 15:10:37.790006		f	\N
-634	58	\N	2014-10-26	\N	4	-20	\N	\N	2	\N	\N	f	f	1	2014-12-09 15:10:37.790006		f	\N
-635	58	\N	2014-10-26	\N	-1	14.4000000000000004	\N	\N	\N	1	\N	f	f	1	2014-12-09 15:10:37.790006		f	\N
-636	58	\N	2014-10-26	\N	5	20	1	\N	\N	\N	\N	f	f	1	2014-12-09 15:10:37.790006		f	\N
-637	58	\N	2014-10-26	\N	0	-0.400000000000005684	\N	\N	\N	\N	\N	f	f	1	2014-12-09 15:10:37.790006		f	\N
-638	58	21	2014-10-27	\N	6	100	\N	\N	\N	\N	\N	f	f	1	2014-12-09 15:10:37.790006		f	\N
-639	58	\N	2014-10-27	\N	4	-20	\N	\N	2	\N	\N	f	f	1	2014-12-09 15:10:37.790006		f	\N
-640	58	\N	2014-10-27	\N	-1	14.4000000000000004	\N	\N	\N	1	\N	f	f	1	2014-12-09 15:10:37.790006		f	\N
-641	58	\N	2014-10-27	\N	5	20	1	\N	\N	\N	\N	f	f	1	2014-12-09 15:10:37.790006		f	\N
-642	58	\N	2014-10-27	\N	0	-0.400000000000005684	\N	\N	\N	\N	\N	f	f	1	2014-12-09 15:10:37.790006		f	\N
-643	58	21	2014-10-28	\N	6	100	\N	\N	\N	\N	\N	f	f	1	2014-12-09 15:10:37.790006		f	\N
-644	58	\N	2014-10-28	\N	4	-20	\N	\N	2	\N	\N	f	f	1	2014-12-09 15:10:37.790006		f	\N
-645	58	\N	2014-10-28	\N	-1	14.4000000000000004	\N	\N	\N	1	\N	f	f	1	2014-12-09 15:10:37.790006		f	\N
-646	58	\N	2014-10-28	\N	5	20	1	\N	\N	\N	\N	f	f	1	2014-12-09 15:10:37.790006		f	\N
-647	58	\N	2014-10-28	\N	0	-0.400000000000005684	\N	\N	\N	\N	\N	f	f	1	2014-12-09 15:10:37.790006		f	\N
-648	58	21	2014-10-29	\N	6	100	\N	\N	\N	\N	\N	f	f	1	2014-12-09 15:10:37.790006		f	\N
-649	58	\N	2014-10-29	\N	4	-20	\N	\N	2	\N	\N	f	f	1	2014-12-09 15:10:37.790006		f	\N
-650	58	\N	2014-10-29	\N	-1	14.4000000000000004	\N	\N	\N	1	\N	f	f	1	2014-12-09 15:10:37.790006		f	\N
-651	58	\N	2014-10-29	\N	5	20	1	\N	\N	\N	\N	f	f	1	2014-12-09 15:10:37.790006		f	\N
-652	58	\N	2014-10-29	\N	0	-0.400000000000005684	\N	\N	\N	\N	\N	f	f	1	2014-12-09 15:10:37.790006		f	\N
-653	58	21	2014-10-30	\N	6	100	\N	\N	\N	\N	\N	f	f	1	2014-12-09 15:10:37.790006		f	\N
-654	58	\N	2014-10-30	\N	4	-20	\N	\N	2	\N	\N	f	f	1	2014-12-09 15:10:37.790006		f	\N
-655	58	\N	2014-10-30	\N	-1	14.4000000000000004	\N	\N	\N	1	\N	f	f	1	2014-12-09 15:10:37.790006		f	\N
-656	58	\N	2014-10-30	\N	5	20	1	\N	\N	\N	\N	f	f	1	2014-12-09 15:10:37.790006		f	\N
-657	58	\N	2014-10-30	\N	0	-0.400000000000005684	\N	\N	\N	\N	\N	f	f	1	2014-12-09 15:10:37.790006		f	\N
-658	58	21	2014-10-31	\N	6	100	\N	\N	\N	\N	\N	f	f	1	2014-12-09 15:10:37.790006		f	\N
-659	58	\N	2014-10-31	\N	4	-20	\N	\N	2	\N	\N	f	f	1	2014-12-09 15:10:37.790006		f	\N
-660	58	\N	2014-10-31	\N	-1	14.4000000000000004	\N	\N	\N	1	\N	f	f	1	2014-12-09 15:10:37.790006		f	\N
-661	58	\N	2014-10-31	\N	5	20	1	\N	\N	\N	\N	f	f	1	2014-12-09 15:10:37.790006		f	\N
-662	58	\N	2014-10-31	\N	0	-0.400000000000005684	\N	\N	\N	\N	\N	f	f	1	2014-12-09 15:10:37.790006		f	\N
-663	57	\N	2014-10-23	\N	2	100	\N	\N	\N	\N	21	f	f	1	2014-12-09 17:15:10.644138		t	\N
+709	66	\N	2014-10-23	\N	6	100	\N	\N	\N	\N	\N	f	f	1	2014-12-18 19:11:24.093		f	\N
+710	66	\N	2014-10-23	\N	-1	18	\N	\N	\N	1	\N	f	f	1	2014-12-18 19:11:24.093		f	\N
+711	66	\N	2014-10-23	\N	0	0	\N	\N	\N	\N	\N	f	f	1	2014-12-18 19:11:24.093		f	\N
+712	66	\N	2014-10-24	\N	6	100	\N	\N	\N	\N	\N	f	f	1	2014-12-18 19:11:24.093		f	\N
+713	66	\N	2014-10-24	\N	-1	18	\N	\N	\N	1	\N	f	f	1	2014-12-18 19:11:24.093		f	\N
+714	66	\N	2014-10-24	\N	0	0	\N	\N	\N	\N	\N	f	f	1	2014-12-18 19:11:24.093		f	\N
+715	67	\N	2014-10-25	\N	6	0	\N	\N	\N	\N	\N	f	f	1	2014-12-18 19:12:40.921		f	\N
+716	67	\N	2014-10-25	\N	-1	0	\N	\N	\N	1	\N	f	f	1	2014-12-18 19:12:40.921		f	\N
+717	67	\N	2014-10-25	\N	0	0	\N	\N	\N	\N	\N	f	f	1	2014-12-18 19:12:40.921		f	\N
+718	67	\N	2014-10-26	\N	6	0	\N	\N	\N	\N	\N	f	f	1	2014-12-18 19:12:40.921		f	\N
+719	67	\N	2014-10-26	\N	-1	0	\N	\N	\N	1	\N	f	f	1	2014-12-18 19:12:40.921		f	\N
+720	67	\N	2014-10-26	\N	0	0	\N	\N	\N	\N	\N	f	f	1	2014-12-18 19:12:40.921		f	\N
+721	68	24	2014-10-23	\N	6	0	\N	\N	\N	\N	\N	f	f	1	2014-12-18 19:13:22.347		f	\N
+722	68	\N	2014-10-23	\N	-1	0	\N	\N	\N	1	\N	f	f	1	2014-12-18 19:13:22.347		f	\N
+723	68	\N	2014-10-23	\N	0	0	\N	\N	\N	\N	\N	f	f	1	2014-12-18 19:13:22.347		f	\N
+724	69	15	2014-10-23	\N	6	101.69491525423729	\N	\N	\N	\N	\N	f	f	1	2014-12-18 19:17:21.372		f	\N
+725	69	\N	2014-10-23	\N	-1	18.305084745762713	\N	\N	\N	1	\N	f	f	1	2014-12-18 19:17:21.372		f	\N
+726	69	\N	2014-10-23	\N	0	0	\N	\N	\N	\N	\N	f	f	1	2014-12-18 19:17:21.372		f	\N
+727	70	24	2014-10-24	\N	6	0	\N	\N	\N	\N	\N	f	f	1	2014-12-18 19:54:33.632		f	\N
+728	70	\N	2014-10-24	\N	-1	0	\N	\N	\N	1	\N	f	f	1	2014-12-18 19:54:33.632		f	\N
+729	70	\N	2014-10-24	\N	0	0	\N	\N	\N	\N	\N	f	f	1	2014-12-18 19:54:33.632		f	\N
+730	70	24	2014-10-25	\N	6	0	\N	\N	\N	\N	\N	f	f	1	2014-12-18 19:54:33.632		f	\N
+731	70	\N	2014-10-25	\N	-1	0	\N	\N	\N	1	\N	f	f	1	2014-12-18 19:54:33.632		f	\N
+732	70	\N	2014-10-25	\N	0	0	\N	\N	\N	\N	\N	f	f	1	2014-12-18 19:54:33.632		f	\N
+733	70	24	2014-10-26	\N	6	0	\N	\N	\N	\N	\N	f	f	1	2014-12-18 19:54:33.632		f	\N
+734	70	\N	2014-10-26	\N	-1	0	\N	\N	\N	1	\N	f	f	1	2014-12-18 19:54:33.632		f	\N
+735	70	\N	2014-10-26	\N	0	0	\N	\N	\N	\N	\N	f	f	1	2014-12-18 19:54:33.632		f	\N
+736	71	\N	2014-10-23	\N	6	100	\N	\N	\N	\N	\N	f	f	1	2014-12-22 14:22:06.818		f	\N
+737	71	\N	2014-10-23	\N	-1	18	\N	\N	\N	1	\N	f	f	1	2014-12-22 14:22:06.818		f	\N
+738	71	\N	2014-10-23	\N	0	0	\N	\N	\N	\N	\N	f	f	1	2014-12-22 14:22:06.818		f	\N
+739	72	\N	2014-10-23	\N	6	0	\N	\N	\N	\N	\N	f	f	1	2014-12-22 14:22:59.917		f	\N
+740	72	\N	2014-10-23	\N	-1	0	\N	\N	\N	1	\N	f	f	1	2014-12-22 14:22:59.917		f	\N
+741	72	\N	2014-10-23	\N	0	0	\N	\N	\N	\N	\N	f	f	1	2014-12-22 14:22:59.917		f	\N
+742	73	\N	2014-10-25	\N	6	0	\N	\N	\N	\N	\N	f	f	1	2014-12-22 14:30:42.736		f	\N
+743	73	\N	2014-10-25	\N	-1	0	\N	\N	\N	1	\N	f	f	1	2014-12-22 14:30:42.736		f	\N
+744	73	\N	2014-10-25	\N	0	0	\N	\N	\N	\N	\N	f	f	1	2014-12-22 14:30:42.736		f	\N
+745	74	\N	2014-10-24	\N	6	100	\N	\N	\N	\N	\N	f	f	1	2014-12-22 14:31:39.293		f	\N
+746	74	\N	2014-10-24	\N	-1	18	\N	\N	\N	1	\N	f	f	1	2014-12-22 14:31:39.293		f	\N
+747	74	\N	2014-10-24	\N	0	0	\N	\N	\N	\N	\N	f	f	1	2014-12-22 14:31:39.293		f	\N
+748	75	\N	2014-10-23	\N	6	0	\N	\N	\N	\N	\N	f	f	1	2014-12-22 14:32:34.906		f	\N
+749	75	\N	2014-10-23	\N	-1	0	\N	\N	\N	1	\N	f	f	1	2014-12-22 14:32:34.906		f	\N
+750	75	\N	2014-10-23	\N	0	0	\N	\N	\N	\N	\N	f	f	1	2014-12-22 14:32:34.906		f	\N
+751	77	\N	2014-10-23	\N	6	100	\N	\N	\N	\N	\N	f	f	1	2014-12-22 18:29:09.763		f	\N
+752	77	\N	2014-10-23	\N	-1	18	\N	\N	\N	1	\N	f	f	1	2014-12-22 18:29:09.763		f	\N
+753	77	\N	2014-10-23	\N	0	0	\N	\N	\N	\N	\N	f	f	1	2014-12-22 18:29:09.763		f	\N
 \.
 
 
@@ -4947,7 +5150,7 @@ COPY folioitem (folioitemid, folioid, roomid, itemdate, refno, particular, amoun
 -- Name: folioitemid_seq; Type: SEQUENCE SET; Schema: public; Owner: hms
 --
 
-SELECT pg_catalog.setval('folioitemid_seq', 663, true);
+SELECT pg_catalog.setval('folioitemid_seq', 753, true);
 
 
 --
@@ -4983,6 +5186,24 @@ COPY guest (guestid, salutationid, fname, lname, type, gender, address, countryi
 35	4	1	bla	0	\N		2			1	43124312	\N					\N	\N	\N	\N	\N	\N	\N	1	2014-12-04 21:20:21.237069	f
 36	4	dads	dasd	0	0		7			1	64616	1					\N	\N	\N	1	\N	\N	\N	1	2014-12-09 15:05:24.378929	f
 37	4	azer	azer	0	\N		5			1	626261	1					\N	\N	\N	\N	\N	\N	\N	1	2014-12-09 15:10:37.790006	f
+38	4	vnaxot	aba	0	\N		2			2	345234	\N					\N	\N	\N	\N	\N	\N	\N	1	2014-12-12 18:46:08.614	f
+39	4	fgsdf	rdfgsdf	0	\N		4			1	3243	\N					\N	\N	\N	\N	\N	\N	\N	1	2014-12-12 19:10:44.772	f
+40	4	house	house	0	\N		4			1	135	\N					\N	\N	\N	1	\N	\N	\N	1	2014-12-12 20:37:39.52	f
+41	4	dfasfas	fdasf	0	\N		6			1	341234	\N					\N	\N	\N	\N	\N	\N	\N	1	2014-12-12 21:45:54.863	f
+42	4	a	abdraxashu	0	\N		2			1	32412	\N					\N	\N	\N	\N	\N	\N	\N	1	2014-12-18 18:51:54.272	f
+43	4	1	rezervaciaa	0	\N		4			1	4231412	\N					\N	\N	\N	\N	\N	\N	\N	1	2014-12-18 19:03:53.664	f
+44	4	rez	daudasturebeli	0	\N		5			1	341231	\N					\N	\N	\N	\N	\N	\N	\N	1	2014-12-18 19:04:41.617	f
+45	4	in	check	0	\N		2			1	6098608	\N					\N	\N	\N	\N	\N	\N	\N	1	2014-12-18 19:11:24.093	f
+46	4	1	rez	0	\N		4			1	31423	\N					\N	\N	\N	\N	\N	\N	\N	1	2014-12-18 19:12:40.921	f
+47	4	es	rez	0	\N		2			1	421341	\N					\N	\N	\N	\N	\N	\N	\N	1	2014-12-18 19:13:22.347	f
+48	4	in	check	0	\N		8			2	3412341	\N					\N	\N	\N	\N	\N	\N	\N	1	2014-12-18 19:17:21.372	f
+49	4	cdsafa	dsafdc	0	\N		3			2	341234	\N					\N	\N	\N	\N	\N	\N	\N	1	2014-12-18 19:54:33.632	f
+50	4	1	rez	0	\N		4			1	412341234	\N					\N	\N	\N	\N	\N	\N	\N	1	2014-12-22 14:22:06.818	f
+51	4	2	rez	0	\N		6			1	41234132	\N					\N	\N	\N	\N	\N	\N	\N	1	2014-12-22 14:22:59.917	f
+52	4	3	rez	0	\N		6			1	4321412	\N					\N	\N	\N	\N	\N	\N	\N	1	2014-12-22 14:30:42.736	f
+53	4	4	rez	0	0		5			1	4324123	\N					\N	\N	\N	\N	\N	\N	\N	1	2014-12-22 14:31:39.293	f
+54	4	5	rez	0	\N		6			2	42314123	\N					\N	\N	\N	\N	\N	\N	\N	1	2014-12-22 14:32:34.906	f
+55	4	6	rezer	0	\N		5			2		\N					\N	\N	\N	\N	\N	\N	\N	1	2014-12-22 18:29:09.763	f
 \.
 
 
@@ -4990,7 +5211,7 @@ COPY guest (guestid, salutationid, fname, lname, type, gender, address, countryi
 -- Name: guestid_seq; Type: SEQUENCE SET; Schema: public; Owner: hms
 --
 
-SELECT pg_catalog.setval('guestid_seq', 37, true);
+SELECT pg_catalog.setval('guestid_seq', 55, true);
 
 
 --
@@ -5167,11 +5388,6 @@ SELECT pg_catalog.setval('nationalityid_seq', 1, true);
 --
 
 COPY payment (paymentid, paymentmethodid, currencyid, amount, paydate, folioid, voucherno, note, deleted, regbyid, regdate) FROM stdin;
-17	1	1	11.8000000000000007	2014-12-04	56		\N	f	1	2014-12-04 21:20:21.237069
-18	1	1	20	2014-10-23	56		\N	f	1	2014-12-04 23:44:18.8344
-19	3	1	30	2014-10-23	56		\N	f	1	2014-12-05 00:10:10.160357
-20	1	1	100	2014-12-09	58		\N	f	1	2014-12-09 15:10:37.790006
-21	1	1	100	2014-10-23	57		\N	f	1	2014-12-09 17:15:10.644138
 \.
 
 
@@ -5440,9 +5656,17 @@ SELECT pg_catalog.setval('regionid_seq', 1, false);
 --
 
 COPY reservation (reservationid, arraivaldate, departuredate, reservationtypeid, ratetype, manualrate, contractcontragentid, billto, taxexemptionreason, paymentmode, paymentmethodid, paymentcontragentid, advancepaymentdate, advancepaymentamount, companyid, marketid, bsourceid, taid, commissionplan, commissionvalue, voucher, discountid, postingtype, regbyid, regdate, postingvalueevery, num, nomanualtax, notax, discountnights, status) FROM stdin;
-102	2014-10-23 00:00:00	2014-10-24 11:11:00	1	0	\N	\N	2		0	1	\N	2014-10-23	10	0	\N	\N	\N	\N	\N		\N	\N	1	2014-12-04 21:20:21.237069	\N	1	f	f	\N	0
-103	2014-10-23 00:00:00	2014-10-24 11:11:00	1	0	\N	\N	2		0	1	\N	2014-10-24	20	0	\N	\N	\N	\N	\N		\N	\N	1	2014-12-09 15:05:24.378929	\N	1	f	f	\N	-1
-104	2014-10-23 00:00:00	2014-10-31 11:11:00	1	0	\N	\N	2		0	1	\N	\N	\N	1	\N	\N	34	2	123		2	1	1	2014-12-09 15:10:37.790006	20	1	f	f	\N	-1
+113	2014-10-25 12:02:00	2014-10-27 11:11:00	1	0	\N	\N	2		0	1	\N	\N	\N	0	\N	\N	\N	\N	\N		\N	\N	1	2014-12-18 19:12:40.921	\N	1	f	f	\N	0
+118	2014-10-23 14:22:00	2014-10-24 11:11:00	1	0	\N	\N	2		0	3	\N	\N	\N	0	\N	\N	\N	\N	\N		\N	\N	1	2014-12-22 14:22:59.917	\N	1	f	f	\N	0
+119	2014-10-25 12:02:00	2014-10-26 11:11:00	1	0	\N	\N	2		0	3	\N	\N	\N	0	\N	\N	\N	\N	\N		\N	\N	1	2014-12-22 14:30:42.736	\N	1	f	f	\N	0
+120	2014-10-24 12:02:00	2014-10-24 23:59:00	1	0	\N	\N	1		0	3	\N	\N	\N	0	\N	\N	\N	\N	\N		\N	\N	1	2014-12-22 14:31:39.293	\N	1	f	f	\N	0
+121	2014-10-23 14:31:00	2014-10-24 11:11:00	1	0	\N	\N	3		0	3	\N	\N	\N	0	\N	\N	\N	\N	\N		\N	\N	1	2014-12-22 14:32:34.906	\N	1	f	f	\N	0
+114	2014-10-23 19:12:00	2014-10-24 11:11:00	1	0	\N	\N	2		0	3	\N	\N	\N	0	\N	\N	\N	\N	\N		\N	\N	1	2014-12-18 19:13:22.347	\N	1	f	f	\N	-1
+115	2014-10-23 19:16:00	2014-10-23 23:59:00	2	0	\N	\N	2		0	3	\N	\N	\N	0	\N	\N	\N	\N	\N		\N	\N	1	2014-12-18 19:17:21.372	\N	1	f	f	\N	-1
+116	2014-10-24 12:02:00	2014-10-27 11:11:00	1	0	\N	\N	2		0	3	\N	\N	\N	0	\N	\N	\N	\N	\N		\N	\N	1	2014-12-18 19:54:33.632	\N	1	f	f	\N	0
+112	2014-10-23 19:10:00	2014-10-25 11:11:00	1	0	\N	\N	2		0	1	\N	\N	\N	0	\N	\N	\N	\N	\N		\N	\N	1	2014-12-18 19:11:24.093	\N	1	f	f	\N	-1
+117	2014-10-23 14:21:00	2014-10-24 11:11:00	3	0	\N	\N	2		0	1	\N	\N	\N	0	\N	\N	\N	\N	\N		\N	\N	1	2014-12-22 14:22:06.818	\N	1	f	f	\N	0
+122	2014-10-23 18:28:00	2014-10-24 11:11:00	1	0	\N	\N	2		0	1	\N	\N	\N	0	\N	\N	\N	\N	\N		\N	\N	1	2014-12-22 18:29:09.763	\N	1	f	f	\N	0
 \.
 
 
@@ -5450,7 +5674,7 @@ COPY reservation (reservationid, arraivaldate, departuredate, reservationtypeid,
 -- Name: reservationid_seq; Type: SEQUENCE SET; Schema: public; Owner: hms
 --
 
-SELECT pg_catalog.setval('reservationid_seq', 104, true);
+SELECT pg_catalog.setval('reservationid_seq', 122, true);
 
 
 --
@@ -5466,9 +5690,17 @@ COPY reservationreason (reservationid, reasonid) FROM stdin;
 --
 
 COPY reservationroom (reservationroomid, reservationid, roomid, leader, adult, child, ratetypeid, guestid, regbyid, regdate, roomtypeid) FROM stdin;
-75	102	\N	t	1	1	1	35	1	2014-12-04 21:20:21.237069	1
-76	103	10	t	1	1	1	36	1	2014-12-09 15:05:24.378929	1
-77	104	21	t	1	1	1	37	1	2014-12-09 15:10:37.790006	1
+86	113	\N	t	1	0	1	46	1	2014-12-18 19:12:40.921	6
+87	114	24	t	1	0	1	47	1	2014-12-18 19:13:22.347	2
+88	115	15	t	1	0	1	48	1	2014-12-18 19:17:21.372	5
+89	116	24	t	1	0	1	49	1	2014-12-18 19:54:33.632	2
+85	112	17	t	1	0	1	45	1	2014-12-18 19:11:24.093	1
+90	117	\N	t	1	0	1	50	1	2014-12-22 14:22:06.818	1
+91	118	\N	t	1	0	1	51	1	2014-12-22 14:22:59.917	3
+92	119	\N	t	1	0	1	52	1	2014-12-22 14:30:42.736	6
+93	120	\N	t	1	0	1	53	1	2014-12-22 14:31:39.293	1
+94	121	\N	t	1	0	1	54	1	2014-12-22 14:32:34.906	6
+95	122	\N	t	1	0	1	55	1	2014-12-22 18:29:09.763	1
 \.
 
 
@@ -5476,7 +5708,7 @@ COPY reservationroom (reservationroomid, reservationid, roomid, leader, adult, c
 -- Name: reservationroomid_seq; Type: SEQUENCE SET; Schema: public; Owner: hms
 --
 
-SELECT pg_catalog.setval('reservationroomid_seq', 77, true);
+SELECT pg_catalog.setval('reservationroomid_seq', 95, true);
 
 
 --
@@ -5653,6 +5885,19 @@ COPY roomst (roomstsid, roomid, statusdate, st, regbyid, regdate) FROM stdin;
 52	3	2014-10-23 00:00:00	7	1	2014-11-26 19:47:58.405
 53	10	2014-10-23 00:00:00	1	1	2014-12-09 15:05:24.378929
 54	21	2014-10-23 00:00:00	1	1	2014-12-09 15:10:37.790006
+55	9	2014-10-23 00:00:00	0	1	2014-12-12 18:46:08.614
+56	5	2014-10-24 12:02:00	0	1	2014-12-12 19:10:44.772
+57	24	2014-10-25 12:02:00	7	1	2014-12-12 20:37:39.52
+58	29	2014-10-23 00:00:00	1	1	2014-12-12 21:45:54.863
+59	7	2014-10-23 18:50:00	1	1	2014-12-18 18:51:54.272
+60	24	2014-10-23 19:12:00	0	1	2014-12-18 19:13:22.347
+61	15	2014-10-23 19:16:00	1	1	2014-12-18 19:17:21.372
+62	24	2014-10-23 00:00:00	1	1	2014-12-18 19:33:13.2
+63	24	2014-10-24 12:02:00	7	1	2014-12-18 19:54:33.632
+64	17	2014-10-23 00:00:00	0	1	2014-12-18 19:55:24.961
+65	17	2014-10-23 00:00:00	1	1	2014-12-22 15:59:01.93
+66	24	2014-10-23 00:00:00	1	1	2014-12-22 15:59:05.424
+67	15	2014-10-23 00:00:00	1	1	2014-12-22 15:59:08.522
 \.
 
 
@@ -5660,7 +5905,7 @@ COPY roomst (roomstsid, roomid, statusdate, st, regbyid, regdate) FROM stdin;
 -- Name: roomstid_seq; Type: SEQUENCE SET; Schema: public; Owner: hms
 --
 
-SELECT pg_catalog.setval('roomstid_seq', 54, true);
+SELECT pg_catalog.setval('roomstid_seq', 67, true);
 
 
 --

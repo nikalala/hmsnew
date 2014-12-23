@@ -718,8 +718,9 @@ function drawFooter(){
     $(".ui-jqgrid-bdiv").height($(".ui-jqgrid-bdiv").height() - 50);
     var html = '<div class="panel-footer" style="height: 50px !important; display:table; width: 100%; padding-bottom: 1px; background-color: #FFF;">' +
         '<div>' +
-        '<span style="margin: 15px 10px 0 10px; float: left;">ჩანაწერების რაოდენობა გცერდზე</span>' +
-        '<select style="float: left; margin: 15px 10px 0 10px;">' +
+        '<span style="margin: 15px 10px 0 10px; float: left;">ჩანაწერების რაოდენობა გვერდზე</span>' +
+        '<select id="limitselectbox" style="float: left; margin: 15px 10px 0 10px;">' +
+        '<option value="5">5</option>' +
         '<option value="15">15</option>' +
         '<option value="25">25</option>' +
         '<option value="50">50</option>' +

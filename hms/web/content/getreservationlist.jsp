@@ -11,6 +11,7 @@
 
     request.setCharacterEncoding("UTF-8");
     String where = (String) request.getParameter("query");
+    String limit = (String) request.getParameter("limit");
     if (where == null || where.equals("0")) {
         where = "";
     } else {
@@ -18,48 +19,34 @@
         where = URLDecoder.decode(strToSplit, "UTF-8");
         where = where.replace("query=", "");
     }
-
-
-    System.out.println(where);
+    if(limit == null){
+        limit = "";
+    }
     String bc = "";
     String room = "";
-
-    int ipg = 1;
-    int ilmt = 10;
-    String pg = request.getParameter("page");
-    if(pg != null)  ipg = Integer.parseInt(pg);
-    String lmt = request.getParameter("rows");
-    if(lmt != null) ilmt = Integer.parseInt(lmt);
     String sidx = request.getParameter("sidx");
-    if(sidx == null)    sidx = "";
+    if (sidx == null) sidx = "";
     String sord = request.getParameter("sord");
-    if(sord == null)    sord = "";
-    int count = VReservationlistManager.getInstance().countWhere(where);
-    int total_pages = 0;
-    if(count > 0)    total_pages = (int)(count/ilmt);
-    if(total_pages*ilmt < count)    total_pages++;
-    if(ipg > total_pages) ipg=total_pages;
-    int start = ilmt*ipg - ilmt;
-    if(start < 0)   start = 0;
-    String limit = "limit "+ilmt+" offset "+start;
-    String order = "order by "+sidx+" "+sord;
-
+    if (sord == null) sord = "";
+    String order = " order by " + sidx + " " + sord;
     SimpleDateFormat resListDate = new SimpleDateFormat(arrdepdateformats[dff]);
-    VReservationlistBean[] ReservationBeanList = VReservationlistManager.getInstance().loadByWhere(where + " " + order);
+    System.out.println(where + " " + order + limit);
+    int total = VReservationlistManager.getInstance().countWhere(where);
+    VReservationlistBean[] ReservationBeanList = VReservationlistManager.getInstance().loadByWhere(where + " " + order + limit);
 
 %>
 
-<rows>
-        <page><%=ipg%></page>
-        <total><%=total_pages%></total>
-        <records><%=count%></records>
+<rows ttt='11111'>
+<%--    <page><%=ipg%></page>
+    <total><%=total_pages%></total>
+    <records><%=count%></records>--%>
     <%
         for (int i = 0; i < ReservationBeanList.length; i++) { %>
     <%
         int st = ReservationBeanList[i].getStatus();
         if (ReservationBeanList[i].getRoomcode() != null) {
             room = ReservationBeanList[i].getRoomcode() + " - ";
-        }else{
+        } else {
             room = "";
         }
         switch (st) {
@@ -77,7 +64,7 @@
                 break;
         }
     %>
-    <row id='<%=ReservationBeanList[i].getReservationid()%>'>
+    <row total='123' id='<%=ReservationBeanList[i].getReservationid()%>'>
         <cell>
             <![CDATA[<div style="width: 50px; text-align:center; color:#FFF; <%=bc%>"><%=ReservationBeanList[i].getReservationroomid()%></div>]]></cell>
         <cell><![CDATA[<%=resListDate.format(ReservationBeanList[i].getArraivaldate())%>]]></cell>

@@ -22,11 +22,14 @@ resGrid = {
     model: resGridModel,
     sort: 'arraivaldate',
     order: 'asc',
+    limit: 5,
+    offset: 0,
     isPopup: false,
+    page : 1,
     gridComplete: function () {
         ReDrawTable(resGrid);
         //Line below makes the height of the row to be 38 px!!!
-        $("#grid-table .ui-widget-content").css("height","38px");
+        $("#grid-table .ui-widget-content").css("height", "38px");
         /*<div align="center" id="grid-footer" style="background: transparent; margin-left: -4px; width: 100%;height: 33px;line-height: 33px; position: absolute;bottom: 0;">*/
 
     },
@@ -65,7 +68,7 @@ depGrid = {
     gridComplete: function () {
         ReDrawTable(depGrid);
         //Line below makes the height of the row to be 38 px!!!
-        $("#grid-table .ui-widget-content").css("height","38px");
+        $("#grid-table .ui-widget-content").css("height", "38px");
         /*<div align="center" id="grid-footer" style="background: transparent; margin-left: -4px; width: 100%;height: 33px;line-height: 33px; position: absolute;bottom: 0;">*/
 
     },
@@ -102,7 +105,7 @@ arrivalGrid = {
     isPopup: false,
     gridComplete: function () {
         ReDrawTable(arrivalGrid);
-        $("#grid-table .ui-widget-content").css("height","38px");
+        $("#grid-table .ui-widget-content").css("height", "38px");
     },
     beforeRequest: function () {
 
@@ -350,7 +353,7 @@ postchargesGridModel.push(
     colModelGenerator(100, 'description', 2),
     colModelGenerator(100, 'amount', 0)
     //colModelGenerator(100, 'net', 0)
-            );
+);
 postchargesGrid = {
     id: 'list_postcharges',
     url: 'content/wizards/nightaudit/content/getna5.jsp',
