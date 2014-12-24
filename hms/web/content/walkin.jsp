@@ -7,6 +7,8 @@
     int req_roomTypeId = 0;
     String req_dtStart = null;
     String req_dtEnd = null;
+    String picker1 = null;
+    String picker2 = null;
 
     if (request.getParameter("req_roomId") != null) {
         req_roomId = Integer.parseInt(request.getParameter("req_roomId"));
@@ -230,20 +232,24 @@
 
            Date req_dtEnd_date = (Date)dt.parse(req_dtEnd);
            long req_dtEnd_long = req_dtEnd_date.getTime();
+           picker1 = "{autoclose: true, format: '" + dateformats1[dff] + "', weekStart: 1, startDate: new Date(" + req_dtStart_long + "), language: 'ka', todayHighlight: true, allowEmpty: false}";
+           picker2 = "{autoclose: true, format: '" + dateformats1[dff] + "', weekStart: 1, startDate: new Date(" + req_dtEnd_long + "), language: 'ka', todayHighlight: true, allowEmpty: false}";
        %>
 
         var roomTypeId = '<%=req_roomTypeId%>';
         var roomId = '<%=req_roomId%>';
-        var dtStart = '<%=dt.format(req_dtStart_long)%>';
-        var dtEnd = '<%=dt.format(req_dtEnd_long)%>';
+/*
+        var dtStart = '<%=picker1%>';
+        var dtEnd = '<%=picker2%>';
+*/
 
-        
+/*        console.log(roomTypeId,roomId,dtStart,dtEnd);*/
 
         if(!isNullOrEmpty(roomTypeId)){
             loader.show();
             $("#guestinfo_roomtypeid").val(roomTypeId);
-            $("#guestinfo_arrivaldate").datepicker("update", dtStart);
-            $("#guestinfo_departuredate").datepicker("update", dtEnd);
+            $("#guestinfo_arrivaldate").datepicker(<%=picker1%>);
+            $("#guestinfo_departuredate").datepicker(<%=picker2%>);
             setTimeout(function (){
                 $("#guestinfo_roomtypeid").trigger( "change" );
                 loadRooms(roomId);
@@ -343,6 +349,7 @@
 <input type="hidden" id="action" value="savereservation.jsp?action=save&type=walkin&wintype=<%=wintype%>"/>
 <input type="hidden" id="maindiv" value="registration"/>
 <input type="hidden" id="callbackurl" value="content/stayviewleft.jsp"/>
+<input type="hidden" id="callbackmethod" value="reloadPageAfterSave()"/>
 <input type="hidden" id="callbackdata" value="leftcontent"/>
 <div class="container-fluid" id="registration" style="padding-top: 4px; height: 100%;">
     <div class="row" style="margin-top: 0px; margin-bottom: 0px; padding-left: 5px;  padding-right: 5px;">

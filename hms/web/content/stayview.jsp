@@ -78,7 +78,23 @@
 </style>
 <script>
 var totalDays;
+lastChosenD = "";
+lastChosenS = "";
+
+function reloadPageAfterSave()
+{
+    console.log("reloadPageAfterSave");
+    if(!isNullOrEmpty(lastChosenD) && !isNullOrEmpty(lastChosenS))
+    {
+        reloadPage(lastChosenD,lastChosenS);
+    }else{
+        reloadPage(<%=days%>, $('#stayview_date').val());
+    }
+}
+
 function reloadPage(d, s){
+    lastChosenD = d;
+    lastChosenS = s;
     totalDays = d;
     $.ajax({
         type: "POST",
@@ -220,7 +236,7 @@ Ext.onReady(function() {
                     var id = record.get('Id');
                     var ids = id.split('_');
                     if(ids.length > 1){
-                        return '<img src="https://cdn0.iconfinder.com/data/icons/prohibited-and-warning/78/Prohibition_icons-03-16.png"/>';
+                        return '<img src="images/Prohibition_icons-03-16.png"/>';
                     }
                     return '';
                 }
@@ -236,7 +252,7 @@ Ext.onReady(function() {
                     var id = record.get('Id');
                     var ids = id.split('_');
                     if(ids.length > 1) {
-                        return '<img src="https://cdn2.iconfinder.com/data/icons/fugue/icon/broom.png"/>';
+                        return '<img src="images/broom.png"/>';
                     }
                     return '';
                 }
@@ -252,7 +268,7 @@ Ext.onReady(function() {
                     var id = record.get('Id');
                     var ids = id.split('_');
                     if(ids.length > 1) {
-                        return '<img src="https://cdn3.iconfinder.com/data/icons/business-101-1/512/Message-16.png"/>';
+                        return '<img src="images/Message-16.png"/>';
                     }
                     return '';
                 }

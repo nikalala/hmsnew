@@ -122,6 +122,7 @@ function savedata(id) {
     var callbackurl = $("#callbackurl").val();
     var callbackdata = $("#callbackdata").val();
     var action = $("#action").val();
+    var callbackmethod = $("#callbackmethod").val();
     var params;
     var maindiv = $("#maindiv").val();
 
@@ -156,6 +157,9 @@ function savedata(id) {
             $("#callbackdata").remove();
             $("#action").remove();
             $("#controls").remove();
+            if(!isNullOrEmpty(callbackmethod)){
+                eval(callbackmethod);
+            }
             //BootstrapDialog.info("ოპერაცია წარმატებით შესრულდა");
         }
     }, "json");
