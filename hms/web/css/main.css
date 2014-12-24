@@ -266,3 +266,47 @@ ol, ul {
     color: #0F83D7;
     font-weight: bold;
 }
+
+.statuses {
+    height:60px;
+}
+
+.statuses span{
+    dispaly:none;
+}
+
+.statuses div{
+    border: 1px solid #000;
+    height: 25px;
+    margin: 2px;
+    padding: 5px 8px;
+    font-weight: bold;
+}
+
+.statuses #recievedGuest {
+    background-color: #E9E200;
+}
+
+.statuses #outGuest {
+    background-color: #5F62A5;
+}
+
+.statuses #willGoGuest {
+    background-color: #D32E35;
+}
+
+.statuses #checkedGuest {
+    background-color: #4CB767;
+}
+
+.statuses #blockedGuest {
+    background-color: #072887;
+}
+
+.statuses #deadlineGuest {
+    background-color: #E6E501;
+}
+
+.statuses #dailyGuest {
+    background-color: #78580B;
+}

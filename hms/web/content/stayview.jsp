@@ -141,7 +141,7 @@ Ext.onReady(function() {
     Ext.BLANK_IMAGE_URL = 'images/blank.gif';
 
     // Store holding all the resources
-    resourceStore = new Sch.data.ResourceStore({
+    var resourceStore = new Sch.data.ResourceStore({
         model   : 'Sch.model.Resource',
         autoLoad: true,
         proxy: {
@@ -154,7 +154,7 @@ Ext.onReady(function() {
     });
 
     // Store holding all the events
-    eventStore = new Sch.data.EventStore({
+    var eventStore = new Sch.data.EventStore({
         model   : 'Sch.model.Event',
         proxy: {
             type: 'ajax',
@@ -177,8 +177,8 @@ Ext.onReady(function() {
         ]
     });
 
-    startDate = new Date(<%=cal1.get(Calendar.YEAR)%>, <%=cal1.get(Calendar.MONTH)%>, <%=cal1.get(Calendar.DATE)%>);
-    endDate = new Date(<%=cal2.get(Calendar.YEAR)%>, <%=cal2.get(Calendar.MONTH)%>, <%=cal2.get(Calendar.DATE)%>);
+    var startDate = new Date(<%=cal1.get(Calendar.YEAR)%>, <%=cal1.get(Calendar.MONTH)%>, <%=cal1.get(Calendar.DATE)%>);
+    var endDate = new Date(<%=cal2.get(Calendar.YEAR)%>, <%=cal2.get(Calendar.MONTH)%>, <%=cal2.get(Calendar.DATE)%>);
     var onEventContextMenu = function(s, rec, e){
         e.stopEvent();
 
@@ -198,7 +198,7 @@ Ext.onReady(function() {
     }
 
 
-    scheduler = Ext.create("Sch.panel.SchedulerGrid",{
+    var scheduler = Ext.create("Sch.panel.SchedulerGrid",{
         width       : "100%",
         height      : height,
         renderTo    : 'stayview-container',
@@ -264,6 +264,7 @@ Ext.onReady(function() {
         enableDragCreation : true,
         eventResizeHandles : 'none',
         enableEventDragDrop : false,
+        columnLines: true,
         allowOverlap:false,
         viewConfig: {
             forceFit: true,
@@ -275,7 +276,7 @@ Ext.onReady(function() {
                 if (ids.length<2) {
                     return 'unavailable';
                 }
-                if(resourceRecord.dirty == true) return 'bg-row-edited';
+
                 return '';
             }
         },
@@ -310,7 +311,6 @@ Ext.onReady(function() {
         },
         listeners       : {
             beforedragcreate : function(s, resource) {
-                // console.log(s.dragCreator)
                 var avalable = false;
                 var id = resource.get('Id');
                 var ids = id.split('_');
@@ -326,7 +326,9 @@ Ext.onReady(function() {
                 var start = Ext.Date.format(data.start, "d.m.Y");
                 var end = Ext.Date.format(data.end, "d.m.Y");
                 var originalStart = Ext.Date.format(sched.originalStart, "d.m.Y");
-                if(Ext.Date.parse(originalStart,'d.m.Y')>Ext.Date.parse(start,'d.m.Y')){
+                console.log(Ext.Date.parse(start,'d.m.Y')<endDate,Ext.Date.parse(start,'d.m.Y'),Ext.Date.parse('<%=dt.format(new Date())%>','d.m.Y'))
+                if(Ext.Date.parse(originalStart,'d.m.Y')>Ext.Date.parse(start,'d.m.Y') || Ext.Date.parse(start,'d.m.Y')<Ext.Date.parse('<%=dt.format(new Date())%>','d.m.Y')){
+                    Ext.MessageBox.alert('ყურადღება','რეზერვაცია ძველი თარიღით აკრძალულია')
                     data.finalize();
                     return false;
                 }
@@ -335,24 +337,34 @@ Ext.onReady(function() {
                 var type = tempArr[0];
                 var roomId = tempArr[1];
 
-                newWindowWithParams('walkin','dasdasdada','?req_roomId='+roomId+'&req_dtStart='+start+'&req_dtEnd='+end);
+                newWindowWithParams('walkin','სტუმრის მიღება / რეზერვაცია','?req_roomId='+roomId+'&req_dtStart='+start+'&req_dtEnd='+end);
                 data.finalize();
+                return false;
 
             }
         }
     });
+
+    scheduler.normalGrid.on('itemmouseenter',function(view, record, item, index, e, options)
+    {
+        view.mouseOverItem.bgColor = '#ccc';
+    });
+    scheduler.normalGrid.on('itemmouseleave',function(view, record, item, index, e, options)
+    {
+        view.mouseOverItem.bgColor = '';
+    });
     // Set up a model to use in our Store
-    statisticsModel = Ext.define('StatisticsModel', {
+    var statisticsModel = Ext.define('StatisticsModel', {
         extend: 'Ext.data.Model',
         fields: [
             {name: 'name', type: 'string'}
         ]
     });
 
-    statisticsStore = Ext.create('Ext.data.Store', {
+    var statisticsStore = Ext.create('Ext.data.Store', {
         model: 'StatisticsModel'
     });
-    statisticsGrid = Ext.create("Ext.grid.Panel",{
+    var statisticsGrid = Ext.create("Ext.grid.Panel",{
         height:50,
         hideHeaders: true,
         width: '100%',

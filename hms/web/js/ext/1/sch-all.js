@@ -518,7 +518,7 @@ Ext.define("Sch.tooltip.Tooltip",
 		this.startDate=this.endDate=new Date();
 		if(!this.template)
 			{
-                        this.template=Ext.create("Ext.XTemplate",'<div class="{[values.valid ? "sch-tip-ok" : "sch-tip-notok"]}">','{[this.renderClock(values.startDate, values.startText, "sch-tooltip-startdate")]}','{[this.renderClock(values.endDate, values.endText, "sch-tooltip-enddate")]}',"</div>",
+                        this.template=Ext.create("Ext.XTemplate",'<div class="{[values.valid ? "sch-tip-ok" : "sch-tip-notok"]}">','{[this.renderClock(values.startDate, values.startText, "sch-tooltip-startdate")]}','{[this.renderClock(values.endDate, values.endText, "sch-tooltip-enddate")]}','{[this.calculateNight(values)]}',"</div>",
 				{
 				compiled:true,disableFormats:true,renderClock:function(d,e,c)
 					{
@@ -527,7 +527,9 @@ Ext.define("Sch.tooltip.Tooltip",
 						date:d,text:e,cls:c
 					}
 					)
-				}
+				},calculateNight: function(val){
+                    return 'ღამე:'+Math.abs((val.startDate-val.endDate)/1000/60/60/24);
+                }
 			}
 			)
 		}
