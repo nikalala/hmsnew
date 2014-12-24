@@ -386,17 +386,11 @@ Ext.onReady(function() {
         var columns =  [{header: '',width:206,dataIndex:'name',align:"center"}];
         var colWidth;
         if(!totalDays) totalDays=15;
-        if(totalDays==15){
-            colWidth = 57;
-        } else if (totalDays==7){
-            colWidth = 114;
-        } else if (totalDays==30){
-            colWidth = 28;
-        }
+
         for(i=0;i<totalDays;i++){
             freeRoomsCount[i]=0;
             var column = Ext.create('Ext.grid.column.Column', {header: '',
-                                                                width:colWidth,
+                                                                width:scheduler.normalGrid.viewConfig.timeAxisViewModel.tickWidth,
                                                                 menuDisabled: true,
                                                                 align:"center",
                                                                 sortable: false,
