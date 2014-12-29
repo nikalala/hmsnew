@@ -51,11 +51,16 @@ try{
             }catch(Exception ex){ }
         } else if(name.equalsIgnoreCase("guestinfo_salutationid")){
             guest.setSalutationid(new Integer(val));
-        } else if(name.equalsIgnoreCase("guestinfo_name")){
-            String[] names = val.split(" ");
-            guest.setLname(names[0]);
-            if(names.length > 1)
-                guest.setFname(names[1]);
+        } else if(name.equalsIgnoreCase("guestinfo_fname")){
+            //String[] names = val.split(" ");
+            //guest.setLname(names[0]);
+            //if(names.length > 1)
+            guest.setFname(val);
+        } else if(name.equalsIgnoreCase("guestinfo_lname")){
+            //String[] names = val.split(" ");
+            //guest.setLname(names[0]);
+            //if(names.length > 1)
+            guest.setLname(val);
         } else if(name.equalsIgnoreCase("guestinfo_address")){
             guest.setAddress(val);
         } else if(name.equalsIgnoreCase("guestinfo_city")){
@@ -70,7 +75,8 @@ try{
         } else if(name.equalsIgnoreCase("guestinfo_roomid")){
             if(checkin && (val == null || val.equalsIgnoreCase("null") || val.equals("0")))
                 throw new Exception("აირჩიეთ ოთახი");
-            resroom.setRoomid(new Integer(val));
+            if(!checkin && val != null && !val.equalsIgnoreCase("null") && !val.equals("0"))
+                resroom.setRoomid(new Integer(val));
         } else if(name.equalsIgnoreCase("guestinfo_ratetypeid")){
             if(val == null || val.equalsIgnoreCase("null") || val.equals("0"))
                 throw new Exception("აირჩიეთ ტარიფი");

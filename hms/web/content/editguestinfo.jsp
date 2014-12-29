@@ -17,7 +17,8 @@ NationalityBean[] nationalities = NationalityManager.getInstance().loadByWhere("
 String guestaddress = "";
 String guestcity = "";
 String guestzip = "";
-String guestname = "";
+String guestfname = "";
+String guestlname = "";
 String guestemail = "";
 String guestphone = "";
 String guestmobile = "";
@@ -27,7 +28,8 @@ if(edit){
     guestaddress = guest.getAddress();
     guestcity = guest.getCity();
     guestzip = guest.getZip();
-    guestname = guest.getFname()+" "+guest.getLname();
+    guestfname = guest.getFname();
+    guestlname = guest.getLname();
     guestemail = guest.getEmail();
     guestphone = guest.getPhone();
     guestmobile = guest.getMobile();
@@ -55,8 +57,9 @@ for(int i=0;i<gender.length;i++){
         $("#editguestinfo_nationalityid").val("");
         $("#editguestinfo_vipstatusid").val("");
         $("#editguestinfo_guestid").val(0);
-        $('#editguestinfo_name').val('');
-        $('#editguestinfo_name').focus();
+        $('#editguestinfo_fname').val('');
+        $('#editguestinfo_lname').val('');
+        $('#editguestinfo_lname').focus();
         <%for(int i=0;i<gender.length;i++){%>$("#editguestinfo_gender<%=i%>").prop("checked",false);<%}%>
     }
     
@@ -66,7 +69,7 @@ for(int i=0;i<gender.length;i++){
     });
 </script>
 <input type="hidden" id="editguestinfo_action" value="updateguestinfo.jsp?reservationroomid=<%=rroom.getReservationroomid()%>"/>
-<input type="hidden" id="editguestinfo_controls" value="<%=gends%>editguestinfo_vipstatusid,editguestinfo_nationalityid,editguestinfo_idn,editguestinfo_idtypeid,editcontactinfo_fax,editcontactinfo_mobile,editcontactinfo_phone,editcontactinfo_email,editguestinfo_name,editguestinfo_guestid,editguestinfo_salutationid,editguestinfo_address,editguestinfo_city,editguestinfo_zip,editguestinfo_countryid"/>
+<input type="hidden" id="editguestinfo_controls" value="<%=gends%>editguestinfo_vipstatusid,editguestinfo_nationalityid,editguestinfo_idn,editguestinfo_idtypeid,editcontacttinfo_fax,editcontacttinfo_mobile,editcontacttinfo_phone,editcontacttinfo_email,editguestinfo_fname,editguestinfo_lname,editguestinfo_guestid,editguestinfo_salutationid,editguestinfo_address,editguestinfo_city,editguestinfo_zip,editguestinfo_countryid"/>
 <input type="hidden" id="editguestinfo_callbackurl" value="content/guestinfo.jsp?reservationroomid=<%=rroom.getReservationroomid()%>"/>
 <input type="hidden" id="editguestinfo_callbackdata" value="guestinfo"/>
 <input type="hidden" id="editguestinfo_guestid" value="<%=(guest != null) ? guest.getGuestid():"0"%>"/>
@@ -93,9 +96,10 @@ for(int i=0;i<gender.length;i++){
                                     %>
                                 </select>
                                 <div class="input-group">
-                                    <input class="form-control" type="text" id="editguestinfo_name" value="<%=guestname%>" style="width: 150px;">
+                                    <input class="form-control" type="text" id="editguestinfo_fname" value="<%=guestfname%>" style="width: 50px;">
+                                    <input class="form-control" type="text" id="editguestinfo_lname" value="<%=guestlname%>" style="width: 100px;">
                                     <div class="input-group-addon glyphicon glyphicon-remove" style="color: red; cursor: pointer;" onclick="remEditGuestName()"></div>
-                                    <div class="input-group-addon glyphicon glyphicon-search" style="cursor: pointer;" onclick="editNameSearch('editguestinfo_name',4,'edit')"></div>
+                                    <div class="input-group-addon glyphicon glyphicon-search" style="cursor: pointer;" onclick="editNameSearch('editguestinfo_lname',4,'edit')"></div>
                                 </div>
                             </div>
                         </div>

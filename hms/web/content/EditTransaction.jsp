@@ -85,7 +85,16 @@ function checkInEdit(){
     });
 }
 
-
+function getReasonList1(rid){
+        $.post(
+            "content/remarklist.jsp",
+            {
+                rid: rid
+            },
+            function(data){$("#geninfo_remarks").html(data);},
+            "html"
+        );
+    }
 </script>
 <div class="container-fluid" id="edittransaction0" style="padding-top: 4px; height: 100%;">
     <div class="row" style="margin-bottom: 0px; padding-left: 5px;  padding-right: 5px;">

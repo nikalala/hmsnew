@@ -48,7 +48,8 @@ GuestBean[] guests = GuestManager.getInstance().loadByWhere("where upper(fname) 
         $.post("content/srch_getguestinfo_json.jsp",{ id: id },function(data){
             if(data.status == 0) BootstrapDialog.alert(data.error);
             else {
-                $("#"+prefix+"guestinfo_name").val(data.guestname);
+                $("#"+prefix+"guestinfo_fname").val(data.guestfname);
+                $("#"+prefix+"guestinfo_lname").val(data.guestlname);
                 $("#"+prefix+"guestinfo_salutationid").val(data.salutationid);
                 
                 $("#"+prefix+"guestinfo_address").val(data.address);

@@ -114,6 +114,7 @@ paid = getSum("select sum(amount*ratedate("+maincurrency.getCurrencyid()+",curre
     
         $('#reldate').datepicker();
         
+        getReasonList1(<%=rroom.getReservationid()%>);
         
         
         //$('#transactiongeninfopanel1').height($("#edittransactionbody").height()-50);
@@ -316,7 +317,7 @@ paid = getSum("select sum(amount*ratedate("+maincurrency.getCurrencyid()+",curre
                                         <h3 class="panel-title">
                                             შენიშვნები
                                             <div class="btn-group pull-right">
-                                                <a href="#" class="glyphicon glyphicon-plus iconblack" style="text-decoration: none;" data-toggle="tooltip" title=""></a>
+                                                <a href="javascript:newmWindow1('remarks','შენიშვნები','script=getReasonList1(<%=rroom.getReservationid()%>)&rid=<%=rroom.getReservationroomid()%>')" class="glyphicon glyphicon-plus iconblack" style="text-decoration: none;" data-toggle="tooltip" title=""></a>
                                             </div>
                                         </h3>
                                     </div>
@@ -324,7 +325,7 @@ paid = getSum("select sum(amount*ratedate("+maincurrency.getCurrencyid()+",curre
                                         <table width="100%">
                                             <tbody>
                                                 <tr>
-                                                    <td></td>
+                                                    <td id="geninfo_remarks"></td>
                                                 </tr>
                                             </tbody>
                                         </table>

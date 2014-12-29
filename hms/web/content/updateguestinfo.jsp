@@ -29,11 +29,12 @@ try{
     String editguestinfo_mobile = request.getParameter("editcontacttinfo_mobile").trim();
     String editguestinfo_phone = request.getParameter("editcontacttinfo_phone").trim();
     String editguestinfo_email = request.getParameter("editcontacttinfo_email").trim();
-    String editguestinfo_name = request.getParameter("editguestinfo_name").trim();
+    String editguestinfo_fname = request.getParameter("editguestinfo_fname").trim();
+    String editguestinfo_lname = request.getParameter("editguestinfo_lname").trim();
     
     int editguestinfo_guestid = Integer.parseInt(request.getParameter("editguestinfo_guestid"));
     
-    String[] names = editguestinfo_name.split(" ",2);
+    //String[] names = editguestinfo_name.split(" ",2);
     
     if(editguestinfo_countryid == 0)
         throw new Exception("აირჩიეთ ქვეყანა");
@@ -41,8 +42,10 @@ try{
         throw new Exception("აირჩიეთ ეროვნება");
     if(editguestinfo_idtypeid == 0)
         throw new Exception("აირჩიეთ საბუთის ტიპი");
-    if(editguestinfo_name.length() == 0)
+    if(editguestinfo_fname.length() == 0)
         throw new Exception("შეიყვანეთ სტუმრის სახელი");
+    if(editguestinfo_lname.length() == 0)
+        throw new Exception("შეიყვანეთ სტუმრის გვარი");
     GuestBean guest = GuestManager.getInstance().createGuestBean();
     if(editguestinfo_guestid > 0)
         guest = GuestManager.getInstance().loadByPrimaryKey(new Long(editguestinfo_guestid));
@@ -61,9 +64,8 @@ try{
     guest.setMobile(editguestinfo_mobile);
     guest.setPhone(editguestinfo_phone);
     guest.setEmail(editguestinfo_email);
-    guest.setLname(names[0]);
-    if(names.length > 1)
-        guest.setFname(names[1]);
+    guest.setLname(editguestinfo_lname);
+    guest.setFname(editguestinfo_fname);
     
     guest = GuestManager.getInstance().save(guest);
     

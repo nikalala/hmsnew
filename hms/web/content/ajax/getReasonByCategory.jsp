@@ -3,7 +3,8 @@
 <%@include file="../../includes/init.jsp"%>
 <%
 int category = Integer.parseInt(request.getParameter("category"));
-ReasonBean[] reasons = ReasonManager.getInstance().loadByWhere("where active = true and deleted = false reasoncategory = "+category+" order by name");
+System.out.println("select * from reason where active = true and deleted = false and reasoncategory = "+category+" order by name");
+ReasonBean[] reasons = ReasonManager.getInstance().loadByWhere("where active = true and deleted = false and reasoncategory = "+category+" order by name");
 %>
 <option value="0">--აირჩიეთ--</option>
 <%

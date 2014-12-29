@@ -5,7 +5,13 @@
 boolean act = false;
 if(request.getParameter("act") != null)
     act = true;
-ReservationroomBean reserv = ReservationroomManager.getInstance().loadByPrimaryKey(new Long(request.getParameter("rid")));
+String rid = request.getParameter("rid");
+if(rid == null)
+    rid = request.getParameter("reservationroomid");
+if(rid == null)
+    rid = request.getParameter("reservationid");
+ReservationroomBean reserv = ReservationroomManager.getInstance().loadByPrimaryKey(new Long(rid));
+
 ReservationBean res = ReservationManager.getInstance().loadByPrimaryKey(reserv.getReservationid());
 GuestBean guest = GuestManager.getInstance().loadByPrimaryKey(reserv.getGuestid());
 SalutationBean salutation = SalutationManager.getInstance().loadByPrimaryKey(guest.getSalutationid());
@@ -83,7 +89,10 @@ if(checkinsettings.getPostcancellationfee().intValue() == 1){
         });
     });
     
-    
+    function reloadAfterCancell(){
+        getBody("stayviewleft", "stayview", 'დატვირთულობა', 'res1','',true);
+        reloadGrid('list_pendingreservations');
+    }
 </script>
 <%if(act){%>
 <input type="hidden" id="action" value="savecancel.jsp?rid=<%=reserv.getReservationroomid()%>"/>
@@ -91,7 +100,7 @@ if(checkinsettings.getPostcancellationfee().intValue() == 1){
 <%} else {%>
 <input type="hidden" id="action" value="savecancel.jsp?rid=<%=reserv.getReservationroomid()%>"/>
 <input type="hidden" id="controls" value="cancel_reasonid,cancel_cancellationfee"/>
-<input type="hidden" id="callbackurl" value="script:reloadGrid('list_pendingreservations')"/>
+<input type="hidden" id="callbackurl" value="script:reloadAfterCancell()"/>
 <%}%>
 <table width="100%" class="table table-borderless">
     <tr>

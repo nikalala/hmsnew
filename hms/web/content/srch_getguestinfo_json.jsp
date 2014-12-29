@@ -18,6 +18,8 @@ String fax = guest.getFax();
 if(fax == null)   fax = "";
 
 obj.put("guestname", guestname);
+obj.put("guestfname", guest.getFname());
+obj.put("guestlname", guest.getLname());
 obj.put("address", (guest.getAddress() != null) ? guest.getAddress():"" );
 obj.put("city", (guest.getCity() != null) ? guest.getCity():"");
 obj.put("zip", (guest.getZip() != null) ? guest.getZip():"");

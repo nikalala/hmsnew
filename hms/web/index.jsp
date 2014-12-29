@@ -20,7 +20,7 @@
         loggedon = false;
     }
 
-    String cmenufiles[] = {"TAB_EditTransaction", "RoomMove", "AmendStay", "CheckIn", "CheckOut", "Cancel", "MarkNoShow", "AssignRoom", "UnblockRoom", "VoidTransaction", "UndoCheckin", "SetMessages", "SetTasks", "SetPreference", "StopRoomMove", "UndoStopRoomMove", "ExchangeRoom", "MoveGuestPhysically"};
+    String cmenufiles[] = {"TAB_EditTransaction", "roommove", "AmendStay", "CheckIn", "CheckOut", "cancel", "MarkNoShow", "assignroom", "UnblockRoom", "VoidTransaction", "UndoCheckin", "SetMessages", "SetTasks", "SetPreference", "StopRoomMove", "UndoStopRoomMove", "ExchangeRoom", "MoveGuestPhysically"};
     String cmenunames[] = {"რედაქტირება", "ოთახის შეცვლა", "გახანგრძლივება", "შესვლა", "გამოსვლა", "გაუქმება", "არ მოსვლა", "ოთახის მინიჭება", "ოთახის განბლოკვა", "რეზერვაციის გაუქმება", "შესვლის გაუქმება", "შეტყობინებების დაყენება", "სამუშაოების მინიჭება", "პარამეტრები", "ოთახის გადატანის შეჩერება", "ოთახის გადატანის შეჩერების გაუქმება", "ოთახის გაცვლა", "სტუმრის გადაყვანა ფიზიკურად"};
     String cmenuicons[] = {"saved", "ოთახის შეცვლა", "გახანგრძლივება", "შესვლა", "გამოსვლა", "გაუქმება", "არ მოსვლა", "ოთახის მინიჭება", "ოთახის განბლოკვა", "რეზერვაციის გაუქმება", "შესვლის გაუქმება", "შეტყობინებების დაყენება", "სამუშაოების მინიჭება", "პარამეტრები", "ოთახის გადატანის შეჩერება", "ოთახის გადატანის შეჩერების გაუქმება", "ოთახის გაცვლა", "სტუმრის გადაყვანა ფიზიკურად"};
 

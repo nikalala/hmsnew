@@ -11,12 +11,20 @@ for(Enumeration e=request.getParameterNames();e.hasMoreElements();){
 */
 String msg = "";
 String act = request.getParameter("act");
+ReservationroomBean rroom = ReservationroomManager.getInstance().loadByPrimaryKey(new Long(request.getParameter("rid")));
+ReservationBean reserv = null;
+if(rroom != null)
+    reserv = ReservationManager.getInstance().loadByPrimaryKey(rroom.getReservationid());
 Manager.getInstance().beginTransaction();
 try{
     Vector v = (Vector)session.getAttribute("WALKIN_REMARKS");
     if(v == null)   v = new Vector();
     
     if(act.equalsIgnoreCase("del")){
+        ReasonBean res = (ReasonBean)v.elementAt(Integer.parseInt(request.getParameter("num")));
+        
+        try{ReasonManager.getInstance().deleteByPrimaryKey(res.getReasonid());}catch(Exception ign){}
+        
         v.removeElementAt(Integer.parseInt(request.getParameter("num")));
         msg = "{\"result\":1}";
     } else {
@@ -33,11 +41,27 @@ try{
             res.setReasoncategory(category);
             res.setName(name);
         }
-
+        System.out.println("reasonid = "+reasonid);
+        res.setRegbyid(user.getPersonnelid());
+        res = ReasonManager.getInstance().save(res);
+        reasonid = res.getReasonid().intValue();
+System.out.println("reasonid = "+reasonid);
+        if(reserv != null){
+            ReservationreasonBean rb = ReservationreasonManager.getInstance().loadByPrimaryKey(reserv.getReservationid(), reasonid);
+            if(rb == null)    {
+                rb = ReservationreasonManager.getInstance().createReservationreasonBean();
+                rb.setReasonid(reasonid);
+                rb.setReservationid(reserv.getReservationid());
+                rb = ReservationreasonManager.getInstance().save(rb);
+            }
+        }
+        
+        
         v.addElement((ReasonBean)res);
         msg = "{\"result\":1}";
     }
     session.setAttribute("WALKIN_REMARKS", (Vector)v);
+    Manager.getInstance().endTransaction(true);
 }catch(Exception e){
     e.printStackTrace();
     Manager.getInstance().endTransaction(false);

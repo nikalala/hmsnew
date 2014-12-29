@@ -35,7 +35,7 @@
     session.removeAttribute("WALKIN_REMARKS");
 
     String fields = ""
-            + "guestinfo_salutationid,guestinfo_name,guestinfo_address,guestinfo_city,guestinfo_zip,guestinfo_countryid,"
+            + "guestinfo_salutationid,guestinfo_fname,guestinfo_lname,guestinfo_address,guestinfo_city,guestinfo_zip,guestinfo_countryid,"
             + "guestinfo_roomnumber,guestinfo_roomtypeid,guestinfo_roomid,guestinfo_ratetypeid,guestinfo_arrivaldate,guestinfo_arrivaltime,guestinfo_night,guestinfo_departuredate,guestinfo_departuretime,guestinfo_adult,guestinfo_reservationtypeid,guestinfo_child,"
             + "contacttinfo_email,contacttinfo_phone,contacttinfo_mobile,contacttinfo_fax,"
             + "guestinfo_idtypeid,guestinfo_idn,guestinfo_nationalityid,";
@@ -318,8 +318,9 @@
         $("#guestinfo_nationalityid").val("");
         $("#guestinfo_vipstatusid").val("");
         $("#guestinfo_guestid").val(0);
-        $('#guestinfo_name').val('');
-        $('#guestinfo_name').focus();
+        $('#guestinfo_lname').val('');
+        $('#guestinfo_fname').val('');
+        $('#guestinfo_fname').focus();
         <%for(int i=0;i<gender.length;i++){%>$("#guestinfo_gender<%=i%>").prop("checked", false);
         <%}%>
     }
@@ -367,7 +368,7 @@
                                class="glyphicon glyphicon-tags iconblack"
                                style="text-decoration: none; padding-right: 4px;" data-toggle="tooltip"
                                title="კოპირება"></a>
-                            <a href="javascript:newmWindow1('remarks','შენიშვნები','')" id='walkin_set_remark'
+                            <a href="javascript:newmWindow1('remarks','შენიშვნები','rid=0')" id='walkin_set_remark'
                                class="glyphicon glyphicon-file iconblack"
                                style="text-decoration: none; padding-right: 4px;" data-toggle="tooltip"
                                title="შენიშვნა"></a>

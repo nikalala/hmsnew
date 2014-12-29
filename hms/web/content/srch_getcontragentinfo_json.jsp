@@ -2,6 +2,7 @@
 <%@page pageEncoding="UTF-8"%>
 <%@include file="../includes/init.jsp"%>
 <%
+
 JSONObject obj = new JSONObject();
 try{
 ContragentBean contr = ContragentManager.getInstance().loadByPrimaryKey(new Long(request.getParameter("id")));
@@ -18,6 +19,8 @@ String fax = contr.getFax();
 if(fax == null)   fax = "";
 
 obj.put("guestname", guestname);
+obj.put("guestfname", contr.getFname());
+obj.put("guestlname", contr.getLname());
 obj.put("address", (contr.getAddress() != null) ? contr.getAddress():"" );
 obj.put("city", (contr.getCity() != null) ? contr.getCity():"");
 obj.put("zip", (contr.getZip() != null) ? contr.getZip():"");
@@ -38,5 +41,6 @@ obj.put("status", "1");
     obj.put("status", "0");
     obj.put("error", e.getMessage());
 }
+
 %>
 <%=obj.toString()%>

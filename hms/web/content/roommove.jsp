@@ -92,17 +92,22 @@
         modifyRate(id != <%=reserv.getRoomtypeid()%>);
         if (id > 0) {
             var html = "<option value='0'>-ოთახის #-</option>";
-            <% for (int i = 0; i < roomBeans.length; i++) {%>
+            <% for (int i = 0; i < roomBeans.length; i++) {
+                String sel = "";
+                if(reserv.getRoomid() != null && reserv.getRoomid().intValue() == roomBeans[i].getRoomid().intValue()) sel = "selected";
+            %>
             var value = "<%=roomBeans[i].getRoomtypeid()%>";
             if (id == value) {
-
-                html += "<option value='<%=roomBeans[i].getRoomid()%>' roomtypeid='<%=roomBeans[i].getRoomtypeid()%>'><%=roomBeans[i].getName()%></option>";
+                html += "<option value='<%=roomBeans[i].getRoomid()%>' roomtypeid='<%=roomBeans[i].getRoomtypeid()%>' <%=sel%>><%=roomBeans[i].getName()%></option>";
             }
             <% } %>
         } else {
             var html = "<option value='0'>-ოთახის #-</option>";
-            <% for (int i = 0; i < roomBeans.length; i++) {%>
-            html += "<option value='<%=roomBeans[i].getRoomid()%>' roomtypeid='<%=roomBeans[i].getRoomtypeid()%>'><%=roomBeans[i].getName()%></option>";
+            <% for (int i = 0; i < roomBeans.length; i++) {
+                String sel = "";
+                if(reserv.getRoomid() != null && reserv.getRoomid().intValue() == roomBeans[i].getRoomid().intValue()) sel = "selected";
+            %>
+            html += "<option value='<%=roomBeans[i].getRoomid()%>' roomtypeid='<%=roomBeans[i].getRoomtypeid()%>' <%=sel%>><%=roomBeans[i].getName()%></option>";
             <% }%>
         }
         $("#assignroom_roomid").html(html);
@@ -202,9 +207,13 @@
             </select>
             <select class="dropdown" id="assignroom_roomid">
                 <option value="0">-ოთახის #-</option>
-                <% for (int i = 0; i < roomBeans.length; i++) { %>
+                <% for (int i = 0; i < roomBeans.length; i++) { 
+                    String sel = "";
+                    if(reserv.getRoomid() != null && reserv.getRoomid().intValue() == roomBeans[i].getRoomid().intValue())
+                        sel = "selected";
+                %>
                 <option value="<%=roomBeans[i].getRoomid()%>"
-                        roomtypeid="<%=roomBeans[i].getRoomtypeid()%>"><%=roomBeans[i].getName()%>
+                        roomtypeid="<%=roomBeans[i].getRoomtypeid()%>" <%=sel%>><%=roomBeans[i].getName()%>
                 </option>
                 <% } %>
             </select>

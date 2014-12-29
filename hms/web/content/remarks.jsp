@@ -2,7 +2,8 @@
 <%@page pageEncoding="UTF-8"%>
 <%@include file="../includes/init.jsp"%>
 <%
-
+long rid = Long.parseLong(request.getParameter("rid"));
+String script = request.getParameter("script");
 %>
 <script>
     
@@ -19,7 +20,8 @@
                     act: "add",
                     category: $("#wlakin_reasoncategory").val(),
                     reasonid: $("#wlakin_reasonid").val(),
-                    name: $("#wlakin_reason").val()
+                    name: $("#wlakin_reason").val(),
+                    rid: <%=rid%>
                 },
                 function(data){
                     if(data.result == 0) BootstrapDialog.alert(data.error);
@@ -37,7 +39,8 @@
                 "content/ajax/updreason.jsp",
                 {
                     act: "del",
-                    num: i
+                    num: i,
+                    rid: <%=rid%>
                 },
                 function(data){
                     if(data.result == 0) BootstrapDialog.alert(data.error);
@@ -53,9 +56,12 @@
         $.post(
             "content/ajax/getReasons.jsp",
             {
-
+                rid: <%=rid%>
             },
-            function(data){$("#walkin_reasons").html(data);},
+            function(data){
+                $("#walkin_reasons").html(data);
+                <%=(script != null) ? script+";":""%>
+            },
             "html"
         );
     }

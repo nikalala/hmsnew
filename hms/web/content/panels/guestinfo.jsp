@@ -24,10 +24,11 @@ CountryBean[] countries = CountryManager.getInstance().loadByWhere("order by nam
                     </select>
                 </div>
                 <div class="input-group">
-                    <input class="form-control" type="text" id="guestinfo_name" style="width: 115px;">
+                    <input class="form-control" type="text" id="guestinfo_fname" style="width: 50px; padding-left: 1px; padding-right: 1px;" placeholder="სახელი">
+                    <input class="form-control" type="text" id="guestinfo_lname" style="width: 65px; padding-left: 1px; padding-right: 1px;" placeholder="გვარი">
                     <input type="hidden" id="guestinfo_guestid" value="0">
                     <div class="input-group-addon glyphicon glyphicon-remove" style="color: red; cursor: pointer;" onclick="remGuestName()"></div>
-                    <div class="input-group-addon glyphicon glyphicon-search" style="cursor: pointer;" onclick="walkinNameSearch('guestinfo_name',4)"></div>
+                    <div class="input-group-addon glyphicon glyphicon-search" style="cursor: pointer;" onclick="walkinNameSearch('guestinfo_lname',4)"></div>
                     <div class="input-group-addon glyphicon glyphicon-credit-card" style="cursor: pointer;" onclick="alert('ბარათი')"></div>
                 </div>
             </div>
