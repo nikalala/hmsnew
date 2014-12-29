@@ -58,8 +58,6 @@ public class VReservationlistComparator implements Comparator
      *   <li>VReservationlistManager.ID_RESERVATIONTYPEID
      *   <li>VReservationlistManager.ID_STATUS
      *   <li>VReservationlistManager.ID_GUESTID
-     *   <li>VReservationlistManager.ID_ADVANCEPAYMENTDATE
-     *   <li>VReservationlistManager.ID_ADVANCEPAYMENTAMOUNT
      *   <li>VReservationlistManager.ID_GUEST
      *   <li>VReservationlistManager.ID_ROOMCODE
      *   <li>VReservationlistManager.ID_ROOMTYPECODE
@@ -100,8 +98,6 @@ public class VReservationlistComparator implements Comparator
      *   <li>VReservationlistManager.ID_RESERVATIONTYPEID
      *   <li>VReservationlistManager.ID_STATUS
      *   <li>VReservationlistManager.ID_GUESTID
-     *   <li>VReservationlistManager.ID_ADVANCEPAYMENTDATE
-     *   <li>VReservationlistManager.ID_ADVANCEPAYMENTAMOUNT
      *   <li>VReservationlistManager.ID_GUEST
      *   <li>VReservationlistManager.ID_ROOMCODE
      *   <li>VReservationlistManager.ID_ROOMTYPECODE
@@ -252,28 +248,6 @@ public class VReservationlistComparator implements Comparator
                     iReturn = 1;
                 } else { 
                     iReturn = b1.getGuestid().compareTo(b2.getGuestid());
-                }
-                break;
-            case VReservationlistManager.ID_ADVANCEPAYMENTDATE:
-                if (b1.getAdvancepaymentdate() == null && b2.getAdvancepaymentdate() != null) {
-                    iReturn = -1;
-                } else if (b1.getAdvancepaymentdate() == null && b2.getAdvancepaymentdate() == null) {
-                    iReturn = 0;
-                } else if (b1.getAdvancepaymentdate() != null && b2.getAdvancepaymentdate() == null) {
-                    iReturn = 1;
-                } else { 
-                    iReturn = b1.getAdvancepaymentdate().compareTo(b2.getAdvancepaymentdate());
-                }
-                break;
-            case VReservationlistManager.ID_ADVANCEPAYMENTAMOUNT:
-                if (b1.getAdvancepaymentamount() == null && b2.getAdvancepaymentamount() != null) {
-                    iReturn = -1;
-                } else if (b1.getAdvancepaymentamount() == null && b2.getAdvancepaymentamount() == null) {
-                    iReturn = 0;
-                } else if (b1.getAdvancepaymentamount() != null && b2.getAdvancepaymentamount() == null) {
-                    iReturn = 1;
-                } else { 
-                    iReturn = b1.getAdvancepaymentamount().compareTo(b2.getAdvancepaymentamount());
                 }
                 break;
             case VReservationlistManager.ID_GUEST:

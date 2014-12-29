@@ -95,6 +95,10 @@ public class VArrivallistBean
     private boolean reservtype_is_modified = false;
     private boolean reservtype_is_initialized = false;
     
+    private Integer roomstatus;
+    private boolean roomstatus_is_modified = false;
+    private boolean roomstatus_is_initialized = false;
+    
     private boolean _isNew = true;
     
     /**
@@ -1246,6 +1250,73 @@ public class VArrivallistBean
     }
 
     /**
+     * Getter method for roomstatus.
+     * <br>
+     * Meta Data Information (in progress):
+     * <ul>
+     * <li>full name: v_arrivallist.roomstatus
+     * <li>column size: 10
+     * <li>jdbc type returned by the driver: Types.INTEGER
+     * </ul>
+     *
+     * @return the value of roomstatus
+     */
+    public Integer getRoomstatus()
+    {
+        return roomstatus; 
+    }
+
+    /**
+     * Setter method for roomstatus.
+     * <br>
+     * The new value is set only if compareTo() says it is different,
+     * or if one of either the new value or the current value is null.
+     * In case the new value is different, it is set and the field is marked as 'modified'.
+     *
+     * @param newVal the new value to be assigned to roomstatus
+     */
+    public void setRoomstatus(Integer newVal) {
+        if ((newVal != null && this.roomstatus != null && (newVal.compareTo(this.roomstatus) == 0)) || 
+            (newVal == null && this.roomstatus == null && roomstatus_is_initialized)) {
+            return; 
+        } 
+        this.roomstatus = newVal; 
+        roomstatus_is_modified = true; 
+        roomstatus_is_initialized = true; 
+    }
+
+    /**
+     * Setter method for roomstatus.
+     * <br>
+     * Convenient for those who do not want to deal with Objects for primary types.
+     *
+     * @param newVal the new value to be assigned to roomstatus
+     */
+    public void setRoomstatus(int newVal) {
+        setRoomstatus(new Integer(newVal));
+    }
+
+    /**
+     * Determines if the roomstatus has been modified.
+     *
+     * @return true if the field has been modified, false if the field has not been modified
+     */
+    public boolean isRoomstatusModified() {
+        return roomstatus_is_modified; 
+    }
+
+    /**
+     * Determines if the roomstatus has been initialized.
+     * <br>
+     * It is useful to determine if a field is null on purpose or just because it has not been initialized.
+     *
+     * @return true if the field has been initialized, false otherwise
+     */
+    public boolean isRoomstatusInitialized() {
+        return roomstatus_is_initialized; 
+    }
+
+    /**
      * Determines if the current object is new.
      *
      * @return true if the current object is new, false if the object is not new
@@ -1288,7 +1359,8 @@ public class VArrivallistBean
 		companyname_is_modified || 
 		adult_is_modified || 
 		child_is_modified || 
-		reservtype_is_modified;
+		reservtype_is_modified || 
+		roomstatus_is_modified;
     }
 
     /**
@@ -1313,6 +1385,7 @@ public class VArrivallistBean
         adult_is_modified = false;
         child_is_modified = false;
         reservtype_is_modified = false;
+        roomstatus_is_modified = false;
     }
 
     /**
@@ -1339,6 +1412,7 @@ public class VArrivallistBean
         setAdult(bean.getAdult());
         setChild(bean.getChild());
         setReservtype(bean.getReservtype());
+        setRoomstatus(bean.getRoomstatus());
     }
 
     /**
@@ -1366,6 +1440,7 @@ public class VArrivallistBean
                  + "\n - v_arrivallist.adult = " + (adult_is_initialized ? ("[" + (adult == null ? null : adult.toString()) + "]") : "not initialized") + ""
                  + "\n - v_arrivallist.child = " + (child_is_initialized ? ("[" + (child == null ? null : child.toString()) + "]") : "not initialized") + ""
                  + "\n - v_arrivallist.reservtype = " + (reservtype_is_initialized ? ("[" + (reservtype == null ? null : reservtype.toString()) + "]") : "not initialized") + ""
+                 + "\n - v_arrivallist.roomstatus = " + (roomstatus_is_initialized ? ("[" + (roomstatus == null ? null : roomstatus.toString()) + "]") : "not initialized") + ""
             ;
     }
 

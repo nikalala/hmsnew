@@ -154,6 +154,13 @@ public class VArrivallistManager
     public static final int TYPE_RESERVTYPE = Types.VARCHAR;
     public static final String NAME_RESERVTYPE = "reservtype";
 
+    /**
+     * Column roomstatus of type Types.INTEGER mapped to Integer.
+     */
+    public static final int ID_ROOMSTATUS = 18;
+    public static final int TYPE_ROOMSTATUS = Types.INTEGER;
+    public static final String NAME_ROOMSTATUS = "roomstatus";
+
 
     private static final String TABLE_NAME = "v_arrivallist";
 
@@ -180,6 +187,7 @@ public class VArrivallistManager
         ,"v_arrivallist.adult"
         ,"v_arrivallist.child"
         ,"v_arrivallist.reservtype"
+        ,"v_arrivallist.roomstatus"
     };
 
     /**
@@ -202,7 +210,8 @@ public class VArrivallistManager
                             + ",v_arrivallist.companyname"
                             + ",v_arrivallist.adult"
                             + ",v_arrivallist.child"
-                            + ",v_arrivallist.reservtype";
+                            + ",v_arrivallist.reservtype"
+                            + ",v_arrivallist.roomstatus";
 
     private static VArrivallistManager singleton = new VArrivallistManager();
 
@@ -546,6 +555,14 @@ public class VArrivallistManager
                     _dirtyCount++;
                 }
 
+                if (pObject.isRoomstatusModified()) {
+                    if (_dirtyCount>0) {
+                        _sql.append(",");
+                    }
+                    _sql.append("roomstatus");
+                    _dirtyCount++;
+                }
+
                 _sql.append(") values (");
                 if(_dirtyCount > 0) {
                     _sql.append("?");
@@ -628,6 +645,10 @@ public class VArrivallistManager
     
                 if (pObject.isReservtypeModified()) {
                     ps.setString(++_dirtyCount, pObject.getReservtype());
+                }
+    
+                if (pObject.isRoomstatusModified()) {
+                    Manager.setInteger(ps, ++_dirtyCount, pObject.getRoomstatus());
                 }
     
                 ps.executeUpdate();
@@ -803,6 +824,15 @@ public class VArrivallistManager
                     }
                     _sql.append("reservtype").append("=?");
                 }
+
+                if (pObject.isRoomstatusModified()) {
+                    if (useComma) {
+                        _sql.append(",");
+                    } else {
+                        useComma=true;
+                    }
+                    _sql.append("roomstatus").append("=?");
+                }
                 _sql.append("");
                 ps = c.prepareStatement(_sql.toString(),ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
                 int _dirtyCount = 0;
@@ -877,6 +907,10 @@ public class VArrivallistManager
 
                 if (pObject.isReservtypeModified()) {
                       ps.setString(++_dirtyCount, pObject.getReservtype());
+                }
+
+                if (pObject.isRoomstatusModified()) {
+                      Manager.setInteger(ps, ++_dirtyCount, pObject.getRoomstatus());
                 }
     
                 if (_dirtyCount == 0) {
@@ -1044,6 +1078,11 @@ public class VArrivallistManager
                  _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("reservtype= ?");
              }
     
+             if (pObject.isRoomstatusModified()) {
+                 _dirtyCount ++; 
+                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("roomstatus= ?");
+             }
+    
              if (_dirtyCount == 0) {
                  throw new SQLException ("The pObject to look for is invalid : not initialized !");
              }
@@ -1122,6 +1161,10 @@ public class VArrivallistManager
     
              if (pObject.isReservtypeModified()) {
                  ps.setString(++_dirtyCount, pObject.getReservtype());
+             }
+    
+             if (pObject.isRoomstatusModified()) {
+                 Manager.setInteger(ps, ++_dirtyCount, pObject.getRoomstatus());
              }
     
              ps.executeQuery();
@@ -1276,6 +1319,13 @@ public class VArrivallistManager
                 _dirtyAnd ++;
             }
     
+            if (pObject.isRoomstatusInitialized()) {
+                if (_dirtyAnd > 0)
+                    sql.append(" AND ");
+                sql.append("roomstatus").append("=?");
+                _dirtyAnd ++;
+            }
+    
             c = getConnection();
             ps = c.prepareStatement(sql.toString(),ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             int _dirtyCount = 0;
@@ -1350,6 +1400,10 @@ public class VArrivallistManager
     
             if (pObject.isReservtypeInitialized()) {
                 ps.setString(++_dirtyCount, pObject.getReservtype());
+            }
+    
+            if (pObject.isRoomstatusInitialized()) {
+                Manager.setInteger(ps, ++_dirtyCount, pObject.getRoomstatus());
             }
     
             int _rows = ps.executeUpdate();
@@ -1552,6 +1606,11 @@ public class VArrivallistManager
                     _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("reservtype= ?");
                 }
     
+                if (pObject.isRoomstatusModified()) {
+                    _dirtyCount++; 
+                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("roomstatus= ?");
+                }
+    
                 if (_dirtyCount == 0)
                    throw new SQLException ("The pObject to look is unvalid : not initialized !");
     
@@ -1633,6 +1692,10 @@ public class VArrivallistManager
                     ps.setString(++_dirtyCount, pObject.getReservtype());
                 }
     
+                if (pObject.isRoomstatusModified()) {
+                    Manager.setInteger(ps, ++_dirtyCount, pObject.getRoomstatus());
+                }
+    
                 return countByPreparedStatement(ps);
         }
         finally
@@ -1675,6 +1738,7 @@ public class VArrivallistManager
         pObject.setAdult(Manager.getInteger(rs, 16));
         pObject.setChild(Manager.getInteger(rs, 17));
         pObject.setReservtype(rs.getString(18));
+        pObject.setRoomstatus(Manager.getInteger(rs, 19));
 
         pObject.isNew(false);
         pObject.resetIsModified();
@@ -1768,6 +1832,10 @@ public class VArrivallistManager
                 case ID_RESERVTYPE:
                     ++pos;
                     pObject.setReservtype(rs.getString(pos));
+                    break;
+                case ID_ROOMSTATUS:
+                    ++pos;
+                    pObject.setRoomstatus(Manager.getInteger(rs, pos));
                     break;
             }
         }

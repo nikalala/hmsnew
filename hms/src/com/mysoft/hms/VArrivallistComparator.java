@@ -65,6 +65,7 @@ public class VArrivallistComparator implements Comparator
      *   <li>VArrivallistManager.ID_ADULT
      *   <li>VArrivallistManager.ID_CHILD
      *   <li>VArrivallistManager.ID_RESERVTYPE
+     *   <li>VArrivallistManager.ID_ROOMSTATUS
      * </ul>
      */
     public VArrivallistComparator(int iType)
@@ -101,6 +102,7 @@ public class VArrivallistComparator implements Comparator
      *   <li>VArrivallistManager.ID_ADULT
      *   <li>VArrivallistManager.ID_CHILD
      *   <li>VArrivallistManager.ID_RESERVTYPE
+     *   <li>VArrivallistManager.ID_ROOMSTATUS
      * </ul>
      *
      * @param bReverse set this value to true, if you want to reverse the sorting results
@@ -317,6 +319,17 @@ public class VArrivallistComparator implements Comparator
                     iReturn = 1;
                 } else { 
                     iReturn = b1.getReservtype().compareTo(b2.getReservtype());
+                }
+                break;
+            case VArrivallistManager.ID_ROOMSTATUS:
+                if (b1.getRoomstatus() == null && b2.getRoomstatus() != null) {
+                    iReturn = -1;
+                } else if (b1.getRoomstatus() == null && b2.getRoomstatus() == null) {
+                    iReturn = 0;
+                } else if (b1.getRoomstatus() != null && b2.getRoomstatus() == null) {
+                    iReturn = 1;
+                } else { 
+                    iReturn = b1.getRoomstatus().compareTo(b2.getRoomstatus());
                 }
                 break;
             default: 

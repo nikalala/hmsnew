@@ -1,9 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" readonly="true" id="5ed80eda-d75c-4142-80e9-933e2c28140f" name="Default" comment="" />
+    <list default="true" readonly="true" id="5ed80eda-d75c-4142-80e9-933e2c28140f" name="Default" comment="hot update">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web/WEB-INF/classes" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mysoft/hms/VArrivallistBean.java" afterPath="$PROJECT_DIR$/src/com/mysoft/hms/VArrivallistBean.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mysoft/hms/VArrivallistComparator.java" afterPath="$PROJECT_DIR$/src/com/mysoft/hms/VArrivallistComparator.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mysoft/hms/VArrivallistManager.java" afterPath="$PROJECT_DIR$/src/com/mysoft/hms/VArrivallistManager.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mysoft/hms/VReservationlistBean.java" afterPath="$PROJECT_DIR$/src/com/mysoft/hms/VReservationlistBean.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mysoft/hms/VReservationlistComparator.java" afterPath="$PROJECT_DIR$/src/com/mysoft/hms/VReservationlistComparator.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/mysoft/hms/VReservationlistManager.java" afterPath="$PROJECT_DIR$/src/com/mysoft/hms/VReservationlistManager.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hms.iml" afterPath="$PROJECT_DIR$/hms.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/sqlscripts/hms.sql" afterPath="$PROJECT_DIR$/web/sqlscripts/hms.sql" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/lib.xml" afterPath="$PROJECT_DIR$/.idea/libraries/lib.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/content/stayview.jsp" afterPath="$PROJECT_DIR$/web/content/stayview.jsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+    </list>
     <ignored path="hms.iws" />
     <ignored path=".idea/workspace.xml" />
+    <ignored path="$PROJECT_DIR$/out/" />
+    <ignored path="$PROJECT_DIR$/src/com/mysoft/hms/" />
+    <ignored path=".idea/dataSources.local.xml" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,11 +41,195 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="fileReader.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/java/com/mysoft/fileReader.java">
+      <file leaf-file-name="stayview.jsp" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/web/content/stayview.jsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="105" max-vertical-offset="1335">
-              <caret line="11" column="20" selection-start-line="11" selection-start-column="20" selection-end-line="11" selection-end-column="20" />
+            <state vertical-scroll-proportion="1.0475352" vertical-offset="0" max-vertical-offset="9316">
+              <caret line="35" column="5" selection-start-line="35" selection-start-column="5" selection-end-line="35" selection-end-column="5" />
+              <folding>
+                <marker date="1419843866966" expanded="true" signature="4535:4550" placeholder="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="main.css" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/web/css/main.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="4234" max-vertical-offset="5389">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="main.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/web/js/main.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="640" max-vertical-offset="3995">
+              <caret line="155" column="40" selection-start-line="155" selection-start-column="40" selection-end-line="155" selection-end-column="40" />
+              <folding>
+                <element signature="e#142#181#0" expanded="false" />
+                <element signature="n#!!block;n#sleep#0" expanded="false" />
+                <element signature="e#382#479#0" expanded="false" />
+                <element signature="e#443#473#0" expanded="false" />
+                <element signature="n#!!block;n#checkAll#0" expanded="false" />
+                <element signature="e#693#1193#0" expanded="false" />
+                <element signature="e#719#1182#0" expanded="false" />
+                <element signature="e#816#860#0" expanded="false" />
+                <element signature="e#904#1176#0" expanded="false" />
+                <element signature="e#918#1166#0" expanded="false" />
+                <element signature="e#991#1152#0" expanded="false" />
+                <element signature="e#1248#1791#0" expanded="false" />
+                <element signature="e#1274#1780#0" expanded="false" />
+                <element signature="e#1373#1417#0" expanded="false" />
+                <element signature="e#1461#1774#0" expanded="false" />
+                <element signature="e#1475#1764#0" expanded="false" />
+                <element signature="e#1589#1750#0" expanded="false" />
+                <element signature="e#1849#2662#0" expanded="false" />
+                <element signature="e#1875#2651#0" expanded="false" />
+                <element signature="e#2002#2046#0" expanded="false" />
+                <element signature="e#2065#2645#0" expanded="false" />
+                <element signature="e#2079#2332#0" expanded="false" />
+                <element signature="e#2156#2318#0" expanded="false" />
+                <element signature="e#2346#2635#0" expanded="false" />
+                <element signature="e#2460#2621#0" expanded="false" />
+                <element signature="e#2704#3078#0" expanded="false" />
+                <element signature="e#2783#3038#0" expanded="false" />
+                <element signature="e#2811#2970#0" expanded="false" />
+                <element signature="e#2849#2911#0" expanded="false" />
+                <element signature="e#2976#3032#0" expanded="false" />
+                <element signature="n#!!block;n#savedataprefix#0" expanded="false" />
+                <element signature="e#5023#5094#0" expanded="false" />
+                <element signature="e#5100#5249#0" expanded="false" />
+                <element signature="e#5162#5201#0" expanded="false" />
+                <element signature="e#5294#5658#0" expanded="false" />
+                <element signature="e#5711#6427#0" expanded="false" />
+                <element signature="e#5794#6421#0" expanded="false" />
+                <element signature="e#5849#5912#0" expanded="false" />
+                <element signature="e#5948#6095#0" expanded="false" />
+                <element signature="e#6006#6079#0" expanded="false" />
+                <element signature="n#!!block;n#savedata1#0" expanded="false" />
+                <element signature="e#6686#6743#0" expanded="false" />
+                <element signature="e#6749#6898#0" expanded="false" />
+                <element signature="e#6811#6850#0" expanded="false" />
+                <element signature="e#6943#7307#0" expanded="false" />
+                <element signature="e#7409#7952#0" expanded="false" />
+                <element signature="e#7492#7946#0" expanded="false" />
+                <element signature="e#7529#7676#0" expanded="false" />
+                <element signature="e#7587#7660#0" expanded="false" />
+                <element signature="n#!!block;n#infopage#0" expanded="false" />
+                <element signature="e#8071#8182#0" expanded="false" />
+                <element signature="n#!!block;n#doContextMenuAction#0" expanded="false" />
+                <element signature="e#8308#8793#0" expanded="false" />
+                <element signature="e#8382#8475#0" expanded="false" />
+                <element signature="e#8505#8776#0" expanded="false" />
+                <element signature="e#8889#9674#0" expanded="false" />
+                <element signature="e#9036#9367#0" expanded="false" />
+                <element signature="e#9131#9218#0" expanded="false" />
+                <element signature="e#9244#9337#0" expanded="false" />
+                <element signature="e#9417#9502#0" expanded="false" />
+                <element signature="e#9544#9580#0" expanded="false" />
+                <element signature="e#9601#9670#0" expanded="false" />
+                <element signature="n#!!block;n#newWindow#0" expanded="false" />
+                <element signature="e#9792#9920#0" expanded="false" />
+                <element signature="e#10023#10152#0" expanded="false" />
+                <element signature="n#!!block;n#extramodal0#1" expanded="false" />
+                <element signature="e#10265#10394#0" expanded="false" />
+                <element signature="n#!!block;n#newWindow1#0" expanded="false" />
+                <element signature="e#10506#10611#0" expanded="false" />
+                <element signature="n#!!block;n#newsWindow#0" expanded="false" />
+                <element signature="e#10713#10823#0" expanded="false" />
+                <element signature="n#!!block;n#newsWindow1#0" expanded="false" />
+                <element signature="e#10936#11046#0" expanded="false" />
+                <element signature="n#!!block;n#modalWindow#0" expanded="false" />
+                <element signature="e#11184#11268#0" expanded="false" />
+                <element signature="n#!!block;n#newmWindow#0" expanded="false" />
+                <element signature="e#11371#11482#0" expanded="false" />
+                <element signature="n#!!block;n#newmWindow1#0" expanded="false" />
+                <element signature="e#11614#11748#0" expanded="false" />
+                <element signature="n#!!block;n#getBody#0" expanded="false" />
+                <element signature="e#11810#12104#0" expanded="false" />
+                <element signature="e#11927#12009#0" expanded="false" />
+                <element signature="e#12038#12076#0" expanded="false" />
+                <element signature="n#!!block;n#getLBody#0" expanded="false" />
+                <element signature="e#12148#12346#0" expanded="false" />
+                <element signature="e#12265#12318#0" expanded="false" />
+                <element signature="n#!!block;n#getBody#1" expanded="false" />
+                <element signature="e#12444#12737#0" expanded="false" />
+                <element signature="e#12562#12642#0" expanded="false" />
+                <element signature="e#12671#12709#0" expanded="false" />
+                <element signature="e#12744#12762#0" expanded="false" />
+                <element signature="e#12817#12850#0" expanded="false" />
+                <element signature="n#!!block;n#removeTab#0" expanded="false" />
+                <element signature="e#13016#13049#0" expanded="false" />
+                <element signature="n#!!block;n#addTab#0" expanded="false" />
+                <element signature="e#13332#13433#0" expanded="false" />
+                <element signature="e#13686#14498#0" expanded="false" />
+                <element signature="e#13767#13955#0" expanded="false" />
+                <element signature="e#13961#14148#0" expanded="false" />
+                <element signature="e#14255#14367#0" expanded="false" />
+                <element signature="e#14373#14492#0" expanded="false" />
+                <element signature="e#14504#15511#0" expanded="false" />
+                <element signature="e#14578#15201#0" expanded="false" />
+                <element signature="e#14973#15143#0" expanded="false" />
+                <element signature="e#15205#15504#0" expanded="false" />
+                <element signature="e#15588#15963#0" expanded="false" />
+                <element signature="e#15614#15957#0" expanded="false" />
+                <element signature="e#15769#15785#0" expanded="false" />
+                <element signature="e#15789#15947#0" expanded="false" />
+                <element signature="e#16065#16143#0" expanded="false" />
+                <element signature="n#!!block;n#reloadMenu#0" expanded="false" />
+                <element signature="n#!!block;n#registerCloseEvent#0" expanded="false" />
+                <element signature="e#17362#17564#0" expanded="false" />
+                <element signature="e#20995#21128#0" expanded="false" />
+                <element signature="n#!!block;n#walkinNameSearch#0" expanded="false" />
+                <element signature="n#!!block;n#editNameSearch#0" expanded="false" />
+                <element signature="n#!!block;n#isNullOrEmpty#0" expanded="false" />
+                <element signature="e#22184#22212#0" expanded="false" />
+                <element signature="n#!!block;n#urlencode#0" expanded="false" />
+                <element signature="n#!!block;n#initializeGrid#0" expanded="false" />
+                <element signature="e#22715#22749#0" expanded="false" />
+                <element signature="e#22792#23501#0" expanded="false" />
+                <element signature="e#23237#23491#0" expanded="false" />
+                <element signature="n#!!block;n#ReDrawTable#0" expanded="false" />
+                <element signature="n#!!block;n#reloadGrid#0" expanded="false" />
+                <element signature="n#!!block;n#colModelGenerator#0" expanded="false" />
+                <element signature="n#!!block;n#newWindowWithParams#0" expanded="false" />
+                <element signature="e#29409#29537#0" expanded="false" />
+                <element signature="n#!!block;n#checkOut#0" expanded="false" />
+                <element signature="e#29641#29841#0" expanded="false" />
+                <element signature="e#29724#29835#0" expanded="false" />
+                <marker date="1419850557433" expanded="false" signature="22715:22749" placeholder="{...}" />
+                <marker date="1419850557433" expanded="false" signature="22792:23501" placeholder="{&quot;rowNum&quot;: 2000...}" />
+                <marker date="1419850557433" expanded="false" signature="23237:23491" placeholder="{...}" />
+                <marker date="1419850557433" expanded="false" signature="25132:25429" placeholder="{...}" />
+                <marker date="1419850557433" expanded="false" signature="25161:25348" placeholder="{&quot;position&quot;: 'absolute'...}" />
+                <marker date="1419850557433" expanded="false" signature="25557:25855" placeholder="{&quot;position&quot;: 'absolute'...}" />
+                <marker date="1419850557433" expanded="false" signature="26057:26137" placeholder="{&quot;height&quot;: '20px'...}" />
+                <marker date="1419850557433" expanded="false" signature="26347:26571" placeholder="{...}" />
+                <marker date="1419850557433" expanded="false" signature="26363:26495" placeholder="{...}" />
+                <marker date="1419850557433" expanded="false" signature="26441:26487" placeholder="{...}" />
+                <marker date="1419850557433" expanded="false" signature="26832:26907" placeholder="{...}" />
+                <marker date="1419850557433" expanded="false" signature="26901:26910" placeholder="{...}" />
+                <marker date="1419850557433" expanded="false" signature="26963:27168" placeholder="{...}" />
+                <marker date="1419850557433" expanded="false" signature="27287:27890" placeholder="{...}" />
+                <marker date="1419850557433" expanded="false" signature="27324:27869" placeholder="{...}" />
+                <marker date="1419850557433" expanded="false" signature="27356:27816" placeholder="{...}" />
+                <marker date="1419850557433" expanded="false" signature="27956:28000" placeholder="{...}" />
+                <marker date="1419850557433" expanded="false" signature="28109:29268" placeholder="{...}" />
+                <marker date="1419850557433" expanded="false" signature="28244:29233" placeholder="{...}" />
+                <marker date="1419850557433" expanded="false" signature="29424:29518" placeholder="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="walkin.jsp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/web/content/walkin.jsp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="3917" max-vertical-offset="9367">
+              <caret line="241" column="37" selection-start-line="241" selection-start-column="37" selection-end-line="241" selection-end-column="37" />
               <folding />
             </state>
           </provider>
@@ -40,11 +242,78 @@
       <setting name="OPEN_NEW_TAB" value="true" />
     </FindUsagesManager>
   </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/web/content/panels/payinfo.jsp" />
+        <option value="$PROJECT_DIR$/web/content/savertype.jsp" />
+        <option value="$PROJECT_DIR$/web/content/changertype.jsp" />
+        <option value="$PROJECT_DIR$/web/content/getroomparambyid.jsp" />
+        <option value="$PROJECT_DIR$/src/com/mysoft/CodeHelpers.java" />
+        <option value="$PROJECT_DIR$/web/includes/meta.jsp" />
+        <option value="$PROJECT_DIR$/web/content/wizards/nightaudit/content/getna2.jsp" />
+        <option value="$PROJECT_DIR$/web/content/wizards/nightaudit/content/getna1.jsp" />
+        <option value="$PROJECT_DIR$/web/content/assignroom.jsp" />
+        <option value="$PROJECT_DIR$/web/content/folio.jsp" />
+        <option value="$PROJECT_DIR$/web/content/mainbody.jsp" />
+        <option value="$PROJECT_DIR$/web/gt/mainbody.js" />
+        <option value="$PROJECT_DIR$/web/chargerinfo.jsp" />
+        <option value="$PROJECT_DIR$/web/content/contactinfo.jsp" />
+        <option value="$PROJECT_DIR$/web/content/voucherinfo.jsp" />
+        <option value="$PROJECT_DIR$/web/css/main.css" />
+        <option value="$PROJECT_DIR$/web/content/getcharges.jsp" />
+        <option value="$PROJECT_DIR$/web/content/expenses.jsp" />
+        <option value="$PROJECT_DIR$/web/js/ext/1/sch-all.js" />
+        <option value="$PROJECT_DIR$/web/content/chargerinfo.jsp" />
+        <option value="$USER_HOME$/Downloads/tabulous.js-master/tabulous.js-master/demo/demo/js.js" />
+        <option value="$USER_HOME$/Downloads/tabulous.js-master/tabulous.js-master/demo/demo/tabulous.js" />
+        <option value="$USER_HOME$/Downloads/tabulous.js-master/tabulous.js-master/demo/demo/index.html" />
+        <option value="$PROJECT_DIR$/web/content/form/printInvoiceFolioItem.jsp" />
+        <option value="$PROJECT_DIR$/web/content/form/printRegCardPdf.jsp" />
+        <option value="$PROJECT_DIR$/web/js/tabulous.js" />
+        <option value="$PROJECT_DIR$/web/css/ui.jqgrid.css" />
+        <option value="$PROJECT_DIR$/web/content/test" />
+        <option value="$PROJECT_DIR$/web/content/getcontrlist.jsp" />
+        <option value="$PROJECT_DIR$/web/content/EditTransaction.jsp" />
+        <option value="$PROJECT_DIR$/web/content/stats.js" />
+        <option value="$PROJECT_DIR$/web/content/stats.jsp" />
+        <option value="$PROJECT_DIR$/web/includes/menu.jsp" />
+        <option value="$PROJECT_DIR$/web/index.jsp" />
+        <option value="$PROJECT_DIR$/web/content/statsleft.jsp" />
+        <option value="$PROJECT_DIR$/web/content/stat/arlist.jsp" />
+        <option value="$PROJECT_DIR$/web/content/getcontrcontact.jsp" />
+        <option value="$PROJECT_DIR$/web/content/arlist.jsp" />
+        <option value="$PROJECT_DIR$/web/content/ge.jsp" />
+        <option value="$PROJECT_DIR$/web/content/arrivallist.jsp" />
+        <option value="$PROJECT_DIR$/web/content/guestdblist.jsp" />
+        <option value="$PROJECT_DIR$/web/content/tagents.jsp" />
+        <option value="$PROJECT_DIR$/web/content/getarrivallist.jsp" />
+        <option value="$PROJECT_DIR$/web/content/deplist.jsp" />
+        <option value="$PROJECT_DIR$/web/js/grids.js" />
+        <option value="$PROJECT_DIR$/web/content/reservationlist.jsp" />
+        <option value="$PROJECT_DIR$/web/content/getreservationlist.jsp" />
+        <option value="$PROJECT_DIR$/web/content/getdeplist.jsp" />
+        <option value="$PROJECT_DIR$/web/js/main.js" />
+        <option value="$PROJECT_DIR$/web/content/walkin.jsp" />
+        <option value="$PROJECT_DIR$/web/content/stayview.jsp" />
+      </list>
+    </option>
+  </component>
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+  </component>
+  <component name="LogFilters">
+    <option name="FILTER_ERRORS" value="false" />
+    <option name="FILTER_WARNINGS" value="false" />
+    <option name="FILTER_INFO" value="true" />
+    <option name="FILTER_DEBUG" value="true" />
+    <option name="CUSTOM_FILTER" />
+  </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="20" />
-    <option name="y" value="24" />
-    <option name="width" value="1400" />
-    <option name="height" value="852" />
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="1936" />
+    <option name="height" value="1056" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -57,9 +326,6 @@
     <OptionsSetting value="true" id="Get Latest Version" />
     <ConfirmationsSetting value="0" id="Add" />
     <ConfirmationsSetting value="0" id="Remove" />
-  </component>
-  <component name="ProjectReloadState">
-    <option name="STATE" value="0" />
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
@@ -102,11 +368,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mysoft" />
+              <option name="myItemId" value="web" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -120,7 +382,11 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
+              <option name="myItemId" value="web" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="css" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -138,7 +404,7 @@
     <property name="MemberChooser.showClasses" value="true" />
     <property name="MemberChooser.copyJavadoc" value="false" />
     <property name="recentsLimit" value="5" />
-    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="options.lastSelected" value="preferences.externalTools" />
@@ -148,75 +414,162 @@
     <property name="FullScreen" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="restartRequiresConfirmation" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/build/web" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/web" />
+    <property name="LayoutCode.rearrangeEntriesJSP" value="false" />
+    <property name="LayoutCode.rearrangeEntriesHTML" value="false" />
+    <property name="LayoutCode.rearrangeEntriesJavaScript 1.5" value="false" />
+    <property name="LayoutCode.rearrangeEntriesCSS" value="false" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\Projects\hms\web\images" />
+      <recent name="E:\Projects\hms\web\sqlscripts" />
+      <recent name="E:\Projects\hms\web\content" />
+      <recent name="E:\Projects\hms\web\js" />
+      <recent name="E:\Projects\hms\web\fonts" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\Projects\hms\web\content" />
+    </key>
+  </component>
+  <component name="RestoreUpdateTree">
+    <UpdateInfo date="Moments ago" ActionInfo="_Update">
+      <UpdatedFiles>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Updated from server" />
+          <option name="myStatusName" value="Changed on server" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="CHANGED_ON_SERVER" />
+          <FILE-GROUP>
+            <option name="myUpdateName" value="Updated" />
+            <option name="myStatusName" value="Changed" />
+            <option name="mySupportsDeletion" value="false" />
+            <option name="myCanBeAbsent" value="false" />
+            <option name="myId" value="UPDATED" />
+            <PATH vcs="svn" revision="76">E:\Projects\hms\web\content\walkin.jsp</PATH>
+            <PATH vcs="svn" revision="76">E:\Projects\hms\web\content\savereservation.jsp</PATH>
+            <PATH vcs="svn" revision="76">E:\Projects\hms\web\content\srch_getcontragentinfo_json.jsp</PATH>
+            <PATH vcs="svn" revision="76">E:\Projects\hms\web\content\editguestinfo.jsp</PATH>
+            <PATH vcs="svn" revision="76">E:\Projects\hms\web\content\panels\guestinfo.jsp</PATH>
+            <PATH vcs="svn" revision="76">E:\Projects\hms\web\content\EditTransaction.jsp</PATH>
+            <PATH vcs="svn" revision="76">E:\Projects\hms\web\content\remarks.jsp</PATH>
+            <PATH vcs="svn" revision="76">E:\Projects\hms\web\content\assignroom.jsp</PATH>
+            <PATH vcs="svn" revision="76">E:\Projects\hms\web\content\geninfo.jsp</PATH>
+            <PATH vcs="svn" revision="76">E:\Projects\hms\web\content\ajax\updreason.jsp</PATH>
+            <PATH vcs="svn" revision="76">E:\Projects\hms\web\content\ajax\getReasonByCategory.jsp</PATH>
+            <PATH vcs="svn" revision="76">E:\Projects\hms\web\content\updateguestinfo.jsp</PATH>
+            <PATH vcs="svn" revision="76">E:\Projects\hms\web\content\cancel.jsp</PATH>
+            <PATH vcs="svn" revision="76">E:\Projects\hms\web\content\srch_getguestinfo_json.jsp</PATH>
+            <PATH vcs="svn" revision="76">E:\Projects\hms\web\content\contactSearch.jsp</PATH>
+            <PATH vcs="svn" revision="76">E:\Projects\hms\web\content</PATH>
+            <PATH vcs="svn" revision="76">E:\Projects\hms\web\js\main.js</PATH>
+            <PATH vcs="svn" revision="76">E:\Projects\hms\web\index.jsp</PATH>
+            <PATH vcs="svn" revision="76">E:\Projects\hms\src\com\mysoft\hms\CountryBean.java</PATH>
+          </FILE-GROUP>
+          <FILE-GROUP>
+            <option name="myUpdateName" value="Created" />
+            <option name="myStatusName" value="Created" />
+            <option name="mySupportsDeletion" value="false" />
+            <option name="myCanBeAbsent" value="false" />
+            <option name="myId" value="CREATED" />
+            <PATH vcs="svn" revision="76">E:\Projects\hms\web\content\remarklist.jsp</PATH>
+          </FILE-GROUP>
+          <FILE-GROUP>
+            <option name="myUpdateName" value="Deleted" />
+            <option name="myStatusName" value="Deleted" />
+            <option name="mySupportsDeletion" value="false" />
+            <option name="myCanBeAbsent" value="true" />
+            <option name="myId" value="REMOVED_FROM_REPOSITORY" />
+          </FILE-GROUP>
+          <FILE-GROUP>
+            <option name="myUpdateName" value="Restored" />
+            <option name="myStatusName" value="Will be restored" />
+            <option name="mySupportsDeletion" value="false" />
+            <option name="myCanBeAbsent" value="false" />
+            <option name="myId" value="RESTORED" />
+          </FILE-GROUP>
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Modified" />
+          <option name="myStatusName" value="Modified" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="MODIFIED" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Skipped" />
+          <option name="myStatusName" value="Skipped" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="SKIPPED" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Merged with conflicts" />
+          <option name="myStatusName" value="Will be merged with conflicts" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="MERGED_WITH_CONFLICTS" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Merged with tree conflicts" />
+          <option name="myStatusName" value="Merged with tree conflicts" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="MERGED_WITH_TREE_CONFLICT" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Merged with property conflicts" />
+          <option name="myStatusName" value="Will be merged with property conflicts" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="MERGED_WITH_PROPERTY_CONFLICT" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Merged" />
+          <option name="myStatusName" value="Will be merged" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="MERGED" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Not in repository" />
+          <option name="myStatusName" value="Not in repository" />
+          <option name="mySupportsDeletion" value="true" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="UNKNOWN" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Locally added" />
+          <option name="myStatusName" value="Locally added" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="LOCALLY_ADDED" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Locally removed" />
+          <option name="myStatusName" value="Locally removed" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="LOCALLY_REMOVED" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Switched" />
+          <option name="myStatusName" value="Switched" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="SWITCHED" />
+        </FILE-GROUP>
+      </UpdatedFiles>
+    </UpdateInfo>
   </component>
   <component name="RunManager" selected="Tomcat Server.hms">
-    <configuration default="true" type="GrailsRunConfigurationType" factoryName="Grails">
-      <module name="" />
-      <setting name="vmparams" value="" />
-      <setting name="cmdLine" value="run-app" />
-      <setting name="depsClasspath" value="false" />
-      <setting name="passParentEnv" value="true" />
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <setting name="launchBrowser" value="false" />
-      <method />
-    </configuration>
-    <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
-      <module name="" />
-      <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m -ea" />
-      <option name="PROGRAM_PARAMETERS" />
-      <method />
-    </configuration>
     <configuration default="true" type="Remote" factoryName="Remote">
       <option name="USE_SOCKET_TRANSPORT" value="true" />
       <option name="SERVER_MODE" value="false" />
       <option name="SHMEM_ADDRESS" value="javadebug" />
       <option name="HOST" value="localhost" />
       <option name="PORT" value="5005" />
-      <method />
-    </configuration>
-    <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
-      <method />
-    </configuration>
-    <configuration default="true" type="Applet" factoryName="Applet">
-      <module name="" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="HTML_FILE_NAME" />
-      <option name="HTML_USED" value="false" />
-      <option name="WIDTH" value="400" />
-      <option name="HEIGHT" value="300" />
-      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
-      <option name="VM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <method />
-    </configuration>
-    <configuration default="true" type="TestNG" factoryName="TestNG">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <module name="" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="SUITE_NAME" />
-      <option name="PACKAGE_NAME" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="METHOD_NAME" />
-      <option name="GROUP_NAME" />
-      <option name="TEST_OBJECT" value="CLASS" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="OUTPUT_DIRECTORY" />
-      <option name="ANNOTATION_TYPE" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="moduleWithDependencies" />
-      </option>
-      <option name="USE_DEFAULT_REPORTERS" value="false" />
-      <option name="PROPERTIES_FILE" />
-      <envs />
-      <properties />
-      <listeners />
       <method />
     </configuration>
     <configuration default="true" type="JUnit" factoryName="JUnit">
@@ -314,6 +667,112 @@
       </ConfigurationWrapper>
       <method />
     </configuration>
+    <configuration default="true" type="AndroidRunConfigurationType" factoryName="Android Application">
+      <module name="" />
+      <option name="ACTIVITY_CLASS" value="" />
+      <option name="MODE" value="default_activity" />
+      <option name="DEPLOY" value="true" />
+      <option name="ARTIFACT_NAME" value="" />
+      <option name="TARGET_SELECTION_MODE" value="EMULATOR" />
+      <option name="USE_LAST_SELECTED_DEVICE" value="false" />
+      <option name="PREFERRED_AVD" value="" />
+      <option name="USE_COMMAND_LINE" value="true" />
+      <option name="COMMAND_LINE" value="" />
+      <option name="WIPE_USER_DATA" value="false" />
+      <option name="DISABLE_BOOT_ANIMATION" value="false" />
+      <option name="NETWORK_SPEED" value="full" />
+      <option name="NETWORK_LATENCY" value="none" />
+      <option name="CLEAR_LOGCAT" value="false" />
+      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="true" />
+      <option name="FILTER_LOGCAT_AUTOMATICALLY" value="true" />
+      <method />
+    </configuration>
+    <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
+      <module name="" />
+      <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m -ea" />
+      <option name="PROGRAM_PARAMETERS" />
+      <method />
+    </configuration>
+    <configuration default="true" type="GrailsRunConfigurationType" factoryName="Grails">
+      <module name="" />
+      <setting name="vmparams" value="" />
+      <setting name="cmdLine" value="run-app" />
+      <setting name="depsClasspath" value="false" />
+      <setting name="passParentEnv" value="true" />
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <setting name="launchBrowser" value="false" />
+      <method />
+    </configuration>
+    <configuration default="true" type="JarApplication" factoryName="JAR Application">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="TestNG" factoryName="TestNG">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="SUITE_NAME" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="GROUP_NAME" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="OUTPUT_DIRECTORY" />
+      <option name="ANNOTATION_TYPE" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="moduleWithDependencies" />
+      </option>
+      <option name="USE_DEFAULT_REPORTERS" value="false" />
+      <option name="PROPERTIES_FILE" />
+      <envs />
+      <properties />
+      <listeners />
+      <method />
+    </configuration>
+    <configuration default="true" type="Application" factoryName="Application">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
+      <node-options />
+      <gulpfile />
+      <tasks />
+      <pass-parent-envs>true</pass-parent-envs>
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="FlexUnitRunConfigurationType" factoryName="FlexUnit" appDescriptorForEmulator="Android" class_name="" emulatorAdlOptions="" method_name="" package_name="" scope="Class">
+      <option name="BCName" value="" />
+      <option name="launcherParameters">
+        <LauncherParameters>
+          <option name="browser" value="a7bb68e0-33c0-4d6f-a81a-aac1fdb870c8" />
+          <option name="launcherType" value="OSDefault" />
+          <option name="newPlayerInstance" value="false" />
+          <option name="playerPath" value="/usr/bin/flashplayerdebugger" />
+        </LauncherParameters>
+      </option>
+      <option name="moduleName" value="" />
+      <option name="trusted" value="true" />
+      <method />
+    </configuration>
     <configuration default="true" type="FlashRunConfigurationType" factoryName="Flash App">
       <option name="BCName" value="" />
       <option name="IOSSimulatorSdkPath" value="" />
@@ -370,18 +829,39 @@
       <option name="FILTER_LOGCAT_AUTOMATICALLY" value="true" />
       <method />
     </configuration>
-    <configuration default="true" type="FlexUnitRunConfigurationType" factoryName="FlexUnit" appDescriptorForEmulator="Android" class_name="" emulatorAdlOptions="" method_name="" package_name="" scope="Class">
-      <option name="BCName" value="" />
-      <option name="launcherParameters">
-        <LauncherParameters>
-          <option name="browser" value="a7bb68e0-33c0-4d6f-a81a-aac1fdb870c8" />
-          <option name="launcherType" value="OSDefault" />
-          <option name="newPlayerInstance" value="false" />
-          <option name="playerPath" value="/usr/bin/flashplayerdebugger" />
-        </LauncherParameters>
-      </option>
-      <option name="moduleName" value="" />
-      <option name="trusted" value="true" />
+    <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
+      <method />
+    </configuration>
+    <configuration default="true" type="GradleRunConfiguration" factoryName="Gradle">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list />
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <method />
+    </configuration>
+    <configuration default="true" type="NodeJSConfigurationType" factoryName="Node.js" working-dir="">
+      <method />
+    </configuration>
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <module name="" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="HTML_FILE_NAME" />
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <option name="VM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
       <method />
     </configuration>
     <configuration default="true" type="CucumberJavaRunConfigurationType" factoryName="Cucumber java">
@@ -403,48 +883,14 @@
       <envs />
       <method />
     </configuration>
-    <configuration default="true" type="Application" factoryName="Application">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="ENABLE_SWING_INSPECTOR" value="false" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="" />
-      <envs />
-      <method />
-    </configuration>
-    <configuration default="true" type="AndroidRunConfigurationType" factoryName="Android Application">
-      <module name="" />
-      <option name="ACTIVITY_CLASS" value="" />
-      <option name="MODE" value="default_activity" />
-      <option name="DEPLOY" value="true" />
-      <option name="ARTIFACT_NAME" value="" />
-      <option name="TARGET_SELECTION_MODE" value="EMULATOR" />
-      <option name="USE_LAST_SELECTED_DEVICE" value="false" />
-      <option name="PREFERRED_AVD" value="" />
-      <option name="USE_COMMAND_LINE" value="true" />
-      <option name="COMMAND_LINE" value="" />
-      <option name="WIPE_USER_DATA" value="false" />
-      <option name="DISABLE_BOOT_ANIMATION" value="false" />
-      <option name="NETWORK_SPEED" value="full" />
-      <option name="NETWORK_LATENCY" value="none" />
-      <option name="CLEAR_LOGCAT" value="false" />
-      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="true" />
-      <option name="FILTER_LOGCAT_AUTOMATICALLY" value="true" />
-      <method />
-    </configuration>
     <configuration default="false" name="hms" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 8.0.3" ALTERNATIVE_JRE_ENABLED="false" ALTERNATIVE_JRE_PATH="">
-      <option name="BROWSER_ID" value="a7bb68e0-33c0-4d6f-a81a-aac1fdb870c8" />
+      <option name="OPEN_IN_BROWSER_URL" value="http://localhost:8084/hms" />
+      <option name="BROWSER_ID" value="98ca6316-2f89-46d9-a9e5-fa9e2b0625b3" />
       <option name="UPDATING_POLICY" value="restart-server" />
       <deployment>
-        <file path="$PROJECT_DIR$/build/web">
+        <file path="$PROJECT_DIR$/web">
           <settings>
-            <option name="CONTEXT_PATH" value="/hmss" />
+            <option name="CONTEXT_PATH" value="/hms" />
           </settings>
         </file>
       </deployment>
@@ -522,52 +968,331 @@
   </component>
   <component name="ShelveChangesManager" show_recycled="false" />
   <component name="SvnConfiguration" cleanupOnStartRun="true">
-    <configuration>$USER_HOME$/.subversion</configuration>
+    <configuration>C:\Users\TuraMan\AppData\Roaming\Subversion</configuration>
     <supportedVersion>125</supportedVersion>
+    <option name="FORCE_UPDATE" value="true" />
+    <option name="IGNORE_EXTERNALS" value="true" />
+  </component>
+  <component name="SvnFileUrlMappingImpl">
+    <option name="myMappingRoots">
+      <list>
+        <SvnCopyRootSimple>
+          <option name="myVcsRoot" value="E:\Projects\hms" />
+          <option name="myCopyRoot" value="E:\Projects\hms" />
+        </SvnCopyRootSimple>
+        <SvnCopyRootSimple>
+          <option name="myVcsRoot" value="E:\Projects\hms\.idea" />
+          <option name="myCopyRoot" value="E:\Projects\hms\.idea" />
+        </SvnCopyRootSimple>
+      </list>
+    </option>
+    <option name="myMoreRealMappingRoots">
+      <list>
+        <SvnCopyRootSimple>
+          <option name="myVcsRoot" value="E:\Projects\hms" />
+          <option name="myCopyRoot" value="E:\Projects\hms" />
+        </SvnCopyRootSimple>
+      </list>
+    </option>
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="5ed80eda-d75c-4142-80e9-933e2c28140f" name="Default" comment="" />
       <created>1414252474190</created>
+      <option name="number" value="Default" />
       <updated>1414252474190</updated>
       <workItem from="1414253256087" duration="685000" />
+      <workItem from="1416589991091" duration="3128000" />
+      <workItem from="1416834131223" duration="6046000" />
+      <workItem from="1416842969961" duration="3636000" />
+      <workItem from="1416847351346" duration="30000" />
+      <workItem from="1416850247796" duration="11617000" />
+      <workItem from="1417013415698" duration="10088000" />
+      <workItem from="1417084423777" duration="588000" />
+      <workItem from="1417260976837" duration="15519000" />
+      <workItem from="1417332857709" duration="14691000" />
+      <workItem from="1417443442895" duration="10316000" />
+      <workItem from="1417531152343" duration="14035000" />
+      <workItem from="1417612789562" duration="14933000" />
+      <workItem from="1417705668953" duration="7959000" />
+      <workItem from="1417714023815" duration="5880000" />
+      <workItem from="1417787132175" duration="8943000" />
+      <workItem from="1418135580782" duration="13975000" />
+      <workItem from="1418194989106" duration="12679000" />
+      <workItem from="1418235068619" duration="711000" />
+      <workItem from="1418316803886" duration="8020000" />
+      <workItem from="1418387629818" duration="19977000" />
+      <workItem from="1418494002760" duration="45000" />
+      <workItem from="1418654284246" duration="2456000" />
+      <workItem from="1418738981647" duration="10672000" />
+      <workItem from="1418825869020" duration="13538000" />
+      <workItem from="1418913000161" duration="6505000" />
+      <workItem from="1419070462168" duration="611000" />
+      <workItem from="1419242341569" duration="9809000" />
+      <workItem from="1419330174376" duration="159000" />
+      <workItem from="1419419927269" duration="5985000" />
+      <workItem from="1419426575943" duration="1081000" />
+      <workItem from="1419842751502" duration="1820000" />
     </task>
+    <task id="LOCAL-00001" summary="Completed working on NightAudit Grids UI side.&#10;">
+      <created>1416840171368</created>
+      <option name="number" value="00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1416840171368</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Corrected view of lists. removed all horizontal scrolls from new lists&#10;">
+      <created>1416845360118</created>
+      <option name="number" value="00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1416845360118</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Added all mysoft package body">
+      <created>1416847004495</created>
+      <option name="number" value="00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1416847004495</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Added all mysoft package body">
+      <created>1416847377668</created>
+      <option name="number" value="00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1416847377668</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Added all mysoft package body">
+      <created>1416925507149</created>
+      <option name="number" value="00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1416925507149</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Added assingroom, modified nightaudit and cancel. added noshow">
+      <created>1416933540508</created>
+      <option name="number" value="00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1416933540508</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Added  noshow">
+      <created>1416933566361</created>
+      <option name="number" value="00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1416933566361</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Modified getna1">
+      <created>1416934005740</created>
+      <option name="number" value="00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1416934005740</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Modified new dates to lclosedate">
+      <created>1416935868095</created>
+      <option name="number" value="00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1416935868095</updated>
+    </task>
+    <task id="LOCAL-00010" summary="hot update">
+      <created>1417024310332</created>
+      <option name="number" value="00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1417024310332</updated>
+    </task>
+    <task id="LOCAL-00011" summary="hot update">
+      <created>1417278198981</created>
+      <option name="number" value="00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1417278198981</updated>
+    </task>
+    <task id="LOCAL-00012" summary="hot update">
+      <created>1417349813942</created>
+      <option name="number" value="00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1417349813942</updated>
+    </task>
+    <task id="LOCAL-00013" summary="hot update">
+      <created>1417453000510</created>
+      <option name="number" value="00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1417453000510</updated>
+    </task>
+    <task id="LOCAL-00014" summary="hot update">
+      <created>1417543632719</created>
+      <option name="number" value="00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1417543632719</updated>
+    </task>
+    <task id="LOCAL-00015" summary="hot update">
+      <created>1417545928028</created>
+      <option name="number" value="00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1417545928028</updated>
+    </task>
+    <task id="LOCAL-00016" summary="hot update">
+      <created>1417628969648</created>
+      <option name="number" value="00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1417628969648</updated>
+    </task>
+    <task id="LOCAL-00017" summary="hot update">
+      <created>1417712135534</created>
+      <option name="number" value="00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1417712135534</updated>
+    </task>
+    <task id="LOCAL-00018" summary="hot update">
+      <created>1417719902783</created>
+      <option name="number" value="00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1417719902783</updated>
+    </task>
+    <task id="LOCAL-00019" summary="added tab manager">
+      <created>1418149537924</created>
+      <option name="number" value="00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1418149537924</updated>
+    </task>
+    <task id="LOCAL-00020" summary="hot update">
+      <created>1418195040046</created>
+      <option name="number" value="00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1418195040046</updated>
+    </task>
+    <task id="LOCAL-00021" summary="hot update">
+      <created>1418234353492</created>
+      <option name="number" value="00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1418234353492</updated>
+    </task>
+    <task id="LOCAL-00022" summary="hot update">
+      <created>1418321403326</created>
+      <option name="number" value="00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1418321403326</updated>
+    </task>
+    <task id="LOCAL-00023" summary="hot update">
+      <created>1418323941110</created>
+      <option name="number" value="00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1418323941110</updated>
+    </task>
+    <task id="LOCAL-00024" summary="hot update">
+      <created>1418739574960</created>
+      <option name="number" value="00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1418739574960</updated>
+    </task>
+    <task id="LOCAL-00025" summary="hot update">
+      <created>1418739608503</created>
+      <option name="number" value="00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1418739608503</updated>
+    </task>
+    <task id="LOCAL-00026" summary="hot update">
+      <created>1418744156637</created>
+      <option name="number" value="00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1418744156637</updated>
+    </task>
+    <task id="LOCAL-00027" summary="hot update">
+      <created>1418753681781</created>
+      <option name="number" value="00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1418753681781</updated>
+    </task>
+    <task id="LOCAL-00028" summary="hot update">
+      <created>1418839049763</created>
+      <option name="number" value="00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1418839049763</updated>
+    </task>
+    <task id="LOCAL-00029" summary="hot update">
+      <created>1418919443043</created>
+      <option name="number" value="00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1418919443043</updated>
+    </task>
+    <task id="LOCAL-00030" summary="hot update">
+      <created>1418919740931</created>
+      <option name="number" value="00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1418919740931</updated>
+    </task>
+    <task id="LOCAL-00031" summary="hot update">
+      <created>1419330324508</created>
+      <option name="number" value="00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1419330324508</updated>
+    </task>
+    <task id="LOCAL-00032" summary="hot update">
+      <created>1419425700193</created>
+      <option name="number" value="00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1419425700193</updated>
+    </task>
+    <option name="localTasksCounter" value="33" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="685000" />
+    <option name="totallyTimeSpent" value="236137000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="20" y="24" width="1400" height="852" extended-state="0" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="false" />
     <layout>
-      <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32980132" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32980132" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32980132" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32946146" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32980132" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24964234" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32946146" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32980132" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32946146" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32946146" sideWeight="0.85520834" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18125" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39915523" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32946146" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
+    <layout-to-restore>
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32946146" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32980132" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39915523" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32980132" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32946146" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32946146" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32946146" sideWeight="0.85520834" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18125" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32946146" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
+    </layout-to-restore>
   </component>
   <component name="Vcs.Log.UiProperties">
     <option name="RECENTLY_FILTERED_USER_GROUPS">
@@ -581,64 +1306,550 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
+    <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
+    <option name="CHECK_NEW_TODO" value="false" />
     <option name="myTodoPanelSettings">
       <TodoPanelSettings />
     </option>
+    <MESSAGE value="Completed working on NightAudit Grids UI side.&#10;" />
+    <MESSAGE value="Corrected view of lists. removed all horizontal scrolls from new lists&#10;" />
+    <MESSAGE value="Added all mysoft package body" />
+    <MESSAGE value="Added assingroom, modified nightaudit and cancel. added noshow" />
+    <MESSAGE value="Added  noshow" />
+    <MESSAGE value="Modified folio" />
+    <MESSAGE value="Modified getna1" />
+    <MESSAGE value="Modified new dates to lclosedate" />
+    <MESSAGE value="added tab manager" />
+    <MESSAGE value="hot update" />
+    <option name="LAST_COMMIT_MESSAGE" value="hot update" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager />
+    <breakpoint-manager>
+      <option name="time" value="8" />
+    </breakpoint-manager>
+    <watches-manager />
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/java/com/mysoft/hms/ReservationManager.java">
+    <entry file="file://$PROJECT_DIR$/web/content/srch_getcontragentinfo.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.41845495" vertical-offset="0" max-vertical-offset="54900">
-          <caret line="23" column="7" selection-start-line="23" selection-start-column="7" selection-end-line="23" selection-end-column="7" />
+        <state vertical-scroll-proportion="-1.7796901" vertical-offset="1034" max-vertical-offset="1615">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/js/ext/sch-all.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="594">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/js/ext/1/sch-all.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.8888889" vertical-offset="36107" max-vertical-offset="202402">
+          <caret line="2155" column="13" selection-start-line="2155" selection-start-column="13" selection-end-line="2155" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/content/folio.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33274648" vertical-offset="1358" max-vertical-offset="6647">
+          <caret line="91" column="4" selection-start-line="91" selection-start-column="4" selection-end-line="95" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/content/chargerinfo.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="45" max-vertical-offset="3332">
+          <caret line="38" column="47" selection-start-line="38" selection-start-column="47" selection-end-line="38" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Downloads/tabulous.js-master/tabulous.js-master/demo/demo/js.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="919">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/content/getcharges.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="306" max-vertical-offset="544">
+          <caret line="18" column="16" selection-start-line="18" selection-start-column="16" selection-end-line="18" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Downloads/tabulous.js-master/tabulous.js-master/demo/demo/tabulous.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.0174103" vertical-offset="0" max-vertical-offset="1224">
+          <caret line="90" column="0" selection-start-line="90" selection-start-column="0" selection-end-line="90" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Downloads/tabulous.js-master/tabulous.js-master/demo/demo/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="799">
+          <caret line="0" column="4" selection-start-line="0" selection-start-column="4" selection-end-line="0" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/sqlscripts/hms.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="137955">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/content/form/printRegCardPdf.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.5533454" vertical-offset="3731" max-vertical-offset="5304">
+          <caret line="329" column="32" selection-start-line="329" selection-start-column="32" selection-end-line="329" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/content/form/printFolioItemPdf.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="5202">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/content/form/printInvoiceFolioItem.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.40963855" vertical-offset="0" max-vertical-offset="581">
+          <caret line="14" column="22" selection-start-line="14" selection-start-column="22" selection-end-line="14" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/content/savereservation.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.34767643" vertical-offset="1107" max-vertical-offset="8432">
+          <caret line="77" column="41" selection-start-line="77" selection-start-column="41" selection-end-line="77" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/content/guestinfo.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.38148147" vertical-offset="236" max-vertical-offset="1088">
+          <caret line="26" column="44" selection-start-line="26" selection-start-column="32" selection-end-line="26" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/js/tabulous.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="781" max-vertical-offset="1802">
+          <caret line="87" column="55" selection-start-line="87" selection-start-column="55" selection-end-line="87" selection-end-column="55" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/css/ui.jqgrid.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2890">
+          <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/content/addtagents.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="4267">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/content/test">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6113689" vertical-offset="0" max-vertical-offset="862">
+          <caret line="31" column="3" selection-start-line="0" selection-start-column="0" selection-end-line="34" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/content/EditTransaction.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5123239" vertical-offset="1154" max-vertical-offset="3485">
+          <caret line="85" column="1" selection-start-line="85" selection-start-column="1" selection-end-line="85" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/js/jquery-ui-1.9.1.custom.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="252093">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/css/jquery-ui-1.9.1.custom.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="7922">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/index.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="723" max-vertical-offset="5151">
+          <caret line="61" column="73" selection-start-line="61" selection-start-column="73" selection-end-line="61" selection-end-column="73" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/mysoft/hms/ContragentBean.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33333334" vertical-offset="2357" max-vertical-offset="31705">
+          <caret line="160" column="33" selection-start-line="160" selection-start-column="16" selection-end-line="160" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/content/stats.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="153">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="2" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/content/statsleft.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1122" max-vertical-offset="1819">
+          <caret line="66" column="22" selection-start-line="66" selection-start-column="22" selection-end-line="66" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/includes/menu.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-8.0" vertical-offset="1492" max-vertical-offset="2261">
+          <caret line="100" column="97" selection-start-line="100" selection-start-column="29" selection-end-line="100" selection-end-column="97" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/content/arlist.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="229" max-vertical-offset="6800">
+          <caret line="42" column="65" selection-start-line="42" selection-start-column="56" selection-end-line="42" selection-end-column="65" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/content/getcontrlist.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="272" max-vertical-offset="680">
+          <caret line="16" column="6" selection-start-line="16" selection-start-column="6" selection-end-line="16" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/content/getcurrencylist.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.34767643" vertical-offset="1413" max-vertical-offset="2261">
+          <caret line="95" column="4" selection-start-line="95" selection-start-column="4" selection-end-line="95" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/content/getlevellist.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.11971831" vertical-offset="0" max-vertical-offset="2023">
+          <caret line="4" column="7" selection-start-line="4" selection-start-column="7" selection-end-line="4" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/content/getfoliolist.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.56514084" vertical-offset="967" max-vertical-offset="2992">
+          <caret line="38" column="21" selection-start-line="38" selection-start-column="16" selection-end-line="38" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/content/ge.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="206" max-vertical-offset="1870">
+          <caret line="30" column="0" selection-start-line="30" selection-start-column="0" selection-end-line="31" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/content/getcontrcontact.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="340" max-vertical-offset="442">
+          <caret line="20" column="4" selection-start-line="20" selection-start-column="4" selection-end-line="20" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/content/guestdblist.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-7.9615383" vertical-offset="82" max-vertical-offset="3366">
+          <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/content/stayviewleft.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.11971831" vertical-offset="0" max-vertical-offset="4471">
+          <caret line="4" column="34" selection-start-line="4" selection-start-column="34" selection-end-line="4" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/content/getarrivallist.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-5.8846154" vertical-offset="510" max-vertical-offset="1870">
+          <caret line="39" column="27" selection-start-line="39" selection-start-column="27" selection-end-line="39" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/content/arrivallist.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-6.4814816" vertical-offset="2880" max-vertical-offset="6732">
+          <caret line="190" column="19" selection-start-line="185" selection-start-column="3" selection-end-line="190" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/content/deplist.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.49074075" vertical-offset="772" max-vertical-offset="3315">
+          <caret line="126" column="54" selection-start-line="126" selection-start-column="54" selection-end-line="126" selection-end-column="54" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/content/tagents.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.8244406" vertical-offset="5828" max-vertical-offset="6409">
+          <caret line="371" column="7" selection-start-line="371" selection-start-column="7" selection-end-line="371" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/sqlscripts/magic query.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.24859393" vertical-offset="0" max-vertical-offset="889">
+          <caret line="13" column="26" selection-start-line="13" selection-start-column="26" selection-end-line="13" selection-end-column="26" />
+        </state>
+      </provider>
+      <provider editor-type-id="com.intellij.database.editor.CsvTableFileEditorProvider">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/content/reservationlist.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.42553192" vertical-offset="2697" max-vertical-offset="7786">
+          <caret line="181" column="123" selection-start-line="181" selection-start-column="123" selection-end-line="181" selection-end-column="123" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/content/getreservationlist.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.09659091" vertical-offset="561" max-vertical-offset="2499">
+          <caret line="38" column="16" selection-start-line="38" selection-start-column="16" selection-end-line="38" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/js/grids.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.21980414" vertical-offset="206" max-vertical-offset="7973">
+          <caret line="24" column="4" selection-start-line="24" selection-start-column="4" selection-end-line="24" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/content/getdeplist.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.34859154" vertical-offset="2046" max-vertical-offset="2720">
+          <caret line="132" column="167" selection-start-line="132" selection-start-column="48" selection-end-line="132" selection-end-column="167" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/includes/meta.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.34859154" vertical-offset="16275" max-vertical-offset="16983">
+          <caret line="969" column="196" selection-start-line="969" selection-start-column="27" selection-end-line="969" selection-end-column="196" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/content/panels/stayinfo.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3321859" vertical-offset="844" max-vertical-offset="4896">
+          <caret line="61" column="58" selection-start-line="61" selection-start-column="35" selection-end-line="61" selection-end-column="58" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/js/main.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="640" max-vertical-offset="3995">
+          <caret line="155" column="40" selection-start-line="155" selection-start-column="40" selection-end-line="155" selection-end-column="40" />
           <folding>
-            <marker date="1412418183212" expanded="true" signature="-1:-1" placeholder="SELECT reser..reservation..." />
-            <marker date="1412418183212" expanded="true" signature="-1:-1" placeholder="DELETE from ..." />
-            <marker date="1412418183212" expanded="true" signature="-1:-1" placeholder="SELECT reser..reservation..." />
-            <marker date="1412418183212" expanded="true" signature="-1:-1" placeholder="DELETE FROM ..." />
-            <marker date="1412418183212" expanded="true" signature="-1:-1" placeholder="SELECT reser..reservation..." />
-            <marker date="1412418183212" expanded="true" signature="-1:-1" placeholder="DELETE FROM ..." />
-            <marker date="1412418183212" expanded="true" signature="-1:-1" placeholder="SELECT reser..reservation..." />
-            <marker date="1412418183212" expanded="true" signature="-1:-1" placeholder="DELETE FROM ..." />
-            <marker date="1412418183212" expanded="true" signature="-1:-1" placeholder="SELECT reser..reservation..." />
-            <marker date="1412418183212" expanded="true" signature="-1:-1" placeholder="DELETE FROM ..." />
-            <marker date="1412418183212" expanded="true" signature="-1:-1" placeholder="SELECT reser..reservation..." />
-            <marker date="1412418183212" expanded="true" signature="-1:-1" placeholder="DELETE FROM ..." />
-            <marker date="1412418183212" expanded="true" signature="-1:-1" placeholder="SELECT reser..reservation..." />
-            <marker date="1412418183212" expanded="true" signature="-1:-1" placeholder="DELETE FROM ..." />
-            <marker date="1412418183212" expanded="true" signature="-1:-1" placeholder="SELECT reser..reservation..." />
-            <marker date="1412418183212" expanded="true" signature="-1:-1" placeholder="DELETE FROM ..." />
-            <marker date="1412418183212" expanded="true" signature="-1:-1" placeholder="SELECT reser..reservation..." />
-            <marker date="1412418183212" expanded="true" signature="-1:-1" placeholder="DELETE FROM ..." />
-            <marker date="1412418183212" expanded="true" signature="-1:-1" placeholder="SELECT reser..reservation..." />
-            <marker date="1412418183212" expanded="true" signature="-1:-1" placeholder="DELETE FROM ..." />
-            <marker date="1412418183212" expanded="true" signature="-1:-1" placeholder="SELECT reser..reservation..." />
-            <marker date="1412418183212" expanded="true" signature="-1:-1" placeholder="DELETE FROM ..." />
-            <marker date="1412418183212" expanded="true" signature="-1:-1" placeholder="SELECT reser..reservation..." />
-            <marker date="1412418183212" expanded="true" signature="-1:-1" placeholder="select reser..reservation..." />
-            <marker date="1412418183212" expanded="true" signature="-1:-1" placeholder="DELETE FROM ..." />
-            <marker date="1412418183212" expanded="true" signature="-1:-1" placeholder="SELECT nextv..." />
-            <marker date="1412418183212" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..reason..." />
-            <marker date="1412418183212" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..guest..." />
-            <marker date="1412418183212" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..personnel..." />
-            <marker date="1412418183212" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..ratetype..." />
-            <marker date="1412418183212" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..room..." />
-            <marker date="1412418183212" expanded="true" signature="-1:-1" placeholder="select count..reservation..." />
+            <element signature="e#142#181#0" expanded="false" />
+            <element signature="n#!!block;n#sleep#0" expanded="false" />
+            <element signature="e#382#479#0" expanded="false" />
+            <element signature="e#443#473#0" expanded="false" />
+            <element signature="n#!!block;n#checkAll#0" expanded="false" />
+            <element signature="e#693#1193#0" expanded="false" />
+            <element signature="e#719#1182#0" expanded="false" />
+            <element signature="e#816#860#0" expanded="false" />
+            <element signature="e#904#1176#0" expanded="false" />
+            <element signature="e#918#1166#0" expanded="false" />
+            <element signature="e#991#1152#0" expanded="false" />
+            <element signature="e#1248#1791#0" expanded="false" />
+            <element signature="e#1274#1780#0" expanded="false" />
+            <element signature="e#1373#1417#0" expanded="false" />
+            <element signature="e#1461#1774#0" expanded="false" />
+            <element signature="e#1475#1764#0" expanded="false" />
+            <element signature="e#1589#1750#0" expanded="false" />
+            <element signature="e#1849#2662#0" expanded="false" />
+            <element signature="e#1875#2651#0" expanded="false" />
+            <element signature="e#2002#2046#0" expanded="false" />
+            <element signature="e#2065#2645#0" expanded="false" />
+            <element signature="e#2079#2332#0" expanded="false" />
+            <element signature="e#2156#2318#0" expanded="false" />
+            <element signature="e#2346#2635#0" expanded="false" />
+            <element signature="e#2460#2621#0" expanded="false" />
+            <element signature="e#2704#3078#0" expanded="false" />
+            <element signature="e#2783#3038#0" expanded="false" />
+            <element signature="e#2811#2970#0" expanded="false" />
+            <element signature="e#2849#2911#0" expanded="false" />
+            <element signature="e#2976#3032#0" expanded="false" />
+            <element signature="n#!!block;n#savedataprefix#0" expanded="false" />
+            <element signature="e#5023#5094#0" expanded="false" />
+            <element signature="e#5100#5249#0" expanded="false" />
+            <element signature="e#5162#5201#0" expanded="false" />
+            <element signature="e#5294#5658#0" expanded="false" />
+            <element signature="e#5711#6427#0" expanded="false" />
+            <element signature="e#5794#6421#0" expanded="false" />
+            <element signature="e#5849#5912#0" expanded="false" />
+            <element signature="e#5948#6095#0" expanded="false" />
+            <element signature="e#6006#6079#0" expanded="false" />
+            <element signature="n#!!block;n#savedata1#0" expanded="false" />
+            <element signature="e#6686#6743#0" expanded="false" />
+            <element signature="e#6749#6898#0" expanded="false" />
+            <element signature="e#6811#6850#0" expanded="false" />
+            <element signature="e#6943#7307#0" expanded="false" />
+            <element signature="e#7409#7952#0" expanded="false" />
+            <element signature="e#7492#7946#0" expanded="false" />
+            <element signature="e#7529#7676#0" expanded="false" />
+            <element signature="e#7587#7660#0" expanded="false" />
+            <element signature="n#!!block;n#infopage#0" expanded="false" />
+            <element signature="e#8071#8182#0" expanded="false" />
+            <element signature="n#!!block;n#doContextMenuAction#0" expanded="false" />
+            <element signature="e#8308#8793#0" expanded="false" />
+            <element signature="e#8382#8475#0" expanded="false" />
+            <element signature="e#8505#8776#0" expanded="false" />
+            <element signature="e#8889#9674#0" expanded="false" />
+            <element signature="e#9036#9367#0" expanded="false" />
+            <element signature="e#9131#9218#0" expanded="false" />
+            <element signature="e#9244#9337#0" expanded="false" />
+            <element signature="e#9417#9502#0" expanded="false" />
+            <element signature="e#9544#9580#0" expanded="false" />
+            <element signature="e#9601#9670#0" expanded="false" />
+            <element signature="n#!!block;n#newWindow#0" expanded="false" />
+            <element signature="e#9792#9920#0" expanded="false" />
+            <element signature="e#10023#10152#0" expanded="false" />
+            <element signature="n#!!block;n#extramodal0#1" expanded="false" />
+            <element signature="e#10265#10394#0" expanded="false" />
+            <element signature="n#!!block;n#newWindow1#0" expanded="false" />
+            <element signature="e#10506#10611#0" expanded="false" />
+            <element signature="n#!!block;n#newsWindow#0" expanded="false" />
+            <element signature="e#10713#10823#0" expanded="false" />
+            <element signature="n#!!block;n#newsWindow1#0" expanded="false" />
+            <element signature="e#10936#11046#0" expanded="false" />
+            <element signature="n#!!block;n#modalWindow#0" expanded="false" />
+            <element signature="e#11184#11268#0" expanded="false" />
+            <element signature="n#!!block;n#newmWindow#0" expanded="false" />
+            <element signature="e#11371#11482#0" expanded="false" />
+            <element signature="n#!!block;n#newmWindow1#0" expanded="false" />
+            <element signature="e#11614#11748#0" expanded="false" />
+            <element signature="n#!!block;n#getBody#0" expanded="false" />
+            <element signature="e#11810#12104#0" expanded="false" />
+            <element signature="e#11927#12009#0" expanded="false" />
+            <element signature="e#12038#12076#0" expanded="false" />
+            <element signature="n#!!block;n#getLBody#0" expanded="false" />
+            <element signature="e#12148#12346#0" expanded="false" />
+            <element signature="e#12265#12318#0" expanded="false" />
+            <element signature="n#!!block;n#getBody#1" expanded="false" />
+            <element signature="e#12444#12737#0" expanded="false" />
+            <element signature="e#12562#12642#0" expanded="false" />
+            <element signature="e#12671#12709#0" expanded="false" />
+            <element signature="e#12744#12762#0" expanded="false" />
+            <element signature="e#12817#12850#0" expanded="false" />
+            <element signature="n#!!block;n#removeTab#0" expanded="false" />
+            <element signature="e#13016#13049#0" expanded="false" />
+            <element signature="n#!!block;n#addTab#0" expanded="false" />
+            <element signature="e#13332#13433#0" expanded="false" />
+            <element signature="e#13686#14498#0" expanded="false" />
+            <element signature="e#13767#13955#0" expanded="false" />
+            <element signature="e#13961#14148#0" expanded="false" />
+            <element signature="e#14255#14367#0" expanded="false" />
+            <element signature="e#14373#14492#0" expanded="false" />
+            <element signature="e#14504#15511#0" expanded="false" />
+            <element signature="e#14578#15201#0" expanded="false" />
+            <element signature="e#14973#15143#0" expanded="false" />
+            <element signature="e#15205#15504#0" expanded="false" />
+            <element signature="e#15588#15963#0" expanded="false" />
+            <element signature="e#15614#15957#0" expanded="false" />
+            <element signature="e#15769#15785#0" expanded="false" />
+            <element signature="e#15789#15947#0" expanded="false" />
+            <element signature="e#16065#16143#0" expanded="false" />
+            <element signature="n#!!block;n#reloadMenu#0" expanded="false" />
+            <element signature="n#!!block;n#registerCloseEvent#0" expanded="false" />
+            <element signature="e#17362#17564#0" expanded="false" />
+            <element signature="e#20995#21128#0" expanded="false" />
+            <element signature="n#!!block;n#walkinNameSearch#0" expanded="false" />
+            <element signature="n#!!block;n#editNameSearch#0" expanded="false" />
+            <element signature="n#!!block;n#isNullOrEmpty#0" expanded="false" />
+            <element signature="e#22184#22212#0" expanded="false" />
+            <element signature="n#!!block;n#urlencode#0" expanded="false" />
+            <element signature="n#!!block;n#initializeGrid#0" expanded="false" />
+            <element signature="e#22715#22749#0" expanded="false" />
+            <element signature="e#22792#23501#0" expanded="false" />
+            <element signature="e#23237#23491#0" expanded="false" />
+            <element signature="n#!!block;n#ReDrawTable#0" expanded="false" />
+            <element signature="n#!!block;n#reloadGrid#0" expanded="false" />
+            <element signature="n#!!block;n#colModelGenerator#0" expanded="false" />
+            <element signature="n#!!block;n#newWindowWithParams#0" expanded="false" />
+            <element signature="e#29409#29537#0" expanded="false" />
+            <element signature="n#!!block;n#checkOut#0" expanded="false" />
+            <element signature="e#29641#29841#0" expanded="false" />
+            <element signature="e#29724#29835#0" expanded="false" />
+            <marker date="1419850557433" expanded="false" signature="22715:22749" placeholder="{...}" />
+            <marker date="1419850557433" expanded="false" signature="22792:23501" placeholder="{&quot;rowNum&quot;: 2000...}" />
+            <marker date="1419850557433" expanded="false" signature="23237:23491" placeholder="{...}" />
+            <marker date="1419850557433" expanded="false" signature="25132:25429" placeholder="{...}" />
+            <marker date="1419850557433" expanded="false" signature="25161:25348" placeholder="{&quot;position&quot;: 'absolute'...}" />
+            <marker date="1419850557433" expanded="false" signature="25557:25855" placeholder="{&quot;position&quot;: 'absolute'...}" />
+            <marker date="1419850557433" expanded="false" signature="26057:26137" placeholder="{&quot;height&quot;: '20px'...}" />
+            <marker date="1419850557433" expanded="false" signature="26347:26571" placeholder="{...}" />
+            <marker date="1419850557433" expanded="false" signature="26363:26495" placeholder="{...}" />
+            <marker date="1419850557433" expanded="false" signature="26441:26487" placeholder="{...}" />
+            <marker date="1419850557433" expanded="false" signature="26832:26907" placeholder="{...}" />
+            <marker date="1419850557433" expanded="false" signature="26901:26910" placeholder="{...}" />
+            <marker date="1419850557433" expanded="false" signature="26963:27168" placeholder="{...}" />
+            <marker date="1419850557433" expanded="false" signature="27287:27890" placeholder="{...}" />
+            <marker date="1419850557433" expanded="false" signature="27324:27869" placeholder="{...}" />
+            <marker date="1419850557433" expanded="false" signature="27356:27816" placeholder="{...}" />
+            <marker date="1419850557433" expanded="false" signature="27956:28000" placeholder="{...}" />
+            <marker date="1419850557433" expanded="false" signature="28109:29268" placeholder="{...}" />
+            <marker date="1419850557433" expanded="false" signature="28244:29233" placeholder="{...}" />
+            <marker date="1419850557433" expanded="false" signature="29424:29518" placeholder="{...}" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/java/com/mysoft/fileReader.java">
+    <entry file="file://$PROJECT_DIR$/web/content/walkin.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="105" max-vertical-offset="1335">
-          <caret line="11" column="20" selection-start-line="11" selection-start-column="20" selection-end-line="11" selection-end-column="20" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="3917" max-vertical-offset="9350">
+          <caret line="241" column="37" selection-start-line="241" selection-start-column="37" selection-end-line="241" selection-end-column="37" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/css/main.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="4234" max-vertical-offset="5389">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/content/stayview.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.0475352" vertical-offset="0" max-vertical-offset="9316">
+          <caret line="35" column="5" selection-start-line="35" selection-start-column="5" selection-end-line="35" selection-end-column="5" />
+          <folding>
+            <marker date="1419843866966" expanded="true" signature="4535:4550" placeholder="..." />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -733,4 +1944,3 @@
     </states>
   </component>
 </project>
-

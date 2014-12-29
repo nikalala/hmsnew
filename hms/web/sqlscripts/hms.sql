@@ -2103,6 +2103,29 @@ CREATE SEQUENCE nationalityid_seq
 ALTER TABLE public.nationalityid_seq OWNER TO hms;
 
 --
+-- Name: ordermain; Type: TABLE; Schema: public; Owner: hms; Tablespace: 
+--
+
+CREATE TABLE ordermain (
+    ordermainid bigint NOT NULL,
+    hallname text NOT NULL,
+    tablename text NOT NULL,
+    opendate timestamp without time zone NOT NULL,
+    closedate timestamp without time zone NOT NULL,
+    waitername text NOT NULL,
+    amount double precision NOT NULL,
+    discount double precision NOT NULL,
+    price double precision NOT NULL,
+    cash double precision NOT NULL,
+    paid double precision NOT NULL,
+    regname text NOT NULL,
+    regdate timestamp without time zone DEFAULT now() NOT NULL
+);
+
+
+ALTER TABLE public.ordermain OWNER TO hms;
+
+--
 -- Name: payment; Type: TABLE; Schema: public; Owner: hms; Tablespace: 
 --
 
@@ -5083,6 +5106,13 @@ COPY folio (folioid, num, guestid, contragentid, reservationroomid, status, regb
 75	75	\N	0	94	0	1	2014-12-22 14:32:34.906
 76	76	54	\N	94	0	1	2014-12-22 14:32:34.906
 77	77	55	\N	95	0	1	2014-12-22 18:29:09.763
+78	78	56	\N	96	0	1	2014-12-24 16:32:10.046
+79	79	57	\N	97	0	1	2014-12-24 16:42:23.486
+80	80	58	\N	98	0	1	2014-12-24 16:44:15.319
+81	81	59	\N	99	0	1	2014-12-24 16:46:09.335
+82	82	60	\N	100	0	1	2014-12-24 16:47:21.176
+83	83	61	\N	101	0	1	2014-12-24 16:49:25.407
+84	84	62	\N	102	0	1	2014-12-24 16:50:35.76
 \.
 
 
@@ -5090,7 +5120,7 @@ COPY folio (folioid, num, guestid, contragentid, reservationroomid, status, regb
 -- Name: folioid_seq; Type: SEQUENCE SET; Schema: public; Owner: hms
 --
 
-SELECT pg_catalog.setval('folioid_seq', 77, true);
+SELECT pg_catalog.setval('folioid_seq', 84, true);
 
 
 --
@@ -5143,6 +5173,76 @@ COPY folioitem (folioitemid, folioid, roomid, itemdate, refno, particular, amoun
 751	77	\N	2014-10-23	\N	6	100	\N	\N	\N	\N	\N	f	f	1	2014-12-22 18:29:09.763		f	\N
 752	77	\N	2014-10-23	\N	-1	18	\N	\N	\N	1	\N	f	f	1	2014-12-22 18:29:09.763		f	\N
 753	77	\N	2014-10-23	\N	0	0	\N	\N	\N	\N	\N	f	f	1	2014-12-22 18:29:09.763		f	\N
+754	78	29	2014-10-23	\N	6	0	\N	\N	\N	\N	\N	f	f	1	2014-12-24 16:32:10.046		f	\N
+755	78	\N	2014-10-23	\N	-1	0	\N	\N	\N	1	\N	f	f	1	2014-12-24 16:32:10.046		f	\N
+756	78	\N	2014-10-23	\N	0	0	\N	\N	\N	\N	\N	f	f	1	2014-12-24 16:32:10.046		f	\N
+757	78	29	2014-10-24	\N	6	0	\N	\N	\N	\N	\N	f	f	1	2014-12-24 16:32:10.046		f	\N
+758	78	\N	2014-10-24	\N	-1	0	\N	\N	\N	1	\N	f	f	1	2014-12-24 16:32:10.046		f	\N
+759	78	\N	2014-10-24	\N	0	0	\N	\N	\N	\N	\N	f	f	1	2014-12-24 16:32:10.046		f	\N
+760	78	29	2014-10-25	\N	6	0	\N	\N	\N	\N	\N	f	f	1	2014-12-24 16:32:10.046		f	\N
+761	78	\N	2014-10-25	\N	-1	0	\N	\N	\N	1	\N	f	f	1	2014-12-24 16:32:10.046		f	\N
+762	78	\N	2014-10-25	\N	0	0	\N	\N	\N	\N	\N	f	f	1	2014-12-24 16:32:10.046		f	\N
+763	78	29	2014-10-26	\N	6	0	\N	\N	\N	\N	\N	f	f	1	2014-12-24 16:32:10.046		f	\N
+764	78	\N	2014-10-26	\N	-1	0	\N	\N	\N	1	\N	f	f	1	2014-12-24 16:32:10.046		f	\N
+765	78	\N	2014-10-26	\N	0	0	\N	\N	\N	\N	\N	f	f	1	2014-12-24 16:32:10.046		f	\N
+766	78	29	2014-10-27	\N	6	0	\N	\N	\N	\N	\N	f	f	1	2014-12-24 16:32:10.046		f	\N
+767	78	\N	2014-10-27	\N	-1	0	\N	\N	\N	1	\N	f	f	1	2014-12-24 16:32:10.046		f	\N
+768	78	\N	2014-10-27	\N	0	0	\N	\N	\N	\N	\N	f	f	1	2014-12-24 16:32:10.046		f	\N
+769	79	8	2014-12-24	\N	6	0	\N	\N	\N	\N	\N	f	f	1	2014-12-24 16:42:23.486		f	\N
+770	79	\N	2014-12-24	\N	-1	0	\N	\N	\N	1	\N	f	f	1	2014-12-24 16:42:23.486		f	\N
+771	79	\N	2014-12-24	\N	0	0	\N	\N	\N	\N	\N	f	f	1	2014-12-24 16:42:23.486		f	\N
+772	79	\N	2014-12-24	\N	1	1231312312	\N	\N	\N	\N	23	f	f	1	2014-12-24 16:42:23.486		f	\N
+773	79	8	2014-12-25	\N	6	0	\N	\N	\N	\N	\N	f	f	1	2014-12-24 16:42:23.486		f	\N
+774	79	\N	2014-12-25	\N	-1	0	\N	\N	\N	1	\N	f	f	1	2014-12-24 16:42:23.486		f	\N
+775	79	\N	2014-12-25	\N	0	0	\N	\N	\N	\N	\N	f	f	1	2014-12-24 16:42:23.486		f	\N
+776	79	8	2014-12-26	\N	6	0	\N	\N	\N	\N	\N	f	f	1	2014-12-24 16:42:23.486		f	\N
+777	79	\N	2014-12-26	\N	-1	0	\N	\N	\N	1	\N	f	f	1	2014-12-24 16:42:23.486		f	\N
+778	79	\N	2014-12-26	\N	0	0	\N	\N	\N	\N	\N	f	f	1	2014-12-24 16:42:23.486		f	\N
+779	80	18	2014-12-24	\N	6	0	\N	\N	\N	\N	\N	f	f	1	2014-12-24 16:44:15.319		f	\N
+780	80	\N	2014-12-24	\N	-1	0	\N	\N	\N	1	\N	f	f	1	2014-12-24 16:44:15.319		f	\N
+781	80	\N	2014-12-24	\N	0	0	\N	\N	\N	\N	\N	f	f	1	2014-12-24 16:44:15.319		f	\N
+782	80	\N	2014-12-24	\N	1	13312	\N	\N	\N	\N	24	f	f	1	2014-12-24 16:44:15.319		f	\N
+783	80	18	2014-12-25	\N	6	0	\N	\N	\N	\N	\N	f	f	1	2014-12-24 16:44:15.319		f	\N
+784	80	\N	2014-12-25	\N	-1	0	\N	\N	\N	1	\N	f	f	1	2014-12-24 16:44:15.319		f	\N
+785	80	\N	2014-12-25	\N	0	0	\N	\N	\N	\N	\N	f	f	1	2014-12-24 16:44:15.319		f	\N
+786	80	18	2014-12-26	\N	6	0	\N	\N	\N	\N	\N	f	f	1	2014-12-24 16:44:15.319		f	\N
+787	80	\N	2014-12-26	\N	-1	0	\N	\N	\N	1	\N	f	f	1	2014-12-24 16:44:15.319		f	\N
+788	80	\N	2014-12-26	\N	0	0	\N	\N	\N	\N	\N	f	f	1	2014-12-24 16:44:15.319		f	\N
+789	81	29	2014-12-24	\N	6	0	\N	\N	\N	\N	\N	f	f	1	2014-12-24 16:46:09.335		f	\N
+790	81	\N	2014-12-24	\N	-1	0	\N	\N	\N	1	\N	f	f	1	2014-12-24 16:46:09.335		f	\N
+791	81	\N	2014-12-24	\N	0	0	\N	\N	\N	\N	\N	f	f	1	2014-12-24 16:46:09.335		f	\N
+792	81	\N	2014-12-24	\N	1	1312312	\N	\N	\N	\N	25	f	f	1	2014-12-24 16:46:09.335		f	\N
+793	81	29	2014-12-25	\N	6	0	\N	\N	\N	\N	\N	f	f	1	2014-12-24 16:46:09.335		f	\N
+794	81	\N	2014-12-25	\N	-1	0	\N	\N	\N	1	\N	f	f	1	2014-12-24 16:46:09.335		f	\N
+795	81	\N	2014-12-25	\N	0	0	\N	\N	\N	\N	\N	f	f	1	2014-12-24 16:46:09.335		f	\N
+796	81	29	2014-12-26	\N	6	0	\N	\N	\N	\N	\N	f	f	1	2014-12-24 16:46:09.335		f	\N
+797	81	\N	2014-12-26	\N	-1	0	\N	\N	\N	1	\N	f	f	1	2014-12-24 16:46:09.335		f	\N
+798	81	\N	2014-12-26	\N	0	0	\N	\N	\N	\N	\N	f	f	1	2014-12-24 16:46:09.335		f	\N
+799	82	\N	2014-12-25	\N	6	0	\N	\N	\N	\N	\N	f	f	1	2014-12-24 16:47:21.176		f	\N
+800	82	\N	2014-12-25	\N	-1	0	\N	\N	\N	1	\N	f	f	1	2014-12-24 16:47:21.176		f	\N
+801	82	\N	2014-12-25	\N	0	0	\N	\N	\N	\N	\N	f	f	1	2014-12-24 16:47:21.176		f	\N
+802	82	\N	2014-12-26	\N	6	0	\N	\N	\N	\N	\N	f	f	1	2014-12-24 16:47:21.176		f	\N
+803	82	\N	2014-12-26	\N	-1	0	\N	\N	\N	1	\N	f	f	1	2014-12-24 16:47:21.176		f	\N
+804	82	\N	2014-12-26	\N	0	0	\N	\N	\N	\N	\N	f	f	1	2014-12-24 16:47:21.176		f	\N
+805	83	26	2014-12-25	\N	6	0	\N	\N	\N	\N	\N	f	f	1	2014-12-24 16:49:25.407		f	\N
+806	83	\N	2014-12-25	\N	-1	0	\N	\N	\N	1	\N	f	f	1	2014-12-24 16:49:25.407		f	\N
+807	83	\N	2014-12-25	\N	0	0	\N	\N	\N	\N	\N	f	f	1	2014-12-24 16:49:25.407		f	\N
+808	83	26	2014-12-26	\N	6	0	\N	\N	\N	\N	\N	f	f	1	2014-12-24 16:49:25.407		f	\N
+809	83	\N	2014-12-26	\N	-1	0	\N	\N	\N	1	\N	f	f	1	2014-12-24 16:49:25.407		f	\N
+810	83	\N	2014-12-26	\N	0	0	\N	\N	\N	\N	\N	f	f	1	2014-12-24 16:49:25.407		f	\N
+811	84	28	2014-12-24	\N	6	0	\N	\N	\N	\N	\N	f	f	1	2014-12-24 16:50:35.76		f	\N
+812	84	\N	2014-12-24	\N	-1	0	\N	\N	\N	1	\N	f	f	1	2014-12-24 16:50:35.76		f	\N
+813	84	\N	2014-12-24	\N	0	0	\N	\N	\N	\N	\N	f	f	1	2014-12-24 16:50:35.76		f	\N
+814	84	\N	2014-12-24	\N	1	1231312312	\N	\N	\N	\N	28	f	f	1	2014-12-24 16:50:35.76		f	\N
+815	84	28	2014-12-25	\N	6	0	\N	\N	\N	\N	\N	f	f	1	2014-12-24 16:50:35.76		f	\N
+816	84	\N	2014-12-25	\N	-1	0	\N	\N	\N	1	\N	f	f	1	2014-12-24 16:50:35.76		f	\N
+817	84	\N	2014-12-25	\N	0	0	\N	\N	\N	\N	\N	f	f	1	2014-12-24 16:50:35.76		f	\N
+818	84	28	2014-12-26	\N	6	0	\N	\N	\N	\N	\N	f	f	1	2014-12-24 16:50:35.76		f	\N
+819	84	\N	2014-12-26	\N	-1	0	\N	\N	\N	1	\N	f	f	1	2014-12-24 16:50:35.76		f	\N
+820	84	\N	2014-12-26	\N	0	0	\N	\N	\N	\N	\N	f	f	1	2014-12-24 16:50:35.76		f	\N
+821	84	28	2014-12-27	\N	6	0	\N	\N	\N	\N	\N	f	f	1	2014-12-24 16:50:35.76		f	\N
+822	84	\N	2014-12-27	\N	-1	0	\N	\N	\N	1	\N	f	f	1	2014-12-24 16:50:35.76		f	\N
+823	84	\N	2014-12-27	\N	0	0	\N	\N	\N	\N	\N	f	f	1	2014-12-24 16:50:35.76		f	\N
 \.
 
 
@@ -5150,7 +5250,7 @@ COPY folioitem (folioitemid, folioid, roomid, itemdate, refno, particular, amoun
 -- Name: folioitemid_seq; Type: SEQUENCE SET; Schema: public; Owner: hms
 --
 
-SELECT pg_catalog.setval('folioitemid_seq', 753, true);
+SELECT pg_catalog.setval('folioitemid_seq', 823, true);
 
 
 --
@@ -5204,6 +5304,13 @@ COPY guest (guestid, salutationid, fname, lname, type, gender, address, countryi
 53	4	4	rez	0	0		5			1	4324123	\N					\N	\N	\N	\N	\N	\N	\N	1	2014-12-22 14:31:39.293	f
 54	4	5	rez	0	\N		6			2	42314123	\N					\N	\N	\N	\N	\N	\N	\N	1	2014-12-22 14:32:34.906	f
 55	4	6	rezer	0	\N		5			2		\N					\N	\N	\N	\N	\N	\N	\N	1	2014-12-22 18:29:09.763	f
+56	4	12321	31231	0	0	ááá¡ááá¡áá	5	áá¥áá¥á¬á		2	312312	1					\N	\N	\N	1	\N	\N	\N	1	2014-12-24 16:32:10.046	f
+57	4	vashushaaa	vasho	0	0	vasho vashushaaa	13	dasdasda		1	60123546	2					\N	\N	\N	1	\N	\N	\N	1	2014-12-24 16:42:23.486	f
+58	4	dasd	vada	0	1	dasdas	4	dasdas		1	1231231	1					\N	\N	\N	1	\N	\N	\N	1	2014-12-24 16:44:15.319	f
+59	4	12312312	123	0	1	3123 12	2	3 12 31231231	31231	1	31231	1					\N	\N	\N	1	\N	\N	\N	1	2014-12-24 16:46:09.335	f
+60	4	dasd	dasdas	0	1	asdasda	2	dasdas	dasd	1	dasdas	1					\N	\N	\N	1	\N	\N	\N	1	2014-12-24 16:47:21.176	f
+61	4	adsdasda	vasda	0	1	dasdasdas	12	dasdas	dasdasdas	1	1231212	1					\N	\N	\N	1	\N	\N	\N	1	2014-12-24 16:49:25.407	f
+62	4	ááá¨áááá«á	áááá áá	0	1	ááá¡á°áá¯ááá¡á°áá¯áá¡á°áá áá¡	12			1	1231231231	1					\N	\N	\N	1	\N	\N	\N	1	2014-12-24 16:50:35.76	f
 \.
 
 
@@ -5211,7 +5318,7 @@ COPY guest (guestid, salutationid, fname, lname, type, gender, address, countryi
 -- Name: guestid_seq; Type: SEQUENCE SET; Schema: public; Owner: hms
 --
 
-SELECT pg_catalog.setval('guestid_seq', 55, true);
+SELECT pg_catalog.setval('guestid_seq', 62, true);
 
 
 --
@@ -5384,10 +5491,25 @@ SELECT pg_catalog.setval('nationalityid_seq', 1, true);
 
 
 --
+-- Data for Name: ordermain; Type: TABLE DATA; Schema: public; Owner: hms
+--
+
+COPY ordermain (ordermainid, hallname, tablename, opendate, closedate, waitername, amount, discount, price, cash, paid, regname, regdate) FROM stdin;
+\.
+
+
+--
 -- Data for Name: payment; Type: TABLE DATA; Schema: public; Owner: hms
 --
 
 COPY payment (paymentid, paymentmethodid, currencyid, amount, paydate, folioid, voucherno, note, deleted, regbyid, regdate) FROM stdin;
+22	3	2	31231231	2014-12-24	78		\N	f	1	2014-12-24 16:32:10.046
+23	3	2	1231312312	2014-12-24	79		\N	f	1	2014-12-24 16:42:23.486
+24	3	2	13312	2014-12-24	80		\N	f	1	2014-12-24 16:44:15.319
+25	3	2	1312312	2014-12-24	81		\N	f	1	2014-12-24 16:46:09.335
+26	1	2	1231	2014-12-24	82		\N	f	1	2014-12-24 16:47:21.176
+27	1	2	12312312312312	2014-12-24	83		\N	f	1	2014-12-24 16:49:25.407
+28	3	2	1231312312	2014-12-24	84		\N	f	1	2014-12-24 16:50:35.76
 \.
 
 
@@ -5395,7 +5517,7 @@ COPY payment (paymentid, paymentmethodid, currencyid, amount, paydate, folioid, 
 -- Name: paymentid_seq; Type: SEQUENCE SET; Schema: public; Owner: hms
 --
 
-SELECT pg_catalog.setval('paymentid_seq', 21, true);
+SELECT pg_catalog.setval('paymentid_seq', 28, true);
 
 
 --
@@ -5657,16 +5779,23 @@ SELECT pg_catalog.setval('regionid_seq', 1, false);
 
 COPY reservation (reservationid, arraivaldate, departuredate, reservationtypeid, ratetype, manualrate, contractcontragentid, billto, taxexemptionreason, paymentmode, paymentmethodid, paymentcontragentid, advancepaymentdate, advancepaymentamount, companyid, marketid, bsourceid, taid, commissionplan, commissionvalue, voucher, discountid, postingtype, regbyid, regdate, postingvalueevery, num, nomanualtax, notax, discountnights, status) FROM stdin;
 113	2014-10-25 12:02:00	2014-10-27 11:11:00	1	0	\N	\N	2		0	1	\N	\N	\N	0	\N	\N	\N	\N	\N		\N	\N	1	2014-12-18 19:12:40.921	\N	1	f	f	\N	0
-118	2014-10-23 14:22:00	2014-10-24 11:11:00	1	0	\N	\N	2		0	3	\N	\N	\N	0	\N	\N	\N	\N	\N		\N	\N	1	2014-12-22 14:22:59.917	\N	1	f	f	\N	0
 119	2014-10-25 12:02:00	2014-10-26 11:11:00	1	0	\N	\N	2		0	3	\N	\N	\N	0	\N	\N	\N	\N	\N		\N	\N	1	2014-12-22 14:30:42.736	\N	1	f	f	\N	0
 120	2014-10-24 12:02:00	2014-10-24 23:59:00	1	0	\N	\N	1		0	3	\N	\N	\N	0	\N	\N	\N	\N	\N		\N	\N	1	2014-12-22 14:31:39.293	\N	1	f	f	\N	0
-121	2014-10-23 14:31:00	2014-10-24 11:11:00	1	0	\N	\N	3		0	3	\N	\N	\N	0	\N	\N	\N	\N	\N		\N	\N	1	2014-12-22 14:32:34.906	\N	1	f	f	\N	0
 114	2014-10-23 19:12:00	2014-10-24 11:11:00	1	0	\N	\N	2		0	3	\N	\N	\N	0	\N	\N	\N	\N	\N		\N	\N	1	2014-12-18 19:13:22.347	\N	1	f	f	\N	-1
 115	2014-10-23 19:16:00	2014-10-23 23:59:00	2	0	\N	\N	2		0	3	\N	\N	\N	0	\N	\N	\N	\N	\N		\N	\N	1	2014-12-18 19:17:21.372	\N	1	f	f	\N	-1
 116	2014-10-24 12:02:00	2014-10-27 11:11:00	1	0	\N	\N	2		0	3	\N	\N	\N	0	\N	\N	\N	\N	\N		\N	\N	1	2014-12-18 19:54:33.632	\N	1	f	f	\N	0
 112	2014-10-23 19:10:00	2014-10-25 11:11:00	1	0	\N	\N	2		0	1	\N	\N	\N	0	\N	\N	\N	\N	\N		\N	\N	1	2014-12-18 19:11:24.093	\N	1	f	f	\N	-1
-117	2014-10-23 14:21:00	2014-10-24 11:11:00	3	0	\N	\N	2		0	1	\N	\N	\N	0	\N	\N	\N	\N	\N		\N	\N	1	2014-12-22 14:22:06.818	\N	1	f	f	\N	0
-122	2014-10-23 18:28:00	2014-10-24 11:11:00	1	0	\N	\N	2		0	1	\N	\N	\N	0	\N	\N	\N	\N	\N		\N	\N	1	2014-12-22 18:29:09.763	\N	1	f	f	\N	0
+124	2014-12-24 16:41:00	2014-12-27 11:11:00	1	0	\N	\N	2		0	3	\N	\N	\N	0	\N	\N	\N	\N	\N		\N	\N	1	2014-12-24 16:42:23.486	\N	1	f	f	\N	0
+125	2014-12-24 16:43:00	2014-12-27 11:11:00	1	0	\N	\N	2		0	3	\N	\N	\N	0	\N	\N	\N	\N	\N		\N	\N	1	2014-12-24 16:44:15.319	\N	1	f	f	\N	0
+126	2014-12-24 16:45:00	2014-12-27 11:11:00	1	0	\N	\N	2		0	3	\N	\N	\N	0	\N	\N	\N	\N	\N		\N	\N	1	2014-12-24 16:46:09.335	\N	1	f	f	\N	0
+127	2014-12-25 16:46:00	2014-12-27 11:11:00	1	0	\N	\N	2		0	1	\N	\N	\N	0	\N	\N	\N	\N	\N		\N	\N	1	2014-12-24 16:47:21.176	\N	1	f	f	\N	0
+128	2014-12-25 16:48:00	2014-12-27 11:11:00	1	0	\N	\N	2		0	1	\N	\N	\N	0	\N	\N	\N	\N	\N		\N	\N	1	2014-12-24 16:49:25.407	\N	1	f	f	\N	0
+129	2014-12-24 16:50:00	2014-12-28 11:11:00	1	0	\N	\N	2		0	3	\N	\N	\N	0	\N	\N	\N	\N	\N		\N	\N	1	2014-12-24 16:50:35.76	\N	1	f	f	\N	0
+117	2014-10-23 14:21:00	2014-10-24 11:11:00	3	0	\N	\N	2		0	1	\N	\N	\N	0	\N	\N	\N	\N	\N		\N	\N	1	2014-12-22 14:22:06.818	\N	1	f	f	\N	-1
+123	2014-10-23 16:31:00	2014-10-28 11:11:00	1	0	\N	\N	2		0	3	\N	\N	\N	0	\N	\N	\N	\N	\N		\N	\N	1	2014-12-24 16:32:10.046	\N	1	f	f	\N	-1
+122	2014-10-23 18:28:00	2014-10-24 11:11:00	1	0	\N	\N	2		0	1	\N	\N	\N	0	\N	\N	\N	\N	\N		\N	\N	1	2014-12-22 18:29:09.763	\N	1	f	f	\N	-1
+121	2014-10-23 14:31:00	2014-10-24 11:11:00	1	0	\N	\N	3		0	3	\N	\N	\N	0	\N	\N	\N	\N	\N		\N	\N	1	2014-12-22 14:32:34.906	\N	1	f	f	\N	-1
+118	2014-10-23 14:22:00	2014-10-24 11:11:00	1	0	\N	\N	2		0	3	\N	\N	\N	0	\N	\N	\N	\N	\N		\N	\N	1	2014-12-22 14:22:59.917	\N	1	f	f	\N	-1
 \.
 
 
@@ -5674,7 +5803,7 @@ COPY reservation (reservationid, arraivaldate, departuredate, reservationtypeid,
 -- Name: reservationid_seq; Type: SEQUENCE SET; Schema: public; Owner: hms
 --
 
-SELECT pg_catalog.setval('reservationid_seq', 122, true);
+SELECT pg_catalog.setval('reservationid_seq', 129, true);
 
 
 --
@@ -5695,12 +5824,19 @@ COPY reservationroom (reservationroomid, reservationid, roomid, leader, adult, c
 88	115	15	t	1	0	1	48	1	2014-12-18 19:17:21.372	5
 89	116	24	t	1	0	1	49	1	2014-12-18 19:54:33.632	2
 85	112	17	t	1	0	1	45	1	2014-12-18 19:11:24.093	1
-90	117	\N	t	1	0	1	50	1	2014-12-22 14:22:06.818	1
-91	118	\N	t	1	0	1	51	1	2014-12-22 14:22:59.917	3
 92	119	\N	t	1	0	1	52	1	2014-12-22 14:30:42.736	6
 93	120	\N	t	1	0	1	53	1	2014-12-22 14:31:39.293	1
-94	121	\N	t	1	0	1	54	1	2014-12-22 14:32:34.906	6
-95	122	\N	t	1	0	1	55	1	2014-12-22 18:29:09.763	1
+96	123	29	t	1	0	3	56	1	2014-12-24 16:32:10.046	6
+97	124	8	t	1	0	1	57	1	2014-12-24 16:42:23.486	4
+98	125	18	t	1	0	1	58	1	2014-12-24 16:44:15.319	4
+99	126	29	t	1	0	1	59	1	2014-12-24 16:46:09.335	6
+100	127	\N	t	1	0	1	60	1	2014-12-24 16:47:21.176	6
+101	128	26	t	1	0	1	61	1	2014-12-24 16:49:25.407	4
+102	129	28	t	1	0	1	62	1	2014-12-24 16:50:35.76	4
+90	117	19	t	1	0	1	50	1	2014-12-22 14:22:06.818	1
+95	122	22	t	1	0	1	55	1	2014-12-22 18:29:09.763	1
+94	121	14	t	1	0	1	54	1	2014-12-22 14:32:34.906	6
+91	118	5	t	1	0	1	51	1	2014-12-22 14:22:59.917	3
 \.
 
 
@@ -5708,7 +5844,7 @@ COPY reservationroom (reservationroomid, reservationid, roomid, leader, adult, c
 -- Name: reservationroomid_seq; Type: SEQUENCE SET; Schema: public; Owner: hms
 --
 
-SELECT pg_catalog.setval('reservationroomid_seq', 95, true);
+SELECT pg_catalog.setval('reservationroomid_seq', 102, true);
 
 
 --
@@ -5898,6 +6034,21 @@ COPY roomst (roomstsid, roomid, statusdate, st, regbyid, regdate) FROM stdin;
 65	17	2014-10-23 00:00:00	1	1	2014-12-22 15:59:01.93
 66	24	2014-10-23 00:00:00	1	1	2014-12-22 15:59:05.424
 67	15	2014-10-23 00:00:00	1	1	2014-12-22 15:59:08.522
+68	29	2014-10-23 16:31:00	0	1	2014-12-24 16:32:10.046
+69	8	2014-12-24 16:41:00	0	1	2014-12-24 16:42:23.486
+70	18	2014-12-24 16:43:00	0	1	2014-12-24 16:44:15.319
+71	29	2014-12-24 16:45:00	0	1	2014-12-24 16:46:09.335
+72	26	2014-12-25 16:48:00	0	1	2014-12-24 16:49:25.407
+73	28	2014-12-24 16:50:00	0	1	2014-12-24 16:50:35.76
+74	19	2014-10-23 00:00:00	7	1	2014-12-24 16:51:33.659
+75	19	2014-10-23 00:00:00	1	1	2014-12-24 16:51:38.33
+76	29	2014-10-23 00:00:00	1	1	2014-12-24 16:51:41.55
+77	22	2014-10-23 00:00:00	0	1	2014-12-24 16:51:48.23
+78	14	2014-10-23 00:00:00	0	1	2014-12-24 16:51:57.23
+79	5	2014-10-23 00:00:00	0	1	2014-12-24 16:52:02.228
+80	22	2014-10-23 00:00:00	1	1	2014-12-24 16:52:04.479
+81	14	2014-10-23 00:00:00	1	1	2014-12-24 16:52:21.821
+82	5	2014-10-23 00:00:00	1	1	2014-12-24 16:52:27.312
 \.
 
 
@@ -5905,7 +6056,7 @@ COPY roomst (roomstsid, roomid, statusdate, st, regbyid, regdate) FROM stdin;
 -- Name: roomstid_seq; Type: SEQUENCE SET; Schema: public; Owner: hms
 --
 
-SELECT pg_catalog.setval('roomstid_seq', 67, true);
+SELECT pg_catalog.setval('roomstid_seq', 82, true);
 
 
 --
@@ -6333,6 +6484,14 @@ ALTER TABLE ONLY menu
 
 ALTER TABLE ONLY nationality
     ADD CONSTRAINT nationality_pkey PRIMARY KEY (nationalityid);
+
+
+--
+-- Name: ordermain_pkey; Type: CONSTRAINT; Schema: public; Owner: hms; Tablespace: 
+--
+
+ALTER TABLE ONLY ordermain
+    ADD CONSTRAINT ordermain_pkey PRIMARY KEY (ordermainid);
 
 
 --

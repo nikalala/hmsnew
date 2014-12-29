@@ -106,93 +106,79 @@ public class VReservationlistManager
     public static final String NAME_GUESTID = "guestid";
 
     /**
-     * Column advancepaymentdate of type Types.DATE mapped to java.util.Date.
-     */
-    public static final int ID_ADVANCEPAYMENTDATE = 11;
-    public static final int TYPE_ADVANCEPAYMENTDATE = Types.DATE;
-    public static final String NAME_ADVANCEPAYMENTDATE = "advancepaymentdate";
-
-    /**
-     * Column advancepaymentamount of type Types.DOUBLE mapped to Double.
-     */
-    public static final int ID_ADVANCEPAYMENTAMOUNT = 12;
-    public static final int TYPE_ADVANCEPAYMENTAMOUNT = Types.DOUBLE;
-    public static final String NAME_ADVANCEPAYMENTAMOUNT = "advancepaymentamount";
-
-    /**
      * Column guest of type Types.VARCHAR mapped to String.
      */
-    public static final int ID_GUEST = 13;
+    public static final int ID_GUEST = 11;
     public static final int TYPE_GUEST = Types.VARCHAR;
     public static final String NAME_GUEST = "guest";
 
     /**
      * Column roomcode of type Types.VARCHAR mapped to String.
      */
-    public static final int ID_ROOMCODE = 14;
+    public static final int ID_ROOMCODE = 12;
     public static final int TYPE_ROOMCODE = Types.VARCHAR;
     public static final String NAME_ROOMCODE = "roomcode";
 
     /**
      * Column roomtypecode of type Types.VARCHAR mapped to String.
      */
-    public static final int ID_ROOMTYPECODE = 15;
+    public static final int ID_ROOMTYPECODE = 13;
     public static final int TYPE_ROOMTYPECODE = Types.VARCHAR;
     public static final String NAME_ROOMTYPECODE = "roomtypecode";
 
     /**
      * Column bsourcename of type Types.VARCHAR mapped to String.
      */
-    public static final int ID_BSOURCENAME = 16;
+    public static final int ID_BSOURCENAME = 14;
     public static final int TYPE_BSOURCENAME = Types.VARCHAR;
     public static final String NAME_BSOURCENAME = "bsourcename";
 
     /**
      * Column bsourceid of type Types.INTEGER mapped to Integer.
      */
-    public static final int ID_BSOURCEID = 17;
+    public static final int ID_BSOURCEID = 15;
     public static final int TYPE_BSOURCEID = Types.INTEGER;
     public static final String NAME_BSOURCEID = "bsourceid";
 
     /**
      * Column companyname of type Types.VARCHAR mapped to String.
      */
-    public static final int ID_COMPANYNAME = 18;
+    public static final int ID_COMPANYNAME = 16;
     public static final int TYPE_COMPANYNAME = Types.VARCHAR;
     public static final String NAME_COMPANYNAME = "companyname";
 
     /**
      * Column price of type Types.DOUBLE mapped to Double.
      */
-    public static final int ID_PRICE = 19;
+    public static final int ID_PRICE = 17;
     public static final int TYPE_PRICE = Types.DOUBLE;
     public static final String NAME_PRICE = "price";
 
     /**
      * Column paid of type Types.DOUBLE mapped to Double.
      */
-    public static final int ID_PAID = 20;
+    public static final int ID_PAID = 18;
     public static final int TYPE_PAID = Types.DOUBLE;
     public static final String NAME_PAID = "paid";
 
     /**
      * Column vouchernum of type Types.VARCHAR mapped to String.
      */
-    public static final int ID_VOUCHERNUM = 21;
+    public static final int ID_VOUCHERNUM = 19;
     public static final int TYPE_VOUCHERNUM = Types.VARCHAR;
     public static final String NAME_VOUCHERNUM = "vouchernum";
 
     /**
      * Column user of type Types.VARCHAR mapped to String.
      */
-    public static final int ID_USER = 22;
+    public static final int ID_USER = 20;
     public static final int TYPE_USER = Types.VARCHAR;
     public static final String NAME_USER = "user";
 
     /**
      * Column reservationtype of type Types.VARCHAR mapped to String.
      */
-    public static final int ID_RESERVATIONTYPE = 23;
+    public static final int ID_RESERVATIONTYPE = 21;
     public static final int TYPE_RESERVATIONTYPE = Types.VARCHAR;
     public static final String NAME_RESERVATIONTYPE = "reservationtype";
 
@@ -215,8 +201,6 @@ public class VReservationlistManager
         ,"v_reservationlist.reservationtypeid"
         ,"v_reservationlist.status"
         ,"v_reservationlist.guestid"
-        ,"v_reservationlist.advancepaymentdate"
-        ,"v_reservationlist.advancepaymentamount"
         ,"v_reservationlist.guest"
         ,"v_reservationlist.roomcode"
         ,"v_reservationlist.roomtypecode"
@@ -244,8 +228,6 @@ public class VReservationlistManager
                             + ",v_reservationlist.reservationtypeid"
                             + ",v_reservationlist.status"
                             + ",v_reservationlist.guestid"
-                            + ",v_reservationlist.advancepaymentdate"
-                            + ",v_reservationlist.advancepaymentamount"
                             + ",v_reservationlist.guest"
                             + ",v_reservationlist.roomcode"
                             + ",v_reservationlist.roomtypecode"
@@ -544,22 +526,6 @@ public class VReservationlistManager
                     _dirtyCount++;
                 }
 
-                if (pObject.isAdvancepaymentdateModified()) {
-                    if (_dirtyCount>0) {
-                        _sql.append(",");
-                    }
-                    _sql.append("advancepaymentdate");
-                    _dirtyCount++;
-                }
-
-                if (pObject.isAdvancepaymentamountModified()) {
-                    if (_dirtyCount>0) {
-                        _sql.append(",");
-                    }
-                    _sql.append("advancepaymentamount");
-                    _dirtyCount++;
-                }
-
                 if (pObject.isGuestModified()) {
                     if (_dirtyCount>0) {
                         _sql.append(",");
@@ -702,14 +668,6 @@ public class VReservationlistManager
     
                 if (pObject.isGuestidModified()) {
                     Manager.setLong(ps, ++_dirtyCount, pObject.getGuestid());
-                }
-    
-                if (pObject.isAdvancepaymentdateModified()) {
-                    if (pObject.getAdvancepaymentdate() == null) ps.setNull(++_dirtyCount, Types.DATE); else ps.setDate(++_dirtyCount, new java.sql.Date(pObject.getAdvancepaymentdate().getTime()));
-                }
-    
-                if (pObject.isAdvancepaymentamountModified()) {
-                    Manager.setDouble(ps, ++_dirtyCount, pObject.getAdvancepaymentamount());
                 }
     
                 if (pObject.isGuestModified()) {
@@ -867,24 +825,6 @@ public class VReservationlistManager
                     _sql.append("guestid").append("=?");
                 }
 
-                if (pObject.isAdvancepaymentdateModified()) {
-                    if (useComma) {
-                        _sql.append(",");
-                    } else {
-                        useComma=true;
-                    }
-                    _sql.append("advancepaymentdate").append("=?");
-                }
-
-                if (pObject.isAdvancepaymentamountModified()) {
-                    if (useComma) {
-                        _sql.append(",");
-                    } else {
-                        useComma=true;
-                    }
-                    _sql.append("advancepaymentamount").append("=?");
-                }
-
                 if (pObject.isGuestModified()) {
                     if (useComma) {
                         _sql.append(",");
@@ -1029,14 +969,6 @@ public class VReservationlistManager
 
                 if (pObject.isGuestidModified()) {
                       Manager.setLong(ps, ++_dirtyCount, pObject.getGuestid());
-                }
-
-                if (pObject.isAdvancepaymentdateModified()) {
-                      if (pObject.getAdvancepaymentdate() == null) ps.setNull(++_dirtyCount, Types.DATE); else ps.setDate(++_dirtyCount, new java.sql.Date(pObject.getAdvancepaymentdate().getTime()));
-                }
-
-                if (pObject.isAdvancepaymentamountModified()) {
-                      Manager.setDouble(ps, ++_dirtyCount, pObject.getAdvancepaymentamount());
                 }
 
                 if (pObject.isGuestModified()) {
@@ -1213,16 +1145,6 @@ public class VReservationlistManager
                  _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("guestid= ?");
              }
     
-             if (pObject.isAdvancepaymentdateModified()) {
-                 _dirtyCount ++; 
-                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("advancepaymentdate= ?");
-             }
-    
-             if (pObject.isAdvancepaymentamountModified()) {
-                 _dirtyCount ++; 
-                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("advancepaymentamount= ?");
-             }
-    
              if (pObject.isGuestModified()) {
                  _dirtyCount ++; 
                  _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("guest= ?");
@@ -1328,14 +1250,6 @@ public class VReservationlistManager
     
              if (pObject.isGuestidModified()) {
                  Manager.setLong(ps, ++_dirtyCount, pObject.getGuestid());
-             }
-    
-             if (pObject.isAdvancepaymentdateModified()) {
-                 if (pObject.getAdvancepaymentdate() == null) ps.setNull(++_dirtyCount, Types.DATE); else ps.setDate(++_dirtyCount, new java.sql.Date(pObject.getAdvancepaymentdate().getTime()));
-             }
-    
-             if (pObject.isAdvancepaymentamountModified()) {
-                 Manager.setDouble(ps, ++_dirtyCount, pObject.getAdvancepaymentamount());
              }
     
              if (pObject.isGuestModified()) {
@@ -1485,20 +1399,6 @@ public class VReservationlistManager
                 _dirtyAnd ++;
             }
     
-            if (pObject.isAdvancepaymentdateInitialized()) {
-                if (_dirtyAnd > 0)
-                    sql.append(" AND ");
-                sql.append("advancepaymentdate").append("=?");
-                _dirtyAnd ++;
-            }
-    
-            if (pObject.isAdvancepaymentamountInitialized()) {
-                if (_dirtyAnd > 0)
-                    sql.append(" AND ");
-                sql.append("advancepaymentamount").append("=?");
-                _dirtyAnd ++;
-            }
-    
             if (pObject.isGuestInitialized()) {
                 if (_dirtyAnd > 0)
                     sql.append(" AND ");
@@ -1622,14 +1522,6 @@ public class VReservationlistManager
     
             if (pObject.isGuestidInitialized()) {
                 Manager.setLong(ps, ++_dirtyCount, pObject.getGuestid());
-            }
-    
-            if (pObject.isAdvancepaymentdateInitialized()) {
-                if (pObject.getAdvancepaymentdate() == null) ps.setNull(++_dirtyCount, Types.DATE); else ps.setDate(++_dirtyCount, new java.sql.Date(pObject.getAdvancepaymentdate().getTime()));
-            }
-    
-            if (pObject.isAdvancepaymentamountInitialized()) {
-                Manager.setDouble(ps, ++_dirtyCount, pObject.getAdvancepaymentamount());
             }
     
             if (pObject.isGuestInitialized()) {
@@ -1841,16 +1733,6 @@ public class VReservationlistManager
                     _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("guestid= ?");
                 }
     
-                if (pObject.isAdvancepaymentdateModified()) {
-                    _dirtyCount++; 
-                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("advancepaymentdate= ?");
-                }
-    
-                if (pObject.isAdvancepaymentamountModified()) {
-                    _dirtyCount++; 
-                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("advancepaymentamount= ?");
-                }
-    
                 if (pObject.isGuestModified()) {
                     _dirtyCount++; 
                     _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("guest= ?");
@@ -1959,14 +1841,6 @@ public class VReservationlistManager
                     Manager.setLong(ps, ++_dirtyCount, pObject.getGuestid());
                 }
     
-                if (pObject.isAdvancepaymentdateModified()) {
-                    if (pObject.getAdvancepaymentdate() == null) ps.setNull(++_dirtyCount, Types.DATE); else ps.setDate(++_dirtyCount, new java.sql.Date(pObject.getAdvancepaymentdate().getTime()));
-                }
-    
-                if (pObject.isAdvancepaymentamountModified()) {
-                    Manager.setDouble(ps, ++_dirtyCount, pObject.getAdvancepaymentamount());
-                }
-    
                 if (pObject.isGuestModified()) {
                     ps.setString(++_dirtyCount, pObject.getGuest());
                 }
@@ -2046,19 +1920,17 @@ public class VReservationlistManager
         pObject.setReservationtypeid(Manager.getInteger(rs, 9));
         pObject.setStatus(Manager.getInteger(rs, 10));
         pObject.setGuestid(Manager.getLong(rs, 11));
-        pObject.setAdvancepaymentdate(rs.getDate(12));
-        pObject.setAdvancepaymentamount(Manager.getDouble(rs, 13));
-        pObject.setGuest(rs.getString(14));
-        pObject.setRoomcode(rs.getString(15));
-        pObject.setRoomtypecode(rs.getString(16));
-        pObject.setBsourcename(rs.getString(17));
-        pObject.setBsourceid(Manager.getInteger(rs, 18));
-        pObject.setCompanyname(rs.getString(19));
-        pObject.setPrice(Manager.getDouble(rs, 20));
-        pObject.setPaid(Manager.getDouble(rs, 21));
-        pObject.setVouchernum(rs.getString(22));
-        pObject.setUser(rs.getString(23));
-        pObject.setReservationtype(rs.getString(24));
+        pObject.setGuest(rs.getString(12));
+        pObject.setRoomcode(rs.getString(13));
+        pObject.setRoomtypecode(rs.getString(14));
+        pObject.setBsourcename(rs.getString(15));
+        pObject.setBsourceid(Manager.getInteger(rs, 16));
+        pObject.setCompanyname(rs.getString(17));
+        pObject.setPrice(Manager.getDouble(rs, 18));
+        pObject.setPaid(Manager.getDouble(rs, 19));
+        pObject.setVouchernum(rs.getString(20));
+        pObject.setUser(rs.getString(21));
+        pObject.setReservationtype(rs.getString(22));
 
         pObject.isNew(false);
         pObject.resetIsModified();
@@ -2124,14 +1996,6 @@ public class VReservationlistManager
                 case ID_GUESTID:
                     ++pos;
                     pObject.setGuestid(Manager.getLong(rs, pos));
-                    break;
-                case ID_ADVANCEPAYMENTDATE:
-                    ++pos;
-                    pObject.setAdvancepaymentdate(rs.getDate(pos));
-                    break;
-                case ID_ADVANCEPAYMENTAMOUNT:
-                    ++pos;
-                    pObject.setAdvancepaymentamount(Manager.getDouble(rs, pos));
                     break;
                 case ID_GUEST:
                     ++pos;
