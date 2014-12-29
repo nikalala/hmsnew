@@ -4,6 +4,17 @@
 <%
 Vector v = (Vector)session.getAttribute("WALKIN_REMARKS");
 if(v == null)   v = new Vector();
+long rid = 0;
+if(request.getParameter("rid") != null)
+    rid = Long.parseLong(request.getParameter("rid"));
+if(rid > 0){
+    v = new Vector();
+    ReasonBean[] res = ReasonManager.getInstance().loadByWhere("where reasonid in (select reasonid from reservationreason where reservationid = "+rid+")");
+    for(int i=0;i<res.length;i++){
+        v.addElement((ReasonBean)res[i]);
+    }
+}
+
 
 if(v.size()>0){
 %>

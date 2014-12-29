@@ -159,7 +159,7 @@ public class PaymentmethodBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: paymentmethod.name
-     * <li>comments: ??????????
+     * <li>comments: დასახელება
      * <li>column size: 2147483647
      * <li>jdbc type returned by the driver: Types.VARCHAR
      * </ul>
@@ -216,7 +216,7 @@ public class PaymentmethodBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: paymentmethod.code
-     * <li>comments: ????? ???????????
+     * <li>comments: მოკლე სახელწოდება
      * <li>column size: 100
      * <li>jdbc type returned by the driver: Types.VARCHAR
      * </ul>
@@ -273,7 +273,7 @@ public class PaymentmethodBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: paymentmethod.paymentmode
-     * <li>comments: ??????????????? ????CODEpaymentmode
+     * <li>comments: ანგარიშსწორების ტიპიCODEpaymentmode
      * <li>column size: 10
      * <li>jdbc type returned by the driver: Types.INTEGER
      * </ul>
@@ -341,7 +341,7 @@ public class PaymentmethodBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: paymentmethod.cardprocessing
-     * <li>comments: ??????? ??????????
+     * <li>comments: ბარათის პროცესინგი
      * <li>default value: false
      * <li>column size: 1
      * <li>jdbc type returned by the driver: Types.BIT
@@ -409,7 +409,7 @@ public class PaymentmethodBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: paymentmethod.receiptno
-     * <li>comments: ??????? ?????????CODEdocumentnumbering
+     * <li>comments: ქვითრის ნუმერაციაCODEdocumentnumbering
      * <li>default value: 0
      * <li>column size: 10
      * <li>jdbc type returned by the driver: Types.INTEGER
@@ -479,7 +479,7 @@ public class PaymentmethodBean
      * <ul>
      * <li>full name: paymentmethod.extrachargeid
      * <li> foreign key: extracharge.extrachargeid
-     * <li>comments: ????????? ?????????? ????????
+     * <li>comments: დამატებით გადასახადი სერვისზე
      * <li>column size: 10
      * <li>jdbc type returned by the driver: Types.INTEGER
      * </ul>
@@ -547,7 +547,7 @@ public class PaymentmethodBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: paymentmethod.amount
-     * <li>comments: ???????
+     * <li>comments: ოდენობა
      * <li>column size: 17
      * <li>jdbc type returned by the driver: Types.DOUBLE
      * </ul>
@@ -615,7 +615,7 @@ public class PaymentmethodBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: paymentmethod.perc
-     * <li>comments: ???????? / ?????
+     * <li>comments: პროცენტი / თანხა
      * <li>column size: 17
      * <li>jdbc type returned by the driver: Types.DOUBLE
      * </ul>
@@ -684,7 +684,7 @@ public class PaymentmethodBean
      * <ul>
      * <li>full name: paymentmethod.regbyid
      * <li> foreign key: personnel.personnelid
-     * <li>comments: ??????
+     * <li>comments: ავტორი
      * <li>column size: 10
      * <li>jdbc type returned by the driver: Types.INTEGER
      * </ul>
@@ -752,7 +752,7 @@ public class PaymentmethodBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: paymentmethod.regdate
-     * <li>comments: ???????????? ??????
+     * <li>comments: რეგისტრაციის თარიღი
      * <li>default value: now()
      * <li>column size: 29
      * <li>jdbc type returned by the driver: Types.TIMESTAMP
@@ -821,7 +821,7 @@ public class PaymentmethodBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: paymentmethod.active
-     * <li>comments: ???????
+     * <li>comments: აქტიური
      * <li>default value: true
      * <li>column size: 1
      * <li>jdbc type returned by the driver: Types.BIT
@@ -889,7 +889,7 @@ public class PaymentmethodBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: paymentmethod.deleted
-     * <li>comments: ???????
+     * <li>comments: წაშლილი
      * <li>default value: false
      * <li>column size: 1
      * <li>jdbc type returned by the driver: Types.BIT

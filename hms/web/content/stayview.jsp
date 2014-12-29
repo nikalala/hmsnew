@@ -43,11 +43,11 @@
     <%}%>
 
     .sch-event {
-    / / border-color : #6699cc;
+    // border-color : #6699cc;
         text-shadow: 0px 1px 1px #000;
         background: -moz-linear-gradient(32% 96% 90deg, rgba(0, 0, 0, 0.5), transparent 80%) repeat scroll 0% 0% transparent;
         border-style: none;
-    / / color : #1C417C;
+    // color : #1C417C;
         cursor: pointer;
         text-align: center;
         top: 0px;
@@ -58,7 +58,7 @@
     }
 
     .sch-event-inner {
-    / / background-color : red !important;
+    // background-color : red !important;
         padding: 1px;
     }
 
@@ -81,6 +81,17 @@
     var totalDays;
     lastChosenD = "";
     lastChosenS = "";
+
+    function doStayViewAction(id,act){
+        if(act == "remark") {
+            $.post("content/ajax/getReservationidByRoom.jsp",{ id: id },function(data){
+                if(data.result == 0)    BootstrapDialog.alert(data.error);
+                else {
+                    newmWindow1('remarks','შენიშვნები','rid='+data.rid);
+                }
+            },"json");
+        }
+    }
 
     function reloadPageAfterSave() {
         console.log("reloadPageAfterSave");
@@ -275,7 +286,7 @@
                         var id = record.get('Id');
                         var ids = id.split('_');
                         if (ids.length > 1) {
-                            return '<img src="images/Message-16.png"/>';
+                            return '<img src="images/Message-16.png" style="cursor: pointer;" onclick="doStayViewAction(\''+ids[1]+'\',\'remark\')"/>';
                         }
                         return '';
                     }
