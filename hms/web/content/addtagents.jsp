@@ -125,7 +125,7 @@
             <td>
                 <%
                     String taddtobussinesssource = "";
-                    if (contragentlistBeans != null && contragentlistBeans.getBsource()) {
+                    if (contragentlistBeans != null && contragentlistBeans.getBsource() != null && contragentlistBeans.getBsource().booleanValue()) {
                         taddtobussinesssource = "checked";
                     }%>
                 <input type="checkbox" name="taddtobussinesssource" id="taddtobussinesssource" <%=taddtobussinesssource%>></td>
@@ -204,7 +204,7 @@
                 <%
                     for (int i = 0; i < roominventory.length; i++) {
                         String selected;
-                        if (contragentlistBeans != null && contragentlistBeans.getRoominventory() == i) {
+                        if (contragentlistBeans != null && contragentlistBeans.getRoominventory() != null && contragentlistBeans.getRoominventory() == i) {
                             selected = "checked";
                         } else {
                             selected = "";
@@ -226,7 +226,7 @@
 
                 <%
                     String selected = "";
-                    if (contragentlistBeans != null && contragentlistBeans.getCreateuser()) {
+                    if (contragentlistBeans != null && contragentlistBeans.getCreateuser() != null && contragentlistBeans.getCreateuser().booleanValue()) {
                         selected = "checked";
                     }%>
                 <input type="checkbox" id="tcreateuser" name="tcreateuser" <%=selected%>></td>
@@ -236,7 +236,7 @@
             <td>
                 <%
                     String tccblock = "";
-                    if (contragentlistBeans != null && contragentlistBeans.getCcblock()) {
+                    if (contragentlistBeans != null && contragentlistBeans.getCcblock() != null && contragentlistBeans.getCcblock().booleanValue()) {
                         tccblock = "checked";
                     }%>
                 <input type="checkbox" id="tccblock" name="tccblock" <%=tccblock%>></td>

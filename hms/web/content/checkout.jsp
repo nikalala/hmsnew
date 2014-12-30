@@ -3,6 +3,9 @@
 <%@include file="../includes/init.jsp"%>
 <%
 String msg = "";
+String rid = request.getParameter("rid");
+if(rid == null)
+    rid = request.getParameter("reservationid");
 ReservationroomBean rroom = ReservationroomManager.getInstance().loadByPrimaryKey(new Long(request.getParameter("rid")));
 Manager.getInstance().beginTransaction();
 try{

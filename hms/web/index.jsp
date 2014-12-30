@@ -20,10 +20,33 @@
         loggedon = false;
     }
 
-    String cmenufiles[] = {"TAB_EditTransaction", "roommove", "AmendStay", "CheckIn", "CheckOut", "cancel", "MarkNoShow", "assignroom", "UnblockRoom", "VoidTransaction", "UndoCheckin", "SetMessages", "SetTasks", "SetPreference", "StopRoomMove", "UndoStopRoomMove", "ExchangeRoom", "MoveGuestPhysically"};
+    String cmenufiles[] = {"TAB_EditTransaction", "roommove", "amendstay", "checkin", "checkout", "cancel", "MarkNoShow", "assignroom", "UnblockRoom", "VoidTransaction", "undocheckin", "remarks", "SetTasks", "SetPreference", "StopRoomMove", "UndoStopRoomMove", "ExchangeRoom", "MoveGuestPhysically"};
     String cmenunames[] = {"რედაქტირება", "ოთახის შეცვლა", "გახანგრძლივება", "შესვლა", "გამოსვლა", "გაუქმება", "არ მოსვლა", "ოთახის მინიჭება", "ოთახის განბლოკვა", "რეზერვაციის გაუქმება", "შესვლის გაუქმება", "შეტყობინებების დაყენება", "სამუშაოების მინიჭება", "პარამეტრები", "ოთახის გადატანის შეჩერება", "ოთახის გადატანის შეჩერების გაუქმება", "ოთახის გაცვლა", "სტუმრის გადაყვანა ფიზიკურად"};
     String cmenuicons[] = {"saved", "ოთახის შეცვლა", "გახანგრძლივება", "შესვლა", "გამოსვლა", "გაუქმება", "არ მოსვლა", "ოთახის მინიჭება", "ოთახის განბლოკვა", "რეზერვაციის გაუქმება", "შესვლის გაუქმება", "შეტყობინებების დაყენება", "სამუშაოების მინიჭება", "პარამეტრები", "ოთახის გადატანის შეჩერება", "ოთახის გადატანის შეჩერების გაუქმება", "ოთახის გაცვლა", "სტუმრის გადაყვანა ფიზიკურად"};
-
+    
+    boolean[][] statusmenu = {
+        //"რედაქტირება", "ოთახის შეცვლა", "გახანგრძლივება", "შესვლა", "გამოსვლა", "გაუქმება", "არ მოსვლა", "ოთახის მინიჭება", "ოთახის განბლოკვა", "რეზერვაციის გაუქმება", "შესვლის გაუქმება", "შეტყობინებების დაყენება", "სამუშაოების მინიჭება", "პარამეტრები", "ოთახის გადატანის შეჩერება", "ოთახის გადატანის შეჩერების გაუქმება", "ოთახის გაცვლა", "სტუმრის გადაყვანა ფიზიკურად"
+        // დადასტურებული რეზერვაცია
+        {  true,          true,           true,             true,     false,      true,       true,        true,              false,              true,                   false,              true,                      false,                  false,         false,                       false,                                 false,           false},
+        // მცხოვრები
+        {  true,          true,           true,             false,    true,       false,      false,       false,             false,              false,                  true,               true,                      false,                  false,         false,                       false,                                 false,           false},
+        // ვადაგადაცილებული
+        {  true,          true,           true,             true,     false,      true,       true,        true,              false,              true,                   false,              true,                      false,                  false,         false,                       false,                                 false,           false},
+        // წამსვლელი
+        {  true,          true,           true,             true,     false,      true,       true,        true,              false,              true,                   false,              true,                      false,                  false,         false,                       false,                                 false,           false},
+        // გაწერილი
+        {  true,          true,           true,             true,     false,      true,       true,        true,              false,              true,                   false,              true,                      false,                  false,         false,                       false,                                 false,           false},
+        // დაბლოკილი
+        {  true,          true,           true,             true,     false,      true,       true,        true,              false,              true,                   false,              true,                      false,                  false,         false,                       false,                                 false,           false},
+        // დღიური გამოყენება
+        {  true,          true,           true,             true,     false,      true,       true,        true,              false,              true,                   false,              true,                      false,                  false,         false,                       false,                                 false,           false},
+        // დაუდასტურებელი რეზერვაცია
+        {  true,          true,           true,             true,     false,      true,       true,        true,              false,              true,                   false,              true,                      false,                  false,         false,                       false,                                 false,           false},
+        // თავისუფალი
+        {  true,          true,           true,             true,     false,      true,       true,        true,              false,              true,                   false,              true,                      false,                  false,         false,                       false,                                 false,           false},
+    };
+    
+    
     String bgcol = "#F5F5F5";
 %>
 <!DOCTYPE html>
@@ -85,6 +108,30 @@
         var globalpars = <%=jschs%>;
         
         var lclosedate = <%=lclosedate%>;
+
+        function changeContextMenu(st,mn){
+            var sts = new Array();
+            <%for(int i=0;i<statusmenu.length;i++){
+                %>
+                sts[<%=i%>] = new Array();
+                <%
+                for(int j=0;j<statusmenu[i].length;j++){
+                    int v = 0;
+                    if(statusmenu[i][j])    v = 1;
+                    %>
+                sts[<%=i%>][<%=j%>] = <%=v%>;
+                    <%
+                }
+            }
+            %>
+            $("#contextMenu ul").find('li').each(function(){
+                var n = $(this).attr('num');
+                if(sts[st][n] == 0) $(this).hide();
+                else                $(this).show();
+            });
+            
+        }
+
 
         $(document).ready(function () {
 
@@ -285,7 +332,7 @@
         <%
             for (int i = 0; i < cmenunames.length; i++) {
         %>
-        <li class="roomlistitm"><a id="<%=cmenufiles[i]%>" icon="<%=cmenuicons[i]%>" href="#"><%=cmenunames[i]%>
+        <li class="roomlistitm" num="<%=i%>"><a id="<%=cmenufiles[i]%>" icon="<%=cmenuicons[i]%>" href="#"><%=cmenunames[i]%>
         </a></li>
         <%
             }

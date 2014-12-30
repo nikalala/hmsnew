@@ -2,7 +2,12 @@
 <%@page pageEncoding="UTF-8" %>
 <%@include file="../includes/init.jsp" %>
 <%
-    ReservationroomBean reserv = ReservationroomManager.getInstance().loadByPrimaryKey(new Long(request.getParameter("rid")));
+    String rid = request.getParameter("rid");
+    if(rid == null)
+        rid = request.getParameter("reservationroomid");
+    if(rid == null)
+        rid = request.getParameter("reservationid");
+    ReservationroomBean reserv = ReservationroomManager.getInstance().loadByPrimaryKey(new Long(rid));
     ReservationBean res = ReservationManager.getInstance().loadByPrimaryKey(reserv.getReservationid());
     GuestBean guest = GuestManager.getInstance().loadByPrimaryKey(reserv.getGuestid());
     SalutationBean salutation = SalutationManager.getInstance().loadByPrimaryKey(guest.getSalutationid());
@@ -75,11 +80,15 @@
         $('#amenddeparturedate').datepicker(<%=pickerformat2%>);
     });
 
+    function reloadAfterAmendStay(){
+        getBody("stayviewleft", "stayview", 'დატვირთულობა', 'res1','',true);
+        reloadGrid('list_roomstatus');
+    }
     
 </script>
 <input type="hidden" id="action" value="doamendstay.jsp?reservationid=<%=reserv.getReservationid()%>"/>
 <input type="hidden" id="controls" value="amenddeparturedate"/>
-<input type="hidden" id="callbackurl" value="script:reloadGrid('list_roomstatus')"/>
+<input type="hidden" id="callbackurl" value="script:reloadAfterAmendStay()"/>
 <table width="100%" class="table table-borderless">
     <tr>
         <td><b>რეზერვაციის #</b></td>

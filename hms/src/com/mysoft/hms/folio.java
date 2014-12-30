@@ -35,7 +35,9 @@ public class folio {
     double roundOff(double val, int prc)
     {
         double[] roundtype = {0,0.1,1,10,100,1000,10000};
-        return Math.round(val * roundtype[prc]) / roundtype[prc];
+        double rf = val;
+        if(prc > 0) rf = Math.round(val * roundtype[prc]) / roundtype[prc];
+        return rf;
     }
     
     public void folio()

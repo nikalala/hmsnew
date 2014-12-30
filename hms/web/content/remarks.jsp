@@ -2,7 +2,12 @@
 <%@page pageEncoding="UTF-8"%>
 <%@include file="../includes/init.jsp"%>
 <%
-long rid = Long.parseLong(request.getParameter("rid"));
+long rid = 0;
+if(request.getParameter("rid") != null)
+    rid = Long.parseLong(request.getParameter("rid"));
+if(request.getParameter("reservationid") != null)
+    rid = Long.parseLong(request.getParameter("reservationid"));
+
 String script = request.getParameter("script");
 %>
 <script>

@@ -641,7 +641,9 @@ System.out.println(rid+" = "+statusid);
 
     double roundOff(double val, int prc) {
         double[] roundtype = {0, 0.1, 1, 10, 100, 1000, 10000};
-        return Math.round(val * roundtype[prc]) / roundtype[prc];
+        double rf = val;
+        if(prc > 0) rf = Math.round(val * roundtype[prc]) / roundtype[prc];
+        return rf;
     }
 
     double[] getTraiffPars(double manualrate, int payinforatetype, long contragentid, int ratetypeid, RoomtypeBean roomtype, int adult, int child, int roundoff, int disctype, boolean notax, Calendar calstart, Calendar calend, int discplan, double discnights, double discamount, int i) throws Exception {

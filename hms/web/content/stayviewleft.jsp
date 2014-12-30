@@ -91,7 +91,7 @@ table.lscroll tr {
                             String roomname = "";
                             if(reservs[i].getRoomid() != null){
                                 RoomBean room = RoomManager.getInstance().loadByPrimaryKey(reservs[i].getRoomid());
-                                istatus = getRoomStatus(null,room.getRoomid().intValue());
+                                istatus = getRoomStatus(dclosedate,room.getRoomid().intValue());
                                 roomname = room.getName();
                             }
                             RoomtypeBean roomtype = RoomtypeManager.getInstance().loadByPrimaryKey(reservs[i].getRoomtypeid());
@@ -108,7 +108,7 @@ table.lscroll tr {
                                     statuscolor = stcolor[0].getColor();
                             }
                         %>
-                        <tr style="cursor: pointer;" id="<%=reservs[i].getReservationroomid()%>">
+                        <tr style="cursor: pointer;" id="<%=reservs[i].getReservationroomid()%>" status="<%=istatus%>">
                             <td width="100%" class="wwww" style="">
                                 <%if(reservs0.length > 0){%><span class="glyphicon glyphicon-user"></span> <%}%>
                                 <font style="font-size: 12px;"><%=guestname%></font>
@@ -128,7 +128,7 @@ table.lscroll tr {
                             String roomname0 = "";
                             if(reservs[i].getRoomid() != null){
                                 RoomBean room = RoomManager.getInstance().loadByPrimaryKey(reservs[i].getRoomid());
-                                istatus0 = getRoomStatus(null,room.getRoomid().intValue());
+                                istatus0 = getRoomStatus(dclosedate,room.getRoomid().intValue());
                                 roomname0 = room.getName();
                             }
                             String statusname0 = "";
@@ -140,7 +140,7 @@ table.lscroll tr {
                                     statuscolor0 = stcolor[0].getColor();
                             }
                         %>
-                        <tr style="cursor: pointer;" id="<%=reservs0[j].getReservationroomid()%>">
+                        <tr style="cursor: pointer;" id="<%=reservs0[j].getReservationroomid()%>" status="<%=istatus0%>">
                             <td width="100%" class="wwww" style="">
                                 <font style="font-size: 12px;"><%=guestname0%></font>
                                 <br>

@@ -122,6 +122,7 @@ function savedata(id) {
     var callbackurl = $("#callbackurl").val();
     var callbackdata = $("#callbackdata").val();
     var action = $("#action").val();
+    var callbackmethod = $("#callbackmethod").val();
     var params;
     var maindiv = $("#maindiv").val();
 
@@ -156,6 +157,9 @@ function savedata(id) {
             $("#callbackdata").remove();
             $("#action").remove();
             $("#controls").remove();
+            if(!isNullOrEmpty(callbackmethod)){
+                eval(callbackmethod);
+            }
             //BootstrapDialog.info("ოპერაცია წარმატებით შესრულდა");
         }
     }, "json");
@@ -284,6 +288,7 @@ $(function () {
             var nms = choosedid.split("-");
             choosedid = nms[3];
         }
+        changeContextMenu($(this).attr('status'),$contextMenu);
         $contextMenu.css({
             display: "block",
             left: e.pageX,
@@ -294,6 +299,7 @@ $(function () {
 
     $contextMenu.on("click", "a", function () {
         $contextMenu.hide();
+        
         doContextMenuAction($(this), choosedid);
     });
 
@@ -336,6 +342,7 @@ function newWindow1(fname, title, qr) {
         $("#mheader").html(title);
         $("#mbody").html(data);
         $('#myModal').modal();
+        try{getBody("stayviewleft", "stayview", 'დატვირთულობა', 'res1','',true);}catch(e){}
     });
 }
 
@@ -444,6 +451,8 @@ function removeTab(id) {
 function removeAllTabs() {
     $('.nav-tabs li').remove();
 }
+
+
 
 function addTab(fname2, name, itemId, isFirst) {
 
@@ -686,6 +695,7 @@ function initializeGrid(grid) {
     {
         gridHeight -= 300;
     }
+    griddata = null;
     jQuery("#" + grid.id).jqGrid(
         {
             url: grid.url,
@@ -698,7 +708,60 @@ function initializeGrid(grid) {
             height: gridHeight,
             autowidth: true,
             sortname: grid.sort,
-            viewrecords: true,
+            //viewrecords: true,
+            sortorder: grid.order,
+            loadComplete: function (data) {
+                griddata = $(data);
+                $("#" + grid.id + " td:last-child").removeAttr("title");
+                reInitializeGrid(grid.id, grid.isPopup);
+                $(".ui-jqgrid-htable").css("background", "#FFF").css("border-bottom", "solid 1px #D1D1D1");
+
+            }
+        }).jqGrid('bindKeys');
+
+}
+
+function drawFooter(){
+    $(".ui-jqgrid-bdiv").height($(".ui-jqgrid-bdiv").height() - 50);
+    var html = '<div class="panel-footer" style="height: 50px !important; display:table; width: 100%; padding-bottom: 1px; background-color: #FFF;">' +
+        '<div>' +
+        '<span style="margin: 15px 10px 0 10px; float: left;">ჩანაწერების რაოდენობა გვერდზე</span>' +
+        '<select id="limitselectbox" style="float: left; margin: 15px 10px 0 10px;">' +
+        '<option value="5">5</option>' +
+        '<option value="15">15</option>' +
+        '<option value="25">25</option>' +
+        '<option value="50">50</option>' +
+        '</select>' +
+        '<button type="button" class="btn btn-default" id="btnNext" style="font-weight: bold; float: right; margin: 9px 10px 0 0;">' +
+        'შემდეგი</button>' +
+        '<button type="button" class="btn btn-danger" id="btnPrev" style="font-weight: bold; float: right; margin: 9px 10px 0 0;">' +
+        'წინა</button>' +
+        '</div></div>';
+    $(".ui-jqgrid-view").find(".panel-footer").remove();
+    $(".ui-jqgrid-view").append(html);
+}
+
+function initializeGridNa(grid) {
+    //console.log("initializing grid named > " + grid.id);
+
+    var gridHeight =$("#centerTabContent").height() - 40 - $(".first-table").height();
+    if($("#centercontent").height() <= gridHeight )
+    {
+        gridHeight -= 300;
+    }
+    jQuery("#" + grid.id).jqGrid(
+        {
+            url: grid.url,
+            datatype: grid.type,
+            colNames: grid.cols,
+            colModel: grid.model,
+            gridComplete: grid.gridComplete,
+            beforeRequest: grid.beforeRequest,
+            rowNum: 2000,
+            height: 360,
+            autowidth: true,
+            sortname: grid.sort,
+            //viewrecords: true,
             sortorder: grid.order,
             loadComplete: function () {
                 $("#" + grid.id + " td:last-child").removeAttr("title");
@@ -845,6 +908,16 @@ function newWindowWithParams(fname, title,params) {
 
 function checkOut(rid,reloadid){
     $.post("content/checkout.jsp", { rid: rid }, function (data) {
+        if (data.result == 0)    BootstrapDialog.alert(data.error);
+        else {
+            reloadGrid(reloadid);
+            BootstrapDialog.info("ოპერაცია წარმატებით შესრულდა");
+        }
+    }, "json");
+}
+
+function checkOut1(rid,reloadid){
+    $.post("content/amendstay.jsp", { rid: rid }, function (data) {
         if (data.result == 0)    BootstrapDialog.alert(data.error);
         else {
             reloadGrid(reloadid);
