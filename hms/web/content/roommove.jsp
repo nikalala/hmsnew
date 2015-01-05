@@ -80,7 +80,10 @@
     } else if (checkinsettings.getPostcancellationfee().intValue() == 3 && dday > 0) {
         tax = ddt * total0 / dday;
     }
-    String roomWhere = "where getroomstatus(roomid,'"+dflong.format(lclosedate)+"') = 8 ORDER BY ord";
+    String roomWhere = "where getroomstatus(roomid,'"+dflong.format(lclosedate)+"') = 8 ";
+    if(reserv.getRoomid() != null)
+        roomWhere += " or roomid = "+reserv.getRoomid();
+    roomWhere += " ORDER BY ord";
     System.out.println(roomWhere);
     RoomBean[] roomBeans = RoomManager.getInstance().loadByWhere(roomWhere); %>
 <% RoomtypeBean[] roomTypes = RoomtypeManager.getInstance().loadByWhere("ORDER BY ord"); %>
@@ -134,22 +137,29 @@
     function populateRoomFirst(id)
     {
         var html = "<option value='0'>-ოთახის #-</option>";
-        <% for (int i = 0; i < roomBeans.length; i++) {%>
+        <% for (int i = 0; i < roomBeans.length; i++) {
+            String sel = "";
+            if(reserv.getRoomid() != null && reserv.getRoomid().intValue() == roomBeans[i].getRoomid().intValue())
+                sel = "selected";
+        %>
         var value = "<%=roomBeans[i].getRoomtypeid()%>";
         if (id == value) {
-
-            html += "<option value='<%=roomBeans[i].getRoomid()%>' roomtypeid='<%=roomBeans[i].getRoomtypeid()%>'><%=roomBeans[i].getName()%></option>";
+            html += "<option value='<%=roomBeans[i].getRoomid()%>' roomtypeid='<%=roomBeans[i].getRoomtypeid()%>' <%=sel%>><%=roomBeans[i].getName()%></option>";
         }
         <% } %>
         $("#assignroom_roomid").html(html);
     }
     $(document).ready(function(){
         populateRoomFirst($("#roomType").val());
+        $("#myModalCheckin").remove();
+        $("#myModalSave").remove();
+        $("#myModalFooter").append('<button type="button" class="btn btn-primary" id="myModalSave" onclick="savedata(\'myModal\')">შენახვა</button>');
+
     });
 
     function generateUrl(value)
     {
-        return "saveassignroom.jsp?rrid=<%=reserv.getReservationroomid()%>&rid="+value+"&rti=<%=res.getReservationtypeid()%>";
+        return "saveroommove.jsp?rrid=<%=reserv.getReservationroomid()%>&rid="+value;
     }
     
     function reloadAfterAssignRoom(){
@@ -158,7 +168,7 @@
     }
 </script>
 <input type="hidden" id="action" class="assignroomURL"/>
-<input type="hidden" id="controls" value="assignroom_roomid"/>
+<input type="hidden" id="controls" value="assignroom_roomid,renewRoomPricech"/>
 <input type="hidden" id="callbackurl" value="script:reloadAfterAssignRoom()"/>
 <table width="100%" class="table table-borderless">
     <tr>

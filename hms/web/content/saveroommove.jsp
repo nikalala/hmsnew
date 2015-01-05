@@ -6,30 +6,36 @@ String msg = "";
 Manager.getInstance().beginTransaction();
 try{
     long id = 0;
-    ReservationBean reserv = ReservationManager.getInstance().loadByPrimaryKey(new Long(request.getParameter("reservationid")));
-    long newroomid = Long.parseLong(request.getParameter("roomid"));
-    long oldroomid = reserv.getRoomid().longValue();
-System.out.println("newroomid = "+newroomid);
-System.out.println("oldroomid = "+oldroomid);
+    ReservationroomBean reserv = ReservationroomManager.getInstance().loadByPrimaryKey(new Long(request.getParameter("rrid")));
+    int newroomid = Integer.parseInt(request.getParameter("rid"));
+    int oldroomid = reserv.getRoomid().intValue();
+System.out.println("renewRoomPricech = "+request.getParameter("renewRoomPricech"));
+//System.out.println("oldroomid = "+oldroomid);
     reserv.setRoomid(newroomid);
-    reserv = ReservationManager.getInstance().save(reserv);
+    reserv = ReservationroomManager.getInstance().save(reserv);
     
     int oldstatus = (int)getSum("select getroomstatus("+oldroomid+",'"+dtlongs.format(new Date())+"')");
     
-    RmstatusBean rms = RmstatusManager.getInstance().createRmstatusBean();
-    rms.setRoomid(oldroomid);
-    rms.setStatustypeid(1);
-    rms = RmstatusManager.getInstance().save(rms);
+    int status = getRoomStatus(rclosedate, oldroomid);
     
-    rms = RmstatusManager.getInstance().createRmstatusBean();
+    RoomstBean rms = RoomstManager.getInstance().createRoomstBean();
+    rms.setRoomid(oldroomid);
+    rms.setSt(8);
+    rms.setStatusdate(lclosedate);
+    rms.setRegbyid(user.getPersonnelid());
+    rms = RoomstManager.getInstance().save(rms);
+    
+    rms = RoomstManager.getInstance().createRoomstBean();
     rms.setRoomid(newroomid);
-    rms.setStatustypeid(oldstatus);
-    rms.setStatustypeid(5);
-    rms = RmstatusManager.getInstance().save(rms);
+    rms.setSt(oldstatus);
+    rms.setSt(status);
+    rms.setStatusdate(lclosedate);
+    rms.setRegbyid(user.getPersonnelid());
+    rms = RoomstManager.getInstance().save(rms);
     
     //if(id == 0) throw new Exception("შეცდომა");
     Manager.getInstance().endTransaction(true);
-    msg = "{\"result\":1,\"id\":"+rms.getStatustypeid()+"}";
+    msg = "{\"result\":1,\"id\":"+rms.getSt()+"}";
 }catch(Exception e){
     e.printStackTrace();
     Manager.getInstance().endTransaction(false);

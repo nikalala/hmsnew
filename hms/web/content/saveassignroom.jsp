@@ -11,7 +11,7 @@
         String rid = request.getParameter("rid");
         String rti = request.getParameter("rti");
         String rrid = request.getParameter("rrid");
-
+System.out.println("renewRoomPricech = "+request.getParameter("renewRoomPricech"));
         RoomstBean roomstBean = RoomstManager.getInstance().createRoomstBean();
         roomstBean.setRegbyid(user.getPersonnelid());
 
