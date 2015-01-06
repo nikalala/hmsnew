@@ -27,6 +27,19 @@ System.out.println("renewRoomPricech = "+request.getParameter("renewRoomPricech"
         ReservationroomBean rrb = ReservationroomManager.getInstance().loadByPrimaryKey( Long.parseLong(rrid));
         rrb.setRoomid(reservRoomId);
         ReservationroomManager.getInstance().save(rrb);
+        
+        String sql = "where "
+        + "folioid in (select folioid from folio where reservationroomid = "+rrb.getReservationroomid()+") and "
+        + "itemdate = to_date('"+df.format(dclosedate)+"','DD/MM/YYYY') and "
+        + "done = false and "
+        + "particular = 6";
+        FolioitemBean[] folioitems = FolioitemManager.getInstance().loadByWhere(sql);
+        for(int i=0;i<folioitems.length;i++){
+            folioitems[i].setRoomid(reservRoomId);
+        }
+        folioitems = FolioitemManager.getInstance().save(folioitems);
+
+        
         Manager.getInstance().endTransaction(true);
     } catch (Exception e) {
         e.printStackTrace();

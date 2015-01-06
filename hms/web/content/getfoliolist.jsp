@@ -63,6 +63,12 @@ for(int i=0;i<items.length;i++){
     double koeff = 1;
     String particular = "";
     boolean noroom = false;
+    if(items[i].getRoomid() != null){
+        RoomBean room = RoomManager.getInstance().loadByPrimaryKey(items[i].getRoomid());
+        rtp = RoomtypeManager.getInstance().loadByPrimaryKey(room.getRoomtypeid());
+        //roomname = rtp.getCode() + " - "+room.getName();
+        roomname = room.getName();
+    }
     switch(items[i].getParticular().intValue()){
         case -1:
             TaxBean tax = TaxManager.getInstance().loadByPrimaryKey(items[i].getTaxid());

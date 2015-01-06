@@ -17,6 +17,10 @@ try{
     reserv = ReservationManager.getInstance().save(reserv);
     
     //if(id == 0) throw new Exception("შეცდომა");
+    
+    folio fl = new folio();
+    fl.reSetFolio(reserv, user);
+    
     Manager.getInstance().endTransaction(true);
     msg = "{\"result\":1,\"id\":"+reserv.getReservationid()+"}";
 }catch(Exception e){

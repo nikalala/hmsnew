@@ -18,6 +18,7 @@ calstart.setTime(reserv.getArraivaldate());
 calend.setTime(reserv.getDeparturedate());
 
 
+        
 int ipg = 1;
 int ilmt = 10;
 String pg = request.getParameter("page");
@@ -55,31 +56,61 @@ double tneto = 0;
 for(int i=0;calstart.before(calend);i++){
     tariff trf = new tariff();
     trf.init(rroom.getReservationroomid().longValue(),i);
+    
+    PersonnelBean pers = PersonnelManager.getInstance().loadByPrimaryKey(reserv.getRegbyid());
+    String author = pers.getFname()+" "+pers.getLname();
+    
     double roomrate = trf.tariff_rate;
     double discount = trf.tariff_discount;
     double fix = trf.tariff_fix;
     double tax = trf.tariff_tax;
     double neto = trf.tariff_neto;
+    
+    int incl = (trf.incl) ? 1:0;
+    String roomtp = roomtype.getCode();
+    String roomnm = roomname;
+    String ratetp = rtp.getName();  // !!!!
+    String sql = "where folioid in (select folioid from folio where reservationroomid = "+rroom.getReservationroomid()+") and "
+            + "itemdate = to_date('"+df.format(calstart.getTime())+"','DD/MM/YYYY')";
+    FolioitemBean[] folioitems = FolioitemManager.getInstance().loadByWhere(sql+" and particular = 6 limit 1");
+    if(folioitems.length > 0){
+        if(folioitems[0].getRoomid() != null){
+            RoomBean room = RoomManager.getInstance().loadByPrimaryKey(folioitems[0].getRoomid());
+            RoomtypeBean roomtype0 = RoomtypeManager.getInstance().loadByPrimaryKey(room.getRoomtypeid());
+            roomtp = roomtype0.getCode();
+            roomnm = room.getName();
+        }
+
+        pers = PersonnelManager.getInstance().loadByPrimaryKey(folioitems[0].getRegbyid());
+        author = pers.getFname()+" "+pers.getLname();
+        
+        roomrate = getSum("select sum(amount) from folioitem "+sql+" and particular = 6");
+        discount = getSum("select sum(amount) from folioitem "+sql+" and particular = 4");
+        fix = getSum("select sum(amount) from folioitem "+sql+" and particular = 0");
+        tax = getSum("select sum(amount) from folioitem "+sql+" and particular = -1");
+        neto = roomrate+discount+fix+tax;
+    }
+    
+    
     troomrate += roomrate;
     ttax += tax;
     tfix += fix;
     tneto += neto;
-    int incl = (trf.incl) ? 1:0;
     String acts = "<span onclick=\"roomchAction(1,"+i+")\" style=\"cursor: pointer;\" class=\"glyphicon glyphicon-usd\" data-toggle=\"tooltip\" title=\"ტარიფის ოპერაცია\"></span>";
     acts += "<span onclick=\"roomchAction(2,"+i+")\" style=\"padding-left: 5px; cursor: pointer;\" class=\"glyphicon glyphicon-record\" data-toggle=\"tooltip\" title=\"ტარიფის ტიპის ოპერაცია\"></span>";
     acts += "<span onclick=\"roomchAction(3,"+i+")\" style=\"padding-left: 5px; cursor: pointer;\" class=\"glyphicon glyphicon-user\" data-toggle=\"tooltip\" title=\"უფრ./ბავშ. ოპერაცია\"></span>";
 %>
     <row id='roomch<%=i%>'>
         <cell><![CDATA[<%=dt.format(calstart.getTime())%>]]></cell>
-        <cell><![CDATA[<%=roomtype.getCode()%>-<%=roomname%>]]></cell>
-        <cell><![CDATA[<%=rtp.getName()%>]]></cell>
+        <cell><![CDATA[<%=roomtp%>-<%=roomnm%>]]></cell>
+        <cell><![CDATA[<%=ratetp%>]]></cell>
         <cell><![CDATA[<%=rroom.getAdult()%> / <%=rroom.getChild()%>]]></cell>
         <cell><![CDATA[<%=dc.format(roomrate)%>]]></cell>
         <cell><![CDATA[<%=dc.format(discount)%>]]></cell>
         <cell><![CDATA[<%=dc.format(tax)%>]]></cell>
         <cell><![CDATA[<%=dc.format(fix)%>]]></cell>
         <cell><![CDATA[<%=dc.format(neto)%>]]></cell>
-        <cell><![CDATA[<%=user.getFname()%> <%=user.getLname()%>]]></cell>
+        <cell><![CDATA[<%=author%>]]></cell>
         <cell><![CDATA[<%=acts%>]]></cell>
         <cell><![CDATA[<%=incl%>]]></cell>
     </row>

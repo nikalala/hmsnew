@@ -101,6 +101,161 @@ public class folio {
         return val;
     }
     
+    public void changeFolio(FolioitemBean[] folioitems, PersonnelBean user, int roomid) throws Exception {
+        folio = FolioManager.getInstance().loadByPrimaryKey(folioitems[0].getFolioid());
+        ReservationroomBean resroom = ReservationroomManager.getInstance().loadByPrimaryKey(folio.getReservationroomid());
+        ReservationBean res = ReservationManager.getInstance().loadByPrimaryKey(resroom.getReservationid());
+        int prc = 0;
+        DisplaysettingsBean[] displaysettings = DisplaysettingsManager.getInstance().loadByWhere("limit 1");
+        if(displaysettings.length > 0)
+            prc = displaysettings[0].getRoundtype().intValue();
+        Calendar c1 = Calendar.getInstance();
+        Calendar c2 = Calendar.getInstance();
+        c1.setTime(res.getArraivaldate());
+        c2.setTime(folioitems[0].getItemdate());
+        int daynum = DayDiff(c1, c2);
+        for(int i=0;i<folioitems.length;i++){
+            c1.setTime(folioitems[i].getItemdate());
+            if(c1.after(c2)){
+                daynum++;
+                c2.setTime(folioitems[i].getItemdate());
+            }
+            tariff trf = new tariff();
+            trf.init(resroom.getReservationroomid(),daynum);
+
+            folioitems[i].setRegbyid(user.getPersonnelid());
+            double amount = trf.tariff_rate;
+            double price = amount;
+            switch(folioitems[i].getParticular().intValue()){
+                case -1:
+                    if(!trf.notax){
+                        folioitems[i].setTaxid(trf.taxid);
+                        folioitems[i].setAmount(trf.tariff_tax);
+                        price += trf.tariff_tax;
+                    } else {
+                        folioitems[i].setZvoid(true);
+                    }
+                    break;
+                case 0:
+                    folioitems[i].setAmount(roundOff(price,prc)-price);
+                    break;
+                case 4:
+                    double discamount = trf.tariff_discount;
+                    folioitems[i].setDiscountid(res.getDiscountid());
+                    folioitems[i].setAmount((-1)*discamount);
+                    price -= discamount;
+                    break;
+                case 5:
+                    break;
+                case 6:
+                    folioitems[i].setRoomid(roomid);
+                    folioitems[i].setAmount(amount);
+                    break;
+            }
+        }
+        folioitems = FolioitemManager.getInstance().save(folioitems);
+    }
+    
+    public void reSetFolio(ReservationBean res, PersonnelBean user) throws Exception
+    {
+        ReservationroomBean[] resrooms = ReservationroomManager.getInstance().loadByReservationid(res.getReservationid());
+        FolioBean[] folios = FolioManager.getInstance().loadByWhere("where reservationroomid = "+resrooms[0].getReservationroomid());
+        if(folios.length > 0)
+            folio = FolioManager.getInstance().loadByPrimaryKey(folios[0].getFolioid());
+        else
+            throw new Exception("არასწორი რეზერვაცია");
+        
+        CheckinreservationsettingsBean[] checkinsettings = CheckinreservationsettingsManager.getInstance().loadByWhere("limit 1");
+        folioid = folio.getFolioid().longValue();
+        
+        FolioitemManager.getInstance().deleteByWhere("where folioid = "+folioid+" and particular not in (1,2,3,5) and done = false");
+        
+        Calendar c1 = Calendar.getInstance();
+        Calendar c2 = Calendar.getInstance();
+        Calendar c3 = Calendar.getInstance();
+        Calendar cstart = Calendar.getInstance();
+        Calendar cendd = Calendar.getInstance();
+        c1.setTime(res.getArraivaldate());
+        c2.setTime(res.getDeparturedate());
+        cstart.setTime(res.getArraivaldate());
+        cendd.setTime(res.getDeparturedate());
+        //if(checkinsettings.length > 0){
+        //    if(!checkinsettings[0].getHours24())
+        //        c2.add(Calendar.DATE, 1);
+        //}
+        int cnt = DayDiff(c1, c2);
+        for(int i=0;c1.before(c2);i++){
+            tariff trf = new tariff();
+            trf.init(folio.getReservationroomid(),i);
+            
+            //PaymentBean[] paid1 = PaymentManager.getInstance().loadByWhere("where paymentmethodid = 1 and folioid = "+folioid+" and paydate = to_date('"+dt.format(c1.getTime())+"','DD/MM/YYYY')");
+            //PaymentBean[] paid2 = PaymentManager.getInstance().loadByWhere("where paymentmethodid > 1 and folioid = "+folioid+" and paydate = to_date('"+dt.format(c1.getTime())+"','DD/MM/YYYY')");
+
+            c3.setTimeInMillis(c1.getTimeInMillis());
+            c3.add(Calendar.DATE, 1);
+            double amount = trf.tariff_rate;
+
+            // roomcharges
+            FolioitemBean fb = FolioitemManager.getInstance().createFolioitemBean();
+            fb.setFolioid(folio.getFolioid());
+            fb.setItemdate(c1.getTime());
+            fb.setRegbyid(user.getPersonnelid());
+            fb.setRoomid(resrooms[0].getRoomid());
+            fb.setAmount(amount);
+            fb.setDone(false);
+            fb.setParticular(6);
+            fb = FolioitemManager.getInstance().save(fb);
+
+            double price = amount;
+            // discount
+            double discamount = 0;
+            DiscountBean disc = null;
+            if(res.getDiscountid() != null){
+                discamount = trf.tariff_discount;
+                fb = FolioitemManager.getInstance().createFolioitemBean();
+                fb.setFolioid(folio.getFolioid());
+                fb.setItemdate(c1.getTime());
+                fb.setRegbyid(user.getPersonnelid());
+                fb.setDiscountid(res.getDiscountid());
+                fb.setAmount((-1)*discamount);
+                fb.setDone(false);
+                fb.setParticular(4);
+                fb = FolioitemManager.getInstance().save(fb);
+                price -= discamount;
+            }
+
+            if(!trf.notax){
+                fb = FolioitemManager.getInstance().createFolioitemBean();
+                fb.setFolioid(folio.getFolioid());
+                fb.setItemdate(c1.getTime());
+                fb.setRegbyid(user.getPersonnelid());
+                fb.setTaxid(trf.taxid);
+                fb.setAmount(trf.tariff_tax);
+                fb.setDone(false);
+                fb.setParticular(-1);
+                fb = FolioitemManager.getInstance().save(fb);
+                price += trf.tariff_tax;
+            }
+
+            // roundoff
+            int prc = 0;
+            DisplaysettingsBean[] displaysettings = DisplaysettingsManager.getInstance().loadByWhere("limit 1");
+            if(displaysettings.length > 0)
+                prc = displaysettings[0].getRoundtype().intValue();
+            fb = FolioitemManager.getInstance().createFolioitemBean();
+            fb.setFolioid(folio.getFolioid());
+            fb.setItemdate(c1.getTime());
+            fb.setRegbyid(user.getPersonnelid());
+            fb.setAmount(roundOff(price,prc)-price);
+            fb.setDone(false);
+            fb.setParticular(0);
+            fb = FolioitemManager.getInstance().save(fb);
+            
+            c1.add(Calendar.DATE, 1);
+        }
+        items = FolioitemManager.getInstance().loadByWhere("where folioid = "+folioid+" order by itemdate");
+    }
+    
     public void setFolio(ReservationBean res, ReservationroomBean resroom, PaymentBean pm, String dateformats2, Vector extracharges,int type,PersonnelBean user) throws Exception
     {
         if((type == 0 || type == 3) && res.getCompanyid() == null)  throw new Exception("აირჩიეთ კომპანია");
