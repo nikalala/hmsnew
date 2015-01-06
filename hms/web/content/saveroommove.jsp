@@ -39,7 +39,7 @@ try{
     
     String sql = "where "
             + "folioid in (select folioid from folio where reservationroomid = "+reserv.getReservationroomid()+") and "
-            + "itemdate > to_date('"+df.format(dclosedate)+"','DD/MM/YYYY') and "
+            + "itemdate >= to_date('"+df.format(dclosedate)+"','DD/MM/YYYY') and "
             + "done = false and "
             + "roomid = "+oldroomid;
     FolioitemBean[] folioitems = FolioitemManager.getInstance().loadByWhere(sql);
@@ -51,7 +51,7 @@ try{
     if(renewtariffs){
         sql = "where "
             + "folioid in (select folioid from folio where reservationroomid = "+reserv.getReservationroomid()+") and "
-            + "itemdate > to_date('"+df.format(dclosedate)+"','DD/MM/YYYY') and "
+            + "itemdate >= to_date('"+df.format(dclosedate)+"','DD/MM/YYYY') and "
             + "done = false "
             + "order by itemdate asc";
         folioitems = FolioitemManager.getInstance().loadByWhere(sql);

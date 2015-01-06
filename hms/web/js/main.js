@@ -329,7 +329,7 @@ function extramodal0(fname, title) {
     });
 }
 
-function extramodal0(fname, title, qr) {
+function extramodal00(fname, title, qr) {
     $.post("content/" + fname + ".jsp?" + qr, {}, function (data) {
         $("#extramodal0header").html(title);
         $("#extramodal0body").html(data);
