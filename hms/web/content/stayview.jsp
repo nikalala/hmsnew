@@ -35,19 +35,25 @@
         font-weight: bold;
     }
 
+    .statuses
+    {
+        padding-left: 0px !important;
+        padding-right: 0px !important;
+        text-align: center;
+    }
+
     <%for(int i=0;i<colors.length;i++){%>
     .sch-event-status- <%=colors[i].getRoomstatus()%> {
         background-color: <%=colors[i].getColor()%> !important;
     }
-
     <%}%>
 
     .sch-event {
-    // border-color : #6699cc;
+    / / border-color : #6699cc;
         text-shadow: 0px 1px 1px #000;
         background: -moz-linear-gradient(32% 96% 90deg, rgba(0, 0, 0, 0.5), transparent 80%) repeat scroll 0% 0% transparent;
         border-style: none;
-    // color : #1C417C;
+    / / color : #1C417C;
         cursor: pointer;
         text-align: center;
         top: 0px;
@@ -58,7 +64,7 @@
     }
 
     .sch-event-inner {
-    // background-color : red !important;
+    / / background-color : red !important;
         padding: 1px;
     }
 
@@ -82,14 +88,14 @@
     lastChosenD = "";
     lastChosenS = "";
 
-    function doStayViewAction(id,act){
-        if(act == "remark") {
-            $.post("content/ajax/getReservationidByRoom.jsp",{ id: id },function(data){
-                if(data.result == 0)    BootstrapDialog.alert(data.error);
+    function doStayViewAction(id, act) {
+        if (act == "remark") {
+            $.post("content/ajax/getReservationidByRoom.jsp", {id: id}, function (data) {
+                if (data.result == 0)    BootstrapDialog.alert(data.error);
                 else {
-                    newmWindow1('remarks','შენიშვნები','rid='+data.rid);
+                    newmWindow1('remarks', 'შენიშვნები', 'rid=' + data.rid);
                 }
-            },"json");
+            }, "json");
         }
     }
 
@@ -128,13 +134,13 @@
     Ext.onReady(function () {
         Ext.QuickTips.init();
         var height = 500;
+
         if ($("#maincontent").height() > 654)
-            height = $("#maincontent").height() - 120;
+            height = $("#maincontent").height() - 150;
 
         $('#stayview_date').datepicker(<%=pickerformat1%>).on('changeDate', function (e) {
             reloadPage(<%=days%>, $('#stayview_date').val());
         });
-
 
         //$(".sch-event").
 
@@ -207,7 +213,7 @@
         var startDate = new Date(<%=cal1.get(Calendar.YEAR)%>, <%=cal1.get(Calendar.MONTH)%>, <%=cal1.get(Calendar.DATE)%>);
         var endDate = new Date(<%=cal2.get(Calendar.YEAR)%>, <%=cal2.get(Calendar.MONTH)%>, <%=cal2.get(Calendar.DATE)%>);
         var onEventContextMenu = function (s, rec, e) {
-            e.stopEvent();
+           /* e.stopEvent();
 
             if (!s.ctx) {
                 s.ctx = new Ext.menu.Menu({
@@ -221,7 +227,7 @@
                 });
             }
             s.ctx.rec = rec;
-            s.ctx.showAt(e.getXY());
+            s.ctx.showAt(e.getXY());*/
         }
 
 
@@ -286,7 +292,7 @@
                         var id = record.get('Id');
                         var ids = id.split('_');
                         if (ids.length > 1) {
-                            return '<img src="images/Message-16.png" style="cursor: pointer;" onclick="doStayViewAction(\''+ids[1]+'\',\'remark\')"/>';
+                            return '<img src="images/Message-16.png" style="cursor: pointer;" onclick="doStayViewAction(\'' + ids[1] + '\',\'remark\')"/>';
                         }
                         return '';
                     }
@@ -305,6 +311,7 @@
                 stripeRows: true,
                 trackOver: true,
                 getRowClass: function (resourceRecord) {
+                    console.log(resourceRecord);
                     var id = resourceRecord.get('Id');
                     var ids = id.split('_');
                     if (ids.length < 2) {
@@ -525,29 +532,27 @@
 </table>
 <div id="stayview-container"></div>
 <div id="stayview-statistics-grid"></div>
-<div id="statusColorInformation">
-    <div class="pull-left statuses">
-        <div id="recievedGuest">მიღებული სტუმარი</div>
+<div id="statusColorInformation" class="col-md-16">
+    <div class="pull-left statuses col-md-2">
+        <div id="recievedGuest" style="background-color: <%=colors[1].getColor()%> !important;">მიღებული სტუმარი</div>
     </div>
-    <div class="pull-left statuses">
-        <div id="outGuest">გაწერილი სტუმარი</div>
+    <div class="pull-left statuses col-md-2">
+        <div id="outGuest" style="background-color: <%=colors[4].getColor()%> !important;">გაწერილი სტუმარი</div>
     </div>
-    <div class="pull-left statuses">
-        <div id="willGoGuest">წამსვლელი სტუმარი</div>
+    <div class="pull-left statuses col-md-2">
+        <div id="willGoGuest" style="background-color: <%=colors[1].getColor()%> !important;">წამსვლელი სტუმარი</div>
     </div>
-    <div class="pull-left statuses">
-        <div id="checkedGuest">დადასტურებული რეზერვაცია</div>
+    <div class="pull-left statuses col-md-3">
+        <div id="checkedGuest" style="background-color: <%=colors[0].getColor()%> !important;">დადასტურებული რეზერვაცია</div>
     </div>
-    <div class="pull-left statuses">
-        <div id="blockedGuest">დროებით დაბლოკილი</div>
+    <div class="pull-left statuses col-md-2">
+        <div id="blockedGuest" style="background-color: <%=colors[5].getColor()%> !important;">დროებით დაბლოკილი</div>
     </div>
-    <div class="pull-left statuses">
-        <div id="deadlineGuest">გადაცილებული დარჩენა</div>
+    <div class="pull-left statuses col-md-3">
+        <div id="deadlineGuest" style="background-color: <%=colors[1].getColor()%> !important;">გადაცილებული დარჩენა</div>
     </div>
-    <div class="pull-left statuses">
-        <div id="dailyGuest">დღიური გამოყენება</div>
+    <div class="pull-left statuses col-md-2">
+        <div id="dailyGuest" style="background-color: <%=colors[6].getColor()%> !important;">დღიური გამოყენება</div>
     </div>
-
 </div>
-
 

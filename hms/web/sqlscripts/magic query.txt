@@ -1,0 +1,14 @@
+SELECT
+SUM(case when to_char(res.arraivaldate,'DD') <= '23' AND '23' <= to_char(res.departuredate,'DD') then 1 else 0 end) AS "23",
+SUM(case when to_char(res.arraivaldate,'DD') <= '24' AND '24' <= to_char(res.departuredate,'DD') then 1 else 0 end) AS "24",
+SUM(case when to_char(res.arraivaldate,'DD') <= '25' AND '25' <= to_char(res.departuredate,'DD') then 1 else 0 end) AS "25",
+SUM(case when to_char(res.arraivaldate,'DD') <= '26' AND '26' <= to_char(res.departuredate,'DD') then 1 else 0 end) AS "26",
+SUM(case when to_char(res.arraivaldate,'DD') <= '27' AND '27' <= to_char(res.departuredate,'DD') then 1 else 0 end) AS "27",
+SUM(case when to_char(res.arraivaldate,'DD') <= '28' AND '28' <= to_char(res.departuredate,'DD') then 1 else 0 end) AS "28",
+SUM(case when to_char(res.arraivaldate,'DD') <= '29' AND '29' <= to_char(res.departuredate,'DD') then 1 else 0 end) AS "29",
+SUM(case when to_char(res.arraivaldate,'DD') <= '30' AND '30' <= to_char(res.departuredate,'DD') then 1 else 0 end) AS "30"
+FROM reservation res
+INNER JOIN reservationroom rm ON rm.reservationid = res.reservationid AND rm.roomid is not null
+WHERE ((res.reservationtypeid = 1 AND res.status = 0) OR (res.status = -1)) AND to_char(res.arraivaldate,'YYYY') = '2014'
+
+//karoche 99% is done : ))

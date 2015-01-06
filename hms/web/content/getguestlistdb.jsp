@@ -6,14 +6,14 @@
     request.setCharacterEncoding("UTF-8");
     String where = (String) request.getParameter("query");
     if (where == null || where.equals("0")) {
-        where = "";
+        where = " where deleted = false ";
     } else {
         String strToSplit = request.getQueryString().substring(0, request.getQueryString().indexOf('&'));
         where = URLDecoder.decode(strToSplit, "UTF-8");
         where = where.replace("query=", "");
     }
     VGuestdblistBean[] guestList = VGuestdblistManager.getInstance().loadByWhere(where);
-
+    Manager.getInstance().getConnection().prepareStatement("");
 %>
 
 <rows>
@@ -32,7 +32,7 @@
         <cell><![CDATA[<%=guestList[i].getVipstatus()%>]]></cell>
         <cell>
             <![CDATA[<a href="#" class="btn btn-xs btn-default"><i class="fa fa-pencil"></i></a>
-                       <a href="#" class="btn btn-xs btn-default"><i class="fa fa-trash"></i></a>
+                       <a href="#" onclick="deleteSelectedGuest(<%=guestList[i].getGuestid()%>)" class="btn btn-xs btn-default"><i class="fa fa-trash"></i></a>
                        <a href="#" class="btn btn-xs btn-default"><i class="fa fa-list"></i></a>
                        ]]>
         </cell>

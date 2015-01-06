@@ -268,7 +268,7 @@ ol, ul {
 }
 
 .statuses {
-    height:60px;
+    /*height:60px;*/
 }
 
 .statuses span{
@@ -278,7 +278,7 @@ ol, ul {
 .statuses div{
     border: 1px solid #000;
     height: 25px;
-    margin: 2px;
+    margin: 1px;
     padding: 5px 8px;
     font-weight: bold;
 }

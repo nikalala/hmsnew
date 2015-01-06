@@ -79,7 +79,7 @@
     %>
     <row id='<%=ReservationBeanList[i].getReservationid()%>'>
         <cell>
-            <![CDATA[<div style="width: 50px; text-align:center; color:#FFF; <%=bc%>"><%=ReservationBeanList[i].getReservationroomid()%></div>]]></cell>
+            <![CDATA[<div style="width: 50px; text-align:center; color:#000;"><%=ReservationBeanList[i].getReservationroomid()%></div>]]></cell>
         <cell><![CDATA[<%=resListDate.format(ReservationBeanList[i].getArraivaldate())%>]]></cell>
         <cell><![CDATA[<%=resListDate.format(ReservationBeanList[i].getDeparturedate())%>]]></cell>
         <cell><![CDATA[<%=ReservationBeanList[i].getGuest()%>]]></cell>

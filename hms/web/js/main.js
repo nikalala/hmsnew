@@ -706,6 +706,9 @@ function initializeGrid(grid) {
             beforeRequest: grid.beforeRequest,
             rowNum: 2000,
             height: gridHeight,
+            multiselect: grid.multiselect,
+            multikey: "ctrlKey",
+            altRows: grid.altRows,
             autowidth: true,
             sortname: grid.sort,
             //viewrecords: true,
@@ -715,7 +718,7 @@ function initializeGrid(grid) {
                 $("#" + grid.id + " td:last-child").removeAttr("title");
                 reInitializeGrid(grid.id, grid.isPopup);
                 $(".ui-jqgrid-htable").css("background", "#FFF").css("border-bottom", "solid 1px #D1D1D1");
-
+                $("#cb_"+grid.id).css("margin-top","-3px");
             }
         }).jqGrid('bindKeys');
 
@@ -739,6 +742,46 @@ function drawFooter(){
         '</div></div>';
     $(".ui-jqgrid-view").find(".panel-footer").remove();
     $(".ui-jqgrid-view").append(html);
+}
+
+function drawTwoDimFooter(){
+    $(".ui-jqgrid-bdiv").height($(".ui-jqgrid-bdiv").height() - 100);
+    var html =
+        '<div class="panel-footer" style="height: 50px !important; display:table; width: 100%; padding-bottom: 1px; background-color: #FFF;">' +
+        '<div>' +
+        '<span style="margin: 15px 10px 0 10px; float: left;">მონიშნულის: </span>'+
+        '<button type="button" class="btn btn-default" id="btnPrintRegCard" style="font-weight: bold; float: left; margin: 9px 10px 0 0;">' +
+        'სარეგისტრაციო ბარათის ბეჭდვა <i class="fa fa-print"></i></button>' +
+        '</div></div>'+
+        '<div class="panel-footer" style="height: 50px !important; display:table; width: 100%; padding-bottom: 1px; background-color: #FFF;">' +
+        '<div>' +
+        '<span style="margin: 15px 10px 0 10px; float: left;">ჩანაწერების რაოდენობა გვერდზე</span>' +
+        '<select id="limitselectbox" style="float: left; margin: 15px 10px 0 10px;">' +
+        '<option value="5">5</option>' +
+        '<option value="15">15</option>' +
+        '<option value="25">25</option>' +
+        '<option value="50">50</option>' +
+        '</select>' +
+        '<button type="button" class="btn btn-default" id="btnNext" style="font-weight: bold; float: right; margin: 9px 10px 0 0;">' +
+        'შემდეგი</button>' +
+        '<button type="button" class="btn btn-danger" id="btnPrev" style="font-weight: bold; float: right; margin: 9px 10px 0 0;">' +
+        'წინა</button>' +
+        '</div></div>';
+    $(".ui-jqgrid-view").find(".panel-footer").remove();
+    $(".ui-jqgrid-view").append(html);
+}
+
+function getSelectedRowIds(id)
+{
+    var ids = "";
+    $(jQuery("#" + id + " .jqgrow")).each(function(index,item){
+        var c = $(item).find('.cbox');
+        if($(c).prop('checked'))
+        {
+            ids += $(item).prop('id') + ",";
+        }
+    });
+    return ids.substring(0, ids.trim().lastIndexOf(","));;
 }
 
 function initializeGridNa(grid) {

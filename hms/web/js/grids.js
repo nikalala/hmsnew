@@ -62,6 +62,10 @@ depGrid = {
     cols: ['რეზ#', 'ჩამოსვლა', 'წასვლა', 'სტუმრის სახელი', 'ოთახი', 'წყარო',
         'კომპანია', 'ჯამი', 'დეპოზიტი', 'მომხმარებელი', 'რეზ.ტიპი', ''],
     model: depGridModel,
+    multiselect: true,
+    multikey: "ctrlKey",
+    altRows: true,
+    altclass: 'altrow',
     sort: 'arraivaldate',
     order: 'asc',
     isPopup: false,
@@ -102,6 +106,10 @@ arrivalGrid = {
     model: arrivalGridModel,
     sort: 'arraivaldate',
     order: 'asc',
+    multiselect: true,
+    multikey: "ctrlKey",
+    altRows: true,
+    altclass: 'altrow',
     isPopup: false,
     gridComplete: function () {
         ReDrawTable(arrivalGrid);
@@ -134,6 +142,10 @@ guestGrid = {
         'ტელეფონი', 'ელ.ფოსტა', 'ვიპ.სტატუსი', ''],
     model: guestGridModel,
     sort: 'guest',
+    multiselect: true,
+    multikey: "ctrlKey",
+    altRows: true,
+    altclass: 'altrow',
     order: 'asc',
     isPopup: false,
     gridComplete: function () {
@@ -461,3 +473,44 @@ chargesGrid = {
     }
 };
 /* -------------------------------- NightAudit NA5 List Model ------------------------------------*/
+
+
+/* -------------------------------- NightAudit NA6 List Model ------------------------------------*/
+var consGridModel = [];
+consGridModel.push(
+    colModelGenerator(30, 'consguest', 0),
+    colModelGenerator(120, 'guest', 0),
+    colModelGenerator(120, 'city', 0),
+    colModelGenerator(120, 'country', 0),
+    colModelGenerator(120, 'phone', 0),
+    colModelGenerator(120, 'email', 0)
+);
+
+consGrid = {
+    id: 'list_consgrid',
+    url: 'content/getconsguestlist.jsp',
+    type: 'xml',
+    cols: ['','სტუმრის სახელი', 'ქალაქი', 'ქვეყანა', 'ტელეფონი', 'ელ.ფოსტა'],
+    model: consGridModel,
+    sort: 'guest',
+    order: 'asc',
+    altRows: true,
+    altclass: 'altrow',
+    isPopup: true,
+    gridComplete: function () {
+        var rows = $("#postcharges").getGridParam("reccount");
+        if (rows > 0) {
+            $("#nopostcharges").hide();
+            $("#postchargestbl").show();
+        } else {
+            $("#nopostcharges").show();
+            $("#postchargestbl").hide();
+        }
+        ReDrawTable(consGrid);
+    },
+    beforeRequest: function () {
+
+    }
+};
+/* -------------------------------- NightAudit NA5 List Model ------------------------------------*/
+

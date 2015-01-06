@@ -83,7 +83,7 @@
                     <a href="#mb59" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-home" style="padding-right: 10px;"></span> დალაგება <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li>
-                            <a href="javascript:getBody('stayviewleft','construction');">სასტუმროს სტატუსი</a>
+                            <a href="javascript:getBody('stayviewleft','consguestlist','ტურისტული აგენტები','res1');">სასტუმროს სტატუსი</a>
                         </li>
                         <li>
                             <a href="javascript:getBody('stayviewleft','construction');">ოთახის ბლოკირება</a>

@@ -14,9 +14,67 @@
     $(document).ready(function () {
 
         loadDefaults();
-        drawFooter();
+        drawTwoDimFooterForGuestDbList();
 
     });
+
+    function drawTwoDimFooterForGuestDbList() {
+        $(".ui-jqgrid-bdiv").height($(".ui-jqgrid-bdiv").height() - 100);
+        var html =
+                '<div class="panel-footer" style="height: 50px !important; display:table; width: 100%; padding-bottom: 1px; background-color: #FFF;">' +
+                '<div>' +
+                '<span style="margin: 15px 10px 0 10px; float: left;">მონიშნულის: </span>' +
+                '<button type="button" class="btn btn-default" id="btnDropSelected" onclick="deleteSelectedGuest()" style="font-weight: bold; float: left; margin: 9px 10px 0 0;">' +
+                'წაშლა <i class="fa fa-trash"></i></button>' +
+                '<button type="button" class="btn btn-default" id="btnJoinSelected" onclick="joinSelected()" style="font-weight: bold; float: left; margin: 9px 10px 0 0;">' +
+                'გაერთიანება <i class="fa fa-life-bouy"></i></button>' +
+                '</div></div>' +
+                '<div class="panel-footer" style="height: 50px !important; display:table; width: 100%; padding-bottom: 1px; background-color: #FFF;">' +
+                '<div>' +
+                '<span style="margin: 15px 10px 0 10px; float: left;">ჩანაწერების რაოდენობა გვერდზე</span>' +
+                '<select id="limitselectbox" style="float: left; margin: 15px 10px 0 10px;">' +
+                '<option value="5">5</option>' +
+                '<option value="15">15</option>' +
+                '<option value="25">25</option>' +
+                '<option value="50">50</option>' +
+                '</select>' +
+                '<button type="button" class="btn btn-default" id="btnNext" style="font-weight: bold; float: right; margin: 9px 10px 0 0;">' +
+                'შემდეგი</button>' +
+                '<button type="button" class="btn btn-danger" id="btnPrev" style="font-weight: bold; float: right; margin: 9px 10px 0 0;">' +
+                'წინა</button>' +
+                '</div></div>';
+        $(".ui-jqgrid-view").find(".panel-footer").remove();
+        $(".ui-jqgrid-view").append(html);
+    }
+
+    function joinSelected()
+    {
+        newsWindow1("consguestlist", "სტუმრის კონსოლიდაცია", "query="+ getSelectedRowIds(guestGrid.id));
+    }
+
+    function deleteSelectedGuest(id) {
+
+        var ids = "";
+        if (isNullOrEmpty(id)) {
+            ids = getSelectedRowIds(guestGrid.id);
+        }else{
+            ids = id;
+        }
+
+
+        if (!isNullOrEmpty(ids)) {
+            BootstrapDialog.confirm("ნამდვილად გსურთ ჩანაწერის წაშლა", function (result) {
+                if (!isNullOrEmpty(result)) {
+                    if (result == true) {
+                        var update = "?query=UPDATE guest set deleted = true where guestid in (" + ids + ")";
+                        $.post("content/execute.jsp" + update, {}, function (data) {
+                            doFilter(true);
+                        });
+                    }
+                }
+            });
+        }
+    }
 
     function resetFilterPanel() {
         $("#filter-form :input").each(function () {
@@ -58,8 +116,7 @@
         var fitlerEquals = " = ";
         var filterQuery = "";
 
-        if(bool)
-        {
+        if (bool) {
             resetFilterPanel();
             var uri = "content/getguestlistdb.jsp?query=0";
             reloadGrid(guestGrid.id, uri);
@@ -87,7 +144,7 @@
             filterQuery += " mobile LIKE '%" + phone.val() + "%' OR phone LIKE '%" + phone.val() + "%'" + contQuery;
         }
 
-        var retVal = filterQuery.substring(0,filterQuery.trim().lastIndexOf("AND"));
+        var retVal = filterQuery.substring(0, filterQuery.trim().lastIndexOf("AND"));
         if (!isNullOrEmpty(retVal)) {
             var url = "content/getguestlistdb.jsp?query=" + encodeURIComponent("where " + retVal);
             reloadGrid(guestGrid.id, url);
@@ -149,7 +206,8 @@
                         </select>
                     </div>
                     <div class="col-md-2">
-                        <button type="button" class="btn btn-danger" style="width: 100%;" id="filterGuests" onclick="doFilter(false);">
+                        <button type="button" class="btn btn-danger" style="width: 100%;" id="filterGuests"
+                                onclick="doFilter(false);">
                             ძიება
                         </button>
                     </div>
@@ -175,7 +233,8 @@
                     </div>
 
                     <div class="col-md-2">
-                        <button type="button" class="btn btn-default" style="width: 100%;" id="showAllGuests" onclick="doFilter(true);">
+                        <button type="button" class="btn btn-default" style="width: 100%;" id="showAllGuests"
+                                onclick="doFilter(true);">
                             მაჩვენე ყველა
                         </button>
                     </div>
