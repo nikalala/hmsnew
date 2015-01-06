@@ -18,6 +18,7 @@ import java.sql.SQLException;
 // imports- 
 
 
+
 /**
  * Listener that is notified of v_deplist table changes.
  */
@@ -25,6 +26,7 @@ public interface VDeplistListener
 // extends+ 
 
 // extends- 
+
 {
     /**
      * Invoked just before inserting a VDeplistBean record into the database.
@@ -61,4 +63,5 @@ public interface VDeplistListener
 // class+ 
 
 // class- 
+
 }

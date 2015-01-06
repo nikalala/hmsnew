@@ -14,8 +14,7 @@
     if(rid == null)
         rid = request.getParameter("reservationid");
     ReservationroomBean reserv = ReservationroomManager.getInstance().loadByPrimaryKey(new Long(rid));
-    
-    
+
     ReservationBean res = ReservationManager.getInstance().loadByPrimaryKey(reserv.getReservationid());
     GuestBean guest = GuestManager.getInstance().loadByPrimaryKey(reserv.getGuestid());
     SalutationBean salutation = SalutationManager.getInstance().loadByPrimaryKey(guest.getSalutationid());

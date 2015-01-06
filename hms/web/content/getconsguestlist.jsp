@@ -26,7 +26,7 @@
     for (int i = 0; i < guestList.length; i++) { %>
 <row id='<%=guestList[i].getGuestid()%>'>
 <cell>
-    <![CDATA[ <input type="radio" name="consguest" id="consguest" /> ]]>
+    <![CDATA[ <input type="radio" name="consguest" class="consguest" /> ]]>
 </cell>
 <cell><![CDATA[<%=guestList[i].getGuest()%>]]></cell>
 <cell><![CDATA[<%=guestList[i].getCity()%>]]></cell>

@@ -16,10 +16,12 @@ package com.mysoft.hms;
 
 // imports- 
 
+
 public class VDeplistBean
 // extends+ 
 
 // extends- 
+
 {
     private Long reservationid;
     private boolean reservationid_is_modified = false;
@@ -1648,4 +1650,5 @@ public class VDeplistBean
 // class+ 
 
 // class- 
+
 }

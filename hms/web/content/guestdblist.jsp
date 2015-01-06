@@ -49,7 +49,12 @@
 
     function joinSelected()
     {
-        newsWindow1("consguestlist", "სტუმრის კონსოლიდაცია", "query="+ getSelectedRowIds(guestGrid.id));
+        var ids = getSelectedRowIds(guestGrid.id);
+        if (isNullOrEmpty(ids) || ids.indexOf(",") ==-1) {
+            BootstrapDialog.alert("თუ გრუსთ სტუმრის კონსოლიდაცია უნდა აირჩიოთ მინიმუმ 2 სტუმარი");
+            return;
+        }
+        newsWindow1("consguestlist", "სტუმრის კონსოლიდაცია", "query="+ids);
     }
 
     function deleteSelectedGuest(id) {

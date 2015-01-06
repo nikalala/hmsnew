@@ -16,10 +16,12 @@ package com.mysoft.hms;
 
 // imports- 
 
+
 public class OrdermainBean
 // extends+ 
 
 // extends- 
+
 {
     private Long ordermainid;
     private boolean ordermainid_is_modified = false;
@@ -1019,4 +1021,5 @@ public class OrdermainBean
 // class+ 
 
 // class- 
+
 }

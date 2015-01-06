@@ -182,6 +182,8 @@
 
     $(document).ready(function () {
 
+        $(".modal-dialog").removeAttr( "style" );
+
         $("#myModalSave").remove();
         var r1 = $('<button type="button" class="btn btn-danger" id="myModalSave" onclick="savedata(\'myModal\')">რეზერვაცია</button>');
         $("#myModalFooter").append(r1);

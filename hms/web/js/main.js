@@ -781,8 +781,25 @@ function getSelectedRowIds(id)
             ids += $(item).prop('id') + ",";
         }
     });
-    return ids.substring(0, ids.trim().lastIndexOf(","));;
+    return ids.substring(0, ids.trim().lastIndexOf(","));
 }
+function getRadioRowIds(id)
+{
+    var ids = "";
+    var idstodelete = "";
+    $(jQuery("#" + id + " .jqgrow")).each(function(index,item){
+        var c = $(item).find('.consguest');
+        if($(c).prop('checked'))
+        {
+            ids += $(item).prop('id') + ",";
+        }else{
+            idstodelete += $(item).prop('id') + ",";
+        }
+    });
+    return idstodelete.substring(0, idstodelete.trim().lastIndexOf(","));
+}
+
+
 
 function initializeGridNa(grid) {
     //console.log("initializing grid named > " + grid.id);
