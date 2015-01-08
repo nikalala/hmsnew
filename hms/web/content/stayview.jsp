@@ -100,7 +100,6 @@
     }
 
     function reloadPageAfterSave() {
-        console.log("reloadPageAfterSave");
         if (!isNullOrEmpty(lastChosenD) && !isNullOrEmpty(lastChosenS)) {
             reloadPage(lastChosenD, lastChosenS);
         } else {
@@ -213,9 +212,26 @@
         var startDate = new Date(<%=cal1.get(Calendar.YEAR)%>, <%=cal1.get(Calendar.MONTH)%>, <%=cal1.get(Calendar.DATE)%>);
         var endDate = new Date(<%=cal2.get(Calendar.YEAR)%>, <%=cal2.get(Calendar.MONTH)%>, <%=cal2.get(Calendar.DATE)%>);
         var onEventContextMenu = function (s, rec, e) {
-           /* e.stopEvent();
+            e.stopEvent();
+            var $contextMenu = $("#contextMenu");
+            changeContextMenu(rec.raw.Status, $contextMenu);
+            $("#contextMenu").css({
+                display: "block",
+                left: e.xy[0],
+                top: e.xy[1]
+            });
+            $contextMenu.on("click", "a", function () {
+                $contextMenu.hide();
+                doContextMenuAction($(this), rec.raw.Id);
+            });
 
-            if (!s.ctx) {
+            $("body").on("click", function () {
+                $contextMenu.hide();
+            }).keyup(function (e) {
+                if (e.keyCode == 27)
+                    $contextMenu.hide();
+            });
+            /* if (!s.ctx) {
                 s.ctx = new Ext.menu.Menu({
                     items: [{
                         text: 'Delete event',
@@ -225,9 +241,10 @@
                         }
                     }]
                 });
+
             }
-            s.ctx.rec = rec;
-            s.ctx.showAt(e.getXY());*/
+             s.ctx.rec = rec;
+             s.ctx.showAt(e.getXY());*/
         }
 
 
@@ -311,7 +328,6 @@
                 stripeRows: true,
                 trackOver: true,
                 getRowClass: function (resourceRecord) {
-                    console.log(resourceRecord);
                     var id = resourceRecord.get('Id');
                     var ids = id.split('_');
                     if (ids.length < 2) {
@@ -337,6 +353,7 @@
 
             eventRenderer: function (eventRecord, resourceRecord, tplData, row, col) {
                 if (eventRecord.raw) {
+
                     tplData.style = 'background-color: ' + eventRecord.raw.Bgcolor + ' !important; color: ' + eventRecord.raw.Color + ' !important;';
                 }
 
@@ -475,7 +492,6 @@
 
             freeRooms.name = '<b>თავისუფალი ოთახები</b>';
             traffic.name = '<b>დატვირთულობის %</b>';
-            console.log(freeRoomsCount)
             Ext.each(freeRoomsCount, function (item, index) {
 
                 traffic['statistic-column-' + index] = (item * 100 / totalRoomsCount).toFixed(1); //
@@ -543,13 +559,16 @@
         <div id="willGoGuest" style="background-color: <%=colors[1].getColor()%> !important;">წამსვლელი სტუმარი</div>
     </div>
     <div class="pull-left statuses col-md-3">
-        <div id="checkedGuest" style="background-color: <%=colors[0].getColor()%> !important;">დადასტურებული რეზერვაცია</div>
+        <div id="checkedGuest" style="background-color: <%=colors[0].getColor()%> !important;">დადასტურებული
+            რეზერვაცია
+        </div>
     </div>
     <div class="pull-left statuses col-md-2">
         <div id="blockedGuest" style="background-color: <%=colors[5].getColor()%> !important;">დროებით დაბლოკილი</div>
     </div>
     <div class="pull-left statuses col-md-3">
-        <div id="deadlineGuest" style="background-color: <%=colors[1].getColor()%> !important;">გადაცილებული დარჩენა</div>
+        <div id="deadlineGuest" style="background-color: <%=colors[1].getColor()%> !important;">გადაცილებული დარჩენა
+        </div>
     </div>
     <div class="pull-left statuses col-md-2">
         <div id="dailyGuest" style="background-color: <%=colors[6].getColor()%> !important;">დღიური გამოყენება</div>
