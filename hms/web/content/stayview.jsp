@@ -49,11 +49,11 @@
     <%}%>
 
     .sch-event {
-    / / border-color : #6699cc;
+    // border-color : #6699cc;
         text-shadow: 0px 1px 1px #000;
         background: -moz-linear-gradient(32% 96% 90deg, rgba(0, 0, 0, 0.5), transparent 80%) repeat scroll 0% 0% transparent;
         border-style: none;
-    / / color : #1C417C;
+    // color : #1C417C;
         cursor: pointer;
         text-align: center;
         top: 0px;
@@ -64,7 +64,7 @@
     }
 
     .sch-event-inner {
-    / / background-color : red !important;
+    // background-color : red !important;
         padding: 1px;
     }
 
@@ -205,22 +205,16 @@
 
                 // Application-specific
                 {name: 'ReservedTo'},
-                {name: 'Description'}
+                {name: 'Description'},
+                {name: 'Status'}
             ]
         });
 
         var startDate = new Date(<%=cal1.get(Calendar.YEAR)%>, <%=cal1.get(Calendar.MONTH)%>, <%=cal1.get(Calendar.DATE)%>);
         var endDate = new Date(<%=cal2.get(Calendar.YEAR)%>, <%=cal2.get(Calendar.MONTH)%>, <%=cal2.get(Calendar.DATE)%>);
+
         var onEventContextMenu = function (s, rec, e) {
-            e.stopEvent();
-            var $contextMenu = $("#contextMenu");
-            console.log($contextMenu);
-            changeContextMenu(rec.raw.Status, $contextMenu);
-            $contextMenu.css({
-                display: "block",
-                left: e.xy[0],
-                top: e.xy[1]
-            });
+            
 
             /* if (!s.ctx) {
                 s.ctx = new Ext.menu.Menu({
