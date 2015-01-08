@@ -4,6 +4,7 @@
 
 <%
     request.setCharacterEncoding("UTF-8");
+    String vipstatus = "";
     String where = (String) request.getParameter("query");
     if (where == null || where.equals("0")) {
         where = " where deleted = false ";
@@ -21,7 +22,9 @@
         <%--<total><%=total_pages%></total>--%>
         <%--<records><%=count%></records>--%>
     <%
-        for (int i = 0; i < guestList.length; i++) { %>
+        for (int i = 0; i < guestList.length; i++) {
+            vipstatus = guestList[i].getVipstatus() == null ? "" : guestList[i].getVipstatus();
+    %>
     <row id='<%=guestList[i].getGuestid()%>'>
         <cell><![CDATA[<%=guestList[i].getGuest()%>]]></cell>
         <cell><![CDATA[<%=guestList[i].getCity()%>]]></cell>
@@ -29,7 +32,7 @@
         <cell><![CDATA[<%=guestList[i].getMobile()%>]]></cell>
         <cell><![CDATA[<%=guestList[i].getPhone()%>]]></cell>
         <cell><![CDATA[<%=guestList[i].getEmail()%> ]]></cell>
-        <cell><![CDATA[<%=guestList[i].getVipstatus()%>]]></cell>
+        <cell><![CDATA[<%=vipstatus%>]]></cell>
         <cell>
             <![CDATA[<a href="#" class="btn btn-xs btn-default"><i class="fa fa-pencil"></i></a>
                        <a href="#" onclick="deleteSelectedGuest(<%=guestList[i].getGuestid()%>)" class="btn btn-xs btn-default"><i class="fa fa-trash"></i></a>
