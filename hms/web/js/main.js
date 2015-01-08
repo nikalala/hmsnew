@@ -284,12 +284,13 @@ $(function () {
 
     $("body").on("contextmenu click", "#roomlist tr, .sch-event", function (e) {
         choosedid = $(this).attr('id');
+        var status = 0;
         if (choosedid.indexOf("schedulergrid") == 0) {
             var nms = choosedid.split("-");
             choosedid = nms[3];
-        }
-        console.log($contextMenu);
-        changeContextMenu($(this).attr('status'),$contextMenu);
+            status = nms[4];
+        } else status = $(this).attr('status');
+        changeContextMenu(status,$contextMenu);
         $contextMenu.css({
             display: "block",
             left: e.pageX,
@@ -300,7 +301,6 @@ $(function () {
 
     $contextMenu.on("click", "a", function () {
         $contextMenu.hide();
-        console.log($(this));
         doContextMenuAction($(this), choosedid);
     });
 
