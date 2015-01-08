@@ -214,23 +214,14 @@
         var onEventContextMenu = function (s, rec, e) {
             e.stopEvent();
             var $contextMenu = $("#contextMenu");
+            console.log($contextMenu);
             changeContextMenu(rec.raw.Status, $contextMenu);
-            $("#contextMenu").css({
+            $contextMenu.css({
                 display: "block",
                 left: e.xy[0],
                 top: e.xy[1]
             });
-            $contextMenu.on("click", "a", function () {
-                $contextMenu.hide();
-                doContextMenuAction($(this), rec.raw.Id);
-            });
 
-            $("body").on("click", function () {
-                $contextMenu.hide();
-            }).keyup(function (e) {
-                if (e.keyCode == 27)
-                    $contextMenu.hide();
-            });
             /* if (!s.ctx) {
                 s.ctx = new Ext.menu.Menu({
                     items: [{

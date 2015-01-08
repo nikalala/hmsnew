@@ -288,6 +288,7 @@ $(function () {
             var nms = choosedid.split("-");
             choosedid = nms[3];
         }
+        console.log($contextMenu);
         changeContextMenu($(this).attr('status'),$contextMenu);
         $contextMenu.css({
             display: "block",
@@ -299,7 +300,7 @@ $(function () {
 
     $contextMenu.on("click", "a", function () {
         $contextMenu.hide();
-        
+        console.log($(this));
         doContextMenuAction($(this), choosedid);
     });
 
