@@ -78,6 +78,7 @@ for(int i=0;i<resrooms.length;i++){
     obj.put("ReservedTo",slt.getName()+" "+guest.getFname()+" "+guest.getLname());
     obj.put("Bgcolor",statuscolor);
     obj.put("Color",color);
+    obj.put("Status",istatus);
     js.add((JSONObject)obj);
 }
 System.out.println(js.toString());
