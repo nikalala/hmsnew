@@ -187,7 +187,8 @@ $(document).ready(function(){
         //altclass: 'altrow',
         multiselect: true,
         loadComplete: function() {
-            var rows = $("#listfolio").getDataIDs(); 
+            var rows = $("#listfolio").getDataIDs();
+            var totbal = 0;
             for (var i = 0; i < rows.length; i++)
             {
                 var st = $("#listfolio").getCell(rows[i],"st");
@@ -195,8 +196,13 @@ $(document).ready(function(){
                     $("#listfolio").jqGrid('setRowData',rows[i],false, {color: '#949090'});
                     jQuery("#jqg_listfolio_"+rows[i]).hide();
                 }
+                var price = Number($("#listfolio").getCell(rows[i],"price"));
+                
+                totbal += price;
             }
             $("#listfolio td").css('border-right-style', 'none').css('border-left-style', 'none');
+            
+            $("#folio_total_balance").html(totbal.toFixed(2));
         }
         })
         .jqGrid('bindKeys')
@@ -353,7 +359,7 @@ $(document).ready(function(){
                 <b>*გამოყენებულია დამატებითი მომსახურებები</b>
             </td>
             <td style="background-color: #E9E9E9; text-align: right; color: #E13B27; font-size: 16px; padding-right: 15px;">
-                <b>ბალანსი: <%=maincurrency.getCode()%> <%=dc.format(tot)%></b>
+                <b>ბალანსი: <%=maincurrency.getCode()%> <span id="folio_total_balance"><%=dc.format(tot)%></span></b>
             </td>
         </tr>
     </table>

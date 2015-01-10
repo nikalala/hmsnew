@@ -338,6 +338,8 @@
 
             eventRenderer: function (eventRecord, resourceRecord, tplData, row, col) {
                 if (eventRecord.raw) {
+                    tplData.status = "1";
+console.log(tplData);
 
                     tplData.style = 'background-color: ' + eventRecord.raw.Bgcolor + ' !important; color: ' + eventRecord.raw.Color + ' !important;';
                 }
