@@ -34,6 +34,8 @@
 <%@page import="com.mysoft.*" %>
 <%@page import="com.mysoft.hms.*" %>
 <%@page import="java.util.concurrent.TimeUnit" %>
+<%@page import="com.mysoft.CodeHelpers" %>
+<%@ page import="java.lang.Boolean" %>
 <jsp:useBean id="user" scope="session" class="com.mysoft.hms.PersonnelBean"/>
 <jsp:useBean id="hotel" scope="session" class="com.mysoft.hms.HotelBean"/>
 <%!
@@ -791,6 +793,7 @@ System.out.println(rid+" = "+statusid);
     }
 %>
 <%
+
     String mand = "<font color=\"RED\">*</font>";
 
     basedir = session.getServletContext().getRealPath("/");
@@ -969,6 +972,7 @@ System.out.println(rid+" = "+statusid);
     String pickerformat = "{autoclose: true, format: '" + dateformats1[dff] + "', weekStart: 1, endDate: new Date(" + lclosedate + "), autoclose: true, language: 'ka', todayHighlight: true, allowEmpty: false}";
     String pickerformat1 = "{autoclose: true, format: '" + dateformats1[dff] + "', weekStart: 1, autoclose: true, language: 'ka', todayHighlight: true, allowEmpty: false}";
     String pickerFormatForDatePickers = "{autoclose: true, format: '" + dateformats1[dff] + "', weekStart: 1, startDate: new Date(" + lclosedate + "), autoclose: true, language: 'ka', todayHighlight: true, allowEmpty: false}";
+    String pickerFormatForDatePickers2 = "{autoclose: true, format: '" + dateformats1[dff] + "', weekStart: 1, autoclose: true, language: 'ka', todayHighlight: true, allowEmpty: false}";
     String pickerformat2 = "{autoclose: true, format: '" + dateformats1[dff] + "', weekStart: 1, startDate: new Date(" + lclosedate + "), language: 'ka', todayHighlight: true, allowEmpty: false}";
     String rpickerformat = "presetRanges: [" +
             "        {text: 'დღეს', dateStart: 'today', dateEnd: 'today' }," +

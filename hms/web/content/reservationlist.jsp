@@ -135,11 +135,6 @@
 
         $('#dateFrom').datepicker(<%=pickerFormatForDatePickers%>);
         $('#dateTo').datepicker(<%=pickerFormatForDatePickers%>);
-        /*        $('#reserv_dateFrom').datepicker(
-        <%=pickerFormatForDatePickers%>);
-         $('#reserv_dateTo').datepicker(
-        <%=pickerFormatForDatePickers%>);*/
-
 
         var today = new Date(<%=lclosedate%>);
         $("#dateFrom").datepicker("setDate", today);

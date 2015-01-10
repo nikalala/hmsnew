@@ -18,6 +18,10 @@
 
     });
 
+    $(document).on('click','#addGuest',function(){
+        addGuest();
+    });
+
     function drawTwoDimFooterForGuestDbList() {
         $(".ui-jqgrid-bdiv").height($(".ui-jqgrid-bdiv").height() - 100);
         var html =
@@ -47,8 +51,7 @@
         $(".ui-jqgrid-view").append(html);
     }
 
-    function joinSelected()
-    {
+    function joinSelected(){
         var ids = getSelectedRowIds(guestGrid.id);
         if (isNullOrEmpty(ids) || ids.indexOf(",") ==-1) {
             BootstrapDialog.alert("თუ გრუსთ სტუმრის კონსოლიდაცია უნდა აირჩიოთ მინიმუმ 2 სტუმარი");
@@ -156,9 +159,83 @@
         }
     }
 
+    function addGuest(id){
+        loader.show();
+
+        $(".filter-form1").hide();
+        $("#grid-footer").hide();
+        $(".filter-form2").show();
+        var url = "content/addguest.jsp";
+        if (!isNullOrEmpty(id)) {
+            url += "?tid=" + id;
+        }
+        $("#guest_add").load(url, function () {
+            loader.hide();
+        }).fadeIn('normal');
+    }
+
+    function cancelSaveGuest() {
+        $(".filter-form1").show();
+        $(".filter-form2").hide();
+        $("#grid-footer").show();
+        $("#tagents_add").html("");
+    }
+
+    function saveGuest() {
+        var str = $.fn.serializeObject($("#guestform"));
+        var errorExist = false;
+        if (!isNullOrEmpty($("#txtguestname").val())) {
+            var guest = $("#txtguestname").val().split(' ');
+            if (guest.length != 2) {
+                errorExist = true;
+                $("#txtguestname").addClass("error");
+                BootstrapDialog.alert("სწორად შეიყვანეთ სახელი და გვარი. მაგ(დავით ბერძენიშვილი)");
+            }else{
+                $("#txtguestname").removeClass("error");
+            }
+        }else{
+            errorExist = true;
+            $("#txtguestname").addClass("error");
+        }
+        if (!isNullOrEmpty($("#email").val())) {
+            if (!isValidEmailAddress($("#email").val())) {
+                errorExist = true;
+                $("#email").addClass("error");
+                BootstrapDialog.alert("სწორად შეიყვანეთ ელ-ფოსტა.მაგ(tourist@selfin.ge)");
+            }else{
+                $("#email").removeClass("error");
+            }
+        }
+
+        if (errorExist) {
+            return;
+        }
+        $.ajax({
+            type: 'get', // it's easier to read GET request parameters
+            url: 'content/saveguest.jsp',
+            data: {
+                guest : encodeURIComponent(JSON.stringify(str))
+            },
+            contentType: 'application/json',
+            dataType: 'json',
+            success: function (data) {
+                if (data.status == "ok") {
+                    BootstrapDialog.alert("სტუმრის დამატება წარმატებით დასრულდა");
+                    cancelSaveGuest();
+                    doFilter(true);
+                }else{
+                    BootstrapDialog.alert("სტუმრის დამატების დროს დაფიქსირდა შეცდომა. სცადეთ ხელახლა");
+                }
+            },
+            error: function (data) {
+                BootstrapDialog.alert("დაფიქსირდა შეცდომა. შეამოწმეთ ყველა ველი და შეცდომის განმეორების შემთხვევაში დაუკავშირდით ადმინისტრატორს");
+            }
+        });
+    }
+
 </script>
 
-<form name="filter-form" id="filter-form">
+<form name="filter-form" id="filter-form" class="filter-form1">
     <table id="grid-table" class="first-table">
         <tr>
             <td>
@@ -251,6 +328,31 @@
         <tr>
             <td>
                 <table id='list_guestdblist' class="table-striped table-hover" align='center'></table>
+            </td>
+        </tr>
+    </table>
+</form>
+<form name="filter-form" id="filter-form" class="filter-form2" style="display: none; background-color: #fff;">
+    <table id="grid-table" class="first-table">
+        <tr>
+            <td id="guest_add">
+
+            </td>
+        </tr>
+        <tr>
+            <td style="border-bottom: solid 1px #c4c4c4 !important; -webkit-box-shadow: 0 0 0 0; box-shadow: 0 0 0 0">
+                <div id="status_bar" class="first-status-bar" align='center' style="-webkit-box-shadow: 0 0 0 0; box-shadow: 0 0 0 0">
+                    <div style="width: 100%; float: right;">
+                        <button type="button" class="btn btn-default" id="cancelSave" onclick="cancelSaveGuest()"
+                                style="border: 0; font-weight: bold; float: right; margin: 3px 5px 0 0;">
+                            დახურვა
+                        </button>
+                        <button type="button" class="btn btn-danger" id="saveAgent" onclick="saveGuest()"
+                                style="font-weight: bold; float: right; margin: 3px 5px 0 0;">
+                            შენახვა
+                        </button>
+                    </div>
+                </div>
             </td>
         </tr>
     </table>
