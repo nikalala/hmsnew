@@ -34,6 +34,8 @@
 <%@page import="com.mysoft.*" %>
 <%@page import="com.mysoft.hms.*" %>
 <%@page import="java.util.concurrent.TimeUnit" %>
+<%@page import="com.mysoft.CodeHelpers" %>
+<%@ page import="java.lang.Boolean" %>
 <jsp:useBean id="user" scope="session" class="com.mysoft.hms.PersonnelBean"/>
 <jsp:useBean id="hotel" scope="session" class="com.mysoft.hms.HotelBean"/>
 <%!
@@ -791,6 +793,7 @@ System.out.println(rid+" = "+statusid);
     }
 %>
 <%
+
     String mand = "<font color=\"RED\">*</font>";
 
     basedir = session.getServletContext().getRealPath("/");

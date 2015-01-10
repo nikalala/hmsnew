@@ -181,6 +181,58 @@
         $("#tagents_add").html("");
     }
 
+    function saveGuest() {
+        var str = $.fn.serializeObject($("#guestform"));
+        var errorExist = false;
+        if (!isNullOrEmpty($("#txtguestname").val())) {
+            var guest = $("#txtguestname").val().split(' ');
+            if (guest.length != 2) {
+                errorExist = true;
+                $("#txtguestname").addClass("error");
+                BootstrapDialog.alert("სწორად შეიყვანეთ სახელი და გვარი. მაგ(დავით ბერძენიშვილი)");
+            }else{
+                $("#txtguestname").removeClass("error");
+            }
+        }else{
+            errorExist = true;
+            $("#txtguestname").addClass("error");
+        }
+        if (!isNullOrEmpty($("#email").val())) {
+            if (!isValidEmailAddress($("#email").val())) {
+                errorExist = true;
+                $("#email").addClass("error");
+                BootstrapDialog.alert("სწორად შეიყვანეთ ელ-ფოსტა.მაგ(tourist@selfin.ge)");
+            }else{
+                $("#email").removeClass("error");
+            }
+        }
+
+        if (errorExist) {
+            return;
+        }
+        $.ajax({
+            type: 'get', // it's easier to read GET request parameters
+            url: 'content/saveguest.jsp',
+            data: {
+                guest : encodeURIComponent(JSON.stringify(str))
+            },
+            contentType: 'application/json',
+            dataType: 'json',
+            success: function (data) {
+                if (data.status == "ok") {
+                    BootstrapDialog.alert("სტუმრის დამატება წარმატებით დასრულდა");
+                    cancelSaveGuest();
+                    doFilter(true);
+                }else{
+                    BootstrapDialog.alert("სტუმრის დამატების დროს დაფიქსირდა შეცდომა. სცადეთ ხელახლა");
+                }
+            },
+            error: function (data) {
+                BootstrapDialog.alert("დაფიქსირდა შეცდომა. შეამოწმეთ ყველა ველი და შეცდომის განმეორების შემთხვევაში დაუკავშირდით ადმინისტრატორს");
+            }
+        });
+    }
+
 </script>
 
 <form name="filter-form" id="filter-form" class="filter-form1">
@@ -295,7 +347,7 @@
                                 style="border: 0; font-weight: bold; float: right; margin: 3px 5px 0 0;">
                             დახურვა
                         </button>
-                        <button type="button" class="btn btn-danger" id="saveAgent" onclick="addGuest()"
+                        <button type="button" class="btn btn-danger" id="saveAgent" onclick="saveGuest()"
                                 style="font-weight: bold; float: right; margin: 3px 5px 0 0;">
                             შენახვა
                         </button>
