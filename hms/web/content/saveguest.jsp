@@ -78,19 +78,22 @@
             }
             c.setRegbyid(user.getPersonnelid());
             if (!CodeHelpers.isNullOrEmpty((String) json.get("birthdate"))) {
-                SimpleDateFormat birthdate = new SimpleDateFormat(arrdepdateformats[dff]);
-                Date d = birthdate.parse(json.get("birthdate").toString());
-                c.setDob(d);
+                SimpleDateFormat birthdate = new SimpleDateFormat(dateformats1[dff]);
+                Calendar cal = Calendar.getInstance();
+                cal.setTime(birthdate.parse(json.get("birthdate").toString()));
+                c.setDob(cal.getTime());
             }
             if (!CodeHelpers.isNullOrEmpty((String) json.get("wifebirthdate"))) {
-                SimpleDateFormat birthdate = new SimpleDateFormat(arrdepdateformats[dff]);
-                Date d = birthdate.parse(json.get("wifebirthdate").toString());
-                c.setSdob(d);
+                SimpleDateFormat birthdate = new SimpleDateFormat(dateformats1[dff]);
+                Calendar cal = Calendar.getInstance();
+                cal.setTime(birthdate.parse(json.get("wifebirthdate").toString()));
+                c.setSdob(cal.getTime());
             }
             if (!CodeHelpers.isNullOrEmpty((String) json.get("weddingyeardate"))) {
-                SimpleDateFormat birthdate = new SimpleDateFormat(arrdepdateformats[dff]);
-                Date d = birthdate.parse(json.get("weddingyeardate").toString());
-                c.setWeddingdate(d);
+                SimpleDateFormat birthdate = new SimpleDateFormat(dateformats1[dff]);
+                Calendar cal = Calendar.getInstance();
+                cal.setTime(birthdate.parse(json.get("weddingyeardate").toString()));
+                c.setWeddingdate(cal.getTime());
             }
 
             if (!CodeHelpers.isNullOrEmpty((String) json.get("email"))) {

@@ -16,6 +16,7 @@
     {
         tid = "";
     }
+    SimpleDateFormat gdf = new SimpleDateFormat(dateformats1[dff]);
     if (!CodeHelpers.isNullOrEmpty(tid)) {
         Object gdblist = GuestManager.getInstance().loadByWhere("where guestid = " + tid);
         if (gdblist != null && ((GuestBean[]) gdblist).length > 0) {
@@ -341,7 +342,7 @@
 
                     <div class="input-append date" id="bDate">
                         <input type="text" class="span2 " name="birthdate"
-                               value="<%if(guestdblistBean != null && guestdblistBean.getDob() != null)%><%=guestdblistBean.getDob()%>"
+                               value="<%if(guestdblistBean != null && guestdblistBean.getDob() != null)%><%=gdf.format(guestdblistBean.getDob())%>"
                                id="birthdate" placeholder=" თარიღი">
                     <span class="add-on"
                           style="background : none  !important;border: none !important;margin-left: -30px;">
@@ -353,7 +354,7 @@
 
                     <div class="input-append date" id="wifDate">
                         <input type="text" class="span2 " name="wifebirthdate"
-                               value="<%if(guestdblistBean != null && guestdblistBean.getSdob() != null)%><%=guestdblistBean.getSdob()%>"
+                               value="<%if(guestdblistBean != null && guestdblistBean.getSdob() != null)%><%=gdf.format(guestdblistBean.getSdob())%>"
                                id="wifebirthdate" placeholder=" თარიღი">
                     <span class="add-on"
                           style="background : none  !important;border: none !important;margin-left: -30px;">
@@ -365,7 +366,7 @@
 
                     <div class="input-append date" id="wDate">
                         <input type="text" class="span2 " name="weddingyeardate"
-                               value="<%if(guestdblistBean != null && guestdblistBean.getWeddingdate() != null)%><%=guestdblistBean.getWeddingdate()%>"
+                               value="<%if(guestdblistBean != null && guestdblistBean.getWeddingdate() != null)%><%=gdf.format(guestdblistBean.getWeddingdate())%>"
                                id="weddingyeardate"
                                placeholder=" თარიღი">
                     <span class="add-on"
