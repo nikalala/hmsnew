@@ -5,6 +5,7 @@
 
 <%
 
+    SimpleDateFormat gdf = new SimpleDateFormat(dateformats1[dff]);
     String errorContrName = "";
     Manager.getInstance().beginTransaction();
     try {
@@ -78,22 +79,16 @@
             }
             c.setRegbyid(user.getPersonnelid());
             if (!CodeHelpers.isNullOrEmpty((String) json.get("birthdate"))) {
-                SimpleDateFormat birthdate = new SimpleDateFormat(dateformats1[dff]);
-                Calendar cal = Calendar.getInstance();
-                cal.setTime(birthdate.parse(json.get("birthdate").toString()));
-                c.setDob(cal.getTime());
+                String d = (String)json.get("birthdate");
+                c.setDob(gdf.parse(d));
             }
             if (!CodeHelpers.isNullOrEmpty((String) json.get("wifebirthdate"))) {
-                SimpleDateFormat birthdate = new SimpleDateFormat(dateformats1[dff]);
-                Calendar cal = Calendar.getInstance();
-                cal.setTime(birthdate.parse(json.get("wifebirthdate").toString()));
-                c.setSdob(cal.getTime());
+                String d = (String)json.get("wifebirthdate");
+                c.setSdob(gdf.parse(d));
             }
             if (!CodeHelpers.isNullOrEmpty((String) json.get("weddingyeardate"))) {
-                SimpleDateFormat birthdate = new SimpleDateFormat(dateformats1[dff]);
-                Calendar cal = Calendar.getInstance();
-                cal.setTime(birthdate.parse(json.get("weddingyeardate").toString()));
-                c.setWeddingdate(cal.getTime());
+                String d = (String)json.get("weddingyeardate");
+                c.setWeddingdate(gdf.parse(d));
             }
 
             if (!CodeHelpers.isNullOrEmpty((String) json.get("email"))) {
