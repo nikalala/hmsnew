@@ -1,3 +1,4 @@
+<%@ page import="org.apache.xmlbeans.impl.xb.ltgfmt.Code" %>
 <%@page contentType="text/html; charset=UTF-8" %>
 <%@page pageEncoding="UTF-8" %>
 <%@include file="../includes/init.jsp" %>
@@ -13,8 +14,19 @@
         System.out.println(jsonString);
         if (!CodeHelpers.isNullOrEmpty((String) jsonString) && jsonString.length() > 0) {
             JSONObject json = (JSONObject) JSONSerializer.toJSON(jsonString);
-            GuestBean c = GuestManager.getInstance().createGuestBean();
+            GuestBean c = null;
 
+            String tid = ((String) json.get("tid"));
+            if (!CodeHelpers.isNullOrEmpty(tid) && tid.replace("null","").replace("\"\"","").length() > 0) {
+                System.out.println(tid.replace("null","").replace("\"\"",""));
+                Long tcontragentid = Long.parseLong((String) json.get("tid"));
+                c = GuestManager.getInstance().loadByPrimaryKey(tcontragentid);
+                if (tcontragentid != null && tcontragentid > 0) {
+                    c.setGuestid(tcontragentid);
+                }
+            }else{
+                c = GuestManager.getInstance().createGuestBean();
+            }
             if (!CodeHelpers.isNullOrEmpty((String) json.get("contragent"))) {
                 Long tcontragentid = Long.parseLong((String) json.get("contragent"));
                 if (tcontragentid > 0) {
@@ -25,6 +37,10 @@
             if (!CodeHelpers.isNullOrEmpty((String) json.get("tcountryid"))) {
                 Integer countryId = Integer.parseInt((String) json.get("tcountryid"));
                 c.setCountryid(countryId);
+            }
+            if (!CodeHelpers.isNullOrEmpty((String) json.get("vipstatus"))) {
+                Integer vipstatus = Integer.parseInt((String) json.get("vipstatus"));
+                c.setVipstatusid(vipstatus);
             }
             if (!CodeHelpers.isNullOrEmpty((String) json.get("tsalutation"))) {
                 Integer setSalutationid = Integer.parseInt((String) json.get("tsalutation"));
@@ -47,17 +63,20 @@
             if (!CodeHelpers.isNullOrEmpty((String) json.get("txtaddress"))) {
                 c.setAddress((String) json.get("txtaddress"));
             }
-            if (!CodeHelpers.isNullOrEmpty((String) json.get("type")) && json.get("type").toString().length() > 0) {
-                c.setType(json.get("type").equals("on") ? 1 : 0);
+
+            if (!CodeHelpers.isNullOrEmpty((String) json.get("type"))) {
+                Integer type = Integer.parseInt((String) json.get("type"));
+                c.setType(type);
             }
-            if (!CodeHelpers.isNullOrEmpty((String) json.get("gender")) && json.get("gender").toString().length() > 0) {
-                c.setGender(json.get("gender").equals("on") ? 1 : 0);
+            if (!CodeHelpers.isNullOrEmpty((String) json.get("gender"))) {
+                Integer g = Integer.parseInt((String) json.get("gender"));
+                c.setGender(g);
             }
+
             if (!CodeHelpers.isNullOrEmpty((String) json.get("txtcity"))) {
                 c.setCity((String) json.get("txtcity"));
             }
             c.setRegbyid(user.getPersonnelid());
-            if(if (!CodeHelpers.isNullOrEmpty((String) json.get("birthdate"))) {)
             if (!CodeHelpers.isNullOrEmpty((String) json.get("birthdate"))) {
                 SimpleDateFormat birthdate = new SimpleDateFormat(arrdepdateformats[dff]);
                 Date d = birthdate.parse(json.get("birthdate").toString());

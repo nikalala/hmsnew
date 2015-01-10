@@ -12,10 +12,13 @@
     ContragentBean[] contrs = ContragentManager.getInstance().loadByWhere("");
     PaymentmethodBean[] paymentmethodBeans = PaymentmethodManager.getInstance().loadByWhere("");
     String tid = (String) request.getParameter("tid");
-    if (tid != null) {
+    if(CodeHelpers.isNullOrEmpty(tid))
+    {
+        tid = "";
+    }
+    if (!CodeHelpers.isNullOrEmpty(tid)) {
         Object gdblist = GuestManager.getInstance().loadByWhere("where guestid = " + tid);
-        if(gdblist != null && ((GuestBean[])gdblist).length > 0 )
-        {
+        if (gdblist != null && ((GuestBean[]) gdblist).length > 0) {
             guestdblistBean = GuestManager.getInstance().loadByWhere("where guestid = " + tid)[0];
         }
     }
@@ -28,10 +31,22 @@
     }
 </style>
 <script>
-    $('#birthdate , #wifebirthdate, #weddingyeardate').val('');
 
     $(document).ready(function () {
         $('.date').datepicker(<%=pickerformat1%>);
+        <%if (CodeHelpers.isNullOrEmpty(tid)) { %>
+        $('#birthdate , #wifebirthdate, #weddingyeardate').val('');
+        <% }else{
+            if(guestdblistBean!= null && guestdblistBean.getDob() == null){%>
+        $('#birthdate').val('');
+        <% }
+        if(guestdblistBean!= null && guestdblistBean.getSdob() == null){%>
+        $('#wifebirthdate').val('');
+        <% }
+        if(guestdblistBean!= null && guestdblistBean.getWeddingdate() == null){%>
+        $('#weddingyeardate').val('');
+        <% }
+} %>
         $('.box_outer .dropdown').selectpicker();
         $(".box_outer input[type=text]").height($(".box_outer .btn-group").height() - 6, "!important");
         $("#tsalutation").next().css("width", "70px").css("padding-right", "10px");
@@ -117,6 +132,7 @@
         <h2 class="box_head">
             <span id="ctl0_fdmain_lblGTitle">სტუმრის დამატება</span>
         </h2>
+        <input type="hidden"name="tid" value="<%=tid%>">
         <ul class="box_container">
             <li class="col1" style="width:490px;float: left;">
                 <p class="fieldset">
@@ -125,36 +141,33 @@
                         <%
                             for (SalutationBean object :
                                     salutationBeans) {
-
                                 String selected = "";
-                                if (guestdblistBean != null
-                                        && guestdblistBean.getSalutationid() == object.getSalutationid()) {
-                                    selected = "selected='selected'";
+                                if (guestdblistBean != null && guestdblistBean.getSalutationid() != null
+                                        && guestdblistBean.getSalutationid().equals(object.getSalutationid())) {
+                                    selected = "selected";
                                 } else {
                                     selected = "";
                                 }
-
                         %>
-                        <option <%=selected%> value="<%=object.getSalutationid()%>"><%=object.getName()%>
-                        </option>
+                        <option value="<%=object.getSalutationid()%>" <%=selected%> ><%=object.getName()%></option>
                         <%
                             }
                         %>
                     </select>
                     <input name="guest" type="text" placeholder="" id="txtguestname"
-                           class="txtbox btnpad" value="<%if(guestdblistBean != null)%><%=CodeHelpers.ifIsNullOrEmptyReturnEmptryString(guestdblistBean.getFname()) + " " + CodeHelpers.ifIsNullOrEmptyReturnEmptryString(guestdblistBean.getLname())%>">
+                           class="txtbox btnpad"
+                           value="<%if(guestdblistBean != null)%><%=CodeHelpers.ifIsNullOrEmptyReturnEmptryString(guestdblistBean.getFname()) + " " + CodeHelpers.ifIsNullOrEmptyReturnEmptryString(guestdblistBean.getLname())%>">
                 </p>
                 <p class="fieldset">
                     <span id="ctl0_fdmain_lblType" class="label_sm label_big">ტიპი</span>
                     <%
                         for (int i = 0; i < pax.length; i++) {
                             String selected = "";
-                            if ( (guestdblistBean != null && guestdblistBean.getType() != null && guestdblistBean.getType() == i)) {
+                            if ((guestdblistBean != null && guestdblistBean.getType() != null && guestdblistBean.getType() == i)) {
                                 selected = "checked";
                             } else {
                                 selected = "";
-                                if(guestdblistBean == null && i == 0)
-                                {
+                                if (guestdblistBean == null && i == 0) {
                                     selected = "checked";
                                 }
                             }
@@ -169,16 +182,15 @@
 
                 <p class="fieldset">
 
-                  <span id="ctl0_fdmain_lblType" class="label_sm label_big">სქესი</span>
+                    <span id="ctl0_fdmain_lblType" class="label_sm label_big">სქესი</span>
                     <%
                         for (int i = 0; i < gender.length; i++) {
                             String selected = "";
-                            if ( (guestdblistBean != null && guestdblistBean.getGender() != null && guestdblistBean.getGender() == i)) {
+                            if ((guestdblistBean != null && guestdblistBean.getGender() != null && guestdblistBean.getGender() == i)) {
                                 selected = "checked";
                             } else {
                                 selected = "";
-                                if(guestdblistBean == null && i == 0)
-                                {
+                                if (guestdblistBean == null && i == 0) {
                                     selected = "checked";
                                 }
                             }
@@ -195,7 +207,8 @@
                     <span id="ctl0_fdmain_lblAddess1" class="label_sm label_big">მისამართი</span>
               <span style="display:block;float:left;">
               <textarea name="txtaddress" rows="4" cols="31" placeholder="" id="txtaddress"
-                        class="textarea"><%if(guestdblistBean != null)%><%=CodeHelpers.ifIsNullOrEmptyReturnEmptryString(guestdblistBean.getAddress())%></textarea>
+                        class="textarea"><%if (guestdblistBean != null)%><%=CodeHelpers.ifIsNullOrEmptyReturnEmptryString(guestdblistBean.getAddress())%>
+              </textarea>
               </span></p>
 
                 <p class="fieldset">
@@ -206,16 +219,14 @@
                         <%
                             for (int i = 0; i < country.length; i++) {
                                 String selected = "";
-                                int cId = 0;
                                 if (guestdblistBean != null
-                                        && guestdblistBean.getCountryid() != null && guestdblistBean.getCountryid() == country[i].getCountryid()) {
-                                    selected = "selected='selected'";
-                                    cId = country[i].getCountryid();
+                                        && guestdblistBean.getCountryid() != null && guestdblistBean.getCountryid().equals(country[i].getCountryid())) {
+                                    selected = "selected";
                                 } else {
                                     selected = "";
                                 }
                         %>
-                        <option value="<%=cId%>" <%=selected%>><%=CodeHelpers.ifIsNullOrEmptyReturnEmptryString(country[i].getName())%>
+                        <option value="<%=country[i].getCountryid()%>" <%=selected%> ><%=CodeHelpers.ifIsNullOrEmptyReturnEmptryString(country[i].getName())%>
                         </option>
                         <% } %>
                     </select>
@@ -226,14 +237,18 @@
                 <p class="fieldset">
                     <span id="ctl0_fdmain_lblCity" class="label_sm label_big">ქალაქი</span>
                     <input name="txtcity" type="text" placeholder="" id="txtcity" class="txtbox"
-                           autocomplete="off" value="<%if(guestdblistBean != null)%><%=CodeHelpers.ifIsNullOrEmptyReturnEmptryString(guestdblistBean.getCity())%>"></p>
+                           autocomplete="off"
+                           value="<%if(guestdblistBean != null)%><%=CodeHelpers.ifIsNullOrEmptyReturnEmptryString(guestdblistBean.getCity())%>">
+                </p>
 
                 <div id="ctl0_fdmain_lstCity_result" class="acomplete" style="display: none;"></div>
                 <p></p>
 
                 <p class="fieldset">
                     <span id="ctl0_fdmain_lblZip" class="label_sm label_big">საფოსტო ინდექსი</span>
-                    <input name="zip" type="text" placeholder="" value="<%if(guestdblistBean != null)%><%=CodeHelpers.ifIsNullOrEmptyReturnEmptryString(guestdblistBean.getZip())%>" id="zip" class="txtbox">
+                    <input name="zip" type="text" placeholder=""
+                           value="<%if(guestdblistBean != null)%><%=CodeHelpers.ifIsNullOrEmptyReturnEmptryString(guestdblistBean.getZip())%>"
+                           id="zip" class="txtbox">
                 </p>
 
                 <p class="fieldset">
@@ -245,17 +260,15 @@
                                     vips) {
 
                                 String selected = "";
-                                int vSt = 0;
-                                if (guestdblistBean != null
-                                        && guestdblistBean.getVipstatusid() == object.getVipstatusid()) {
-                                    selected = "selected='selected'";
-                                    vSt = object.getVipstatusid();
+                                if (guestdblistBean != null && guestdblistBean.getVipstatusid() != null
+                                        && guestdblistBean.getVipstatusid().equals(object.getVipstatusid())) {
+                                    selected = "selected";
                                 } else {
                                     selected = "";
                                 }
 
                         %>
-                        <option <%=selected%> value="<%=vSt%>"><%=CodeHelpers.ifIsNullOrEmptyReturnEmptryString(object.getName())%>
+                        <option value="<%=object.getVipstatusid()%>" <%=selected%> ><%=CodeHelpers.ifIsNullOrEmptyReturnEmptryString(object.getName())%>
                         </option>
                         <%
                             }
@@ -271,17 +284,15 @@
                                     idtypes) {
 
                                 String selected = "";
-                                int idtypeid = 0;
-                                if (guestdblistBean != null
-                                        && guestdblistBean.getIdtypeid() == object.getIdtypeid()) {
-                                    selected = "selected='selected'";
-                                    idtypeid = object.getIdtypeid();
+                                if (guestdblistBean != null && guestdblistBean.getIdtypeid() != null
+                                        && guestdblistBean.getIdtypeid().equals(object.getIdtypeid())) {
+                                    selected = "selected";
                                 } else {
                                     selected = "";
                                 }
 
                         %>
-                        <option <%=selected%> value="<%=idtypeid%>"><%=CodeHelpers.ifIsNullOrEmptyReturnEmptryString(object.getName())%>
+                        <option value="<%=object.getIdtypeid()%>" <%=selected%> ><%=CodeHelpers.ifIsNullOrEmptyReturnEmptryString(object.getName())%>
                         </option>
                         <%
                             }
@@ -290,36 +301,48 @@
                 </p>
                 <p class="fieldset">
                     <span id="ctl0_fdmain_lblIDNo" class="label_sm label_big">საბუთის No</span>
-                    <input name="idno" value="<%if(guestdblistBean != null)%><%=CodeHelpers.ifIsNullOrEmptyReturnEmptryString(guestdblistBean.getIdn())%>" type="text" placeholder="" id="idno" class="txtbox">
+                    <input name="idno"
+                           value="<%if(guestdblistBean != null)%><%=CodeHelpers.ifIsNullOrEmptyReturnEmptryString(guestdblistBean.getIdn())%>"
+                           type="text" placeholder="" id="idno" class="txtbox">
                 </p>
             </li>
             <li class="col1" style="width:450px;float: left;">
                 <p class="fieldset">
                     <span id="ctl0_fdmain_lblPhone" class="label_sm label_big">ტელეფონი</span>
-                    <input name="phone" type="text" placeholder="" value="<%if(guestdblistBean != null)%><%=CodeHelpers.ifIsNullOrEmptyReturnEmptryString(guestdblistBean.getPhone())%>" id="phone" class="txtbox">
+                    <input name="phone" type="text" placeholder=""
+                           value="<%if(guestdblistBean != null)%><%=CodeHelpers.ifIsNullOrEmptyReturnEmptryString(guestdblistBean.getPhone())%>"
+                           id="phone" class="txtbox">
                 </p>
 
                 <p class="fieldset">
                     <span id="ctl0_fdmain_lblMobile" class="label_sm label_big">მობილური</span>
-                    <input name="mobile" value="<%if(guestdblistBean != null)%><%=CodeHelpers.ifIsNullOrEmptyReturnEmptryString(guestdblistBean.getMobile())%>" type="text" placeholder="" id="mobile"
+                    <input name="mobile"
+                           value="<%if(guestdblistBean != null)%><%=CodeHelpers.ifIsNullOrEmptyReturnEmptryString(guestdblistBean.getMobile())%>"
+                           type="text" placeholder="" id="mobile"
                            class="txtbox">
                 </p>
 
                 <p class="fieldset">
                     <span id="ctl0_fdmain_lblFax" class="label_sm label_big">ფაქსი</span>
-                    <input name="fax" type="text" placeholder="" value="<%if(guestdblistBean != null)%><%=CodeHelpers.ifIsNullOrEmptyReturnEmptryString(guestdblistBean.getFax())%>" id="fax" class="txtbox">
+                    <input name="fax" type="text" placeholder=""
+                           value="<%if(guestdblistBean != null)%><%=CodeHelpers.ifIsNullOrEmptyReturnEmptryString(guestdblistBean.getFax())%>"
+                           id="fax" class="txtbox">
                 </p>
 
                 <p class="fieldset">
                     <span id="email" class="label_sm label_big">ელ-ფოსტა</span>
-                    <input name="email" type="text" placeholder="" value="<%if(guestdblistBean != null)%><%=CodeHelpers.ifIsNullOrEmptyReturnEmptryString(guestdblistBean.getEmail())%>" id="ctl0_fdmain_txtEmail" class="txtbox">
+                    <input name="email" type="text" placeholder=""
+                           value="<%if(guestdblistBean != null)%><%=CodeHelpers.ifIsNullOrEmptyReturnEmptryString(guestdblistBean.getEmail())%>"
+                           id="ctl0_fdmain_txtEmail" class="txtbox">
                 </p>
 
                 <div class="fieldset">
                     <span class="label_sm label_big">დაბ. თარიღი</span>
 
                     <div class="input-append date" id="bDate">
-                        <input type="text" class="span2 " name="birthdate" value="<%if(guestdblistBean != null && guestdblistBean.getDob() != null)%><%=guestdblistBean.getDob()%>" id="birthdate" placeholder=" თარიღი">
+                        <input type="text" class="span2 " name="birthdate"
+                               value="<%if(guestdblistBean != null && guestdblistBean.getDob() != null)%><%=guestdblistBean.getDob()%>"
+                               id="birthdate" placeholder=" თარიღი">
                     <span class="add-on"
                           style="background : none  !important;border: none !important;margin-left: -30px;">
                         <i class="glyphicon glyphicon-calendar"></i></span>
@@ -329,7 +352,9 @@
                     <span class="label_sm label_big">მეუღლის დაბ. თარიღი</span>
 
                     <div class="input-append date" id="wifDate">
-                        <input type="text" class="span2 " name="wifebirthdate" value="<%if(guestdblistBean != null && guestdblistBean.getSdob() != null)%><%=guestdblistBean.getSdob()%>" id="wifebirthdate" placeholder=" თარიღი">
+                        <input type="text" class="span2 " name="wifebirthdate"
+                               value="<%if(guestdblistBean != null && guestdblistBean.getSdob() != null)%><%=guestdblistBean.getSdob()%>"
+                               id="wifebirthdate" placeholder=" თარიღი">
                     <span class="add-on"
                           style="background : none  !important;border: none !important;margin-left: -30px;">
                         <i class="glyphicon glyphicon-calendar"></i></span>
@@ -339,7 +364,9 @@
                     <span class="label_sm label_big">ქორწ. წლის თავი:</span>
 
                     <div class="input-append date" id="wDate">
-                        <input type="text" class="span2 " name="weddingyeardate" value="<%if(guestdblistBean != null && guestdblistBean.getWeddingdate() != null)%><%=guestdblistBean.getWeddingdate()%>" id="weddingyeardate"
+                        <input type="text" class="span2 " name="weddingyeardate"
+                               value="<%if(guestdblistBean != null && guestdblistBean.getWeddingdate() != null)%><%=guestdblistBean.getWeddingdate()%>"
+                               id="weddingyeardate"
                                placeholder=" თარიღი">
                     <span class="add-on"
                           style="background : none  !important;border: none !important;margin-left: -30px;">
@@ -355,17 +382,15 @@
                                     nats) {
 
                                 String selected = "";
-                                int natid = 0;
-                                if (guestdblistBean != null
-                                        && guestdblistBean.getNationalityid() == object.getNationalityid()) {
-                                    selected = "selected='selected'";
-                                    natid = object.getNationalityid();
+                                if (guestdblistBean != null && guestdblistBean.getNationalityid() != null
+                                        && guestdblistBean.getNationalityid().equals(object.getNationalityid())) {
+                                    selected = "selected";
                                 } else {
                                     selected = "";
                                 }
 
                         %>
-                        <option <%=selected%> value="<%=natid%>"><%=CodeHelpers.ifIsNullOrEmptyReturnEmptryString(object.getName())%>
+                        <option value="<%=object.getNationalityid()%>" <%=selected%> ><%=CodeHelpers.ifIsNullOrEmptyReturnEmptryString(object.getName())%>
                         </option>
                         <%
                             }
@@ -382,17 +407,14 @@
                                     contrs) {
 
                                 String selected = "";
-                                Long contrid = Long.valueOf(0);
-                                if (guestdblistBean != null
-                                        && guestdblistBean.getContragentid() == object.getContragentid()) {
-                                    selected = "selected='selected'";
-                                    contrid = object.getContragentid();
+                                if (guestdblistBean != null && guestdblistBean.getContragentid() != null
+                                        && guestdblistBean.getContragentid().equals(object.getContragentid())) {
+                                    selected = "selected";
                                 } else {
                                     selected = "";
                                 }
                         %>
-                        <option <%=selected%> value="<%=contrid%>"><%=CodeHelpers.ifIsNullOrEmptyReturnEmptryString(object.getName())%>
-                        </option>
+                        <option value="<%=object.getContragentid()%>" <%=selected%> ><%=CodeHelpers.ifIsNullOrEmptyReturnEmptryString(object.getName())%></option>
                         <%
                             }
                         %>
@@ -407,18 +429,15 @@
                                     paymentmethodBeans) {
 
                                 String selected = "";
-                                int pmethod = 0;
-                                if (guestdblistBean != null
-                                        && guestdblistBean.getPaymentmethodid() == object.getPaymentmethodid()) {
-                                    selected = "selected='selected'";
-                                    pmethod = object.getPaymentmethodid();
+                                if (guestdblistBean != null && guestdblistBean.getPaymentmethodid() != null
+                                        && guestdblistBean.getPaymentmethodid().equals(object.getPaymentmethodid())) {
+                                    selected = "selected";
                                 } else {
                                     selected = "";
                                 }
 
                         %>
-                        <option <%=selected%> value="<%=pmethod%>"><%=CodeHelpers.ifIsNullOrEmptyReturnEmptryString(object.getName())%>
-                        </option>
+                        <option value="<%=object.getPaymentmethodid()%>" <%=selected%> ><%=CodeHelpers.ifIsNullOrEmptyReturnEmptryString(object.getName())%></option>
                         <%
                             }
                         %>
