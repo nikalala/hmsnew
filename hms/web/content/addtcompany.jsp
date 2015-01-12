@@ -30,6 +30,7 @@
     });
 </script>
 <form id="tagentsfrm" name="tagentsfrm">
+    <input type="hidden"name="tid" value="<%=tid%>">
     <div style="float: left; margin-left: 15px;">
         <table class="ttable">
             <tr>
@@ -134,7 +135,7 @@
                                     String selected = "";
                                     if (contragentlistBeans != null && contragentlistBeans.getSalutationid() != null
                                             && contragentlistBeans.getSalutationid().equals(object.getSalutationid())) {
-                                        selected = "selected='selected'";
+                                        selected = "selected";
                                     } else {
                                         selected = "";
                                     }
@@ -155,9 +156,7 @@
             </tr>
             <tr>
                 <td><label>მისამართი:</label></td>
-                <td><textarea id="taddress"
-                              name="taddress"><% if (contragentlistBeans != null && contragentlistBeans.getAddress() != null) {%><%=contragentlistBeans.getAddress()%><%}%>
-                </textarea></td>
+                <td><textarea id="taddress" name="taddress"><% if (contragentlistBeans != null && contragentlistBeans.getAddress() != null) {%><%=contragentlistBeans.getAddress()%><%}%></textarea></td>
             </tr>
             <tr>
                 <td><label>ქვეყანა:</label></td>
@@ -170,7 +169,7 @@
                                 String selected = "";
                                 if (contragentlistBeans != null && contragentlistBeans.getCountryid() != null
                                         && contragentlistBeans.getCountryid().equals(country[i].getCountryid())) {
-                                    selected = "selected='selected'";
+                                    selected = "selected";
                                 } else {
                                     selected = "";
                                 }

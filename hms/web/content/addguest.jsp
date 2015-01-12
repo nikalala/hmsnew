@@ -211,8 +211,7 @@
                     <span id="ctl0_fdmain_lblAddess1" class="label_sm label_big">მისამართი</span>
               <span style="display:block;float:left;">
               <textarea name="txtaddress" rows="4" cols="31" placeholder="" id="txtaddress"
-                        class="textarea"><%if (guestdblistBean != null)%><%=CodeHelpers.ifIsNullOrEmptyReturnEmptryString(guestdblistBean.getAddress())%>
-              </textarea>
+                        class="textarea"><%if (guestdblistBean != null)%><%=CodeHelpers.ifIsNullOrEmptyReturnEmptryString(guestdblistBean.getAddress())%></textarea>
               </span></p>
 
                 <p class="fieldset">
