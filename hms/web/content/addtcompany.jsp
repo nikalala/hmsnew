@@ -35,37 +35,37 @@
             <tr>
                 <td><label>კომპანია:</label></td>
                 <td><input type="text" id="tcompany" name="tcompany"
-                           value="<% if (contragentlistBeans != null)       {%><%=contragentlistBeans.getCompany()%><%}%>">
+                           value="<% if (contragentlistBeans != null && contragentlistBeans.getCompany() != null)       {%><%=contragentlistBeans.getCompany()%><%}%>">
                 </td>
             </tr>
             <tr>
                 <td><label>ტელეფონი:</label></td>
                 <td><input type="text" id="tphone" name="tphone"
-                           value="<% if (contragentlistBeans != null)      {%><%=contragentlistBeans.getPhone()%><%}%>">
+                           value="<% if (contragentlistBeans != null && contragentlistBeans.getPhone() != null)      {%><%=contragentlistBeans.getPhone()%><%}%>">
                 </td>
             </tr>
             <tr>
                 <td><label>მობილური:</label></td>
                 <td><input type="text" id="tmobile" name="tmobile"
-                           value="<% if (contragentlistBeans != null)    {%><%=contragentlistBeans.getMobile()%><%}%>">
+                           value="<% if (contragentlistBeans != null && contragentlistBeans.getMobile() != null)    {%><%=contragentlistBeans.getMobile()%><%}%>">
                 </td>
             </tr>
             <tr>
                 <td><label>ფაქსი:</label></td>
                 <td><input type="text" id="tfax" name="tfax"
-                           value="<% if (contragentlistBeans != null)  {%><%=contragentlistBeans.getFax()%><%}%>"></td>
+                           value="<% if (contragentlistBeans != null && contragentlistBeans.getFax() != null)  {%><%=contragentlistBeans.getFax()%><%}%>"></td>
             </tr>
             <tr>
                 <td><label>ელ-ფოსტა:</label></td>
                 <td><input type="text" id="temail" name="temail"
-                           value="<% if (contragentlistBeans != null)  {%><%=contragentlistBeans.getEmail()%><%}%>">
+                           value="<% if (contragentlistBeans != null && contragentlistBeans.getEmail() != null)  {%><%=contragentlistBeans.getEmail()%><%}%>">
                 </td>
             </tr>
             <tr>
                 <td><label>კრედიტის პირობა:</label></td>
                 <td>
                     <input type="text" id="tcterm" name="tcterm" style="width:80% !important;"
-                           value="<% if (contragentlistBeans != null)  {%><%=contragentlistBeans.getCreditterm()%><%}%>">
+                           value="<% if (contragentlistBeans != null && contragentlistBeans.getCreditterm() != null)  {%><%=contragentlistBeans.getCreditterm()%><%}%>">
                     <b>დღე</b>
                 </td>
             </tr>
@@ -73,14 +73,14 @@
                 <td><label>კრედიტის ლიმიტი:</label></td>
                 <td>
                     <input type="text" id="tclimit" name="tclimit" style="width:80% !important;"
-                           value="<% if (contragentlistBeans != null)  {%><%=contragentlistBeans.getCreditlimit()%><%}%>">
+                           value="<% if (contragentlistBeans != null && contragentlistBeans.getCreditlimit() != null)  {%><%=contragentlistBeans.getCreditlimit()%><%}%>">
                     <b>ლარი</b>
                 </td>
             </tr>
             <tr>
                 <td><label>საწყისი ბალანსი(GEL):</label></td>
                 <td><input type="text" id="topenbal" name="topenbal"
-                           value="<% if (contragentlistBeans != null)   {%><%=contragentlistBeans.getOpenbalance()%><%}%>">
+                           value="<% if (contragentlistBeans != null && contragentlistBeans.getOpenbalance() != null)   {%><%=contragentlistBeans.getOpenbalance()%><%}%>">
                 </td>
             </tr>
             <tr>
@@ -89,7 +89,7 @@
                     <%
                         for (int i = 0; i < roominventory.length; i++) {
                             String selected;
-                            if (contragentlistBeans != null && contragentlistBeans.getRoominventory() == i) {
+                            if (contragentlistBeans != null && contragentlistBeans.getRoominventory() != null && contragentlistBeans.getRoominventory().equals(i)) {
                                 selected = "checked";
                             } else {
                                 selected = "";
@@ -111,7 +111,7 @@
 
                     <%
                         String checked = "";
-                        if (contragentlistBeans != null && contragentlistBeans.getCreateuser()) {
+                        if (contragentlistBeans != null && contragentlistBeans.getCreateuser() != null  && contragentlistBeans.getCreateuser()) {
                             checked = "checked";
                         }%>
                     <input type="checkbox" id="tcreateuser" name="tcreateuser" <%=checked%>></td>
@@ -132,8 +132,8 @@
                                         salutationBeans) {
 
                                     String selected = "";
-                                    if (contragentlistBeans != null
-                                            && contragentlistBeans.getSalutationid() == object.getSalutationid()) {
+                                    if (contragentlistBeans != null && contragentlistBeans.getSalutationid() != null
+                                            && contragentlistBeans.getSalutationid().equals(object.getSalutationid())) {
                                         selected = "selected='selected'";
                                     } else {
                                         selected = "";
@@ -149,14 +149,14 @@
                     </div>
                     <div style="float: left; width: 80%;">
                         <input type="text" id="tcontrname" name="tcontrname" style="width: 100%;"
-                               value="<% if (contragentlistBeans != null) {%><%=contragentlistBeans.getContragent()%><%}%>"/>
+                               value="<% if (contragentlistBeans != null && contragentlistBeans.getContragent() != null) {%><%=contragentlistBeans.getContragent()%><%}%>"/>
                     </div>
                 </td>
             </tr>
             <tr>
                 <td><label>მისამართი:</label></td>
                 <td><textarea id="taddress"
-                              name="taddress"><% if (contragentlistBeans != null) {%><%=contragentlistBeans.getAddress()%><%}%>
+                              name="taddress"><% if (contragentlistBeans != null && contragentlistBeans.getAddress() != null) {%><%=contragentlistBeans.getAddress()%><%}%>
                 </textarea></td>
             </tr>
             <tr>
@@ -168,8 +168,8 @@
                         <%
                             for (int i = 0; i < country.length; i++) {
                                 String selected = "";
-                                if (contragentlistBeans != null
-                                        && contragentlistBeans.getCountryid() == country[i].getCountryid()) {
+                                if (contragentlistBeans != null && contragentlistBeans.getCountryid() != null
+                                        && contragentlistBeans.getCountryid().equals(country[i].getCountryid())) {
                                     selected = "selected='selected'";
                                 } else {
                                     selected = "";
@@ -184,7 +184,7 @@
             <tr>
                 <td><label>ქალაქი:</label></td>
                 <td><input type="text" id="tcity" name="tcity"
-                           value="<% if (contragentlistBeans != null)   {%><%=contragentlistBeans.getCity()%><%}%>"/>
+                           value="<% if (contragentlistBeans != null && contragentlistBeans.getCity() != null)   {%><%=contragentlistBeans.getCity()%><%}%>"/>
                 </td>
             </tr>
             <tr>
@@ -192,7 +192,7 @@
                 <td>
                     <%
                         String taddtobussinesssource = "";
-                        if (contragentlistBeans != null && contragentlistBeans.getBsource()) {
+                        if (contragentlistBeans != null && contragentlistBeans.getBsource() != null && contragentlistBeans.getBsource()) {
                             taddtobussinesssource = "checked";
                         }%>
                     <input type="checkbox" name="taddtobussinesssource"
@@ -204,7 +204,7 @@
                     <%
                         for (int i = 0; i < rate.length; i++) {
                             String selected = "";
-                            if ((contragentlistBeans != null && contragentlistBeans.getRate() == i)) {
+                            if ((contragentlistBeans != null && contragentlistBeans.getRate() != null && contragentlistBeans.getRate().equals(i))) {
                                 selected = "checked";
                             } else {
                                 selected = "";

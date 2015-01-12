@@ -31,14 +31,17 @@
     function saveTAgent() {
         var str = $.fn.serializeObject($("#tagents_add #tagentsfrm"));
         var errorExist = false;
+        $("#tcommissionplan").next().removeClass("error");
+        $("#tvalue").removeClass("error");
         for (var key in str) {
-            if (key != "taddress" && key != "tcity" && key != "tphone" && key != "tmobile" && key != "tfax" && key != "tclimit" && key != "tcterm" && key != "topenbal" && key != "tvalue") {
+            if (key != "taddress" && key != "tcity" && key != "tcommissionplan"  && key != "tphone" && key != "tmobile" && key != "tfax" && key != "zip" && key != "tclimit" && key != "tcterm" && key != "topenbal" && key != "tvalue") {
                 if (isNullOrEmpty(str[key])) {
                     if (key == "tcountryid") {
                         $("#" + key).next().addClass("error");
                     } else {
                         $("#" + key).addClass("error");
                     }
+                    console.log(key)
                     errorExist = true;
                 } else {
                     if (key == "tcountryid" || key == "tcommissionplan") {
@@ -64,6 +67,27 @@
                 }
             }
         }
+        if(!isNullOrEmpty($("#tvalue").val()))
+        {
+            if(isNullOrEmpty($("#tcommissionplan").val()))
+            {
+                $("#tcommissionplan").next().addClass("error");
+                errorExist = true;
+            }else{
+                $("#tcommissionplan").next().removeClass("error");
+            }
+        }
+        if(!isNullOrEmpty($("#tcommissionplan").val()))
+        {
+            if(isNullOrEmpty($("#tvalue").val()))
+            {
+                $("#tvalue").addClass("error");
+                errorExist = true;
+            }else{
+                $("#tvalue").removeClass("error");
+            }
+        }
+
         if (errorExist) {
             return;
         }
@@ -92,7 +116,7 @@
                     <%
                         }
                     %>
-                    BootstrapDialog.alert(t + " დამატება წარმატებით დასრულდა");
+                    BootstrapDialog.alert("ოპერაცია შესრულდა წარმატებით");
                     cancelSaveContr();
                     doFilter(true);
                 }
@@ -105,7 +129,11 @@
 
     function addContr(id) {
         loader.show();
-
+        if(isNullOrEmpty(id)){
+            $("#addtagenttxt").html("ტურისტული აგენტის დამატება");
+        }else{
+            $("#addtagenttxt").html("ტურისტული აგენტის რედაქტირება");
+        }
         $(".filter-form1").hide();
         $("#grid-footer").hide();
         $(".filter-form2").slideToggle();
@@ -119,7 +147,11 @@
     }
     function addCompany(id) {
         loader.show();
-
+        if(isNullOrEmpty(id)){
+            $("#addtagenttxt").html("კომპანიის დამატება");
+        }else{
+            $("#addtagenttxt").html("კომპანიის რედაქტირება");
+        }
         $(".filter-form1").hide();
         $("#grid-footer").hide();
         $(".filter-form2").slideToggle();
@@ -227,14 +259,17 @@
                                 onclick="<%if(type.equals("1")){%>  addCompany(); <%}else{%> addContr() <%}%>"
                                 style="border: 0; font-weight: bold; float: right; margin: 3px 5px 0 0;">
                             <%
+                                String headerVal = "";
                                 if (type.equals("1")) {
+                                    headerVal = "კომპანიის დამატება";
                             %>
-                            კომპანიის დამატება
+                                <%=headerVal%>
                             <%
                                 }
                                 if (type.equals("2")) {
+                                    headerVal = "ტურისტული აგენტის დამატება";
                             %>
-                            ტურისტული აგენტის დამატება
+                            <%=headerVal%>
                             <%
                                 }
                             %>
@@ -342,7 +377,7 @@
             <td>
                 <div id="status_bar" class="first-status-bar" align='center'>
                     <div style="width: 100%; float: left;">
-                        <span style="float: left; margin: 7px 0 0 10px;">ტურისტული აგენტის დამატება</span>
+                        <span style="float: left; margin: 7px 0 0 10px;" id="addtagenttxt"><%=headerVal%></span>
                     </div>
                 </div>
             </td>

@@ -5,7 +5,6 @@
 
 <%
 
-    SimpleDateFormat gdf = new SimpleDateFormat(dateformats1[dff]);
     String errorContrName = "";
     Manager.getInstance().beginTransaction();
     try {
@@ -78,17 +77,18 @@
                 c.setCity((String) json.get("txtcity"));
             }
             c.setRegbyid(user.getPersonnelid());
+
             if (!CodeHelpers.isNullOrEmpty((String) json.get("birthdate"))) {
                 String d = (String)json.get("birthdate");
-                c.setDob(gdf.parse(d));
+                c.setDob(dt.parse(d));
             }
             if (!CodeHelpers.isNullOrEmpty((String) json.get("wifebirthdate"))) {
                 String d = (String)json.get("wifebirthdate");
-                c.setSdob(gdf.parse(d));
+                c.setSdob(dt.parse(d));
             }
             if (!CodeHelpers.isNullOrEmpty((String) json.get("weddingyeardate"))) {
                 String d = (String)json.get("weddingyeardate");
-                c.setWeddingdate(gdf.parse(d));
+                c.setWeddingdate(dt.parse(d));
             }
 
             if (!CodeHelpers.isNullOrEmpty((String) json.get("email"))) {

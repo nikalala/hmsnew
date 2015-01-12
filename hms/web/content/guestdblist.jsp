@@ -161,6 +161,11 @@
 
     function addGuest(id){
         loader.show();
+        if(isNullOrEmpty(id)){
+            $("#addtagenttxt").html("კომპანიის დამატება");
+        }else{
+            $("#addtagenttxt").html("კომპანიის რედაქტირება");
+        }
 
         $(".filter-form1").hide();
         $("#grid-footer").hide();
@@ -220,11 +225,11 @@
             dataType: 'json',
             success: function (data) {
                 if (data.status == "ok") {
-                    BootstrapDialog.alert("სტუმრის დამატება წარმატებით დასრულდა");
+                    BootstrapDialog.alert("ოპერაცია შესრულდა წარმატებით");
                     cancelSaveGuest();
                     doFilter(true);
                 }else{
-                    BootstrapDialog.alert("სტუმრის დამატების დროს დაფიქსირდა შეცდომა. სცადეთ ხელახლა");
+                    BootstrapDialog.alert("დაფიქსირდა შეცდომა. სცადეთ ხელახლა");
                 }
             },
             error: function (data) {

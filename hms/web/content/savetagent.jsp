@@ -14,89 +14,96 @@
             JSONObject json = (JSONObject) JSONSerializer.toJSON(jsonString);
             ContragentBean c = ContragentManager.getInstance().createContragentBean();
             System.out.println(json);
-            if (((String) json.get("taddress")).trim() != null) {
+            if (((String) json.get("taddress")).trim() != "") {
                 c.setAddress((String) json.get("taddress"));
             }
-            if (json.get("taddtobussinesssource") != null && json.get("taddtobussinesssource").toString().length() > 0) {
-                c.setBsource(json.get("taddtobussinesssource").equals("on") ? true : false);
+            if (!CodeHelpers.isNullOrEmpty((String) json.get("taddtobussinesssource"))) {
+                c.setBsource(json.get("taddtobussinesssource").equals("on"));
             }
-            if (json.get("tccblock") != null && json.get("tccblock").toString().length() > 0) {
-                c.setCcblock(json.get("tccblock").equals("on") ? true : false);
+            if (!CodeHelpers.isNullOrEmpty((String) json.get("tccblock"))) {
+                c.setCcblock(json.get("tccblock").equals("on"));
             }
-            if (json.get("tcreateuser") != null && json.get("tcreateuser").toString().length() > 0) {
-                c.setCreateuser(json.get("tcreateuser").equals("on") ? true : false);
+            if (!CodeHelpers.isNullOrEmpty((String) json.get("tcreateuser"))) {
+                c.setCreateuser(json.get("tcreateuser").equals("on"));
             }
             if (json.get("tcity") != null) {
                 c.setCity((String) json.get("tcity"));
             }
-            if (json.get("tcommissionplan") != null) {
-                c.setCommissionplan(new Integer(json.get("tcommissionplan").toString()));
+
+            if (!CodeHelpers.isNullOrEmpty((String) json.get("tcommissionplan"))) {
+                Integer tcommissionplan = Integer.parseInt((String) json.get("tcommissionplan"));
+                if (tcommissionplan != null) {
+                    c.setCommissionplan(tcommissionplan);
+                }
             }
+
             c.setRegbyid(user.getPersonnelid());
             c.setType(2);
-            if (json.get("tcontragentid") != null) {
+            if (!CodeHelpers.isNullOrEmpty((String) json.get("tcontragentid"))) {
                 Long tcontragentid = Long.parseLong((String) json.get("tcontragentid"));
                 if (tcontragentid != null && tcontragentid > 0) {
                     c.setContragentid(tcontragentid);
                 }
             }
 
-
-            if (json.get("tcountryid") != null) {
+            if (!CodeHelpers.isNullOrEmpty((String) json.get("tcountryid"))) {
                 Integer countryId = Integer.parseInt((String) json.get("tcountryid"));
                 if (countryId != null) {
                     c.setCountryid(countryId);
                 }
             }
 
-            if (json.get("tsalutation") != null) {
+            if (!CodeHelpers.isNullOrEmpty((String) json.get("tsalutation"))) {
                 Integer setSalutationid = Integer.parseInt((String) json.get("tsalutation"));
                 if (setSalutationid != null) {
                     c.setCountryid(setSalutationid);
                 }
             }
 
-            if (json.get("rinve") != null) {
+            if (!CodeHelpers.isNullOrEmpty((String) json.get("rinve"))) {
                 Integer rinve = Integer.parseInt((String) json.get("rinve"));
                 if (rinve != null) {
                     c.setRoominventory(rinve);
                 }
             }
 
-            if (json.get("topenbal") != null) {
+            if (!CodeHelpers.isNullOrEmpty((String) json.get("topenbal"))) {
                 Double topenbal = Double.parseDouble((String) json.get("topenbal"));
                 if (topenbal != null) {
                     c.setOpenbalance(topenbal);
                 }
             }
 
-            if (json.get("trate") != null) {
+            if (!CodeHelpers.isNullOrEmpty((String) json.get("trate"))) {
                 Integer trate = Integer.parseInt((String) json.get("trate"));
                 if (trate != null) {
                     c.setRate(trate);
                 }
             }
 
-            if (json.get("tvalue") != null) {
+            if (!CodeHelpers.isNullOrEmpty((String) json.get("tvalue"))) {
                 Double tvalue = Double.parseDouble((String) json.get("tvalue"));
                 if (tvalue != null) {
                     c.setVal(tvalue);
                 }
             }
 
-            if (json.get("temail") != null) {
+            if (!CodeHelpers.isNullOrEmpty((String) json.get("temail"))) {
                 c.setEmail((String) json.get("temail"));
             }
-            if (json.get("tfax") != null) {
+            if (!CodeHelpers.isNullOrEmpty((String) json.get("zip"))) {
+                c.setZip((String) json.get("zip"));
+            }
+            if (!CodeHelpers.isNullOrEmpty((String) json.get("tfax"))) {
                 c.setFax((String) json.get("tfax"));
             }
-            if (json.get("tphone") != null) {
+            if (!CodeHelpers.isNullOrEmpty((String) json.get("tphone"))) {
                 c.setPhone((String) json.get("tphone"));
             }
-            if (json.get("tmobile") != null) {
+            if (!CodeHelpers.isNullOrEmpty((String) json.get("tmobile"))) {
                 c.setMobile((String) json.get("tmobile"));
             }
-            if (json.get("tcompany") != null) {
+            if (!CodeHelpers.isNullOrEmpty((String) json.get("tcompany"))) {
                 c.setName((String) json.get("tcompany"));
             }
             if ((String) json.get("tcontrname") != null && ((String) json.get("tcontrname")).length() > 0) {
@@ -125,7 +132,7 @@
         Manager.getInstance().endTransaction(false);
     }
 %>
-<%="{\"status\":\""+errorContrName+"\"}"%>
+<%="{\"status\":\"" + errorContrName + "\"}"%>
 
 
 

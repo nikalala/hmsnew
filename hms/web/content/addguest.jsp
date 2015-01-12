@@ -12,11 +12,14 @@
     ContragentBean[] contrs = ContragentManager.getInstance().loadByWhere("");
     PaymentmethodBean[] paymentmethodBeans = PaymentmethodManager.getInstance().loadByWhere("");
     String tid = (String) request.getParameter("tid");
+    String headerVal = "";
     if(CodeHelpers.isNullOrEmpty(tid))
     {
         tid = "";
+        headerVal = "სტუმრის დამატება";
+    }else{
+        headerVal = "სტუმრის რედაქტირება";
     }
-    SimpleDateFormat gdf = new SimpleDateFormat(dateformats1[dff]);
     if (!CodeHelpers.isNullOrEmpty(tid)) {
         Object gdblist = GuestManager.getInstance().loadByWhere("where guestid = " + tid);
         if (gdblist != null && ((GuestBean[]) gdblist).length > 0) {
@@ -131,7 +134,7 @@
 <form name="guestform" id="guestform">
     <div class="box_outer" style="width:100%">
         <h2 class="box_head">
-            <span id="ctl0_fdmain_lblGTitle">სტუმრის დამატება</span>
+            <span id="ctl0_fdmain_lblGTitle"><%=headerVal%></span>
         </h2>
         <input type="hidden"name="tid" value="<%=tid%>">
         <ul class="box_container">
@@ -342,7 +345,7 @@
 
                     <div class="input-append date" id="bDate">
                         <input type="text" class="span2 " name="birthdate"
-                               value="<%if(guestdblistBean != null && guestdblistBean.getDob() != null)%><%=gdf.format(guestdblistBean.getDob())%>"
+                               value="<%if(guestdblistBean != null && guestdblistBean.getDob() != null)%><%=dt.format(guestdblistBean.getDob())%>"
                                id="birthdate" placeholder=" თარიღი">
                     <span class="add-on"
                           style="background : none  !important;border: none !important;margin-left: -30px;">
@@ -354,7 +357,7 @@
 
                     <div class="input-append date" id="wifDate">
                         <input type="text" class="span2 " name="wifebirthdate"
-                               value="<%if(guestdblistBean != null && guestdblistBean.getSdob() != null)%><%=gdf.format(guestdblistBean.getSdob())%>"
+                               value="<%if(guestdblistBean != null && guestdblistBean.getSdob() != null)%><%=dt.format(guestdblistBean.getSdob())%>"
                                id="wifebirthdate" placeholder=" თარიღი">
                     <span class="add-on"
                           style="background : none  !important;border: none !important;margin-left: -30px;">
@@ -366,7 +369,7 @@
 
                     <div class="input-append date" id="wDate">
                         <input type="text" class="span2 " name="weddingyeardate"
-                               value="<%if(guestdblistBean != null && guestdblistBean.getWeddingdate() != null)%><%=gdf.format(guestdblistBean.getWeddingdate())%>"
+                               value="<%if(guestdblistBean != null && guestdblistBean.getWeddingdate() != null)%><%=dt.format(guestdblistBean.getWeddingdate())%>"
                                id="weddingyeardate"
                                placeholder=" თარიღი">
                     <span class="add-on"
