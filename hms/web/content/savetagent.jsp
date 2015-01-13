@@ -12,22 +12,21 @@
         jsonString = URLDecoder.decode(jsonString, "UTF-8");
         if (jsonString != null && jsonString.length() > 0) {
             JSONObject json = (JSONObject) JSONSerializer.toJSON(jsonString);
-            ContragentBean c = ContragentManager.getInstance().createContragentBean();
+            ContragentBean c = null;
             System.out.println(json);
 
             String tid = ((String) json.get("tid"));
+            System.out.println(tid);
             if (!CodeHelpers.isNullOrEmpty(tid) && tid.replace("null", "").replace("\"\"", "").length() > 0) {
                 System.out.println(tid.replace("null", "").replace("\"\"", ""));
                 Long tcontragentid = Long.parseLong((String) json.get("tid"));
                 c = ContragentManager.getInstance().loadByPrimaryKey(tcontragentid);
-                if (tcontragentid != null && tcontragentid > 0) {
-                    c.setContragentid(tcontragentid);
-                }
+                System.out.println("Contragent Id Set was successful");
             } else {
                 c = ContragentManager.getInstance().createContragentBean();
             }
             String add = (String) json.get("taddress");
-            c.setAddress(!CodeHelpers.isNullOrEmpty(add) && add.replace("\\r\\n","").trim() != "" ? (String) json.get("taddress") : null);
+            c.setAddress(!CodeHelpers.isNullOrEmpty(add) && add.replace("\\r\\n","").trim() != "" ? (String) json.get("taddress") : "");
             System.out.println(c.getAddress());
             c.setBsource(!CodeHelpers.isNullOrEmpty((String) json.get("taddtobussinesssource")) ? json.get("taddtobussinesssource").equals("on") : false);
             c.setCcblock(!CodeHelpers.isNullOrEmpty((String) json.get("tccblock")) ? json.get("tccblock").equals("on") : false);
@@ -42,12 +41,6 @@
 
             c.setRegbyid(user.getPersonnelid());
             c.setType(2);
-            if (!CodeHelpers.isNullOrEmpty((String) json.get("tcontragentid"))) {
-                Long tcontragentid = Long.parseLong((String) json.get("tcontragentid"));
-                c.setContragentid(tcontragentid);
-            }else{
-                c.setContragentid(0);
-            }
 
             if (!CodeHelpers.isNullOrEmpty((String) json.get("tcountryid"))) {
                 Integer countryId = Integer.parseInt((String) json.get("tcountryid"));

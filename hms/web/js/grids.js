@@ -175,6 +175,10 @@ tagentsGrid = {
     cols: ['კომპანია', 'სახელი, გვარი', 'ქალაქი', 'ქვეყანა',
         'ტელეფონი', 'ელ.ფოსტა', ''],
     model: tagentsGridModel,
+    multiselect: true,
+    multikey: "ctrlKey",
+    altRows: true,
+    altclass: 'altrow',
     sort: 'company',
     order: 'asc',
     isPopup: false,
@@ -394,7 +398,7 @@ postchargesGrid = {
 };
 /* -------------------------------- NightAudit NA5 List Model ------------------------------------*/
 
-/* -------------------------------- NightAudit NA6 List Model ------------------------------------*/
+/* -------------------------------- closedayGrid List Model ------------------------------------*/
 var closedayGridModel = [];
 closedayGridModel.push(
     colModelGenerator(65, 'reservationid', 0),
@@ -434,10 +438,10 @@ closedayGrid = {
 
     }
 };
-/* -------------------------------- NightAudit NA5 List Model ------------------------------------*/
+/* -------------------------------- closedayGrid List Model ------------------------------------*/
 
 
-/* -------------------------------- NightAudit NA6 List Model ------------------------------------*/
+/* -------------------------------- chargesGrid List Model ------------------------------------*/
 var chargesGridModel = [];
 chargesGridModel.push(
     colModelGenerator(120, 'srno', 0),
@@ -472,10 +476,10 @@ chargesGrid = {
 
     }
 };
-/* -------------------------------- NightAudit NA5 List Model ------------------------------------*/
+/* -------------------------------- chargesGrid List Model ------------------------------------*/
 
 
-/* -------------------------------- NightAudit NA6 List Model ------------------------------------*/
+/* --------------------------------  consGrid List Model ------------------------------------*/
 var consGridModel = [];
 consGridModel.push(
     colModelGenerator(30, 'consguest', 0),
@@ -498,19 +502,43 @@ consGrid = {
     altclass: 'altrow',
     isPopup: true,
     gridComplete: function () {
-        var rows = $("#postcharges").getGridParam("reccount");
-        if (rows > 0) {
-            $("#nopostcharges").hide();
-            $("#postchargestbl").show();
-        } else {
-            $("#nopostcharges").show();
-            $("#postchargestbl").hide();
-        }
         ReDrawTable(consGrid);
     },
     beforeRequest: function () {
 
     }
 };
-/* -------------------------------- NightAudit NA5 List Model ------------------------------------*/
+/* -------------------------------- consGrid List Model ------------------------------------*/
 
+
+/* --------------------------------  tagentscons List Model ------------------------------------*/
+var constagentGridModel = [];
+constagentGridModel.push(
+    colModelGenerator(30, 'conscontr', 0),
+    colModelGenerator(120, 'company', 0),
+    colModelGenerator(120, 'contragent', 0),
+    colModelGenerator(120, 'city', 0),
+    colModelGenerator(120, 'country', 0),
+    colModelGenerator(120, 'phone', 0),
+    colModelGenerator(120, 'email', 0)
+);
+
+constagentGrid = {
+    id: 'list_contrgrid',
+    url: 'content/getconscontrlist.jsp',
+    type: 'xml',
+    cols: ['','კომპანია','სახელი,გვარი', 'ქალაქი', 'ქვეყანა', 'ტელეფონი', 'ელ.ფოსტა'],
+    model: constagentGridModel,
+    sort: 'contragent',
+    order: 'asc',
+    altRows: true,
+    altclass: 'altrow',
+    isPopup: true,
+    gridComplete: function () {
+        ReDrawTable(constagentGrid);
+    },
+    beforeRequest: function () {
+
+    }
+};
+/* -------------------------------- tagentscons List Model ------------------------------------*/

@@ -76,6 +76,9 @@
                         <li>
                             <a href="javascript:newWindow('construction','მოლარე');">მოლარე</a>
                         </li>
+                        <li>
+                            <a href="javascript:newsWindow('currcource','ვალუტის კურსი');">ვალუტის კურსი</a>
+                        </li>
                     </ul>
                 </li>
                 

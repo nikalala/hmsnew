@@ -12,7 +12,17 @@
         jsonString = URLDecoder.decode(jsonString, "UTF-8");
         if (jsonString != null && jsonString.length() > 0) {
             JSONObject json = (JSONObject) JSONSerializer.toJSON(jsonString);
-            ContragentBean c = ContragentManager.getInstance().createContragentBean();
+            ContragentBean c = null;
+            String tid = ((String) json.get("tid"));
+            System.out.println(tid);
+            if (!CodeHelpers.isNullOrEmpty(tid) && tid.replace("null", "").replace("\"\"", "").length() > 0) {
+                System.out.println(tid.replace("null", "").replace("\"\"", ""));
+                Long tcontragentid = Long.parseLong((String) json.get("tid"));
+                c = ContragentManager.getInstance().loadByPrimaryKey(tcontragentid);
+                System.out.println("Contragent Id Set was successful");
+            } else {
+                c = ContragentManager.getInstance().createContragentBean();
+            }
 
             c.setAddress(((String) json.get("taddress")).trim() != null ? (String) json.get("taddress") : "");
 
@@ -33,14 +43,6 @@
             c.setRegbyid(user.getPersonnelid());
             c.setType(1);
 
-            if (json.get("tcontragentid") != null && ((String)json.get("tcontragentid")).length() > 0) {
-                Long tcontragentid = Long.parseLong((String) json.get("tcontragentid"));
-                if (tcontragentid != null && tcontragentid > 0) {
-                    c.setContragentid(tcontragentid);
-                }
-            }else{
-                c.setContragentid(0);
-            }
 
             if (json.get("tcterm") != null && ((String)json.get("tcterm")).length() > 0) {
                 Integer tcterm = Integer.parseInt((String) json.get("tcterm"));

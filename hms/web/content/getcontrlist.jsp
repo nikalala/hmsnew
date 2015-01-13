@@ -34,7 +34,7 @@
         <cell><![CDATA[<%=contragentlistBeans[i].getEmail()%> ]]></cell>
         <cell>
             <![CDATA[
-             <a href="#" class="btn btn-xs btn-default"><i class="fa fa-trash"></i></a>
+             <a href="#" class="btn btn-xs btn-default" onclick="deleteSelectedGuest(<%=contragentlistBeans[i].getContragentid()%>)"><i class="fa fa-trash"></i></a>
              <a href="#" class="btn btn-xs btn-default" onclick="<%=methodName%>"><i class="fa fa-list"></i></a>
             ]]>
         </cell>
