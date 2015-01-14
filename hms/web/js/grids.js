@@ -541,4 +541,48 @@ constagentGrid = {
 
     }
 };
+
+
 /* -------------------------------- tagentscons List Model ------------------------------------*/
+
+
+/* --------------------------------  tagentscons List Model ------------------------------------*/
+var hsGridModel = [];
+hsGridModel.push(
+    colModelGenerator(130, 'unitroom', 0),
+    colModelGenerator(120, 'roomtype', 0),
+    colModelGenerator(150, 'status', 0),
+    colModelGenerator(120, 'aval', 0),
+    colModelGenerator(120, 'remarks', 0),
+    colModelGenerator(120, 'housekeeper', 0)
+);
+
+hsGrid = {
+    id: 'list_hsgrid',
+    url: 'content/gethotelstatus.jsp',
+    type: 'xml',
+    cols: ['დასალაგებელი ადგილები','ოთახის ტიპი', 'სტატუსი', 'ხელმისაწვდომობა', 'შენიშვნა', 'დამლაგებელი'],
+    model: hsGridModel,
+    sort: 'contragent',
+    order: 'asc',
+    multiselect: true,
+    multikey: "ctrlKey",
+    altRows: true,
+    altclass: 'altrow',
+    isPopup: false,
+    gridComplete: function () {
+        ReDrawTable(hsGrid);
+        $("[aria-describedby=list_hsgrid_status]").each(function (i, o) {
+            var color = $(o).find(".status-color").attr("color");
+            $(o).parent().css("height","29px");
+            if(!isNullOrEmpty(color))
+            {
+                $(o).parent().css("border-left", "solid 5px " + $(o).find(".status-color").attr("color"));
+            }
+        });
+    },
+    beforeRequest: function () {
+
+    }
+};
+

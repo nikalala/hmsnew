@@ -5,7 +5,7 @@
     String id = (String) request.getParameter("query");
     Connection con = Manager.getInstance().getConnection();
 
-    CurrencyrateBean[] ratevalue = CurrencyrateManager.getInstance().loadByWhere("where currencyid = " + id + "  order by currencyid desc limit 1");
+    CurrencyrateBean[] ratevalue = CurrencyrateManager.getInstance().loadByWhere("where currencyid = " + id + "  order by currencyrateid desc limit 1");
 
     Manager.getInstance().releaseConnection(con);
     System.out.println(ratevalue.length);

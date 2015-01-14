@@ -1,0 +1,23 @@
+<%@ page import="javax.mail.internet.MimeUtility" %><?xml version="1.0" encoding="UTF-8"?>
+<%@page contentType="text/xml;charset=utf-8" %>
+<%@include file="../includes/initxml.jsp" %>
+
+<rows>
+    <%
+        for (int i = 0; i < 30; i++) {
+            String color = "color='#FA1511'";
+            if(i % 4 == 0)
+            {
+                color = "";
+            }
+    %>
+    <row id='<%=i%>'>
+        <cell><![CDATA[<%=(i+1)*100%><a onclick="alert('not implemented yet')">  <i style="font-size: 15px;" class="fa fa-lock"></i></a>]]></cell>
+        <cell><![CDATA[Junior King Room]]></cell>
+        <cell><![CDATA[<div class="status-color" <%=color%> style="background-color:#FA1511; width:16px; margin-top: 1px; margin-right: 4px; height:16px; float:left;"></div><div style="float:left;">Dirty <i style="font-size: 15px;" class="fa fa-pencil"></i> <i style="font-size: 15px;" class="fa fa-times"></i></div> ]]></cell>
+        <cell><![CDATA[Available]]></cell>
+        <cell><![CDATA[<i style="font-size: 15px;" class="fa fa-pencil"></i>]]></cell>
+        <cell><![CDATA[<i style="font-size: 15px;" class="fa fa-times"></i> ]]></cell>
+    </row>
+    <% } %>
+</rows>

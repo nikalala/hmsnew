@@ -6,6 +6,7 @@
     request.setCharacterEncoding("UTF-8");
     String update = (String) request.getParameter("query");
     Connection con = Manager.getInstance().getConnection();
+    System.out.println(update);
     int retVal = con.createStatement().executeUpdate(update);
     Manager.getInstance().releaseConnection(con);
 %>

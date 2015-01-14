@@ -6,8 +6,7 @@
     CurrencyBean[] currencyBeans = CurrencyManager.getInstance().loadByWhere("");
     String mainCourse = "";
     for (int i = 0; i < currencyBeans.length; i++) {
-        if(currencyBeans[i].getBasic())
-        {
+        if (currencyBeans[i].getBasic()) {
             mainCourse = currencyBeans[i].getIcon();
         }
     }
@@ -17,36 +16,54 @@
 
     $(document).ready(function () {
         $('.dropdown').selectpicker();
-        $("#curr_table .btn-group").css("width","100%");
+        $("#curr_table .btn-group").css("width", "100%");
         $("#curr_table input").height("27px", "!important");
         $("#curr_table input[type='text']").css("width", "100%", "!important");
         $(".currtxt").ForceNumericOnly();
+        $("#curr_table").closest('#smbody').next().hide();
     });
 
     $("#currs").on('change', function () {
         getRate();
     });
 
-    function getRate()
-    {
+    function getRate() {
         var element = $("#currs option:selected");
+        /*    if(element.attr("basic") == "true")
+         {
+         $(".currtxt").prop("disabled",true);
+         }else{
+         $(".currtxt").prop("disabled",false);
+         }*/
         var val = element.val();
-        if(!isNullOrEmpty(val))
-        {
+        if (!isNullOrEmpty(val)) {
             $("#simple_curr_symb").html(element.attr("symbol"));
             calculate(val);
         }
     }
 
-    $(document).on("change",".currtxt",function(){
-       getRate();
-    });
+    /* $(document).on("change",".currtxt",function(){
+     getRate();
+     });*/
 
-    function calculate(id)
-    {
+    function calculate(id) {
         $.post("content/getcurrrate.jsp?query=" + id, {}, function (data) {
-            $("#main_curr").val(data * $("#simple_curr").val());
+            $("#main_curr").val(data);
         });
+    }
+
+    function SaveCurr() {
+        var simpl = $("#simple_curr").val();
+        var main = $("#main_curr").val();
+        var selected = $("#currs option:selected");
+        if (!isNullOrEmpty(simpl) && !isNullOrEmpty(main) && !isNullOrEmpty(selected.val()) && main > 0 && simpl > 0) {
+            var calculated = main / simpl;
+            var insert = "INSERT INTO currencyrate(currencyrateid,currencyid, value) VALUES ((SELECT MAX(currencyrateid) %2B 1 FROM currencyrate)," + selected.val() + "," + calculated + ")";
+            console.log(insert);
+            $.post("content/execute.jsp?query=" + insert, {}, function (data) {
+                $("#dismissbutton").click();
+            });
+        }
     }
 
 </script>
@@ -55,9 +72,10 @@
         <tr>
             <td colspan="5">
                 <select class="dropdown" id="currs">
-                    <option value="0">-აირჩიეთ-</option>
+                    <option value="">-აირჩიეთ-</option>
                     <% for (int i = 0; i < currencyBeans.length; i++) { %>
-                    <option symbol="<%=currencyBeans[i].getIcon()%>" value="<%=currencyBeans[i].getCurrencyid()%>"><%=currencyBeans[i].getName()%>
+                    <option basic="<%=currencyBeans[i].getBasic()%>" symbol="<%=currencyBeans[i].getIcon()%>"
+                            value="<%=currencyBeans[i].getCurrencyid()%>"><%=currencyBeans[i].getName()%>
                         (<%=currencyBeans[i].getIcon()%>)
                     </option>
                     <% } %>
@@ -93,4 +111,10 @@
             </td>
         </tr>
     </table>
+    <div class="modal-footer" style="margin-top: 10px;">
+        <button type="button" class="btn btn-default" id="dismissbutton" data-dismiss="modal" onclick="this.click();">
+            დახურვა
+        </button>
+        <button type="button" class="btn btn-primary" onclick="SaveCurr()">შენახვა</button>
+    </div>
 </div>
