@@ -462,6 +462,57 @@ public class FolioitemManager
 
 
     /**
+     * Loads FolioitemBean array from the folioitem table using its ordermainid field.
+     *
+     * @return an array of FolioitemBean 
+     */
+    // LOAD BY IMPORTED KEY
+    public FolioitemBean[] loadByOrdermainid(Long value) throws SQLException 
+    {
+        Connection c = null;
+        PreparedStatement ps = null;
+        try 
+        {
+            c = getConnection();
+            ps = c.prepareStatement("SELECT " + ALL_FIELDS + " FROM folioitem WHERE ordermainid=?",ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            Manager.setLong(ps, 1, value);
+            return loadByPreparedStatement(ps);
+        }
+        finally
+        {
+            getManager().close(ps);
+            freeConnection(c);
+        }
+    }
+
+
+    /**
+     * Deletes from the folioitem table by ordermainid field.
+     *
+     * @param value the key value to seek
+     * @return the number of rows deleted
+     */
+    // DELETE BY IMPORTED KEY
+    public int deleteByOrdermainid(Long value) throws SQLException 
+    {
+        Connection c = null;
+        PreparedStatement ps = null;
+        try 
+        {
+            c = getConnection();
+            ps = c.prepareStatement("DELETE FROM folioitem WHERE ordermainid=?");
+            Manager.setLong(ps, 1, value);
+            return ps.executeUpdate();
+        }
+        finally
+        {
+            getManager().close(ps);
+            freeConnection(c);
+        }
+    }
+
+
+    /**
      * Loads FolioitemBean array from the folioitem table using its regbyid field.
      *
      * @return an array of FolioitemBean 
@@ -699,6 +750,34 @@ public class FolioitemManager
     public FolioitemBean setFolioBean(FolioitemBean pObject,FolioBean pObjectToBeSet)
     {
         pObject.setFolioid(pObjectToBeSet.getFolioid());
+        return pObject;
+    }
+
+    /**
+     * Retrieves the OrdermainBean object from the folioitem.ordermainid field.
+     *
+     * @param pObject the FolioitemBean 
+     * @return the associated OrdermainBean pObject
+     */
+    // GET IMPORTED
+    public OrdermainBean getOrdermainBean(FolioitemBean pObject) throws SQLException
+    {
+        OrdermainBean other = OrdermainManager.getInstance().createOrdermainBean();
+        other.setOrdermainid(pObject.getOrdermainid());
+        return OrdermainManager.getInstance().loadUniqueUsingTemplate(other);
+    }
+
+    /**
+     * Associates the FolioitemBean object to the OrdermainBean object.
+     *
+     * @param pObject the FolioitemBean object to use
+     * @param pObjectToBeSet the OrdermainBean object to associate to the FolioitemBean 
+     * @return the associated OrdermainBean pObject
+     */
+    // SET IMPORTED
+    public FolioitemBean setOrdermainBean(FolioitemBean pObject,OrdermainBean pObjectToBeSet)
+    {
+        pObject.setOrdermainid(pObjectToBeSet.getOrdermainid());
         return pObject;
     }
 

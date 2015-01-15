@@ -1578,6 +1578,38 @@ public class ExtrachargeManager
     }
 
     /**
+     * Retrieves an array of OrdermainBean using the relation table Folioitem given a ExtrachargeBean object.
+     *
+     * @param pObject the ExtrachargeBean pObject to be used
+     * @return an array of OrdermainBean 
+     */
+    // MANY TO MANY
+    public OrdermainBean[] loadOrdermainViaFolioitem(ExtrachargeBean pObject) throws SQLException
+    {
+         Connection c = null;
+         PreparedStatement ps = null;
+         String strSQL =      " SELECT "
+                         + "        *"
+                         + " FROM  "
+                         + "        ordermain,folioitem"
+                         + " WHERE "    
+                         + "     folioitem.extrachargeid = ?"
+                         + " AND folioitem.ordermainid = ordermain.ordermainid";
+         try
+         {
+             c = getConnection();
+             ps = c.prepareStatement(strSQL,ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+             Manager.setInteger(ps, 1, pObject.getExtrachargeid());
+             return OrdermainManager.getInstance().loadByPreparedStatement(ps);
+         }
+         finally
+         {
+            getManager().close(ps);
+            freeConnection(c);
+         }
+    }
+
+    /**
      * Retrieves an array of PersonnelBean using the relation table Folioitem given a ExtrachargeBean object.
      *
      * @param pObject the ExtrachargeBean pObject to be used

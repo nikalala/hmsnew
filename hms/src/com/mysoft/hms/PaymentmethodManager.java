@@ -1665,6 +1665,38 @@ public class PaymentmethodManager
     }
 
     /**
+     * Retrieves an array of ContragentBean using the relation table Payment given a PaymentmethodBean object.
+     *
+     * @param pObject the PaymentmethodBean pObject to be used
+     * @return an array of ContragentBean 
+     */
+    // MANY TO MANY
+    public ContragentBean[] loadContragentViaPayment(PaymentmethodBean pObject) throws SQLException
+    {
+         Connection c = null;
+         PreparedStatement ps = null;
+         String strSQL =      " SELECT "
+                         + "        *"
+                         + " FROM  "
+                         + "        contragent,payment"
+                         + " WHERE "    
+                         + "     payment.paymentmethodid = ?"
+                         + " AND payment.contracgentid = contragent.contragentid";
+         try
+         {
+             c = getConnection();
+             ps = c.prepareStatement(strSQL,ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+             Manager.setInteger(ps, 1, pObject.getPaymentmethodid());
+             return ContragentManager.getInstance().loadByPreparedStatement(ps);
+         }
+         finally
+         {
+            getManager().close(ps);
+            freeConnection(c);
+         }
+    }
+
+    /**
      * Retrieves an array of CurrencyBean using the relation table Payment given a PaymentmethodBean object.
      *
      * @param pObject the PaymentmethodBean pObject to be used

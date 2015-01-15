@@ -17,51 +17,49 @@ import java.sql.*;
 
 // imports- 
 
-
 /**
- * Handles database calls for the transportationmode table.
+ * Handles database calls for the pickdrop table.
  */
-public class TransportationmodeManager
+public class PickdropManager
 // extends+ 
 
 // extends- 
-
 {
+
+    /**
+     * Column pickdropid of type Types.BIGINT mapped to Long.
+     */
+    public static final int ID_PICKDROPID = 0;
+    public static final int TYPE_PICKDROPID = Types.BIGINT;
+    public static final String NAME_PICKDROPID = "pickdropid";
 
     /**
      * Column transportationmodeid of type Types.INTEGER mapped to Integer.
      */
-    public static final int ID_TRANSPORTATIONMODEID = 0;
+    public static final int ID_TRANSPORTATIONMODEID = 1;
     public static final int TYPE_TRANSPORTATIONMODEID = Types.INTEGER;
     public static final String NAME_TRANSPORTATIONMODEID = "transportationmodeid";
 
     /**
-     * Column name of type Types.VARCHAR mapped to String.
+     * Column vehicle of type Types.VARCHAR mapped to String.
      */
-    public static final int ID_NAME = 1;
-    public static final int TYPE_NAME = Types.VARCHAR;
-    public static final String NAME_NAME = "name";
+    public static final int ID_VEHICLE = 2;
+    public static final int TYPE_VEHICLE = Types.VARCHAR;
+    public static final String NAME_VEHICLE = "vehicle";
 
     /**
-     * Column regbyid of type Types.INTEGER mapped to Integer.
+     * Column pick of type Types.BIT mapped to Boolean.
      */
-    public static final int ID_REGBYID = 2;
-    public static final int TYPE_REGBYID = Types.INTEGER;
-    public static final String NAME_REGBYID = "regbyid";
+    public static final int ID_PICK = 3;
+    public static final int TYPE_PICK = Types.BIT;
+    public static final String NAME_PICK = "pick";
 
     /**
-     * Column active of type Types.BIT mapped to Boolean.
+     * Column actiondate of type Types.TIMESTAMP mapped to java.sql.Timestamp.
      */
-    public static final int ID_ACTIVE = 3;
-    public static final int TYPE_ACTIVE = Types.BIT;
-    public static final String NAME_ACTIVE = "active";
-
-    /**
-     * Column deteted of type Types.BIT mapped to Boolean.
-     */
-    public static final int ID_DETETED = 4;
-    public static final int TYPE_DETETED = Types.BIT;
-    public static final String NAME_DETETED = "deteted";
+    public static final int ID_ACTIONDATE = 4;
+    public static final int TYPE_ACTIONDATE = Types.TIMESTAMP;
+    public static final String NAME_ACTIONDATE = "actiondate";
 
     /**
      * Column regdate of type Types.TIMESTAMP mapped to java.sql.Timestamp.
@@ -70,63 +68,72 @@ public class TransportationmodeManager
     public static final int TYPE_REGDATE = Types.TIMESTAMP;
     public static final String NAME_REGDATE = "regdate";
 
+    /**
+     * Column regbyid of type Types.INTEGER mapped to Integer.
+     */
+    public static final int ID_REGBYID = 6;
+    public static final int TYPE_REGBYID = Types.INTEGER;
+    public static final String NAME_REGBYID = "regbyid";
 
-    private static final String TABLE_NAME = "transportationmode";
+
+    private static final String TABLE_NAME = "pickdrop";
 
     /**
-     * Create an array of type string containing all the fields of the transportationmode table.
+     * Create an array of type string containing all the fields of the pickdrop table.
      */
     private static final String[] FIELD_NAMES = 
     {
-        "transportationmode.transportationmodeid"
-        ,"transportationmode.name"
-        ,"transportationmode.regbyid"
-        ,"transportationmode.active"
-        ,"transportationmode.deteted"
-        ,"transportationmode.regdate"
+        "pickdrop.pickdropid"
+        ,"pickdrop.transportationmodeid"
+        ,"pickdrop.vehicle"
+        ,"pickdrop.pick"
+        ,"pickdrop.actiondate"
+        ,"pickdrop.regdate"
+        ,"pickdrop.regbyid"
     };
 
     /**
-     * Field that contains the comma separated fields of the transportationmode table.
+     * Field that contains the comma separated fields of the pickdrop table.
      */
-    private static final String ALL_FIELDS = "transportationmode.transportationmodeid"
-                            + ",transportationmode.name"
-                            + ",transportationmode.regbyid"
-                            + ",transportationmode.active"
-                            + ",transportationmode.deteted"
-                            + ",transportationmode.regdate";
+    private static final String ALL_FIELDS = "pickdrop.pickdropid"
+                            + ",pickdrop.transportationmodeid"
+                            + ",pickdrop.vehicle"
+                            + ",pickdrop.pick"
+                            + ",pickdrop.actiondate"
+                            + ",pickdrop.regdate"
+                            + ",pickdrop.regbyid";
 
-    private static TransportationmodeManager singleton = new TransportationmodeManager();
+    private static PickdropManager singleton = new PickdropManager();
 
     /**
-     * Get the TransportationmodeManager singleton.
+     * Get the PickdropManager singleton.
      *
-     * @return TransportationmodeManager 
+     * @return PickdropManager 
      */
-    synchronized public static TransportationmodeManager getInstance()
+    synchronized public static PickdropManager getInstance()
     {
         return singleton;
     }
 
     /**
-     * Sets your own TransportationmodeManager instance.
+     * Sets your own PickdropManager instance.
      <br>
      * This is optional, by default we provide it for you.
      */
-    synchronized public static void setInstance(TransportationmodeManager instance)
+    synchronized public static void setInstance(PickdropManager instance)
     {
         singleton = instance;
     }
 
 
     /**
-     * Creates a new TransportationmodeBean instance.
+     * Creates a new PickdropBean instance.
      *
-     * @return the new TransportationmodeBean 
+     * @return the new PickdropBean 
      */
-    public TransportationmodeBean createTransportationmodeBean()
+    public PickdropBean createPickdropBean()
     {
-        return new TransportationmodeBean();
+        return new PickdropBean();
     }
 
     //////////////////////////////////////
@@ -134,21 +141,21 @@ public class TransportationmodeManager
     //////////////////////////////////////
 
     /**
-     * Loads a TransportationmodeBean from the transportationmode using its key fields.
+     * Loads a PickdropBean from the pickdrop using its key fields.
      *
-     * @return a unique TransportationmodeBean 
+     * @return a unique PickdropBean 
      */
     //12
-    public TransportationmodeBean loadByPrimaryKey(Integer transportationmodeid) throws SQLException
+    public PickdropBean loadByPrimaryKey(Long pickdropid) throws SQLException
     {
         Connection c = null;
         PreparedStatement ps = null;
         try 
         {
             c = getConnection();
-            ps = c.prepareStatement("SELECT " + ALL_FIELDS + " FROM transportationmode WHERE transportationmode.transportationmodeid=?",ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-            Manager.setInteger(ps, 1, transportationmodeid);
-            TransportationmodeBean pReturn[] = loadByPreparedStatement(ps);
+            ps = c.prepareStatement("SELECT " + ALL_FIELDS + " FROM pickdrop WHERE pickdrop.pickdropid=?",ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            Manager.setLong(ps, 1, pickdropid);
+            PickdropBean pReturn[] = loadByPreparedStatement(ps);
             if (pReturn.length < 1)
                 return null;
             else
@@ -167,15 +174,15 @@ public class TransportationmodeManager
      * @return the number of deleted rows
      */
     //60
-    public int deleteByPrimaryKey(Integer transportationmodeid) throws SQLException
+    public int deleteByPrimaryKey(Long pickdropid) throws SQLException
     {
         Connection c = null;
         PreparedStatement ps = null;
         try
         {
             c = getConnection();
-            ps = c.prepareStatement("DELETE from transportationmode WHERE transportationmode.transportationmodeid=?",ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-            Manager.setInteger(ps, 1, transportationmodeid);
+            ps = c.prepareStatement("DELETE from pickdrop WHERE pickdrop.pickdropid=?",ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            Manager.setLong(ps, 1, pickdropid);
             return ps.executeUpdate();
         }
         finally
@@ -192,19 +199,19 @@ public class TransportationmodeManager
     //////////////////////////////////////
 
     /**
-     * Loads TransportationmodeBean array from the transportationmode table using its regbyid field.
+     * Loads PickdropBean array from the pickdrop table using its regbyid field.
      *
-     * @return an array of TransportationmodeBean 
+     * @return an array of PickdropBean 
      */
     // LOAD BY IMPORTED KEY
-    public TransportationmodeBean[] loadByRegbyid(Integer value) throws SQLException 
+    public PickdropBean[] loadByRegbyid(Integer value) throws SQLException 
     {
         Connection c = null;
         PreparedStatement ps = null;
         try 
         {
             c = getConnection();
-            ps = c.prepareStatement("SELECT " + ALL_FIELDS + " FROM transportationmode WHERE regbyid=?",ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            ps = c.prepareStatement("SELECT " + ALL_FIELDS + " FROM pickdrop WHERE regbyid=?",ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             Manager.setInteger(ps, 1, value);
             return loadByPreparedStatement(ps);
         }
@@ -217,7 +224,7 @@ public class TransportationmodeManager
 
 
     /**
-     * Deletes from the transportationmode table by regbyid field.
+     * Deletes from the pickdrop table by regbyid field.
      *
      * @param value the key value to seek
      * @return the number of rows deleted
@@ -230,7 +237,58 @@ public class TransportationmodeManager
         try 
         {
             c = getConnection();
-            ps = c.prepareStatement("DELETE FROM transportationmode WHERE regbyid=?");
+            ps = c.prepareStatement("DELETE FROM pickdrop WHERE regbyid=?");
+            Manager.setInteger(ps, 1, value);
+            return ps.executeUpdate();
+        }
+        finally
+        {
+            getManager().close(ps);
+            freeConnection(c);
+        }
+    }
+
+
+    /**
+     * Loads PickdropBean array from the pickdrop table using its transportationmodeid field.
+     *
+     * @return an array of PickdropBean 
+     */
+    // LOAD BY IMPORTED KEY
+    public PickdropBean[] loadByTransportationmodeid(Integer value) throws SQLException 
+    {
+        Connection c = null;
+        PreparedStatement ps = null;
+        try 
+        {
+            c = getConnection();
+            ps = c.prepareStatement("SELECT " + ALL_FIELDS + " FROM pickdrop WHERE transportationmodeid=?",ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            Manager.setInteger(ps, 1, value);
+            return loadByPreparedStatement(ps);
+        }
+        finally
+        {
+            getManager().close(ps);
+            freeConnection(c);
+        }
+    }
+
+
+    /**
+     * Deletes from the pickdrop table by transportationmodeid field.
+     *
+     * @param value the key value to seek
+     * @return the number of rows deleted
+     */
+    // DELETE BY IMPORTED KEY
+    public int deleteByTransportationmodeid(Integer value) throws SQLException 
+    {
+        Connection c = null;
+        PreparedStatement ps = null;
+        try 
+        {
+            c = getConnection();
+            ps = c.prepareStatement("DELETE FROM pickdrop WHERE transportationmodeid=?");
             Manager.setInteger(ps, 1, value);
             return ps.executeUpdate();
         }
@@ -247,13 +305,13 @@ public class TransportationmodeManager
     // GET/SET FOREIGN KEY BEAN METHOD
     //////////////////////////////////////
     /**
-     * Retrieves the PersonnelBean object from the transportationmode.personnelid field.
+     * Retrieves the PersonnelBean object from the pickdrop.personnelid field.
      *
-     * @param pObject the TransportationmodeBean 
+     * @param pObject the PickdropBean 
      * @return the associated PersonnelBean pObject
      */
     // GET IMPORTED
-    public PersonnelBean getPersonnelBean(TransportationmodeBean pObject) throws SQLException
+    public PersonnelBean getPersonnelBean(PickdropBean pObject) throws SQLException
     {
         PersonnelBean other = PersonnelManager.getInstance().createPersonnelBean();
         other.setPersonnelid(pObject.getRegbyid());
@@ -261,16 +319,44 @@ public class TransportationmodeManager
     }
 
     /**
-     * Associates the TransportationmodeBean object to the PersonnelBean object.
+     * Associates the PickdropBean object to the PersonnelBean object.
      *
-     * @param pObject the TransportationmodeBean object to use
-     * @param pObjectToBeSet the PersonnelBean object to associate to the TransportationmodeBean 
+     * @param pObject the PickdropBean object to use
+     * @param pObjectToBeSet the PersonnelBean object to associate to the PickdropBean 
      * @return the associated PersonnelBean pObject
      */
     // SET IMPORTED
-    public TransportationmodeBean setPersonnelBean(TransportationmodeBean pObject,PersonnelBean pObjectToBeSet)
+    public PickdropBean setPersonnelBean(PickdropBean pObject,PersonnelBean pObjectToBeSet)
     {
         pObject.setRegbyid(pObjectToBeSet.getPersonnelid());
+        return pObject;
+    }
+
+    /**
+     * Retrieves the TransportationmodeBean object from the pickdrop.transportationmodeid field.
+     *
+     * @param pObject the PickdropBean 
+     * @return the associated TransportationmodeBean pObject
+     */
+    // GET IMPORTED
+    public TransportationmodeBean getTransportationmodeBean(PickdropBean pObject) throws SQLException
+    {
+        TransportationmodeBean other = TransportationmodeManager.getInstance().createTransportationmodeBean();
+        other.setTransportationmodeid(pObject.getTransportationmodeid());
+        return TransportationmodeManager.getInstance().loadUniqueUsingTemplate(other);
+    }
+
+    /**
+     * Associates the PickdropBean object to the TransportationmodeBean object.
+     *
+     * @param pObject the PickdropBean object to use
+     * @param pObjectToBeSet the TransportationmodeBean object to associate to the PickdropBean 
+     * @return the associated TransportationmodeBean pObject
+     */
+    // SET IMPORTED
+    public PickdropBean setTransportationmodeBean(PickdropBean pObject,TransportationmodeBean pObjectToBeSet)
+    {
+        pObject.setTransportationmodeid(pObjectToBeSet.getTransportationmodeid());
         return pObject;
     }
 
@@ -281,19 +367,19 @@ public class TransportationmodeManager
     //////////////////////////////////////
 
     /**
-     * Loads all the rows from transportationmode.
+     * Loads all the rows from pickdrop.
      *
-     * @return an array of TransportationmodeManager pObject
+     * @return an array of PickdropManager pObject
      */
     //38
-    public TransportationmodeBean[] loadAll() throws SQLException 
+    public PickdropBean[] loadAll() throws SQLException 
     {
         Connection c = null;
         PreparedStatement ps = null;
         try 
         {
             c = getConnection();
-            ps = c.prepareStatement("SELECT " + ALL_FIELDS + " FROM transportationmode",ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            ps = c.prepareStatement("SELECT " + ALL_FIELDS + " FROM pickdrop",ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             return loadByPreparedStatement(ps);
         }
         finally
@@ -307,31 +393,31 @@ public class TransportationmodeManager
     // SQL 'WHERE' METHOD
     //////////////////////////////////////
     /**
-     * Retrieves an array of TransportationmodeBean given a sql 'where' clause.
+     * Retrieves an array of PickdropBean given a sql 'where' clause.
      *
      * @param where the sql 'where' clause
-     * @return the resulting TransportationmodeBean table 
+     * @return the resulting PickdropBean table 
      */
     //49
-    public TransportationmodeBean[] loadByWhere(String where) throws SQLException
+    public PickdropBean[] loadByWhere(String where) throws SQLException
     {
         return loadByWhere(where, null);
     }
 
     /**
-     * Retrieves an array of TransportationmodeBean given a sql where clause, and a list of fields.
+     * Retrieves an array of PickdropBean given a sql where clause, and a list of fields.
      * It is up to you to pass the 'WHERE' in your where clausis.
      *
      * @param where the sql 'where' clause
      * @param fieldList table of the field's associated constants
-     * @return the resulting TransportationmodeBean table 
+     * @return the resulting PickdropBean table 
      */
     //51
-    public TransportationmodeBean[] loadByWhere(String where, int[] fieldList) throws SQLException
+    public PickdropBean[] loadByWhere(String where, int[] fieldList) throws SQLException
     {
         String sql = null;
         if(fieldList == null)
-            sql = "select " + ALL_FIELDS + " from transportationmode " + where;
+            sql = "select " + ALL_FIELDS + " from pickdrop " + where;
         else
         {
             StringBuffer buff = new StringBuffer(128);
@@ -342,7 +428,7 @@ public class TransportationmodeManager
                     buff.append(",");
                 buff.append(FIELD_NAMES[fieldList[i]]);
             }
-            buff.append(" from transportationmode ");
+            buff.append(" from pickdrop ");
             buff.append(where);
             sql = buff.toString();
             buff = null;
@@ -365,7 +451,7 @@ public class TransportationmodeManager
                     v.add(decodeRow(rs, fieldList));
             }
 
-            return (TransportationmodeBean[])v.toArray(new TransportationmodeBean[0]);
+            return (PickdropBean[])v.toArray(new PickdropBean[0]);
         }
         finally
         {
@@ -377,7 +463,7 @@ public class TransportationmodeManager
 
 
     /**
-     * Deletes all rows from transportationmode table.
+     * Deletes all rows from pickdrop table.
      * @return the number of deleted rows.
      */
     public int deleteAll() throws SQLException
@@ -387,7 +473,7 @@ public class TransportationmodeManager
 
 
     /**
-     * Deletes rows from the transportationmode table using a 'where' clause.
+     * Deletes rows from the pickdrop table using a 'where' clause.
      * It is up to you to pass the 'WHERE' in your where clausis.
      * <br>Attention, if 'WHERE' is omitted it will delete all records. 
      *
@@ -402,7 +488,7 @@ public class TransportationmodeManager
         try
         {
             c = getConnection();
-            String delByWhereSQL = "DELETE FROM transportationmode " + where;
+            String delByWhereSQL = "DELETE FROM pickdrop " + where;
             ps = c.prepareStatement(delByWhereSQL);
             return ps.executeUpdate();
         }
@@ -419,12 +505,12 @@ public class TransportationmodeManager
     // SAVE 
     ///////////////////////////////////////////////////////////////////////
     /**
-     * Saves the TransportationmodeBean pObject into the database.
+     * Saves the PickdropBean pObject into the database.
      *
-     * @param pObject the TransportationmodeBean pObject to be saved
+     * @param pObject the PickdropBean pObject to be saved
      */
     //100
-    public TransportationmodeBean save(TransportationmodeBean pObject) throws SQLException
+    public PickdropBean save(PickdropBean pObject) throws SQLException
     {
         Connection c = null;
         PreparedStatement ps = null;
@@ -435,15 +521,15 @@ public class TransportationmodeManager
             c = getConnection();
             if (pObject.isNew())
             { // SAVE 
-                if (!pObject.isTransportationmodeidModified())
+                if (!pObject.isPickdropidModified())
                 {
-                    ps = c.prepareStatement("SELECT nextval('transportationmodeid_seq')");
+                    ps = c.prepareStatement("SELECT nextval('pickdropid_seq')");
                     ResultSet rs = null;
                     try
                     {
                         rs = ps.executeQuery();
                         if(rs.next())
-                            pObject.setTransportationmodeid(Manager.getInteger(rs, 1));
+                            pObject.setPickdropid(Manager.getLong(rs, 1));
                         else
                             getManager().log("ATTENTION: Could not retrieve generated key!");
                     }
@@ -455,8 +541,16 @@ public class TransportationmodeManager
                 }
                 beforeInsert(pObject); // listener callback
                 int _dirtyCount = 0;
-                _sql = new StringBuffer("INSERT into transportationmode (");
+                _sql = new StringBuffer("INSERT into pickdrop (");
     
+                if (pObject.isPickdropidModified()) {
+                    if (_dirtyCount>0) {
+                        _sql.append(",");
+                    }
+                    _sql.append("pickdropid");
+                    _dirtyCount++;
+                }
+
                 if (pObject.isTransportationmodeidModified()) {
                     if (_dirtyCount>0) {
                         _sql.append(",");
@@ -465,35 +559,27 @@ public class TransportationmodeManager
                     _dirtyCount++;
                 }
 
-                if (pObject.isNameModified()) {
+                if (pObject.isVehicleModified()) {
                     if (_dirtyCount>0) {
                         _sql.append(",");
                     }
-                    _sql.append("name");
+                    _sql.append("vehicle");
                     _dirtyCount++;
                 }
 
-                if (pObject.isRegbyidModified()) {
+                if (pObject.isPickModified()) {
                     if (_dirtyCount>0) {
                         _sql.append(",");
                     }
-                    _sql.append("regbyid");
+                    _sql.append("pick");
                     _dirtyCount++;
                 }
 
-                if (pObject.isActiveModified()) {
+                if (pObject.isActiondateModified()) {
                     if (_dirtyCount>0) {
                         _sql.append(",");
                     }
-                    _sql.append("active");
-                    _dirtyCount++;
-                }
-
-                if (pObject.isDetetedModified()) {
-                    if (_dirtyCount>0) {
-                        _sql.append(",");
-                    }
-                    _sql.append("deteted");
+                    _sql.append("actiondate");
                     _dirtyCount++;
                 }
 
@@ -502,6 +588,14 @@ public class TransportationmodeManager
                         _sql.append(",");
                     }
                     _sql.append("regdate");
+                    _dirtyCount++;
+                }
+
+                if (pObject.isRegbyidModified()) {
+                    if (_dirtyCount>0) {
+                        _sql.append(",");
+                    }
+                    _sql.append("regbyid");
                     _dirtyCount++;
                 }
 
@@ -517,28 +611,32 @@ public class TransportationmodeManager
                 ps = c.prepareStatement(_sql.toString(), ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
                 _dirtyCount = 0;
 
+                if (pObject.isPickdropidModified()) {
+                    Manager.setLong(ps, ++_dirtyCount, pObject.getPickdropid());
+                }
+    
                 if (pObject.isTransportationmodeidModified()) {
                     Manager.setInteger(ps, ++_dirtyCount, pObject.getTransportationmodeid());
                 }
     
-                if (pObject.isNameModified()) {
-                    ps.setString(++_dirtyCount, pObject.getName());
+                if (pObject.isVehicleModified()) {
+                    ps.setString(++_dirtyCount, pObject.getVehicle());
                 }
     
-                if (pObject.isRegbyidModified()) {
-                    Manager.setInteger(ps, ++_dirtyCount, pObject.getRegbyid());
+                if (pObject.isPickModified()) {
+                    Manager.setBoolean(ps, ++_dirtyCount, pObject.getPick());
                 }
     
-                if (pObject.isActiveModified()) {
-                    Manager.setBoolean(ps, ++_dirtyCount, pObject.getActive());
-                }
-    
-                if (pObject.isDetetedModified()) {
-                    Manager.setBoolean(ps, ++_dirtyCount, pObject.getDeteted());
+                if (pObject.isActiondateModified()) {
+                    ps.setTimestamp(++_dirtyCount, pObject.getActiondate());
                 }
     
                 if (pObject.isRegdateModified()) {
                     ps.setTimestamp(++_dirtyCount, pObject.getRegdate());
+                }
+    
+                if (pObject.isRegbyidModified()) {
+                    Manager.setInteger(ps, ++_dirtyCount, pObject.getRegbyid());
                 }
     
                 ps.executeUpdate();
@@ -550,8 +648,17 @@ public class TransportationmodeManager
             else 
             { // UPDATE 
                 beforeUpdate(pObject); // listener callback
-                _sql = new StringBuffer("UPDATE transportationmode SET ");
+                _sql = new StringBuffer("UPDATE pickdrop SET ");
                 boolean useComma=false;
+
+                if (pObject.isPickdropidModified()) {
+                    if (useComma) {
+                        _sql.append(",");
+                    } else {
+                        useComma=true;
+                    }
+                    _sql.append("pickdropid").append("=?");
+                }
 
                 if (pObject.isTransportationmodeidModified()) {
                     if (useComma) {
@@ -562,40 +669,31 @@ public class TransportationmodeManager
                     _sql.append("transportationmodeid").append("=?");
                 }
 
-                if (pObject.isNameModified()) {
+                if (pObject.isVehicleModified()) {
                     if (useComma) {
                         _sql.append(",");
                     } else {
                         useComma=true;
                     }
-                    _sql.append("name").append("=?");
+                    _sql.append("vehicle").append("=?");
                 }
 
-                if (pObject.isRegbyidModified()) {
+                if (pObject.isPickModified()) {
                     if (useComma) {
                         _sql.append(",");
                     } else {
                         useComma=true;
                     }
-                    _sql.append("regbyid").append("=?");
+                    _sql.append("pick").append("=?");
                 }
 
-                if (pObject.isActiveModified()) {
+                if (pObject.isActiondateModified()) {
                     if (useComma) {
                         _sql.append(",");
                     } else {
                         useComma=true;
                     }
-                    _sql.append("active").append("=?");
-                }
-
-                if (pObject.isDetetedModified()) {
-                    if (useComma) {
-                        _sql.append(",");
-                    } else {
-                        useComma=true;
-                    }
-                    _sql.append("deteted").append("=?");
+                    _sql.append("actiondate").append("=?");
                 }
 
                 if (pObject.isRegdateModified()) {
@@ -606,40 +704,53 @@ public class TransportationmodeManager
                     }
                     _sql.append("regdate").append("=?");
                 }
+
+                if (pObject.isRegbyidModified()) {
+                    if (useComma) {
+                        _sql.append(",");
+                    } else {
+                        useComma=true;
+                    }
+                    _sql.append("regbyid").append("=?");
+                }
                 _sql.append(" WHERE ");
-                _sql.append("transportationmode.transportationmodeid=?");
+                _sql.append("pickdrop.pickdropid=?");
                 ps = c.prepareStatement(_sql.toString(),ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
                 int _dirtyCount = 0;
+
+                if (pObject.isPickdropidModified()) {
+                      Manager.setLong(ps, ++_dirtyCount, pObject.getPickdropid());
+                }
 
                 if (pObject.isTransportationmodeidModified()) {
                       Manager.setInteger(ps, ++_dirtyCount, pObject.getTransportationmodeid());
                 }
 
-                if (pObject.isNameModified()) {
-                      ps.setString(++_dirtyCount, pObject.getName());
+                if (pObject.isVehicleModified()) {
+                      ps.setString(++_dirtyCount, pObject.getVehicle());
                 }
 
-                if (pObject.isRegbyidModified()) {
-                      Manager.setInteger(ps, ++_dirtyCount, pObject.getRegbyid());
+                if (pObject.isPickModified()) {
+                      Manager.setBoolean(ps, ++_dirtyCount, pObject.getPick());
                 }
 
-                if (pObject.isActiveModified()) {
-                      Manager.setBoolean(ps, ++_dirtyCount, pObject.getActive());
-                }
-
-                if (pObject.isDetetedModified()) {
-                      Manager.setBoolean(ps, ++_dirtyCount, pObject.getDeteted());
+                if (pObject.isActiondateModified()) {
+                      ps.setTimestamp(++_dirtyCount, pObject.getActiondate());
                 }
 
                 if (pObject.isRegdateModified()) {
                       ps.setTimestamp(++_dirtyCount, pObject.getRegdate());
+                }
+
+                if (pObject.isRegbyidModified()) {
+                      Manager.setInteger(ps, ++_dirtyCount, pObject.getRegbyid());
                 }
     
                 if (_dirtyCount == 0) {
                      return pObject;
                 }
     
-                Manager.setInteger(ps, ++_dirtyCount, pObject.getTransportationmodeid());
+                Manager.setLong(ps, ++_dirtyCount, pObject.getPickdropid());
                 ps.executeUpdate();
                 pObject.resetIsModified();
                 afterUpdate(pObject); // listener callback
@@ -657,13 +768,13 @@ public class TransportationmodeManager
 
 
     /**
-     * Saves an array of TransportationmodeBean pObjects into the database.
+     * Saves an array of PickdropBean pObjects into the database.
      *
-     * @param pObjects the TransportationmodeBean pObject table to be saved
-     * @return the saved TransportationmodeBean array.
+     * @param pObjects the PickdropBean pObject table to be saved
+     * @return the saved PickdropBean array.
      */
     //65
-    public TransportationmodeBean[] save(TransportationmodeBean[] pObjects) throws SQLException 
+    public PickdropBean[] save(PickdropBean[] pObjects) throws SQLException 
     {
         for (int iIndex = 0; iIndex < pObjects.length; iIndex ++){
             save(pObjects[iIndex]);
@@ -677,15 +788,15 @@ public class TransportationmodeManager
     // USING TEMPLATE 
     ///////////////////////////////////////////////////////////////////////
     /**
-     * Loads a unique TransportationmodeBean pObject from a template one giving a c
+     * Loads a unique PickdropBean pObject from a template one giving a c
      *
-     * @param pObject the TransportationmodeBean pObject to look for
+     * @param pObject the PickdropBean pObject to look for
      * @return the pObject matching the template
      */
     //85
-    public TransportationmodeBean loadUniqueUsingTemplate(TransportationmodeBean pObject) throws SQLException
+    public PickdropBean loadUniqueUsingTemplate(PickdropBean pObject) throws SQLException
     {
-         TransportationmodeBean[] pReturn = loadUsingTemplate(pObject);
+         PickdropBean[] pReturn = loadUsingTemplate(pObject);
          if (pReturn.length == 0)
              return null;
          if (pReturn.length > 1)
@@ -694,51 +805,56 @@ public class TransportationmodeManager
      }
 
     /**
-     * Loads an array of TransportationmodeBean from a template one.
+     * Loads an array of PickdropBean from a template one.
      *
-     * @param pObject the TransportationmodeBean template to look for
-     * @return all the TransportationmodeBean matching the template
+     * @param pObject the PickdropBean template to look for
+     * @return all the PickdropBean matching the template
      */
     //88
-    public TransportationmodeBean[] loadUsingTemplate(TransportationmodeBean pObject) throws SQLException
+    public PickdropBean[] loadUsingTemplate(PickdropBean pObject) throws SQLException
     {
         Connection c = null;
         PreparedStatement ps = null;
         StringBuffer where = new StringBuffer("");
-        StringBuffer _sql = new StringBuffer("SELECT " + ALL_FIELDS + " from transportationmode WHERE ");
+        StringBuffer _sql = new StringBuffer("SELECT " + ALL_FIELDS + " from pickdrop WHERE ");
         StringBuffer _sqlWhere = new StringBuffer("");
         try
         {
             int _dirtyCount = 0;
+    
+             if (pObject.isPickdropidModified()) {
+                 _dirtyCount ++; 
+                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("pickdropid= ?");
+             }
     
              if (pObject.isTransportationmodeidModified()) {
                  _dirtyCount ++; 
                  _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("transportationmodeid= ?");
              }
     
-             if (pObject.isNameModified()) {
+             if (pObject.isVehicleModified()) {
                  _dirtyCount ++; 
-                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("name= ?");
+                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("vehicle= ?");
              }
     
-             if (pObject.isRegbyidModified()) {
+             if (pObject.isPickModified()) {
                  _dirtyCount ++; 
-                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("regbyid= ?");
+                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("pick= ?");
              }
     
-             if (pObject.isActiveModified()) {
+             if (pObject.isActiondateModified()) {
                  _dirtyCount ++; 
-                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("active= ?");
-             }
-    
-             if (pObject.isDetetedModified()) {
-                 _dirtyCount ++; 
-                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("deteted= ?");
+                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("actiondate= ?");
              }
     
              if (pObject.isRegdateModified()) {
                  _dirtyCount ++; 
                  _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("regdate= ?");
+             }
+    
+             if (pObject.isRegbyidModified()) {
+                 _dirtyCount ++; 
+                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("regbyid= ?");
              }
     
              if (_dirtyCount == 0) {
@@ -749,28 +865,32 @@ public class TransportationmodeManager
              ps = c.prepareStatement(_sql.toString(),ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
              _dirtyCount = 0;
     
+             if (pObject.isPickdropidModified()) {
+                 Manager.setLong(ps, ++_dirtyCount, pObject.getPickdropid());
+             }
+    
              if (pObject.isTransportationmodeidModified()) {
                  Manager.setInteger(ps, ++_dirtyCount, pObject.getTransportationmodeid());
              }
     
-             if (pObject.isNameModified()) {
-                 ps.setString(++_dirtyCount, pObject.getName());
+             if (pObject.isVehicleModified()) {
+                 ps.setString(++_dirtyCount, pObject.getVehicle());
              }
     
-             if (pObject.isRegbyidModified()) {
-                 Manager.setInteger(ps, ++_dirtyCount, pObject.getRegbyid());
+             if (pObject.isPickModified()) {
+                 Manager.setBoolean(ps, ++_dirtyCount, pObject.getPick());
              }
     
-             if (pObject.isActiveModified()) {
-                 Manager.setBoolean(ps, ++_dirtyCount, pObject.getActive());
-             }
-    
-             if (pObject.isDetetedModified()) {
-                 Manager.setBoolean(ps, ++_dirtyCount, pObject.getDeteted());
+             if (pObject.isActiondateModified()) {
+                 ps.setTimestamp(++_dirtyCount, pObject.getActiondate());
              }
     
              if (pObject.isRegdateModified()) {
                  ps.setTimestamp(++_dirtyCount, pObject.getRegdate());
+             }
+    
+             if (pObject.isRegbyidModified()) {
+                 Manager.setInteger(ps, ++_dirtyCount, pObject.getRegbyid());
              }
     
              ps.executeQuery();
@@ -783,16 +903,16 @@ public class TransportationmodeManager
         }
     }
     /**
-     * Deletes rows using a TransportationmodeBean template.
+     * Deletes rows using a PickdropBean template.
      *
-     * @param pObject the TransportationmodeBean object(s) to be deleted
+     * @param pObject the PickdropBean object(s) to be deleted
      * @return the number of deleted objects
      */
     //63
-    public int deleteUsingTemplate(TransportationmodeBean pObject) throws SQLException
+    public int deleteUsingTemplate(PickdropBean pObject) throws SQLException
     {
-        if (pObject.isTransportationmodeidInitialized())
-            return deleteByPrimaryKey(pObject.getTransportationmodeid());
+        if (pObject.isPickdropidInitialized())
+            return deleteByPrimaryKey(pObject.getPickdropid());
     
         Connection c = null;
         PreparedStatement ps = null;
@@ -800,8 +920,15 @@ public class TransportationmodeManager
     
         try 
         {
-            sql = new StringBuffer("DELETE FROM transportationmode WHERE ");
+            sql = new StringBuffer("DELETE FROM pickdrop WHERE ");
             int _dirtyAnd = 0;
+            if (pObject.isPickdropidInitialized()) {
+                if (_dirtyAnd > 0)
+                    sql.append(" AND ");
+                sql.append("pickdropid").append("=?");
+                _dirtyAnd ++;
+            }
+    
             if (pObject.isTransportationmodeidInitialized()) {
                 if (_dirtyAnd > 0)
                     sql.append(" AND ");
@@ -809,31 +936,24 @@ public class TransportationmodeManager
                 _dirtyAnd ++;
             }
     
-            if (pObject.isNameInitialized()) {
+            if (pObject.isVehicleInitialized()) {
                 if (_dirtyAnd > 0)
                     sql.append(" AND ");
-                sql.append("name").append("=?");
+                sql.append("vehicle").append("=?");
                 _dirtyAnd ++;
             }
     
-            if (pObject.isRegbyidInitialized()) {
+            if (pObject.isPickInitialized()) {
                 if (_dirtyAnd > 0)
                     sql.append(" AND ");
-                sql.append("regbyid").append("=?");
+                sql.append("pick").append("=?");
                 _dirtyAnd ++;
             }
     
-            if (pObject.isActiveInitialized()) {
+            if (pObject.isActiondateInitialized()) {
                 if (_dirtyAnd > 0)
                     sql.append(" AND ");
-                sql.append("active").append("=?");
-                _dirtyAnd ++;
-            }
-    
-            if (pObject.isDetetedInitialized()) {
-                if (_dirtyAnd > 0)
-                    sql.append(" AND ");
-                sql.append("deteted").append("=?");
+                sql.append("actiondate").append("=?");
                 _dirtyAnd ++;
             }
     
@@ -844,32 +964,43 @@ public class TransportationmodeManager
                 _dirtyAnd ++;
             }
     
+            if (pObject.isRegbyidInitialized()) {
+                if (_dirtyAnd > 0)
+                    sql.append(" AND ");
+                sql.append("regbyid").append("=?");
+                _dirtyAnd ++;
+            }
+    
             c = getConnection();
             ps = c.prepareStatement(sql.toString(),ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             int _dirtyCount = 0;
+    
+            if (pObject.isPickdropidInitialized()) {
+                Manager.setLong(ps, ++_dirtyCount, pObject.getPickdropid());
+            }
     
             if (pObject.isTransportationmodeidInitialized()) {
                 Manager.setInteger(ps, ++_dirtyCount, pObject.getTransportationmodeid());
             }
     
-            if (pObject.isNameInitialized()) {
-                ps.setString(++_dirtyCount, pObject.getName());
+            if (pObject.isVehicleInitialized()) {
+                ps.setString(++_dirtyCount, pObject.getVehicle());
             }
     
-            if (pObject.isRegbyidInitialized()) {
-                Manager.setInteger(ps, ++_dirtyCount, pObject.getRegbyid());
+            if (pObject.isPickInitialized()) {
+                Manager.setBoolean(ps, ++_dirtyCount, pObject.getPick());
             }
     
-            if (pObject.isActiveInitialized()) {
-                Manager.setBoolean(ps, ++_dirtyCount, pObject.getActive());
-            }
-    
-            if (pObject.isDetetedInitialized()) {
-                Manager.setBoolean(ps, ++_dirtyCount, pObject.getDeteted());
+            if (pObject.isActiondateInitialized()) {
+                ps.setTimestamp(++_dirtyCount, pObject.getActiondate());
             }
     
             if (pObject.isRegdateInitialized()) {
                 ps.setTimestamp(++_dirtyCount, pObject.getRegdate());
+            }
+    
+            if (pObject.isRegbyidInitialized()) {
+                Manager.setInteger(ps, ++_dirtyCount, pObject.getRegbyid());
             }
     
             int _rows = ps.executeUpdate();
@@ -882,43 +1013,6 @@ public class TransportationmodeManager
         }
     }
 
-    
-    
-    ///////////////////////////////////////////////////////////////////////
-    // MANY TO MANY: LOAD OTHER BEAN VIA JUNCTION TABLE 
-    ///////////////////////////////////////////////////////////////////////
-    /**
-     * Retrieves an array of PersonnelBean using the relation table Pickdrop given a TransportationmodeBean object.
-     *
-     * @param pObject the TransportationmodeBean pObject to be used
-     * @return an array of PersonnelBean 
-     */
-    // MANY TO MANY
-    public PersonnelBean[] loadPersonnelViaPickdrop(TransportationmodeBean pObject) throws SQLException
-    {
-         Connection c = null;
-         PreparedStatement ps = null;
-         String strSQL =      " SELECT "
-                         + "        *"
-                         + " FROM  "
-                         + "        personnel,pickdrop"
-                         + " WHERE "    
-                         + "     pickdrop.transportationmodeid = ?"
-                         + " AND pickdrop.regbyid = personnel.personnelid";
-         try
-         {
-             c = getConnection();
-             ps = c.prepareStatement(strSQL,ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-             Manager.setInteger(ps, 1, pObject.getTransportationmodeid());
-             return PersonnelManager.getInstance().loadByPreparedStatement(ps);
-         }
-         finally
-         {
-            getManager().close(ps);
-            freeConnection(c);
-         }
-    }
-
 
 
     ///////////////////////////////////////////////////////////////////////
@@ -926,7 +1020,7 @@ public class TransportationmodeManager
     ///////////////////////////////////////////////////////////////////////
 
     /**
-     * Retrieves the number of rows of the table transportationmode.
+     * Retrieves the number of rows of the table pickdrop.
      *
      * @return the number of rows returned
      */
@@ -939,7 +1033,7 @@ public class TransportationmodeManager
 
 
     /**
-     * Retrieves the number of rows of the table transportationmode with a 'where' clause.
+     * Retrieves the number of rows of the table pickdrop with a 'where' clause.
      * It is up to you to pass the 'WHERE' in your where clausis.
      *
      * @param where the restriction clause
@@ -947,7 +1041,7 @@ public class TransportationmodeManager
      */
     public int countWhere(String where) throws SQLException
     {
-        String sql = "select count(*) as MCOUNT from transportationmode " + where;
+        String sql = "select count(*) as MCOUNT from pickdrop " + where;
         Connection c = null;
         Statement pStatement = null;
         ResultSet rs =  null;
@@ -973,7 +1067,7 @@ public class TransportationmodeManager
     }
 
     /**
-     * Retrieves the number of rows of the table transportationmode with a prepared statement.
+     * Retrieves the number of rows of the table pickdrop with a prepared statement.
      *
      * @param ps the PreparedStatement to be used
      * @return the number of rows returned
@@ -999,13 +1093,13 @@ public class TransportationmodeManager
     }
 
     /**
-     * Looks for the number of elements of a specific TransportationmodeBean pObject given a c
+     * Looks for the number of elements of a specific PickdropBean pObject given a c
      *
-     * @param pObject the TransportationmodeBean pObject to look for
+     * @param pObject the PickdropBean pObject to look for
      * @return the number of rows returned
      */
     //83
-    public int countUsingTemplate(TransportationmodeBean pObject) throws SQLException
+    public int countUsingTemplate(PickdropBean pObject) throws SQLException
     {
         StringBuffer where = new StringBuffer("");
         Connection c = null;
@@ -1015,38 +1109,43 @@ public class TransportationmodeManager
     
         try
         {
-                _sql = new StringBuffer("SELECT count(*) as MCOUNT  from transportationmode WHERE ");
+                _sql = new StringBuffer("SELECT count(*) as MCOUNT  from pickdrop WHERE ");
                 _sqlWhere = new StringBuffer("");
                 int _dirtyCount = 0;
+    
+                if (pObject.isPickdropidModified()) {
+                    _dirtyCount++; 
+                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("pickdropid= ?");
+                }
     
                 if (pObject.isTransportationmodeidModified()) {
                     _dirtyCount++; 
                     _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("transportationmodeid= ?");
                 }
     
-                if (pObject.isNameModified()) {
+                if (pObject.isVehicleModified()) {
                     _dirtyCount++; 
-                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("name= ?");
+                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("vehicle= ?");
                 }
     
-                if (pObject.isRegbyidModified()) {
+                if (pObject.isPickModified()) {
                     _dirtyCount++; 
-                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("regbyid= ?");
+                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("pick= ?");
                 }
     
-                if (pObject.isActiveModified()) {
+                if (pObject.isActiondateModified()) {
                     _dirtyCount++; 
-                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("active= ?");
-                }
-    
-                if (pObject.isDetetedModified()) {
-                    _dirtyCount++; 
-                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("deteted= ?");
+                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("actiondate= ?");
                 }
     
                 if (pObject.isRegdateModified()) {
                     _dirtyCount++; 
                     _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("regdate= ?");
+                }
+    
+                if (pObject.isRegbyidModified()) {
+                    _dirtyCount++; 
+                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("regbyid= ?");
                 }
     
                 if (_dirtyCount == 0)
@@ -1058,28 +1157,32 @@ public class TransportationmodeManager
     
                 _dirtyCount = 0;
     
+                if (pObject.isPickdropidModified()) {
+                    Manager.setLong(ps, ++_dirtyCount, pObject.getPickdropid());
+                }
+    
                 if (pObject.isTransportationmodeidModified()) {
                     Manager.setInteger(ps, ++_dirtyCount, pObject.getTransportationmodeid());
                 }
     
-                if (pObject.isNameModified()) {
-                    ps.setString(++_dirtyCount, pObject.getName());
+                if (pObject.isVehicleModified()) {
+                    ps.setString(++_dirtyCount, pObject.getVehicle());
                 }
     
-                if (pObject.isRegbyidModified()) {
-                    Manager.setInteger(ps, ++_dirtyCount, pObject.getRegbyid());
+                if (pObject.isPickModified()) {
+                    Manager.setBoolean(ps, ++_dirtyCount, pObject.getPick());
                 }
     
-                if (pObject.isActiveModified()) {
-                    Manager.setBoolean(ps, ++_dirtyCount, pObject.getActive());
-                }
-    
-                if (pObject.isDetetedModified()) {
-                    Manager.setBoolean(ps, ++_dirtyCount, pObject.getDeteted());
+                if (pObject.isActiondateModified()) {
+                    ps.setTimestamp(++_dirtyCount, pObject.getActiondate());
                 }
     
                 if (pObject.isRegdateModified()) {
                     ps.setTimestamp(++_dirtyCount, pObject.getRegdate());
+                }
+    
+                if (pObject.isRegbyidModified()) {
+                    Manager.setInteger(ps, ++_dirtyCount, pObject.getRegbyid());
                 }
     
                 return countByPreparedStatement(ps);
@@ -1097,21 +1200,22 @@ public class TransportationmodeManager
     // DECODE RESULT SET 
     ///////////////////////////////////////////////////////////////////////
     /**
-     * Transforms a ResultSet iterating on the transportationmode on a TransportationmodeBean pObject.
+     * Transforms a ResultSet iterating on the pickdrop on a PickdropBean pObject.
      *
      * @param rs the ResultSet to be transformed
-     * @return pObject resulting TransportationmodeBean pObject
+     * @return pObject resulting PickdropBean pObject
      */
     //72
-    public TransportationmodeBean decodeRow(ResultSet rs) throws SQLException
+    public PickdropBean decodeRow(ResultSet rs) throws SQLException
     {
-        TransportationmodeBean pObject = createTransportationmodeBean();
-        pObject.setTransportationmodeid(Manager.getInteger(rs, 1));
-        pObject.setName(rs.getString(2));
-        pObject.setRegbyid(Manager.getInteger(rs, 3));
-        pObject.setActive(Manager.getBoolean(rs, 4));
-        pObject.setDeteted(Manager.getBoolean(rs, 5));
+        PickdropBean pObject = createPickdropBean();
+        pObject.setPickdropid(Manager.getLong(rs, 1));
+        pObject.setTransportationmodeid(Manager.getInteger(rs, 2));
+        pObject.setVehicle(rs.getString(3));
+        pObject.setPick(Manager.getBoolean(rs, 4));
+        pObject.setActiondate(rs.getTimestamp(5));
         pObject.setRegdate(rs.getTimestamp(6));
+        pObject.setRegbyid(Manager.getInteger(rs, 7));
 
         pObject.isNew(false);
         pObject.resetIsModified();
@@ -1120,43 +1224,47 @@ public class TransportationmodeManager
     }
 
     /**
-     * Transforms a ResultSet iterating on the transportationmode table on a TransportationmodeBean pObject according to a list of fields.
+     * Transforms a ResultSet iterating on the pickdrop table on a PickdropBean pObject according to a list of fields.
      *
      * @param rs the ResultSet to be transformed
      * @param fieldList table of the field's associated constants
-     * @return pObject resulting TransportationmodeBean pObject
+     * @return pObject resulting PickdropBean pObject
      */
     //73
-    public TransportationmodeBean decodeRow(ResultSet rs, int[] fieldList) throws SQLException
+    public PickdropBean decodeRow(ResultSet rs, int[] fieldList) throws SQLException
     {
-        TransportationmodeBean pObject = createTransportationmodeBean();
+        PickdropBean pObject = createPickdropBean();
         int pos = 0;
         for(int i = 0; i < fieldList.length; i++)
         {
             switch(fieldList[i]) {
+                case ID_PICKDROPID:
+                    ++pos;
+                    pObject.setPickdropid(Manager.getLong(rs, pos));
+                    break;
                 case ID_TRANSPORTATIONMODEID:
                     ++pos;
                     pObject.setTransportationmodeid(Manager.getInteger(rs, pos));
                     break;
-                case ID_NAME:
+                case ID_VEHICLE:
                     ++pos;
-                    pObject.setName(rs.getString(pos));
+                    pObject.setVehicle(rs.getString(pos));
                     break;
-                case ID_REGBYID:
+                case ID_PICK:
                     ++pos;
-                    pObject.setRegbyid(Manager.getInteger(rs, pos));
+                    pObject.setPick(Manager.getBoolean(rs, pos));
                     break;
-                case ID_ACTIVE:
+                case ID_ACTIONDATE:
                     ++pos;
-                    pObject.setActive(Manager.getBoolean(rs, pos));
-                    break;
-                case ID_DETETED:
-                    ++pos;
-                    pObject.setDeteted(Manager.getBoolean(rs, pos));
+                    pObject.setActiondate(rs.getTimestamp(pos));
                     break;
                 case ID_REGDATE:
                     ++pos;
                     pObject.setRegdate(rs.getTimestamp(pos));
+                    break;
+                case ID_REGBYID:
+                    ++pos;
+                    pObject.setRegbyid(Manager.getInteger(rs, pos));
                     break;
             }
         }
@@ -1174,10 +1282,10 @@ public class TransportationmodeManager
      * Loads all the elements using a prepared statement.
      *
      * @param ps the PreparedStatement to be used
-     * @return an array of TransportationmodeBean 
+     * @return an array of PickdropBean 
      */
     //41
-    public TransportationmodeBean[] loadByPreparedStatement(PreparedStatement ps) throws SQLException
+    public PickdropBean[] loadByPreparedStatement(PreparedStatement ps) throws SQLException
     {
         return loadByPreparedStatement(ps, null);
     }
@@ -1187,9 +1295,9 @@ public class TransportationmodeManager
      *
      * @param ps the PreparedStatement to be used
      * @param fieldList table of the field's associated constants
-     * @return an array of TransportationmodeBean 
+     * @return an array of PickdropBean 
      */
-    public TransportationmodeBean[] loadByPreparedStatement(PreparedStatement ps, int[] fieldList) throws SQLException
+    public PickdropBean[] loadByPreparedStatement(PreparedStatement ps, int[] fieldList) throws SQLException
     {
         ResultSet rs =  null;
         java.util.ArrayList v =  null;
@@ -1204,7 +1312,7 @@ public class TransportationmodeManager
                 else 
                     v.add(decodeRow(rs, fieldList));
             }
-            return (TransportationmodeBean[])v.toArray(new TransportationmodeBean[0]);
+            return (PickdropBean[])v.toArray(new PickdropBean[0]);
         }
         finally
         {
@@ -1216,56 +1324,56 @@ public class TransportationmodeManager
     ///////////////////////////////////////////////////////////////////////
     // LISTENER 
     ///////////////////////////////////////////////////////////////////////
-    private TransportationmodeListener listener = null;
+    private PickdropListener listener = null;
 
     /**
-     * Registers a unique TransportationmodeListener listener.
+     * Registers a unique PickdropListener listener.
      */
     //66.5
-    public void registerListener(TransportationmodeListener listener) {
+    public void registerListener(PickdropListener listener) {
         this.listener = listener;
     }
 
     /**
-     * Before the save of the TransportationmodeBean pObject.
+     * Before the save of the PickdropBean pObject.
      *
-     * @param pObject the TransportationmodeBean pObject to be saved
+     * @param pObject the PickdropBean pObject to be saved
      */
     //67
-    void beforeInsert(TransportationmodeBean pObject) throws SQLException {
+    void beforeInsert(PickdropBean pObject) throws SQLException {
         if (listener != null)
             listener.beforeInsert(pObject);
     }
 
     /**
-     * After the save of the TransportationmodeBean pObject.
+     * After the save of the PickdropBean pObject.
      *
-     * @param pObject the TransportationmodeBean pObject to be saved
+     * @param pObject the PickdropBean pObject to be saved
      */
     //68
-    void afterInsert(TransportationmodeBean pObject) throws SQLException {
+    void afterInsert(PickdropBean pObject) throws SQLException {
         if (listener != null)
             listener.afterInsert(pObject);
     }
 
     /**
-     * Before the update of the TransportationmodeBean pObject.
+     * Before the update of the PickdropBean pObject.
      *
-     * @param pObject the TransportationmodeBean pObject to be updated
+     * @param pObject the PickdropBean pObject to be updated
      */
     //69
-    void beforeUpdate(TransportationmodeBean pObject) throws SQLException {
+    void beforeUpdate(PickdropBean pObject) throws SQLException {
         if (listener != null)
             listener.beforeUpdate(pObject);
     }
 
     /**
-     * After the update of the TransportationmodeBean pObject.
+     * After the update of the PickdropBean pObject.
      *
-     * @param pObject the TransportationmodeBean pObject to be updated
+     * @param pObject the PickdropBean pObject to be updated
      */
     //70
-    void afterUpdate(TransportationmodeBean pObject) throws SQLException {
+    void afterUpdate(PickdropBean pObject) throws SQLException {
         if (listener != null)
             listener.afterUpdate(pObject);
     }
@@ -1302,5 +1410,4 @@ public class TransportationmodeManager
 // class+ 
 
 // class- 
-
 }

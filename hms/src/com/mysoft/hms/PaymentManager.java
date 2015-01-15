@@ -105,6 +105,13 @@ public class PaymentManager
     public static final int TYPE_REGDATE = Types.TIMESTAMP;
     public static final String NAME_REGDATE = "regdate";
 
+    /**
+     * Column contracgentid of type Types.BIGINT mapped to Long.
+     */
+    public static final int ID_CONTRACGENTID = 11;
+    public static final int TYPE_CONTRACGENTID = Types.BIGINT;
+    public static final String NAME_CONTRACGENTID = "contracgentid";
+
 
     private static final String TABLE_NAME = "payment";
 
@@ -124,6 +131,7 @@ public class PaymentManager
         ,"payment.deleted"
         ,"payment.regbyid"
         ,"payment.regdate"
+        ,"payment.contracgentid"
     };
 
     /**
@@ -139,7 +147,8 @@ public class PaymentManager
                             + ",payment.note"
                             + ",payment.deleted"
                             + ",payment.regbyid"
-                            + ",payment.regdate";
+                            + ",payment.regdate"
+                            + ",payment.contracgentid";
 
     private static PaymentManager singleton = new PaymentManager();
 
@@ -235,6 +244,57 @@ public class PaymentManager
     //////////////////////////////////////
     // FOREIGN KEY METHODS 
     //////////////////////////////////////
+
+    /**
+     * Loads PaymentBean array from the payment table using its contracgentid field.
+     *
+     * @return an array of PaymentBean 
+     */
+    // LOAD BY IMPORTED KEY
+    public PaymentBean[] loadByContracgentid(Long value) throws SQLException 
+    {
+        Connection c = null;
+        PreparedStatement ps = null;
+        try 
+        {
+            c = getConnection();
+            ps = c.prepareStatement("SELECT " + ALL_FIELDS + " FROM payment WHERE contracgentid=?",ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            Manager.setLong(ps, 1, value);
+            return loadByPreparedStatement(ps);
+        }
+        finally
+        {
+            getManager().close(ps);
+            freeConnection(c);
+        }
+    }
+
+
+    /**
+     * Deletes from the payment table by contracgentid field.
+     *
+     * @param value the key value to seek
+     * @return the number of rows deleted
+     */
+    // DELETE BY IMPORTED KEY
+    public int deleteByContracgentid(Long value) throws SQLException 
+    {
+        Connection c = null;
+        PreparedStatement ps = null;
+        try 
+        {
+            c = getConnection();
+            ps = c.prepareStatement("DELETE FROM payment WHERE contracgentid=?");
+            Manager.setLong(ps, 1, value);
+            return ps.executeUpdate();
+        }
+        finally
+        {
+            getManager().close(ps);
+            freeConnection(c);
+        }
+    }
+
 
     /**
      * Loads PaymentBean array from the payment table using its currencyid field.
@@ -444,6 +504,34 @@ public class PaymentManager
     //////////////////////////////////////
     // GET/SET FOREIGN KEY BEAN METHOD
     //////////////////////////////////////
+    /**
+     * Retrieves the ContragentBean object from the payment.contragentid field.
+     *
+     * @param pObject the PaymentBean 
+     * @return the associated ContragentBean pObject
+     */
+    // GET IMPORTED
+    public ContragentBean getContragentBean(PaymentBean pObject) throws SQLException
+    {
+        ContragentBean other = ContragentManager.getInstance().createContragentBean();
+        other.setContragentid(pObject.getContracgentid());
+        return ContragentManager.getInstance().loadUniqueUsingTemplate(other);
+    }
+
+    /**
+     * Associates the PaymentBean object to the ContragentBean object.
+     *
+     * @param pObject the PaymentBean object to use
+     * @param pObjectToBeSet the ContragentBean object to associate to the PaymentBean 
+     * @return the associated ContragentBean pObject
+     */
+    // SET IMPORTED
+    public PaymentBean setContragentBean(PaymentBean pObject,ContragentBean pObjectToBeSet)
+    {
+        pObject.setContracgentid(pObjectToBeSet.getContragentid());
+        return pObject;
+    }
+
     /**
      * Retrieves the CurrencyBean object from the payment.currencyid field.
      *
@@ -827,6 +915,14 @@ public class PaymentManager
                     _dirtyCount++;
                 }
 
+                if (pObject.isContracgentidModified()) {
+                    if (_dirtyCount>0) {
+                        _sql.append(",");
+                    }
+                    _sql.append("contracgentid");
+                    _dirtyCount++;
+                }
+
                 _sql.append(") values (");
                 if(_dirtyCount > 0) {
                     _sql.append("?");
@@ -881,6 +977,10 @@ public class PaymentManager
     
                 if (pObject.isRegdateModified()) {
                     ps.setTimestamp(++_dirtyCount, pObject.getRegdate());
+                }
+    
+                if (pObject.isContracgentidModified()) {
+                    Manager.setLong(ps, ++_dirtyCount, pObject.getContracgentid());
                 }
     
                 ps.executeUpdate();
@@ -993,6 +1093,15 @@ public class PaymentManager
                     }
                     _sql.append("regdate").append("=?");
                 }
+
+                if (pObject.isContracgentidModified()) {
+                    if (useComma) {
+                        _sql.append(",");
+                    } else {
+                        useComma=true;
+                    }
+                    _sql.append("contracgentid").append("=?");
+                }
                 _sql.append(" WHERE ");
                 _sql.append("payment.paymentid=?");
                 ps = c.prepareStatement(_sql.toString(),ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
@@ -1040,6 +1149,10 @@ public class PaymentManager
 
                 if (pObject.isRegdateModified()) {
                       ps.setTimestamp(++_dirtyCount, pObject.getRegdate());
+                }
+
+                if (pObject.isContracgentidModified()) {
+                      Manager.setLong(ps, ++_dirtyCount, pObject.getContracgentid());
                 }
     
                 if (_dirtyCount == 0) {
@@ -1173,6 +1286,11 @@ public class PaymentManager
                  _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("regdate= ?");
              }
     
+             if (pObject.isContracgentidModified()) {
+                 _dirtyCount ++; 
+                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("contracgentid= ?");
+             }
+    
              if (_dirtyCount == 0) {
                  throw new SQLException ("The pObject to look for is invalid : not initialized !");
              }
@@ -1223,6 +1341,10 @@ public class PaymentManager
     
              if (pObject.isRegdateModified()) {
                  ps.setTimestamp(++_dirtyCount, pObject.getRegdate());
+             }
+    
+             if (pObject.isContracgentidModified()) {
+                 Manager.setLong(ps, ++_dirtyCount, pObject.getContracgentid());
              }
     
              ps.executeQuery();
@@ -1331,6 +1453,13 @@ public class PaymentManager
                 _dirtyAnd ++;
             }
     
+            if (pObject.isContracgentidInitialized()) {
+                if (_dirtyAnd > 0)
+                    sql.append(" AND ");
+                sql.append("contracgentid").append("=?");
+                _dirtyAnd ++;
+            }
+    
             c = getConnection();
             ps = c.prepareStatement(sql.toString(),ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             int _dirtyCount = 0;
@@ -1377,6 +1506,10 @@ public class PaymentManager
     
             if (pObject.isRegdateInitialized()) {
                 ps.setTimestamp(++_dirtyCount, pObject.getRegdate());
+            }
+    
+            if (pObject.isContracgentidInitialized()) {
+                Manager.setLong(ps, ++_dirtyCount, pObject.getContracgentid());
             }
     
             int _rows = ps.executeUpdate();
@@ -1544,6 +1677,11 @@ public class PaymentManager
                     _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("regdate= ?");
                 }
     
+                if (pObject.isContracgentidModified()) {
+                    _dirtyCount++; 
+                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("contracgentid= ?");
+                }
+    
                 if (_dirtyCount == 0)
                    throw new SQLException ("The pObject to look is unvalid : not initialized !");
     
@@ -1597,6 +1735,10 @@ public class PaymentManager
                     ps.setTimestamp(++_dirtyCount, pObject.getRegdate());
                 }
     
+                if (pObject.isContracgentidModified()) {
+                    Manager.setLong(ps, ++_dirtyCount, pObject.getContracgentid());
+                }
+    
                 return countByPreparedStatement(ps);
         }
         finally
@@ -1632,6 +1774,7 @@ public class PaymentManager
         pObject.setDeleted(Manager.getBoolean(rs, 9));
         pObject.setRegbyid(Manager.getInteger(rs, 10));
         pObject.setRegdate(rs.getTimestamp(11));
+        pObject.setContracgentid(Manager.getLong(rs, 12));
 
         pObject.isNew(false);
         pObject.resetIsModified();
@@ -1697,6 +1840,10 @@ public class PaymentManager
                 case ID_REGDATE:
                     ++pos;
                     pObject.setRegdate(rs.getTimestamp(pos));
+                    break;
+                case ID_CONTRACGENTID:
+                    ++pos;
+                    pObject.setContracgentid(Manager.getLong(rs, pos));
                     break;
             }
         }

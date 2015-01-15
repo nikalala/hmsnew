@@ -83,10 +83,11 @@ try{
             payment = PaymentManager.getInstance().save(payment);
             fitem.setPaymentid(payment.getPaymentid());
         } else if(actiontype == 3){         // კონტრაქტორი
-            /*
+            
             PaymentBean payment = PaymentManager.getInstance().createPaymentBean();
             payment.setRegbyid(user.getPersonnelid());
-            payment.setPaymentmethodid(actionvalue);
+            //payment.setPaymentmethodid(2);
+            payment.setContracgentid(new Long(actionvalue));
             payment.setCurrencyid(currencyid);
             payment.setAmount(amount);
             payment.setPaydate(date);
@@ -94,7 +95,7 @@ try{
             payment.setFolioid(folioid);
             payment = PaymentManager.getInstance().save(payment);
             fitem.setPaymentid(payment.getPaymentid());
-            */
+            
         } else if(actiontype == 4){         // ფასდაკლება
             fitem.setDiscountid(actionvalue);
             fitem.setAmount((-1)*amount);
