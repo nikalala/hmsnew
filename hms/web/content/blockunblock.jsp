@@ -65,7 +65,7 @@
 
     $(document).ready(function () {
         $('.dropdown').selectpicker();
-        $("#curr_table .btn-group").css("width", "143px");
+        $("#curr_table .btn-group").css("width", "143px", "!important");
         $(".currtxt").ForceNumericOnly();
         $("#smbody").next().hide();
         $(".modal-sm").css("width", "580px");
@@ -77,12 +77,16 @@
     });
     addReason();
     function addReason() {
+        loader.show();
         var reason = $("#reasontxt").val();
         if(!isNullOrEmpty(reason)){ reason = "?reasonid="+reason;  }
         $.post("content/getroomreason.jsp" + reason, {}, function (data) {
             $("#reasondrop").html(data);
             $('#reasondrop').selectpicker("refresh");
-            $('#reasondrop').next().css("width", "100%").css("padding-left", "0px");
+            $("#curr_table .btn-group").css("width", "143px", "!important");
+            $("#reasontxt").val("");
+            $('#reasonblock').hide();
+            loader.hide();
         });
     }
 
@@ -135,7 +139,7 @@
                                 <div style="position: absolute;right: 39px; top: 8px; cursor:pointer;" onclick="$('#reasonblock').show();"><i class="fa fa-plus"></i></div>
                                 <div id="reasonblock" style="display: none;">
                                     <br />
-                                    <input type="text" id="reasontxt" style="height: 27px;"><br /><br />
+                                    <textarea id="reasontxt" placeholder="შეიყვანეთ მიზეზი"></textarea><br /><br />
                                     <button type="button" class="btn btn-default" id="dismissreason" onclick="$('#reasonblock').hide();">
                                         დახურვა
                                     </button>
