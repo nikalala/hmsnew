@@ -2330,6 +2330,134 @@ public class ContragentManager
     }
 
     /**
+     * Retrieves an array of CurrencyBean using the relation table Payment given a ContragentBean object.
+     *
+     * @param pObject the ContragentBean pObject to be used
+     * @return an array of CurrencyBean 
+     */
+    // MANY TO MANY
+    public CurrencyBean[] loadCurrencyViaPayment(ContragentBean pObject) throws SQLException
+    {
+         Connection c = null;
+         PreparedStatement ps = null;
+         String strSQL =      " SELECT "
+                         + "        *"
+                         + " FROM  "
+                         + "        currency,payment"
+                         + " WHERE "    
+                         + "     payment.contracgentid = ?"
+                         + " AND payment.currencyid = currency.currencyid";
+         try
+         {
+             c = getConnection();
+             ps = c.prepareStatement(strSQL,ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+             Manager.setLong(ps, 1, pObject.getContragentid());
+             return CurrencyManager.getInstance().loadByPreparedStatement(ps);
+         }
+         finally
+         {
+            getManager().close(ps);
+            freeConnection(c);
+         }
+    }
+
+    /**
+     * Retrieves an array of FolioBean using the relation table Payment given a ContragentBean object.
+     *
+     * @param pObject the ContragentBean pObject to be used
+     * @return an array of FolioBean 
+     */
+    // MANY TO MANY
+    public FolioBean[] loadFolioViaPayment(ContragentBean pObject) throws SQLException
+    {
+         Connection c = null;
+         PreparedStatement ps = null;
+         String strSQL =      " SELECT "
+                         + "        *"
+                         + " FROM  "
+                         + "        folio,payment"
+                         + " WHERE "    
+                         + "     payment.contracgentid = ?"
+                         + " AND payment.folioid = folio.folioid";
+         try
+         {
+             c = getConnection();
+             ps = c.prepareStatement(strSQL,ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+             Manager.setLong(ps, 1, pObject.getContragentid());
+             return FolioManager.getInstance().loadByPreparedStatement(ps);
+         }
+         finally
+         {
+            getManager().close(ps);
+            freeConnection(c);
+         }
+    }
+
+    /**
+     * Retrieves an array of PaymentmethodBean using the relation table Payment given a ContragentBean object.
+     *
+     * @param pObject the ContragentBean pObject to be used
+     * @return an array of PaymentmethodBean 
+     */
+    // MANY TO MANY
+    public PaymentmethodBean[] loadPaymentmethodViaPayment(ContragentBean pObject) throws SQLException
+    {
+         Connection c = null;
+         PreparedStatement ps = null;
+         String strSQL =      " SELECT "
+                         + "        *"
+                         + " FROM  "
+                         + "        paymentmethod,payment"
+                         + " WHERE "    
+                         + "     payment.contracgentid = ?"
+                         + " AND payment.paymentmethodid = paymentmethod.paymentmethodid";
+         try
+         {
+             c = getConnection();
+             ps = c.prepareStatement(strSQL,ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+             Manager.setLong(ps, 1, pObject.getContragentid());
+             return PaymentmethodManager.getInstance().loadByPreparedStatement(ps);
+         }
+         finally
+         {
+            getManager().close(ps);
+            freeConnection(c);
+         }
+    }
+
+    /**
+     * Retrieves an array of PersonnelBean using the relation table Payment given a ContragentBean object.
+     *
+     * @param pObject the ContragentBean pObject to be used
+     * @return an array of PersonnelBean 
+     */
+    // MANY TO MANY
+    public PersonnelBean[] loadPersonnelViaPayment(ContragentBean pObject) throws SQLException
+    {
+         Connection c = null;
+         PreparedStatement ps = null;
+         String strSQL =      " SELECT "
+                         + "        *"
+                         + " FROM  "
+                         + "        personnel,payment"
+                         + " WHERE "    
+                         + "     payment.contracgentid = ?"
+                         + " AND payment.regbyid = personnel.personnelid";
+         try
+         {
+             c = getConnection();
+             ps = c.prepareStatement(strSQL,ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+             Manager.setLong(ps, 1, pObject.getContragentid());
+             return PersonnelManager.getInstance().loadByPreparedStatement(ps);
+         }
+         finally
+         {
+            getManager().close(ps);
+            freeConnection(c);
+         }
+    }
+
+    /**
      * Retrieves an array of BsourceBean using the relation table Reservation given a ContragentBean object.
      *
      * @param pObject the ContragentBean pObject to be used

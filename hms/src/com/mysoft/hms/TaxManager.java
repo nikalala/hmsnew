@@ -1394,6 +1394,38 @@ public class TaxManager
     }
 
     /**
+     * Retrieves an array of OrdermainBean using the relation table Folioitem given a TaxBean object.
+     *
+     * @param pObject the TaxBean pObject to be used
+     * @return an array of OrdermainBean 
+     */
+    // MANY TO MANY
+    public OrdermainBean[] loadOrdermainViaFolioitem(TaxBean pObject) throws SQLException
+    {
+         Connection c = null;
+         PreparedStatement ps = null;
+         String strSQL =      " SELECT "
+                         + "        *"
+                         + " FROM  "
+                         + "        ordermain,folioitem"
+                         + " WHERE "    
+                         + "     folioitem.taxid = ?"
+                         + " AND folioitem.ordermainid = ordermain.ordermainid";
+         try
+         {
+             c = getConnection();
+             ps = c.prepareStatement(strSQL,ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+             Manager.setInteger(ps, 1, pObject.getTaxid());
+             return OrdermainManager.getInstance().loadByPreparedStatement(ps);
+         }
+         finally
+         {
+            getManager().close(ps);
+            freeConnection(c);
+         }
+    }
+
+    /**
      * Retrieves an array of PersonnelBean using the relation table Folioitem given a TaxBean object.
      *
      * @param pObject the TaxBean pObject to be used

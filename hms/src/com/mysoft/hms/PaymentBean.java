@@ -67,6 +67,10 @@ public class PaymentBean
     private boolean regdate_is_modified = false;
     private boolean regdate_is_initialized = false;
     
+    private Long contracgentid;
+    private boolean contracgentid_is_modified = false;
+    private boolean contracgentid_is_initialized = false;
+    
     private boolean _isNew = true;
     
     /**
@@ -799,6 +803,74 @@ public class PaymentBean
     }
 
     /**
+     * Getter method for contracgentid.
+     * <br>
+     * Meta Data Information (in progress):
+     * <ul>
+     * <li>full name: payment.contracgentid
+     * <li> foreign key: contragent.contragentid
+     * <li>column size: 19
+     * <li>jdbc type returned by the driver: Types.BIGINT
+     * </ul>
+     *
+     * @return the value of contracgentid
+     */
+    public Long getContracgentid()
+    {
+        return contracgentid; 
+    }
+
+    /**
+     * Setter method for contracgentid.
+     * <br>
+     * The new value is set only if compareTo() says it is different,
+     * or if one of either the new value or the current value is null.
+     * In case the new value is different, it is set and the field is marked as 'modified'.
+     *
+     * @param newVal the new value to be assigned to contracgentid
+     */
+    public void setContracgentid(Long newVal) {
+        if ((newVal != null && this.contracgentid != null && (newVal.compareTo(this.contracgentid) == 0)) || 
+            (newVal == null && this.contracgentid == null && contracgentid_is_initialized)) {
+            return; 
+        } 
+        this.contracgentid = newVal; 
+        contracgentid_is_modified = true; 
+        contracgentid_is_initialized = true; 
+    }
+
+    /**
+     * Setter method for contracgentid.
+     * <br>
+     * Convenient for those who do not want to deal with Objects for primary types.
+     *
+     * @param newVal the new value to be assigned to contracgentid
+     */
+    public void setContracgentid(long newVal) {
+        setContracgentid(new Long(newVal));
+    }
+
+    /**
+     * Determines if the contracgentid has been modified.
+     *
+     * @return true if the field has been modified, false if the field has not been modified
+     */
+    public boolean isContracgentidModified() {
+        return contracgentid_is_modified; 
+    }
+
+    /**
+     * Determines if the contracgentid has been initialized.
+     * <br>
+     * It is useful to determine if a field is null on purpose or just because it has not been initialized.
+     *
+     * @return true if the field has been initialized, false otherwise
+     */
+    public boolean isContracgentidInitialized() {
+        return contracgentid_is_initialized; 
+    }
+
+    /**
      * Determines if the current object is new.
      *
      * @return true if the current object is new, false if the object is not new
@@ -834,7 +906,8 @@ public class PaymentBean
 		note_is_modified || 
 		deleted_is_modified || 
 		regbyid_is_modified || 
-		regdate_is_modified;
+		regdate_is_modified || 
+		contracgentid_is_modified;
     }
 
     /**
@@ -852,6 +925,7 @@ public class PaymentBean
         deleted_is_modified = false;
         regbyid_is_modified = false;
         regdate_is_modified = false;
+        contracgentid_is_modified = false;
     }
 
     /**
@@ -871,6 +945,7 @@ public class PaymentBean
         setDeleted(bean.getDeleted());
         setRegbyid(bean.getRegbyid());
         setRegdate(bean.getRegdate());
+        setContracgentid(bean.getContracgentid());
     }
 
     /**
@@ -891,6 +966,7 @@ public class PaymentBean
                  + "\n - payment.deleted = " + (deleted_is_initialized ? ("[" + (deleted == null ? null : deleted.toString()) + "]") : "not initialized") + ""
                  + "\n - payment.regbyid = " + (regbyid_is_initialized ? ("[" + (regbyid == null ? null : regbyid.toString()) + "]") : "not initialized") + ""
                  + "\n - payment.regdate = " + (regdate_is_initialized ? ("[" + (regdate == null ? null : regdate.toString()) + "]") : "not initialized") + ""
+                 + "\n - payment.contracgentid = " + (contracgentid_is_initialized ? ("[" + (contracgentid == null ? null : contracgentid.toString()) + "]") : "not initialized") + ""
             ;
     }
 

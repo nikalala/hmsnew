@@ -94,9 +94,11 @@ for(int i=0;i<items.length;i++){
             break;
         case 3:
             payment = PaymentManager.getInstance().loadByPrimaryKey(items[i].getPaymentid());
-            pmethod = PaymentmethodManager.getInstance().loadByPrimaryKey(payment.getPaymentmethodid());
-            particular = pmethod.getCode();
-            koeff = -1;
+            if(payment != null){
+                pmethod = PaymentmethodManager.getInstance().loadByPrimaryKey(payment.getPaymentmethodid());
+                particular = pmethod.getCode();
+                koeff = -1;
+            }
             break;
         case 4:
             DiscountBean discount = DiscountManager.getInstance().loadByPrimaryKey(items[i].getDiscountid());

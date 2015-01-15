@@ -882,6 +882,171 @@ public class HouseunitManager
         }
     }
 
+    
+    
+    ///////////////////////////////////////////////////////////////////////
+    // MANY TO MANY: LOAD OTHER BEAN VIA JUNCTION TABLE 
+    ///////////////////////////////////////////////////////////////////////
+    /**
+     * Retrieves an array of HousekeepingstatusBean using the relation table Roomhst given a HouseunitBean object.
+     *
+     * @param pObject the HouseunitBean pObject to be used
+     * @return an array of HousekeepingstatusBean 
+     */
+    // MANY TO MANY
+    public HousekeepingstatusBean[] loadHousekeepingstatusViaRoomhst(HouseunitBean pObject) throws SQLException
+    {
+         Connection c = null;
+         PreparedStatement ps = null;
+         String strSQL =      " SELECT "
+                         + "        *"
+                         + " FROM  "
+                         + "        housekeepingstatus,roomhst"
+                         + " WHERE "    
+                         + "     roomhst.houseunitid = ?"
+                         + " AND roomhst.housekeepingstatusid = housekeepingstatus.housekeepingstatusid";
+         try
+         {
+             c = getConnection();
+             ps = c.prepareStatement(strSQL,ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+             Manager.setInteger(ps, 1, pObject.getHouseunitid());
+             return HousekeepingstatusManager.getInstance().loadByPreparedStatement(ps);
+         }
+         finally
+         {
+            getManager().close(ps);
+            freeConnection(c);
+         }
+    }
+
+    /**
+     * Retrieves an array of PersonnelBean using the relation table Roomhst given a HouseunitBean object.
+     *
+     * @param pObject the HouseunitBean pObject to be used
+     * @return an array of PersonnelBean 
+     */
+    // MANY TO MANY
+    public PersonnelBean[] loadPersonnelViaRoomhst(HouseunitBean pObject) throws SQLException
+    {
+         Connection c = null;
+         PreparedStatement ps = null;
+         String strSQL =      " SELECT "
+                         + "        *"
+                         + " FROM  "
+                         + "        personnel,roomhst"
+                         + " WHERE "    
+                         + "     roomhst.houseunitid = ?"
+                         + " AND roomhst.regbyid = personnel.personnelid";
+         try
+         {
+             c = getConnection();
+             ps = c.prepareStatement(strSQL,ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+             Manager.setInteger(ps, 1, pObject.getHouseunitid());
+             return PersonnelManager.getInstance().loadByPreparedStatement(ps);
+         }
+         finally
+         {
+            getManager().close(ps);
+            freeConnection(c);
+         }
+    }
+
+    /**
+     * Retrieves an array of RoomBean using the relation table Roomhst given a HouseunitBean object.
+     *
+     * @param pObject the HouseunitBean pObject to be used
+     * @return an array of RoomBean 
+     */
+    // MANY TO MANY
+    public RoomBean[] loadRoomViaRoomhst(HouseunitBean pObject) throws SQLException
+    {
+         Connection c = null;
+         PreparedStatement ps = null;
+         String strSQL =      " SELECT "
+                         + "        *"
+                         + " FROM  "
+                         + "        room,roomhst"
+                         + " WHERE "    
+                         + "     roomhst.houseunitid = ?"
+                         + " AND roomhst.roomid = room.roomid";
+         try
+         {
+             c = getConnection();
+             ps = c.prepareStatement(strSQL,ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+             Manager.setInteger(ps, 1, pObject.getHouseunitid());
+             return RoomManager.getInstance().loadByPreparedStatement(ps);
+         }
+         finally
+         {
+            getManager().close(ps);
+            freeConnection(c);
+         }
+    }
+
+    /**
+     * Retrieves an array of PersonnelBean using the relation table Workorder given a HouseunitBean object.
+     *
+     * @param pObject the HouseunitBean pObject to be used
+     * @return an array of PersonnelBean 
+     */
+    // MANY TO MANY
+    public PersonnelBean[] loadPersonnelViaWorkorder(HouseunitBean pObject) throws SQLException
+    {
+         Connection c = null;
+         PreparedStatement ps = null;
+         String strSQL =      " SELECT "
+                         + "        *"
+                         + " FROM  "
+                         + "        personnel,workorder"
+                         + " WHERE "    
+                         + "     workorder.houseunitid = ?"
+                         + " AND workorder.assignedtoid = personnel.personnelid";
+         try
+         {
+             c = getConnection();
+             ps = c.prepareStatement(strSQL,ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+             Manager.setInteger(ps, 1, pObject.getHouseunitid());
+             return PersonnelManager.getInstance().loadByPreparedStatement(ps);
+         }
+         finally
+         {
+            getManager().close(ps);
+            freeConnection(c);
+         }
+    }
+
+    /**
+     * Retrieves an array of RoomBean using the relation table Workorder given a HouseunitBean object.
+     *
+     * @param pObject the HouseunitBean pObject to be used
+     * @return an array of RoomBean 
+     */
+    // MANY TO MANY
+    public RoomBean[] loadRoomViaWorkorder(HouseunitBean pObject) throws SQLException
+    {
+         Connection c = null;
+         PreparedStatement ps = null;
+         String strSQL =      " SELECT "
+                         + "        *"
+                         + " FROM  "
+                         + "        room,workorder"
+                         + " WHERE "    
+                         + "     workorder.houseunitid = ?"
+                         + " AND workorder.roomid = room.roomid";
+         try
+         {
+             c = getConnection();
+             ps = c.prepareStatement(strSQL,ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+             Manager.setInteger(ps, 1, pObject.getHouseunitid());
+             return RoomManager.getInstance().loadByPreparedStatement(ps);
+         }
+         finally
+         {
+            getManager().close(ps);
+            freeConnection(c);
+         }
+    }
+
 
 
     ///////////////////////////////////////////////////////////////////////

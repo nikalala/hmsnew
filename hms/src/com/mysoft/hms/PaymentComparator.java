@@ -57,6 +57,7 @@ public class PaymentComparator implements Comparator
      *   <li>PaymentManager.ID_NOTE
      *   <li>PaymentManager.ID_REGBYID
      *   <li>PaymentManager.ID_REGDATE
+     *   <li>PaymentManager.ID_CONTRACGENTID
      * </ul>
      */
     public PaymentComparator(int iType)
@@ -86,6 +87,7 @@ public class PaymentComparator implements Comparator
      *   <li>PaymentManager.ID_DELETED
      *   <li>PaymentManager.ID_REGBYID
      *   <li>PaymentManager.ID_REGDATE
+     *   <li>PaymentManager.ID_CONTRACGENTID
      * </ul>
      *
      * @param bReverse set this value to true, if you want to reverse the sorting results
@@ -214,6 +216,17 @@ public class PaymentComparator implements Comparator
                     iReturn = 1;
                 } else { 
                     iReturn = b1.getRegdate().compareTo(b2.getRegdate());
+                }
+                break;
+            case PaymentManager.ID_CONTRACGENTID:
+                if (b1.getContracgentid() == null && b2.getContracgentid() != null) {
+                    iReturn = -1;
+                } else if (b1.getContracgentid() == null && b2.getContracgentid() == null) {
+                    iReturn = 0;
+                } else if (b1.getContracgentid() != null && b2.getContracgentid() == null) {
+                    iReturn = 1;
+                } else { 
+                    iReturn = b1.getContracgentid().compareTo(b2.getContracgentid());
                 }
                 break;
             default: 

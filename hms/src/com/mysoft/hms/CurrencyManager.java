@@ -942,6 +942,38 @@ public class CurrencyManager
     // MANY TO MANY: LOAD OTHER BEAN VIA JUNCTION TABLE 
     ///////////////////////////////////////////////////////////////////////
     /**
+     * Retrieves an array of ContragentBean using the relation table Payment given a CurrencyBean object.
+     *
+     * @param pObject the CurrencyBean pObject to be used
+     * @return an array of ContragentBean 
+     */
+    // MANY TO MANY
+    public ContragentBean[] loadContragentViaPayment(CurrencyBean pObject) throws SQLException
+    {
+         Connection c = null;
+         PreparedStatement ps = null;
+         String strSQL =      " SELECT "
+                         + "        *"
+                         + " FROM  "
+                         + "        contragent,payment"
+                         + " WHERE "    
+                         + "     payment.currencyid = ?"
+                         + " AND payment.contracgentid = contragent.contragentid";
+         try
+         {
+             c = getConnection();
+             ps = c.prepareStatement(strSQL,ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+             Manager.setInteger(ps, 1, pObject.getCurrencyid());
+             return ContragentManager.getInstance().loadByPreparedStatement(ps);
+         }
+         finally
+         {
+            getManager().close(ps);
+            freeConnection(c);
+         }
+    }
+
+    /**
      * Retrieves an array of FolioBean using the relation table Payment given a CurrencyBean object.
      *
      * @param pObject the CurrencyBean pObject to be used

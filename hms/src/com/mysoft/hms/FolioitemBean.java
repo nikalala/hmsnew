@@ -645,6 +645,7 @@ public class FolioitemBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: folioitem.ordermainid
+     * <li> foreign key: ordermain.ordermainid
      * <li>column size: 19
      * <li>jdbc type returned by the driver: Types.BIGINT
      * </ul>

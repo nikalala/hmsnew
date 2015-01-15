@@ -942,6 +942,70 @@ public class ReasonManager
     // MANY TO MANY: LOAD OTHER BEAN VIA JUNCTION TABLE 
     ///////////////////////////////////////////////////////////////////////
     /**
+     * Retrieves an array of PersonnelBean using the relation table Blockroom given a ReasonBean object.
+     *
+     * @param pObject the ReasonBean pObject to be used
+     * @return an array of PersonnelBean 
+     */
+    // MANY TO MANY
+    public PersonnelBean[] loadPersonnelViaBlockroom(ReasonBean pObject) throws SQLException
+    {
+         Connection c = null;
+         PreparedStatement ps = null;
+         String strSQL =      " SELECT "
+                         + "        *"
+                         + " FROM  "
+                         + "        personnel,blockroom"
+                         + " WHERE "    
+                         + "     blockroom.reasonid = ?"
+                         + " AND blockroom.regbyid = personnel.personnelid";
+         try
+         {
+             c = getConnection();
+             ps = c.prepareStatement(strSQL,ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+             Manager.setInteger(ps, 1, pObject.getReasonid());
+             return PersonnelManager.getInstance().loadByPreparedStatement(ps);
+         }
+         finally
+         {
+            getManager().close(ps);
+            freeConnection(c);
+         }
+    }
+
+    /**
+     * Retrieves an array of RoomBean using the relation table Blockroom given a ReasonBean object.
+     *
+     * @param pObject the ReasonBean pObject to be used
+     * @return an array of RoomBean 
+     */
+    // MANY TO MANY
+    public RoomBean[] loadRoomViaBlockroom(ReasonBean pObject) throws SQLException
+    {
+         Connection c = null;
+         PreparedStatement ps = null;
+         String strSQL =      " SELECT "
+                         + "        *"
+                         + " FROM  "
+                         + "        room,blockroom"
+                         + " WHERE "    
+                         + "     blockroom.reasonid = ?"
+                         + " AND blockroom.roomid = room.roomid";
+         try
+         {
+             c = getConnection();
+             ps = c.prepareStatement(strSQL,ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+             Manager.setInteger(ps, 1, pObject.getReasonid());
+             return RoomManager.getInstance().loadByPreparedStatement(ps);
+         }
+         finally
+         {
+            getManager().close(ps);
+            freeConnection(c);
+         }
+    }
+
+    /**
      * Retrieves an array of ReservationBean using the relation table Reservationreason given a ReasonBean object.
      *
      * @param pObject the ReasonBean pObject to be used

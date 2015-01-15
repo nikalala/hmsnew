@@ -1171,6 +1171,203 @@ public class OrdermainManager
         }
     }
 
+    
+    
+    ///////////////////////////////////////////////////////////////////////
+    // MANY TO MANY: LOAD OTHER BEAN VIA JUNCTION TABLE 
+    ///////////////////////////////////////////////////////////////////////
+    /**
+     * Retrieves an array of DiscountBean using the relation table Folioitem given a OrdermainBean object.
+     *
+     * @param pObject the OrdermainBean pObject to be used
+     * @return an array of DiscountBean 
+     */
+    // MANY TO MANY
+    public DiscountBean[] loadDiscountViaFolioitem(OrdermainBean pObject) throws SQLException
+    {
+         Connection c = null;
+         PreparedStatement ps = null;
+         String strSQL =      " SELECT "
+                         + "        *"
+                         + " FROM  "
+                         + "        discount,folioitem"
+                         + " WHERE "    
+                         + "     folioitem.ordermainid = ?"
+                         + " AND folioitem.discountid = discount.discountid";
+         try
+         {
+             c = getConnection();
+             ps = c.prepareStatement(strSQL,ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+             Manager.setLong(ps, 1, pObject.getOrdermainid());
+             return DiscountManager.getInstance().loadByPreparedStatement(ps);
+         }
+         finally
+         {
+            getManager().close(ps);
+            freeConnection(c);
+         }
+    }
+
+    /**
+     * Retrieves an array of ExtrachargeBean using the relation table Folioitem given a OrdermainBean object.
+     *
+     * @param pObject the OrdermainBean pObject to be used
+     * @return an array of ExtrachargeBean 
+     */
+    // MANY TO MANY
+    public ExtrachargeBean[] loadExtrachargeViaFolioitem(OrdermainBean pObject) throws SQLException
+    {
+         Connection c = null;
+         PreparedStatement ps = null;
+         String strSQL =      " SELECT "
+                         + "        *"
+                         + " FROM  "
+                         + "        extracharge,folioitem"
+                         + " WHERE "    
+                         + "     folioitem.ordermainid = ?"
+                         + " AND folioitem.extrachargeid = extracharge.extrachargeid";
+         try
+         {
+             c = getConnection();
+             ps = c.prepareStatement(strSQL,ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+             Manager.setLong(ps, 1, pObject.getOrdermainid());
+             return ExtrachargeManager.getInstance().loadByPreparedStatement(ps);
+         }
+         finally
+         {
+            getManager().close(ps);
+            freeConnection(c);
+         }
+    }
+
+    /**
+     * Retrieves an array of FolioBean using the relation table Folioitem given a OrdermainBean object.
+     *
+     * @param pObject the OrdermainBean pObject to be used
+     * @return an array of FolioBean 
+     */
+    // MANY TO MANY
+    public FolioBean[] loadFolioViaFolioitem(OrdermainBean pObject) throws SQLException
+    {
+         Connection c = null;
+         PreparedStatement ps = null;
+         String strSQL =      " SELECT "
+                         + "        *"
+                         + " FROM  "
+                         + "        folio,folioitem"
+                         + " WHERE "    
+                         + "     folioitem.ordermainid = ?"
+                         + " AND folioitem.folioid = folio.folioid";
+         try
+         {
+             c = getConnection();
+             ps = c.prepareStatement(strSQL,ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+             Manager.setLong(ps, 1, pObject.getOrdermainid());
+             return FolioManager.getInstance().loadByPreparedStatement(ps);
+         }
+         finally
+         {
+            getManager().close(ps);
+            freeConnection(c);
+         }
+    }
+
+    /**
+     * Retrieves an array of PersonnelBean using the relation table Folioitem given a OrdermainBean object.
+     *
+     * @param pObject the OrdermainBean pObject to be used
+     * @return an array of PersonnelBean 
+     */
+    // MANY TO MANY
+    public PersonnelBean[] loadPersonnelViaFolioitem(OrdermainBean pObject) throws SQLException
+    {
+         Connection c = null;
+         PreparedStatement ps = null;
+         String strSQL =      " SELECT "
+                         + "        *"
+                         + " FROM  "
+                         + "        personnel,folioitem"
+                         + " WHERE "    
+                         + "     folioitem.ordermainid = ?"
+                         + " AND folioitem.regbyid = personnel.personnelid";
+         try
+         {
+             c = getConnection();
+             ps = c.prepareStatement(strSQL,ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+             Manager.setLong(ps, 1, pObject.getOrdermainid());
+             return PersonnelManager.getInstance().loadByPreparedStatement(ps);
+         }
+         finally
+         {
+            getManager().close(ps);
+            freeConnection(c);
+         }
+    }
+
+    /**
+     * Retrieves an array of RoomBean using the relation table Folioitem given a OrdermainBean object.
+     *
+     * @param pObject the OrdermainBean pObject to be used
+     * @return an array of RoomBean 
+     */
+    // MANY TO MANY
+    public RoomBean[] loadRoomViaFolioitem(OrdermainBean pObject) throws SQLException
+    {
+         Connection c = null;
+         PreparedStatement ps = null;
+         String strSQL =      " SELECT "
+                         + "        *"
+                         + " FROM  "
+                         + "        room,folioitem"
+                         + " WHERE "    
+                         + "     folioitem.ordermainid = ?"
+                         + " AND folioitem.roomid = room.roomid";
+         try
+         {
+             c = getConnection();
+             ps = c.prepareStatement(strSQL,ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+             Manager.setLong(ps, 1, pObject.getOrdermainid());
+             return RoomManager.getInstance().loadByPreparedStatement(ps);
+         }
+         finally
+         {
+            getManager().close(ps);
+            freeConnection(c);
+         }
+    }
+
+    /**
+     * Retrieves an array of TaxBean using the relation table Folioitem given a OrdermainBean object.
+     *
+     * @param pObject the OrdermainBean pObject to be used
+     * @return an array of TaxBean 
+     */
+    // MANY TO MANY
+    public TaxBean[] loadTaxViaFolioitem(OrdermainBean pObject) throws SQLException
+    {
+         Connection c = null;
+         PreparedStatement ps = null;
+         String strSQL =      " SELECT "
+                         + "        *"
+                         + " FROM  "
+                         + "        tax,folioitem"
+                         + " WHERE "    
+                         + "     folioitem.ordermainid = ?"
+                         + " AND folioitem.taxid = tax.taxid";
+         try
+         {
+             c = getConnection();
+             ps = c.prepareStatement(strSQL,ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+             Manager.setLong(ps, 1, pObject.getOrdermainid());
+             return TaxManager.getInstance().loadByPreparedStatement(ps);
+         }
+         finally
+         {
+            getManager().close(ps);
+            freeConnection(c);
+         }
+    }
+
 
 
     ///////////////////////////////////////////////////////////////////////
