@@ -12,12 +12,12 @@
             }
     %>
     <row id='<%=i%>'>
-        <cell><![CDATA[<%=(i+1)*100%><a onclick="alert('not implemented yet')">  <i style="font-size: 15px;" class="fa fa-lock"></i></a>]]></cell>
+        <cell><![CDATA[<%=(i+1)*100%><a style="cursor:pointer;" onclick="blockunbloc(<%=(i+1)*100%>)">    <i style="font-size: 15px; margin-left:10px;" class="fa fa-lock"></i></a>]]></cell>
         <cell><![CDATA[Junior King Room]]></cell>
-        <cell><![CDATA[<div class="status-color" <%=color%> style="background-color:#FA1511; width:16px; margin-top: 1px; margin-right: 4px; height:16px; float:left;"></div><div style="float:left;">Dirty <i style="font-size: 15px;" class="fa fa-pencil"></i> <i style="font-size: 15px;" class="fa fa-times"></i></div> ]]></cell>
+        <cell><![CDATA[<div class="status-color" <%=color%> style="-webkit-border-radius: 3px;-moz-border-radius: 3px;border-radius: 3px;background-color:#FA1511; width:16px; margin-top: 1px; margin-right: 4px; height:16px; float:left;"></div><div style="float:left;">Dirty <i style="font-size: 15px; margin-left:10px;" class="fa fa-pencil"></i> <i style="font-size: 15px; margin-left:10px;" class="fa fa-times"></i></div> ]]></cell>
         <cell><![CDATA[Available]]></cell>
-        <cell><![CDATA[<i style="font-size: 15px;" class="fa fa-pencil"></i>]]></cell>
-        <cell><![CDATA[<i style="font-size: 15px;" class="fa fa-times"></i> ]]></cell>
+        <cell><![CDATA[<i style="font-size: 15px;  margin-left:10px;" class="fa fa-pencil"></i>]]></cell>
+        <cell><![CDATA[<i style="font-size: 15px;  margin-left:10px;" class="fa fa-times"></i> ]]></cell>
     </row>
     <% } %>
 </rows>

@@ -644,7 +644,7 @@ System.out.println(rid+" = "+statusid);
     double roundOff(double val, int prc) {
         double[] roundtype = {0, 0.1, 1, 10, 100, 1000, 10000};
         double rf = val;
-        if(prc > 0) rf = Math.round(val * roundtype[prc]) / roundtype[prc];
+        if (prc > 0) rf = Math.round(val * roundtype[prc]) / roundtype[prc];
         return rf;
     }
 
@@ -871,8 +871,26 @@ System.out.println(rid+" = "+statusid);
     String[] dateformats2 = {"DD.MM.YYYY", "DD/MM/YYYY", "DD-MM-YYYY", "DD.MM.YY", "DD/MM/YY", "DD-MM-YY", "MM.DD.YYYY", "MM/DD/YYYY", "MM-DD-YYYY", "MM.DD.YY", "MM/DD/YY", "MM-DD-YY"};
     String[] arrdepdateformats = {"dd.MM", "dd/MM", "dd-MM", "MM.dd", "MM/dd", "MM-dd"};
     String[] timezones = TimeZone.getAvailableIDs();
-    String[] reasoncategory = {"ოთახის დაბლოკვა", "რეზერვაციის გაუქმება", "სტუმრის მიღება", "სტუმრის გაწერა", "ფოლიოს ტრანზაქცია", "სტუმრის ფოლიო",
-            "დალაგება", "არ გამოცხადებული რეზერვაცია", "პაკეტი", "პრომო აქცია", "რეზერვაცია", "ოთახის გადატანის შეჩერება", "მიღების წაშლა", "რეზერვაციის წაშლა", "ნედლეულის ჩამოწერა", "კერძის ჩამოწერა", "შავი სიის მიზეზი"};
+    String[] reasoncategory =
+    {
+            "ოთახის დაბლოკვა",
+            "რეზერვაციის გაუქმება",
+            "სტუმრის მიღება",
+            "სტუმრის გაწერა",
+            "ფოლიოს ტრანზაქცია",
+            "სტუმრის ფოლიო",
+            "დალაგება",
+            "არ გამოცხადებული რეზერვაცია",
+            "პაკეტი",
+            "პრომო აქცია",
+            "რეზერვაცია",
+            "ოთახის გადატანის შეჩერება",
+            "მიღების წაშლა",
+            "რეზერვაციის წაშლა",
+            "ნედლეულის ჩამოწერა",
+            "კერძის ჩამოწერა",
+            "შავი სიის მიზეზი"
+    };
     String[] folioactiontype = {"შესწორება", "ბანკი", "ნაღდი", "კონტრაქტორი", "ფასდაკლება", "მომსახურება", "ოთახის გადასახადი", "გადატანა"};
 //                                  0           1       2       3               4           5               6                   7
 
