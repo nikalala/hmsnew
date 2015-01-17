@@ -11,7 +11,7 @@
 <html lang="en-us" id="lock-page">
 <head>
     <meta charset="utf-8">
-    <title> SmartAdmin</title>
+    <title>Selfin LLC Lock Screen</title>
     <meta name="description" content="">
     <meta name="author" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -24,14 +24,6 @@
     <!-- SmartAdmin Styles : Please note (smartadmin-production.css) was created using LESS variables -->
     <link rel="stylesheet" type="text/css" media="screen" href="../css/smartadmin-production.min.css">
     <link rel="stylesheet" type="text/css" media="screen" href="../css/smartadmin-skins.min.css">
-
-    <!-- SmartAdmin RTL Support is under construction
-         This RTL CSS will be released in version 1.5
-    <link rel="stylesheet" type="text/css" media="screen" href="css/smartadmin-rtl.min.css"> -->
-
-    <!-- We recommend you use "your_style.css" to override SmartAdmin
-         specific styles this will also ensure you retrain your customization with each SmartAdmin update.
-    <link rel="stylesheet" type="text/css" media="screen" href="css/your_style.css"> -->
 
     <!-- Demo purpose only: goes with demo.js, you can delete this css when designing your own WebApp -->
     <link rel="stylesheet" type="text/css" media="screen" href="../css/demo.min.css">
@@ -71,8 +63,12 @@
 
 <div id="main" role="main">
 
-    <!-- MAIN CONTENT -->
-
+    <div id="dialog_simple" style="display: none;">
+        <p>
+            პაროლი არასწორია
+        </p>
+    </div>
+    <% if (!CodeHelpers.isNullOrEmpty(username)) {%>
     <form class="lockscreen animated flipInY" role="form" id="lockform" method="post" action="../index.jsp">
         <div class="logo">
             <h1 class="semi-bold"><img src="../img/logo.png" alt=""/> Selfin LLC</h1>
@@ -81,8 +77,10 @@
             <img src="../img/sunny-big.png" alt="" width="120" height="120"/>
 
             <div>
-                <h1 style="font-family: 'BGMtavr'; font-size: 19px;"><i class="fa fa-user fa-3x text-muted air air-top-right hidden-mobile"></i><%=namecreds%>
-                    <small style="font-family: 'BGMtavr'; font-size: 17px;"><i class="fa fa-lock text-muted"></i> &nbsp;დაბლოკილია</small>
+                <h1 style="font-family: 'BGMtavr'; font-size: 19px;"><i
+                        class="fa fa-user fa-3x text-muted air air-top-right hidden-mobile"></i><%=namecreds%>
+                    <small style="font-family: 'BGMtavr'; font-size: 17px;"><i class="fa fa-lock text-muted"></i> &nbsp;დაბლოკილია
+                    </small>
                 </h1>
                 <p class="text-muted">
                     <a><%=username%>
@@ -95,8 +93,9 @@
                     <input class="form-control" name="password" id="password" type="password"
                            placeholder="Password" required="required">
                     <input type="hidden" name="login">
+
                     <div class="input-group-btn">
-                        <button class="btn btn-primary" class="loginbtn" name="login" type="button">
+                        <button class="btn btn-primary loginbtn" name="login" type="button">
                             <i class="fa fa-key"></i>
                         </button>
                     </div>
@@ -113,34 +112,43 @@
             Copyright Selfin LLC 2012-2015.
         </p>
     </form>
-
+    <% } %>
 </div>
-
 <!--================================================== -->
 
 <!-- PACE LOADER - turn this on if you want ajax loading to show (caution: uses lots of memory on iDevices)-->
 <script src="../js/pace.min.js"></script>
 <script src="../js/jquery-1.8.2.js"></script>
+<script src="../js/jquery-ui.js"></script>
 <script>
+
     var loginInfo = '<%=CodeHelpers.ifIsNullOrEmptyReturnEmptryString(username)%>';
-    if(loginInfo === '')
-    {
+    if (loginInfo === '') {
         window.location.href = '../index.jsp';
     }
+    $('#dialog_simple').dialog({
+        autoOpen: false,
+        width: 600,
+        resizable: false,
+        modal: true,
+        title: "<div class='widget-header'><h4><i class='fa fa-warning'></i> ყურადღება!!!</h4></div>"
+    });
+
     $(document).on("click", ".loginbtn", function () {
         var formData = $("#lockform").serializeArray();
         var pass = $("#password");
-        if(pass.val() == "")
-        {
+        if (pass.val() == "") {
             pass.addClass("required");
             return;
-        }else{
+        } else {
             pass.removeClass("required");
         }
         $.post("checkuser.jsp", formData, function (result) {
             if (typeof result !== "undefined") {
                 if (result.trim() === "true") {
                     $("#lockform").submit();
+                } else {
+                    $('#dialog_simple').dialog('open');
                 }
             }
         });

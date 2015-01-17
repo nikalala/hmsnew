@@ -69,6 +69,20 @@
     src: url(../fonts/bpg_banner_extrasquare.eot) format('embedded-opentype'), url(../fonts/bpg_banner_extrasquare.woff) format('woff'), url(../fonts/bpg_banner_extrasquare.ttf) format('truetype'), url('../fonts/bpg_banner_extrasquare.svg#BPG Banner') format('svg')
 }
 
+.ui-dialog
+{
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    z-index: 1000;
+    outline: 0px;
+    height: auto;
+    width: 600px;
+}
+
 @media (max-width: 767px) {
     .lockscreen .logo + div > img {
         float: none !important
