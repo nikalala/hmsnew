@@ -122,6 +122,7 @@
                     <ul class="dropdown-menu">
                         <li><a href="javascript:getBody('construction')">პაროლის შეცვლა</a></li>
                         <li class="divider"></li>
+                        <li><a href="#" onclick="launchLockScreen()">ეკრანის ბლოკი</a></li>
                         <li><a href="index.jsp?logout=1">გამოსვლა</a></li>
                     </ul>
                 </li>

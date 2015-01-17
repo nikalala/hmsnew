@@ -11,9 +11,29 @@ $(document).ready(function () {
 
 $(document).keydown(function(e) {
     if (e.keyCode == 76 && e.ctrlKey) {
-        window.location.href = "content/lock.jsp";
+        launchLockScreen();
+    }
+    if (e.keyCode == 116) {
+        return false;
     }
 });
+
+function launchLockScreen()
+{
+    $("#mainbody").append('<div id="lockscreen"></div>');
+    $("#lockscreen").css("width", $(document).width());
+    $("#lockscreen").css("height",$(document).height());
+    $("#lockscreen").css("z-index", "1000000000");
+    $("#lockscreen").css("background","url(img/mybg.png) #fff");
+    $("#lockscreen").css("min-height","100%");
+    $("#lockscreen").load("content/lock.jsp");
+    $("#lockscreen").fadeIn();
+}
+
+function removelockscr()
+{
+    $("#lockscreen").remove();
+}
 
 function loadMainBody() {
     getBody("stayviewleft", "stayview", 'დატვირთულობა', 'res1');
