@@ -24,6 +24,15 @@ html, body {
     src: url(../fonts/bpg_banner_extrasquare.eot) format('embedded-opentype'), url(../fonts/bpg_banner_extrasquare.woff) format('woff'), url(../fonts/bpg_banner_extrasquare.ttf) format('truetype'), url('../fonts/bpg_banner_extrasquare.svg#BPG Banner') format('svg')
 }
 
+div#lockscreen
+{
+    width: 0;
+    height: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: none;
+}
 
 [class^="selfin-"],
 [class*=" selfin-"] {

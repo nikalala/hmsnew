@@ -3,50 +3,63 @@
 <%@include file="includes/init.jsp" %>
 <%
     boolean loggedon = false;
-    if (request.getParameter("login") != null) {
-        try {
-            PersonnelBean[] tuser = PersonnelManager.getInstance().loadByWhere("where deleted = false and upper(loginid) = '" + request.getParameter("loginid").toUpperCase().replaceAll("'", "''") + "' and password = '" + request.getParameter("password").replaceAll("'", "''") + "'");
-            if (tuser != null && tuser.length > 0) {
-                user.copy(tuser[0]);
-                loggedon = true;
-                HotelBean[] hotels = HotelManager.getInstance().loadByWhere("");
-                hotel.copy(hotels[0]);
-            }
-        } catch (Exception ign) {
-        }
-    } else if (request.getParameter("logout") != null) {
+    if (user.getPersonnelid() == null) {
+        loggedon = false;
+%>
+<script>
+    function redirectifnotloggedin() {
+        window.location.href = "login.jsp";
+    }
+    redirectifnotloggedin();
+</script>
+<%
+    } else {
+        loggedon = true;
+    }
+
+    if (request.getParameter("logout") != null) {
         PersonnelBean tuser = PersonnelManager.getInstance().createPersonnelBean();
         user.copy(tuser);
         loggedon = false;
+%>
+
+<script>
+    function redirectifnotloggedin() {
+        window.location.href = "login.jsp";
     }
+    redirectifnotloggedin();
+</script>
+
+
+<% }
 
     String cmenufiles[] = {"TAB_EditTransaction", "roommove", "amendstay", "checkin", "checkout", "cancel", "MarkNoShow", "assignroom", "UnblockRoom", "VoidTransaction", "undocheckin", "remarks", "SetTasks", "SetPreference", "StopRoomMove", "UndoStopRoomMove", "ExchangeRoom", "MoveGuestPhysically"};
     String cmenunames[] = {"რედაქტირება", "ოთახის შეცვლა", "გახანგრძლივება", "შესვლა", "გამოსვლა", "გაუქმება", "არ მოსვლა", "ოთახის მინიჭება", "ოთახის განბლოკვა", "რეზერვაციის გაუქმება", "შესვლის გაუქმება", "შეტყობინებების დაყენება", "სამუშაოების მინიჭება", "პარამეტრები", "ოთახის გადატანის შეჩერება", "ოთახის გადატანის შეჩერების გაუქმება", "ოთახის გაცვლა", "სტუმრის გადაყვანა ფიზიკურად"};
     String cmenuicons[] = {"saved", "ოთახის შეცვლა", "გახანგრძლივება", "შესვლა", "გამოსვლა", "გაუქმება", "არ მოსვლა", "ოთახის მინიჭება", "ოთახის განბლოკვა", "რეზერვაციის გაუქმება", "შესვლის გაუქმება", "შეტყობინებების დაყენება", "სამუშაოების მინიჭება", "პარამეტრები", "ოთახის გადატანის შეჩერება", "ოთახის გადატანის შეჩერების გაუქმება", "ოთახის გაცვლა", "სტუმრის გადაყვანა ფიზიკურად"};
-    
+
     boolean[][] statusmenu = {
-        //"რედაქტირება", "ოთახის შეცვლა", "გახანგრძლივება", "შესვლა", "გამოსვლა", "გაუქმება", "არ მოსვლა", "ოთახის მინიჭება", "ოთახის განბლოკვა", "რეზერვაციის გაუქმება", "შესვლის გაუქმება", "შეტყობინებების დაყენება", "სამუშაოების მინიჭება", "პარამეტრები", "ოთახის გადატანის შეჩერება", "ოთახის გადატანის შეჩერების გაუქმება", "ოთახის გაცვლა", "სტუმრის გადაყვანა ფიზიკურად"
-        // დადასტურებული რეზერვაცია
-        {  true,          true,           true,             true,     false,      true,       true,        true,              false,              true,                   false,              true,                      false,                  false,         false,                       false,                                 false,           false},
-        // მცხოვრები
-        {  true,          true,           true,             false,    true,       false,      false,       false,             false,              false,                  true,               true,                      false,                  false,         false,                       false,                                 false,           false},
-        // ვადაგადაცილებული
-        {  true,          true,           true,             true,     false,      true,       true,        true,              false,              true,                   false,              true,                      false,                  false,         false,                       false,                                 false,           false},
-        // წამსვლელი
-        {  true,          true,           true,             true,     false,      true,       true,        true,              false,              true,                   false,              true,                      false,                  false,         false,                       false,                                 false,           false},
-        // გაწერილი
-        {  true,          true,           true,             true,     false,      true,       true,        true,              false,              true,                   false,              true,                      false,                  false,         false,                       false,                                 false,           false},
-        // დაბლოკილი
-        {  true,          true,           true,             true,     false,      true,       true,        true,              false,              true,                   false,              true,                      false,                  false,         false,                       false,                                 false,           false},
-        // დღიური გამოყენება
-        {  true,          true,           true,             true,     false,      true,       true,        true,              false,              true,                   false,              true,                      false,                  false,         false,                       false,                                 false,           false},
-        // დაუდასტურებელი რეზერვაცია
-        {  true,          true,           true,             true,     false,      true,       true,        true,              false,              true,                   false,              true,                      false,                  false,         false,                       false,                                 false,           false},
-        // თავისუფალი
-        {  true,          true,           true,             true,     false,      true,       true,        true,              false,              true,                   false,              true,                      false,                  false,         false,                       false,                                 false,           false},
+            //"რედაქტირება", "ოთახის შეცვლა", "გახანგრძლივება", "შესვლა", "გამოსვლა", "გაუქმება", "არ მოსვლა", "ოთახის მინიჭება", "ოთახის განბლოკვა", "რეზერვაციის გაუქმება", "შესვლის გაუქმება", "შეტყობინებების დაყენება", "სამუშაოების მინიჭება", "პარამეტრები", "ოთახის გადატანის შეჩერება", "ოთახის გადატანის შეჩერების გაუქმება", "ოთახის გაცვლა", "სტუმრის გადაყვანა ფიზიკურად"
+            // დადასტურებული რეზერვაცია
+            {true, true, true, true, false, true, true, true, false, true, false, true, false, false, false, false, false, false},
+            // მცხოვრები
+            {true, true, true, false, true, false, false, false, false, false, true, true, false, false, false, false, false, false},
+            // ვადაგადაცილებული
+            {true, true, true, true, false, true, true, true, false, true, false, true, false, false, false, false, false, false},
+            // წამსვლელი
+            {true, true, true, true, false, true, true, true, false, true, false, true, false, false, false, false, false, false},
+            // გაწერილი
+            {true, true, true, true, false, true, true, true, false, true, false, true, false, false, false, false, false, false},
+            // დაბლოკილი
+            {true, true, true, true, false, true, true, true, false, true, false, true, false, false, false, false, false, false},
+            // დღიური გამოყენება
+            {true, true, true, true, false, true, true, true, false, true, false, true, false, false, false, false, false, false},
+            // დაუდასტურებელი რეზერვაცია
+            {true, true, true, true, false, true, true, true, false, true, false, true, false, false, false, false, false, false},
+            // თავისუფალი
+            {true, true, true, true, false, true, true, true, false, true, false, true, false, false, false, false, false, false},
     };
-    
-    
+
+
     String bgcol = "#F5F5F5";
 %>
 <!DOCTYPE html>
@@ -106,30 +119,30 @@
         var dateglobalformat1 = "<%=dateformats1[dff]%>";
 
         var globalpars = <%=jschs%>;
-        
+
         var lclosedate = <%=lclosedate%>;
 
-        function changeContextMenu(st,mn){
+        function changeContextMenu(st, mn) {
             var sts = new Array();
             <%for(int i=0;i<statusmenu.length;i++){
                 %>
-                sts[<%=i%>] = new Array();
-                <%
-                for(int j=0;j<statusmenu[i].length;j++){
-                    int v = 0;
-                    if(statusmenu[i][j])    v = 1;
-                    %>
-                sts[<%=i%>][<%=j%>] = <%=v%>;
-                    <%
-                }
-            }
-            %>
-            $("#contextMenu ul").find('li').each(function(){
+            sts[<%=i%>] = new Array();
+            <%
+            for(int j=0;j<statusmenu[i].length;j++){
+                int v = 0;
+                if(statusmenu[i][j])    v = 1;
+                %>
+            sts[<%=i%>][<%=j%>] = <%=v%>;
+            <%
+        }
+    }
+    %>
+            $("#contextMenu ul").find('li').each(function () {
                 var n = $(this).attr('num');
-                if(sts[st][n] == 0) $(this).hide();
+                if (sts[st][n] == 0) $(this).hide();
                 else                $(this).show();
             });
-            
+
         }
 
 
@@ -140,32 +153,32 @@
                 effect: 'scale'
             });
 
-            getBody("stayviewleft", "stayview", 'დატვირთულობა', 'res1','',true);
+            getBody("stayviewleft", "stayview", 'დატვირთულობა', 'res1', '', true);
 
             if ($("#maincontent").height() > 652)
                 $("#mainpanel0").height($("#maincontent").height() - 2);
 
 
-          /*  $("[data-toggle='tooltip']").tooltip({
-                //html: true, 
-                placement: "bottom"
-            });
+            /*  $("[data-toggle='tooltip']").tooltip({
+             //html: true,
+             placement: "bottom"
+             });
 
-            $('[data-toggle="tab"]').click(function (e) {
-                e.preventDefault();
-                var $this = $(this),
-                        loadurl = $this.attr('src'),
-                        targ = $this.attr('href');
+             $('[data-toggle="tab"]').click(function (e) {
+             e.preventDefault();
+             var $this = $(this),
+             loadurl = $this.attr('src'),
+             targ = $this.attr('href');
 
-                $.get(loadurl, function (data) {
-                    $(targ).html(data);
-                });
-                $this.tab('show');
-                return false;
-            });
+             $.get(loadurl, function (data) {
+             $(targ).html(data);
+             });
+             $this.tab('show');
+             return false;
+             });
 
-            registerCloseEvent();
-*/
+             registerCloseEvent();
+             */
             $('#myModal').on('hidden.bs.modal', function () {
                 $("#callbackurl").remove();
                 $("#callbackdata").remove();
@@ -181,10 +194,11 @@
 
         });
 
+
     </script>
 </head>
 
-<body>
+<body id="mainbody">
 <div class="container-fluid" style="height: 100%">
     <%
         if (loggedon) {
@@ -199,8 +213,8 @@
                      style="text-align: center; height: 31px; background-color: darkgray !important;">
                         <span class="pull-left">
                             <div id="tabs">
-                            <ul class="nav nav-tabs toptab" role="tablist" id='maintabs'
-                                style="padding-top: 0px; padding-left: 0px; padding-bottom: 0px;"></ul>
+                                <ul class="nav nav-tabs toptab" role="tablist" id='maintabs'
+                                    style="padding-top: 0px; padding-left: 0px; padding-bottom: 0px;"></ul>
                             </div>
                         </span>
                 </div>
@@ -209,33 +223,6 @@
         </div>
     </div>
     <%@include file="includes/footer.jsp" %>
-    <%} else {%>
-    <div class="row" style="margin-top: 100px;">
-        <div class="col-md-5"></div>
-        <div class="col-md-6">
-            <div class="panel panel-primary">
-                <div class="panel-heading">
-                    <h3 class="panel-title">რეგისტრაცია</h3>
-                </div>
-                <div class="panel-body">
-                    <form role="form" method="post">
-                        <div class="form-group">
-                            <input class="form-control" placeholder="სარეგისტრაციო სახელი" type="text" name="loginid"
-                                   id="loginid">
-                        </div>
-                        <div class="form-group">
-                            <input class="form-control" id="password" name="password" placeholder="პაროლი"
-                                   type="password">
-                        </div>
-                        <button type="submit" name="login" id="login" class="active btn btn-block btn-lg btn-primary">
-                            შესვლა
-                        </button>
-                    </form>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-5"></div>
-    </div>
     <%}%>
 </div>
 
@@ -332,7 +319,8 @@
         <%
             for (int i = 0; i < cmenunames.length; i++) {
         %>
-        <li class="roomlistitm" num="<%=i%>"><a id="<%=cmenufiles[i]%>" icon="<%=cmenuicons[i]%>" href="#"><%=cmenunames[i]%>
+        <li class="roomlistitm" num="<%=i%>"><a id="<%=cmenufiles[i]%>" icon="<%=cmenuicons[i]%>"
+                                                href="#"><%=cmenunames[i]%>
         </a></li>
         <%
             }
