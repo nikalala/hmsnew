@@ -102,7 +102,7 @@
 
                 </div>
                 <p class="no-margin margin-top-5" style="font-family: 'BGMtavr'; font-size: 11px;">
-                    გსურთ სხვა მომხმარებლით შესვლა? <a href="index.jsp"> დააჭირეთ აქ</a>
+                    გსურთ სხვა მომხმარებლით შესვლა? <a href="login.jsp?logout=1"> დააჭირეთ აქ</a>
                 </p>
             </div>
 
