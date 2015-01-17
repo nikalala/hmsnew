@@ -9,6 +9,12 @@ $(document).ready(function () {
 
 });
 
+$(document).keydown(function(e) {
+    if (e.keyCode == 76 && e.ctrlKey) {
+        window.location.href = "content/lock.jsp";
+    }
+});
+
 function loadMainBody() {
     getBody("stayviewleft", "stayview", 'დატვირთულობა', 'res1');
 }
