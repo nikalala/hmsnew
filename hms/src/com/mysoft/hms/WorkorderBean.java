@@ -16,10 +16,12 @@ package com.mysoft.hms;
 
 // imports- 
 
+
 public class WorkorderBean
 // extends+ 
 
 // extends- 
+
 {
     private Long workorderid;
     private boolean workorderid_is_modified = false;
@@ -1120,4 +1122,5 @@ public class WorkorderBean
 // class+ 
 
 // class- 
+
 }

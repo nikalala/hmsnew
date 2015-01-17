@@ -89,7 +89,7 @@ BootstrapDialog.confirm = function (message, callback) {
             {
                 label: 'Cancel',
                 action: function (dialog) {
-                    typeof dialog.getData('callback') === 'function' && dialog.getData('callback')(false);
+                    //typeof dialog.getData('callback') === 'function' && dialog.getData('callback')(false);
                     dialog.close();
                 }
             },

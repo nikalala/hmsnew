@@ -16,10 +16,12 @@ package com.mysoft.hms;
 
 // imports- 
 
+
 public class PickdropBean
 // extends+ 
 
 // extends- 
+
 {
     private Long pickdropid;
     private boolean pickdropid_is_modified = false;
@@ -603,4 +605,5 @@ public class PickdropBean
 // class+ 
 
 // class- 
+
 }

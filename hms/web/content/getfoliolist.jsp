@@ -23,6 +23,8 @@ if(reserv.getBillto() == 0) bid = reserv.getCompanyid().longValue();
 String sql = "where folioid = "+folio.getFolioid();
 if(hideunposted)
     sql += " and done = true ";
+if(hidevoid)
+    sql += " and zvoid = false ";
 /*
         + "(select folioid from folio where "
         + "reservationroomid = "+rroom.getReservationroomid()+" and ";
@@ -57,12 +59,14 @@ int start = ilmt*ipg - ilmt;
 if(start < 0)   start = 0;
 String limit = "limit "+ilmt+" offset "+start;
 String order = "order by "+sidx+" "+sord;
-String[][] ss = new String[items.length][11];
+String[][] ss = new String[items.length][12];
 int n = 0;
 for(int i=0;i<items.length;i++){
     double koeff = 1;
     String particular = "";
     boolean noroom = false;
+    int z = 1;
+    if(items[i].getZvoid().booleanValue()) z = 0;
     if(items[i].getRoomid() != null){
         RoomBean room = RoomManager.getInstance().loadByPrimaryKey(items[i].getRoomid());
         rtp = RoomtypeManager.getInstance().loadByPrimaryKey(room.getRoomtypeid());
@@ -95,8 +99,17 @@ for(int i=0;i<items.length;i++){
         case 3:
             payment = PaymentManager.getInstance().loadByPrimaryKey(items[i].getPaymentid());
             if(payment != null){
-                pmethod = PaymentmethodManager.getInstance().loadByPrimaryKey(payment.getPaymentmethodid());
-                particular = pmethod.getCode();
+                if(payment.getPaymentmethodid() == null){
+                    ContragentBean contragent = ContragentManager.getInstance().loadByPrimaryKey(payment.getContracgentid());
+                    if(contragent.getName() != null && contragent.getName().trim().length() > 0)
+                        particular = contragent.getName();
+                    else
+                        particular = contragent.getFname()+" "+contragent.getLname();
+                    if(items[i].getNote() != null && items[i].getNote().trim().length() > 0)    particular += items[i].getNote();
+                } else {
+                    pmethod = PaymentmethodManager.getInstance().loadByPrimaryKey(payment.getPaymentmethodid());
+                    particular = pmethod.getCode();
+                }
                 koeff = -1;
             }
             break;
@@ -151,6 +164,7 @@ for(int i=0;i<items.length;i++){
     ss[n][8] = maincurrency.getCode();
     ss[n][9] = dc.format(amt*koeff);
     ss[n][10] = String.valueOf(st);
+    ss[n][11] = String.valueOf(z);
     //System.out.println(i+" = "+n+" = "+amt);
     n++;
     }
@@ -167,7 +181,7 @@ n--;
             %>
                 <row id='<%=ss[i][0]%>'>
                     <%
-                    for(int j=1;j<11;j++){
+                    for(int j=1;j<12;j++){
                         %><cell><![CDATA[<%=ss[i][j]%>]]></cell><%
                     }
                     %>

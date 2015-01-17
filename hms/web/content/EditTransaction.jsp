@@ -95,6 +95,13 @@ function getReasonList1(rid){
             "html"
         );
     }
+    
+function audittrial(id){
+    $.post("content/audittrial.jsp",{ id: id },function(data){
+        BootstrapDialog.info(data);
+    });
+    
+}
 </script>
 <div class="container-fluid" id="edittransaction0" style="padding-top: 4px; height: 100%;">
     <div class="row" style="margin-bottom: 0px; padding-left: 5px;  padding-right: 5px;">
@@ -195,7 +202,7 @@ function getReasonList1(rid){
                     რეზერვირებულია <span style="color: #52A2E5;"><%=user.getFname()%> <%=user.getLname()%></span>
                 </td>
                 <td align="right">
-                    <button type="button" class="btn btn-sm btn-primary navbar-btn">აუდიტი</button>
+                    <button type="button" class="btn btn-sm btn-primary navbar-btn" onclick='audittrial(<%=rroom.getReservationroomid()%>)'>აუდიტი</button>
                     <button type="button" class="btn btn-sm btn-default navbar-btn">შენახვა</button>
                     <button type="button" class="btn btn-sm btn-default navbar-btn">გაუქმება</button>
                     <%if(sts == 0){%>

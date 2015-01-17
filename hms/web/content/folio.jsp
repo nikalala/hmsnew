@@ -21,6 +21,19 @@ FolioBean[] folios = FolioManager.getInstance().loadByWhere("where reservationro
 %>
 <script>
     
+    function folioZvoid(id,ids){
+        if(ids.length > 0){
+            
+            newsWindow1("voidfolioitem","რედაქტირება","ids="+ids);
+            
+            //BootstrapDialog.confirm("ნამდვილად გინდათ არჩეული ჩანაწერების გაუქმება?",function(){
+            //    alert("aaaa");
+            //    refreshFoliolist(id);
+            //});
+            
+        } else BootstrapDialog.alert("აირჩიეთ ჩანაწერ(ებ)ი");
+    }
+    
     function editFolioAction(itemid){
         newmWindow1("editfolioitem","რედაქტირება","folioitemid="+itemid);
     }
@@ -164,7 +177,7 @@ $(document).ready(function(){
     {
         url:'content/getfoliolist.jsp?reservationroomid=<%=rroom.getReservationroomid()%>&itemize=true&folioid=<%=folios[0].getFolioid()%>&hideunposted=false&hidevoid=false',
         datatype: 'xml',
-        colNames:['ოთახი', 'თარიღი', 'ნომერი', 'ტიპი', 'აღწერა', 'მომხმარებელი','მოქმედება','','ფასი','st'],
+        colNames:['ოთახი', 'თარიღი', 'ნომერი', 'ტიპი', 'აღწერა', 'მომხმარებელი','მოქმედება','','ფასი','st','z'],
         colModel:[
             {width: 80, hidden:false, name:'roomnumber', index:'roomnumber', align:'left'},
             {width: 100, hidden:false, name:'itemdate', index:'itemdate', align:'left'},
@@ -175,7 +188,8 @@ $(document).ready(function(){
             {width: 100, hidden:false, name:'act', index:'act', align:'center'},
             {width: 40, hidden:false, name:'curr', index:'curr', align:'right'},
             {width: 50, hidden:false, name:'price', index:'price', align:'right'},
-            {hidden:true, name:'st', index:'st'}
+            {hidden:true, name:'st', index:'st'},
+            {hidden:true, name:'z', index:'z'}
         ],
         rowNum:2000,
         height: height,
@@ -191,6 +205,11 @@ $(document).ready(function(){
             var totbal = 0;
             for (var i = 0; i < rows.length; i++)
             {
+                var z = Number($("#listfolio").getCell(rows[i],"z"));
+                if(z == 0){
+                    $("#listfolio").jqGrid('setRowData',rows[i],false, {'text-decoration': 'line-through'});
+                    jQuery("#jqg_listfolio_"+rows[i]).hide();
+                }
                 var st = $("#listfolio").getCell(rows[i],"st");
                 if(st == "0"){
                     $("#listfolio").jqGrid('setRowData',rows[i],false, {color: '#949090'});
@@ -198,7 +217,7 @@ $(document).ready(function(){
                 }
                 var price = Number($("#listfolio").getCell(rows[i],"price"));
                 
-                totbal += price;
+                if(z == 1)  totbal += price;
             }
             $("#listfolio td").css('border-right-style', 'none').css('border-left-style', 'none');
             
@@ -340,7 +359,7 @@ $(document).ready(function(){
             <td style="background-color: #E9E9E9; width: 80px; border-right-color: #BEBEBE; border-right-style: solid; border-right-width: 1px; padding-left: 5px;">
                 არჩეულზე
             </td>
-            <td class='pseudobutton' style="background-color: #F9F9F9; text-align: center; width: 80px; border-right-color: #BEBEBE; border-right-style: solid; border-right-width: 1px;">
+            <td class='pseudobutton' onclick='folioZvoid(<%=rroom.getReservationroomid()%>,$("#listfolio").jqGrid ("getGridParam", "selarrrow"))' style="background-color: #F9F9F9; text-align: center; width: 80px; border-right-color: #BEBEBE; border-right-style: solid; border-right-width: 1px;">
                 <b>გაუქმება</b>
             </td>
             <td class='pseudobutton' style="background-color: #F9F9F9; text-align: center; width: 80px; border-right-color: #BEBEBE; border-right-style: solid; border-right-width: 1px;">

@@ -116,7 +116,7 @@ try{
             }
             ex.setRate(rate0);
         } else if(actiontype == 6){     // ოთახის გადასახადი
-            
+            fitem.setRoomoper(actionvalue);
         } else if(actiontype == 7){     // გადატანა
             
         }

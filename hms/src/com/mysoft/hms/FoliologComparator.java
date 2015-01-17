@@ -19,9 +19,9 @@ import java.util.Comparator;
 
 
 /**
- * Comparator class is used to sort the RoomhstBean objects.
+ * Comparator class is used to sort the FoliologBean objects.
  */
-public class RoomhstComparator implements Comparator
+public class FoliologComparator implements Comparator
 // extends+ 
 
 // extends- 
@@ -37,51 +37,51 @@ public class RoomhstComparator implements Comparator
     private boolean bReverse;
 
     /**
-     * Constructor class for RoomhstComparator.
+     * Constructor class for FoliologComparator.
      * <br>
      * Example:
      * <br>
-     * <code>Arrays.sort(pArray, new RoomhstComparator(RoomhstManager.ROOMHSTID, bReverse));<code>
+     * <code>Arrays.sort(pArray, new FoliologComparator(FoliologManager.FOLIOLOGID, bReverse));<code>
      *
      * @param iType the field from which you want to sort
      * <br>
      * Possible values are:
      * <ul>
-     *   <li>RoomhstManager.ID_ROOMHSTID
-     *   <li>RoomhstManager.ID_ROOMID
-     *   <li>RoomhstManager.ID_HOUSEKEEPINGSTATUSID
-     *   <li>RoomhstManager.ID_REGDATE
-     *   <li>RoomhstManager.ID_REGBYID
-     *   <li>RoomhstManager.ID_HOUSEUNITID
+     *   <li>FoliologManager.ID_FOLIOLOGID
+     *   <li>FoliologManager.ID_LOGNAME
+     *   <li>FoliologManager.ID_CONTENT
+     *   <li>FoliologManager.ID_REGDATE
+     *   <li>FoliologManager.ID_REGBYID
+     *   <li>FoliologManager.ID_FOLIOITEMID
      * </ul>
      */
-    public RoomhstComparator(int iType)
+    public FoliologComparator(int iType)
     {
         this(iType, false);
     }
 
     /**
-     * Constructor class for RoomhstComparator.
+     * Constructor class for FoliologComparator.
      * <br>
      * Example:
      * <br>
-     * <code>Arrays.sort(pArray, new RoomhstComparator(RoomhstManager.ROOMHSTID, bReverse));<code>
+     * <code>Arrays.sort(pArray, new FoliologComparator(FoliologManager.FOLIOLOGID, bReverse));<code>
      *
      * @param iType the field from which you want to sort.
      * <br>
      * Possible values are:
      * <ul>
-     *   <li>RoomhstManager.ID_ROOMHSTID
-     *   <li>RoomhstManager.ID_ROOMID
-     *   <li>RoomhstManager.ID_HOUSEKEEPINGSTATUSID
-     *   <li>RoomhstManager.ID_REGDATE
-     *   <li>RoomhstManager.ID_REGBYID
-     *   <li>RoomhstManager.ID_HOUSEUNITID
+     *   <li>FoliologManager.ID_FOLIOLOGID
+     *   <li>FoliologManager.ID_LOGNAME
+     *   <li>FoliologManager.ID_CONTENT
+     *   <li>FoliologManager.ID_REGDATE
+     *   <li>FoliologManager.ID_REGBYID
+     *   <li>FoliologManager.ID_FOLIOITEMID
      * </ul>
      *
      * @param bReverse set this value to true, if you want to reverse the sorting results
      */
-    public RoomhstComparator(int iType, boolean bReverse)
+    public FoliologComparator(int iType, boolean bReverse)
     {
         this.iType = iType;
         this.bReverse = bReverse;
@@ -92,45 +92,45 @@ public class RoomhstComparator implements Comparator
      */
     public int compare(Object pObj1, Object pObj2)
     {
-        RoomhstBean b1 = (RoomhstBean)pObj1;
-        RoomhstBean b2 = (RoomhstBean)pObj2;
+        FoliologBean b1 = (FoliologBean)pObj1;
+        FoliologBean b2 = (FoliologBean)pObj2;
         int iReturn = 0;
         switch(iType)
         {
-            case RoomhstManager.ID_ROOMHSTID:
-                if (b1.getRoomhstid() == null && b2.getRoomhstid() != null) {
+            case FoliologManager.ID_FOLIOLOGID:
+                if (b1.getFoliologid() == null && b2.getFoliologid() != null) {
                     iReturn = -1;
-                } else if (b1.getRoomhstid() == null && b2.getRoomhstid() == null) {
+                } else if (b1.getFoliologid() == null && b2.getFoliologid() == null) {
                     iReturn = 0;
-                } else if (b1.getRoomhstid() != null && b2.getRoomhstid() == null) {
+                } else if (b1.getFoliologid() != null && b2.getFoliologid() == null) {
                     iReturn = 1;
                 } else { 
-                    iReturn = b1.getRoomhstid().compareTo(b2.getRoomhstid());
+                    iReturn = b1.getFoliologid().compareTo(b2.getFoliologid());
                 }
                 break;
-            case RoomhstManager.ID_ROOMID:
-                if (b1.getRoomid() == null && b2.getRoomid() != null) {
+            case FoliologManager.ID_LOGNAME:
+                if (b1.getLogname() == null && b2.getLogname() != null) {
                     iReturn = -1;
-                } else if (b1.getRoomid() == null && b2.getRoomid() == null) {
+                } else if (b1.getLogname() == null && b2.getLogname() == null) {
                     iReturn = 0;
-                } else if (b1.getRoomid() != null && b2.getRoomid() == null) {
+                } else if (b1.getLogname() != null && b2.getLogname() == null) {
                     iReturn = 1;
                 } else { 
-                    iReturn = b1.getRoomid().compareTo(b2.getRoomid());
+                    iReturn = b1.getLogname().compareTo(b2.getLogname());
                 }
                 break;
-            case RoomhstManager.ID_HOUSEKEEPINGSTATUSID:
-                if (b1.getHousekeepingstatusid() == null && b2.getHousekeepingstatusid() != null) {
+            case FoliologManager.ID_CONTENT:
+                if (b1.getContent() == null && b2.getContent() != null) {
                     iReturn = -1;
-                } else if (b1.getHousekeepingstatusid() == null && b2.getHousekeepingstatusid() == null) {
+                } else if (b1.getContent() == null && b2.getContent() == null) {
                     iReturn = 0;
-                } else if (b1.getHousekeepingstatusid() != null && b2.getHousekeepingstatusid() == null) {
+                } else if (b1.getContent() != null && b2.getContent() == null) {
                     iReturn = 1;
                 } else { 
-                    iReturn = b1.getHousekeepingstatusid().compareTo(b2.getHousekeepingstatusid());
+                    iReturn = b1.getContent().compareTo(b2.getContent());
                 }
                 break;
-            case RoomhstManager.ID_REGDATE:
+            case FoliologManager.ID_REGDATE:
                 if (b1.getRegdate() == null && b2.getRegdate() != null) {
                     iReturn = -1;
                 } else if (b1.getRegdate() == null && b2.getRegdate() == null) {
@@ -141,7 +141,7 @@ public class RoomhstComparator implements Comparator
                     iReturn = b1.getRegdate().compareTo(b2.getRegdate());
                 }
                 break;
-            case RoomhstManager.ID_REGBYID:
+            case FoliologManager.ID_REGBYID:
                 if (b1.getRegbyid() == null && b2.getRegbyid() != null) {
                     iReturn = -1;
                 } else if (b1.getRegbyid() == null && b2.getRegbyid() == null) {
@@ -152,15 +152,15 @@ public class RoomhstComparator implements Comparator
                     iReturn = b1.getRegbyid().compareTo(b2.getRegbyid());
                 }
                 break;
-            case RoomhstManager.ID_HOUSEUNITID:
-                if (b1.getHouseunitid() == null && b2.getHouseunitid() != null) {
+            case FoliologManager.ID_FOLIOITEMID:
+                if (b1.getFolioitemid() == null && b2.getFolioitemid() != null) {
                     iReturn = -1;
-                } else if (b1.getHouseunitid() == null && b2.getHouseunitid() == null) {
+                } else if (b1.getFolioitemid() == null && b2.getFolioitemid() == null) {
                     iReturn = 0;
-                } else if (b1.getHouseunitid() != null && b2.getHouseunitid() == null) {
+                } else if (b1.getFolioitemid() != null && b2.getFolioitemid() == null) {
                     iReturn = 1;
                 } else { 
-                    iReturn = b1.getHouseunitid().compareTo(b2.getHouseunitid());
+                    iReturn = b1.getFolioitemid().compareTo(b2.getFolioitemid());
                 }
                 break;
             default: 

@@ -17,23 +17,23 @@ package com.mysoft.hms;
 // imports- 
 
 
-public class RoomhstBean
+public class FoliologBean
 // extends+ 
 
 // extends- 
 
 {
-    private Long roomhstid;
-    private boolean roomhstid_is_modified = false;
-    private boolean roomhstid_is_initialized = false;
+    private Long foliologid;
+    private boolean foliologid_is_modified = false;
+    private boolean foliologid_is_initialized = false;
     
-    private Integer roomid;
-    private boolean roomid_is_modified = false;
-    private boolean roomid_is_initialized = false;
+    private String logname;
+    private boolean logname_is_modified = false;
+    private boolean logname_is_initialized = false;
     
-    private Integer housekeepingstatusid;
-    private boolean housekeepingstatusid_is_modified = false;
-    private boolean housekeepingstatusid_is_initialized = false;
+    private String content;
+    private boolean content_is_modified = false;
+    private boolean content_is_initialized = false;
     
     private java.sql.Timestamp regdate;
     private boolean regdate_is_modified = false;
@@ -43,9 +43,9 @@ public class RoomhstBean
     private boolean regbyid_is_modified = false;
     private boolean regbyid_is_initialized = false;
     
-    private Integer houseunitid;
-    private boolean houseunitid_is_modified = false;
-    private boolean houseunitid_is_initialized = false;
+    private Long folioitemid;
+    private boolean folioitemid_is_modified = false;
+    private boolean folioitemid_is_initialized = false;
     
     private boolean _isNew = true;
     
@@ -53,212 +53,188 @@ public class RoomhstBean
      * Do not use this constructor directly, please use the factory method
      * available in the associated manager.
      */
-    RoomhstBean()
+    FoliologBean()
     {
     }
     
     /**
-     * Getter method for roomhstid.
+     * Getter method for foliologid.
      * <br>
      * PRIMARY KEY.<br>
      * Meta Data Information (in progress):
      * <ul>
-     * <li>full name: roomhst.roomhstid
+     * <li>full name: foliolog.foliologid
      * <li>column size: 19
      * <li>jdbc type returned by the driver: Types.BIGINT
      * </ul>
      *
-     * @return the value of roomhstid
+     * @return the value of foliologid
      */
-    public Long getRoomhstid()
+    public Long getFoliologid()
     {
-        return roomhstid; 
+        return foliologid; 
     }
 
     /**
-     * Setter method for roomhstid.
+     * Setter method for foliologid.
      * <br>
      * The new value is set only if compareTo() says it is different,
      * or if one of either the new value or the current value is null.
      * In case the new value is different, it is set and the field is marked as 'modified'.
      *
-     * @param newVal the new value to be assigned to roomhstid
+     * @param newVal the new value to be assigned to foliologid
      */
-    public void setRoomhstid(Long newVal) {
-        if ((newVal != null && this.roomhstid != null && (newVal.compareTo(this.roomhstid) == 0)) || 
-            (newVal == null && this.roomhstid == null && roomhstid_is_initialized)) {
+    public void setFoliologid(Long newVal) {
+        if ((newVal != null && this.foliologid != null && (newVal.compareTo(this.foliologid) == 0)) || 
+            (newVal == null && this.foliologid == null && foliologid_is_initialized)) {
             return; 
         } 
-        this.roomhstid = newVal; 
-        roomhstid_is_modified = true; 
-        roomhstid_is_initialized = true; 
+        this.foliologid = newVal; 
+        foliologid_is_modified = true; 
+        foliologid_is_initialized = true; 
     }
 
     /**
-     * Setter method for roomhstid.
+     * Setter method for foliologid.
      * <br>
      * Convenient for those who do not want to deal with Objects for primary types.
      *
-     * @param newVal the new value to be assigned to roomhstid
+     * @param newVal the new value to be assigned to foliologid
      */
-    public void setRoomhstid(long newVal) {
-        setRoomhstid(new Long(newVal));
+    public void setFoliologid(long newVal) {
+        setFoliologid(new Long(newVal));
     }
 
     /**
-     * Determines if the roomhstid has been modified.
+     * Determines if the foliologid has been modified.
      *
      * @return true if the field has been modified, false if the field has not been modified
      */
-    public boolean isRoomhstidModified() {
-        return roomhstid_is_modified; 
+    public boolean isFoliologidModified() {
+        return foliologid_is_modified; 
     }
 
     /**
-     * Determines if the roomhstid has been initialized.
+     * Determines if the foliologid has been initialized.
      * <br>
      * It is useful to determine if a field is null on purpose or just because it has not been initialized.
      *
      * @return true if the field has been initialized, false otherwise
      */
-    public boolean isRoomhstidInitialized() {
-        return roomhstid_is_initialized; 
+    public boolean isFoliologidInitialized() {
+        return foliologid_is_initialized; 
     }
 
     /**
-     * Getter method for roomid.
+     * Getter method for logname.
      * <br>
      * Meta Data Information (in progress):
      * <ul>
-     * <li>full name: roomhst.roomid
-     * <li> foreign key: room.roomid
-     * <li>column size: 10
-     * <li>jdbc type returned by the driver: Types.INTEGER
+     * <li>full name: foliolog.logname
+     * <li>column size: 2147483647
+     * <li>jdbc type returned by the driver: Types.VARCHAR
      * </ul>
      *
-     * @return the value of roomid
+     * @return the value of logname
      */
-    public Integer getRoomid()
+    public String getLogname()
     {
-        return roomid; 
+        return logname; 
     }
 
     /**
-     * Setter method for roomid.
+     * Setter method for logname.
      * <br>
      * The new value is set only if compareTo() says it is different,
      * or if one of either the new value or the current value is null.
      * In case the new value is different, it is set and the field is marked as 'modified'.
      *
-     * @param newVal the new value to be assigned to roomid
+     * @param newVal the new value to be assigned to logname
      */
-    public void setRoomid(Integer newVal) {
-        if ((newVal != null && this.roomid != null && (newVal.compareTo(this.roomid) == 0)) || 
-            (newVal == null && this.roomid == null && roomid_is_initialized)) {
+    public void setLogname(String newVal) {
+        if ((newVal != null && this.logname != null && (newVal.compareTo(this.logname) == 0)) || 
+            (newVal == null && this.logname == null && logname_is_initialized)) {
             return; 
         } 
-        this.roomid = newVal; 
-        roomid_is_modified = true; 
-        roomid_is_initialized = true; 
+        this.logname = newVal; 
+        logname_is_modified = true; 
+        logname_is_initialized = true; 
     }
 
     /**
-     * Setter method for roomid.
-     * <br>
-     * Convenient for those who do not want to deal with Objects for primary types.
-     *
-     * @param newVal the new value to be assigned to roomid
-     */
-    public void setRoomid(int newVal) {
-        setRoomid(new Integer(newVal));
-    }
-
-    /**
-     * Determines if the roomid has been modified.
+     * Determines if the logname has been modified.
      *
      * @return true if the field has been modified, false if the field has not been modified
      */
-    public boolean isRoomidModified() {
-        return roomid_is_modified; 
+    public boolean isLognameModified() {
+        return logname_is_modified; 
     }
 
     /**
-     * Determines if the roomid has been initialized.
+     * Determines if the logname has been initialized.
      * <br>
      * It is useful to determine if a field is null on purpose or just because it has not been initialized.
      *
      * @return true if the field has been initialized, false otherwise
      */
-    public boolean isRoomidInitialized() {
-        return roomid_is_initialized; 
+    public boolean isLognameInitialized() {
+        return logname_is_initialized; 
     }
 
     /**
-     * Getter method for housekeepingstatusid.
+     * Getter method for content.
      * <br>
      * Meta Data Information (in progress):
      * <ul>
-     * <li>full name: roomhst.housekeepingstatusid
-     * <li> foreign key: housekeepingstatus.housekeepingstatusid
-     * <li>column size: 10
-     * <li>jdbc type returned by the driver: Types.INTEGER
+     * <li>full name: foliolog.content
+     * <li>column size: 2147483647
+     * <li>jdbc type returned by the driver: Types.VARCHAR
      * </ul>
      *
-     * @return the value of housekeepingstatusid
+     * @return the value of content
      */
-    public Integer getHousekeepingstatusid()
+    public String getContent()
     {
-        return housekeepingstatusid; 
+        return content; 
     }
 
     /**
-     * Setter method for housekeepingstatusid.
+     * Setter method for content.
      * <br>
      * The new value is set only if compareTo() says it is different,
      * or if one of either the new value or the current value is null.
      * In case the new value is different, it is set and the field is marked as 'modified'.
      *
-     * @param newVal the new value to be assigned to housekeepingstatusid
+     * @param newVal the new value to be assigned to content
      */
-    public void setHousekeepingstatusid(Integer newVal) {
-        if ((newVal != null && this.housekeepingstatusid != null && (newVal.compareTo(this.housekeepingstatusid) == 0)) || 
-            (newVal == null && this.housekeepingstatusid == null && housekeepingstatusid_is_initialized)) {
+    public void setContent(String newVal) {
+        if ((newVal != null && this.content != null && (newVal.compareTo(this.content) == 0)) || 
+            (newVal == null && this.content == null && content_is_initialized)) {
             return; 
         } 
-        this.housekeepingstatusid = newVal; 
-        housekeepingstatusid_is_modified = true; 
-        housekeepingstatusid_is_initialized = true; 
+        this.content = newVal; 
+        content_is_modified = true; 
+        content_is_initialized = true; 
     }
 
     /**
-     * Setter method for housekeepingstatusid.
-     * <br>
-     * Convenient for those who do not want to deal with Objects for primary types.
-     *
-     * @param newVal the new value to be assigned to housekeepingstatusid
-     */
-    public void setHousekeepingstatusid(int newVal) {
-        setHousekeepingstatusid(new Integer(newVal));
-    }
-
-    /**
-     * Determines if the housekeepingstatusid has been modified.
+     * Determines if the content has been modified.
      *
      * @return true if the field has been modified, false if the field has not been modified
      */
-    public boolean isHousekeepingstatusidModified() {
-        return housekeepingstatusid_is_modified; 
+    public boolean isContentModified() {
+        return content_is_modified; 
     }
 
     /**
-     * Determines if the housekeepingstatusid has been initialized.
+     * Determines if the content has been initialized.
      * <br>
      * It is useful to determine if a field is null on purpose or just because it has not been initialized.
      *
      * @return true if the field has been initialized, false otherwise
      */
-    public boolean isHousekeepingstatusidInitialized() {
-        return housekeepingstatusid_is_initialized; 
+    public boolean isContentInitialized() {
+        return content_is_initialized; 
     }
 
     /**
@@ -266,7 +242,7 @@ public class RoomhstBean
      * <br>
      * Meta Data Information (in progress):
      * <ul>
-     * <li>full name: roomhst.regdate
+     * <li>full name: foliolog.regdate
      * <li>default value: now()
      * <li>column size: 29
      * <li>jdbc type returned by the driver: Types.TIMESTAMP
@@ -334,7 +310,7 @@ public class RoomhstBean
      * <br>
      * Meta Data Information (in progress):
      * <ul>
-     * <li>full name: roomhst.regbyid
+     * <li>full name: foliolog.regbyid
      * <li> foreign key: personnel.personnelid
      * <li>column size: 10
      * <li>jdbc type returned by the driver: Types.INTEGER
@@ -398,71 +374,71 @@ public class RoomhstBean
     }
 
     /**
-     * Getter method for houseunitid.
+     * Getter method for folioitemid.
      * <br>
      * Meta Data Information (in progress):
      * <ul>
-     * <li>full name: roomhst.houseunitid
-     * <li> foreign key: houseunit.houseunitid
-     * <li>column size: 10
-     * <li>jdbc type returned by the driver: Types.INTEGER
+     * <li>full name: foliolog.folioitemid
+     * <li> foreign key: folioitem.folioitemid
+     * <li>column size: 19
+     * <li>jdbc type returned by the driver: Types.BIGINT
      * </ul>
      *
-     * @return the value of houseunitid
+     * @return the value of folioitemid
      */
-    public Integer getHouseunitid()
+    public Long getFolioitemid()
     {
-        return houseunitid; 
+        return folioitemid; 
     }
 
     /**
-     * Setter method for houseunitid.
+     * Setter method for folioitemid.
      * <br>
      * The new value is set only if compareTo() says it is different,
      * or if one of either the new value or the current value is null.
      * In case the new value is different, it is set and the field is marked as 'modified'.
      *
-     * @param newVal the new value to be assigned to houseunitid
+     * @param newVal the new value to be assigned to folioitemid
      */
-    public void setHouseunitid(Integer newVal) {
-        if ((newVal != null && this.houseunitid != null && (newVal.compareTo(this.houseunitid) == 0)) || 
-            (newVal == null && this.houseunitid == null && houseunitid_is_initialized)) {
+    public void setFolioitemid(Long newVal) {
+        if ((newVal != null && this.folioitemid != null && (newVal.compareTo(this.folioitemid) == 0)) || 
+            (newVal == null && this.folioitemid == null && folioitemid_is_initialized)) {
             return; 
         } 
-        this.houseunitid = newVal; 
-        houseunitid_is_modified = true; 
-        houseunitid_is_initialized = true; 
+        this.folioitemid = newVal; 
+        folioitemid_is_modified = true; 
+        folioitemid_is_initialized = true; 
     }
 
     /**
-     * Setter method for houseunitid.
+     * Setter method for folioitemid.
      * <br>
      * Convenient for those who do not want to deal with Objects for primary types.
      *
-     * @param newVal the new value to be assigned to houseunitid
+     * @param newVal the new value to be assigned to folioitemid
      */
-    public void setHouseunitid(int newVal) {
-        setHouseunitid(new Integer(newVal));
+    public void setFolioitemid(long newVal) {
+        setFolioitemid(new Long(newVal));
     }
 
     /**
-     * Determines if the houseunitid has been modified.
+     * Determines if the folioitemid has been modified.
      *
      * @return true if the field has been modified, false if the field has not been modified
      */
-    public boolean isHouseunitidModified() {
-        return houseunitid_is_modified; 
+    public boolean isFolioitemidModified() {
+        return folioitemid_is_modified; 
     }
 
     /**
-     * Determines if the houseunitid has been initialized.
+     * Determines if the folioitemid has been initialized.
      * <br>
      * It is useful to determine if a field is null on purpose or just because it has not been initialized.
      *
      * @return true if the field has been initialized, false otherwise
      */
-    public boolean isHouseunitidInitialized() {
-        return houseunitid_is_initialized; 
+    public boolean isFolioitemidInitialized() {
+        return folioitemid_is_initialized; 
     }
 
     /**
@@ -491,24 +467,24 @@ public class RoomhstBean
      * @return true if the object has been modified, false if the object has not been modified
      */
     public boolean isModified() {
-        return roomhstid_is_modified || 
-		roomid_is_modified || 
-		housekeepingstatusid_is_modified || 
+        return foliologid_is_modified || 
+		logname_is_modified || 
+		content_is_modified || 
 		regdate_is_modified || 
 		regbyid_is_modified || 
-		houseunitid_is_modified;
+		folioitemid_is_modified;
     }
 
     /**
      * Resets the object modification status to 'not modified'.
      */
     public void resetIsModified() {
-        roomhstid_is_modified = false;
-        roomid_is_modified = false;
-        housekeepingstatusid_is_modified = false;
+        foliologid_is_modified = false;
+        logname_is_modified = false;
+        content_is_modified = false;
         regdate_is_modified = false;
         regbyid_is_modified = false;
-        houseunitid_is_modified = false;
+        folioitemid_is_modified = false;
     }
 
     /**
@@ -516,13 +492,13 @@ public class RoomhstBean
      *
      * @param bean the bean to copy into the current bean
      */
-    public void copy(RoomhstBean bean) {
-        setRoomhstid(bean.getRoomhstid());
-        setRoomid(bean.getRoomid());
-        setHousekeepingstatusid(bean.getHousekeepingstatusid());
+    public void copy(FoliologBean bean) {
+        setFoliologid(bean.getFoliologid());
+        setLogname(bean.getLogname());
+        setContent(bean.getContent());
         setRegdate(bean.getRegdate());
         setRegbyid(bean.getRegbyid());
-        setHouseunitid(bean.getHouseunitid());
+        setFolioitemid(bean.getFolioitemid());
     }
 
     /**
@@ -531,13 +507,13 @@ public class RoomhstBean
      * @return the object as a string
      */
     public String toString() {
-        return   "\n[roomhst] "
-                 + "\n - roomhst.roomhstid = " + (roomhstid_is_initialized ? ("[" + (roomhstid == null ? null : roomhstid.toString()) + "]") : "not initialized") + ""
-                 + "\n - roomhst.roomid = " + (roomid_is_initialized ? ("[" + (roomid == null ? null : roomid.toString()) + "]") : "not initialized") + ""
-                 + "\n - roomhst.housekeepingstatusid = " + (housekeepingstatusid_is_initialized ? ("[" + (housekeepingstatusid == null ? null : housekeepingstatusid.toString()) + "]") : "not initialized") + ""
-                 + "\n - roomhst.regdate = " + (regdate_is_initialized ? ("[" + (regdate == null ? null : regdate.toString()) + "]") : "not initialized") + ""
-                 + "\n - roomhst.regbyid = " + (regbyid_is_initialized ? ("[" + (regbyid == null ? null : regbyid.toString()) + "]") : "not initialized") + ""
-                 + "\n - roomhst.houseunitid = " + (houseunitid_is_initialized ? ("[" + (houseunitid == null ? null : houseunitid.toString()) + "]") : "not initialized") + ""
+        return   "\n[foliolog] "
+                 + "\n - foliolog.foliologid = " + (foliologid_is_initialized ? ("[" + (foliologid == null ? null : foliologid.toString()) + "]") : "not initialized") + ""
+                 + "\n - foliolog.logname = " + (logname_is_initialized ? ("[" + (logname == null ? null : logname.toString()) + "]") : "not initialized") + ""
+                 + "\n - foliolog.content = " + (content_is_initialized ? ("[" + (content == null ? null : content.toString()) + "]") : "not initialized") + ""
+                 + "\n - foliolog.regdate = " + (regdate_is_initialized ? ("[" + (regdate == null ? null : regdate.toString()) + "]") : "not initialized") + ""
+                 + "\n - foliolog.regbyid = " + (regbyid_is_initialized ? ("[" + (regbyid == null ? null : regbyid.toString()) + "]") : "not initialized") + ""
+                 + "\n - foliolog.folioitemid = " + (folioitemid_is_initialized ? ("[" + (folioitemid == null ? null : folioitemid.toString()) + "]") : "not initialized") + ""
             ;
     }
 

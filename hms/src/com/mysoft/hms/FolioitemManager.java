@@ -2058,6 +2058,43 @@ public class FolioitemManager
         }
     }
 
+    
+    
+    ///////////////////////////////////////////////////////////////////////
+    // MANY TO MANY: LOAD OTHER BEAN VIA JUNCTION TABLE 
+    ///////////////////////////////////////////////////////////////////////
+    /**
+     * Retrieves an array of PersonnelBean using the relation table Foliolog given a FolioitemBean object.
+     *
+     * @param pObject the FolioitemBean pObject to be used
+     * @return an array of PersonnelBean 
+     */
+    // MANY TO MANY
+    public PersonnelBean[] loadPersonnelViaFoliolog(FolioitemBean pObject) throws SQLException
+    {
+         Connection c = null;
+         PreparedStatement ps = null;
+         String strSQL =      " SELECT "
+                         + "        *"
+                         + " FROM  "
+                         + "        personnel,foliolog"
+                         + " WHERE "    
+                         + "     foliolog.folioitemid = ?"
+                         + " AND foliolog.regbyid = personnel.personnelid";
+         try
+         {
+             c = getConnection();
+             ps = c.prepareStatement(strSQL,ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+             Manager.setLong(ps, 1, pObject.getFolioitemid());
+             return PersonnelManager.getInstance().loadByPreparedStatement(ps);
+         }
+         finally
+         {
+            getManager().close(ps);
+            freeConnection(c);
+         }
+    }
+
 
 
     ///////////////////////////////////////////////////////////////////////
