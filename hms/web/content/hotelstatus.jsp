@@ -29,7 +29,6 @@
 
     function loadDefaults() {
         initializeGrid(hsGrid);
-        $('#grid-table .date').datepicker(<%=pickerformat1%>);
         $("#grid-table .btn-group").css("width", "100%", "!important");
         $("#grid-table label").each(function () {
             $(this).css("float", "right", "!important");

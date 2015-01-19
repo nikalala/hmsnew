@@ -838,6 +838,8 @@ System.out.println(rid+" = "+statusid);
     int height = 50;
     double padding = 0.5;
 
+    HousekeepingstatusBean[] hksb = HousekeepingstatusManager.getInstance().loadByWhere("");
+
     String[] months = {"იანვარი", "თებერვალი", "მარტი", "აპრილი", "მაისი", "ივნისი", "ივლისი", "აგვისტო", "სექტემბერი", "ოქტომბერი", "ნოემბერი", "დეკემბერი"};
 
     String[] workordercategory = {"დასუფთავება","მოვლა","სხვა დავალება","შეკეთება"};

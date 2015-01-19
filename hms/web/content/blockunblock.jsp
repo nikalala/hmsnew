@@ -70,16 +70,56 @@
         $("#smbody").next().hide();
         $(".modal-sm").css("width", "580px");
         $('#curr_table .date').datepicker(<%=pickerFormatForDatePickers%>);
+        $('#fromdateval, #todateval').val('');
+        disableSecondDatePicker();
+        addReason();
     });
 
     $("#currs").on('change', function () {
 
     });
-    addReason();
+
+
+    $(document).on("change", "#fromdateval", function () {
+        var currDate = $(this).val();
+        if (!isNullOrEmpty(currDate)) {
+            $("#todate").datepicker("setStartDate", currDate);
+            $("#todateval").val(currDate);
+        } else {
+            $("#todateval").val('');
+        }
+        disableSecondDatePicker();
+    });
+
+    function disableSecondDatePicker() {
+        var fcValue = $("#fromdateval").val();
+        if (isNullOrEmpty(fcValue)) {
+            $("#todate .glyphicon-calendar").css("display", "none");
+            $("#todateval").prop("disabled", true);
+        } else {
+            $("#todateval").prop("disabled", false);
+            $("#todate .glyphicon-calendar").css("display", "block");
+        }
+    }
+
+    function toggleReason(_this) {
+        $('#reasonblock').toggle();
+        if ($('#reasonblock').is(":visible")) {
+            $(_this).find("i").removeClass("fa-plus");
+            $(_this).find("i").addClass("fa-minus");
+        }
+        else {
+            $(_this).find("i").addClass("fa-plus");
+            $(_this).find("i").removeClass("fa-minus");
+        }
+    }
+
     function addReason() {
         loader.show();
         var reason = $("#reasontxt").val();
-        if(!isNullOrEmpty(reason)){ reason = "?reasonid="+reason;  }
+        if (!isNullOrEmpty(reason)) {
+            reason = "?reasonid=" + reason;
+        }
         $.post("content/getroomreason.jsp" + reason, {}, function (data) {
             $("#reasondrop").html(data);
             $('#reasondrop').selectpicker("refresh");
@@ -108,8 +148,10 @@
                             </td>
                             <td>
                                 <div class="input-append date" id="fromdate">
-                                    <input type="text" class="span2 " value="" id="fromdateval" placeholder=" თარიღი" style="height: 27px;">
-                                    <span class="add-on" style="background : none  !important;border: none !important;margin-left: -30px;">
+                                    <input type="text" class="span2 " value="" id="fromdateval" placeholder=" თარიღი"
+                                           style="height: 27px;">
+                                    <span class="add-on"
+                                          style="background : none  !important;border: none !important;margin-left: -30px;">
                                         <i class="glyphicon glyphicon-calendar"></i>
                                     </span>
                                 </div>
@@ -121,8 +163,10 @@
                             </td>
                             <td>
                                 <div class="input-append date" id="todate">
-                                    <input type="text" class="span2 " value="" id="todateval" placeholder=" თარიღი" style="height: 27px;">
-                                    <span class="add-on" style="background : none  !important;border: none !important;margin-left: -30px;">
+                                    <input type="text" class="span2 " value="" id="todateval" placeholder=" თარიღი"
+                                           style="height: 27px;">
+                                    <span class="add-on"
+                                          style="background : none  !important;border: none !important;margin-left: -30px;">
                                         <i class="glyphicon glyphicon-calendar"></i>
                                     </span>
                                 </div>
@@ -136,11 +180,14 @@
                                 <select id="reasondrop" class="dropdown" style="width:96px;">
 
                                 </select>
-                                <div style="position: absolute;right: 39px; top: 8px; cursor:pointer;" onclick="$('#reasonblock').show();"><i class="fa fa-plus"></i></div>
+
+                                <div style="position: absolute;right: 39px; top: 8px; cursor:pointer;"
+                                     onclick="toggleReason(this)"><i class="fa fa-plus"></i></div>
                                 <div id="reasonblock" style="display: none;">
-                                    <br />
-                                    <textarea id="reasontxt" placeholder="შეიყვანეთ მიზეზი"></textarea><br /><br />
-                                    <button type="button" class="btn btn-default" id="dismissreason" onclick="$('#reasonblock').hide();">
+                                    <br/>
+                                    <textarea id="reasontxt" placeholder="შეიყვანეთ მიზეზი"></textarea><br/><br/>
+                                    <button type="button" class="btn btn-default" id="dismissreason"
+                                            onclick="$('#reasonblock').hide();">
                                         დახურვა
                                     </button>
                                     <button type="button" class="btn btn-primary" onclick="addReason()">შენახვა</button>
