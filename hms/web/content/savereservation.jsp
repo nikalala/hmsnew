@@ -69,8 +69,8 @@ try{
             guest.setZip(val);
         } else if(name.equalsIgnoreCase("guestinfo_countryid")){
             int countryid = Integer.parseInt(val);
-            if(countryid == 0)
-                throw new Exception("აირჩიეთ ქვეყანა");
+            if(countryid > 0)
+                //throw new Exception("აირჩიეთ ქვეყანა");
             guest.setCountryid(countryid);
         } else if(name.equalsIgnoreCase("guestinfo_roomid")){
             if(checkin && (val == null || val.equalsIgnoreCase("null") || val.equals("0")))
@@ -79,7 +79,7 @@ try{
                 resroom.setRoomid(new Integer(val));
         } else if(name.equalsIgnoreCase("guestinfo_ratetypeid")){
             if(val == null || val.equalsIgnoreCase("null") || val.equals("0"))
-                throw new Exception("აირჩიეთ ტარიფი");
+                throw new Exception("აირჩიეთ ოთახის ტიპი");
             resroom.setRatetypeid(new Integer(val));
         } else if(name.equalsIgnoreCase("guestinfo_arrivaldate")){
             if(res.getArraivaldate() != null){
@@ -155,8 +155,8 @@ try{
         } else if(name.equalsIgnoreCase("payinfo_tax")){
             res.setNomanualtax(new Boolean(val));
         } else if(name.equalsIgnoreCase("payinfo_billto")){
-            if(val.equals("-1"))
-                throw new Exception("აირჩიეთ გადამხდელი");
+            //if(val.equals("-1"))
+                //throw new Exception("აირჩიეთ გადამხდელი");
             res.setBillto(new Integer(val));
         } else if(name.equalsIgnoreCase("payinfo_notax")){
             res.setNotax(new Boolean(val));
@@ -169,6 +169,7 @@ try{
                     throw new Exception("აირჩიეთ გადახდის ქვემეთოდი");
                 res.setPaymentmethodid(new Integer(val));
                 res.setPaymentmode(0);
+                guest.setPaymentmethodid(new Integer(val));
             } else res.setPaymentmethodid(null);
         } else if(name.equalsIgnoreCase("payinfo_paymentcontragentid")){
             Boolean payinfo_paymentmode1 = new Boolean(request.getParameter("payinfo_paymentmode1"));
@@ -177,6 +178,7 @@ try{
                     throw new Exception("აირჩიეთ გადახდის ქვემეთოდი");
                 res.setPaymentcontragentid(new Long(val));
                 res.setPaymentmode(1);
+                guest.setContragentid(new Integer(val));
             } else res.setPaymentcontragentid(null);
             
         } else if(name.equalsIgnoreCase("payinfo_relesedate")){
@@ -349,36 +351,66 @@ try{
         
     }
     
+    if(guest.getGender() == null)   guest.setGender(2);
+    //if(guest.get == null)   guest.setGender(2);
+    
     if(res.getRatetype() == null)
         throw new Exception("აირჩიეთ ტარიფი");
-    if(res.getPaymentmode()== null)
-        throw new Exception("აირჩიეთ გადახდის მეთოდი");
+    //if(res.getPaymentmode()== null)
+    //    throw new Exception("აირჩიეთ გადახდის მეთოდი");
     
     if(payment.getAmount() != null && payment.getPaymentmethodid().intValue() == 0)
         throw new Exception("აირჩიეთ გადახდის ტიპი გადახდაში");
     
     CheckinreservationsettingsBean[] stt = CheckinreservationsettingsManager.getInstance().loadAll();
     if(stt.length > 0){
-        if(stt[0].getAddresswalkin().booleanValue() && (guest.getAddress() == null && guest.getAddress().trim().length() == 0))
-            throw new Exception("სტუმრის მისამართი არაა მითითებული");
-        if(stt[0].getGuestidnwalkin().booleanValue() && (guest.getIdn() == null && guest.getIdn().trim().length() == 0))
-            throw new Exception("სტუმრის საბუთის ნომერი არაა მითითებული");
-        if(stt[0].getBsourcewalkin().booleanValue() && res.getBsourceid() == null)
-            throw new Exception("აირჩიეთ ბიზნესის წყარო");
-        if(stt[0].getCompanywalkin().booleanValue() && res.getCompanyid() == null)
-            throw new Exception("აირჩიეთ კომპანია");
-        if(stt[0].getGuestnamewalkin().booleanValue()){
-            if(guest.getFname() == null || guest.getFname().trim().length() == 0)
-                throw new Exception("სტუმრის სახელი არაა მითითებული");
-            if(guest.getLname() == null || guest.getLname().trim().length() == 0)
-                throw new Exception("სტუმრის გვარი არაა მითითებული");
+        if(checkin){
+            if(stt[0].getGuestnamewalkin().booleanValue()){
+                if(guest.getFname() == null || guest.getFname().trim().length() == 0)
+                    throw new Exception("სტუმრის სახელი არაა მითითებული");
+                if(guest.getLname() == null || guest.getLname().trim().length() == 0)
+                    throw new Exception("სტუმრის გვარი არაა მითითებული");
+            }
+            if(stt[0].getAddresswalkin().booleanValue() && (guest.getAddress() == null || guest.getAddress().trim().length() == 0))
+                throw new Exception("სტუმრის მისამართი არაა მითითებული");
+            if(stt[0].getGuestidnwalkin().booleanValue() && (guest.getIdn() == null || guest.getIdn().trim().length() == 0))
+                throw new Exception("სტუმრის საბუთის ნომერი არაა მითითებული");
+            if(stt[0].getNationalitywalkin().booleanValue() && guest.getNationalityid()== null)
+                throw new Exception("სტუმრის ეროვნება არაა მითითებული");
+            if(stt[0].getPaymenttypewalkin().booleanValue() && res.getPaymentmode() == null)
+                throw new Exception("აირჩიეთ გადახდის მეთოდი");
+            if(stt[0].getCompanywalkin().booleanValue() && (res.getCompanyid() == null || res.getCompanyid().longValue() == 0))
+                throw new Exception("აირჩიეთ კომპანია");
+            if(stt[0].getMarketcodewalkin().booleanValue() && res.getMarketid() == null)
+                throw new Exception("სეგმენტი არაა მითითებული");
+            if(stt[0].getBsourcewalkin().booleanValue() && res.getBsourceid() == null)
+                throw new Exception("აირჩიეთ ბიზნესის წყარო");
+            if(stt[0].getTawalkin().booleanValue() && res.getTaid() == null)
+                throw new Exception("აირჩიეთ ტურისტული აგენტი");
+        } else {
+            if(stt[0].getGuestnamereserv().booleanValue()){
+                if(guest.getFname() == null || guest.getFname().trim().length() == 0)
+                    throw new Exception("სტუმრის სახელი არაა მითითებული");
+                if(guest.getLname() == null || guest.getLname().trim().length() == 0)
+                    throw new Exception("სტუმრის გვარი არაა მითითებული");
+            }
+            if(stt[0].getAddressreserv().booleanValue() && (guest.getAddress() == null || guest.getAddress().trim().length() == 0))
+                throw new Exception("სტუმრის მისამართი არაა მითითებული");
+            if(stt[0].getGuestidnreserv().booleanValue() && (guest.getIdn() == null || guest.getIdn().trim().length() == 0))
+                throw new Exception("სტუმრის საბუთის ნომერი არაა მითითებული");
+            if(stt[0].getNationalityreserv().booleanValue() && guest.getNationalityid()== null)
+                throw new Exception("სტუმრის ეროვნება არაა მითითებული");
+            if(stt[0].getPaymenttypereserv().booleanValue() && res.getPaymentmode() == null)
+                throw new Exception("აირჩიეთ გადახდის მეთოდი");
+            if(stt[0].getCompanyreserv().booleanValue() && (res.getCompanyid() == null || res.getCompanyid().longValue() == 0))
+                throw new Exception("აირჩიეთ კომპანია");
+            if(stt[0].getMarketcodereserv().booleanValue() && res.getMarketid() == null)
+                throw new Exception("სეგმენტი არაა მითითებული");
+            if(stt[0].getBsourcereserv().booleanValue() && res.getBsourceid() == null)
+                throw new Exception("აირჩიეთ ბიზნესის წყარო");
+            if(stt[0].getTareserv().booleanValue() && res.getTaid() == null)
+                throw new Exception("აირჩიეთ ტურისტული აგენტი");
         }
-        if(stt[0].getMarketcodewalkin().booleanValue() && res.getMarketid() == null)
-            throw new Exception("სეგმენტი არაა მითითებული");
-        if(stt[0].getNationalitywalkin().booleanValue() && guest.getNationalityid()== null)
-            throw new Exception("სტუმრის ნაციონალობა არაა მითითებული");
-//        if(stt[0].getPaymenttypewalkin().booleanValue())
-//            throw new Exception("სტუმრის მისამართი არაა მითითებული");
     }
     
     if(resroom.getRoomid() != null && resroom.getRoomid().intValue() == 0)

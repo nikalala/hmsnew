@@ -70,17 +70,21 @@ double topay = 0;
 double paid = 0;
 
 PaymentmethodBean[] ptps = PaymentmethodManager.getInstance().loadByWhere("order by paymentmethodid");
+ContragentBean[] contragents = ContragentManager.getInstance().loadByWhere("order by name, lname");
 //ViewSourcemixlistTravelagentOrCompanyAllBean[] scs =ViewSourcemixlistTravelagentOrCompanyAllManager.getInstance().loadByWhere(" order by name asc");
 String[] paytaypevalue = new String[2];
-paytaypevalue[0] = "<select id='paymentmethodid' style='width: 200px;'>";
+paytaypevalue[0] = "<select id='paymentmethodid' style='width: 200px;'><option value='0'>-- აირჩიეთ --</option>";
 for(int i=0;i<ptps.length;i++){
     paytaypevalue[0] += "<option value='"+ptps[i].getPaymentmethodid()+"'>"+ptps[i].getName()+"</option>";
 }
 paytaypevalue[0] += "</select>";
-paytaypevalue[1] = "<select id='paymentmethodid' style='width: 200px;'>";
-//for(int i=0;i<scs.length;i++){
-//    paytaypevalue[1] += "<option value='"+scs[i].getSourcemixid()+"'>"+scs[i].getName()+"</option>";
-//}
+paytaypevalue[1] = "<select id='paymentmethodid' style='width: 200px;'><option value='0'>-- აირჩიეთ --</option>";
+for(int i=0;i<contragents.length;i++){
+    String cname = contragents[i].getName();
+    if(cname == null || cname.trim().length() == 0)
+        cname = contragents[i].getFname()+" "+contragents[i].getLname();
+    paytaypevalue[1] += "<option value='"+contragents[i].getContragentid()+"'>"+cname+"</option>";
+}
 paytaypevalue[1] += "</select>";
 
 Calendar c1 = Calendar.getInstance();
@@ -142,6 +146,7 @@ paid = getSum("select sum(amount*ratedate("+maincurrency.getCurrencyid()+",curre
                                     <td><b>გადახდის ინსტრუქცია</b></td>
                                     <td>
                                         <select id="payinstruction" style="width: 200px;">
+                                            <option value="-1">-- აირჩიეთ --</option>
                                             <%
                                             for(int i=0;i<billto.length;i++){
                                                 String sel = "";
@@ -160,7 +165,7 @@ paid = getSum("select sum(amount*ratedate("+maincurrency.getCurrencyid()+",curre
                                     <td>
                                         <div class="radio-inline">
                                             <label>
-                                                <input type="radio" name="paytype" id="paytype1" value="cash" onchange="chPayType(1)" checked>
+                                                <input type="radio" name="paytype" id="paytype1" value="cash" onchange="chPayType(1)">
                                                 ნაღდი
                                             </label>
                                         </div>
