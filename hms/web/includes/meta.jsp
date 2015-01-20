@@ -839,6 +839,7 @@ System.out.println(rid+" = "+statusid);
     double padding = 0.5;
 
     HousekeepingstatusBean[] hksb = HousekeepingstatusManager.getInstance().loadByWhere("");
+    PersonnelBean[] hkeeper = PersonnelManager.getInstance().loadByWhere("where personneltypeid = 2");
 
     String[] months = {"იანვარი", "თებერვალი", "მარტი", "აპრილი", "მაისი", "ივნისი", "ივლისი", "აგვისტო", "სექტემბერი", "ოქტომბერი", "ნოემბერი", "დეკემბერი"};
 

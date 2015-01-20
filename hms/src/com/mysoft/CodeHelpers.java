@@ -2,12 +2,6 @@ package com.mysoft;
 
 
 import com.mysoft.hms.HousekeepingstatusBean;
-import com.mysoft.hms.HousekeepingstatusManager;
-import com.mysoft.hms.HouseunitManager;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 /**
  * Created by TuraMan on 12/4/2014.
@@ -27,9 +21,8 @@ public class CodeHelpers {
         {
             if(item.getHousekeepingstatusid().equals(roomStatus))
             {
-                return isNullOrEmpty(item.getColor()) ? "" : item.getColor();
+                return item.getColor();
             }
-            break;
         }
         return "";
     }

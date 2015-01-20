@@ -4,46 +4,56 @@
 
 <rows>
     <%
-
-
+        Manager.getInstance().beginTransaction();
         Connection con = Manager.getInstance().getConnection();
-        String query = "SELECT gethotelstatusgrid('" + dclosedate + "')";
-        System.out.println(query);
-        ResultSet retVal = con.createStatement().executeQuery(query);
-        if(retVal != null)
-        {
-            int size = retVal.getFetchSize();
-            for(int u = 0; u < size; u++)
-            {
-                String item = new String(retVal.getBytes(u));
-                System.out.println(item);
 
-            }
+        java.sql.CallableStatement cntfnct = con.prepareCall("{ ? = call gethotelstatusgrid ( ? ) }");
+        cntfnct.registerOutParameter(1, java.sql.Types.OTHER);
+        cntfnct.setString(2, dclosedate.toString());
+        cntfnct.execute();
 
-        }
-        Manager.getInstance().releaseConnection(con);
+        ResultSet rs = (ResultSet) cntfnct.getObject(1);
 
-
-        for (int i = 0; i < 30; i++) {
-            String color = "color='#FA1511'";
-            if (i % 4 == 0) {
-                color = "";
-            }
-
-
-
-
+        if (rs != null) {
+            while (rs.next()) {
+                int hstatus = rs.getInt("hstatus");
+                int rstatus = rs.getInt("rstatus");
+                String roomst = "";
+                if(rstatus != -2)
+                {
+                    roomst = roomstatus[rs.getInt("rstatus")];
+                }
+                String color = "style='background-color:" + CodeHelpers.getColorByRoomStatus(hstatus, hksb)+";'";
     %>
-    <row id='<%=i%>'>
+    <row id='<%=rs.getInt("roomid")%>_room'>
         <cell>
-            <![CDATA[<%=(i+1)*100%><a style="cursor:pointer;" onclick="blockunbloc(<%=(i+1)*100%>)">    <i style="font-size: 15px; margin-left:10px;" class="fa fa-lock"></i></a>]]></cell>
-        <cell><![CDATA[Junior King Room]]></cell>
+            <![CDATA[
+                <%=rs.getString("roomname")%>
+                <a style="cursor:pointer;" onclick="blockunbloc(<%=rs.getInt("roomid")%>)">
+                    <i style="font-size: 15px; margin-left:10px;" class="fa fa-lock"></i>
+                </a>
+            ]]>
+        </cell>
+        <cell><![CDATA[<%=rs.getString("roomtype")%>]]></cell>
         <cell>
-            <![CDATA[<div class="status-color" <%=color%> style="-webkit-border-radius: 3px;-moz-border-radius: 3px;border-radius: 3px;background-color:#FA1511; width:16px; margin-top: 1px; margin-right: 4px; height:16px; float:left;"></div><div style="float:left;">Dirty <i style="font-size: 15px; margin-left:10px;" class="fa fa-pencil"></i> <i style="font-size: 15px; margin-left:10px;" class="fa fa-times"></i></div> ]]></cell>
-        <cell><![CDATA[Available]]></cell>
+            <![CDATA[
+                <div class="status-color" <%=color%>></div>
+                <div style="float:left;">
+                    <i style="font-size: 15px; margin-left:10px;" class="fa fa-pencil"></i>
+                    <i style="font-size: 15px; margin-left:10px;" class="fa fa-times"></i>
+                </div>
+            ]]>
+        </cell>
+        <cell><![CDATA[<%=roomst%>]]></cell>
         <cell><![CDATA[<i style="font-size: 15px;  margin-left:10px;" class="fa fa-pencil"></i>]]></cell>
         <cell><![CDATA[<i style="font-size: 15px;  margin-left:10px;" class="fa fa-times"></i> ]]></cell>
     </row>
-    <% } %>
+    <% }
+    } %>
+
+    <%
+        Manager.getInstance().releaseConnection(con);
+        Manager.getInstance().endTransaction(true);
+    %>
 </rows>
 
