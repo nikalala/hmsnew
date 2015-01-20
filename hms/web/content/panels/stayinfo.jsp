@@ -253,8 +253,11 @@
                                             name="guestinfo_reservationtypeid" id="guestinfo_reservationtypeid">
                                         <%
                                             for (int i = 0; i < resrvationtypes.length; i++) {
+                                                String sel = "";
+                                                if(displaysettings.length > 0 && displaysettings[0].getReservationtypeid().intValue() == resrvationtypes[i].getReservationtypeid().intValue())
+                                                    sel = "selected";
                                         %>
-                                        <option value="<%=resrvationtypes[i].getReservationtypeid()%>"><%=resrvationtypes[i].getName()%>
+                                        <option value="<%=resrvationtypes[i].getReservationtypeid()%>" <%=sel%>><%=resrvationtypes[i].getName()%>
                                         </option>
                                         <%
                                             }

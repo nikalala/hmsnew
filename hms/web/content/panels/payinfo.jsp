@@ -167,8 +167,11 @@ ReservationtypeBean[] resrvationtypes = ReservationtypeManager.getInstance().loa
                             <option value="-1">--აირჩიეთ--</option>
                             <%
                             for(int i=0;i<billto.length;i++){
+                                String sel = "";
+                                if(displaysettings.length > 0 && displaysettings[0].getBillto().intValue() == i)
+                                    sel = "selected";
                             %>
-                            <option value="<%=i%>"><%=billto[i]%></option>
+                            <option value="<%=i%>" <%=sel%>><%=billto[i]%></option>
                             <%
                             }
                             %>
@@ -208,9 +211,12 @@ ReservationtypeBean[] resrvationtypes = ReservationtypeManager.getInstance().loa
                     <span class="tbllabel" style="padding-right: 5px;">გადახდის მეთოდი</span>
                     <%
                     for(int i=0;i<paymentmode.length;i++){
+                        String sel = "";
+                        if(displaysettings.length > 0 && displaysettings[0].getPaymentmode().intValue() == i)
+                            sel = "checked";
                     %>
                     <label class="radio-inline" style="height: 23px !important;">
-                        <input type="radio" name="payinfo_paymentmode" id="payinfo_paymentmode<%=i%>" value="<%=i%>"> <%=paymentmode[i]%>
+                        <input type="radio" name="payinfo_paymentmode" id="payinfo_paymentmode<%=i%>" value="<%=i%>" <%=sel%>> <%=paymentmode[i]%>
                     </label>
                     <%}%>
                 </div>
@@ -225,8 +231,11 @@ ReservationtypeBean[] resrvationtypes = ReservationtypeManager.getInstance().loa
                             <option value="0">--აირჩიეთ--</option>
                             <%
                             for(int i=0;i<paymentmethods.length;i++){
+                                String sel = "";
+                                if(displaysettings.length > 0 && displaysettings[0].getPaymentmethodid().intValue() == paymentmethods[i].getPaymentmethodid().intValue())
+                                    sel = "selected";
                             %>
-                            <option value="<%=paymentmethods[i].getPaymentmethodid()%>"><%=paymentmethods[i].getName()%></option>
+                            <option value="<%=paymentmethods[i].getPaymentmethodid()%>" <%=sel%>><%=paymentmethods[i].getName()%></option>
                             <%
                             }
                             %>

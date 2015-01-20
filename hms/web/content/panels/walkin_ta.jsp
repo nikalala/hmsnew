@@ -19,6 +19,8 @@ BsourceBean[] bsources = BsourceManager.getInstance().loadByWhere("order by name
             else
                 $("#wlakin_other_currency").html("<%=maincurrency.getCode()%>");
         } else {
+            $("#wlakin_other_value").val("");
+            $("#wlakin_other_voucher").val("");
             $("#wlakin_other_value").attr("readonly",true);
             $("#wlakin_other_voucher").attr("readonly",true);
             $("#wlakin_other_currency").html();
@@ -34,6 +36,8 @@ BsourceBean[] bsources = BsourceManager.getInstance().loadByWhere("order by name
                 function(data){
                     $("#wlakin_other_commissionplan").val(data.cplan);
                     $("#wlakin_other_value").val(data.val);
+                    if($("#wlakin_other_taid").val() == "0")
+                        $("#wlakin_other_commissionplan").attr("readonly",true);
                     WalkinChVals();
                 },
                 "json"
@@ -73,7 +77,7 @@ BsourceBean[] bsources = BsourceManager.getInstance().loadByWhere("order by name
             <form class="form-inline" role="form">
             <div class="form-group">
                 <div class="input-group-xs">
-                    <select class="form-control dropdown" name="wlakin_other_commissionplan" id="wlakin_other_commissionplan" style="width: 180px;">
+                    <select class="form-control dropdown" readonly name="wlakin_other_commissionplan" id="wlakin_other_commissionplan" style="width: 180px;">
                         <option value="-1">--აირჩიეთ--</option>
                         <%
                         for(int i=0;i<commissionplan.length;i++){
