@@ -4,11 +4,12 @@
 <%
 String cplan = "-1";
 String val = "";
-ContragentBean cb = ContragentManager.getInstance().loadByPrimaryKey(new Long(request.getParameter("taid")));
+long id = Long.parseLong(request.getParameter("taid"));
+ContragentBean cb = ContragentManager.getInstance().loadByPrimaryKey(id);
 JSONObject json = new JSONObject();
-if(cb != null && cb.getCommissionplan() != null)
+if(id > 0 && cb != null && cb.getCommissionplan() != null)
     cplan = cb.getCommissionplan().toString();
-if(cb != null && cb.getVal() != null)
+if(id > 0 && cb != null && cb.getVal() != null)
     val = dc.format(cb.getVal().doubleValue());
 json.put("cplan", cplan);
 json.put("val", val);

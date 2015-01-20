@@ -16,8 +16,11 @@ CountryBean[] countries = CountryManager.getInstance().loadByWhere("order by nam
                     <select class="form-control dropdown" name="guestinfo_salutationid" id="guestinfo_salutationid" style="width: 50px; padding: 2px 2px; font-size: 12px; line-height: 1.5;">
                         <%
                         for(int i=0;i<salutations.length;i++){
+                            String sel = "";
+                            if(displaysettings.length > 0 && displaysettings[0].getSalutationid() != null && displaysettings[0].getSalutationid().intValue() == salutations[i].getSalutationid().intValue())
+                                sel = "selected";
                         %>
-                        <option value="<%=salutations[i].getSalutationid()%>"><%=salutations[i].getName()%></option>
+                        <option value="<%=salutations[i].getSalutationid()%>" <%=sel%>><%=salutations[i].getName()%></option>
                         <%
                         }
                         %>
