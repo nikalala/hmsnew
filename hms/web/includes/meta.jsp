@@ -813,6 +813,7 @@ System.out.println(rid+" = "+statusid);
     SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
     SimpleDateFormat dflong = new SimpleDateFormat("dd/MM/yyyy HH:mm");
     SimpleDateFormat sdf0 = new SimpleDateFormat("yyyy/MM/dd");
+    SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     SimpleDateFormat dtlong = new SimpleDateFormat("dd/MM/yyyy HH:mm");
     SimpleDateFormat dtlongs = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
     SimpleDateFormat dtime = new SimpleDateFormat("HH:mm");

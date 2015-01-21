@@ -343,7 +343,10 @@ function newWindow(fname, title) {
     $.post("content/" + fname + ".jsp", {}, function (data) {
         $("#mheader").html(title);
         $("#mbody").html(data);
-        $('#myModal').modal();
+        $('#myModal').modal({
+            backdrop: 'static',
+            keyboard: true
+        });
         loader.hide();
     });
 }

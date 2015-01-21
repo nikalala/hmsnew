@@ -113,7 +113,7 @@
                                 </li>
                                 <li class="divider"></li>
                                 <li>
-                                    <a onclick="newmWindow1('changertype','რეზერვაციის ტიპის შეცვლა','rid=<%=ReservationBeanList[i].getReservationid()%>')"><img src="images/grid/calendar_icon.jpg"> რეზერვაციის ტიპის შეცვლა</a>
+                                    <a onclick="newmWindow1('changertype','რეზერვაციის ტიპის შეცვლა','rid=<%=ReservationBeanList[i].getReservationid()%>&arrdt=<%=ReservationBeanList[i].getArraivaldate()%>&dep=<%=ReservationBeanList[i].getDeparturedate()%>&roomid=<%=ReservationBeanList[i].getRoomid()%>')"><img src="images/grid/calendar_icon.jpg"> რეზერვაციის ტიპის შეცვლა</a>
                                 </li>
                                 <li class="divider"></li>
                                 <li>
