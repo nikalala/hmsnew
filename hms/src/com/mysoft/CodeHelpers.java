@@ -22,12 +22,10 @@ public class CodeHelpers {
         return object == null || object.length() == 0 ? "" : object;
     }
 
-    public static String getColorByRoomStatus(int roomStatus, HousekeepingstatusBean[] arr){
+    public static String getColorByRoomStatus(int roomStatus, HousekeepingstatusBean[] arr) {
 
-        for(HousekeepingstatusBean item : arr)
-        {
-            if(item.getHousekeepingstatusid().equals(roomStatus))
-            {
+        for (HousekeepingstatusBean item : arr) {
+            if (item.getHousekeepingstatusid().equals(roomStatus)) {
                 return item.getColor();
             }
         }
@@ -45,7 +43,6 @@ public class CodeHelpers {
         cal.add(Calendar.DATE, 1);
 
         return cal.getTime();
-
     }
 
     public static String getNextDay(String curDate, String dtFormat) {
@@ -62,4 +59,7 @@ public class CodeHelpers {
         }
         return nextDate;
     }
+
 }
+
+

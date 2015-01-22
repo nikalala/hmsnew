@@ -811,6 +811,7 @@ System.out.println(rid+" = "+statusid);
     SimpleDateFormat dnikaday = new SimpleDateFormat("dd-MM");
 
     SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+    SimpleDateFormat df2 = new SimpleDateFormat("MM-dd-yyyy");
     SimpleDateFormat dflong = new SimpleDateFormat("dd/MM/yyyy HH:mm");
     SimpleDateFormat sdf0 = new SimpleDateFormat("yyyy/MM/dd");
     SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
