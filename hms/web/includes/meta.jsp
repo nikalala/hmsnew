@@ -811,6 +811,7 @@ System.out.println(rid+" = "+statusid);
     SimpleDateFormat dnikaday = new SimpleDateFormat("dd-MM");
 
     SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+    SimpleDateFormat df3 = new SimpleDateFormat("dd.MM.yyyy");
     SimpleDateFormat df2 = new SimpleDateFormat("MM-dd-yyyy");
     SimpleDateFormat dflong = new SimpleDateFormat("dd/MM/yyyy HH:mm");
     SimpleDateFormat sdf0 = new SimpleDateFormat("yyyy/MM/dd");
@@ -868,7 +869,9 @@ System.out.println(rid+" = "+statusid);
     String[] taxpostingtype = {"ფიქსირებული პროცენტი", "ფიქსირებული თანხა"};
     String[] discountplan = {"ყველა", "ყოველ ღამე", "მხოლოდ პირველი ღამე", "მხოლოდ ბოლო ღამე"};
     String[] hotelstar = {"უვარსკვლავო", "*", "**", "***", "****", "***** და მეტი"};
-    String[] roomstatus = {"დადასტურებული რეზერვაცია", "მცხოვრები", "ვადაგადაცილებული", "წამსვლელი", "გაწერილი", "დაბლოკილი", "დღიური გამოყენება", "დაუდასტურებელი რეზერვაცია", "თავისუფალი"};
+
+
+
     String[] accounts = {"შემოსავალი გაუქმებიდან", "დღიური გამოყენების თანხა", "გვიან გაწერის თანხა", "ადრე მიღების თანხა", "არ გამოცხადების თანხა", "ოთახის ღირებულება"};
     String[] taxaccountnames = {"ოთახი", "გაუქმება", "არ გამოცხადება", "ადრე მიღება", "გვიან გაწერა", "დღიური გამოყენება", "ტურისტული აგენტის საკომისიო"};
     String[] reservationstatus = {"აქტიური", "გაუქმებული", "არ გამოცხადებული", "წაშლილი"};
@@ -880,6 +883,20 @@ System.out.println(rid+" = "+statusid);
     String[] dateformats2 = {"DD.MM.YYYY", "DD/MM/YYYY", "DD-MM-YYYY", "DD.MM.YY", "DD/MM/YY", "DD-MM-YY", "MM.DD.YYYY", "MM/DD/YYYY", "MM-DD-YYYY", "MM.DD.YY", "MM/DD/YY", "MM-DD-YY"};
     String[] arrdepdateformats = {"dd.MM", "dd/MM", "dd-MM", "MM.dd", "MM/dd", "MM-dd"};
     String[] timezones = TimeZone.getAvailableIDs();
+
+    String[] roomstatus =
+    {
+            "დადასტურებული რეზერვაცია",
+            "მცხოვრები",
+            "ვადაგადაცილებული",
+            "წამსვლელი",
+            "გაწერილი",
+            "დაბლოკილი",
+            "დღიური გამოყენება",
+            "დაუდასტურებელი რეზერვაცია",
+            "თავისუფალი"
+    };
+
     String[] reasoncategory =
     {
             "ოთახის დაბლოკვა",

@@ -28,6 +28,32 @@
 
 }
 
+
+.modal-custom-header {
+    padding: 10px;
+    border-bottom: 1px solid #e5e5e5;
+    min-height: 11.1px;
+}
+.modal-custom-content {
+    -webkit-box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+}
+.modal-custom-content {
+    position: relative;
+    background-color: #fff;
+    border: 1px solid #999;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    -webkit-box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);
+    background-clip: padding-box;
+    outline: 0;
+}
+.modal-custom-body {
+    position: relative;
+    padding: 10px;
+}
+
 #status_bar {
     -webkit-box-shadow: 0 3px 3px 2px #292929;
     box-shadow: 0 3px 3px 2px #C4C4C4;

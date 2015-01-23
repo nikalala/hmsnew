@@ -19,8 +19,8 @@ $(document).keydown(function (e) {
     }
 });
 
-function registerModalFunctions(){
-    $(document).on("click","#myModalCancel, #myModalSave, #myModalCheckin",function(){
+function registerModalFunctions() {
+    $(document).on("click", "#myModalCancel, #myModalSave, #myModalCheckin", function () {
         removeModal();
     });
 }
@@ -345,7 +345,7 @@ $(function () {
 
 function newWindow(fname, title) {
     loader.show();
-    $("#maindiv").remove();
+    loadModalDefs();
     $.post("content/" + fname + ".jsp", {}, function (data) {
         $("#mheader").html(title);
         $("#mbody").html(data);
@@ -375,7 +375,7 @@ function extramodal00(fname, title, qr) {
 }
 
 function newWindow1(fname, title, qr) {
-    $("#maindiv").remove();
+    loadModalDefs();
     registerModalFunctions();
     $.post("content/" + fname + ".jsp?" + qr, {}, function (data) {
         $("#mheader").html(title);
@@ -389,7 +389,7 @@ function newWindow1(fname, title, qr) {
 }
 
 function newsWindow(fname, title) {
-    $("#maindiv").remove();
+    loadModalDefs();
     registerModalFunctions();
     $.post("content/" + fname + ".jsp", {}, function (data) {
         $("#smheader").html(title);
@@ -399,7 +399,7 @@ function newsWindow(fname, title) {
 }
 
 function newsWindow1(fname, title, qr) {
-    $("#maindiv").remove();
+    loadModalDefs();
     registerModalFunctions();
     $.post("content/" + fname + ".jsp?" + qr, {}, function (data) {
         $("#smheader").html(title);
@@ -409,7 +409,7 @@ function newsWindow1(fname, title, qr) {
 }
 
 function modalWindow(fname, title, qr, callback, callbackparam) {
-    $("#maindiv").remove();
+    loadModalDefs();
     $.post("content/" + fname + ".jsp?" + qr, {}, function (data) {
         callback(callbackparam);
         BootstrapDialog.alert(data.trim());
@@ -418,7 +418,7 @@ function modalWindow(fname, title, qr, callback, callbackparam) {
 
 
 function newmWindow(fname, title) {
-    $("#maindiv").remove();
+    loadModalDefs();
     registerModalFunctions();
     $.post("content/" + fname + ".jsp", {}, function (data) {
         $("#mdheader").html(title);
@@ -429,7 +429,7 @@ function newmWindow(fname, title) {
 
 function newmWindow1(fname, title, qr) {
     loader.show();
-    $("#maindiv").remove();
+    loadModalDefs();
     registerModalFunctions();
     $.post("content/" + fname + ".jsp?" + qr, {}, function (data) {
         $("#mdheader").html(title);
@@ -999,7 +999,7 @@ function isValidEmailAddress(emailAddress) {
 
 function newWindowWithParams(fname, title, params) {
     loader.show();
-    $("#maindiv").remove();
+
     registerModalFunctions();
     $.post("content/" + fname + ".jsp" + params, {}, function (data) {
         $("#mheader").html(title);
@@ -1011,9 +1011,15 @@ function newWindowWithParams(fname, title, params) {
 
 function removeModal() {
 
-    $(".modal-body").html('')
+    $(".modal-body").html('');
 
 }
+
+function loadModalDefs() {
+    $('.modal-dialog').removeAttr('style');
+    $("#maindiv").remove();
+}
+
 
 function checkOut(rid, reloadid) {
     $.post("content/checkout.jsp", {rid: rid}, function (data) {

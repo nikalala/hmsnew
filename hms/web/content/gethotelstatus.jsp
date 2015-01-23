@@ -42,8 +42,9 @@
             <![CDATA[
                 <div class="status-color" color="<%=colorName%>" <%=color%>></div>
                 <div style="float:left;">
+                    <% if(!CodeHelpers.isNullOrEmpty(colorName)){ %><%=CodeHelpers.getCurrentHouseKeepingStatus(hstatus, hksb)%><% } %>
                     <i style="font-size: 15px; margin-left:10px;" onclick="updateselectedhs('<%=rs.getInt("roomid")%>_room',this)" class="fa fa-pencil"></i>
-                    <i style="font-size: 15px; margin-left:10px;" class="fa fa-times"></i>
+                    <% if(!CodeHelpers.isNullOrEmpty(colorName)){ %><i style="font-size: 15px; margin-left:10px; color: red;" class="fa fa-times"></i><% } %>
                 </div>
             ]]>
         </cell>
@@ -83,8 +84,9 @@
             <![CDATA[
                 <div class="status-color" color="<%=colorName%>" <%=color%>></div>
                 <div style="float:left;">
+                    <% if(!CodeHelpers.isNullOrEmpty(colorName)){ %><%=CodeHelpers.getCurrentHouseKeepingStatus(hstatus, hksb)%><% } %>
                     <i style="font-size: 15px; margin-left:10px;" onclick="updateselectedhs('<%=rs1.getInt("roomid")%>_house',this)" class="fa fa-pencil"></i>
-                    <i style="font-size: 15px; margin-left:10px;" class="fa fa-times"></i>
+                    <% if(!CodeHelpers.isNullOrEmpty(colorName)){ %><i style="font-size: 15px; margin-left:10px;color: red;" class="fa fa-times"></i><% } %>
                 </div>
             ]]>
         </cell>

@@ -26,6 +26,7 @@
         height: 16px;
         float: left;
     }
+
 </style>
 
 <script type="text/javascript">
@@ -39,7 +40,6 @@
         $('#grid-table .dropdown, #changestatus,#assigntohk, #viewby').selectpicker();
         $("#changestatus,#assigntohk").next().css("margin-top", "8px");
         $("#viewby").next().css("margin-top", "1px");
-        /*$(".first-table").css("width",$(".filter-form1").width(),"!important");*/
 
     });
 
@@ -74,6 +74,7 @@
                 '</select>' +
                 '<button type="button" onclick="saveMultStatusId()" class="btn btn-primary" id="btnChangeStatus" style="font-weight: bold; margin: 9px 10px 0 5px;">' +
                 'შესრულება</button>' +
+                '<button type="button" class="btn btn-danger" id="btnRemoveStatus" onclick="removeAllStatus()" style="font-weight: bold; float: right; margin: 9px 10px 0 0;">X</button>'+
                 '</div>' +
                 '<div class="footercont" style="padding-right: 10px;">' +
                 '<span style="margin: 15px 10px 0 10px; float: left;">დაავალე დამლაგებელს: </span>' +
@@ -142,11 +143,12 @@
             });
         }
     }
+
     function saveMultStatusId() {
 
         var hkid = $(".changestatus1").val();
-        if(hkid === "0")
-        {
+
+        if(hkid === "0"){
             BootstrapDialog.alert("აირჩიეთ სტატუსი");
             return;
         }
@@ -160,10 +162,8 @@
         var q = "?query=";
 
         var roomids = "";
+
         var unitids = "";
-
-
-
 
         $.each(result, function (id,val) {
 
@@ -186,16 +186,18 @@
         });
 
         var roomquery = "";
+
         var unitquery = "";
+
         if (!isNullOrEmpty(roomids)) {
             roomids = roomids.substring(0, roomids.trim().lastIndexOf(","));
             roomquery = "DELETE FROM roomhst where roomid IN(" + roomids + ");";
         }
+
         if (!isNullOrEmpty(unitids)) {
             unitids = unitids.substring(0, unitids.trim().lastIndexOf(","));
             unitquery = "DELETE FROM roomhst where houseunitid IN(" + unitids + ");";
         }
-
 
         $.post("content/execute.jsp?query=" + unitquery + roomquery, {}, function (data) {
             $.post("content/execute.jsp" + q + generatedSQL, {}, function (data2) {
@@ -206,20 +208,58 @@
         });
     }
 
+    function removeAllStatus() {
+        var ids = getSelectedRowIds(hsGrid.id);
+
+        var result = ids.split(',');
+
+        var roomids = "";
+
+        var unitids = "";
+
+        $.each(result, function (id,val) {
+            var id = val;
+            if (id.indexOf("room") != -1) {
+                roomids += id.replace("_room", "") + ",";
+            } else {
+                unitids += id.replace("_house", "") + ",";
+            }
+        });
+
+        var roomquery = "";
+
+        var unitquery = "";
+
+        if (!isNullOrEmpty(roomids)) {
+            roomids = roomids.substring(0, roomids.trim().lastIndexOf(","));
+            roomquery = "DELETE FROM roomhst where roomid IN(" + roomids + ");";
+        }
+
+        if (!isNullOrEmpty(unitids)) {
+            unitids = unitids.substring(0, unitids.trim().lastIndexOf(","));
+            unitquery = "DELETE FROM roomhst where houseunitid IN(" + unitids + ");";
+        }
+
+        $.post("content/execute.jsp?query=" + unitquery + roomquery, {}, function (data) {
+            reloadGrid(hsGrid.id, hsGrid.url);
+            loader.hide();
+        });
+    }
+
     $(document).on("click", "#dismissbutton, #smallmodalbtn", function () {
         $("#updatehs").css("display", "none");
     });
 
 </script>
 
-<div class="modal-content" id="updatehs" style="position: absolute; z-index: 10; display: none;">
-    <div class="modal-header" style="background-color: gray; color: white; height: 30px;">
+<div class="modal-custom-content" id="updatehs" style="position: absolute; z-index: 10; display: none;">
+    <div class="modal-custom-header" style="background-color: gray; color: white; height: 30px;">
         <button type="button" id="smallmodalbtn" class="close" data-dismiss="modal" aria-hidden="true"
                 style="margin-top: -6px;">×
         </button>
-        <h4 id="smheader" style="margin-top: -4px;">ვალუტის კურსი</h4>
+        <h4 style="margin-top: -4px;">სტატუსის შეცვლა</h4>
     </div>
-    <div class="modal-body" id="smbody">
+    <div class="modal-custom-body">
         <select id="changestatus" class="dropdown changestatus2" style="float: left; margin: 15px 10px 0 10px;">
             <% for (int i = 0; i < hksb.length; i++) { %>
             <option value="<%=hksb[i].getHousekeepingstatusid()%>"><%=hksb[i].getName()%>

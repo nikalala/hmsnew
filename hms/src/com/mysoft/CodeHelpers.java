@@ -60,6 +60,16 @@ public class CodeHelpers {
         return nextDate;
     }
 
+    public static String getCurrentHouseKeepingStatus(int hsid,HousekeepingstatusBean[] arr){
+        for (HousekeepingstatusBean item : arr) {
+            if (item.getHousekeepingstatusid().equals(hsid)) {
+                return item.getName();
+            }
+        }
+        return "";
+    }
+
+
 }
 
 
