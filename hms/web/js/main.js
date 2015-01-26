@@ -760,6 +760,8 @@ function initializeGrid(grid) {
             sortname: grid.sort,
             //viewrecords: true,
             sortorder: grid.order,
+            footerrow: grid.footerrow,
+            userDataOnFooter: grid.userDataOnFooter,
             loadComplete: function (data) {
                 griddata = $(data);
                 $("#" + grid.id + " td:last-child").removeAttr("title");
