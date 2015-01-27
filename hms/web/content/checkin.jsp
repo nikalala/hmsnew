@@ -21,14 +21,14 @@
 
         System.out.println(rid);
         System.out.println(reservId);
-
+/*
         RoomstBean roomstBean = RoomstManager.getInstance().createRoomstBean();
         roomstBean.setRegbyid(user.getPersonnelid());
         roomstBean.setRoomid(Integer.parseInt(rid));
         roomstBean.setSt(1);
         roomstBean.setStatusdate(lclosedate);
         RoomstManager.getInstance().save(roomstBean);
-
+*/
         ReservationBean rb = ReservationManager.getInstance().loadByPrimaryKey(Long.parseLong(reservId));
         
         if(!df.format(new Date(rb.getArraivaldate().getTime())).equals(df.format(dclosedate)))

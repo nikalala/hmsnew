@@ -166,7 +166,7 @@ try{
             Boolean payinfo_paymentmode0 = new Boolean(request.getParameter("payinfo_paymentmode0"));
             if(payinfo_paymentmode0){
                 if(val.equals("0"))
-                    throw new Exception("აირჩიეთ გადახდის ქვემეთოდი");
+                    throw new Exception("აირჩიეთ გადახდის მეთოდი");
                 res.setPaymentmethodid(new Integer(val));
                 res.setPaymentmode(0);
                 guest.setPaymentmethodid(new Integer(val));
@@ -175,7 +175,7 @@ try{
             Boolean payinfo_paymentmode1 = new Boolean(request.getParameter("payinfo_paymentmode1"));
             if(payinfo_paymentmode1){
                 if(val.equals("0"))
-                    throw new Exception("აირჩიეთ გადახდის ქვემეთოდი");
+                    throw new Exception("აირჩიეთ გადახდის მეთოდი");
                 res.setPaymentcontragentid(new Long(val));
                 res.setPaymentmode(1);
                 guest.setContragentid(new Integer(val));
@@ -434,6 +434,9 @@ try{
             throw new Exception("ოთახი ამ პერიოდში დაკავებულია");
     }
     
+    if(!getAvailableRoomtypes(res.getArraivaldate().getTime(),res.getDeparturedate().getTime(),resroom.getRoomtypeid().intValue()))
+        throw new Exception("ოთახის ტიპი ამ პერიოდში დაკავებულია");
+    
     res.setRegbyid(user.getPersonnelid());
     if(!checkin){
         res.setStatus(0);
@@ -446,6 +449,7 @@ try{
     resroom.setReservationid(res.getReservationid());
     resroom.setRegbyid(user.getPersonnelid());
     resroom = ReservationroomManager.getInstance().save(resroom);
+    /*
     if(resroom.getRoomid() != null){
         RoomstBean roomst = RoomstManager.getInstance().createRoomstBean();
         roomst.setRegbyid(user.getPersonnelid());
@@ -462,6 +466,7 @@ try{
             guests[i] = GuestManager.getInstance().save(guests[i]);
         }
     }
+    */
     for(int i=0;i<resrooms.length;i++){
         if(resrooms[i].getRoomid() != null && resrooms[i].getRoomid().intValue() == 0)
             resrooms[i].setRoomid(null);
@@ -469,6 +474,7 @@ try{
         resrooms[i].setReservationid(res.getReservationid());
         resrooms[i].setRegbyid(user.getPersonnelid());
         resrooms[i] = ReservationroomManager.getInstance().save(resrooms[i]);
+        /*
         if(resrooms[i].getRoomid() != null){
             RoomstBean roomst = RoomstManager.getInstance().createRoomstBean();
             roomst.setRegbyid(user.getPersonnelid());
@@ -481,6 +487,7 @@ try{
             }
             roomst = RoomstManager.getInstance().save(roomst);
         }
+        */
     }
     
     Vector v = (Vector)session.getAttribute("WALKIN_REMARKS");

@@ -191,17 +191,9 @@ System.out.println(rid+" = "+statusid);
     int getRoomStatus(Date dt, int rid) throws Exception {
         int n = -1;
         SimpleDateFormat dtlong = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-        //SimpleDateFormat dtshort = new SimpleDateFormat("dd/MM/yyyy");
-        //String sql = "where roomid = "+rid+" and statusdate <= ";
-        //if(dt != null)  sql += "to_timestamp('"+dtlong.format(dt)+"','DD/MM/YYYY HH24:MI')";
-        //else            sql += "now()";
-        //sql += " order by statusdate desc limit 1";
         String sql = "select getroomstatus(" + rid + ",";
         if (dt == null) dt = new Date();
         sql += "'" + dtlong.format(dt) + "')";
-        //RoomstBean[] statuses = RoomstManager.getInstance().loadByWhere(sql);
-        //if(statuses.length > 0)
-        //    n = statuses[0].getSt().intValue();
         n = (int) getSum(sql);
         return n;
     }
@@ -791,6 +783,71 @@ System.out.println(rid+" = "+statusid);
         ret[4] = net + fix;
         return ret;
     }
+    
+    
+    public RoomBean[] getAvailableRooms(Date dt1, Date dt2, int rtp) throws Exception {
+        SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+        String sql = "where deleted = false and active = true ";
+        if(rtp > 0) sql += "and roomtypeid = "+rtp;
+        RoomBean[] rooms = RoomManager.getInstance().loadByWhere(sql);
+        Calendar cal1 = Calendar.getInstance();
+        Calendar cal2 = Calendar.getInstance();
+        cal1.setTime(dt1);
+        cal2.setTime(df.parse(df.format(dt2)));
+        
+        String ids = "";
+        for(int i=0;i<rooms.length;i++){
+            for(int j=0;cal1.before(cal2);j++){
+                Calendar cal = Calendar.getInstance();
+                cal.setTimeInMillis(cal1.getTimeInMillis());
+                if(j > 0){
+                    cal.set(Calendar.HOUR_OF_DAY,23);
+                    cal.set(Calendar.MINUTE,59);
+                    cal.set(Calendar.SECOND,59);
+                    cal.set(Calendar.MILLISECOND,999);
+                }
+                int st = getRoomStatus(cal.getTime(), rooms[i].getRoomid());
+                if(j == 0){
+                    if(st == 0 || st == 1 || st == 2 || st == 5){
+                        if(ids.length() > 0)    ids += ",";
+                        ids += rooms[i].getRoomid();
+                        break;
+                    }
+                } else {
+                    if(st == 0 || st == 1 || st == 2 || st == 3 || st == 5 || st == 7){
+                        if(ids.length() > 0)    ids += ",";
+                        ids += rooms[i].getRoomid();
+                        break;
+                    }
+                }
+                cal1.add(Calendar.DATE,1);
+            }
+            int st = getRoomStatus(dt2, rooms[i].getRoomid());
+            if(st == 0 || st == 1 || st == 2 || st == 5){
+                if(ids.length() > 0)    ids += ",";
+                ids += rooms[i].getRoomid();
+            }
+        }
+        if(ids.length() > 0)    sql += " and roomid not in ("+ids+")";
+        sql += " order by name";
+        rooms = RoomManager.getInstance().loadByWhere(sql);
+        return rooms;
+    }
+    
+    public boolean getAvailableRoomtypes(Date dt1, Date dt2, int rtp) throws Exception {
+        SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+        String sql = "where "
+                + "arraivaldate::date <= to_date('"+df.format(dt2)+"','DD/MM/YYYY') and "
+                + "arraivaldate::date >= to_date('"+df.format(dt1)+"','DD/MM/YYYY') and "
+                + "statusid in (-1,0) and reservationid in (select resrvationid from reservationroom where roomtypeid = "+rtp+")";
+        int cnt1 = RoomManager.getInstance().countWhere("where deleted = false and active = true and roomtypeid = "+rtp);
+        int cnt2 = ReservationManager.getInstance().countWhere(sql);
+        
+        boolean bret = true;
+        if(cnt1 >= cnt2)    bret = false;
+        return bret;
+    }
+    
 %>
 <%
 
@@ -814,6 +871,7 @@ System.out.println(rid+" = "+statusid);
     SimpleDateFormat df3 = new SimpleDateFormat("dd.MM.yyyy");
     SimpleDateFormat df2 = new SimpleDateFormat("MM-dd-yyyy");
     SimpleDateFormat dflong = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+    SimpleDateFormat dftime = new SimpleDateFormat("HH:mm");
     SimpleDateFormat sdf0 = new SimpleDateFormat("yyyy/MM/dd");
     SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     SimpleDateFormat dtlong = new SimpleDateFormat("dd/MM/yyyy HH:mm");
@@ -993,19 +1051,25 @@ System.out.println(rid+" = "+statusid);
     ClosedateBean closedate = ClosedateManager.getInstance().createClosedateBean();
     ClosedateBean[] bclosedate = ClosedateManager.getInstance().loadByWhere("order by cldate desc limit 1");
     if (bclosedate.length == 0) {
-        String fdt = "01/01/2014";
+        String fdt = "01/01/2014 23:59";
         ReservationBean[] reservs = ReservationManager.getInstance().loadByWhere("order by arraivaldate asc");
         if (reservs.length > 0)
             fdt = df.format(reservs[0].getArraivaldate());
-        closedate.setCldate(df.parse(fdt));
+        closedate.setCldate(dflong.parse(fdt));
         closedate.setRegbyid(user.getPersonnelid());
         if (user != null && user.getPersonnelid() != null) {
             closedate = ClosedateManager.getInstance().save(closedate);
         }
     } else closedate = ClosedateManager.getInstance().loadByPrimaryKey(bclosedate[0].getClosedateid());
+    Calendar cclosedate = Calendar.getInstance();
+    cclosedate.setTime(closedate.getCldate());
+    cclosedate.set(Calendar.HOUR_OF_DAY,23);
+    cclosedate.set(Calendar.MINUTE,59);
+    cclosedate.set(Calendar.SECOND,59);
+    cclosedate.set(Calendar.MILLISECOND,999);
 
-    long lclosedate = closedate.getCldate().getTime();
-    Date dclosedate = closedate.getCldate();
+    long lclosedate = cclosedate.getTimeInMillis();
+    Date dclosedate = cclosedate.getTime();
 
     dt = new SimpleDateFormat(dateformats[dff]);
     dtime = new SimpleDateFormat(timeformats1[tff]);

@@ -13,7 +13,7 @@ try{
     double bal = getBalance(rroom.getReservationroomid());
     if(bal > 0)
         throw new Exception("გაასწორეთ ბალანსი");
-    
+/*    
     RoomBean room = RoomManager.getInstance().loadByPrimaryKey(rroom.getRoomid());
     RoomstBean rst = RoomstManager.getInstance().createRoomstBean();
     rst.setSt(4);
@@ -21,7 +21,7 @@ try{
     rst.setStatusdate(lclosedate);
     rst.setRegbyid(user.getPersonnelid());
     rst = RoomstManager.getInstance().save(rst);
-    
+*/    
     ReservationBean res = ReservationManager.getInstance().loadByPrimaryKey(rroom.getReservationid());
     res.setStatus(-1);
     res = ReservationManager.getInstance().save(res);
