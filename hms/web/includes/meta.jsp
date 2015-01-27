@@ -783,88 +783,89 @@ System.out.println(rid+" = "+statusid);
         ret[4] = net + fix;
         return ret;
     }
-    
-    
+
+
     public RoomBean[] getAvailableRooms(Date dt1, Date dt2, int rtp) throws Exception {
         SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
         String sql = "where deleted = false and active = true ";
-        if(rtp > 0) sql += "and roomtypeid = "+rtp;
+        if (rtp > 0) sql += "and roomtypeid = " + rtp;
         RoomBean[] rooms = RoomManager.getInstance().loadByWhere(sql);
         Calendar cal1 = Calendar.getInstance();
         Calendar cal2 = Calendar.getInstance();
         cal1.setTime(dt1);
         cal2.setTime(df.parse(df.format(dt2)));
-        
+
         String ids = "";
-        for(int i=0;i<rooms.length;i++){
-            for(int j=0;cal1.before(cal2);j++){
+        for (int i = 0; i < rooms.length; i++) {
+            for (int j = 0; cal1.before(cal2); j++) {
                 Calendar cal = Calendar.getInstance();
                 cal.setTimeInMillis(cal1.getTimeInMillis());
-                if(j > 0){
-                    cal.set(Calendar.HOUR_OF_DAY,23);
-                    cal.set(Calendar.MINUTE,59);
-                    cal.set(Calendar.SECOND,59);
-                    cal.set(Calendar.MILLISECOND,999);
+                if (j > 0) {
+                    cal.set(Calendar.HOUR_OF_DAY, 23);
+                    cal.set(Calendar.MINUTE, 59);
+                    cal.set(Calendar.SECOND, 59);
+                    cal.set(Calendar.MILLISECOND, 999);
                 }
                 int st = getRoomStatus(cal.getTime(), rooms[i].getRoomid());
-                if(j == 0){
-                    if(st == 0 || st == 1 || st == 2 || st == 5){
-                        if(ids.length() > 0)    ids += ",";
+                if (j == 0) {
+                    if (st == 0 || st == 1 || st == 2 || st == 5) {
+                        if (ids.length() > 0) ids += ",";
                         ids += rooms[i].getRoomid();
                         break;
                     }
                 } else {
-                    if(st == 0 || st == 1 || st == 2 || st == 3 || st == 5 || st == 7){
-                        if(ids.length() > 0)    ids += ",";
+                    if (st == 0 || st == 1 || st == 2 || st == 3 || st == 5 || st == 7) {
+                        if (ids.length() > 0) ids += ",";
                         ids += rooms[i].getRoomid();
                         break;
                     }
                 }
-                cal1.add(Calendar.DATE,1);
+                cal1.add(Calendar.DATE, 1);
             }
             int st = getRoomStatus(dt2, rooms[i].getRoomid());
-            if(st == 0 || st == 1 || st == 2 || st == 5){
-                if(ids.length() > 0)    ids += ",";
+            if (st == 0 || st == 1 || st == 2 || st == 5) {
+                if (ids.length() > 0) ids += ",";
                 ids += rooms[i].getRoomid();
             }
         }
-        if(ids.length() > 0)    sql += " and roomid not in ("+ids+")";
+        if (ids.length() > 0) sql += " and roomid not in (" + ids + ")";
         sql += " order by name";
         rooms = RoomManager.getInstance().loadByWhere(sql);
         return rooms;
     }
-    
+
     public boolean getAvailableRoomtypes(Date dt1, Date dt2, int rtp) throws Exception {
         SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
         String sql = "where "
-                + "arraivaldate::date <= to_date('"+df.format(dt2)+"','DD/MM/YYYY') and "
-                + "arraivaldate::date >= to_date('"+df.format(dt1)+"','DD/MM/YYYY') and "
-                + "statusid in (-1,0) and reservationid in (select resrvationid from reservationroom where roomtypeid = "+rtp+")";
-        int cnt1 = RoomManager.getInstance().countWhere("where deleted = false and active = true and roomtypeid = "+rtp);
+                + "arraivaldate::date <= to_date('" + df.format(dt2) + "','DD/MM/YYYY') and "
+                + "arraivaldate::date >= to_date('" + df.format(dt1) + "','DD/MM/YYYY') and "
+                + "statusid in (-1,0) and reservationid in (select resrvationid from reservationroom where roomtypeid = " + rtp + ")";
+        int cnt1 = RoomManager.getInstance().countWhere("where deleted = false and active = true and roomtypeid = " + rtp);
         int cnt2 = ReservationManager.getInstance().countWhere(sql);
-        
+
         boolean bret = true;
-        if(cnt1 >= cnt2)    bret = false;
+        if (cnt1 >= cnt2) bret = false;
         return bret;
     }
-    
-    public String[][] getRoomStatuses(Date startdate,int days) throws Exception {
+
+    public String[][] getRoomStatuses(Date startdate, int days) throws Exception {
         RoomtypeBean[] rtypes = RoomtypeManager.getInstance().loadByWhere("where deleted = false and active = true");
-        String s[][] = new String[rtypes.length][days+1];
+        String s[][] = new String[rtypes.length][days + 1];
         Calendar cal = Calendar.getInstance();
-        
-        for(int i=0;i<rtypes.length;i++){
+
+        for (int i = 0; i < rtypes.length; i++) {
             s[i][0] = rtypes[i].getName();
             cal.setTime(startdate);
-            for(int j=0;j<days;j++){
+            for (int j = 0; j < days; j++) {
                 RoomBean[] rm = getAvailableRooms(cal.getTime(), cal.getTime(), rtypes[i].getRoomtypeid().intValue());
-                s[i][j+1] = String.valueOf(rm.length);
+                s[i][j + 1] = String.valueOf(rm.length);
+                cal.add(Calendar.DATE, 1);
             }
         }
-        
+
         return s;
     }
-    
+
 %>
 <%
 
@@ -921,10 +922,10 @@ System.out.println(rid+" = "+statusid);
 
     String[] months = {"იანვარი", "თებერვალი", "მარტი", "აპრილი", "მაისი", "ივნისი", "ივლისი", "აგვისტო", "სექტემბერი", "ოქტომბერი", "ნოემბერი", "დეკემბერი"};
 
-    String[] workordercategory = {"დასუფთავება","მოვლა","სხვა დავალება","შეკეთება"};
-    String[] workorderpriority = {"მაღალი","საშუალო","დაბალი"};
-    String[] workorderstatus = {"მინიჭებული","შესრულებული","პროცესში","ახალი"};
-    
+    String[] workordercategory = {"დასუფთავება", "მოვლა", "სხვა დავალება", "შეკეთება"};
+    String[] workorderpriority = {"მაღალი", "საშუალო", "დაბალი"};
+    String[] workorderstatus = {"მინიჭებული", "შესრულებული", "პროცესში", "ახალი"};
+
     String[] amenitytype = {"ოთახი", "სასტუმრო", "ორივე"};
     String[] contragenttype = {"ოთახის მფლობელი", "კომპანია", "ტურისტული აგენტი", "მომწოდებელი", "სტუმარი", "web"};
     String[] commissionplan = {"% ყველა ღამეზე", "ფიქსირებული თანხა თითოეულ ღამეზე", "ფიქსირებული თანხა თითოეულ დარჩენაზე"};
@@ -946,7 +947,6 @@ System.out.println(rid+" = "+statusid);
     String[] hotelstar = {"უვარსკვლავო", "*", "**", "***", "****", "***** და მეტი"};
 
 
-
     String[] accounts = {"შემოსავალი გაუქმებიდან", "დღიური გამოყენების თანხა", "გვიან გაწერის თანხა", "ადრე მიღების თანხა", "არ გამოცხადების თანხა", "ოთახის ღირებულება"};
     String[] taxaccountnames = {"ოთახი", "გაუქმება", "არ გამოცხადება", "ადრე მიღება", "გვიან გაწერა", "დღიური გამოყენება", "ტურისტული აგენტის საკომისიო"};
     String[] reservationstatus = {"აქტიური", "გაუქმებული", "არ გამოცხადებული", "წაშლილი"};
@@ -960,38 +960,38 @@ System.out.println(rid+" = "+statusid);
     String[] timezones = TimeZone.getAvailableIDs();
 
     String[] roomstatus =
-    {
-            "დადასტურებული რეზერვაცია",
-            "მცხოვრები",
-            "ვადაგადაცილებული",
-            "წამსვლელი",
-            "გაწერილი",
-            "დაბლოკილი",
-            "დღიური გამოყენება",
-            "დაუდასტურებელი რეზერვაცია",
-            "თავისუფალი"
-    };
+            {
+                    "დადასტურებული რეზერვაცია",
+                    "მცხოვრები",
+                    "ვადაგადაცილებული",
+                    "წამსვლელი",
+                    "გაწერილი",
+                    "დაბლოკილი",
+                    "დღიური გამოყენება",
+                    "დაუდასტურებელი რეზერვაცია",
+                    "თავისუფალი"
+            };
 
     String[] reasoncategory =
-    {
-            "ოთახის დაბლოკვა",
-            "რეზერვაციის გაუქმება",
-            "სტუმრის მიღება",
-            "სტუმრის გაწერა",
-            "ფოლიოს ტრანზაქცია",
-            "სტუმრის ფოლიო",
-            "დალაგება",
-            "არ გამოცხადებული რეზერვაცია",
-            "პაკეტი",
-            "პრომო აქცია",
-            "რეზერვაცია",
-            "ოთახის გადატანის შეჩერება",
-            "მიღების წაშლა",
-            "რეზერვაციის წაშლა",
-            "ნედლეულის ჩამოწერა",
-            "კერძის ჩამოწერა",
-            "შავი სიის მიზეზი"
-    };
+            {
+                    "ოთახის დაბლოკვა",
+                    "რეზერვაციის გაუქმება",
+                    "სტუმრის მიღება",
+                    "სტუმრის გაწერა",
+                    "ფოლიოს ტრანზაქცია",
+                    "სტუმრის ფოლიო",
+                    "დალაგება",
+                    "არ გამოცხადებული რეზერვაცია",
+                    "პაკეტი",
+                    "პრომო აქცია",
+                    "რეზერვაცია",
+                    "ოთახის გადატანის შეჩერება",
+                    "მიღების წაშლა",
+                    "რეზერვაციის წაშლა",
+                    "ნედლეულის ჩამოწერა",
+                    "კერძის ჩამოწერა",
+                    "შავი სიის მიზეზი"
+            };
     String[] folioactiontype = {"შესწორება", "ბანკი", "ნაღდი", "კონტრაქტორი", "ფასდაკლება", "მომსახურება", "ოთახის გადასახადი", "გადატანა"};
 //                                  0           1       2       3               4           5               6                   7
 
@@ -1080,10 +1080,10 @@ System.out.println(rid+" = "+statusid);
     } else closedate = ClosedateManager.getInstance().loadByPrimaryKey(bclosedate[0].getClosedateid());
     Calendar cclosedate = Calendar.getInstance();
     cclosedate.setTime(closedate.getCldate());
-    cclosedate.set(Calendar.HOUR_OF_DAY,23);
-    cclosedate.set(Calendar.MINUTE,59);
-    cclosedate.set(Calendar.SECOND,59);
-    cclosedate.set(Calendar.MILLISECOND,999);
+    cclosedate.set(Calendar.HOUR_OF_DAY, 23);
+    cclosedate.set(Calendar.MINUTE, 59);
+    cclosedate.set(Calendar.SECOND, 59);
+    cclosedate.set(Calendar.MILLISECOND, 999);
 
     long lclosedate = cclosedate.getTimeInMillis();
     Date dclosedate = cclosedate.getTime();

@@ -6,13 +6,24 @@
 
 <script>
     $(document).ready(function () {
-        $('#dtp').datepicker(<%=pickerFormatForDatePickers%>);
+        $('#dtp').datepicker(<%=pickerFormatForDatePickers%>).on('changeDate', function(e){
+            e.preventDefault();
+            var dt = e.target.value;
+            if(!isNullOrEmpty(dt)){
+                finGrid.url = 'content/getfinventory.jsp?dt='+dt;
+                reloadGrid(finGrid.id,finGrid.url);
+            }
+        });
+        $('.datepicker').datepicker()
+
+        var dt = $('#dtp').val();
+        if(!isNullOrEmpty(dt)){
+            finGrid.url = 'content/getfinventory.jsp?dt='+dt;
+        }
         initializeGrid(finGrid);
         initializeGrid(qohsGrid);
     });
-    $(document).on('click', '.glyphicon-calendar', function () {
-        $("#dtp").focus();
-    });
+
 </script>
 
 <style>
