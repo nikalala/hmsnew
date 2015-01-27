@@ -27,7 +27,7 @@ try{
         rs.setReasonid(reasonid);
         rs.setReservationid(res.getReservationid());
         rs = ReservationreasonManager.getInstance().save(rs);
-        
+/*
         if(reserv.getRoomid() != null){
             RoomstBean roomst = RoomstManager.getInstance().createRoomstBean();
             roomst.setRegbyid(user.getPersonnelid());
@@ -36,6 +36,7 @@ try{
             roomst.setSt(8);
             roomst = RoomstManager.getInstance().save(roomst);
         }
+*/
     }
 
     Manager.getInstance().endTransaction(true);

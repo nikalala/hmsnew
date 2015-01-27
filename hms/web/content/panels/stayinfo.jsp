@@ -58,12 +58,41 @@
     System.out.println("arr.getTime() = "+dt.format(arr.getTime()));
 %>
 <script>
+    
+    function getRoomtypes(id) { if(id > 0)
+        $.post(
+            "content/ajax/getRoomsByType.jsp",
+            {
+                roomtypeid: id, 
+                arrivaldate: $("#guestinfo_arrivaldate").val(), 
+                arrivaltime: $("#guestinfo_arrivaltime").val(), 
+                departuredate: $("#guestinfo_departuredate").val(), 
+                departuretime: $("#guestinfo_departuretime").val(),
+                rtp: $("#guestinfo_reservationtypeid").val()
+            },
+            function (data) {
+                $("#guestinfo_roomid").html(data.selectroom);
+                $("#guestinfo_ratetypeid").html(data.selectratetype);
+                $("#guestinfo_adult").html(data.selectadult);
+                $("#guestinfo_child").html(data.selectcild);
+                var sho = true;
+                if ($('input[name$="payinfo_ratetype"]:checked').val() == 1 && $('#payinfo_contragentid').val() == 0)
+                    sho = false;
+                if (id > 0 && sho) $("#walkin_set_rates").show();
+                else $("#walkin_set_rates").hide();
+            },
+            "json"
+        );
+    }
+    
     $(document).ready(function () {
         $('#guestinfo_arrivaldate').datepicker(<%=pkfmt%>).on('changeDate', function (e) {
             updateWalkinStayInfo(1);
+            getRoomtypes($("#guestinfo_roomtypeid").val());
         });
         $('#guestinfo_departuredate').datepicker(<%=pkfmt%>).on('changeDate', function (e) {
             updateWalkinStayInfo(2);
+            getRoomtypes($("#guestinfo_roomtypeid").val());
         });
         $('#guestinfo_arrivaltime').keyup(function (e) {
             updateWalkinStayInfo(1);
@@ -76,25 +105,13 @@
         });
 
         $("#guestinfo_roomtypeid").change(function () {
-            var id = $(this).val();
-            $.post(
-                    "content/ajax/getRoomsByType.jsp",
-                    {roomtypeid: id},
-                    function (data) {
-                        $("#guestinfo_roomid").html(data.selectroom);
-                        $("#guestinfo_ratetypeid").html(data.selectratetype);
-                        $("#guestinfo_adult").html(data.selectadult);
-                        $("#guestinfo_child").html(data.selectcild);
-                        var sho = true;
-                        if ($('input[name$="payinfo_ratetype"]:checked').val() == 1 && $('#payinfo_contragentid').val() == 0)
-                            sho = false;
-                        if (id > 0 && sho) $("#walkin_set_rates").show();
-                        else $("#walkin_set_rates").hide();
-                    },
-                    "json"
-            );
+            getRoomtypes($(this).val());
         });
-
+        
+        $("#guestinfo_reservationtypeid").change(function () {
+            getRoomtypes($("#guestinfo_roomtypeid").val());
+        });
+        
         $("#guestinfo_roomnumber").keyup(function (e) {
             if ((e.which > 31 && e.which < 48) || e.which > 57) return false;
         });

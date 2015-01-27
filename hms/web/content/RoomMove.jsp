@@ -34,7 +34,7 @@ if(rname == null || rname.trim().length() == 0) rname = "ნომრის გ�
                     <form role="form" method="post">
                         <div class="form-group">
                             <label for="roomtypeid">ოთახის ტიპი:</label>
-                            <select class="form-control" id="roomtypeid" onchange="$.post('content/getroombytype.jsp?', { roomtypeid: $(this).val(), statustypes: '1', oldroomid: <%=room.getRoomid()%> },function(data){$('#roomid').html(data);});">
+                            <select class="form-control" id="roomtypeid" onchange="$.post('content/getroombytype.jsp?', { roomtypeid: $(this).val(), statustypes: '7,8', oldroomid: <%=room.getRoomid()%> },function(data){$('#roomid').html(data);});">
                               <option>-- აირჩიეთ --</option>
                               <%
                               for(int i=0;i<roomtypes.length;i++){

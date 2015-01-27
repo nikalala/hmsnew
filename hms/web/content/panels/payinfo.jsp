@@ -105,7 +105,14 @@ ReservationtypeBean[] resrvationtypes = ReservationtypeManager.getInstance().loa
             }
         });
         
-        
+        var rtp = $("input[name='payinfo_paymentmode']:checked").val();
+        if(rtp == 0){
+            $("#payinfo_paymentmethodid").show();
+            $("#payinfo_paymentcontragentid").hide();
+        } else if(rtp == 1){
+            $("#payinfo_paymentmethodid").hide();
+            $("#payinfo_paymentcontragentid").show();
+        }
         
     });
 </script>
@@ -208,11 +215,11 @@ ReservationtypeBean[] resrvationtypes = ReservationtypeManager.getInstance().loa
             <form class="form-inline" role="form">
             <div class="form-group">
                 <div class="input-group-xs">
-                    <span class="tbllabel" style="padding-right: 5px;">გადახდის მეთოდი</span>
+                    <span class="tbllabel" style="padding-right: 5px;">გადახდის ტიპი</span>
                     <%
                     for(int i=0;i<paymentmode.length;i++){
                         String sel = "";
-                        if(displaysettings.length > 0 && displaysettings[0].getPaymentmode().intValue() == i)
+                        if(displaysettings.length > 0 && displaysettings[0].getPaymentmode() != null && displaysettings[0].getPaymentmode().intValue() == i)
                             sel = "checked";
                     %>
                     <label class="radio-inline" style="height: 23px !important;">
@@ -232,7 +239,7 @@ ReservationtypeBean[] resrvationtypes = ReservationtypeManager.getInstance().loa
                             <%
                             for(int i=0;i<paymentmethods.length;i++){
                                 String sel = "";
-                                if(displaysettings.length > 0 && displaysettings[0].getPaymentmethodid().intValue() == paymentmethods[i].getPaymentmethodid().intValue())
+                                if(displaysettings.length > 0 && displaysettings[0].getPaymentmethodid() != null && displaysettings[0].getPaymentmethodid().intValue() == paymentmethods[i].getPaymentmethodid().intValue())
                                     sel = "selected";
                             %>
                             <option value="<%=paymentmethods[i].getPaymentmethodid()%>" <%=sel%>><%=paymentmethods[i].getName()%></option>

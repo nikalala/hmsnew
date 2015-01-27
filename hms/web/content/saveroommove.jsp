@@ -2,7 +2,7 @@
 <%@page pageEncoding="UTF-8"%>
 <%@include file="../includes/init.jsp"%>
 <%
-String msg = "";
+JSONObject js = new JSONObject();
 Manager.getInstance().beginTransaction();
 try{
     long id = 0;
@@ -21,7 +21,7 @@ try{
     //int oldstatus = (int)getSum("select getroomstatus("+oldroomid+",'"+dtlongs.format(new Date())+"')");
     
     int status = getRoomStatus(dclosedate, oldroomid);
-    
+    /*
     RoomstBean rms = RoomstManager.getInstance().createRoomstBean();
     rms.setRoomid(oldroomid);
     rms.setSt(8);
@@ -36,7 +36,7 @@ try{
     rms.setStatusdate(lclosedate);
     rms.setRegbyid(user.getPersonnelid());
     rms = RoomstManager.getInstance().save(rms);
-    
+    */
     String sql = "where "
             + "folioid in (select folioid from folio where reservationroomid = "+reserv.getReservationroomid()+") and "
             + "itemdate >= to_date('"+df.format(dclosedate)+"','DD/MM/YYYY') and "
@@ -62,12 +62,14 @@ try{
     
     //if(id == 0) throw new Exception("შეცდომა");
     Manager.getInstance().endTransaction(true);
-    msg = "{\"result\":1,\"id\":"+rms.getSt()+"}";
+    js.put("result",1);
+    //msg = "{\"result\":1,\"id\":"+rms.getSt()+"}";
 }catch(Exception e){
     e.printStackTrace();
     Manager.getInstance().endTransaction(false);
-    msg = "{\"result\":0,\"error\":\""+e.getMessage().replaceAll("\n"," ").replaceAll("\"", "\\\\\"")+"\"}";
+    js.put("result",0);
+    js.put("error",e.getMessage());
 }
     
 %>
-<%=msg%>
+<%=js.toString()%>

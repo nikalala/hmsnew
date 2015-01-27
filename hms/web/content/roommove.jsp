@@ -79,7 +79,7 @@
     } else if (checkinsettings.getPostcancellationfee().intValue() == 3 && dday > 0) {
         tax = ddt * total0 / dday;
     }
-    String roomWhere = "where getroomstatus(roomid,'"+dflong.format(lclosedate)+"') = 8 ";
+    String roomWhere = "where getroomstatus(roomid,'"+dflong.format(lclosedate)+"') in (7,8) ";
     if(reserv.getRoomid() != null)
         roomWhere += " or roomid = "+reserv.getRoomid();
     roomWhere += " ORDER BY ord";

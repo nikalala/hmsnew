@@ -19,7 +19,7 @@ NationalityBean[] nationalities = NationalityManager.getInstance().loadByWhere("
                         <%
                         for(int i=0;i<idtypes.length;i++){
                             String sel = "";
-                            if(displaysettings.length > 0 && displaysettings[0].getIdtypeid().intValue() == idtypes[i].getIdtypeid().intValue())
+                            if(displaysettings.length > 0 && displaysettings[0].getIdtypeid() != null && displaysettings[0].getIdtypeid().intValue() == idtypes[i].getIdtypeid().intValue())
                                 sel = "selected";
                         %>
                         <option value="<%=idtypes[i].getIdtypeid()%>" <%=sel%>><%=idtypes[i].getName()%></option>
