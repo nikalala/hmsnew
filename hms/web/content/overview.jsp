@@ -8,6 +8,7 @@
     $(document).ready(function () {
         $('#dtp').datepicker(<%=pickerFormatForDatePickers%>);
         initializeGrid(finGrid);
+        initializeGrid(qohsGrid);
     });
     $(document).on('click', '.glyphicon-calendar', function () {
         $("#dtp").focus();
@@ -37,6 +38,7 @@
         background: #fff;
         border: solid 1px #DADADA;
         height: 270px;
+        color: #545454;
     }
 
     .t-s-table {
@@ -298,7 +300,7 @@
 
             </div>
         </div>
-        <div class="q-table-div">
+        <div class="q-table-div q-table-div1">
             <table id='list_fin' class="table-striped table-hover" align='center'></table>
         </div>
     </div>
@@ -308,21 +310,8 @@
                 <span class="q-statusbar-span">დასუფთავების სტატუსი</span>
             </div>
         </div>
-        <div class="q-table-div">
-            <table class="t-s-table table-striped table-hover">
-                <tr>
-                    <td><span>ოთახები სასტუმროში</span></td>
-                    <td><span>3</span></td>
-                </tr>
-                <tr>
-                    <td><span>მწყობრიდან გამოსული</span></td>
-                    <td><span>6</span></td>
-                </tr>
-                <tr>
-                    <td><span>ხელმისაწვდომი ოთახები (სულ)</span></td>
-                    <td><span>6</span></td>
-                </tr>
-            </table>
+        <div class="q-table-div q-table-div2">
+            <table id='list_qohs' class="table-striped table-hover" align='center'></table>
         </div>
     </div>
 </div>

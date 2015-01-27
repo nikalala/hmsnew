@@ -610,13 +610,53 @@ finGrid = {
     userDataOnFooter:true,
     gridComplete: function () {
         ReDrawTable(finGrid);
-        var width = $(".q-table-div .ui-jqgrid").width();
-        $(".q-table-div .ui-jqgrid-labels").hide();
+        var width = $(".q-table-div1 .ui-jqgrid").width();
+        $(".q-table-div1 .ui-jqgrid-labels").hide();
+        $("#gbox_list_fin").width(width-3);
         $("#list_fin").width(width-10);
-        $(".q-table-div .ui-jqgrid-sdiv").width(width);
-        $(".q-table-div .ui-jqgrid-ftable").width(width);
+        $(".q-table-div1 .ui-jqgrid-sdiv").width(width);
+        $(".q-table-div1 .ui-jqgrid-ftable").width(width);
         $(".footrow td").css("border-right","0");
-        $(".q-table-div .ui-jqgrid-bdiv").css("height","auto");
+        $(".q-table-div1 .ui-jqgrid-bdiv").css("height","244px");
+    },
+    beforeRequest: function () {
+
+    }
+};
+
+
+/* --------------------------------  List Model ------------------------------------*/
+var qohsGridModel = [];
+qohsGridModel.push(
+    colModelGenerator(80, 'status', 0),
+    colModelGenerator(100, 'vacant', 0),
+    colModelGenerator(100, 'occupied', 0),
+    colModelGenerator(100, 'total', 0)
+);
+
+qohsGrid = {
+    id: 'list_qohs',
+    url: 'content/getqohs.jsp',
+    type: 'xml',
+    cols: ['', 'თავისუფალი', 'დაკავებული', 'სულ'],
+    model: qohsGridModel,
+    sort: 'type',
+    order: 'asc',
+    isPopup: false,
+    altRows: true,
+    altclass: 'altrow',
+    footerrow : true,
+    userDataOnFooter:true,
+    gridComplete: function () {
+        ReDrawTable(qohsGrid);
+        var width = $(".q-table-div2 .ui-jqgrid").width();
+        $("#list_qohs").width(width-10);
+        $("#gbox_list_qohs").width(width-3);
+        $(".q-table-div2 .ui-jqgrid-labels").css("width","100%");
+        $(".q-table-div2 .ui-jqgrid-sdiv").width(width-10);
+        $(".q-table-div2 .ui-jqgrid-ftable").width(width-10);
+        $(".footrow td").css("border-right","0");
+        $(".q-table-div2 .ui-jqgrid-bdiv").css("height","222px");
     },
     beforeRequest: function () {
 
