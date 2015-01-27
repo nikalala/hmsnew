@@ -79,10 +79,42 @@
 
     });
 
+    function SaveBlock() {
+
+        var select = "select getroomstatusbydate(<%=roomid%>,'" + $("#fromdateval").val() + "','" + $("#todateval").val() + "');";
+
+        loader.show();
+
+        $.post("content/checkifavalforblock.jsp?query=" + select, {}, function (data) {
+
+            if (data.trim() == 1) {
+                BootstrapDialog.alert("არჩეული თარიღებისთვის შეუძლებელია ნომრის დაბლოკვა");
+                loader.hide();
+            } else {
+
+                var arrdt = $("#fromdateval").val();
+                var dep = $("#todateval").val();
+                var reason = $("#reasondrop").val();
+
+                if (isNullOrEmpty(dep) || isNullOrEmpty(arrdt) || isNullOrEmpty(reason) || reason === "0" || reason == 0) {
+                    BootstrapDialog.alert("შეავსეთ ყველა ველი");
+                    loader.hide();
+                    return;
+                }
+
+                $.post("content/saveblockunblock.jsp?arrdt=" + arrdt + "&dep=" + dep + "&roomid=<%=roomid%>&reason=" + reason, {}, function (data) {
+                    reloadGrid(hsGrid.id, hsGrid.url);
+                    loader.hide();
+                });
+
+            }
+        });
+    }
 
     $(document).on("change", "#fromdateval", function () {
         var currDate = $(this).val();
         if (!isNullOrEmpty(currDate)) {
+            $("#todate").datepicker(<%=pickerFormatForDatePickers%>);
             $("#todate").datepicker("setStartDate", currDate);
             $("#todateval").val(currDate);
         } else {
@@ -244,7 +276,7 @@
                         onclick="this.click();">
                     დახურვა
                 </button>
-                <button type="button" class="btn btn-primary" onclick="SaveCurr()">შენახვა</button>
+                <button type="button" class="btn btn-primary" onclick="SaveBlock()">შენახვა</button>
             </div>
         </td>
     </tr>

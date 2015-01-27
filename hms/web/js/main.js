@@ -6,10 +6,11 @@ var tabcount = 0;
 $(document).ready(function () {
 
     loader = $(".loading-panel");
+    registerModalFunctions();
 
 });
 
-$(document).keydown(function(e) {
+$(document).keydown(function (e) {
     if (e.keyCode == 76 && e.ctrlKey) {
         launchLockScreen();
     }
@@ -18,20 +19,24 @@ $(document).keydown(function(e) {
     }
 });
 
-function launchLockScreen()
-{
+function registerModalFunctions() {
+    $(document).on("click", "#myModalCancel, #myModalSave, #myModalCheckin", function () {
+        removeModal();
+    });
+}
+
+function launchLockScreen() {
     $("#mainbody").append('<div id="lockscreen"></div>');
     $("#lockscreen").css("width", $(document).width());
-    $("#lockscreen").css("height",$(document).height());
+    $("#lockscreen").css("height", $(document).height());
     $("#lockscreen").css("z-index", "1000000000");
-    $("#lockscreen").css("background","url(img/mybg.png) #fff");
-    $("#lockscreen").css("min-height","100%");
+    $("#lockscreen").css("background", "url(img/mybg.png) #fff");
+    $("#lockscreen").css("min-height", "100%");
     $("#lockscreen").load("content/lock.jsp");
     $("#lockscreen").fadeIn();
 }
 
-function removelockscr()
-{
+function removelockscr() {
     $("#lockscreen").remove();
 }
 
@@ -183,7 +188,7 @@ function savedata(id) {
             $("#callbackdata").remove();
             $("#action").remove();
             $("#controls").remove();
-            if(!isNullOrEmpty(callbackmethod)){
+            if (!isNullOrEmpty(callbackmethod)) {
                 eval(callbackmethod);
             }
             //BootstrapDialog.info("ოპერაცია წარმატებით შესრულდა");
@@ -281,7 +286,7 @@ function infopage(fname, title, qr) {
     $.post("content/" + fname + ".jsp?" + qr, {}, function (data) {
         $("#ismheader").html(title);
         $("#ismbody").html(data);
-        $('#infomodal').modal();
+        $('#infomodal').modal({backdrop: 'static', keyboard: true});
     });
 }
 
@@ -316,7 +321,7 @@ $(function () {
             choosedid = nms[3];
             status = nms[4];
         } else status = $(this).attr('status');
-        changeContextMenu(status,$contextMenu);
+        changeContextMenu(status, $contextMenu);
         $contextMenu.css({
             display: "block",
             left: e.pageX,
@@ -340,10 +345,14 @@ $(function () {
 
 function newWindow(fname, title) {
     loader.show();
+    loadModalDefs();
     $.post("content/" + fname + ".jsp", {}, function (data) {
         $("#mheader").html(title);
         $("#mbody").html(data);
-        $('#myModal').modal();
+        $('#myModal').modal({
+            backdrop: 'static',
+            keyboard: true
+        });
         loader.hide();
     });
 }
@@ -352,44 +361,55 @@ function extramodal0(fname, title) {
     $.post("content/" + fname + ".jsp", {}, function (data) {
         $("#extramodal0header").html(title);
         $("#extramodal0body").html(data);
-        $('#extramodal0').modal();
+        $('#extramodal0').modal({backdrop: 'static', keyboard: true});
     });
 }
 
 function extramodal00(fname, title, qr) {
+    registerModalFunctions();
     $.post("content/" + fname + ".jsp?" + qr, {}, function (data) {
         $("#extramodal0header").html(title);
         $("#extramodal0body").html(data);
-        $('#extramodal0').modal();
+        $('#extramodal0').modal({backdrop: 'static', keyboard: true});
     });
 }
 
 function newWindow1(fname, title, qr) {
+    loadModalDefs();
+    registerModalFunctions();
     $.post("content/" + fname + ".jsp?" + qr, {}, function (data) {
         $("#mheader").html(title);
         $("#mbody").html(data);
-        $('#myModal').modal();
-        try{getBody("stayviewleft", "stayview", 'დატვირთულობა', 'res1','',true);}catch(e){}
+        $('#myModal').modal({backdrop: 'static', keyboard: true});
+        try {
+            getBody("stayviewleft", "stayview", 'დატვირთულობა', 'res1', '', true);
+        } catch (e) {
+        }
     });
 }
 
 function newsWindow(fname, title) {
+    loadModalDefs();
+    registerModalFunctions();
     $.post("content/" + fname + ".jsp", {}, function (data) {
         $("#smheader").html(title);
         $("#smbody").html(data);
-        $('#smallmodal').modal();
+        $('#smallmodal').modal({backdrop: 'static', keyboard: true});
     });
 }
 
 function newsWindow1(fname, title, qr) {
+    loadModalDefs();
+    registerModalFunctions();
     $.post("content/" + fname + ".jsp?" + qr, {}, function (data) {
         $("#smheader").html(title);
         $("#smbody").html(data);
-        $('#smallmodal').modal();
+        $('#smallmodal').modal({backdrop: 'static', keyboard: true});
     });
 }
 
 function modalWindow(fname, title, qr, callback, callbackparam) {
+    loadModalDefs();
     $.post("content/" + fname + ".jsp?" + qr, {}, function (data) {
         callback(callbackparam);
         BootstrapDialog.alert(data.trim());
@@ -398,19 +418,23 @@ function modalWindow(fname, title, qr, callback, callbackparam) {
 
 
 function newmWindow(fname, title) {
+    loadModalDefs();
+    registerModalFunctions();
     $.post("content/" + fname + ".jsp", {}, function (data) {
         $("#mdheader").html(title);
         $("#mdbody").html(data);
-        $('#mediummodal').modal();
+        $('#mediummodal').modal({backdrop: 'static', keyboard: true});
     });
 }
 
 function newmWindow1(fname, title, qr) {
     loader.show();
+    loadModalDefs();
+    registerModalFunctions();
     $.post("content/" + fname + ".jsp?" + qr, {}, function (data) {
         $("#mdheader").html(title);
         $("#mdbody").html(data);
-        $('#mediummodal').modal();
+        $('#mediummodal').modal({backdrop: 'static', keyboard: true});
         loader.hide();
     });
 }
@@ -480,7 +504,6 @@ function removeAllTabs() {
 }
 
 
-
 function addTab(fname2, name, itemId, isFirst) {
 
     //Davit aq araferi ar shecvalo gtxov :D:D:D:D
@@ -516,23 +539,22 @@ function addTab(fname2, name, itemId, isFirst) {
     } else {
 
         var firstLi = $("#tabs ul li")[0];
-        if(firstLi)
-        {
+        if (firstLi) {
             $("#tabs ul li").first().html('<a href="' + id + '" data-toggle="tab" style="padding-top: 4px; background-color: #F5F5F5;" title="' + name + '">' + name + '</a>');
             $('#tabs').tabulous();
-            $("#centerTabContent").children().first().attr('id',id.replace('#', ''));
+            $("#centerTabContent").children().first().attr('id', id.replace('#', ''));
 
             $("#tabs li").first().find('a').click();
             $.get(fname2, function (data) {
                 $(id).html(data);
                 reloadMenu();
-                $(id).css('display','block','!important');
+                $(id).css('display', 'block', '!important');
                 loader.hide();
 
             });
             reloadMenu();
             return;
-        }else{
+        } else {
             $("#tabs ul").first().html('<li><a href="' + id + '" data-toggle="tab" style="padding-top: 4px; background-color: #F5F5F5;" title="' + name + '">' + name + '</a></li>');
             $("#centerTabContent").html('<div class="tab-pane" id="' + id.replace('#', '') + '"></div>');
         }
@@ -545,10 +567,9 @@ function addTab(fname2, name, itemId, isFirst) {
         if (index != 0) {
             var html = $(this).html();
             var closeBtn = $(this).find('.closeTab');
-            if(closeBtn && closeBtn.size() > 0)
-            {
+            if (closeBtn && closeBtn.size() > 0) {
 
-            }else{
+            } else {
                 html += '<button class="close closeTab" contentid="' + id + '" type="button" >×</button>';
                 $(this).html(html);
             }
@@ -717,9 +738,8 @@ var hmsMonthsMin = ["იან", "თებ", "მარ", "აპრ", "მა�
 function initializeGrid(grid) {
     //console.log("initializing grid named > " + grid.id);
 
-    var gridHeight =$("#centerTabContent").height() - 40 - $(".first-table").height();
-    if($("#centercontent").height() <= gridHeight )
-    {
+    var gridHeight = $("#centerTabContent").height() - 40 - $(".first-table").height();
+    if ($("#centercontent").height() <= gridHeight) {
         gridHeight -= 300;
     }
     griddata = null;
@@ -740,18 +760,20 @@ function initializeGrid(grid) {
             sortname: grid.sort,
             //viewrecords: true,
             sortorder: grid.order,
+            footerrow: grid.footerrow,
+            userDataOnFooter: grid.userDataOnFooter,
             loadComplete: function (data) {
                 griddata = $(data);
                 $("#" + grid.id + " td:last-child").removeAttr("title");
                 reInitializeGrid(grid.id, grid.isPopup);
                 $(".ui-jqgrid-htable").css("background", "#FFF").css("border-bottom", "solid 1px #D1D1D1");
-                $("#cb_"+grid.id).css("margin-top","-3px");
+                $("#cb_" + grid.id).css("margin-top", "-3px");
             }
         }).jqGrid('bindKeys');
 
 }
 
-function drawFooter(){
+function drawFooter() {
     $(".ui-jqgrid-bdiv").height($(".ui-jqgrid-bdiv").height() - 50);
     var html = '<div class="panel-footer" style="height: 50px !important; display:table; width: 100%; padding-bottom: 1px; background-color: #FFF;">' +
         '<div>' +
@@ -771,15 +793,15 @@ function drawFooter(){
     $(".ui-jqgrid-view").append(html);
 }
 
-function drawTwoDimFooter(){
+function drawTwoDimFooter() {
     $(".ui-jqgrid-bdiv").height($(".ui-jqgrid-bdiv").height() - 100);
     var html =
         '<div class="panel-footer" style="height: 50px !important; display:table; width: 100%; padding-bottom: 1px; background-color: #FFF;">' +
         '<div>' +
-        '<span style="margin: 15px 10px 0 10px; float: left;">მონიშნულის: </span>'+
+        '<span style="margin: 15px 10px 0 10px; float: left;">მონიშნულის: </span>' +
         '<button type="button" class="btn btn-default" id="btnPrintRegCard" style="font-weight: bold; float: left; margin: 9px 10px 0 0;">' +
         'სარეგისტრაციო ბარათის ბეჭდვა <i class="fa fa-print"></i></button>' +
-        '</div></div>'+
+        '</div></div>' +
         '<div class="panel-footer" style="height: 50px !important; display:table; width: 100%; padding-bottom: 1px; background-color: #FFF;">' +
         '<div>' +
         '<span style="margin: 15px 10px 0 10px; float: left;">ჩანაწერების რაოდენობა გვერდზე</span>' +
@@ -798,42 +820,36 @@ function drawTwoDimFooter(){
     $(".ui-jqgrid-view").append(html);
 }
 
-function getSelectedRowIds(id)
-{
+function getSelectedRowIds(id) {
     var ids = "";
-    $(jQuery("#" + id + " .jqgrow")).each(function(index,item){
+    $(jQuery("#" + id + " .jqgrow")).each(function (index, item) {
         var c = $(item).find('.cbox');
-        if($(c).prop('checked'))
-        {
+        if ($(c).prop('checked')) {
             ids += $(item).prop('id') + ",";
         }
     });
     return ids.substring(0, ids.trim().lastIndexOf(","));
 }
-function getRadioRowIds(id)
-{
+
+function getRadioRowIds(id) {
     var ids = "";
     var idstodelete = "";
-    $(jQuery("#" + id + " .jqgrow")).each(function(index,item){
+    $(jQuery("#" + id + " .jqgrow")).each(function (index, item) {
         var c = $(item).find('.consguest');
-        if($(c).prop('checked'))
-        {
+        if ($(c).prop('checked')) {
             ids += $(item).prop('id') + ",";
-        }else{
+        } else {
             idstodelete += $(item).prop('id') + ",";
         }
     });
     return idstodelete.substring(0, idstodelete.trim().lastIndexOf(","));
 }
 
-
-
 function initializeGridNa(grid) {
     //console.log("initializing grid named > " + grid.id);
 
-    var gridHeight =$("#centerTabContent").height() - 40 - $(".first-table").height();
-    if($("#centercontent").height() <= gridHeight )
-    {
+    var gridHeight = $("#centerTabContent").height() - 40 - $(".first-table").height();
+    if ($("#centercontent").height() <= gridHeight) {
         gridHeight -= 300;
     }
     jQuery("#" + grid.id).jqGrid(
@@ -983,19 +999,32 @@ function isValidEmailAddress(emailAddress) {
     return pattern.test(emailAddress);
 };
 
-function newWindowWithParams(fname, title,params) {
+function newWindowWithParams(fname, title, params) {
     loader.show();
-    $.post("content/" + fname + ".jsp"+params, {}, function (data) {
+
+    registerModalFunctions();
+    $.post("content/" + fname + ".jsp" + params, {}, function (data) {
         $("#mheader").html(title);
         $("#mbody").html(data);
-        $('#myModal').modal();
+        $('#myModal').modal({backdrop: 'static', keyboard: true});
         loader.hide();
     });
 }
 
+function removeModal() {
 
-function checkOut(rid,reloadid){
-    $.post("content/checkout.jsp", { rid: rid }, function (data) {
+    $(".modal-body").html('');
+
+}
+
+function loadModalDefs() {
+    $('.modal-dialog').removeAttr('style');
+    $("#maindiv").remove();
+}
+
+
+function checkOut(rid, reloadid) {
+    $.post("content/checkout.jsp", {rid: rid}, function (data) {
         if (data.result == 0)    BootstrapDialog.alert(data.error);
         else {
             reloadGrid(reloadid);
@@ -1004,8 +1033,8 @@ function checkOut(rid,reloadid){
     }, "json");
 }
 
-function checkOut1(rid,reloadid){
-    $.post("content/amendstay.jsp", { rid: rid }, function (data) {
+function checkOut1(rid, reloadid) {
+    $.post("content/amendstay.jsp", {rid: rid}, function (data) {
         if (data.result == 0)    BootstrapDialog.alert(data.error);
         else {
             reloadGrid(reloadid);

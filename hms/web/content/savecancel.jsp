@@ -6,7 +6,6 @@ boolean act = false;
 if(request.getParameter("act") != null)
     act = true;
 String msg = "";
-SimpleDateFormat dttt = new SimpleDateFormat("DD/MM/YYYY");
 Manager.getInstance().beginTransaction();
 try{
     ReservationroomBean reserv = ReservationroomManager.getInstance().loadByPrimaryKey(new Long(request.getParameter("rid")));
@@ -19,16 +18,24 @@ try{
         //String sql = "where (particular = 1 || particuler = -1) and length(note) > 0 and itemdate = to_date('DD/MM/YYYY','"+dttt.format(res.getArraivaldate())+"') and folioid = "+folio[0].getFolioid();
         //FolioitemManager.getInstance().deleteByWhere(sql);
     } else {
-    
+
+        System.out.println(request.getParameter("cancel_reasonid"));
         int reasonid = Integer.parseInt(request.getParameter("cancel_reasonid"));
+
+        System.out.println("HEREEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE1");
         if(reasonid == 0)   throw new Exception("აირჩიეთ გაუქმების მიზეზი");
         double cancellationfee = 0;
         try{
+            System.out.println("HEREEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE2");
             cancellationfee = Double.parseDouble(request.getParameter("cancel_cancellationfee").trim());
+            System.out.println("HEREEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE3");
         }catch(Exception e){
             if(request.getParameter("cancel_cancellationfee").trim().length() > 0)
+                System.out.println("HEREEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE4");
                 throw new Exception("არასწორი გაუქმების თანხა");
         }
+
+
         res.setStatus(1);
         res = ReservationManager.getInstance().save(res);
         ReservationreasonBean rs = ReservationreasonManager.getInstance().createReservationreasonBean();

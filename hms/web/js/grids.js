@@ -25,7 +25,7 @@ resGrid = {
     limit: 5,
     offset: 0,
     isPopup: false,
-    page : 1,
+    page: 1,
     gridComplete: function () {
         ReDrawTable(resGrid);
         //Line below makes the height of the row to be 38 px!!!
@@ -494,7 +494,7 @@ consGrid = {
     id: 'list_consgrid',
     url: 'content/getconsguestlist.jsp',
     type: 'xml',
-    cols: ['','სტუმრის სახელი', 'ქალაქი', 'ქვეყანა', 'ტელეფონი', 'ელ.ფოსტა'],
+    cols: ['', 'სტუმრის სახელი', 'ქალაქი', 'ქვეყანა', 'ტელეფონი', 'ელ.ფოსტა'],
     model: consGridModel,
     sort: 'guest',
     order: 'asc',
@@ -527,7 +527,7 @@ constagentGrid = {
     id: 'list_contrgrid',
     url: 'content/getconscontrlist.jsp',
     type: 'xml',
-    cols: ['','კომპანია','სახელი,გვარი', 'ქალაქი', 'ქვეყანა', 'ტელეფონი', 'ელ.ფოსტა'],
+    cols: ['', 'კომპანია', 'სახელი,გვარი', 'ქალაქი', 'ქვეყანა', 'ტელეფონი', 'ელ.ფოსტა'],
     model: constagentGridModel,
     sort: 'contragent',
     order: 'asc',
@@ -543,10 +543,10 @@ constagentGrid = {
 };
 
 
-/* -------------------------------- tagentscons List Model ------------------------------------*/
+/* --------------------------------  List Model ------------------------------------*/
 
 
-/* --------------------------------  tagentscons List Model ------------------------------------*/
+/* --------------------------------  List Model ------------------------------------*/
 var hsGridModel = [];
 hsGridModel.push(
     colModelGenerator(130, 'unitroom', 0),
@@ -561,7 +561,7 @@ hsGrid = {
     id: 'list_hsgrid',
     url: 'content/gethotelstatus.jsp',
     type: 'xml',
-    cols: ['დასალაგებელი ადგილები','ოთახის ტიპი', 'სტატუსი', 'ხელმისაწვდომობა', 'შენიშვნა', 'დამლაგებელი'],
+    cols: ['დასალაგებელი ადგილები', 'ოთახის ტიპი', 'სტატუსი', 'ხელმისაწვდომობა', 'შენიშვნა', 'დამლაგებელი'],
     model: hsGridModel,
     sort: 'contragent',
     order: 'asc',
@@ -574,12 +574,49 @@ hsGrid = {
         ReDrawTable(hsGrid);
         $("[aria-describedby=list_hsgrid_status]").each(function (i, o) {
             var color = $(o).find(".status-color").attr("color");
-            $(o).parent().css("height","29px");
-            if(!isNullOrEmpty(color))
-            {
+            $(o).parent().css("height", "29px");
+            if (!isNullOrEmpty(color)) {
                 $(o).parent().css("border-left", "solid 5px " + $(o).find(".status-color").attr("color"));
             }
         });
+    },
+    beforeRequest: function () {
+
+    }
+};
+
+
+/* --------------------------------  List Model ------------------------------------*/
+var finGridModel = [];
+finGridModel.push(
+    colModelGenerator(130, 'type', 0),
+    colModelGenerator(60, 'dt1', 0),
+    colModelGenerator(60, 'dt2', 0),
+    colModelGenerator(60, 'dt3', 0)
+);
+
+finGrid = {
+    id: 'list_fin',
+    url: 'content/getfinventory.jsp',
+    type: 'xml',
+    cols: ['Type', 'dt1', 'dt2', 'dt3'],
+    model: finGridModel,
+    sort: 'type',
+    order: 'asc',
+    isPopup: false,
+    altRows: true,
+    altclass: 'altrow',
+    footerrow : true,
+    userDataOnFooter:true,
+    gridComplete: function () {
+        ReDrawTable(finGrid);
+        var width = $(".q-table-div .ui-jqgrid").width();
+        $(".q-table-div .ui-jqgrid-labels").hide();
+        $("#list_fin").width(width-10);
+        $(".q-table-div .ui-jqgrid-sdiv").width(width);
+        $(".q-table-div .ui-jqgrid-ftable").width(width);
+        $(".footrow td").css("border-right","0");
+        $(".q-table-div .ui-jqgrid-bdiv").css("height","auto");
     },
     beforeRequest: function () {
 

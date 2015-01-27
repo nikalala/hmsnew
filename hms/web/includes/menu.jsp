@@ -109,7 +109,7 @@
                     <a href="javascript:getBody('stayviewleft', 'stayview', 'დატვირთულობა', 'res1','',true);" data-toggle="tooltip" title="დატვირთულობა"><span class="glyphicon glyphicon-inbox"></span></a>
                 </li>
                 <li>
-                    <a href="javascript:getBody('stayviewleft','construction');" data-toggle="tooltip" title="სწრაფი ნახვა"><span class="glyphicon glyphicon-eye-open"></span></a>
+                    <a href="javascript:getBody('stayviewleft','overview','მიმოხილვა', 'res1','',true);" data-toggle="tooltip" title="მიმოხილვა"><span class="glyphicon glyphicon-eye-open"></span></a>
                 </li>
                 <li>
                     <a href="javascript:getBody('stayviewleft','construction');" data-toggle="tooltip" title="სამუშაო მაგიდა"><span class="glyphicon glyphicon-dashboard"></span></a>

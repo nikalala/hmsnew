@@ -114,12 +114,6 @@
     </form>
     <%--<% } %>--%>
 </div>
-<!--================================================== -->
-
-<!-- PACE LOADER - turn this on if you want ajax loading to show (caution: uses lots of memory on iDevices)-->
-<%--<script src="js/pace.min.js"></script>--%>
-<%--<script src="js/jquery-1.8.2.js"></script>
---%>
 
 <script>
 

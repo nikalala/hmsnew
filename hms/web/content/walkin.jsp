@@ -277,6 +277,7 @@
         }, 100);
     }
 
+
     function walkinRoomType(id) {
         $.post(
                 "content/ajax/getRoomsByType.jsp",
