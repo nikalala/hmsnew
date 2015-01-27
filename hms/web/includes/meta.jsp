@@ -848,6 +848,23 @@ System.out.println(rid+" = "+statusid);
         return bret;
     }
     
+    public String[][] getRoomStatuses(Date startdate,int days) throws Exception {
+        RoomtypeBean[] rtypes = RoomtypeManager.getInstance().loadByWhere("where deleted = false and active = true");
+        String s[][] = new String[rtypes.length][days+1];
+        Calendar cal = Calendar.getInstance();
+        
+        for(int i=0;i<rtypes.length;i++){
+            s[i][0] = rtypes[i].getName();
+            cal.setTime(startdate);
+            for(int j=0;j<days;j++){
+                RoomBean[] rm = getAvailableRooms(cal.getTime(), cal.getTime(), rtypes[i].getRoomtypeid().intValue());
+                s[i][j+1] = String.valueOf(rm.length);
+            }
+        }
+        
+        return s;
+    }
+    
 %>
 <%
 
