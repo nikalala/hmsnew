@@ -590,9 +590,9 @@ hsGrid = {
 var finGridModel = [];
 finGridModel.push(
     colModelGenerator(130, 'type', 0),
-    colModelGenerator(60, 'dt1', 0),
-    colModelGenerator(60, 'dt2', 0),
-    colModelGenerator(60, 'dt3', 0)
+    colModelGenerator(60, 'dt1', 1),
+    colModelGenerator(60, 'dt2', 1),
+    colModelGenerator(60, 'dt3', 1)
 );
 
 finGrid = {

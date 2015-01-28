@@ -14,10 +14,6 @@ import java.util.Date;
 
 public class CodeHelpers {
 
-    public static boolean isNullOrEmpty(String object) {
-        return object == null || object.length() == 0 ? true : false;
-    }
-
     public static String ifIsNullOrEmptyReturnEmptryString(String object) {
         return object == null || object.length() == 0 ? "" : object;
     }
@@ -68,6 +64,87 @@ public class CodeHelpers {
         }
         return "";
     }
+
+    /**
+     * Return a substring of the source string up until the first
+     * occurrence of the specified character
+     *
+     * @param source - The source string to operate on
+     * @param c      - Character to search for
+     * @return - Substring of the original string up until the first occurance of c
+     */
+    public static String substringUpToFirstOccurance(String source, char c) {
+        return !isNullOrEmpty(source) && !Character.isWhitespace(c) ?
+                source.substring(0, source.indexOf(c)) : null;
+    }
+
+    /**
+     * Return a substring of the source string after the first
+     * occurrence of the specified character
+     *
+     * @param source - The source string to operate on
+     * @param c      - Character to search for
+     * @return - Substring of the original string after the first occurrence of c
+     */
+    public static String substringFromFirstOccurance(String source, char c) {
+        return !isNullOrEmpty(source) && !Character.isWhitespace(c) ?
+                source.substring(source.indexOf(c), source.length() - 1) : null;
+    }
+
+    /**
+     * Return a substring of the source string up until the last
+     * occurrence of the specified character
+     *
+     * @param source - The source string to operate on
+     * @param c      - Character to search for
+     * @return - Substring of the original string up until the last occurrence of c
+     */
+    public static String substringUpToLastOccurance(String source, char c) {
+        return !isNullOrEmpty(source) && !Character.isWhitespace(c) ?
+                source.substring(0, source.lastIndexOf(c)) : null;
+    }
+
+    /**
+     * Return a substring of the source string after the last
+     * occurrence of the specified character
+     *
+     * @param source - The source string to operate on
+     * @param c      - Character to search for
+     * @return - Substring of the original string after the last occurrence of c
+     */
+    public static String substringFromLastOccurance(String source, char c) {
+        return !isNullOrEmpty(source) && !Character.isWhitespace(c) ?
+                source.substring(source.lastIndexOf(c), source.length() - 1) : null;
+    }
+
+    /**
+     * Return a substring of the source string after the first occurrence
+     * of the search String
+     *
+     * @param source       - The source string to operate on
+     * @param searchString - String to search for
+     * @return - Substring of the original string after the first occurrence of searchString
+     */
+    public static String substringAfterSearchString(String source, String searchString) {
+        if (!isNullOrEmpty(source) && !isNullOrEmpty(searchString)) {
+            int index = source.indexOf(searchString);
+            return index > -1 ? source.substring(index + searchString.length()) : null;
+        } else {
+            return null;
+        }
+    }
+
+    /**
+     * @param param - The source string to operate on
+     * @return - Returns True If param is null or param characters length == 0
+     */
+    public static boolean isNullOrEmpty(String param) {
+        if (param != null && !param.isEmpty()) {
+            return false;
+        }
+        return true;
+    }
+
 
 
 }
