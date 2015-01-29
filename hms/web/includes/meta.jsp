@@ -784,7 +784,47 @@ System.out.println(rid+" = "+statusid);
         return ret;
     }
 
+    public boolean isRoomAvailable(Date dt1, Date dt2, int roomid) throws Exception {
+        boolean bret = true;
+        SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+        
+        Calendar cal1 = Calendar.getInstance();
+        Calendar cal2 = Calendar.getInstance();
+        cal1.setTime(dt1);
+        cal2.setTime(df.parse(df.format(dt2)));
 
+
+            for (int j = 0; cal1.before(cal2); j++) {
+                Calendar cal = Calendar.getInstance();
+                cal.setTimeInMillis(cal1.getTimeInMillis());
+                if (j > 0) {
+                    cal.set(Calendar.HOUR_OF_DAY, 23);
+                    cal.set(Calendar.MINUTE, 59);
+                    cal.set(Calendar.SECOND, 59);
+                    cal.set(Calendar.MILLISECOND, 999);
+                }
+                int st = getRoomStatus(cal.getTime(), roomid);
+                if (j == 0) {
+                    if (st == 0 || st == 1 || st == 2 || st == 5) {
+                        bret = false;
+                        break;
+                    }
+                } else {
+                    if (st == 0 || st == 1 || st == 2 || st == 3 || st == 5 || st == 7) {
+                        bret = false;
+                        break;
+                    }
+                }
+                cal1.add(Calendar.DATE, 1);
+            }
+            int st = getRoomStatus(dt2, roomid);
+            if (st == 0 || st == 1 || st == 2 || st == 5) {
+                bret = false;
+            }
+
+        return bret;
+    }
+    
     public RoomBean[] getAvailableRooms(Date dt1, Date dt2, int rtp) throws Exception {
         SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
         String sql = "where deleted = false and active = true ";
@@ -839,12 +879,12 @@ System.out.println(rid+" = "+statusid);
         String sql = "where "
                 + "arraivaldate::date <= to_date('" + df.format(dt2) + "','DD/MM/YYYY') and "
                 + "arraivaldate::date >= to_date('" + df.format(dt1) + "','DD/MM/YYYY') and "
-                + "statusid in (-1,0) and reservationid in (select resrvationid from reservationroom where roomtypeid = " + rtp + ")";
+                + "status in (-1,0) and reservationid in (select reservationid from reservationroom where roomtypeid = " + rtp + ")";
         int cnt1 = RoomManager.getInstance().countWhere("where deleted = false and active = true and roomtypeid = " + rtp);
         int cnt2 = ReservationManager.getInstance().countWhere(sql);
 
         boolean bret = true;
-        if (cnt1 >= cnt2) bret = false;
+        if (cnt1 < cnt2) bret = false;
         return bret;
     }
 
