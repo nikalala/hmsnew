@@ -20,6 +20,7 @@ $(document).keydown(function (e) {
 });
 
 function registerModalFunctions() {
+    //This should not happen if there is at least one error message...
     $(document).on("click", "#myModalCancel, #myModalSave, #myModalCheckin", function () {
         removeModal();
     });
@@ -1014,6 +1015,7 @@ function newWindowWithParams(fname, title, params) {
 function removeModal() {
 
     $(".modal-body").html('');
+    $('.modal-dialog').hide();
 
 }
 
