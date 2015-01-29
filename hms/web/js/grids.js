@@ -663,3 +663,52 @@ qohsGrid = {
     }
 };
 
+/* --------------------------------  List Model ------------------------------------*/
+var finGridModel2 = [];
+finGridModel2.push(
+    colModelGenerator(130, 'type', 0),
+    colModelGenerator(60, 'dt1', 1),
+    colModelGenerator(60, 'dt2', 1),
+    colModelGenerator(60, 'dt3', 1),
+    colModelGenerator(60, 'dt4', 1),
+    colModelGenerator(60, 'dt5', 1),
+    colModelGenerator(60, 'dt6', 1),
+    colModelGenerator(60, 'dt7', 1),
+    colModelGenerator(60, 'dt8', 1),
+    colModelGenerator(60, 'dt9', 1),
+    colModelGenerator(60, 'dt10', 1),
+    colModelGenerator(60, 'dt11', 1),
+    colModelGenerator(60, 'dt12', 1),
+    colModelGenerator(60, 'dt13', 1),
+    colModelGenerator(60, 'dt14', 1)
+
+);
+
+finGrid2 = {
+    id: 'list_fin2',
+    url: 'content/overviewpopup.jsp',
+    type: 'xml',
+    cols: ['Type', 'dt1', 'dt2', 'dt3','dt4','dt5','dt6','dt7','dt8','dt9','dt10','dt11','dt12','dt13','dt14'],
+    model: finGridModel2,
+    sort: 'type',
+    order: 'asc',
+    isPopup: false,
+    altRows: true,
+    altclass: 'altrow',
+    footerrow : true,
+    userDataOnFooter:true,
+    gridComplete: function () {
+        ReDrawTable(finGrid2);
+        var width = $(".modal-custom-body .ui-jqgrid").width();
+        $(".modal-custom-body .ui-jqgrid-labels").hide();
+        $("#gbox_list_fin2").width(width-3);
+        $("#list_fin2").width(width-10);
+        $(".modal-custom-body .ui-jqgrid-sdiv").width(width);
+        $(".modal-custom-body .ui-jqgrid-ftable").width(width);
+        $(".footrow td").css("border-right","0");
+        $(".modal-custom-body .ui-jqgrid-bdiv").css("height","244px");
+    },
+    beforeRequest: function () {
+        $(".modal-custom-body .ui-jqgrid-labels").hide();
+    }
+};

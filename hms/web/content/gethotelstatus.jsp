@@ -53,6 +53,7 @@
         <cell><![CDATA[<i style="font-size: 15px;  margin-left:10px;" class="fa fa-times"></i> ]]></cell>
     </row>
     <% }
+        rs.close();
     }
 
         java.sql.CallableStatement cntfnct1 = con.prepareCall("{ ? = call gethotelstatusgrid ( ?,? ) }");
@@ -98,6 +99,7 @@
 
     <%
             }
+            rs1.close();
         }
         Manager.getInstance().releaseConnection(con);
         Manager.getInstance().endTransaction(true);

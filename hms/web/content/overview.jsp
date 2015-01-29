@@ -6,25 +6,50 @@
 
 <script>
     $(document).ready(function () {
-        $('#dtp').datepicker(<%=pickerFormatForDatePickers%>).on('changeDate', function(e){
+        $('#dtp').datepicker(<%=pickerFormatForDatePickers%>).on('changeDate', function (e) {
             e.preventDefault();
             var dt = e.target.value;
-            if(!isNullOrEmpty(dt)){
-                finGrid.url = 'content/getfinventory.jsp?dt='+dt;
-                reloadGrid(finGrid.id,finGrid.url);
+            if (!isNullOrEmpty(dt)) {
+                finGrid.url = 'content/getfinventory.jsp?dt=' + dt;
+                reloadGrid(finGrid.id, finGrid.url);
             }
         });
-        $('.datepicker').datepicker()
+        $('#dtp1').datepicker(<%=pickerFormatForDatePickers%>).on('changeDate', function (e) {
+            e.preventDefault();
+            var dt = e.target.value;
+            finGrid2.url = "content/overviewpopup.jsp?dt=" + dt;
+            reloadGrid(finGrid2.id, finGrid2.url);
+        });
 
         var dt = $('#dtp').val();
-        if(!isNullOrEmpty(dt)){
-            finGrid.url = 'content/getfinventory.jsp?dt='+dt;
+        if (!isNullOrEmpty(dt)) {
+            finGrid.url = 'content/getfinventory.jsp?dt=' + dt;
         }
         initializeGrid(finGrid);
         initializeGrid(qohsGrid);
+
     });
 
+    $(document).on("click", "#dismissbutton,#smallmodalbtn", function () {
+        $("#updatehs").fadeOut();
+    });
+
+    var initialized = false;
+    function displayTable() {
+        var dt = $('#dtp').val();
+        finGrid2.url = "content/overviewpopup.jsp?dt=" + dt;
+        if (!initialized) {
+            initializeGrid(finGrid2);
+            initialized = true;
+        } else {
+            reloadGrid(finGrid2.id, finGrid2.url);
+        }
+        $("#updatehs").fadeIn();
+    }
+
 </script>
+
+<link rel="stylesheet" type="text/css" href="css/grid-filter.css">
 
 <style>
     .q-main-div {
@@ -131,6 +156,32 @@
     }
 
 </style>
+
+<div class="modal-custom-content" id="updatehs" style="position: absolute; z-index: 10; display: none;">
+    <div class="modal-custom-header" style="background-color: gray; color: white; height: 30px;">
+        <button type="button" id="smallmodalbtn" class="close" data-dismiss="modal" aria-hidden="true"
+                style="margin-top: -6px;">×
+        </button>
+        <h4 style="margin-top: -4px;"></h4>
+    </div>
+    <div class="modal-custom-body">
+        <div style="width: 300px; height: 35px;">
+            <div class="input-append date q-s-dt-box" id="dt1" style="float: left !important;">
+                <input type="text" class="span2 " id="dtp1" style="height: 26px; width: 133px;">
+                    <span class="add-on q-s-dt">
+                        <i class="glyphicon glyphicon-calendar"></i>
+                    </span>
+            </div>
+        </div>
+        <table id='list_fin2' class="table-striped table-hover" align='center'></table>
+    </div>
+    <div class="modal-footer" style="margin-top: 10px;">
+        <button type="button" class="btn btn-default" id="dismissbutton" data-dismiss="modal" onclick="this.click();">
+            დახურვა
+        </button>
+        <button type="button" class="btn btn-primary" onclick="" style="display: none;">შენახვა</button>
+    </div>
+</div>
 
 <div class="q-main-div">
     <div class="col-md-5">
@@ -300,7 +351,7 @@
             <div class="q-statusbar-div">
                 <span class="q-statusbar-span" style="float: left;">სამომავლო ინვენტარი</span>
 
-                <i class="fa fa-search q-s-search"></i>
+                <i onclick="displayTable()" class="fa fa-search q-s-search"></i>
 
                 <div class="input-append date q-s-dt-box" id="dt">
                     <input type="text" class="span2 " id="dtp" style="height: 26px; width: 133px;">
