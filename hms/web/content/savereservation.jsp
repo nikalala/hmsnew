@@ -413,6 +413,7 @@ try{
         }
     }
     
+System.out.println("roomid = "+resroom.getRoomid());
     if(resroom.getRoomid() != null && resroom.getRoomid().intValue() == 0)
         resroom.setRoomid(null);
     
@@ -425,18 +426,12 @@ try{
     if(resroom.getRoomtypeid().intValue() == 0)
         throw new Exception("აირჩიეთ ოთახის ტიპი");
     
-    if(resroom.getRoomid() != null){
-        String sqlcheck = "where "
-                + "arraivaldate < to_timestamp('"+dtlong.format(res.getDeparturedate())+"','DD/MM/YYYY HH24:MI') and "
-                + "departuredate > to_timestamp('"+dtlong.format(res.getArraivaldate())+"','DD/MM/YYYY HH24:MI') and "
-                + "reservationid in (select reservationid from reservationroom where roomid = "+resroom.getRoomid()+")";
-        if(ReservationManager.getInstance().countWhere(sqlcheck) > 0)
+    if(resroom.getRoomid() != null && !isRoomAvailable(res.getArraivaldate(),res.getDeparturedate(),resroom.getRoomid().intValue())){
             throw new Exception("ოთახი ამ პერიოდში დაკავებულია");
+    } else {
+        if(!getAvailableRoomtypes(res.getArraivaldate(),res.getDeparturedate(),resroom.getRoomtypeid().intValue()))
+            throw new Exception("ოთახის ტიპი ამ პერიოდში დაკავებულია");
     }
-    
-    if(!getAvailableRoomtypes(res.getArraivaldate().getTime(),res.getDeparturedate().getTime(),resroom.getRoomtypeid().intValue()))
-        throw new Exception("ოთახის ტიპი ამ პერიოდში დაკავებულია");
-    
     res.setRegbyid(user.getPersonnelid());
     if(!checkin){
         res.setStatus(0);
