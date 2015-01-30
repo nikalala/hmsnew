@@ -4,7 +4,9 @@
 
 <%
     request.setCharacterEncoding("UTF-8");
-    String update = (String) request.getParameter("query");
+    String update = URLDecoder.decode(request.getQueryString(), "UTF-8");
+    update = update.replace("query=", "");
+    System.out.println(update);
     Connection con = Manager.getInstance().getConnection();
     int retVal = con.createStatement().executeUpdate(update);
     Manager.getInstance().releaseConnection(con);

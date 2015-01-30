@@ -247,8 +247,64 @@
     }
 
     $(document).on("click", "#dismissbutton, #smallmodalbtn", function () {
-        $("#updatehs").css("display", "none");
+        $("#updatehs, #updateremark").css("display", "none");
     });
+
+    function changeRemark(id,remark,isHUnit,_this){
+
+        if(isHUnit){
+           $("#saveRemarkBtn").attr("onclick","saveMark(true)");
+        }else{
+            $("#saveRemarkBtn").attr("onclick","saveMark(false)");
+        }
+
+        if(remark === 'null') { remark = ''}
+        $("#remarktxt").val(remark);
+        $("#updateremark").css("display", "block");
+        $("#updateremark").offset($(_this).offset());
+        $("#updateremark").css({'left': $("#updateremark").position().left + 25});
+        rid = id;
+
+    }
+
+    function saveMark(isHUnit){
+
+        var remark = $("#remarktxt").val();
+
+        if(remark === "null" || remark == ""){
+            BootstrapDialog.alert("შეიყვანეთ მინიშნება!!!");
+            return;
+        }
+
+        var roomId = "NULL";
+
+        var huId = "NULL";
+
+        var deleteRemarks = "";
+
+        if(!isHUnit){
+            deleteRemarks = "UPDATE remarks SET deleted = true WHERE roomid in (" + rid + ");";
+            roomId = rid;
+        }else{
+            deleteRemarks = "UPDATE remarks SET deleted = true WHERE houseunitid in (" + rid + ");";
+            huId = rid;
+        }
+
+        var sql = deleteRemarks + " INSERT INTO remarks(remarkid, remark, roomid, houseunitid) " +
+                "VALUES " +
+                "((SELECT COALESCE(MAX(remarkid) + 1,1) FROM remarks), '" + remark + "', " + roomId + ", " + huId + ");";
+
+        $.post("content/execute.jsp?query=" + encodeURIComponent(sql), {}, function () {
+
+            reloadGrid(hsGrid.id, hsGrid.url);
+
+            $("#dismissbutton").click();
+
+            loader.hide();
+
+        });
+
+    }
 
 </script>
 
@@ -272,6 +328,24 @@
             დახურვა
         </button>
         <button type="button" class="btn btn-primary" onclick="saveStatusId()">შენახვა</button>
+    </div>
+</div>
+
+<div class="modal-custom-content" id="updateremark" style="position: absolute; z-index: 10; display: none;">
+    <div class="modal-custom-header" style="background-color: gray; color: white; height: 30px;">
+        <button type="button" id="smallmodalbtn" class="close" data-dismiss="modal" aria-hidden="true"
+                style="margin-top: -6px;">×
+        </button>
+        <h4 style="margin-top: -4px;">სტატუსის შეცვლა</h4>
+    </div>
+    <div class="modal-custom-body">
+        <textarea id="remarktxt"></textarea>
+    </div>
+    <div class="modal-footer" style="margin-top: 10px;">
+        <button type="button" class="btn btn-default" id="dismissbutton" data-dismiss="modal" onclick="this.click();">
+            დახურვა
+        </button>
+        <button type="button" id="saveRemarkBtn" class="btn btn-primary">შენახვა</button>
     </div>
 </div>
 

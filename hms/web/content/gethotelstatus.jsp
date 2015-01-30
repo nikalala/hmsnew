@@ -49,7 +49,7 @@
             ]]>
         </cell>
         <cell><![CDATA[<%=roomst%>]]></cell>
-        <cell><![CDATA[<i style="font-size: 15px;  margin-left:10px;" class="fa fa-pencil"></i>]]></cell>
+        <cell><![CDATA[<%=CodeHelpers.ifIsNullOrEmptyReturnEmptryString(rs.getString("remark"))%> &nbsp; <i onclick="changeRemark(<%=rs.getInt("roomid")%>,'<%=rs.getString("remark")%>',false,this)" style="font-size: 15px;  margin-left:10px;" class="fa fa-pencil"></i>]]></cell>
         <cell><![CDATA[<i style="font-size: 15px;  margin-left:10px;" class="fa fa-times"></i> ]]></cell>
     </row>
     <% }
@@ -92,7 +92,7 @@
             ]]>
         </cell>
         <cell><![CDATA[]]></cell>
-        <cell><![CDATA[<i style="font-size: 15px;  margin-left:10px;" class="fa fa-pencil"></i>]]></cell>
+        <cell><![CDATA[ <%=CodeHelpers.ifIsNullOrEmptyReturnEmptryString(rs1.getString("remark"))%> &nbsp; <i onclick="changeRemark(<%=rs1.getInt("roomid")%>,'<%=rs1.getString("remark")%>',true,this)" style="font-size: 15px;  margin-left:10px;" class="fa fa-pencil"></i>]]></cell>
         <cell><![CDATA[<i style="font-size: 15px;  margin-left:10px;" class="fa fa-times"></i> ]]></cell>
     </row>
 
