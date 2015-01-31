@@ -49,12 +49,48 @@ double deposit = getSum("select sum(amount) from payment where folioid in (selec
 ReasonBean[] reasons = ReasonManager.getInstance().loadByWhere("where deleted = false and active = true and reasoncategory = 13 order by name");
 FolioBean[] folio = FolioManager.getInstance().loadByWhere("where reservationroomid = "+reserv.getReservationroomid());
 %>
+<script>
+    var addnew = 0;
+    $("#addnewreason").hide();
+    
+    $("#addremreason").button().click(function(){adddelreason();});
+    
+    $("#reasonid").change(function(){
+        var rid = $("#reasonid").val();
+        if(rid > 0){
+            addnew = 0;
+            $("#addnewreason").hide();
+            $("#addremreason").hide();
+            $("#addremreason").removeClass("fa-minus");
+            $("#addremreason").addClass("fa-plus");
+        } else {
+            $("#addremreason").show();
+            $("#addremreason").removeClass("fa-minus");
+            $("#addremreason").addClass("fa-plus");
+        }
+    });
+    
+    function adddelreason(){
+        if (addnew == 0) {
+            $("#addnewreason").show();
+            $("#addremreason").removeClass("fa-plus");
+            $("#addremreason").addClass("fa-minus");
+            addnew = 1;
+        } else {
+            $("#addnewreason").hide();
+            $("#addremreason").removeClass("fa-minus");
+            $("#addremreason").addClass("fa-plus");
+            addnew = 0;
+        }
+    }
+    
+</script>
 <%if(act){%>
 <input type="hidden" id="action" value="savevoid.jsp?rid=<%=reserv.getReservationroomid()%>"/>
 <input type="hidden" id="callbackurl" value="script:reloadGrid(resGrid.id)"/>
 <%} else {%>
 <input type="hidden" id="action" value="savevoid.jsp?rid=<%=reserv.getReservationroomid()%>"/>
-<input type="hidden" id="controls" value="reasonid"/>
+<input type="hidden" id="controls" value="reasonid,newreason"/>
 <input type="hidden" id="callbackurl" value="script:reloadGrid('list_pendingreservations')"/>
 <%}%>
 <table width="100%" class="table table-borderless">
@@ -98,8 +134,8 @@ FolioBean[] folio = FolioManager.getInstance().loadByWhere("where reservationroo
         <td><b>ბალანსი</b></td>
         <td><%=maincurrency.getCode()%> <%=dc.format(total-deposit)%></td>
         <td><b>მიზეზი</b></td>
-        <td>
-            <select name="reasonid" id="reasonid">
+        <td nowrap>
+            <select name="reasonid" id="reasonid" style="width: 150px;">
                 <option value="0">-- აირჩიეთ --</option>
                 <%
                 for(int i=0;i<reasons.length;i++){
@@ -109,6 +145,12 @@ FolioBean[] folio = FolioManager.getInstance().loadByWhere("where reservationroo
                 }
                 %>
             </select>
+            <button id="addremreason" class="fa fa-plus" style="color: green; height: 24px;"></button>
+        </td>
+    </tr>
+    <tr id="addnewreason">
+        <td colspan="4" align="center">
+            <textarea cols="100" rows="3" id="newreason" name="neawreason"></textarea>
         </td>
     </tr>
 </table>

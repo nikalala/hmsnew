@@ -21,7 +21,16 @@ try{
     } else {
     
         int reasonid = Integer.parseInt(request.getParameter("nowshow_reasonid"));
-        if(reasonid == 0)   throw new Exception("აირჩიეთ არ გამოცხადების მიზეზი");
+        String newreason = request.getParameter("nowshow_newreason");
+        if(reasonid == 0 && (newreason == null || newreason.trim().length() == 0))   throw new Exception("აირჩიეთ არ გამოცხადების მიზეზი");
+        if(reasonid == 0){
+            ReasonBean resn = ReasonManager.getInstance().createReasonBean();
+            resn.setReasoncategory(7);
+            resn.setName(newreason);
+            resn.setRegbyid(user.getPersonnelid());
+            resn = ReasonManager.getInstance().save(resn);
+            reasonid = resn.getReasonid().intValue();
+        }
         double cancellationfee = 0;
         try{
             cancellationfee = Double.parseDouble(request.getParameter("nowshow_cancellationfee").trim());

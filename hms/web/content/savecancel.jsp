@@ -19,19 +19,24 @@ try{
         //FolioitemManager.getInstance().deleteByWhere(sql);
     } else {
 
-        System.out.println(request.getParameter("cancel_reasonid"));
         int reasonid = Integer.parseInt(request.getParameter("cancel_reasonid"));
-
-        System.out.println("HEREEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE1");
-        if(reasonid == 0)   throw new Exception("აირჩიეთ გაუქმების მიზეზი");
+        String newreason = request.getParameter("cancel_newreason");
+        if(reasonid == 0 && (newreason == null || newreason.trim().length() == 0))   throw new Exception("აირჩიეთ გაუქმების მიზეზი");
+        if(reasonid == 0){
+            ReasonBean resn = ReasonManager.getInstance().createReasonBean();
+            resn.setReasoncategory(1);
+            resn.setName(newreason);
+            resn.setRegbyid(user.getPersonnelid());
+            resn = ReasonManager.getInstance().save(resn);
+            reasonid = resn.getReasonid().intValue();
+        }
+        
+        
         double cancellationfee = 0;
         try{
-            System.out.println("HEREEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE2");
             cancellationfee = Double.parseDouble(request.getParameter("cancel_cancellationfee").trim());
-            System.out.println("HEREEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE3");
         }catch(Exception e){
             if(request.getParameter("cancel_cancellationfee").trim().length() > 0)
-                System.out.println("HEREEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE4");
                 throw new Exception("არასწორი გაუქმების თანხა");
         }
 

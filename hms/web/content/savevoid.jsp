@@ -20,7 +20,16 @@ try{
 
     } else {
         int reasonid = Integer.parseInt(request.getParameter("reasonid"));
-        if(reasonid == 0)   throw new Exception("აირჩიეთ განულების მიზეზი");
+        String newreason = request.getParameter("newreason");
+        if(reasonid == 0 && (newreason == null || newreason.trim().length() == 0))   throw new Exception("აირჩიეთ განულების მიზეზი");
+        if(reasonid == 0){
+            ReasonBean resn = ReasonManager.getInstance().createReasonBean();
+            resn.setReasoncategory(13);
+            resn.setName(newreason);
+            resn.setRegbyid(user.getPersonnelid());
+            resn = ReasonManager.getInstance().save(resn);
+            reasonid = resn.getReasonid().intValue();
+        }
         res.setStatus(3);
         res = ReservationManager.getInstance().save(res);
         ReservationreasonBean rs = ReservationreasonManager.getInstance().createReservationreasonBean();

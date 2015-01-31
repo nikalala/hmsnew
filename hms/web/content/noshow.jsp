@@ -50,7 +50,7 @@
     double total = getSum("select sum(amount) from folioitem where particular not in (1,2) and folioid in (select folioid from folio where reservationroomid = " + reserv.getReservationroomid() + ")");
     double deposit = getSum("select sum(amount) from payment where folioid in (select folioid from folio where reservationroomid = " + reserv.getReservationroomid() + ")");
     int dday = DayDiff(cal1, cal2);
-    ReasonBean[] reasons = ReasonManager.getInstance().loadByWhere("where deleted = false and active = true and reasoncategory = 1 order by name");
+    ReasonBean[] reasons = ReasonManager.getInstance().loadByWhere("where deleted = false and active = true and reasoncategory = 7 order by name");
     double total0 = getSum("select sum(amount) from folioitem where particular = 6 and folioid in (select folioid from folio where reservationroomid = " + reserv.getReservationroomid() + ")");
 
     FolioBean[] folio = FolioManager.getInstance().loadByWhere("where reservationroomid = " + reserv.getReservationroomid());
@@ -75,8 +75,43 @@
     }
 %>
 <script>
+    var addnew = 0;
+    
+    function adddelreason2(){
+        if (addnew == 0) {
+            $("#addnewreason").show();
+            $("#addremreason").removeClass("fa-plus");
+            $("#addremreason").addClass("fa-minus");
+            addnew = 1;
+        } else {
+            $("#addnewreason").hide();
+            $("#addremreason").removeClass("fa-minus");
+            $("#addremreason").addClass("fa-plus");
+            addnew = 0;
+        }
+    }
     
     $(document).ready(function () {
+        
+        $("#addnewreason").hide();
+
+        $("#addremreason").button().click(function(){adddelreason2();});
+
+        $("#nowshow_reasonid").change(function(){
+            var rid = $("#nowshow_reasonid").val();
+            if(rid > 0){
+                addnew = 0;
+                $("#addnewreason").hide();
+                $("#addremreason").hide();
+                $("#addremreason").removeClass("fa-minus");
+                $("#addremreason").addClass("fa-plus");
+            } else {
+                $("#addremreason").show();
+                $("#addremreason").removeClass("fa-minus");
+                $("#addremreason").addClass("fa-plus");
+            }
+        });
+        
         $("#nowshow_cancellationfee").on("change",function(){
             var val = Number($("#nowshow_cancellationfee").val());
             var valtax = val*0.18;
@@ -92,8 +127,8 @@
 <input type="hidden" id="action" value="savenowshow.jsp?rid=<%=reserv.getReservationroomid()%>"/>
 <input type="hidden" id="callbackurl" value="script:reloadGrid(resGrid.id)"/>
 <%} else {%>
-<input type="hidden" id="action" value="savecancel.jsp?rid=<%=reserv.getReservationroomid()%>"/>
-<input type="hidden" id="controls" value="nowshow_reasonid,nowshow_cancellationfee"/>
+<input type="hidden" id="action" value="savenowshow.jsp?rid=<%=reserv.getReservationroomid()%>"/>
+<input type="hidden" id="controls" value="nowshow_reasonid,nowshow_cancellationfee,nowshow_newreason"/>
 <input type="hidden" id="callbackurl" value="script:reloadGrid('list_pendingreservations')"/>
 <%}%>
 <table width="100%" class="table table-borderless">
@@ -146,7 +181,7 @@
         </td>
         <td><b>მიზეზი</b></td>
         <td>
-            <select name="nowshow_reasonid" id="cancel_reasonid">
+            <select name="nowshow_reasonid" id="nowshow_reasonid">
                 <option value="0">-- აირჩიეთ --</option>
                 <%
                     for(int i=0;i<reasons.length;i++){
@@ -156,6 +191,7 @@
                     }
                 %>
             </select>
+            <button id="addremreason" class="fa fa-plus" style="color: green; height: 24px;"></button>
         </td>
     </tr>
     <tr>
@@ -170,5 +206,10 @@
         <td id="nowshow_taxvalue"><%=maincurrency.getCode()%> <%=dc.format(tax*0.18)%>
         <td><b>ბალანსი</b></td>
         <td id="nowshow_totalvalue"><%=maincurrency.getCode()%> <%=dc.format(tax*1.18+total-deposit)%></td>
+    </tr>
+    <tr id="addnewreason">
+        <td colspan="4" align="center">
+            <textarea cols="100" rows="3" id="nowshow_newreason" name="nowshow_neawreason"></textarea>
+        </td>
     </tr>
 </table>
