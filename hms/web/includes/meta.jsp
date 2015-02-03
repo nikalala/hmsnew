@@ -197,6 +197,17 @@ System.out.println(rid+" = "+statusid);
         n = (int) getSum(sql);
         return n;
     }
+    
+    int getRoomStatus1(Date dt, long rid) throws Exception {
+        int n = -1;
+        SimpleDateFormat dtlong = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+        String sql = "select getroomstatus1(" + rid + ",";
+        if (dt == null) dt = new Date();
+        sql += "'" + dtlong.format(dt) + "')";
+System.out.println(sql);
+        n = (int) getSum(sql);
+        return n;
+    }
 
     int DayDiff(Calendar d1, Calendar d2) {
         long diff = d2.getTimeInMillis() - d1.getTimeInMillis();
@@ -690,7 +701,6 @@ System.out.println(rid+" = "+statusid);
             taxtype = taxes[0].getPostingtype().intValue();
             taxamount = taxes[0].getAmount().doubleValue();
         }
-        System.out.println("discplan = " + discplan + "; discnights = " + String.valueOf((i + 1) % discnights));
         double discamt = discamount;
         if (discplan == 0 && discnights != 0 && (i + 1) % (discnights + 1) != 0) discamt = 0;
         else if (discplan == 2 && i > 0) discamt = 0;
@@ -805,12 +815,12 @@ System.out.println(rid+" = "+statusid);
                 }
                 int st = getRoomStatus(cal.getTime(), roomid);
                 if (j == 0) {
-                    if (st == 0 || st == 1 || st == 2 || st == 5) {
+                    if (st == 0 || st == 1 || st == 2 || st == 5 || st == 6 || st == 9) {
                         bret = false;
                         break;
                     }
                 } else {
-                    if (st == 0 || st == 1 || st == 2 || st == 3 || st == 5 || st == 7) {
+                    if (st == 0 || st == 1 || st == 2 || st == 3 || st == 5 || st == 6 || st == 7 || st == 9) {
                         bret = false;
                         break;
                     }
@@ -818,7 +828,7 @@ System.out.println(rid+" = "+statusid);
                 cal1.add(Calendar.DATE, 1);
             }
             int st = getRoomStatus(dt2, roomid);
-            if (st == 0 || st == 1 || st == 2 || st == 5) {
+            if (st == 0 || st == 1 || st == 2 || st == 5 || st == 6 || st == 9) {
                 bret = false;
             }
 
@@ -848,13 +858,13 @@ System.out.println(rid+" = "+statusid);
                 }
                 int st = getRoomStatus(cal.getTime(), rooms[i].getRoomid());
                 if (j == 0) {
-                    if (st == 0 || st == 1 || st == 2 || st == 5) {
+                    if (st == 0 || st == 1 || st == 2 || st == 5 || st == 6 || st == 9) {
                         if (ids.length() > 0) ids += ",";
                         ids += rooms[i].getRoomid();
                         break;
                     }
                 } else {
-                    if (st == 0 || st == 1 || st == 2 || st == 3 || st == 5 || st == 7) {
+                    if (st == 0 || st == 1 || st == 2 || st == 3 || st == 5 || st == 6 || st == 7 || st == 9) {
                         if (ids.length() > 0) ids += ",";
                         ids += rooms[i].getRoomid();
                         break;
@@ -863,7 +873,7 @@ System.out.println(rid+" = "+statusid);
                 cal1.add(Calendar.DATE, 1);
             }
             int st = getRoomStatus(dt2, rooms[i].getRoomid());
-            if (st == 0 || st == 1 || st == 2 || st == 5) {
+            if (st == 0 || st == 1 || st == 2 || st == 5 || st == 6 || st == 9) {
                 if (ids.length() > 0) ids += ",";
                 ids += rooms[i].getRoomid();
             }
@@ -880,11 +890,12 @@ System.out.println(rid+" = "+statusid);
                 + "arraivaldate::date <= to_date('" + df.format(dt2) + "','DD/MM/YYYY') and "
                 + "arraivaldate::date >= to_date('" + df.format(dt1) + "','DD/MM/YYYY') and "
                 + "status in (-1,0) and reservationid in (select reservationid from reservationroom where roomtypeid = " + rtp + ")";
-        int cnt1 = RoomManager.getInstance().countWhere("where deleted = false and active = true and roomtypeid = " + rtp);
+        //int cnt1 = RoomManager.getInstance().countWhere("where deleted = false and active = true and roomtypeid = " + rtp);
         int cnt2 = ReservationManager.getInstance().countWhere(sql);
+        RoomBean[] rooms = getAvailableRooms(dt1,dt2,rtp);
 
         boolean bret = true;
-        if (cnt1 < cnt2) bret = false;
+        if (rooms.length < cnt2) bret = false;
         return bret;
     }
 
@@ -1001,15 +1012,16 @@ System.out.println(rid+" = "+statusid);
 
     String[] roomstatus =
             {
-                    "დადასტურებული რეზერვაცია",
-                    "მცხოვრები",
-                    "ვადაგადაცილებული",
-                    "წამსვლელი",
-                    "გაწერილი",
-                    "დაბლოკილი",
-                    "დღიური გამოყენება",
-                    "დაუდასტურებელი რეზერვაცია",
-                    "თავისუფალი"
+                    "დადასტურებული რეზერვაცია",     //  0
+                    "მცხოვრები",                    //  1
+                    "ვადაგადაცილებული",             //  2
+                    "წამსვლელი",                    //  3
+                    "გაწერილი",                     //  4
+                    "დაბლოკილი",                    //  5
+                    "დღიური გამოყენება",            //  6
+                    "დაუდასტურებელი რეზერვაცია",    //  7
+                    "თავისუფალი",                   //  8
+                    "დღიური რეზერვაცია"             //  9
             };
 
     String[] reasoncategory =
@@ -1127,6 +1139,11 @@ System.out.println(rid+" = "+statusid);
 
     long lclosedate = cclosedate.getTimeInMillis();
     Date dclosedate = cclosedate.getTime();
+    
+    Calendar cclosedate1 = Calendar.getInstance();
+    cclosedate1.setTimeInMillis(cclosedate.getTimeInMillis());
+    cclosedate1.add(Calendar.DATE, -1);
+    long lclosedate1 = cclosedate1.getTimeInMillis();
 
     dt = new SimpleDateFormat(dateformats[dff]);
     dtime = new SimpleDateFormat(timeformats1[tff]);
@@ -1139,6 +1156,7 @@ System.out.println(rid+" = "+statusid);
     String pickerFormatForDatePickers = "{autoclose: true, format: '" + dateformats1[dff] + "', weekStart: 1, startDate: new Date(" + lclosedate + "), autoclose: true, language: 'ka', todayHighlight: true, allowEmpty: false}";
     String pickerFormatForDatePickers2 = "{autoclose: true, format: '" + dateformats1[dff] + "', weekStart: 1, autoclose: true, language: 'ka', todayHighlight: true, allowEmpty: false}";
     String pickerformat2 = "{autoclose: true, format: '" + dateformats1[dff] + "', weekStart: 1, startDate: new Date(" + lclosedate + "), language: 'ka', todayHighlight: true, allowEmpty: false}";
+    String pickerformat3 = "{autoclose: true, format: '" + dateformats1[dff] + "', weekStart: 1, endDate: new Date(" + lclosedate1 + "), autoclose: true, language: 'ka', todayHighlight: false, allowEmpty: false, setDate: new Date(" + lclosedate1 + ")}";
     String rpickerformat = "presetRanges: [" +
             "        {text: 'დღეს', dateStart: 'today', dateEnd: 'today' }," +
             "        {text: 'ბოლო 7 დღე', dateStart: 'today-7days', dateEnd: 'today' }," +

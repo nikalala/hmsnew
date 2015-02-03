@@ -186,6 +186,9 @@
 
         $("#myModalSave").remove();
         var r1 = $('<button type="button" class="btn btn-danger" id="myModalSave" onclick="savedata(\'myModal\')">რეზერვაცია</button>');
+        <%if(wintype == 2){%>
+                r1 = $('<button type="button" class="btn btn-danger" id="myModalSave" onclick="savedata(\'myModal\')">შენახვა</button>');
+        <%}%>
         $("#myModalFooter").append(r1);
 
         $("#myModalCheckin").remove();

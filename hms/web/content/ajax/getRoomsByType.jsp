@@ -28,13 +28,13 @@ if(roomtype != null){
         + "roomtypeid = "+roomtype.getRoomtypeid()+" order by name";
     sqlrooms = "where "
             + "roomtypeid = "+roomtype.getRoomtypeid()+" "
-            + "and roomid not in (select roomid from roomst where roomid is not null and statusdate <= to_timestamp('"+adt+"','DD/MM/YYYY HH24:MI') and st in (0,1,2,5) order by statusdate desc, regdate desc limit 1) "
-            + "and roomid not in (select roomid from roomst where roomid is not null and statusdate::date >= (to_timestamp('"+adt+"','DD/MM/YYYY HH24:MI')+interval '1' day)::date and statusdate::date <= (to_timestamp('"+ddt+"','DD/MM/YYYY HH24:MI')-interval '1' day)::date and st in (0,1,2,5)) "
-            + "and roomid not in (select roomid from roomst where roomid is not null and statusdate >= to_timestamp('"+ddt+"','DD/MM/YYYY HH24:MI') and st in (0,1,2,5) order by statusdate desc, regdate desc limit 1) "
+            + "and roomid not in (select roomid from roomst where roomid is not null and statusdate <= to_timestamp('"+adt+"','DD/MM/YYYY HH24:MI') and st in (0,1,2,5,6) order by statusdate desc, regdate desc limit 1) "
+            + "and roomid not in (select roomid from roomst where roomid is not null and statusdate::date >= (to_timestamp('"+adt+"','DD/MM/YYYY HH24:MI')+interval '1' day)::date and statusdate::date <= (to_timestamp('"+ddt+"','DD/MM/YYYY HH24:MI')-interval '1' day)::date and st in (0,1,2,5,6)) "
+            + "and roomid not in (select roomid from roomst where roomid is not null and statusdate >= to_timestamp('"+ddt+"','DD/MM/YYYY HH24:MI') and st in (0,1,2,5,6) order by statusdate desc, regdate desc limit 1) "
             + " order by name";
 
-    
-    RoomBean[] rooms = RoomManager.getInstance().loadByWhere("where roomtypeid = "+roomtype.getRoomtypeid());
+System.out.println(sqlrooms);
+    RoomBean[] rooms = getAvailableRooms(dflong.parse(adt), dflong.parse(ddt), roomtype.getRoomtypeid().intValue());   //RoomManager.getInstance().loadByWhere("where roomtypeid = "+roomtype.getRoomtypeid());
     if(rtp.getConfirmed().booleanValue())
             rooms = getAvailableRooms(dflong.parse(adt),dflong.parse(ddt),roomtype.getRoomtypeid().intValue()); // RoomManager.getInstance().loadByWhere(sqlrooms);
     RatetypeBean[] ratetypes = RatetypeManager.getInstance().loadByWhere("where ratetypeid in (select ratetypeid from ratetyperoomtype where roomtypeid = "+roomtype.getRoomtypeid()+") order by ord");

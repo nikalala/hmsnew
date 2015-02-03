@@ -3,7 +3,13 @@
 <%@include file="../includes/init.jsp"%>
 <%
 //System.out.println("select * from reservation where reservationid in (select reservationid from reservation where status <= 0 and arraivaldate::date <= N'"+dclosedate+"'::date and departuredate::date >= N'"+dclosedate+"'::date) and leader = true order by guestid");
-ReservationroomBean[] reservs = ReservationroomManager.getInstance().loadByWhere("where reservationid in (select reservationid from reservation where status <= 0 and arraivaldate::date <= N'"+dclosedate+"'::date and departuredate::date >= N'"+dclosedate+"'::date) and leader = true order by guestid");
+String sqlst = "where reservationid in "
+        + "(select r.reservationid from reservationroom r, roomst s where r.reservationroomid = s.reservationroomid and s.statusdate::date = N'"+dclosedate+"'::date and s.st <> 8) or "
+        + "reservationid in (select r.reservationid from reservationroom r, roomst s where r.roomid = s.roomid and s.statusdate::date = N'"+dclosedate+"'::date and s.st <> 8)"
+        + " order by reservationid";
+//"where reservationid in (select reservationid from reservation where status <= 0 and arraivaldate::date <= N'"+dclosedate+"'::date and departuredate::date >= N'"+dclosedate+"'::date) and leader = true order by guestid"
+System.out.println(sqlst);
+ReservationroomBean[] reservs = ReservationroomManager.getInstance().loadByWhere(sqlst);
 %>
 <style>
 table.lscroll tbody {
@@ -91,9 +97,10 @@ table.lscroll tr {
                             String roomname = "";
                             if(reservs[i].getRoomid() != null){
                                 RoomBean room = RoomManager.getInstance().loadByPrimaryKey(reservs[i].getRoomid());
-                                istatus = getRoomStatus(dclosedate,room.getRoomid().intValue());
+                                //istatus = getRoomStatus(dclosedate,room.getRoomid().intValue());
                                 roomname = room.getName();
                             }
+                            istatus = getRoomStatus1(dclosedate,reservs[i].getReservationroomid());
                             RoomtypeBean roomtype = RoomtypeManager.getInstance().loadByPrimaryKey(reservs[i].getRoomtypeid());
                             String guestname = salutation.getName()+" ";
                             guestname += guest.getFname() + " " + guest.getLname();
@@ -128,9 +135,10 @@ table.lscroll tr {
                             String roomname0 = "";
                             if(reservs[i].getRoomid() != null){
                                 RoomBean room = RoomManager.getInstance().loadByPrimaryKey(reservs[i].getRoomid());
-                                istatus0 = getRoomStatus(dclosedate,room.getRoomid().intValue());
+                                //istatus0 = getRoomStatus(dclosedate,room.getRoomid().intValue());
                                 roomname0 = room.getName();
                             }
+                            istatus0 = getRoomStatus1(dclosedate,reservs0[i].getReservationroomid());
                             String statusname0 = "";
                             String statuscolor0 = "#FFFFFF";
                             if(istatus0 >= 0) {

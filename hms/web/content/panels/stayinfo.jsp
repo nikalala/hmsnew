@@ -19,15 +19,17 @@
     Calendar dep = Calendar.getInstance();
     dep.setTime(dclosedate);
     String pkfmt = pickerformat2;
+    String pkfmt2 = pickerformat2;
 
     Calendar depDate = Calendar.getInstance();
     depDate.setTime(dclosedate);
     depDate.add(Calendar.DATE, 1);  // number of days to add
 
-    if (wintype > 0) {
+    if (wintype == 2) {
         //arr.add(Calendar.DATE, 1);
         //dep.add(Calendar.DATE, 1);
-        //pkfmt = pickerformat2.replaceAll("new Date()","new Date("+arr.getTimeInMillis()+")");
+
+        pkfmt = pickerformat;   //.replaceAll("new Date()","new Date("+arr.getTimeInMillis()+")");
     }
     int nights = 1;
     if (checkinsettings != null) {
@@ -90,7 +92,7 @@
             updateWalkinStayInfo(1);
             getRoomtypes($("#guestinfo_roomtypeid").val());
         });
-        $('#guestinfo_departuredate').datepicker(<%=pkfmt%>).on('changeDate', function (e) {
+        $('#guestinfo_departuredate').datepicker(<%=pkfmt2%>).on('changeDate', function (e) {
             updateWalkinStayInfo(2);
             getRoomtypes($("#guestinfo_roomtypeid").val());
         });

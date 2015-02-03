@@ -20,7 +20,7 @@
                             <a href="javascript:newWindow('walkin','მოსული სტუმარი');">სტუმრის მიღება</a>
                         </li>
                         <li>
-                            <a href="javascript:newWindow1('walkin','სტუმრის მიღება / რეზერვაცია','wintype=2');">ახალი რეზერვაცია</a>
+                            <a href="javascript:newWindow1('walkin','სტუმრის მიღება / რეზერვაცია','wintype=1');">ახალი რეზერვაცია</a>
                         </li>
                         <li>
                             <a href="javascript:newWindow1('walkin','ტრანზაქციის ჩამატება','wintype=2');">ტრანზაქციის ჩამატება</a>
