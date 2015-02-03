@@ -28,8 +28,10 @@
     if (wintype == 2) {
         //arr.add(Calendar.DATE, 1);
         //dep.add(Calendar.DATE, 1);
+        //pkfmt = pickerformat;   //.replaceAll("new Date()","new Date("+arr.getTimeInMillis()+")");
+        pkfmt = "{autoclose: true, format: '" + dateformats1[dff] + "', startDate: new Date(" + CodeHelpers.addDays(dclosedate, -1) + "), maxDate : new Date(" + CodeHelpers.addDays(dclosedate, -1) + "), language: 'ka', todayHighlight: true, allowEmpty: false}";
+        System.out.println(pkfmt);
 
-        pkfmt = pickerformat;   //.replaceAll("new Date()","new Date("+arr.getTimeInMillis()+")");
     }
     int nights = 1;
     if (checkinsettings != null) {

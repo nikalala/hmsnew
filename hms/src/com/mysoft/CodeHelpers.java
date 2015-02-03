@@ -56,6 +56,14 @@ public class CodeHelpers {
         return nextDate;
     }
 
+    public static Long addDays(Date date, int days)
+    {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        cal.add(Calendar.DATE, days); //minus number would decrement the days
+        return cal.getTimeInMillis();
+    }
+
     public static String getCurrentHouseKeepingStatus(int hsid,HousekeepingstatusBean[] arr){
         for (HousekeepingstatusBean item : arr) {
             if (item.getHousekeepingstatusid().equals(hsid)) {

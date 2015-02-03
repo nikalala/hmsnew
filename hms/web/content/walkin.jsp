@@ -180,92 +180,7 @@
         alert('adfhd');
     }
 
-    $(document).ready(function () {
-
-        $(".modal-dialog").removeAttr( "style" );
-
-        $("#myModalSave").remove();
-        var r1 = $('<button type="button" class="btn btn-danger" id="myModalSave" onclick="savedata(\'myModal\')">რეზერვაცია</button>');
-        <%if(wintype == 2){%>
-                r1 = $('<button type="button" class="btn btn-danger" id="myModalSave" onclick="savedata(\'myModal\')">შენახვა</button>');
-        <%}%>
-        $("#myModalFooter").append(r1);
-
-        $("#myModalCheckin").remove();
-
-        <%if(wintype == 0){%>
-        var r = $('<button type="button" class="btn btn-danger" id="myModalCheckin" onclick="savedata1(\'myModal\',\'checkin=true\')">მიღება</button>');
-        $("#myModalFooter").append(r);
-        <%}%>
-        $("#walkin_set_rates").hide();
-        $("#walkin_set_copy").hide();
-
-        var $table = $('table.scrollwk'),
-                $bodyCells = $table.find('tbody tr:first').children(),
-                colWidth;
-
-        $(window).resize(function () {
-
-            colWidth = $bodyCells.map(function () {
-                var wd = $(this).width();
-                //alert(wd);
-                return wd;
-            }).get();
-
-            $table.find('thead tr').children().each(function (i, v) {
-                $(v).width(colWidth[i]);
-            });
-        }).resize();
-
-        $('.specialTab').click(function (e) {
-            //e.preventDefault();
-            //var containerId = '#content'; /** Specify which element container */
-            //var self = $(this);
-            //var url = self.attr('href');
-            //$(self.data('target'))
-            //    .load(url, function(){
-            //       self.tab('show');
-            //    });
-        });
-
-
-        <%
-       // ეს აუცილებელია!!!!
-       if(req_dtStart != null && req_dtEnd != null){
-           Date req_dtStart_date = (Date)dt.parse(req_dtStart);
-           long req_dtStart_long = req_dtStart_date.getTime();
-
-           Date req_dtEnd_date = (Date)dt.parse(req_dtEnd);
-           long req_dtEnd_long = req_dtEnd_date.getTime();
-           picker1 = "{autoclose: true, format: '" + dateformats1[dff] + "', weekStart: 1, startDate: new Date(" + req_dtStart_long + "), language: 'ka', todayHighlight: true, allowEmpty: false}";
-           picker2 = "{autoclose: true, format: '" + dateformats1[dff] + "', weekStart: 1, startDate: new Date(" + req_dtEnd_long + "), language: 'ka', todayHighlight: true, allowEmpty: false}";
-       %>
-
-        var roomTypeId = '<%=req_roomTypeId%>';
-        var roomId = '<%=req_roomId%>';
-/*
-        var dtStart = '<%=picker1%>';
-        var dtEnd = '<%=picker2%>';
-*/
-
-/*        console.log(roomTypeId,roomId,dtStart,dtEnd);*/
-
-        if(!isNullOrEmpty(roomTypeId)){
-            loader.show();
-            $("#guestinfo_roomtypeid").val(roomTypeId);
-            $("#guestinfo_arrivaldate").datepicker(<%=picker1%>);
-            $("#guestinfo_departuredate").datepicker(<%=picker2%>);
-            setTimeout(function (){
-                $("#guestinfo_roomtypeid").trigger( "change" );
-                loadRooms(roomId);
-            }, 1000);
-            loader.hide();
-        }
-       <% } %>
-    });
-
-    function loadRooms(id)
-    {
+    function loadRooms(id){
         //newWindowWithParams('walkin','dasdasdada','?req_roomId=3&req_dtStart=10.10.2014&req_dtEnd=12.12.2014')
         setTimeout(function (){
             var guestRoomId = $("#guestinfo_roomid");
@@ -279,7 +194,6 @@
             }
         }, 100);
     }
-
 
     function walkinRoomType(id) {
         $.post(
@@ -352,8 +266,100 @@
         }
     }
 
-</script>
-<input type="hidden" id="action" value="savereservation.jsp?action=save&type=walkin&wintype=<%=wintype%>"/>
+    $(document).ready(function () {
+
+        $(".modal-dialog").removeAttr( "style" );
+
+        $("#myModalSave").remove();
+        var r1 = $('<button type="button" class="btn btn-danger" id="myModalSave" onclick="savedata(\'myModal\')">რეზერვაცია</button>');
+        <%if(wintype == 2){%>
+
+        r1 = $('<button type="button" class="btn btn-danger" id="myModalSave" onclick="savedata(\'myModal\')">შენახვა</button>');
+
+        <%}%>
+        $("#myModalFooter").append(r1);
+
+        $("#myModalCheckin").remove();
+
+        <%if(wintype == 0){%>
+        var r = $('<button type="button" class="btn btn-danger" id="myModalCheckin" onclick="savedata1(\'myModal\',\'checkin=true\')">მიღება</button>');
+        $("#myModalFooter").append(r);
+        <%}%>
+        $("#walkin_set_rates").hide();
+        $("#walkin_set_copy").hide();
+
+        var $table = $('table.scrollwk'),
+                $bodyCells = $table.find('tbody tr:first').children(),
+                colWidth;
+
+        $(window).resize(function () {
+
+            colWidth = $bodyCells.map(function () {
+                var wd = $(this).width();
+                //alert(wd);
+                return wd;
+            }).get();
+
+            $table.find('thead tr').children().each(function (i, v) {
+                $(v).width(colWidth[i]);
+            });
+        }).resize();
+
+        $('.specialTab').click(function (e) {
+            //e.preventDefault();
+            //var containerId = '#content'; /** Specify which element container */
+            //var self = $(this);
+            //var url = self.attr('href');
+            //$(self.data('target'))
+            //    .load(url, function(){
+            //       self.tab('show');
+            //    });
+        });
+
+       <%
+       // ეს აუცილებელია!!!!
+       if(req_dtStart != null && req_dtEnd != null){
+           Date req_dtStart_date = (Date)dt.parse(req_dtStart);
+           long req_dtStart_long = req_dtStart_date.getTime();
+           Date req_dtEnd_date = (Date)dt.parse(req_dtEnd);
+           long req_dtEnd_long = req_dtEnd_date.getTime();
+           picker1 = "{autoclose: true, format: '" + dateformats1[dff] + "', weekStart: 1, startDate: new Date(" + req_dtStart_long + "), language: 'ka', todayHighlight: true, allowEmpty: false}";
+           picker2 = "{autoclose: true, format: '" + dateformats1[dff] + "', weekStart: 1, startDate: new Date(" + req_dtEnd_long + "), language: 'ka', todayHighlight: true, allowEmpty: false}";
+       %>
+
+        var roomTypeId = '<%=req_roomTypeId%>';
+        var roomId = '<%=req_roomId%>';
+        /*
+         var dtStart = '<%=picker1%>';
+         var dtEnd = '<%=picker2%>';
+         */
+
+        /*        console.log(roomTypeId,roomId,dtStart,dtEnd);*/
+
+        if(!isNullOrEmpty(roomTypeId)){
+            loader.show();
+            $("#guestinfo_roomtypeid").val(roomTypeId);
+            $("#guestinfo_arrivaldate").datepicker(<%=picker1%>);
+            $("#guestinfo_departuredate").datepicker(<%=picker2%>);
+
+            setTimeout(function (){
+                $("#guestinfo_roomtypeid").trigger( "change" );
+                loadRooms(roomId);
+            }, 1000);
+            loader.hide();
+        }
+        <% } %>
+
+        //this is test.....
+        //$("#guestinfo_arrivaldate").datepicker({autoclose: true, format: 'dd.mm.yyyy', startDate: new Date(1414267199999), language: 'ka', todayHighlight: true, allowEmpty: false});
+
+     });
+
+
+
+
+ </script>
+ <input type="hidden" id="action" value="savereservation.jsp?action=save&type=walkin&wintype=<%=wintype%>"/>
 <input type="hidden" id="maindiv" value="registration"/>
 <input type="hidden" id="callbackurl" value="content/stayviewleft.jsp"/>
 <input type="hidden" id="callbackmethod" value="reloadPageAfterSave()"/>

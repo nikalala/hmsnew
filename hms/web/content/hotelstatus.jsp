@@ -3,6 +3,7 @@
 <%@include file="../includes/init.jsp" %>
 
 <% RoomtypeBean[] roomTypes = RoomtypeManager.getInstance().loadByWhere(""); %>
+<% PersonnelBean[] keepers = PersonnelManager.getInstance().loadByWhere("where personneltypeid = 2"); %>
 
 <link rel="stylesheet" type="text/css" href="css/grid-filter.css">
 
@@ -37,7 +38,7 @@
 
         loadDefaults();
         drawTwoDimFooterForGuestDbList();
-        $('#grid-table .dropdown, #changestatus,#assigntohk, #viewby').selectpicker();
+        $('#grid-table .dropdown, #changestatus, #changekeeper, #assigntohk, #viewby').selectpicker();
         $("#changestatus,#assigntohk").next().css("margin-top", "8px");
         $("#viewby").next().css("margin-top", "1px");
 
@@ -247,7 +248,7 @@
     }
 
     $(document).on("click", "#dismissbutton, #smallmodalbtn", function () {
-        $("#updatehs, #updateremark").css("display", "none");
+        $("#updatehs, #updateremark, #updateroomkeeper").css("display", "none");
     });
 
     function changeRemark(id,remark,isHUnit,_this){
@@ -306,6 +307,51 @@
 
     }
 
+    function changeRoomKeeper(id,_this,isHUnit){
+
+        if(isHUnit){
+            $("#saveRoomKeeperBtn").attr("onclick","saveRoomKeeper(true)");
+        }else{
+            $("#saveRoomKeeperBtn").attr("onclick","saveRoomKeeper(false)");
+        }
+
+        $("#updateroomkeeper").css("display", "block");
+        $("#updateroomkeeper").offset($(_this).offset());
+        $("#updateroomkeeper").css({'left': $("#updateroomkeeper").position().left - 255});
+        rid = id;
+    }
+
+    function saveRoomKeeper(isHUnit){
+
+        var roomId = "NULL";
+
+        var huId = "NULL";
+
+        var deleteRK = "";
+
+        if(!isHUnit){
+            deleteRK = "UPDATE housekeeper SET deleted = true WHERE roomid in (" + rid + ");";
+            roomId = rid;
+        }else{
+            deleteRK = "UPDATE housekeeper SET deleted = true WHERE houseunitid in (" + rid + ");";
+            huId = rid;
+        }
+
+        var sql = deleteRK + " INSERT INTO housekeeper(housekeeperid, personnelid, roomid, houseunitid) " +
+                "VALUES " +
+                "((SELECT COALESCE(MAX(housekeeperid) + 1,1) FROM housekeeper), '" + $("#changekeeper").val() + "', " + roomId + ", " + huId + ");";
+
+        $.post("content/execute.jsp?query=" + encodeURIComponent(sql), {}, function () {
+
+            reloadGrid(hsGrid.id, hsGrid.url);
+
+            $("#dismissbutton").click();
+
+            loader.hide();
+
+        });
+    }
+
 </script>
 
 <div class="modal-custom-content" id="updatehs" style="position: absolute; z-index: 10; display: none;">
@@ -330,6 +376,30 @@
         <button type="button" class="btn btn-primary" onclick="saveStatusId()">შენახვა</button>
     </div>
 </div>
+
+<div class="modal-custom-content" id="updateroomkeeper" style="position: absolute; z-index: 10; display: none;">
+    <div class="modal-custom-header" style="background-color: gray; color: white; height: 30px;">
+        <button type="button" id="smallmodalbtn" class="close" data-dismiss="modal" aria-hidden="true"
+                style="margin-top: -6px;">×
+        </button>
+        <h4 style="margin-top: -4px;">დამლაგებლის შეცვლა</h4>
+    </div>
+    <div class="modal-custom-body">
+        <select id="changekeeper" class="dropdown changestatus3" style="float: left; margin: 15px 10px 0 10px;">
+            <% for (int i = 0; i < keepers.length; i++) { %>
+            <option value="<%=keepers[i].getPersonnelid()%>"><%=keepers[i].getFname() + " " + keepers[i].getLname()%>
+            </option>
+            <% } %>
+        </select>
+    </div>
+    <div class="modal-footer" style="margin-top: 10px;">
+        <button type="button" class="btn btn-default" id="dismissbutton" data-dismiss="modal" onclick="this.click();">
+            დახურვა
+        </button>
+        <button type="button" class="btn btn-primary" id="saveRoomKeeperBtn" onclick="saveRoomKeeper()">შენახვა</button>
+    </div>
+</div>
+
 
 <div class="modal-custom-content" id="updateremark" style="position: absolute; z-index: 10; display: none;">
     <div class="modal-custom-header" style="background-color: gray; color: white; height: 30px;">
