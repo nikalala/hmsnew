@@ -44,6 +44,10 @@
 
     });
 
+    $(document).on("click", "#dismissbutton, #smallmodalbtn", function () {
+        $("#updatehs, #updateremark, #updateroomkeeper").css("display", "none");
+    });
+
     function blockunbloc(roomid) {
         newsWindow1('blockunblock', 'ოთახის ბლოკირება', "roomid=" + roomid);
     }
@@ -84,8 +88,9 @@
                 '<option value="<%=hkeeper[i].getPersonnelid()%>"><%=hkeeper[i].getFname() + " " + hkeeper[i].getLname()%></option>' +
                 <% } %>
                 '</select>' +
-                '<button type="button" class="btn btn-primary" id="btnAssignToHK" style="font-weight: bold; margin: 9px 10px 0 5px;">' +
+                '<button type="button" class="btn btn-primary" onclick="saveMultKeeper()" id="btnAssignToHK" style="font-weight: bold; margin: 9px 10px 0 5px;">' +
                 'მიბმა</button>' +
+                '<button type="button" class="btn btn-danger" id="btnRemoveStatus" onclick="removeAllKeeper()" style="font-weight: bold; float: right; margin: 9px 10px 0 0;">X</button>'+
                 '</div>' +
 
                 '</div></div>' +
@@ -156,7 +161,17 @@
 
         var ids = getSelectedRowIds(hsGrid.id);
 
+        if(isNullOrEmpty(ids)){
+            BootstrapDialog.alert("აირჩიეთ მინიმუმ 1 ოთახი");
+            return;
+        }
+
         var result = ids.split(',');
+
+        if(result.length > 10){
+            BootstrapDialog.alert("ერთდროულად შეუძლებელია 10-ზე მეტ ოთახზე ცვლილების შეტანა");
+            return;
+        }
 
         var generatedSQL = "";
 
@@ -182,7 +197,7 @@
             }
 
             generatedSQL += "INSERT INTO roomhst(roomhstid, roomid, housekeepingstatusid, regdate, regbyid, houseunitid) " +
-            " VALUES ((SELECT COALESCE(MAX(roomhstid) %2B 1,1) FROM roomhst), " + trid + ", " + hkid + ", '<%=df2.format(dclosedate)%>', <%=user.getPersonnelid()%>, " + thuid + ");";
+            " VALUES ((SELECT COALESCE(MAX(roomhstid) + 1,1) FROM roomhst), " + trid + ", " + hkid + ", '<%=df2.format(dclosedate)%>', <%=user.getPersonnelid()%>, " + thuid + ");";
 
         });
 
@@ -200,19 +215,102 @@
             unitquery = "DELETE FROM roomhst where houseunitid IN(" + unitids + ");";
         }
 
-        $.post("content/execute.jsp?query=" + unitquery + roomquery, {}, function (data) {
-            $.post("content/execute.jsp" + q + generatedSQL, {}, function (data2) {
-                reloadGrid(hsGrid.id, hsGrid.url);
-                $("#dismissbutton").click();
-                loader.hide();
-            });
+        $.post("content/execute.jsp?query=" + encodeURIComponent(unitquery + roomquery + generatedSQL), {}, function (data) {
+            reloadGrid(hsGrid.id, hsGrid.url);
+            $("#dismissbutton").click();
+            loader.hide();
+        });
+    }
+
+    function saveMultKeeper() {
+
+        var hkid = $("#assigntohk").val();
+
+        if(hkid === "0"){
+            BootstrapDialog.alert("აირჩიეთ დამლაგებელი");
+            return;
+        }
+
+        var ids = getSelectedRowIds(hsGrid.id);
+
+        if(isNullOrEmpty(ids)){
+            BootstrapDialog.alert("აირჩიეთ მინიმუმ 1 ოთახი");
+            return;
+        }
+
+        var result = ids.split(',');
+
+        if(result.length > 10){
+            BootstrapDialog.alert("ერთდროულად შეუძლებელია 10-ზე მეტ ოთახზე ცვლილების შეტანა");
+            return;
+        }
+
+
+        var generatedSQL = "";
+
+        var q = "?query=";
+
+        var roomids = "";
+
+        var unitids = "";
+
+        $.each(result, function (id,val) {
+
+            var id = val;
+
+            var trid = "NULL";
+            var thuid = "NULL";
+
+            if (id.indexOf("room") != -1) {
+                roomids += id.replace("_room", "") + ",";
+                trid = id.replace("_room", "");
+            } else {
+                unitids += id.replace("_house", "") + ",";
+                thuid = id.replace("_house", "");
+            }
+
+            generatedSQL += " INSERT INTO housekeeper(housekeeperid, personnelid, roomid, houseunitid) " +
+            " VALUES " +
+            "((SELECT COALESCE(MAX(housekeeperid) + 1,1) FROM housekeeper), '" + $("#assigntohk").val() + "', " + trid + ", " + thuid + ");";
+
+        });
+
+        var roomquery = "";
+
+        var unitquery = "";
+
+        if (!isNullOrEmpty(roomids)) {
+            roomids = roomids.substring(0, roomids.trim().lastIndexOf(","));
+            roomquery = "UPDATE housekeeper SET deleted = TRUE where roomid IN(" + roomids + ");";
+        }
+
+        if (!isNullOrEmpty(unitids)) {
+            unitids = unitids.substring(0, unitids.trim().lastIndexOf(","));
+            unitquery = "UPDATE housekeeper SET deleted = TRUE where houseunitid IN(" + unitids + ");";
+        }
+
+        $.post("content/execute.jsp?query=" + encodeURIComponent(unitquery + roomquery + generatedSQL), {}, function () {
+            reloadGrid(hsGrid.id, hsGrid.url);
+            $("#dismissbutton").click();
+            loader.hide();
         });
     }
 
     function removeAllStatus() {
         var ids = getSelectedRowIds(hsGrid.id);
 
+        if(isNullOrEmpty(ids)){
+            BootstrapDialog.alert("აირჩიეთ მინიმუმ 1 ოთახი");
+            return;
+        }
+
         var result = ids.split(',');
+
+        if(result.length > 10){
+            BootstrapDialog.alert("ერთდროულად შეუძლებელია 10-ზე მეტ ოთახზე ცვლილების შეტანა");
+            return;
+        }
+
 
         var roomids = "";
 
@@ -247,9 +345,54 @@
         });
     }
 
-    $(document).on("click", "#dismissbutton, #smallmodalbtn", function () {
-        $("#updatehs, #updateremark, #updateroomkeeper").css("display", "none");
-    });
+    function removeAllKeeper() {
+
+        var ids = getSelectedRowIds(hsGrid.id);
+
+        if(isNullOrEmpty(ids)){
+            BootstrapDialog.alert("აირჩიეთ მინიმუმ 1 ოთახი");
+            return;
+        }
+
+        var result = ids.split(',');
+
+        if(result.length > 10){
+            BootstrapDialog.alert("ერთდროულად შეუძლებელია 10-ზე მეტ ოთახზე ცვლილების შეტანა");
+            return;
+        }
+
+        var roomids = "";
+
+        var unitids = "";
+
+        $.each(result, function (id,val) {
+            var id = val;
+            if (id.indexOf("room") != -1) {
+                roomids += id.replace("_room", "") + ",";
+            } else {
+                unitids += id.replace("_house", "") + ",";
+            }
+        });
+
+        var roomquery = "";
+
+        var unitquery = "";
+
+        if (!isNullOrEmpty(roomids)) {
+            roomids = roomids.substring(0, roomids.trim().lastIndexOf(","));
+            roomquery = "UPDATE housekeeper SET deleted = TRUE where roomid IN(" + roomids + ");";
+        }
+
+        if (!isNullOrEmpty(unitids)) {
+            unitids = unitids.substring(0, unitids.trim().lastIndexOf(","));
+            unitquery = "UPDATE housekeeper SET deleted = TRUE where houseunitid IN(" + unitids + ");";
+        }
+
+        $.post("content/execute.jsp?query=" + unitquery + roomquery, {}, function (data) {
+            reloadGrid(hsGrid.id, hsGrid.url);
+            loader.hide();
+        });
+    }
 
     function changeRemark(id,remark,isHUnit,_this){
 
@@ -352,6 +495,40 @@
         });
     }
 
+    function removeRoomKeeper(id,isHUnit){
+
+        var query = "";
+
+        if (!isHUnit) {
+            query = "UPDATE housekeeper SET deleted = TRUE where roomid IN(" + id + ");";
+        } else {
+            query = "UPDATE housekeeper SET deleted = TRUE where houseunitid IN(" + id + ");";
+        }
+
+        $.post("content/execute.jsp?query=" + query, {}, function () {
+            reloadGrid(hsGrid.id, hsGrid.url);
+            loader.hide();
+        });
+
+    }
+
+    function removeRoomStatus(id,isHUnit){
+
+        var query = "";
+
+        if (!isHUnit) {
+            query = "DELETE FROM roomhst where roomid = " + id + ";";
+        } else {
+            query = "DELETE FROM roomhst where houseunitid = " + id + ";";
+        }
+
+        $.post("content/execute.jsp?query=" + query, {}, function () {
+            reloadGrid(hsGrid.id, hsGrid.url);
+            loader.hide();
+        });
+
+    }
+
 </script>
 
 <div class="modal-custom-content" id="updatehs" style="position: absolute; z-index: 10; display: none;">
@@ -399,7 +576,6 @@
         <button type="button" class="btn btn-primary" id="saveRoomKeeperBtn" onclick="saveRoomKeeper()">შენახვა</button>
     </div>
 </div>
-
 
 <div class="modal-custom-content" id="updateremark" style="position: absolute; z-index: 10; display: none;">
     <div class="modal-custom-header" style="background-color: gray; color: white; height: 30px;">

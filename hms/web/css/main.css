@@ -332,3 +332,10 @@ ol, ul {
 .statuses #dailyGuest {
     background-color: #78580B;
 }
+
+.truncate {
+    width: 200px !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+}
