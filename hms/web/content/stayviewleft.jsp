@@ -91,18 +91,23 @@ table.lscroll tr {
                         <%for(int i=0;i<reservs.length;i++){
                             GuestBean guest = GuestManager.getInstance().loadByPrimaryKey(reservs[i].getGuestid());
                             SalutationBean salutation = SalutationManager.getInstance().loadByPrimaryKey(guest.getSalutationid());
+                            ReservationBean reserv = ReservationManager.getInstance().loadByPrimaryKey(reservs[i].getReservationid());
                             int istatus = 0;
                             String roomname = "";
+                            int hasroom = 0;
+                            int samedate = 0;
+                            if(df.format(reserv.getArraivaldate().getTime()).equals(df.format(dclosedate)))
+                                samedate = 1;
                             if(reservs[i].getRoomid() != null){
                                 RoomBean room = RoomManager.getInstance().loadByPrimaryKey(reservs[i].getRoomid());
                                 //istatus = getRoomStatus(dclosedate,room.getRoomid().intValue());
                                 roomname = room.getName();
+                                hasroom = 1;
                             }
                             istatus = getRoomStatus1(dclosedate,reservs[i].getReservationroomid());
                             RoomtypeBean roomtype = RoomtypeManager.getInstance().loadByPrimaryKey(reservs[i].getRoomtypeid());
                             String guestname = salutation.getName()+" ";
                             guestname += guest.getFname() + " " + guest.getLname();
-                            ReservationroomBean[] reservs0 = ReservationroomManager.getInstance().loadByWhere("where leader = false and reservationid = "+reservs[i].getReservationid()+" order by guestid");
                             
                             String statusname = "";
                             String statuscolor = "#FFFFFF";
@@ -112,9 +117,10 @@ table.lscroll tr {
                                 if(stcolor.length > 0)
                                     statuscolor = stcolor[0].getColor();
                             }
-                            int children = ReservationroomManager.getInstance().countWhere("where leader = false and reservationid = "+reservs[i].getReservationid()+" order by guestid");
+                            int children = ReservationroomManager.getInstance().countWhere("where leader = false and reservationid = "+reservs[i].getReservationid());
+                            
                         %>
-                        <tr style="cursor: pointer;" id="<%=reservs[i].getReservationroomid()%>" status="<%=istatus%>">
+                        <tr style="cursor: pointer;" id="<%=reservs[i].getReservationroomid()%>" status="<%=istatus%>" hasroom="<%=hasroom%>" samedate="<%=samedate%>">
                             <td width="100%" class="wwww" style="">
                                 <%if(children > 0){%><span class="glyphicon glyphicon-user"></span> <%}%>
                                 <font style="font-size: 12px;"><%=guestname%></font>

@@ -5,7 +5,11 @@
 boolean act = false;
 if(request.getParameter("act") != null)
     act = true;
-ReservationroomBean reserv = ReservationroomManager.getInstance().loadByPrimaryKey(new Long(request.getParameter("rid")));
+ReservationroomBean reserv = null;
+    if(request.getParameter("reservationid") != null)
+        reserv = ReservationroomManager.getInstance().loadByPrimaryKey(new Long(request.getParameter("reservationid")));
+    else
+        reserv = ReservationroomManager.getInstance().loadByPrimaryKey(new Long(request.getParameter("rid")));
 ReservationBean res = ReservationManager.getInstance().loadByPrimaryKey(reserv.getReservationid());
 GuestBean guest = GuestManager.getInstance().loadByPrimaryKey(reserv.getGuestid());
 SalutationBean salutation = SalutationManager.getInstance().loadByPrimaryKey(guest.getSalutationid());
@@ -84,6 +88,10 @@ FolioBean[] folio = FolioManager.getInstance().loadByWhere("where reservationroo
         }
     }
     
+    function reloadAfterVoid(){
+        getBody("stayviewleft", "stayview", 'დატვირთულობა', 'res1','',true);
+        reloadGrid('list_pendingreservations');
+    }
 </script>
 <%if(act){%>
 <input type="hidden" id="action" value="savevoid.jsp?rid=<%=reserv.getReservationroomid()%>"/>
@@ -91,7 +99,7 @@ FolioBean[] folio = FolioManager.getInstance().loadByWhere("where reservationroo
 <%} else {%>
 <input type="hidden" id="action" value="savevoid.jsp?rid=<%=reserv.getReservationroomid()%>"/>
 <input type="hidden" id="controls" value="reasonid,newreason"/>
-<input type="hidden" id="callbackurl" value="script:reloadGrid('list_pendingreservations')"/>
+<input type="hidden" id="callbackurl" value="script:reloadAfterVoid()"/>
 <%}%>
 <table width="100%" class="table table-borderless">
     <tr>

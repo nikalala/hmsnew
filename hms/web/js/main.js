@@ -317,12 +317,18 @@ $(function () {
     $("body").on("contextmenu click", "#roomlist tr, .sch-event", function (e) {
         choosedid = $(this).attr('id');
         var status = 0;
+        var hasroom = 0;
+        var samedate = 0;
         if (choosedid.indexOf("schedulergrid") == 0) {
             var nms = choosedid.split("-");
             choosedid = nms[3];
             status = nms[4];
-        } else status = $(this).attr('status');
-        changeContextMenu(status, $contextMenu);
+        } else {
+            status = $(this).attr('status');
+            hasroom = $(this).attr('hasroom');
+            samedate = $(this).attr('samedate');
+        }
+        changeContextMenu(status,hasroom,samedate,$contextMenu);
         $contextMenu.css({
             display: "block",
             left: e.pageX,
