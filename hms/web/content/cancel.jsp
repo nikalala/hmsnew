@@ -123,6 +123,12 @@ if(checkinsettings.getPostcancellationfee().intValue() == 1){
             $("#cancel_taxvalue").html("<%=maincurrency.getCode()%> "+valtax.toFixed(2));
             $("#cancel_totalvalue").html("<%=maincurrency.getCode()%> "+total.toFixed(2));
         });
+        
+        $("#myModalSave").remove();
+        $("#myModalCheckin").remove();
+        
+        var r1 = $('<button type="button" class="btn btn-primary" id="myModalSave" onclick="savedata(\'myModal\')">შენახვა</button>');
+        $("#myModalFooter").append(r1);
     });
     
     function reloadAfterCancell(){

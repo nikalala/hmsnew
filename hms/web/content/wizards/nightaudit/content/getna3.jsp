@@ -2,9 +2,7 @@
 <%@page contentType="text/xml;charset=utf-8"%>
 <%@include file="../../../../includes/initxml.jsp"%>
 <%
-String sql = "where roomid is not null and reservationid in ("
-        + "select reservationid from reservation where departuredate::date = to_date('"+df.format(dclosedate)+"','DD/MM/YYYY')"
-        + ") and getroomstatus(roomid, '"+dflong.format(dclosedate)+"') != 4";
+String sql = "where roomid is not null and getroomstatus1(reservationroomid,'"+dflong.format(dclosedate)+"') in (3,6) and reservationid in (select reservationid from reservation where status = -1)";
     
 int ipg = 1;
 int ilmt = 10;

@@ -3,9 +3,8 @@
 <%@include file="../includes/init.jsp"%>
 <%
 //System.out.println("select * from reservation where reservationid in (select reservationid from reservation where status <= 0 and arraivaldate::date <= N'"+dclosedate+"'::date and departuredate::date >= N'"+dclosedate+"'::date) and leader = true order by guestid");
-String sqlst = "where reservationid in "
-        + "(select r.reservationid from reservationroom r, roomst s where r.reservationroomid = s.reservationroomid and s.statusdate::date = N'"+dclosedate+"'::date and s.st <> 8) or "
-        + "reservationid in (select r.reservationid from reservationroom r, roomst s where r.roomid = s.roomid and s.statusdate::date = N'"+dclosedate+"'::date and s.st <> 8)"
+String sqlst = "where getroomstatus1(reservationroomid,'"+dflong.format(dclosedate)+"') in (0,1,2,3,6,7,9) and reservationid in "
+        + "(select reservationid from reservation where status in (-1,0))"
         + " order by reservationid";
 //"where reservationid in (select reservationid from reservation where status <= 0 and arraivaldate::date <= N'"+dclosedate+"'::date and departuredate::date >= N'"+dclosedate+"'::date) and leader = true order by guestid"
 System.out.println(sqlst);
@@ -89,22 +88,26 @@ table.lscroll tr {
             <div id="roomlist0">
                 <table class="lscroll table table-hover" id="roomlist" width="100%">
                     <tbody id="roomlistitems" style='height: 100px;' width="100%">
-                        <%//for(int jj=0;jj<5;jj++){
-                        for(int i=0;i<reservs.length;i++){
+                        <%for(int i=0;i<reservs.length;i++){
                             GuestBean guest = GuestManager.getInstance().loadByPrimaryKey(reservs[i].getGuestid());
                             SalutationBean salutation = SalutationManager.getInstance().loadByPrimaryKey(guest.getSalutationid());
+                            ReservationBean reserv = ReservationManager.getInstance().loadByPrimaryKey(reservs[i].getReservationid());
                             int istatus = 0;
                             String roomname = "";
+                            int hasroom = 0;
+                            int samedate = 0;
+                            if(df.format(reserv.getArraivaldate().getTime()).equals(df.format(dclosedate)))
+                                samedate = 1;
                             if(reservs[i].getRoomid() != null){
                                 RoomBean room = RoomManager.getInstance().loadByPrimaryKey(reservs[i].getRoomid());
                                 //istatus = getRoomStatus(dclosedate,room.getRoomid().intValue());
                                 roomname = room.getName();
+                                hasroom = 1;
                             }
                             istatus = getRoomStatus1(dclosedate,reservs[i].getReservationroomid());
                             RoomtypeBean roomtype = RoomtypeManager.getInstance().loadByPrimaryKey(reservs[i].getRoomtypeid());
                             String guestname = salutation.getName()+" ";
                             guestname += guest.getFname() + " " + guest.getLname();
-                            ReservationroomBean[] reservs0 = ReservationroomManager.getInstance().loadByWhere("where leader = false and reservationid = "+reservs[i].getReservationid()+" order by guestid");
                             
                             String statusname = "";
                             String statuscolor = "#FFFFFF";
@@ -114,10 +117,12 @@ table.lscroll tr {
                                 if(stcolor.length > 0)
                                     statuscolor = stcolor[0].getColor();
                             }
+                            int children = ReservationroomManager.getInstance().countWhere("where leader = false and reservationid = "+reservs[i].getReservationid());
+                            
                         %>
-                        <tr style="cursor: pointer;" id="<%=reservs[i].getReservationroomid()%>" status="<%=istatus%>">
+                        <tr style="cursor: pointer;" id="<%=reservs[i].getReservationroomid()%>" status="<%=istatus%>" hasroom="<%=hasroom%>" samedate="<%=samedate%>">
                             <td width="100%" class="wwww" style="">
-                                <%if(reservs0.length > 0){%><span class="glyphicon glyphicon-user"></span> <%}%>
+                                <%if(children > 0){%><span class="glyphicon glyphicon-user"></span> <%}%>
                                 <font style="font-size: 12px;"><%=guestname%></font>
                                 <br>
                                 <font style="color: #99CAEC; float: left;"><%=roomname%> - <%=(roomtype.getCode())%></font>
@@ -125,38 +130,6 @@ table.lscroll tr {
                             </td>
                         </tr>
                         <%
-                        for(int j=0;j<reservs0.length;j++){
-                            GuestBean guest0 = GuestManager.getInstance().loadByPrimaryKey(reservs0[j].getGuestid());
-                            SalutationBean salutation0 = SalutationManager.getInstance().loadByPrimaryKey(guest0.getSalutationid());
-                            RoomtypeBean roomtype0 = RoomtypeManager.getInstance().loadByPrimaryKey(reservs0[j].getRoomtypeid());
-                            String guestname0 = salutation0.getName()+" ";
-                            guestname0 += guest0.getFname() + " " + guest0.getLname();
-                            int istatus0 = 0;
-                            String roomname0 = "";
-                            if(reservs[i].getRoomid() != null){
-                                RoomBean room = RoomManager.getInstance().loadByPrimaryKey(reservs[i].getRoomid());
-                                //istatus0 = getRoomStatus(dclosedate,room.getRoomid().intValue());
-                                roomname0 = room.getName();
-                            }
-                            istatus0 = getRoomStatus1(dclosedate,reservs0[i].getReservationroomid());
-                            String statusname0 = "";
-                            String statuscolor0 = "#FFFFFF";
-                            if(istatus0 >= 0) {
-                                statusname0 = roomstatus[istatus0];
-                                StcolorBean[] stcolor = StcolorManager.getInstance().loadByWhere("where active = true and deleted = false and roomstatus = "+istatus);
-                                if(stcolor.length > 0)
-                                    statuscolor0 = stcolor[0].getColor();
-                            }
-                        %>
-                        <tr style="cursor: pointer;" id="<%=reservs0[j].getReservationroomid()%>" status="<%=istatus0%>">
-                            <td width="100%" class="wwww" style="">
-                                <font style="font-size: 12px;"><%=guestname0%></font>
-                                <br>
-                                <font style="color: #99CAEC; float: left;"><%=roomname0%> - <%=(roomtype0.getCode())%></font>
-                                <font style="color: <%=statuscolor0%>; float: right; padding-left: 5px;"><%=statusname0%></font>
-                            </td>
-                        </tr>
-                        <%}
                         }
                         //}
                         %>

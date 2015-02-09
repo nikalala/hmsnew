@@ -78,6 +78,12 @@
     
     $(document).ready(function(){
         $('#amenddeparturedate').datepicker(<%=pickerformat2%>);
+        
+        $("#myModalSave").remove();
+        $("#myModalCheckin").remove();
+        
+        var r1 = $('<button type="button" class="btn btn-primary" id="myModalSave" onclick="savedata(\'myModal\')">შენახვა</button>');
+        $("#myModalFooter").append(r1);
     });
 
     function reloadAfterAmendStay(){

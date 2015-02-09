@@ -33,32 +33,94 @@
 
 <% }
 
-    String cmenufiles[] = {"TAB_EditTransaction", "roommove", "amendstay", "checkin", "checkout", "cancel", "MarkNoShow", "assignroom", "UnblockRoom", "VoidTransaction", "undocheckin", "remarks", "SetTasks", "SetPreference", "StopRoomMove", "UndoStopRoomMove", "ExchangeRoom", "MoveGuestPhysically"};
-    String cmenunames[] = {"რედაქტირება", "ოთახის შეცვლა", "გახანგრძლივება", "შესვლა", "გამოსვლა", "გაუქმება", "არ მოსვლა", "ოთახის მინიჭება", "ოთახის განბლოკვა", "რეზერვაციის გაუქმება", "შესვლის გაუქმება", "შეტყობინებების დაყენება", "სამუშაოების მინიჭება", "პარამეტრები", "ოთახის გადატანის შეჩერება", "ოთახის გადატანის შეჩერების გაუქმება", "ოთახის გაცვლა", "სტუმრის გადაყვანა ფიზიკურად"};
-    String cmenuicons[] = {"saved", "ოთახის შეცვლა", "გახანგრძლივება", "შესვლა", "გამოსვლა", "გაუქმება", "არ მოსვლა", "ოთახის მინიჭება", "ოთახის განბლოკვა", "რეზერვაციის გაუქმება", "შესვლის გაუქმება", "შეტყობინებების დაყენება", "სამუშაოების მინიჭება", "პარამეტრები", "ოთახის გადატანის შეჩერება", "ოთახის გადატანის შეჩერების გაუქმება", "ოთახის გაცვლა", "სტუმრის გადაყვანა ფიზიკურად"};
-
-    boolean[][] statusmenu = {
-            //"რედაქტირება", "ოთახის შეცვლა", "გახანგრძლივება", "შესვლა", "გამოსვლა", "გაუქმება", "არ მოსვლა", "ოთახის მინიჭება", "ოთახის განბლოკვა", "რეზერვაციის გაუქმება", "შესვლის გაუქმება", "შეტყობინებების დაყენება", "სამუშაოების მინიჭება", "პარამეტრები", "ოთახის გადატანის შეჩერება", "ოთახის გადატანის შეჩერების გაუქმება", "ოთახის გაცვლა", "სტუმრის გადაყვანა ფიზიკურად"
-            // დადასტურებული რეზერვაცია
-            {true, true, true, true, false, true, true, true, false, true, false, true, false, false, false, false, false, false},
-            // მცხოვრები
-            {true, true, true, false, true, false, false, false, false, false, true, true, false, false, false, false, false, false},
-            // ვადაგადაცილებული
-            {true, true, true, true, false, true, true, true, false, true, false, true, false, false, false, false, false, false},
-            // წამსვლელი
-            {true, true, true, true, false, true, true, true, false, true, false, true, false, false, false, false, false, false},
-            // გაწერილი
-            {true, true, true, true, false, true, true, true, false, true, false, true, false, false, false, false, false, false},
-            // დაბლოკილი
-            {true, true, true, true, false, true, true, true, false, true, false, true, false, false, false, false, false, false},
-            // დღიური გამოყენება
-            {true, true, true, true, false, true, true, true, false, true, false, true, false, false, false, false, false, false},
-            // დაუდასტურებელი რეზერვაცია
-            {true, true, true, true, false, true, true, true, false, true, false, true, false, false, false, false, false, false},
-            // თავისუფალი
-            {true, true, true, true, false, true, true, true, false, true, false, true, false, false, false, false, false, false},
+    String cmenufiles[] = {
+        "TAB_EditTransaction",          //  0 
+        "roommove",                     //  1
+        "amendstay",                    //  2
+        "checkin",                      //  3
+        "undocheckin",                  //  4
+        "checkout",                     //  5
+        "cancel",                       //  6
+        "noshow",                       //  7
+        "assignroom",                   //  8
+        "unassignroom",                 //  9
+        "remarks",                      // 10
+        "SetTasks",                     // 11
+        "SetPreference",                // 12
+        "StopRoomMove",                 // 13
+        "ExchangeRoom",                 // 14
+        "void"                          // 15
+    };
+    
+    String cmenunames[] = {
+        "რედაქტირება",                  //  0
+        "ოთახის გადატანა",              //  1
+        "გახანგრძლივება",               //  2
+        "მიღება",                       //  3
+        "მიღების გაუქმება",             //  4
+        "გაწერა",                       //  5
+        "გაუქმება",                     //  6
+        "არ მოსვლა",                    //  7
+        "ოთახის მინიჭება",              //  8
+        "ოთახის მოხსნა",                //  9
+        "შეტყობინება",                  // 10
+        "დავალება",                     // 11
+        "უპირატესობა",                  // 12
+        "ოთახის გადატანის შეჩერება",    // 13
+        "ოთახის შეცვლა",                // 14
+        "ტრანზაქციის გაუქმება"          // 15
+    };
+    String cmenuicons[] = {
+        "რედაქტირება",                  //  0
+        "ოთახის გადატანა",              //  1
+        "გახანგრძლივება",               //  2
+        "მიღება",                       //  3
+        "მიღების გაუქმება",             //  4
+        "გაწერა",                       //  5
+        "გაუქმება",                     //  6
+        "არ მოსვლა",                    //  7
+        "ოთახის მინიჭება",              //  8
+        "ოთახის მოხსნა",                //  9
+        "შეტყობინება",                  // 10
+        "დავალება",                     // 11
+        "უპირატესობა",                  // 12
+        "ოთახის გადატანის შეჩერება",    // 13
+        "ოთახის შეცვლა",                // 14
+        "ტრანზაქციის გაუქმება"          // 15
     };
 
+    boolean[][] statusmenu = {
+            //0     1      2     3     4      5     6     7     8     9     10     11     12    13    14     15   
+            // დადასტურებული რეზერვაცია  0 + roomid is not null
+            {true, true, true, true, false, false, true, true, false, true, true, true, true, false, true, true},                  //  0
+            // დადასტურებული რეზერვაცია  0 + roomid is null
+            {true, false, true, false, false, false, true, true, true, false, true, true, true, false, true, true},                //  1
+            // მცხოვრები 1 + arraivaldate = closedate
+            {true, true, true, false, true, false, false, false, false, false, true, true, true, false, true, true},                //  2
+            // მცხოვრები 1 + arraivaldate <> closedate
+            {true, true, true, false, false, false, false, false, false, false, true, true, true, false, true, true},               //  3
+            // ვადაგადაცილებული 2
+            {true, true, true, false, false, false, false, false, false, false, true, true, true, false, true, true},               //  4
+            // წამსვლელი 3
+            {true, true, true, false, false, true, false, false, false, false, true, true, true, false, true, true},                //  5
+            // გაწერილი 4
+            {false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false},       //  6
+            // დაბლოკილი 5
+            {false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false},       //  7
+            // დღიური გამოყენება 6
+            {true, true, true, false, true, true, false, false, false, false, true, true, true, false, true, true},                 //  8
+            // დაუდასტურებელი რეზერვაცია 7 + roomid is not null
+            {true, true, true, true, false, false, true, true, false, true, true, true, true, false, true, true},                   //  9
+            // დაუდასტურებელი რეზერვაცია 7 + roomid is null
+            {true, false, true, false, false, false, true, true, true, false, true, true, true, false, true, true},                 // 10
+            // თავისუფალი 8
+            {false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false},       // 11
+            // დღიური რეზერვაცია 9 + roomid is not null
+            {true, true, true, true, false, false, true, true, false, true, true, true, true, false, true, true},                   // 12
+            // დღიური რეზერვაცია 9 + roomid is null
+            {true, true, true, true, false, false, true, true, true, false, true, true, true, false, true, true}                    // 13
+
+    };
 
     String bgcol = "#F5F5F5";
 %>
@@ -122,7 +184,78 @@
 
         var lclosedate = <%=lclosedate%>;
 
-        function changeContextMenu(st, mn) {
+        var statusmenu = [
+            //0     1      2     3     4      5     6     7     8     9     10     11     12    13    14     15   
+            // დადასტურებული რეზერვაცია  0 + roomid is not null
+            [true, true, true, true, false, false, true, true, false, true, true, true, true, false, true, true],                  //  0
+            // დადასტურებული რეზერვაცია  0 + roomid is null
+            [true, false, true, false, false, false, true, true, true, false, true, true, true, false, true, true],                //  1
+            // მცხოვრები 1 + arraivaldate = closedate
+            [true, true, true, false, true, false, false, false, false, false, true, true, true, false, true, true],                //  2
+            // მცხოვრები 1 + arraivaldate <> closedate
+            [true, true, true, false, false, false, false, false, false, false, true, true, true, false, true, true],               //  3
+            // ვადაგადაცილებული 2
+            [true, true, true, false, false, false, false, false, false, false, true, true, true, false, true, true],               //  4
+            // წამსვლელი 3
+            [true, true, true, false, false, true, false, false, false, false, true, true, true, false, true, true],                //  5
+            // გაწერილი 4
+            [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false],       //  6
+            // დაბლოკილი 5
+            [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false],       //  7
+            // დღიური გამოყენება 6
+            [true, true, true, false, true, true, false, false, false, false, true, true, true, false, true, true],                 //  8
+            // დაუდასტურებელი რეზერვაცია 7 + roomid is not null
+            [true, true, true, true, false, false, true, true, false, true, true, true, true, false, true, true],                   //  9
+            // დაუდასტურებელი რეზერვაცია 7 + roomid is null
+            [true, false, true, false, false, false, true, true, true, false, true, true, true, false, true, true],                 // 10
+            // თავისუფალი 8
+            [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false],       // 11
+            // დღიური რეზერვაცია 9 + roomid is not null
+            [true, true, true, true, false, false, true, true, false, true, true, true, true, false, true, true],                   // 12
+            // დღიური რეზერვაცია 9 + roomid is null
+            [true, true, true, true, false, false, true, true, true, false, true, true, true, false, true, true]                    // 13
+
+    ];
+        var stmn = [
+            [0,1,2,0],
+            [0,0,2,1],
+            [1,2,1,2],
+            [1,2,0,3],
+            [2,2,2,4],
+            [3,2,2,5],
+            [4,2,2,6],
+            [5,2,2,7],
+            [6,2,2,8],
+            [7,1,2,9],
+            [7,0,2,10],
+            [8,2,2,11],
+            [9,1,2,12],
+            [9,0,2,13]
+        ];
+        
+        function changeContextMenu(st,hr,sd, mn) {
+            var k = -1;
+            for(var i=0;i<stmn.length;i++){
+                if(stmn[i][0] == st){
+                    if(stmn[i][1] == 2 || stmn[i][1] == hr){
+                        if(stmn[i][2] == 2 || stmn[i][2] == sd){
+                            k = stmn[i][3];
+                            break;
+                        }
+                    }
+                }
+            }
+            
+            if(k >= 0){
+                $("#contextMenu ul").find('li').each(function () {
+                    var n = $(this).attr('num');
+                    if (statusmenu[k][n]) $(this).show();
+                    else                $(this).hide();
+                });
+            }
+        }
+
+        function changeContextMenu1(st,hr,sd, mn) {
             var sts = new Array();
             <%for(int i=0;i<statusmenu.length;i++){
                 %>

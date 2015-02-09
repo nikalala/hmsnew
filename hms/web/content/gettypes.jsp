@@ -25,6 +25,7 @@ while(rs.next()){
     h.put((String)colname, (String)sql);
 }
 rs.close();
+Manager.getInstance().releaseConnection(con);
 
 String res = "<select>\n<option value=\"0\">-- ყველა --</option>\n";
 if(request.getParameter("edit") != null){

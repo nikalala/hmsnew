@@ -6,7 +6,7 @@ String msg = "";
 String rid = request.getParameter("rid");
 if(rid == null)
     rid = request.getParameter("reservationid");
-ReservationroomBean rroom = ReservationroomManager.getInstance().loadByPrimaryKey(new Long(request.getParameter("rid")));
+ReservationroomBean rroom = ReservationroomManager.getInstance().loadByPrimaryKey(new Long(rid));
 Manager.getInstance().beginTransaction();
 try{
     
@@ -23,11 +23,11 @@ try{
     rst = RoomstManager.getInstance().save(rst);
 */    
     ReservationBean res = ReservationManager.getInstance().loadByPrimaryKey(rroom.getReservationid());
-    res.setStatus(-1);
+    res.setStatus(4);
     res = ReservationManager.getInstance().save(res);
     
     Manager.getInstance().endTransaction(true);
-    msg = "{\"result\":1}";
-}catch(Exception e){Manager.getInstance().endTransaction(false);e.printStackTrace();msg = "{\"result\":0,\"error\":\""+e.getMessage().replaceAll("\n"," ").replaceAll("\"", "\\\\\"")+"\"}"; e.printStackTrace();}
+    msg = "ოპერაცია შესრულდა წარმატებით";
+}catch(Exception e){Manager.getInstance().endTransaction(false);e.printStackTrace();msg = e.getMessage(); e.printStackTrace();}
 %>
 <%=msg%>
