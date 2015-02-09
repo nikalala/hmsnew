@@ -537,25 +537,22 @@ console.log(tplData);
 <div id="stayview-statistics-grid"></div>
 <div id="statusColorInformation" class="col-md-16">
     <div class="pull-left statuses col-md-2">
-        <div id="recievedGuest" style="background-color: <%=colors[1].getColor()%> !important;">მიღებული სტუმარი</div>
+        <div id="recievedGuest" style="background-color: <%=colors[1].getColor()%> !important;">მიღებული</div>
     </div>
     <div class="pull-left statuses col-md-2">
-        <div id="outGuest" style="background-color: <%=colors[4].getColor()%> !important;">გაწერილი სტუმარი</div>
+        <div id="outGuest" style="background-color: <%=colors[4].getColor()%> !important;">გაწერილი</div>
     </div>
     <div class="pull-left statuses col-md-2">
-        <div id="willGoGuest" style="background-color: <%=colors[1].getColor()%> !important;">წამსვლელი სტუმარი</div>
+        <div id="willGoGuest" style="background-color: <%=colors[1].getColor()%> !important;">წამსვლელი</div>
     </div>
     <div class="pull-left statuses col-md-3">
-        <div id="checkedGuest" style="background-color: <%=colors[0].getColor()%> !important;">დადასტურებული
-            რეზერვაცია
-        </div>
+        <div id="checkedGuest" style="background-color: <%=colors[0].getColor()%> !important;">დადასტურებული</div>
     </div>
     <div class="pull-left statuses col-md-2">
-        <div id="blockedGuest" style="background-color: <%=colors[5].getColor()%> !important;">დროებით დაბლოკილი</div>
+        <div id="blockedGuest" style="background-color: <%=colors[5].getColor()%> !important;">დაბლოკილი</div>
     </div>
     <div class="pull-left statuses col-md-3">
-        <div id="deadlineGuest" style="background-color: <%=colors[1].getColor()%> !important;">გადაცილებული დარჩენა
-        </div>
+        <div id="deadlineGuest" style="background-color: <%=colors[1].getColor()%> !important;">ვადაგადაცილებული</div>
     </div>
     <div class="pull-left statuses col-md-2">
         <div id="dailyGuest" style="background-color: <%=colors[6].getColor()%> !important;">დღიური გამოყენება</div>

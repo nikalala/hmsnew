@@ -1,12 +1,3 @@
-/*
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
-*/
-/* 
-    Created on : Jul 12, 2014, 2:25:35 PM
-    Author     : djorj
-*/
 body {
     padding-bottom: 20px;
     padding-top: 40px;
@@ -26,6 +17,16 @@ html, body {
     font-family: 'BGMtavr';
     src: url(../fonts/bpg_banner_extrasquare.eot);
     src: url(../fonts/bpg_banner_extrasquare.eot) format('embedded-opentype'), url(../fonts/bpg_banner_extrasquare.woff) format('woff'), url(../fonts/bpg_banner_extrasquare.ttf) format('truetype'), url('../fonts/bpg_banner_extrasquare.svg#BPG Banner') format('svg')
+}
+
+@font-face {
+    font-family: 'title_font';
+    src: url('../fonts/alk-sanet-webfont.eot');
+    src: url('../fonts/alk-sanet-webfont.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/alk-sanet-webfont.woff') format('woff'),
+    url('../fonts/alk-sanet-webfont.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
 }
 
 div#lockscreen {
@@ -338,4 +339,16 @@ ol, ul {
     white-space: nowrap !important;
     overflow: hidden !important;
     text-overflow: ellipsis !important;
+}
+#roomlistitems {
+    font-family: title_font !important;
+    font-size: 11px;
+}
+
+.stayview-left-room{
+    color: #99CAEC; float: left;  margin-top: -10px; margin-left: 4px;
+}
+
+.stayview-left-reserv {
+    float: right; word-wrap: break-word; width: 125px; text-align: right;
 }

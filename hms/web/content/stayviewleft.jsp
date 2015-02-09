@@ -65,6 +65,8 @@ table.lscroll tr {
         //    $(v).width(widths[i]);
         //});
 
+        $('#sortby ,#filterby').selectpicker();
+
     } );
 </script>
     <div class="panel panel-default" id='leftpanel' style="margin-top: 0px; height: 654px">
@@ -77,7 +79,7 @@ table.lscroll tr {
                     <label for="sortby" style="margin-top:7px; padding-left: 10px;">სორტირება</label>
                 </div>
                 <div class="col-sm-10">
-                    <select id="sortby" class="form-control" style="width: 156px;">
+                    <select id="sortby" class="dropdown form-control" style="width: 156px;">
                         <option value="">სტუმრის სახელი</option>
                         <option value="">ოთახის ტიპი</option>
                         <option value="">ოთახი</option>
@@ -123,10 +125,10 @@ table.lscroll tr {
                         <tr style="cursor: pointer;" id="<%=reservs[i].getReservationroomid()%>" status="<%=istatus%>" hasroom="<%=hasroom%>" samedate="<%=samedate%>">
                             <td width="100%" class="wwww" style="">
                                 <%if(children > 0){%><span class="glyphicon glyphicon-user"></span> <%}%>
-                                <font style="font-size: 12px;"><%=guestname%></font>
-                                <br>
-                                <font style="color: #99CAEC; float: left;"><%=roomname%> - <%=(roomtype.getCode())%></font>
-                                <font style="color: <%=statuscolor%>; float: right; padding-left: 5px;"><%=statusname%></font>
+                                <font class="col-md-7" title="<%=guestname%>" style="font-size: 12px;float: left;white-space: nowrap !important; overflow: hidden !important; text-overflow: ellipsis !important;"><%=guestname%></font>
+                                <font style="color: <%=statuscolor%>;" class="stayview-left-reserv ool-md-9"><%=statusname%></font>
+                                <br><br>
+                                <font class="stayview-left-room"><%=roomname%> - <%=(roomtype.getCode())%></font>
                             </td>
                         </tr>
                         <%
