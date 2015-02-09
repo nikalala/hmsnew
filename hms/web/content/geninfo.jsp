@@ -27,9 +27,11 @@ RatetypeBean rtp = RatetypeManager.getInstance().loadByPrimaryKey(rroom.getRatet
 
 int sts = 0;
 String rname = "ნომრის გარეშე";
+String rtypecode = "";
 if(rroom.getRoomid() != null){
     RoomBean room = RoomManager.getInstance().loadByPrimaryKey(rroom.getRoomid());
     rname = room.getCode();
+
     if(rname == null)   rname = room.getName();
     if(rname == null || rname.trim().length() == 0) rname = "ნომრის გარეშე";
     sts = getRoomStatus(new Date(), room.getRoomid().intValue());
@@ -40,6 +42,7 @@ FolioBean[] folio = FolioManager.getInstance().loadByReservationroomid(rroom.get
 String fnum = "0";
 if(folio.length > 0)    fnum = folio[0].getFolioid().toString();
 
+rtypecode = " - " + roomtype.getCode();
 String restp = "";
 String bsrc = "";
 String marketname = "";
@@ -388,7 +391,7 @@ paid = getSum("select sum(amount*ratedate("+maincurrency.getCurrencyid()+",curre
                                 </form>
                             </td>
                             <td align="center" style="border: 1px solid #C8C8C8;" width='20%'><b>საკრედიტო ბარათის ინფორმაცია</b></td>
-                            <td align="center" style="border: 1px solid #C8C8C8;" width='10%'><b>უპირატესობები</b></td>
+                            <td align="center" style="border: 1px solid #C8C8C8; cursor: pointer;" width='10%' onclick="newWindowWithParams('setPreference','უპირატესობის მინიჭება','?rid=<%=reserv.getReservationid()%>&roomid=<%=rname+rtypecode%>')"><b>უპირატესობები</b></td>
                             <td align="center" style="border: 1px solid #C8C8C8;" width='10%'><b>დავალებები</b></td>
                             <td align="center" style="border: 1px solid #C8C8C8;" width='10%'><b>შეტყობინებები</b></td>
                         </tr>

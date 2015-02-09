@@ -1002,7 +1002,7 @@ function isValidEmailAddress(emailAddress) {
 
 function newWindowWithParams(fname, title, params) {
     loader.show();
-
+    loadModalDefs();
     registerModalFunctions();
     $.post("content/" + fname + ".jsp" + params, {}, function (data) {
         $("#mheader").html(title);
@@ -1013,14 +1013,12 @@ function newWindowWithParams(fname, title, params) {
 }
 
 function removeModal() {
-
     $(".modal-body").html('');
     $('.modal-dialog').hide();
-
 }
 
 function loadModalDefs() {
-    $('.modal-dialog').removeAttr('style');
+    $('.modal-dialog,#myModalFooter').removeAttr('style');
     $("#maindiv").remove();
 }
 

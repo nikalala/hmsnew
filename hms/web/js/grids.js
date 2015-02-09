@@ -712,3 +712,36 @@ finGrid2 = {
         $(".modal-custom-body .ui-jqgrid-labels").hide();
     }
 };
+
+
+var preferencesGridModel = [];
+preferencesGridModel.push(
+    colModelGenerator(200, 'Preference', 0),
+    colModelGenerator(120, 'room', 0),
+    colModelGenerator(120, 'type', 0),
+    colModelGenerator(120, 'action', 0));
+preferencesGrid = {
+    id: 'list_preferences',
+    url: 'content/getpreferences.jsp',
+    type: 'xml',
+    cols: ['უპირატესობა', 'ოთახი', 'ტიპი', 'ქმედება'],
+    model: preferencesGridModel,
+    order: 'asc',
+    altRows: true,
+    altclass: 'altrow',
+    isPopup: false,
+    gridComplete: function () {
+        ReDrawTable(preferencesGrid);
+        var width = $(".modal-custom-body").width();
+        $("#gbox_list_preferences").width(width-3);
+        $("#list_preferences").width(width-10);
+        $(".modal-custom-body .ui-jqgrid-view").width(width);
+        $(".modal-custom-body .ui-jqgrid-sdiv").width(width);
+        $(".modal-custom-body .ui-jqgrid-ftable").width(width);
+        $(".footrow td").css("border-right","0");
+        $(".modal-custom-body .ui-jqgrid-bdiv").css("height","244px");
+    },
+    beforeRequest: function () {
+        $(".modal-custom-body .ui-jqgrid-bdiv").css("height","120","!important");
+    }
+};

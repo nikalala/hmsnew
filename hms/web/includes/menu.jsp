@@ -89,7 +89,7 @@
                             <a href="javascript:getBody('stayviewleft','hotelstatus','სასტუმროს სტატუსი','res1','',true);">სასტუმროს სტატუსი</a>
                         </li>
                         <li>
-                            <a href="javascript:newsWindow('blockunblock','ოთახის ბლოკირება');">ოთახის ბლოკირება</a>
+                            <a href="javascript:getBody('stayviewleft','construction');">ოთახის ბლოკირება</a>
                         </li>
                         <li>
                             <a href="javascript:getBody('stayviewleft','construction');">შესასრულებელი სამუშაოები</a>

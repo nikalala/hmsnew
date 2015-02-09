@@ -36,7 +36,7 @@
                     <i style="font-size: 15px; margin-left:10px;" class="fa fa-lock"></i>
                 </a>
                 <% if(rs.getInt("reservationid") > 0){%>
-                <a style="cursor:pointer;" onclick="">
+                <a style="cursor:pointer;" onclick="newWindowWithParams('setPreference','უპირატესობის მინიჭება','?rid=<%=rs.getInt("reservationid")%>&roomid=<%=rs.getString("roomname") + " - " + rs.getString("roomtype")%>:<%=rs.getInt("roomid")%>_room')">
                     <i style="font-size: 15px; margin-left:10px;" class="fa fa-sun-o"></i>
                 </a>
                 <% } %>
