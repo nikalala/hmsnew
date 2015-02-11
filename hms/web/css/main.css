@@ -103,13 +103,17 @@ div#lockscreen {
 /* active tab color */
 #maintabs.nav-tabs > li.active > a, #maintabs.nav-tabs > li.active > a:hover, #maintabs.nav-tabs > li.active > a:focus {
     color: #428BCA;
-    background-color: #F5F5F5 !important;
+    background-color: #FFFFFF !important;
     /*//border: 1px solid #888888;*/
     height: 26px;
     border-color: #F5F5F5 !important;
     font-family: bgmtavr;
     font-size: 12px;
     padding-top: 7px;
+}
+
+.panel-title {
+
 }
 
 /* hover tab color */
@@ -340,15 +344,22 @@ ol, ul {
     overflow: hidden !important;
     text-overflow: ellipsis !important;
 }
+
 #roomlistitems {
     font-family: title_font !important;
     font-size: 11px;
 }
 
-.stayview-left-room{
-    color: #99CAEC; float: left;  margin-top: -10px; margin-left: 4px;
+.stayview-left-room {
+    color: #99CAEC;
+    float: left;
+    margin-top: -10px;
+    margin-left: 4px;
 }
 
 .stayview-left-reserv {
-    float: right; word-wrap: break-word; width: 125px; text-align: right;
+    float: right;
+    word-wrap: break-word;
+    width: 125px;
+    text-align: right;
 }

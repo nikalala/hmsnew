@@ -69,11 +69,11 @@ table.lscroll tr {
 
     } );
 </script>
-    <div class="panel panel-default" id='leftpanel' style="margin-top: 0px; height: 654px">
-        <div class="panel-heading  panel-title" style="text-align: center; font-size: 16px !important; height: 31px; background-color: darkgray !important;">
-            <b style='vertical-align: middle; color: #FFFFFF;'><%=dt.format(dclosedate)%></b>
+    <div class="panel panel-default" id='leftpanel' style="margin-top: 0px; height: 654px; font-family: bgmtavr;">
+        <div class="panel-heading  panel-title" style="text-align: center; font-size: 16px !important; height: 31px; background-color: #474544 !important;">
+            <b style='vertical-align: middle; color: #FFFFFF; font-family: bgmtavr;'><%=dt.format(dclosedate)%></b>
         </div>
-        <div class="panel-body" style="background-color: #F5F5F5;">
+        <div class="panel-body" style="background-color: #FFFFFF;">
             <div class="input-group" style="width: 98%;">
                 <div class="col-sm-6">
                     <label for="sortby" style="margin-top:7px; padding-left: 10px;">სორტირება</label>
@@ -142,7 +142,7 @@ table.lscroll tr {
         <div class="panel-footer" style="width: 100%; padding-bottom: 1px; padding-top: 10px;">
             
             <div class="panel panel-default" style="">
-                <div class="panel-heading  panel-title">
+                <div class="panel-heading  panel-title" style="text-align: center;height: 31px;background-color: #474544 !important; color: #FFF !important; font-family: bgmtavr; line-height: 26px;">
                     <b>ძებნა</b>
                 </div>
                 

@@ -33,6 +33,7 @@
         background-color: transparent;
         border: 0px solid;
         font-weight: bold;
+        font-family: bgmtavr;
     }
 
     .statuses

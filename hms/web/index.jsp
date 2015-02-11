@@ -342,8 +342,7 @@
         </div>
         <div class="col-md-13" id="centercontent" style="height: 100%;">
             <div class="panel panel-default" id='mainpanel0' style="height: 654px; background-color: <%=bgcol%>;">
-                <div class="panel-heading  panel-title"
-                     style="text-align: center; height: 31px; background-color: darkgray !important;">
+                <div class="panel-heading  panel-title" style="text-align: center;height: 31px;background-color: #474544 !important;">
                         <span class="pull-left">
                             <div id="tabs">
                                 <ul class="nav nav-tabs toptab" role="tablist" id='maintabs'
