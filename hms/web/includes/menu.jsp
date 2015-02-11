@@ -106,6 +106,9 @@
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li>
+                    <a href="javascript:void(0);" data-action="launchFullscreen" title="Full Screen"><i class="fa fa-arrows-alt"></i></a>
+                </li>
+                <li>
                     <a href="javascript:getBody('stayviewleft', 'stayview', 'დატვირთულობა', 'res1','',true);" data-toggle="tooltip" title="დატვირთულობა"><span class="glyphicon glyphicon-inbox"></span></a>
                 </li>
                 <li>

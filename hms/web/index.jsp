@@ -329,6 +329,14 @@
 
 
     </script>
+    <style>
+        .nav-tabs > li > a {
+            border-radius: 2px 2px 0 0 !important;
+        }
+        .btn {
+            border-radius: 2px !important;
+        }
+    </style>
 </head>
 
 <body id="mainbody">
