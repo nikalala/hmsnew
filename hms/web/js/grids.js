@@ -4,13 +4,13 @@ resGridModel.push(
     colModelGenerator(50, 'reservationroomid', 0),
     colModelGenerator(60, 'arraivaldate', 0),
     colModelGenerator(60, 'departuredate', 0),
-    colModelGenerator(120, 'guest', 0),
+    colModelGenerator(120,'guest', 0),
     colModelGenerator(90, 'roomcode', 0),
     colModelGenerator(90, 'bsourcename', 0),
     colModelGenerator(85, 'companyname', 0),
     colModelGenerator(60, 'price', 0),
     colModelGenerator(80, 'paid', 0),
-    colModelGenerator(110, 'user', 0),
+    colModelGenerator(110,'user', 0),
     colModelGenerator(94, 'reservationtype', 0),
     colModelGenerator(40, 'action', 0));
 resGrid = {
@@ -745,3 +745,37 @@ preferencesGrid = {
         $(".modal-custom-body .ui-jqgrid-bdiv").css("height","120","!important");
     }
 };
+
+
+var workOrderGridModel = [];
+workOrderGridModel.push(
+    colModelGenerator(60, 'ordernum', 0),
+    colModelGenerator(140, 'description', 0),
+    colModelGenerator(120, 'category', 0),
+    colModelGenerator(80, 'unit', 0),
+    colModelGenerator(80, 'priority', 0),
+    colModelGenerator(100, 'enteredon', 0),
+    colModelGenerator(100, 'updated', 0),
+    colModelGenerator(100, 'assignedto', 0),
+    colModelGenerator(100, 'deadline', 0),
+    colModelGenerator(100, 'status', 0),
+    colModelGenerator(100, 'action', 0)
+);
+workOrderGrid = {
+    id: 'list_work_orders',
+    url: 'content/getworkorder.jsp',
+    type: 'xml',
+    cols: ['რეზ. #', 'განმარტება', 'კატეგორია', 'ოთახი', 'პრიორიტეტი', 'შეიქმნა', 'განახლდა', 'მიმაგრებულია', 'დედლაინი', 'სტატუსი', 'ქმედება'],
+    model: workOrderGridModel,
+    order: 'asc',
+    altRows: true,
+    altclass: 'altrow',
+    isPopup: false,
+    gridComplete: function () {
+        ReDrawTable(workOrderGrid);
+    },
+    beforeRequest: function () {
+
+    }
+};
+

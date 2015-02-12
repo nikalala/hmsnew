@@ -4,12 +4,11 @@
 
 <%
     PreferencetypeBean[] pTypes = PreferencetypeManager.getInstance().loadByWhere("");
-    String rid = (String) request.getParameter("rid");
+    String rid = (String) request.getParameter("reservationid");
     String roomid = (String) request.getParameter("roomid");
-    System.out.println(roomid);
     String idToremove = "";
 
-    if(roomid.contains("_room")){
+    if(roomid != null && roomid.contains("_room")){
         String delimiter = ":";
         String[] arr = roomid.split(delimiter);
         idToremove = arr[1];

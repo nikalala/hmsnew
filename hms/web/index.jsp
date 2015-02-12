@@ -46,7 +46,7 @@
         "unassignroom",                 //  9
         "remarks",                      // 10
         "SetTasks",                     // 11
-        "SetPreference",                // 12
+        "setPreference",                // 12
         "StopRoomMove",                 // 13
         "ExchangeRoom",                 // 14
         "void"                          // 15

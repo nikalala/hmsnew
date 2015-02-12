@@ -92,7 +92,7 @@
                             <a href="javascript:getBody('stayviewleft','construction');">ოთახის ბლოკირება</a>
                         </li>
                         <li>
-                            <a href="javascript:getBody('stayviewleft','construction');">შესასრულებელი სამუშაოები</a>
+                            <a href="javascript:getBody('stayviewleft','workbuilder','შესასრულებელი სამუშაოები','res1','',true);">შესასრულებელი სამუშაოები</a>
                         </li>
                     </ul>
                 </li>
