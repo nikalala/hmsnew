@@ -31,11 +31,11 @@ public class BlockroomBean
     private boolean roomid_is_modified = false;
     private boolean roomid_is_initialized = false;
     
-    private java.util.Date blockstart;
+    private java.sql.Timestamp blockstart;
     private boolean blockstart_is_modified = false;
     private boolean blockstart_is_initialized = false;
     
-    private java.util.Date blockend;
+    private java.sql.Timestamp blockend;
     private boolean blockend_is_modified = false;
     private boolean blockend_is_initialized = false;
     
@@ -207,13 +207,13 @@ public class BlockroomBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: blockroom.blockstart
-     * <li>column size: 13
-     * <li>jdbc type returned by the driver: Types.DATE
+     * <li>column size: 29
+     * <li>jdbc type returned by the driver: Types.TIMESTAMP
      * </ul>
      *
      * @return the value of blockstart
      */
-    public java.util.Date getBlockstart()
+    public java.sql.Timestamp getBlockstart()
     {
         return blockstart; 
     }
@@ -227,7 +227,7 @@ public class BlockroomBean
      *
      * @param newVal the new value to be assigned to blockstart
      */
-    public void setBlockstart(java.util.Date newVal) {
+    public void setBlockstart(java.sql.Timestamp newVal) {
         if ((newVal != null && this.blockstart != null && (newVal.compareTo(this.blockstart) == 0)) || 
             (newVal == null && this.blockstart == null && blockstart_is_initialized)) {
             return; 
@@ -245,7 +245,7 @@ public class BlockroomBean
      * @param newVal the new value to be assigned to blockstart
      */
     public void setBlockstart(long newVal) {
-        setBlockstart(new java.util.Date(newVal));
+        setBlockstart(new java.sql.Timestamp(newVal));
     }
 
     /**
@@ -274,13 +274,13 @@ public class BlockroomBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: blockroom.blockend
-     * <li>column size: 13
-     * <li>jdbc type returned by the driver: Types.DATE
+     * <li>column size: 29
+     * <li>jdbc type returned by the driver: Types.TIMESTAMP
      * </ul>
      *
      * @return the value of blockend
      */
-    public java.util.Date getBlockend()
+    public java.sql.Timestamp getBlockend()
     {
         return blockend; 
     }
@@ -294,7 +294,7 @@ public class BlockroomBean
      *
      * @param newVal the new value to be assigned to blockend
      */
-    public void setBlockend(java.util.Date newVal) {
+    public void setBlockend(java.sql.Timestamp newVal) {
         if ((newVal != null && this.blockend != null && (newVal.compareTo(this.blockend) == 0)) || 
             (newVal == null && this.blockend == null && blockend_is_initialized)) {
             return; 
@@ -312,7 +312,7 @@ public class BlockroomBean
      * @param newVal the new value to be assigned to blockend
      */
     public void setBlockend(long newVal) {
-        setBlockend(new java.util.Date(newVal));
+        setBlockend(new java.sql.Timestamp(newVal));
     }
 
     /**

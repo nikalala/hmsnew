@@ -105,6 +105,13 @@ public class VGuestdblistManager
     public static final int TYPE_VIPSTATUSID = Types.INTEGER;
     public static final String NAME_VIPSTATUSID = "vipstatusid";
 
+    /**
+     * Column deleted of type Types.BIT mapped to Boolean.
+     */
+    public static final int ID_DELETED = 11;
+    public static final int TYPE_DELETED = Types.BIT;
+    public static final String NAME_DELETED = "deleted";
+
 
     private static final String TABLE_NAME = "v_guestdblist";
 
@@ -124,6 +131,7 @@ public class VGuestdblistManager
         ,"v_guestdblist.salutationid"
         ,"v_guestdblist.countryid"
         ,"v_guestdblist.vipstatusid"
+        ,"v_guestdblist.deleted"
     };
 
     /**
@@ -139,7 +147,8 @@ public class VGuestdblistManager
                             + ",v_guestdblist.vipstatus"
                             + ",v_guestdblist.salutationid"
                             + ",v_guestdblist.countryid"
-                            + ",v_guestdblist.vipstatusid";
+                            + ",v_guestdblist.vipstatusid"
+                            + ",v_guestdblist.deleted";
 
     private static VGuestdblistManager singleton = new VGuestdblistManager();
 
@@ -427,6 +436,14 @@ public class VGuestdblistManager
                     _dirtyCount++;
                 }
 
+                if (pObject.isDeletedModified()) {
+                    if (_dirtyCount>0) {
+                        _sql.append(",");
+                    }
+                    _sql.append("deleted");
+                    _dirtyCount++;
+                }
+
                 _sql.append(") values (");
                 if(_dirtyCount > 0) {
                     _sql.append("?");
@@ -481,6 +498,10 @@ public class VGuestdblistManager
     
                 if (pObject.isVipstatusidModified()) {
                     Manager.setInteger(ps, ++_dirtyCount, pObject.getVipstatusid());
+                }
+    
+                if (pObject.isDeletedModified()) {
+                    Manager.setBoolean(ps, ++_dirtyCount, pObject.getDeleted());
                 }
     
                 ps.executeUpdate();
@@ -593,6 +614,15 @@ public class VGuestdblistManager
                     }
                     _sql.append("vipstatusid").append("=?");
                 }
+
+                if (pObject.isDeletedModified()) {
+                    if (useComma) {
+                        _sql.append(",");
+                    } else {
+                        useComma=true;
+                    }
+                    _sql.append("deleted").append("=?");
+                }
                 _sql.append("");
                 ps = c.prepareStatement(_sql.toString(),ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
                 int _dirtyCount = 0;
@@ -639,6 +669,10 @@ public class VGuestdblistManager
 
                 if (pObject.isVipstatusidModified()) {
                       Manager.setInteger(ps, ++_dirtyCount, pObject.getVipstatusid());
+                }
+
+                if (pObject.isDeletedModified()) {
+                      Manager.setBoolean(ps, ++_dirtyCount, pObject.getDeleted());
                 }
     
                 if (_dirtyCount == 0) {
@@ -771,6 +805,11 @@ public class VGuestdblistManager
                  _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("vipstatusid= ?");
              }
     
+             if (pObject.isDeletedModified()) {
+                 _dirtyCount ++; 
+                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("deleted= ?");
+             }
+    
              if (_dirtyCount == 0) {
                  throw new SQLException ("The pObject to look for is invalid : not initialized !");
              }
@@ -821,6 +860,10 @@ public class VGuestdblistManager
     
              if (pObject.isVipstatusidModified()) {
                  Manager.setInteger(ps, ++_dirtyCount, pObject.getVipstatusid());
+             }
+    
+             if (pObject.isDeletedModified()) {
+                 Manager.setBoolean(ps, ++_dirtyCount, pObject.getDeleted());
              }
     
              ps.executeQuery();
@@ -926,6 +969,13 @@ public class VGuestdblistManager
                 _dirtyAnd ++;
             }
     
+            if (pObject.isDeletedInitialized()) {
+                if (_dirtyAnd > 0)
+                    sql.append(" AND ");
+                sql.append("deleted").append("=?");
+                _dirtyAnd ++;
+            }
+    
             c = getConnection();
             ps = c.prepareStatement(sql.toString(),ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             int _dirtyCount = 0;
@@ -972,6 +1022,10 @@ public class VGuestdblistManager
     
             if (pObject.isVipstatusidInitialized()) {
                 Manager.setInteger(ps, ++_dirtyCount, pObject.getVipstatusid());
+            }
+    
+            if (pObject.isDeletedInitialized()) {
+                Manager.setBoolean(ps, ++_dirtyCount, pObject.getDeleted());
             }
     
             int _rows = ps.executeUpdate();
@@ -1139,6 +1193,11 @@ public class VGuestdblistManager
                     _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("vipstatusid= ?");
                 }
     
+                if (pObject.isDeletedModified()) {
+                    _dirtyCount++; 
+                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("deleted= ?");
+                }
+    
                 if (_dirtyCount == 0)
                    throw new SQLException ("The pObject to look is unvalid : not initialized !");
     
@@ -1192,6 +1251,10 @@ public class VGuestdblistManager
                     Manager.setInteger(ps, ++_dirtyCount, pObject.getVipstatusid());
                 }
     
+                if (pObject.isDeletedModified()) {
+                    Manager.setBoolean(ps, ++_dirtyCount, pObject.getDeleted());
+                }
+    
                 return countByPreparedStatement(ps);
         }
         finally
@@ -1227,6 +1290,7 @@ public class VGuestdblistManager
         pObject.setSalutationid(Manager.getInteger(rs, 9));
         pObject.setCountryid(Manager.getInteger(rs, 10));
         pObject.setVipstatusid(Manager.getInteger(rs, 11));
+        pObject.setDeleted(Manager.getBoolean(rs, 12));
 
         pObject.isNew(false);
         pObject.resetIsModified();
@@ -1292,6 +1356,10 @@ public class VGuestdblistManager
                 case ID_VIPSTATUSID:
                     ++pos;
                     pObject.setVipstatusid(Manager.getInteger(rs, pos));
+                    break;
+                case ID_DELETED:
+                    ++pos;
+                    pObject.setDeleted(Manager.getBoolean(rs, pos));
                     break;
             }
         }

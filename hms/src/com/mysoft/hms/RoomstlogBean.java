@@ -17,12 +17,16 @@ package com.mysoft.hms;
 // imports- 
 
 
-public class RoomstBean
+public class RoomstlogBean
 // extends+ 
 
 // extends- 
 
 {
+    private Long roomstlogid;
+    private boolean roomstlogid_is_modified = false;
+    private boolean roomstlogid_is_initialized = false;
+    
     private Long roomstid;
     private boolean roomstid_is_modified = false;
     private boolean roomstid_is_initialized = false;
@@ -59,23 +63,94 @@ public class RoomstBean
     private boolean blockroomid_is_modified = false;
     private boolean blockroomid_is_initialized = false;
     
+    private java.sql.Timestamp logdate;
+    private boolean logdate_is_modified = false;
+    private boolean logdate_is_initialized = false;
+    
     private boolean _isNew = true;
     
     /**
      * Do not use this constructor directly, please use the factory method
      * available in the associated manager.
      */
-    RoomstBean()
+    RoomstlogBean()
     {
     }
     
     /**
-     * Getter method for roomstid.
+     * Getter method for roomstlogid.
      * <br>
      * PRIMARY KEY.<br>
      * Meta Data Information (in progress):
      * <ul>
-     * <li>full name: roomst.roomstid
+     * <li>full name: roomstlog.roomstlogid
+     * <li>column size: 19
+     * <li>jdbc type returned by the driver: Types.BIGINT
+     * </ul>
+     *
+     * @return the value of roomstlogid
+     */
+    public Long getRoomstlogid()
+    {
+        return roomstlogid; 
+    }
+
+    /**
+     * Setter method for roomstlogid.
+     * <br>
+     * The new value is set only if compareTo() says it is different,
+     * or if one of either the new value or the current value is null.
+     * In case the new value is different, it is set and the field is marked as 'modified'.
+     *
+     * @param newVal the new value to be assigned to roomstlogid
+     */
+    public void setRoomstlogid(Long newVal) {
+        if ((newVal != null && this.roomstlogid != null && (newVal.compareTo(this.roomstlogid) == 0)) || 
+            (newVal == null && this.roomstlogid == null && roomstlogid_is_initialized)) {
+            return; 
+        } 
+        this.roomstlogid = newVal; 
+        roomstlogid_is_modified = true; 
+        roomstlogid_is_initialized = true; 
+    }
+
+    /**
+     * Setter method for roomstlogid.
+     * <br>
+     * Convenient for those who do not want to deal with Objects for primary types.
+     *
+     * @param newVal the new value to be assigned to roomstlogid
+     */
+    public void setRoomstlogid(long newVal) {
+        setRoomstlogid(new Long(newVal));
+    }
+
+    /**
+     * Determines if the roomstlogid has been modified.
+     *
+     * @return true if the field has been modified, false if the field has not been modified
+     */
+    public boolean isRoomstlogidModified() {
+        return roomstlogid_is_modified; 
+    }
+
+    /**
+     * Determines if the roomstlogid has been initialized.
+     * <br>
+     * It is useful to determine if a field is null on purpose or just because it has not been initialized.
+     *
+     * @return true if the field has been initialized, false otherwise
+     */
+    public boolean isRoomstlogidInitialized() {
+        return roomstlogid_is_initialized; 
+    }
+
+    /**
+     * Getter method for roomstid.
+     * <br>
+     * Meta Data Information (in progress):
+     * <ul>
+     * <li>full name: roomstlog.roomstid
      * <li>column size: 19
      * <li>jdbc type returned by the driver: Types.BIGINT
      * </ul>
@@ -142,9 +217,8 @@ public class RoomstBean
      * <br>
      * Meta Data Information (in progress):
      * <ul>
-     * <li>full name: roomst.roomid
+     * <li>full name: roomstlog.roomid
      * <li> foreign key: room.roomid
-     * <li>comments: ?????
      * <li>column size: 10
      * <li>jdbc type returned by the driver: Types.INTEGER
      * </ul>
@@ -211,8 +285,7 @@ public class RoomstBean
      * <br>
      * Meta Data Information (in progress):
      * <ul>
-     * <li>full name: roomst.statusdate
-     * <li>comments: ??????
+     * <li>full name: roomstlog.statusdate
      * <li>column size: 29
      * <li>jdbc type returned by the driver: Types.TIMESTAMP
      * </ul>
@@ -279,8 +352,7 @@ public class RoomstBean
      * <br>
      * Meta Data Information (in progress):
      * <ul>
-     * <li>full name: roomst.st
-     * <li>comments: ???????
+     * <li>full name: roomstlog.st
      * <li>column size: 10
      * <li>jdbc type returned by the driver: Types.INTEGER
      * </ul>
@@ -347,9 +419,8 @@ public class RoomstBean
      * <br>
      * Meta Data Information (in progress):
      * <ul>
-     * <li>full name: roomst.regbyid
+     * <li>full name: roomstlog.regbyid
      * <li> foreign key: personnel.personnelid
-     * <li>comments: ??????
      * <li>column size: 10
      * <li>jdbc type returned by the driver: Types.INTEGER
      * </ul>
@@ -416,9 +487,7 @@ public class RoomstBean
      * <br>
      * Meta Data Information (in progress):
      * <ul>
-     * <li>full name: roomst.regdate
-     * <li>comments: ???????????? ??????
-     * <li>default value: now()
+     * <li>full name: roomstlog.regdate
      * <li>column size: 29
      * <li>jdbc type returned by the driver: Types.TIMESTAMP
      * </ul>
@@ -485,8 +554,7 @@ public class RoomstBean
      * <br>
      * Meta Data Information (in progress):
      * <ul>
-     * <li>full name: roomst.reservationroomid
-     * <li> foreign key: reservationroom.reservationroomid
+     * <li>full name: roomstlog.reservationroomid
      * <li>column size: 19
      * <li>jdbc type returned by the driver: Types.BIGINT
      * </ul>
@@ -553,7 +621,7 @@ public class RoomstBean
      * <br>
      * Meta Data Information (in progress):
      * <ul>
-     * <li>full name: roomst.roomtypeid
+     * <li>full name: roomstlog.roomtypeid
      * <li> foreign key: roomtype.roomtypeid
      * <li>column size: 10
      * <li>jdbc type returned by the driver: Types.INTEGER
@@ -621,7 +689,7 @@ public class RoomstBean
      * <br>
      * Meta Data Information (in progress):
      * <ul>
-     * <li>full name: roomst.blockroomid
+     * <li>full name: roomstlog.blockroomid
      * <li> foreign key: blockroom.blockroomid
      * <li>column size: 19
      * <li>jdbc type returned by the driver: Types.BIGINT
@@ -685,6 +753,74 @@ public class RoomstBean
     }
 
     /**
+     * Getter method for logdate.
+     * <br>
+     * Meta Data Information (in progress):
+     * <ul>
+     * <li>full name: roomstlog.logdate
+     * <li>default value: now()
+     * <li>column size: 29
+     * <li>jdbc type returned by the driver: Types.TIMESTAMP
+     * </ul>
+     *
+     * @return the value of logdate
+     */
+    public java.sql.Timestamp getLogdate()
+    {
+        return logdate; 
+    }
+
+    /**
+     * Setter method for logdate.
+     * <br>
+     * The new value is set only if compareTo() says it is different,
+     * or if one of either the new value or the current value is null.
+     * In case the new value is different, it is set and the field is marked as 'modified'.
+     *
+     * @param newVal the new value to be assigned to logdate
+     */
+    public void setLogdate(java.sql.Timestamp newVal) {
+        if ((newVal != null && this.logdate != null && (newVal.compareTo(this.logdate) == 0)) || 
+            (newVal == null && this.logdate == null && logdate_is_initialized)) {
+            return; 
+        } 
+        this.logdate = newVal; 
+        logdate_is_modified = true; 
+        logdate_is_initialized = true; 
+    }
+
+    /**
+     * Setter method for logdate.
+     * <br>
+     * Convenient for those who do not want to deal with Objects for primary types.
+     *
+     * @param newVal the new value to be assigned to logdate
+     */
+    public void setLogdate(long newVal) {
+        setLogdate(new java.sql.Timestamp(newVal));
+    }
+
+    /**
+     * Determines if the logdate has been modified.
+     *
+     * @return true if the field has been modified, false if the field has not been modified
+     */
+    public boolean isLogdateModified() {
+        return logdate_is_modified; 
+    }
+
+    /**
+     * Determines if the logdate has been initialized.
+     * <br>
+     * It is useful to determine if a field is null on purpose or just because it has not been initialized.
+     *
+     * @return true if the field has been initialized, false otherwise
+     */
+    public boolean isLogdateInitialized() {
+        return logdate_is_initialized; 
+    }
+
+    /**
      * Determines if the current object is new.
      *
      * @return true if the current object is new, false if the object is not new
@@ -710,7 +846,8 @@ public class RoomstBean
      * @return true if the object has been modified, false if the object has not been modified
      */
     public boolean isModified() {
-        return roomstid_is_modified || 
+        return roomstlogid_is_modified || 
+		roomstid_is_modified || 
 		roomid_is_modified || 
 		statusdate_is_modified || 
 		st_is_modified || 
@@ -718,13 +855,15 @@ public class RoomstBean
 		regdate_is_modified || 
 		reservationroomid_is_modified || 
 		roomtypeid_is_modified || 
-		blockroomid_is_modified;
+		blockroomid_is_modified || 
+		logdate_is_modified;
     }
 
     /**
      * Resets the object modification status to 'not modified'.
      */
     public void resetIsModified() {
+        roomstlogid_is_modified = false;
         roomstid_is_modified = false;
         roomid_is_modified = false;
         statusdate_is_modified = false;
@@ -734,6 +873,7 @@ public class RoomstBean
         reservationroomid_is_modified = false;
         roomtypeid_is_modified = false;
         blockroomid_is_modified = false;
+        logdate_is_modified = false;
     }
 
     /**
@@ -741,7 +881,8 @@ public class RoomstBean
      *
      * @param bean the bean to copy into the current bean
      */
-    public void copy(RoomstBean bean) {
+    public void copy(RoomstlogBean bean) {
+        setRoomstlogid(bean.getRoomstlogid());
         setRoomstid(bean.getRoomstid());
         setRoomid(bean.getRoomid());
         setStatusdate(bean.getStatusdate());
@@ -751,6 +892,7 @@ public class RoomstBean
         setReservationroomid(bean.getReservationroomid());
         setRoomtypeid(bean.getRoomtypeid());
         setBlockroomid(bean.getBlockroomid());
+        setLogdate(bean.getLogdate());
     }
 
     /**
@@ -759,16 +901,18 @@ public class RoomstBean
      * @return the object as a string
      */
     public String toString() {
-        return   "\n[roomst] "
-                 + "\n - roomst.roomstid = " + (roomstid_is_initialized ? ("[" + (roomstid == null ? null : roomstid.toString()) + "]") : "not initialized") + ""
-                 + "\n - roomst.roomid = " + (roomid_is_initialized ? ("[" + (roomid == null ? null : roomid.toString()) + "]") : "not initialized") + ""
-                 + "\n - roomst.statusdate = " + (statusdate_is_initialized ? ("[" + (statusdate == null ? null : statusdate.toString()) + "]") : "not initialized") + ""
-                 + "\n - roomst.st = " + (st_is_initialized ? ("[" + (st == null ? null : st.toString()) + "]") : "not initialized") + ""
-                 + "\n - roomst.regbyid = " + (regbyid_is_initialized ? ("[" + (regbyid == null ? null : regbyid.toString()) + "]") : "not initialized") + ""
-                 + "\n - roomst.regdate = " + (regdate_is_initialized ? ("[" + (regdate == null ? null : regdate.toString()) + "]") : "not initialized") + ""
-                 + "\n - roomst.reservationroomid = " + (reservationroomid_is_initialized ? ("[" + (reservationroomid == null ? null : reservationroomid.toString()) + "]") : "not initialized") + ""
-                 + "\n - roomst.roomtypeid = " + (roomtypeid_is_initialized ? ("[" + (roomtypeid == null ? null : roomtypeid.toString()) + "]") : "not initialized") + ""
-                 + "\n - roomst.blockroomid = " + (blockroomid_is_initialized ? ("[" + (blockroomid == null ? null : blockroomid.toString()) + "]") : "not initialized") + ""
+        return   "\n[roomstlog] "
+                 + "\n - roomstlog.roomstlogid = " + (roomstlogid_is_initialized ? ("[" + (roomstlogid == null ? null : roomstlogid.toString()) + "]") : "not initialized") + ""
+                 + "\n - roomstlog.roomstid = " + (roomstid_is_initialized ? ("[" + (roomstid == null ? null : roomstid.toString()) + "]") : "not initialized") + ""
+                 + "\n - roomstlog.roomid = " + (roomid_is_initialized ? ("[" + (roomid == null ? null : roomid.toString()) + "]") : "not initialized") + ""
+                 + "\n - roomstlog.statusdate = " + (statusdate_is_initialized ? ("[" + (statusdate == null ? null : statusdate.toString()) + "]") : "not initialized") + ""
+                 + "\n - roomstlog.st = " + (st_is_initialized ? ("[" + (st == null ? null : st.toString()) + "]") : "not initialized") + ""
+                 + "\n - roomstlog.regbyid = " + (regbyid_is_initialized ? ("[" + (regbyid == null ? null : regbyid.toString()) + "]") : "not initialized") + ""
+                 + "\n - roomstlog.regdate = " + (regdate_is_initialized ? ("[" + (regdate == null ? null : regdate.toString()) + "]") : "not initialized") + ""
+                 + "\n - roomstlog.reservationroomid = " + (reservationroomid_is_initialized ? ("[" + (reservationroomid == null ? null : reservationroomid.toString()) + "]") : "not initialized") + ""
+                 + "\n - roomstlog.roomtypeid = " + (roomtypeid_is_initialized ? ("[" + (roomtypeid == null ? null : roomtypeid.toString()) + "]") : "not initialized") + ""
+                 + "\n - roomstlog.blockroomid = " + (blockroomid_is_initialized ? ("[" + (blockroomid == null ? null : blockroomid.toString()) + "]") : "not initialized") + ""
+                 + "\n - roomstlog.logdate = " + (logdate_is_initialized ? ("[" + (logdate == null ? null : logdate.toString()) + "]") : "not initialized") + ""
             ;
     }
 

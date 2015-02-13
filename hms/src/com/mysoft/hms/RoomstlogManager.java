@@ -19,9 +19,9 @@ import java.sql.*;
 
 
 /**
- * Handles database calls for the roomst table.
+ * Handles database calls for the roomstlog table.
  */
-public class RoomstManager
+public class RoomstlogManager
 // extends+ 
 
 // extends- 
@@ -29,131 +29,149 @@ public class RoomstManager
 {
 
     /**
+     * Column roomstlogid of type Types.BIGINT mapped to Long.
+     */
+    public static final int ID_ROOMSTLOGID = 0;
+    public static final int TYPE_ROOMSTLOGID = Types.BIGINT;
+    public static final String NAME_ROOMSTLOGID = "roomstlogid";
+
+    /**
      * Column roomstid of type Types.BIGINT mapped to Long.
      */
-    public static final int ID_ROOMSTID = 0;
+    public static final int ID_ROOMSTID = 1;
     public static final int TYPE_ROOMSTID = Types.BIGINT;
     public static final String NAME_ROOMSTID = "roomstid";
 
     /**
      * Column roomid of type Types.INTEGER mapped to Integer.
      */
-    public static final int ID_ROOMID = 1;
+    public static final int ID_ROOMID = 2;
     public static final int TYPE_ROOMID = Types.INTEGER;
     public static final String NAME_ROOMID = "roomid";
 
     /**
      * Column statusdate of type Types.TIMESTAMP mapped to java.sql.Timestamp.
      */
-    public static final int ID_STATUSDATE = 2;
+    public static final int ID_STATUSDATE = 3;
     public static final int TYPE_STATUSDATE = Types.TIMESTAMP;
     public static final String NAME_STATUSDATE = "statusdate";
 
     /**
      * Column st of type Types.INTEGER mapped to Integer.
      */
-    public static final int ID_ST = 3;
+    public static final int ID_ST = 4;
     public static final int TYPE_ST = Types.INTEGER;
     public static final String NAME_ST = "st";
 
     /**
      * Column regbyid of type Types.INTEGER mapped to Integer.
      */
-    public static final int ID_REGBYID = 4;
+    public static final int ID_REGBYID = 5;
     public static final int TYPE_REGBYID = Types.INTEGER;
     public static final String NAME_REGBYID = "regbyid";
 
     /**
      * Column regdate of type Types.TIMESTAMP mapped to java.sql.Timestamp.
      */
-    public static final int ID_REGDATE = 5;
+    public static final int ID_REGDATE = 6;
     public static final int TYPE_REGDATE = Types.TIMESTAMP;
     public static final String NAME_REGDATE = "regdate";
 
     /**
      * Column reservationroomid of type Types.BIGINT mapped to Long.
      */
-    public static final int ID_RESERVATIONROOMID = 6;
+    public static final int ID_RESERVATIONROOMID = 7;
     public static final int TYPE_RESERVATIONROOMID = Types.BIGINT;
     public static final String NAME_RESERVATIONROOMID = "reservationroomid";
 
     /**
      * Column roomtypeid of type Types.INTEGER mapped to Integer.
      */
-    public static final int ID_ROOMTYPEID = 7;
+    public static final int ID_ROOMTYPEID = 8;
     public static final int TYPE_ROOMTYPEID = Types.INTEGER;
     public static final String NAME_ROOMTYPEID = "roomtypeid";
 
     /**
      * Column blockroomid of type Types.BIGINT mapped to Long.
      */
-    public static final int ID_BLOCKROOMID = 8;
+    public static final int ID_BLOCKROOMID = 9;
     public static final int TYPE_BLOCKROOMID = Types.BIGINT;
     public static final String NAME_BLOCKROOMID = "blockroomid";
 
+    /**
+     * Column logdate of type Types.TIMESTAMP mapped to java.sql.Timestamp.
+     */
+    public static final int ID_LOGDATE = 10;
+    public static final int TYPE_LOGDATE = Types.TIMESTAMP;
+    public static final String NAME_LOGDATE = "logdate";
 
-    private static final String TABLE_NAME = "roomst";
+
+    private static final String TABLE_NAME = "roomstlog";
 
     /**
-     * Create an array of type string containing all the fields of the roomst table.
+     * Create an array of type string containing all the fields of the roomstlog table.
      */
     private static final String[] FIELD_NAMES = 
     {
-        "roomst.roomstid"
-        ,"roomst.roomid"
-        ,"roomst.statusdate"
-        ,"roomst.st"
-        ,"roomst.regbyid"
-        ,"roomst.regdate"
-        ,"roomst.reservationroomid"
-        ,"roomst.roomtypeid"
-        ,"roomst.blockroomid"
+        "roomstlog.roomstlogid"
+        ,"roomstlog.roomstid"
+        ,"roomstlog.roomid"
+        ,"roomstlog.statusdate"
+        ,"roomstlog.st"
+        ,"roomstlog.regbyid"
+        ,"roomstlog.regdate"
+        ,"roomstlog.reservationroomid"
+        ,"roomstlog.roomtypeid"
+        ,"roomstlog.blockroomid"
+        ,"roomstlog.logdate"
     };
 
     /**
-     * Field that contains the comma separated fields of the roomst table.
+     * Field that contains the comma separated fields of the roomstlog table.
      */
-    private static final String ALL_FIELDS = "roomst.roomstid"
-                            + ",roomst.roomid"
-                            + ",roomst.statusdate"
-                            + ",roomst.st"
-                            + ",roomst.regbyid"
-                            + ",roomst.regdate"
-                            + ",roomst.reservationroomid"
-                            + ",roomst.roomtypeid"
-                            + ",roomst.blockroomid";
+    private static final String ALL_FIELDS = "roomstlog.roomstlogid"
+                            + ",roomstlog.roomstid"
+                            + ",roomstlog.roomid"
+                            + ",roomstlog.statusdate"
+                            + ",roomstlog.st"
+                            + ",roomstlog.regbyid"
+                            + ",roomstlog.regdate"
+                            + ",roomstlog.reservationroomid"
+                            + ",roomstlog.roomtypeid"
+                            + ",roomstlog.blockroomid"
+                            + ",roomstlog.logdate";
 
-    private static RoomstManager singleton = new RoomstManager();
+    private static RoomstlogManager singleton = new RoomstlogManager();
 
     /**
-     * Get the RoomstManager singleton.
+     * Get the RoomstlogManager singleton.
      *
-     * @return RoomstManager 
+     * @return RoomstlogManager 
      */
-    synchronized public static RoomstManager getInstance()
+    synchronized public static RoomstlogManager getInstance()
     {
         return singleton;
     }
 
     /**
-     * Sets your own RoomstManager instance.
+     * Sets your own RoomstlogManager instance.
      <br>
      * This is optional, by default we provide it for you.
      */
-    synchronized public static void setInstance(RoomstManager instance)
+    synchronized public static void setInstance(RoomstlogManager instance)
     {
         singleton = instance;
     }
 
 
     /**
-     * Creates a new RoomstBean instance.
+     * Creates a new RoomstlogBean instance.
      *
-     * @return the new RoomstBean 
+     * @return the new RoomstlogBean 
      */
-    public RoomstBean createRoomstBean()
+    public RoomstlogBean createRoomstlogBean()
     {
-        return new RoomstBean();
+        return new RoomstlogBean();
     }
 
     //////////////////////////////////////
@@ -161,21 +179,21 @@ public class RoomstManager
     //////////////////////////////////////
 
     /**
-     * Loads a RoomstBean from the roomst using its key fields.
+     * Loads a RoomstlogBean from the roomstlog using its key fields.
      *
-     * @return a unique RoomstBean 
+     * @return a unique RoomstlogBean 
      */
     //12
-    public RoomstBean loadByPrimaryKey(Long roomstid) throws SQLException
+    public RoomstlogBean loadByPrimaryKey(Long roomstlogid) throws SQLException
     {
         Connection c = null;
         PreparedStatement ps = null;
         try 
         {
             c = getConnection();
-            ps = c.prepareStatement("SELECT " + ALL_FIELDS + " FROM roomst WHERE roomst.roomstid=?",ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-            Manager.setLong(ps, 1, roomstid);
-            RoomstBean pReturn[] = loadByPreparedStatement(ps);
+            ps = c.prepareStatement("SELECT " + ALL_FIELDS + " FROM roomstlog WHERE roomstlog.roomstlogid=?",ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            Manager.setLong(ps, 1, roomstlogid);
+            RoomstlogBean pReturn[] = loadByPreparedStatement(ps);
             if (pReturn.length < 1)
                 return null;
             else
@@ -194,15 +212,15 @@ public class RoomstManager
      * @return the number of deleted rows
      */
     //60
-    public int deleteByPrimaryKey(Long roomstid) throws SQLException
+    public int deleteByPrimaryKey(Long roomstlogid) throws SQLException
     {
         Connection c = null;
         PreparedStatement ps = null;
         try
         {
             c = getConnection();
-            ps = c.prepareStatement("DELETE from roomst WHERE roomst.roomstid=?",ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-            Manager.setLong(ps, 1, roomstid);
+            ps = c.prepareStatement("DELETE from roomstlog WHERE roomstlog.roomstlogid=?",ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            Manager.setLong(ps, 1, roomstlogid);
             return ps.executeUpdate();
         }
         finally
@@ -219,19 +237,19 @@ public class RoomstManager
     //////////////////////////////////////
 
     /**
-     * Loads RoomstBean array from the roomst table using its blockroomid field.
+     * Loads RoomstlogBean array from the roomstlog table using its blockroomid field.
      *
-     * @return an array of RoomstBean 
+     * @return an array of RoomstlogBean 
      */
     // LOAD BY IMPORTED KEY
-    public RoomstBean[] loadByBlockroomid(Long value) throws SQLException 
+    public RoomstlogBean[] loadByBlockroomid(Long value) throws SQLException 
     {
         Connection c = null;
         PreparedStatement ps = null;
         try 
         {
             c = getConnection();
-            ps = c.prepareStatement("SELECT " + ALL_FIELDS + " FROM roomst WHERE blockroomid=?",ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            ps = c.prepareStatement("SELECT " + ALL_FIELDS + " FROM roomstlog WHERE blockroomid=?",ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             Manager.setLong(ps, 1, value);
             return loadByPreparedStatement(ps);
         }
@@ -244,7 +262,7 @@ public class RoomstManager
 
 
     /**
-     * Deletes from the roomst table by blockroomid field.
+     * Deletes from the roomstlog table by blockroomid field.
      *
      * @param value the key value to seek
      * @return the number of rows deleted
@@ -257,7 +275,7 @@ public class RoomstManager
         try 
         {
             c = getConnection();
-            ps = c.prepareStatement("DELETE FROM roomst WHERE blockroomid=?");
+            ps = c.prepareStatement("DELETE FROM roomstlog WHERE blockroomid=?");
             Manager.setLong(ps, 1, value);
             return ps.executeUpdate();
         }
@@ -270,19 +288,19 @@ public class RoomstManager
 
 
     /**
-     * Loads RoomstBean array from the roomst table using its regbyid field.
+     * Loads RoomstlogBean array from the roomstlog table using its regbyid field.
      *
-     * @return an array of RoomstBean 
+     * @return an array of RoomstlogBean 
      */
     // LOAD BY IMPORTED KEY
-    public RoomstBean[] loadByRegbyid(Integer value) throws SQLException 
+    public RoomstlogBean[] loadByRegbyid(Integer value) throws SQLException 
     {
         Connection c = null;
         PreparedStatement ps = null;
         try 
         {
             c = getConnection();
-            ps = c.prepareStatement("SELECT " + ALL_FIELDS + " FROM roomst WHERE regbyid=?",ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            ps = c.prepareStatement("SELECT " + ALL_FIELDS + " FROM roomstlog WHERE regbyid=?",ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             Manager.setInteger(ps, 1, value);
             return loadByPreparedStatement(ps);
         }
@@ -295,7 +313,7 @@ public class RoomstManager
 
 
     /**
-     * Deletes from the roomst table by regbyid field.
+     * Deletes from the roomstlog table by regbyid field.
      *
      * @param value the key value to seek
      * @return the number of rows deleted
@@ -308,7 +326,7 @@ public class RoomstManager
         try 
         {
             c = getConnection();
-            ps = c.prepareStatement("DELETE FROM roomst WHERE regbyid=?");
+            ps = c.prepareStatement("DELETE FROM roomstlog WHERE regbyid=?");
             Manager.setInteger(ps, 1, value);
             return ps.executeUpdate();
         }
@@ -321,70 +339,19 @@ public class RoomstManager
 
 
     /**
-     * Loads RoomstBean array from the roomst table using its reservationroomid field.
+     * Loads RoomstlogBean array from the roomstlog table using its roomid field.
      *
-     * @return an array of RoomstBean 
+     * @return an array of RoomstlogBean 
      */
     // LOAD BY IMPORTED KEY
-    public RoomstBean[] loadByReservationroomid(Long value) throws SQLException 
+    public RoomstlogBean[] loadByRoomid(Integer value) throws SQLException 
     {
         Connection c = null;
         PreparedStatement ps = null;
         try 
         {
             c = getConnection();
-            ps = c.prepareStatement("SELECT " + ALL_FIELDS + " FROM roomst WHERE reservationroomid=?",ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-            Manager.setLong(ps, 1, value);
-            return loadByPreparedStatement(ps);
-        }
-        finally
-        {
-            getManager().close(ps);
-            freeConnection(c);
-        }
-    }
-
-
-    /**
-     * Deletes from the roomst table by reservationroomid field.
-     *
-     * @param value the key value to seek
-     * @return the number of rows deleted
-     */
-    // DELETE BY IMPORTED KEY
-    public int deleteByReservationroomid(Long value) throws SQLException 
-    {
-        Connection c = null;
-        PreparedStatement ps = null;
-        try 
-        {
-            c = getConnection();
-            ps = c.prepareStatement("DELETE FROM roomst WHERE reservationroomid=?");
-            Manager.setLong(ps, 1, value);
-            return ps.executeUpdate();
-        }
-        finally
-        {
-            getManager().close(ps);
-            freeConnection(c);
-        }
-    }
-
-
-    /**
-     * Loads RoomstBean array from the roomst table using its roomid field.
-     *
-     * @return an array of RoomstBean 
-     */
-    // LOAD BY IMPORTED KEY
-    public RoomstBean[] loadByRoomid(Integer value) throws SQLException 
-    {
-        Connection c = null;
-        PreparedStatement ps = null;
-        try 
-        {
-            c = getConnection();
-            ps = c.prepareStatement("SELECT " + ALL_FIELDS + " FROM roomst WHERE roomid=?",ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            ps = c.prepareStatement("SELECT " + ALL_FIELDS + " FROM roomstlog WHERE roomid=?",ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             Manager.setInteger(ps, 1, value);
             return loadByPreparedStatement(ps);
         }
@@ -397,7 +364,7 @@ public class RoomstManager
 
 
     /**
-     * Deletes from the roomst table by roomid field.
+     * Deletes from the roomstlog table by roomid field.
      *
      * @param value the key value to seek
      * @return the number of rows deleted
@@ -410,7 +377,7 @@ public class RoomstManager
         try 
         {
             c = getConnection();
-            ps = c.prepareStatement("DELETE FROM roomst WHERE roomid=?");
+            ps = c.prepareStatement("DELETE FROM roomstlog WHERE roomid=?");
             Manager.setInteger(ps, 1, value);
             return ps.executeUpdate();
         }
@@ -423,19 +390,19 @@ public class RoomstManager
 
 
     /**
-     * Loads RoomstBean array from the roomst table using its roomtypeid field.
+     * Loads RoomstlogBean array from the roomstlog table using its roomtypeid field.
      *
-     * @return an array of RoomstBean 
+     * @return an array of RoomstlogBean 
      */
     // LOAD BY IMPORTED KEY
-    public RoomstBean[] loadByRoomtypeid(Integer value) throws SQLException 
+    public RoomstlogBean[] loadByRoomtypeid(Integer value) throws SQLException 
     {
         Connection c = null;
         PreparedStatement ps = null;
         try 
         {
             c = getConnection();
-            ps = c.prepareStatement("SELECT " + ALL_FIELDS + " FROM roomst WHERE roomtypeid=?",ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            ps = c.prepareStatement("SELECT " + ALL_FIELDS + " FROM roomstlog WHERE roomtypeid=?",ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             Manager.setInteger(ps, 1, value);
             return loadByPreparedStatement(ps);
         }
@@ -448,7 +415,7 @@ public class RoomstManager
 
 
     /**
-     * Deletes from the roomst table by roomtypeid field.
+     * Deletes from the roomstlog table by roomtypeid field.
      *
      * @param value the key value to seek
      * @return the number of rows deleted
@@ -461,7 +428,7 @@ public class RoomstManager
         try 
         {
             c = getConnection();
-            ps = c.prepareStatement("DELETE FROM roomst WHERE roomtypeid=?");
+            ps = c.prepareStatement("DELETE FROM roomstlog WHERE roomtypeid=?");
             Manager.setInteger(ps, 1, value);
             return ps.executeUpdate();
         }
@@ -478,13 +445,13 @@ public class RoomstManager
     // GET/SET FOREIGN KEY BEAN METHOD
     //////////////////////////////////////
     /**
-     * Retrieves the BlockroomBean object from the roomst.blockroomid field.
+     * Retrieves the BlockroomBean object from the roomstlog.blockroomid field.
      *
-     * @param pObject the RoomstBean 
+     * @param pObject the RoomstlogBean 
      * @return the associated BlockroomBean pObject
      */
     // GET IMPORTED
-    public BlockroomBean getBlockroomBean(RoomstBean pObject) throws SQLException
+    public BlockroomBean getBlockroomBean(RoomstlogBean pObject) throws SQLException
     {
         BlockroomBean other = BlockroomManager.getInstance().createBlockroomBean();
         other.setBlockroomid(pObject.getBlockroomid());
@@ -492,27 +459,27 @@ public class RoomstManager
     }
 
     /**
-     * Associates the RoomstBean object to the BlockroomBean object.
+     * Associates the RoomstlogBean object to the BlockroomBean object.
      *
-     * @param pObject the RoomstBean object to use
-     * @param pObjectToBeSet the BlockroomBean object to associate to the RoomstBean 
+     * @param pObject the RoomstlogBean object to use
+     * @param pObjectToBeSet the BlockroomBean object to associate to the RoomstlogBean 
      * @return the associated BlockroomBean pObject
      */
     // SET IMPORTED
-    public RoomstBean setBlockroomBean(RoomstBean pObject,BlockroomBean pObjectToBeSet)
+    public RoomstlogBean setBlockroomBean(RoomstlogBean pObject,BlockroomBean pObjectToBeSet)
     {
         pObject.setBlockroomid(pObjectToBeSet.getBlockroomid());
         return pObject;
     }
 
     /**
-     * Retrieves the PersonnelBean object from the roomst.personnelid field.
+     * Retrieves the PersonnelBean object from the roomstlog.personnelid field.
      *
-     * @param pObject the RoomstBean 
+     * @param pObject the RoomstlogBean 
      * @return the associated PersonnelBean pObject
      */
     // GET IMPORTED
-    public PersonnelBean getPersonnelBean(RoomstBean pObject) throws SQLException
+    public PersonnelBean getPersonnelBean(RoomstlogBean pObject) throws SQLException
     {
         PersonnelBean other = PersonnelManager.getInstance().createPersonnelBean();
         other.setPersonnelid(pObject.getRegbyid());
@@ -520,55 +487,27 @@ public class RoomstManager
     }
 
     /**
-     * Associates the RoomstBean object to the PersonnelBean object.
+     * Associates the RoomstlogBean object to the PersonnelBean object.
      *
-     * @param pObject the RoomstBean object to use
-     * @param pObjectToBeSet the PersonnelBean object to associate to the RoomstBean 
+     * @param pObject the RoomstlogBean object to use
+     * @param pObjectToBeSet the PersonnelBean object to associate to the RoomstlogBean 
      * @return the associated PersonnelBean pObject
      */
     // SET IMPORTED
-    public RoomstBean setPersonnelBean(RoomstBean pObject,PersonnelBean pObjectToBeSet)
+    public RoomstlogBean setPersonnelBean(RoomstlogBean pObject,PersonnelBean pObjectToBeSet)
     {
         pObject.setRegbyid(pObjectToBeSet.getPersonnelid());
         return pObject;
     }
 
     /**
-     * Retrieves the ReservationroomBean object from the roomst.reservationroomid field.
+     * Retrieves the RoomBean object from the roomstlog.roomid field.
      *
-     * @param pObject the RoomstBean 
-     * @return the associated ReservationroomBean pObject
-     */
-    // GET IMPORTED
-    public ReservationroomBean getReservationroomBean(RoomstBean pObject) throws SQLException
-    {
-        ReservationroomBean other = ReservationroomManager.getInstance().createReservationroomBean();
-        other.setReservationroomid(pObject.getReservationroomid());
-        return ReservationroomManager.getInstance().loadUniqueUsingTemplate(other);
-    }
-
-    /**
-     * Associates the RoomstBean object to the ReservationroomBean object.
-     *
-     * @param pObject the RoomstBean object to use
-     * @param pObjectToBeSet the ReservationroomBean object to associate to the RoomstBean 
-     * @return the associated ReservationroomBean pObject
-     */
-    // SET IMPORTED
-    public RoomstBean setReservationroomBean(RoomstBean pObject,ReservationroomBean pObjectToBeSet)
-    {
-        pObject.setReservationroomid(pObjectToBeSet.getReservationroomid());
-        return pObject;
-    }
-
-    /**
-     * Retrieves the RoomBean object from the roomst.roomid field.
-     *
-     * @param pObject the RoomstBean 
+     * @param pObject the RoomstlogBean 
      * @return the associated RoomBean pObject
      */
     // GET IMPORTED
-    public RoomBean getRoomBean(RoomstBean pObject) throws SQLException
+    public RoomBean getRoomBean(RoomstlogBean pObject) throws SQLException
     {
         RoomBean other = RoomManager.getInstance().createRoomBean();
         other.setRoomid(pObject.getRoomid());
@@ -576,27 +515,27 @@ public class RoomstManager
     }
 
     /**
-     * Associates the RoomstBean object to the RoomBean object.
+     * Associates the RoomstlogBean object to the RoomBean object.
      *
-     * @param pObject the RoomstBean object to use
-     * @param pObjectToBeSet the RoomBean object to associate to the RoomstBean 
+     * @param pObject the RoomstlogBean object to use
+     * @param pObjectToBeSet the RoomBean object to associate to the RoomstlogBean 
      * @return the associated RoomBean pObject
      */
     // SET IMPORTED
-    public RoomstBean setRoomBean(RoomstBean pObject,RoomBean pObjectToBeSet)
+    public RoomstlogBean setRoomBean(RoomstlogBean pObject,RoomBean pObjectToBeSet)
     {
         pObject.setRoomid(pObjectToBeSet.getRoomid());
         return pObject;
     }
 
     /**
-     * Retrieves the RoomtypeBean object from the roomst.roomtypeid field.
+     * Retrieves the RoomtypeBean object from the roomstlog.roomtypeid field.
      *
-     * @param pObject the RoomstBean 
+     * @param pObject the RoomstlogBean 
      * @return the associated RoomtypeBean pObject
      */
     // GET IMPORTED
-    public RoomtypeBean getRoomtypeBean(RoomstBean pObject) throws SQLException
+    public RoomtypeBean getRoomtypeBean(RoomstlogBean pObject) throws SQLException
     {
         RoomtypeBean other = RoomtypeManager.getInstance().createRoomtypeBean();
         other.setRoomtypeid(pObject.getRoomtypeid());
@@ -604,14 +543,14 @@ public class RoomstManager
     }
 
     /**
-     * Associates the RoomstBean object to the RoomtypeBean object.
+     * Associates the RoomstlogBean object to the RoomtypeBean object.
      *
-     * @param pObject the RoomstBean object to use
-     * @param pObjectToBeSet the RoomtypeBean object to associate to the RoomstBean 
+     * @param pObject the RoomstlogBean object to use
+     * @param pObjectToBeSet the RoomtypeBean object to associate to the RoomstlogBean 
      * @return the associated RoomtypeBean pObject
      */
     // SET IMPORTED
-    public RoomstBean setRoomtypeBean(RoomstBean pObject,RoomtypeBean pObjectToBeSet)
+    public RoomstlogBean setRoomtypeBean(RoomstlogBean pObject,RoomtypeBean pObjectToBeSet)
     {
         pObject.setRoomtypeid(pObjectToBeSet.getRoomtypeid());
         return pObject;
@@ -624,19 +563,19 @@ public class RoomstManager
     //////////////////////////////////////
 
     /**
-     * Loads all the rows from roomst.
+     * Loads all the rows from roomstlog.
      *
-     * @return an array of RoomstManager pObject
+     * @return an array of RoomstlogManager pObject
      */
     //38
-    public RoomstBean[] loadAll() throws SQLException 
+    public RoomstlogBean[] loadAll() throws SQLException 
     {
         Connection c = null;
         PreparedStatement ps = null;
         try 
         {
             c = getConnection();
-            ps = c.prepareStatement("SELECT " + ALL_FIELDS + " FROM roomst",ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            ps = c.prepareStatement("SELECT " + ALL_FIELDS + " FROM roomstlog",ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             return loadByPreparedStatement(ps);
         }
         finally
@@ -650,31 +589,31 @@ public class RoomstManager
     // SQL 'WHERE' METHOD
     //////////////////////////////////////
     /**
-     * Retrieves an array of RoomstBean given a sql 'where' clause.
+     * Retrieves an array of RoomstlogBean given a sql 'where' clause.
      *
      * @param where the sql 'where' clause
-     * @return the resulting RoomstBean table 
+     * @return the resulting RoomstlogBean table 
      */
     //49
-    public RoomstBean[] loadByWhere(String where) throws SQLException
+    public RoomstlogBean[] loadByWhere(String where) throws SQLException
     {
         return loadByWhere(where, null);
     }
 
     /**
-     * Retrieves an array of RoomstBean given a sql where clause, and a list of fields.
+     * Retrieves an array of RoomstlogBean given a sql where clause, and a list of fields.
      * It is up to you to pass the 'WHERE' in your where clausis.
      *
      * @param where the sql 'where' clause
      * @param fieldList table of the field's associated constants
-     * @return the resulting RoomstBean table 
+     * @return the resulting RoomstlogBean table 
      */
     //51
-    public RoomstBean[] loadByWhere(String where, int[] fieldList) throws SQLException
+    public RoomstlogBean[] loadByWhere(String where, int[] fieldList) throws SQLException
     {
         String sql = null;
         if(fieldList == null)
-            sql = "select " + ALL_FIELDS + " from roomst " + where;
+            sql = "select " + ALL_FIELDS + " from roomstlog " + where;
         else
         {
             StringBuffer buff = new StringBuffer(128);
@@ -685,7 +624,7 @@ public class RoomstManager
                     buff.append(",");
                 buff.append(FIELD_NAMES[fieldList[i]]);
             }
-            buff.append(" from roomst ");
+            buff.append(" from roomstlog ");
             buff.append(where);
             sql = buff.toString();
             buff = null;
@@ -708,7 +647,7 @@ public class RoomstManager
                     v.add(decodeRow(rs, fieldList));
             }
 
-            return (RoomstBean[])v.toArray(new RoomstBean[0]);
+            return (RoomstlogBean[])v.toArray(new RoomstlogBean[0]);
         }
         finally
         {
@@ -720,7 +659,7 @@ public class RoomstManager
 
 
     /**
-     * Deletes all rows from roomst table.
+     * Deletes all rows from roomstlog table.
      * @return the number of deleted rows.
      */
     public int deleteAll() throws SQLException
@@ -730,7 +669,7 @@ public class RoomstManager
 
 
     /**
-     * Deletes rows from the roomst table using a 'where' clause.
+     * Deletes rows from the roomstlog table using a 'where' clause.
      * It is up to you to pass the 'WHERE' in your where clausis.
      * <br>Attention, if 'WHERE' is omitted it will delete all records. 
      *
@@ -745,7 +684,7 @@ public class RoomstManager
         try
         {
             c = getConnection();
-            String delByWhereSQL = "DELETE FROM roomst " + where;
+            String delByWhereSQL = "DELETE FROM roomstlog " + where;
             ps = c.prepareStatement(delByWhereSQL);
             return ps.executeUpdate();
         }
@@ -762,12 +701,12 @@ public class RoomstManager
     // SAVE 
     ///////////////////////////////////////////////////////////////////////
     /**
-     * Saves the RoomstBean pObject into the database.
+     * Saves the RoomstlogBean pObject into the database.
      *
-     * @param pObject the RoomstBean pObject to be saved
+     * @param pObject the RoomstlogBean pObject to be saved
      */
     //100
-    public RoomstBean save(RoomstBean pObject) throws SQLException
+    public RoomstlogBean save(RoomstlogBean pObject) throws SQLException
     {
         Connection c = null;
         PreparedStatement ps = null;
@@ -778,15 +717,15 @@ public class RoomstManager
             c = getConnection();
             if (pObject.isNew())
             { // SAVE 
-                if (!pObject.isRoomstidModified())
+                if (!pObject.isRoomstlogidModified())
                 {
-                    ps = c.prepareStatement("SELECT nextval('roomstid_seq')");
+                    ps = c.prepareStatement("SELECT nextval('roomstlogid_seq')");
                     ResultSet rs = null;
                     try
                     {
                         rs = ps.executeQuery();
                         if(rs.next())
-                            pObject.setRoomstid(Manager.getLong(rs, 1));
+                            pObject.setRoomstlogid(Manager.getLong(rs, 1));
                         else
                             getManager().log("ATTENTION: Could not retrieve generated key!");
                     }
@@ -798,8 +737,16 @@ public class RoomstManager
                 }
                 beforeInsert(pObject); // listener callback
                 int _dirtyCount = 0;
-                _sql = new StringBuffer("INSERT into roomst (");
+                _sql = new StringBuffer("INSERT into roomstlog (");
     
+                if (pObject.isRoomstlogidModified()) {
+                    if (_dirtyCount>0) {
+                        _sql.append(",");
+                    }
+                    _sql.append("roomstlogid");
+                    _dirtyCount++;
+                }
+
                 if (pObject.isRoomstidModified()) {
                     if (_dirtyCount>0) {
                         _sql.append(",");
@@ -872,6 +819,14 @@ public class RoomstManager
                     _dirtyCount++;
                 }
 
+                if (pObject.isLogdateModified()) {
+                    if (_dirtyCount>0) {
+                        _sql.append(",");
+                    }
+                    _sql.append("logdate");
+                    _dirtyCount++;
+                }
+
                 _sql.append(") values (");
                 if(_dirtyCount > 0) {
                     _sql.append("?");
@@ -884,6 +839,10 @@ public class RoomstManager
                 ps = c.prepareStatement(_sql.toString(), ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
                 _dirtyCount = 0;
 
+                if (pObject.isRoomstlogidModified()) {
+                    Manager.setLong(ps, ++_dirtyCount, pObject.getRoomstlogid());
+                }
+    
                 if (pObject.isRoomstidModified()) {
                     Manager.setLong(ps, ++_dirtyCount, pObject.getRoomstid());
                 }
@@ -920,6 +879,10 @@ public class RoomstManager
                     Manager.setLong(ps, ++_dirtyCount, pObject.getBlockroomid());
                 }
     
+                if (pObject.isLogdateModified()) {
+                    ps.setTimestamp(++_dirtyCount, pObject.getLogdate());
+                }
+    
                 ps.executeUpdate();
     
                 pObject.isNew(false);
@@ -929,8 +892,17 @@ public class RoomstManager
             else 
             { // UPDATE 
                 beforeUpdate(pObject); // listener callback
-                _sql = new StringBuffer("UPDATE roomst SET ");
+                _sql = new StringBuffer("UPDATE roomstlog SET ");
                 boolean useComma=false;
+
+                if (pObject.isRoomstlogidModified()) {
+                    if (useComma) {
+                        _sql.append(",");
+                    } else {
+                        useComma=true;
+                    }
+                    _sql.append("roomstlogid").append("=?");
+                }
 
                 if (pObject.isRoomstidModified()) {
                     if (useComma) {
@@ -1012,10 +984,23 @@ public class RoomstManager
                     }
                     _sql.append("blockroomid").append("=?");
                 }
+
+                if (pObject.isLogdateModified()) {
+                    if (useComma) {
+                        _sql.append(",");
+                    } else {
+                        useComma=true;
+                    }
+                    _sql.append("logdate").append("=?");
+                }
                 _sql.append(" WHERE ");
-                _sql.append("roomst.roomstid=?");
+                _sql.append("roomstlog.roomstlogid=?");
                 ps = c.prepareStatement(_sql.toString(),ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
                 int _dirtyCount = 0;
+
+                if (pObject.isRoomstlogidModified()) {
+                      Manager.setLong(ps, ++_dirtyCount, pObject.getRoomstlogid());
+                }
 
                 if (pObject.isRoomstidModified()) {
                       Manager.setLong(ps, ++_dirtyCount, pObject.getRoomstid());
@@ -1052,12 +1037,16 @@ public class RoomstManager
                 if (pObject.isBlockroomidModified()) {
                       Manager.setLong(ps, ++_dirtyCount, pObject.getBlockroomid());
                 }
+
+                if (pObject.isLogdateModified()) {
+                      ps.setTimestamp(++_dirtyCount, pObject.getLogdate());
+                }
     
                 if (_dirtyCount == 0) {
                      return pObject;
                 }
     
-                Manager.setLong(ps, ++_dirtyCount, pObject.getRoomstid());
+                Manager.setLong(ps, ++_dirtyCount, pObject.getRoomstlogid());
                 ps.executeUpdate();
                 pObject.resetIsModified();
                 afterUpdate(pObject); // listener callback
@@ -1075,13 +1064,13 @@ public class RoomstManager
 
 
     /**
-     * Saves an array of RoomstBean pObjects into the database.
+     * Saves an array of RoomstlogBean pObjects into the database.
      *
-     * @param pObjects the RoomstBean pObject table to be saved
-     * @return the saved RoomstBean array.
+     * @param pObjects the RoomstlogBean pObject table to be saved
+     * @return the saved RoomstlogBean array.
      */
     //65
-    public RoomstBean[] save(RoomstBean[] pObjects) throws SQLException 
+    public RoomstlogBean[] save(RoomstlogBean[] pObjects) throws SQLException 
     {
         for (int iIndex = 0; iIndex < pObjects.length; iIndex ++){
             save(pObjects[iIndex]);
@@ -1095,15 +1084,15 @@ public class RoomstManager
     // USING TEMPLATE 
     ///////////////////////////////////////////////////////////////////////
     /**
-     * Loads a unique RoomstBean pObject from a template one giving a c
+     * Loads a unique RoomstlogBean pObject from a template one giving a c
      *
-     * @param pObject the RoomstBean pObject to look for
+     * @param pObject the RoomstlogBean pObject to look for
      * @return the pObject matching the template
      */
     //85
-    public RoomstBean loadUniqueUsingTemplate(RoomstBean pObject) throws SQLException
+    public RoomstlogBean loadUniqueUsingTemplate(RoomstlogBean pObject) throws SQLException
     {
-         RoomstBean[] pReturn = loadUsingTemplate(pObject);
+         RoomstlogBean[] pReturn = loadUsingTemplate(pObject);
          if (pReturn.length == 0)
              return null;
          if (pReturn.length > 1)
@@ -1112,22 +1101,27 @@ public class RoomstManager
      }
 
     /**
-     * Loads an array of RoomstBean from a template one.
+     * Loads an array of RoomstlogBean from a template one.
      *
-     * @param pObject the RoomstBean template to look for
-     * @return all the RoomstBean matching the template
+     * @param pObject the RoomstlogBean template to look for
+     * @return all the RoomstlogBean matching the template
      */
     //88
-    public RoomstBean[] loadUsingTemplate(RoomstBean pObject) throws SQLException
+    public RoomstlogBean[] loadUsingTemplate(RoomstlogBean pObject) throws SQLException
     {
         Connection c = null;
         PreparedStatement ps = null;
         StringBuffer where = new StringBuffer("");
-        StringBuffer _sql = new StringBuffer("SELECT " + ALL_FIELDS + " from roomst WHERE ");
+        StringBuffer _sql = new StringBuffer("SELECT " + ALL_FIELDS + " from roomstlog WHERE ");
         StringBuffer _sqlWhere = new StringBuffer("");
         try
         {
             int _dirtyCount = 0;
+    
+             if (pObject.isRoomstlogidModified()) {
+                 _dirtyCount ++; 
+                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("roomstlogid= ?");
+             }
     
              if (pObject.isRoomstidModified()) {
                  _dirtyCount ++; 
@@ -1174,6 +1168,11 @@ public class RoomstManager
                  _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("blockroomid= ?");
              }
     
+             if (pObject.isLogdateModified()) {
+                 _dirtyCount ++; 
+                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("logdate= ?");
+             }
+    
              if (_dirtyCount == 0) {
                  throw new SQLException ("The pObject to look for is invalid : not initialized !");
              }
@@ -1181,6 +1180,10 @@ public class RoomstManager
              c = getConnection();
              ps = c.prepareStatement(_sql.toString(),ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
              _dirtyCount = 0;
+    
+             if (pObject.isRoomstlogidModified()) {
+                 Manager.setLong(ps, ++_dirtyCount, pObject.getRoomstlogid());
+             }
     
              if (pObject.isRoomstidModified()) {
                  Manager.setLong(ps, ++_dirtyCount, pObject.getRoomstid());
@@ -1218,6 +1221,10 @@ public class RoomstManager
                  Manager.setLong(ps, ++_dirtyCount, pObject.getBlockroomid());
              }
     
+             if (pObject.isLogdateModified()) {
+                 ps.setTimestamp(++_dirtyCount, pObject.getLogdate());
+             }
+    
              ps.executeQuery();
              return loadByPreparedStatement(ps);
         }
@@ -1228,16 +1235,16 @@ public class RoomstManager
         }
     }
     /**
-     * Deletes rows using a RoomstBean template.
+     * Deletes rows using a RoomstlogBean template.
      *
-     * @param pObject the RoomstBean object(s) to be deleted
+     * @param pObject the RoomstlogBean object(s) to be deleted
      * @return the number of deleted objects
      */
     //63
-    public int deleteUsingTemplate(RoomstBean pObject) throws SQLException
+    public int deleteUsingTemplate(RoomstlogBean pObject) throws SQLException
     {
-        if (pObject.isRoomstidInitialized())
-            return deleteByPrimaryKey(pObject.getRoomstid());
+        if (pObject.isRoomstlogidInitialized())
+            return deleteByPrimaryKey(pObject.getRoomstlogid());
     
         Connection c = null;
         PreparedStatement ps = null;
@@ -1245,8 +1252,15 @@ public class RoomstManager
     
         try 
         {
-            sql = new StringBuffer("DELETE FROM roomst WHERE ");
+            sql = new StringBuffer("DELETE FROM roomstlog WHERE ");
             int _dirtyAnd = 0;
+            if (pObject.isRoomstlogidInitialized()) {
+                if (_dirtyAnd > 0)
+                    sql.append(" AND ");
+                sql.append("roomstlogid").append("=?");
+                _dirtyAnd ++;
+            }
+    
             if (pObject.isRoomstidInitialized()) {
                 if (_dirtyAnd > 0)
                     sql.append(" AND ");
@@ -1310,9 +1324,20 @@ public class RoomstManager
                 _dirtyAnd ++;
             }
     
+            if (pObject.isLogdateInitialized()) {
+                if (_dirtyAnd > 0)
+                    sql.append(" AND ");
+                sql.append("logdate").append("=?");
+                _dirtyAnd ++;
+            }
+    
             c = getConnection();
             ps = c.prepareStatement(sql.toString(),ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             int _dirtyCount = 0;
+    
+            if (pObject.isRoomstlogidInitialized()) {
+                Manager.setLong(ps, ++_dirtyCount, pObject.getRoomstlogid());
+            }
     
             if (pObject.isRoomstidInitialized()) {
                 Manager.setLong(ps, ++_dirtyCount, pObject.getRoomstid());
@@ -1350,6 +1375,10 @@ public class RoomstManager
                 Manager.setLong(ps, ++_dirtyCount, pObject.getBlockroomid());
             }
     
+            if (pObject.isLogdateInitialized()) {
+                ps.setTimestamp(++_dirtyCount, pObject.getLogdate());
+            }
+    
             int _rows = ps.executeUpdate();
             return _rows;
         }
@@ -1367,7 +1396,7 @@ public class RoomstManager
     ///////////////////////////////////////////////////////////////////////
 
     /**
-     * Retrieves the number of rows of the table roomst.
+     * Retrieves the number of rows of the table roomstlog.
      *
      * @return the number of rows returned
      */
@@ -1380,7 +1409,7 @@ public class RoomstManager
 
 
     /**
-     * Retrieves the number of rows of the table roomst with a 'where' clause.
+     * Retrieves the number of rows of the table roomstlog with a 'where' clause.
      * It is up to you to pass the 'WHERE' in your where clausis.
      *
      * @param where the restriction clause
@@ -1388,7 +1417,7 @@ public class RoomstManager
      */
     public int countWhere(String where) throws SQLException
     {
-        String sql = "select count(*) as MCOUNT from roomst " + where;
+        String sql = "select count(*) as MCOUNT from roomstlog " + where;
         Connection c = null;
         Statement pStatement = null;
         ResultSet rs =  null;
@@ -1414,7 +1443,7 @@ public class RoomstManager
     }
 
     /**
-     * Retrieves the number of rows of the table roomst with a prepared statement.
+     * Retrieves the number of rows of the table roomstlog with a prepared statement.
      *
      * @param ps the PreparedStatement to be used
      * @return the number of rows returned
@@ -1440,13 +1469,13 @@ public class RoomstManager
     }
 
     /**
-     * Looks for the number of elements of a specific RoomstBean pObject given a c
+     * Looks for the number of elements of a specific RoomstlogBean pObject given a c
      *
-     * @param pObject the RoomstBean pObject to look for
+     * @param pObject the RoomstlogBean pObject to look for
      * @return the number of rows returned
      */
     //83
-    public int countUsingTemplate(RoomstBean pObject) throws SQLException
+    public int countUsingTemplate(RoomstlogBean pObject) throws SQLException
     {
         StringBuffer where = new StringBuffer("");
         Connection c = null;
@@ -1456,9 +1485,14 @@ public class RoomstManager
     
         try
         {
-                _sql = new StringBuffer("SELECT count(*) as MCOUNT  from roomst WHERE ");
+                _sql = new StringBuffer("SELECT count(*) as MCOUNT  from roomstlog WHERE ");
                 _sqlWhere = new StringBuffer("");
                 int _dirtyCount = 0;
+    
+                if (pObject.isRoomstlogidModified()) {
+                    _dirtyCount++; 
+                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("roomstlogid= ?");
+                }
     
                 if (pObject.isRoomstidModified()) {
                     _dirtyCount++; 
@@ -1505,6 +1539,11 @@ public class RoomstManager
                     _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("blockroomid= ?");
                 }
     
+                if (pObject.isLogdateModified()) {
+                    _dirtyCount++; 
+                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("logdate= ?");
+                }
+    
                 if (_dirtyCount == 0)
                    throw new SQLException ("The pObject to look is unvalid : not initialized !");
     
@@ -1513,6 +1552,10 @@ public class RoomstManager
                 ps = c.prepareStatement(_sql.toString(),ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
     
                 _dirtyCount = 0;
+    
+                if (pObject.isRoomstlogidModified()) {
+                    Manager.setLong(ps, ++_dirtyCount, pObject.getRoomstlogid());
+                }
     
                 if (pObject.isRoomstidModified()) {
                     Manager.setLong(ps, ++_dirtyCount, pObject.getRoomstid());
@@ -1550,6 +1593,10 @@ public class RoomstManager
                     Manager.setLong(ps, ++_dirtyCount, pObject.getBlockroomid());
                 }
     
+                if (pObject.isLogdateModified()) {
+                    ps.setTimestamp(++_dirtyCount, pObject.getLogdate());
+                }
+    
                 return countByPreparedStatement(ps);
         }
         finally
@@ -1565,24 +1612,26 @@ public class RoomstManager
     // DECODE RESULT SET 
     ///////////////////////////////////////////////////////////////////////
     /**
-     * Transforms a ResultSet iterating on the roomst on a RoomstBean pObject.
+     * Transforms a ResultSet iterating on the roomstlog on a RoomstlogBean pObject.
      *
      * @param rs the ResultSet to be transformed
-     * @return pObject resulting RoomstBean pObject
+     * @return pObject resulting RoomstlogBean pObject
      */
     //72
-    public RoomstBean decodeRow(ResultSet rs) throws SQLException
+    public RoomstlogBean decodeRow(ResultSet rs) throws SQLException
     {
-        RoomstBean pObject = createRoomstBean();
-        pObject.setRoomstid(Manager.getLong(rs, 1));
-        pObject.setRoomid(Manager.getInteger(rs, 2));
-        pObject.setStatusdate(rs.getTimestamp(3));
-        pObject.setSt(Manager.getInteger(rs, 4));
-        pObject.setRegbyid(Manager.getInteger(rs, 5));
-        pObject.setRegdate(rs.getTimestamp(6));
-        pObject.setReservationroomid(Manager.getLong(rs, 7));
-        pObject.setRoomtypeid(Manager.getInteger(rs, 8));
-        pObject.setBlockroomid(Manager.getLong(rs, 9));
+        RoomstlogBean pObject = createRoomstlogBean();
+        pObject.setRoomstlogid(Manager.getLong(rs, 1));
+        pObject.setRoomstid(Manager.getLong(rs, 2));
+        pObject.setRoomid(Manager.getInteger(rs, 3));
+        pObject.setStatusdate(rs.getTimestamp(4));
+        pObject.setSt(Manager.getInteger(rs, 5));
+        pObject.setRegbyid(Manager.getInteger(rs, 6));
+        pObject.setRegdate(rs.getTimestamp(7));
+        pObject.setReservationroomid(Manager.getLong(rs, 8));
+        pObject.setRoomtypeid(Manager.getInteger(rs, 9));
+        pObject.setBlockroomid(Manager.getLong(rs, 10));
+        pObject.setLogdate(rs.getTimestamp(11));
 
         pObject.isNew(false);
         pObject.resetIsModified();
@@ -1591,20 +1640,24 @@ public class RoomstManager
     }
 
     /**
-     * Transforms a ResultSet iterating on the roomst table on a RoomstBean pObject according to a list of fields.
+     * Transforms a ResultSet iterating on the roomstlog table on a RoomstlogBean pObject according to a list of fields.
      *
      * @param rs the ResultSet to be transformed
      * @param fieldList table of the field's associated constants
-     * @return pObject resulting RoomstBean pObject
+     * @return pObject resulting RoomstlogBean pObject
      */
     //73
-    public RoomstBean decodeRow(ResultSet rs, int[] fieldList) throws SQLException
+    public RoomstlogBean decodeRow(ResultSet rs, int[] fieldList) throws SQLException
     {
-        RoomstBean pObject = createRoomstBean();
+        RoomstlogBean pObject = createRoomstlogBean();
         int pos = 0;
         for(int i = 0; i < fieldList.length; i++)
         {
             switch(fieldList[i]) {
+                case ID_ROOMSTLOGID:
+                    ++pos;
+                    pObject.setRoomstlogid(Manager.getLong(rs, pos));
+                    break;
                 case ID_ROOMSTID:
                     ++pos;
                     pObject.setRoomstid(Manager.getLong(rs, pos));
@@ -1641,6 +1694,10 @@ public class RoomstManager
                     ++pos;
                     pObject.setBlockroomid(Manager.getLong(rs, pos));
                     break;
+                case ID_LOGDATE:
+                    ++pos;
+                    pObject.setLogdate(rs.getTimestamp(pos));
+                    break;
             }
         }
         pObject.isNew(false);
@@ -1657,10 +1714,10 @@ public class RoomstManager
      * Loads all the elements using a prepared statement.
      *
      * @param ps the PreparedStatement to be used
-     * @return an array of RoomstBean 
+     * @return an array of RoomstlogBean 
      */
     //41
-    public RoomstBean[] loadByPreparedStatement(PreparedStatement ps) throws SQLException
+    public RoomstlogBean[] loadByPreparedStatement(PreparedStatement ps) throws SQLException
     {
         return loadByPreparedStatement(ps, null);
     }
@@ -1670,9 +1727,9 @@ public class RoomstManager
      *
      * @param ps the PreparedStatement to be used
      * @param fieldList table of the field's associated constants
-     * @return an array of RoomstBean 
+     * @return an array of RoomstlogBean 
      */
-    public RoomstBean[] loadByPreparedStatement(PreparedStatement ps, int[] fieldList) throws SQLException
+    public RoomstlogBean[] loadByPreparedStatement(PreparedStatement ps, int[] fieldList) throws SQLException
     {
         ResultSet rs =  null;
         java.util.ArrayList v =  null;
@@ -1687,7 +1744,7 @@ public class RoomstManager
                 else 
                     v.add(decodeRow(rs, fieldList));
             }
-            return (RoomstBean[])v.toArray(new RoomstBean[0]);
+            return (RoomstlogBean[])v.toArray(new RoomstlogBean[0]);
         }
         finally
         {
@@ -1699,56 +1756,56 @@ public class RoomstManager
     ///////////////////////////////////////////////////////////////////////
     // LISTENER 
     ///////////////////////////////////////////////////////////////////////
-    private RoomstListener listener = null;
+    private RoomstlogListener listener = null;
 
     /**
-     * Registers a unique RoomstListener listener.
+     * Registers a unique RoomstlogListener listener.
      */
     //66.5
-    public void registerListener(RoomstListener listener) {
+    public void registerListener(RoomstlogListener listener) {
         this.listener = listener;
     }
 
     /**
-     * Before the save of the RoomstBean pObject.
+     * Before the save of the RoomstlogBean pObject.
      *
-     * @param pObject the RoomstBean pObject to be saved
+     * @param pObject the RoomstlogBean pObject to be saved
      */
     //67
-    void beforeInsert(RoomstBean pObject) throws SQLException {
+    void beforeInsert(RoomstlogBean pObject) throws SQLException {
         if (listener != null)
             listener.beforeInsert(pObject);
     }
 
     /**
-     * After the save of the RoomstBean pObject.
+     * After the save of the RoomstlogBean pObject.
      *
-     * @param pObject the RoomstBean pObject to be saved
+     * @param pObject the RoomstlogBean pObject to be saved
      */
     //68
-    void afterInsert(RoomstBean pObject) throws SQLException {
+    void afterInsert(RoomstlogBean pObject) throws SQLException {
         if (listener != null)
             listener.afterInsert(pObject);
     }
 
     /**
-     * Before the update of the RoomstBean pObject.
+     * Before the update of the RoomstlogBean pObject.
      *
-     * @param pObject the RoomstBean pObject to be updated
+     * @param pObject the RoomstlogBean pObject to be updated
      */
     //69
-    void beforeUpdate(RoomstBean pObject) throws SQLException {
+    void beforeUpdate(RoomstlogBean pObject) throws SQLException {
         if (listener != null)
             listener.beforeUpdate(pObject);
     }
 
     /**
-     * After the update of the RoomstBean pObject.
+     * After the update of the RoomstlogBean pObject.
      *
-     * @param pObject the RoomstBean pObject to be updated
+     * @param pObject the RoomstlogBean pObject to be updated
      */
     //70
-    void afterUpdate(RoomstBean pObject) throws SQLException {
+    void afterUpdate(RoomstlogBean pObject) throws SQLException {
         if (listener != null)
             listener.afterUpdate(pObject);
     }

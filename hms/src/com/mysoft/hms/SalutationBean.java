@@ -115,7 +115,7 @@ public class SalutationBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: salutation.name
-     * <li>comments: დასახელება
+     * <li>comments: ??????????
      * <li>column size: 2147483647
      * <li>jdbc type returned by the driver: Types.VARCHAR
      * </ul>

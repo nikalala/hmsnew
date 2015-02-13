@@ -67,6 +67,10 @@ public class VGuestdblistBean
     private boolean vipstatusid_is_modified = false;
     private boolean vipstatusid_is_initialized = false;
     
+    private Boolean deleted;
+    private boolean deleted_is_modified = false;
+    private boolean deleted_is_initialized = false;
+    
     private boolean _isNew = true;
     
     /**
@@ -738,6 +742,72 @@ public class VGuestdblistBean
     }
 
     /**
+     * Getter method for deleted.
+     * <br>
+     * Meta Data Information (in progress):
+     * <ul>
+     * <li>full name: v_guestdblist.deleted
+     * <li>column size: 1
+     * <li>jdbc type returned by the driver: Types.BIT
+     * </ul>
+     *
+     * @return the value of deleted
+     */
+    public Boolean getDeleted()
+    {
+        return deleted; 
+    }
+
+    /**
+     * Setter method for deleted.
+     * <br>
+     * Attention, there will be no comparison with current value which
+     * means calling this method will mark the field as 'modified' in all cases.
+     *
+     * @param newVal the new value to be assigned to deleted
+     */
+    public void setDeleted(Boolean newVal) {
+        if ((newVal != null && this.deleted != null && newVal.equals(this.deleted)) || 
+            (newVal == null && this.deleted == null && deleted_is_initialized)) {
+            return; 
+        } 
+        this.deleted = newVal; 
+        deleted_is_modified = true; 
+        deleted_is_initialized = true; 
+    }
+
+    /**
+     * Setter method for deleted.
+     * <br>
+     * Convenient for those who do not want to deal with Objects for primary types.
+     *
+     * @param newVal the new value to be assigned to deleted
+     */
+    public void setDeleted(boolean newVal) {
+        setDeleted(new Boolean(newVal));
+    }
+
+    /**
+     * Determines if the deleted has been modified.
+     *
+     * @return true if the field has been modified, false if the field has not been modified
+     */
+    public boolean isDeletedModified() {
+        return deleted_is_modified; 
+    }
+
+    /**
+     * Determines if the deleted has been initialized.
+     * <br>
+     * It is useful to determine if a field is null on purpose or just because it has not been initialized.
+     *
+     * @return true if the field has been initialized, false otherwise
+     */
+    public boolean isDeletedInitialized() {
+        return deleted_is_initialized; 
+    }
+
+    /**
      * Determines if the current object is new.
      *
      * @return true if the current object is new, false if the object is not new
@@ -773,7 +843,8 @@ public class VGuestdblistBean
 		vipstatus_is_modified || 
 		salutationid_is_modified || 
 		countryid_is_modified || 
-		vipstatusid_is_modified;
+		vipstatusid_is_modified || 
+		deleted_is_modified;
     }
 
     /**
@@ -791,6 +862,7 @@ public class VGuestdblistBean
         salutationid_is_modified = false;
         countryid_is_modified = false;
         vipstatusid_is_modified = false;
+        deleted_is_modified = false;
     }
 
     /**
@@ -810,6 +882,7 @@ public class VGuestdblistBean
         setSalutationid(bean.getSalutationid());
         setCountryid(bean.getCountryid());
         setVipstatusid(bean.getVipstatusid());
+        setDeleted(bean.getDeleted());
     }
 
     /**
@@ -830,6 +903,7 @@ public class VGuestdblistBean
                  + "\n - v_guestdblist.salutationid = " + (salutationid_is_initialized ? ("[" + (salutationid == null ? null : salutationid.toString()) + "]") : "not initialized") + ""
                  + "\n - v_guestdblist.countryid = " + (countryid_is_initialized ? ("[" + (countryid == null ? null : countryid.toString()) + "]") : "not initialized") + ""
                  + "\n - v_guestdblist.vipstatusid = " + (vipstatusid_is_initialized ? ("[" + (vipstatusid == null ? null : vipstatusid.toString()) + "]") : "not initialized") + ""
+                 + "\n - v_guestdblist.deleted = " + (deleted_is_initialized ? ("[" + (deleted == null ? null : deleted.toString()) + "]") : "not initialized") + ""
             ;
     }
 

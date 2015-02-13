@@ -43,17 +43,17 @@ public class BlockroomManager
     public static final String NAME_ROOMID = "roomid";
 
     /**
-     * Column blockstart of type Types.DATE mapped to java.util.Date.
+     * Column blockstart of type Types.TIMESTAMP mapped to java.sql.Timestamp.
      */
     public static final int ID_BLOCKSTART = 2;
-    public static final int TYPE_BLOCKSTART = Types.DATE;
+    public static final int TYPE_BLOCKSTART = Types.TIMESTAMP;
     public static final String NAME_BLOCKSTART = "blockstart";
 
     /**
-     * Column blockend of type Types.DATE mapped to java.util.Date.
+     * Column blockend of type Types.TIMESTAMP mapped to java.sql.Timestamp.
      */
     public static final int ID_BLOCKEND = 3;
-    public static final int TYPE_BLOCKEND = Types.DATE;
+    public static final int TYPE_BLOCKEND = Types.TIMESTAMP;
     public static final String NAME_BLOCKEND = "blockend";
 
     /**
@@ -718,11 +718,11 @@ public class BlockroomManager
                 }
     
                 if (pObject.isBlockstartModified()) {
-                    if (pObject.getBlockstart() == null) ps.setNull(++_dirtyCount, Types.DATE); else ps.setDate(++_dirtyCount, new java.sql.Date(pObject.getBlockstart().getTime()));
+                    ps.setTimestamp(++_dirtyCount, pObject.getBlockstart());
                 }
     
                 if (pObject.isBlockendModified()) {
-                    if (pObject.getBlockend() == null) ps.setNull(++_dirtyCount, Types.DATE); else ps.setDate(++_dirtyCount, new java.sql.Date(pObject.getBlockend().getTime()));
+                    ps.setTimestamp(++_dirtyCount, pObject.getBlockend());
                 }
     
                 if (pObject.isReasonidModified()) {
@@ -838,11 +838,11 @@ public class BlockroomManager
                 }
 
                 if (pObject.isBlockstartModified()) {
-                      if (pObject.getBlockstart() == null) ps.setNull(++_dirtyCount, Types.DATE); else ps.setDate(++_dirtyCount, new java.sql.Date(pObject.getBlockstart().getTime()));
+                      ps.setTimestamp(++_dirtyCount, pObject.getBlockstart());
                 }
 
                 if (pObject.isBlockendModified()) {
-                      if (pObject.getBlockend() == null) ps.setNull(++_dirtyCount, Types.DATE); else ps.setDate(++_dirtyCount, new java.sql.Date(pObject.getBlockend().getTime()));
+                      ps.setTimestamp(++_dirtyCount, pObject.getBlockend());
                 }
 
                 if (pObject.isReasonidModified()) {
@@ -994,11 +994,11 @@ public class BlockroomManager
              }
     
              if (pObject.isBlockstartModified()) {
-                 if (pObject.getBlockstart() == null) ps.setNull(++_dirtyCount, Types.DATE); else ps.setDate(++_dirtyCount, new java.sql.Date(pObject.getBlockstart().getTime()));
+                 ps.setTimestamp(++_dirtyCount, pObject.getBlockstart());
              }
     
              if (pObject.isBlockendModified()) {
-                 if (pObject.getBlockend() == null) ps.setNull(++_dirtyCount, Types.DATE); else ps.setDate(++_dirtyCount, new java.sql.Date(pObject.getBlockend().getTime()));
+                 ps.setTimestamp(++_dirtyCount, pObject.getBlockend());
              }
     
              if (pObject.isReasonidModified()) {
@@ -1115,11 +1115,11 @@ public class BlockroomManager
             }
     
             if (pObject.isBlockstartInitialized()) {
-                if (pObject.getBlockstart() == null) ps.setNull(++_dirtyCount, Types.DATE); else ps.setDate(++_dirtyCount, new java.sql.Date(pObject.getBlockstart().getTime()));
+                ps.setTimestamp(++_dirtyCount, pObject.getBlockstart());
             }
     
             if (pObject.isBlockendInitialized()) {
-                if (pObject.getBlockend() == null) ps.setNull(++_dirtyCount, Types.DATE); else ps.setDate(++_dirtyCount, new java.sql.Date(pObject.getBlockend().getTime()));
+                ps.setTimestamp(++_dirtyCount, pObject.getBlockend());
             }
     
             if (pObject.isReasonidInitialized()) {
@@ -1146,6 +1146,235 @@ public class BlockroomManager
             getManager().close(ps);
             freeConnection(c);
         }
+    }
+
+    
+    
+    ///////////////////////////////////////////////////////////////////////
+    // MANY TO MANY: LOAD OTHER BEAN VIA JUNCTION TABLE 
+    ///////////////////////////////////////////////////////////////////////
+    /**
+     * Retrieves an array of PersonnelBean using the relation table Roomst given a BlockroomBean object.
+     *
+     * @param pObject the BlockroomBean pObject to be used
+     * @return an array of PersonnelBean 
+     */
+    // MANY TO MANY
+    public PersonnelBean[] loadPersonnelViaRoomst(BlockroomBean pObject) throws SQLException
+    {
+         Connection c = null;
+         PreparedStatement ps = null;
+         String strSQL =      " SELECT "
+                         + "        *"
+                         + " FROM  "
+                         + "        personnel,roomst"
+                         + " WHERE "    
+                         + "     roomst.blockroomid = ?"
+                         + " AND roomst.regbyid = personnel.personnelid";
+         try
+         {
+             c = getConnection();
+             ps = c.prepareStatement(strSQL,ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+             Manager.setLong(ps, 1, pObject.getBlockroomid());
+             return PersonnelManager.getInstance().loadByPreparedStatement(ps);
+         }
+         finally
+         {
+            getManager().close(ps);
+            freeConnection(c);
+         }
+    }
+
+    /**
+     * Retrieves an array of ReservationroomBean using the relation table Roomst given a BlockroomBean object.
+     *
+     * @param pObject the BlockroomBean pObject to be used
+     * @return an array of ReservationroomBean 
+     */
+    // MANY TO MANY
+    public ReservationroomBean[] loadReservationroomViaRoomst(BlockroomBean pObject) throws SQLException
+    {
+         Connection c = null;
+         PreparedStatement ps = null;
+         String strSQL =      " SELECT "
+                         + "        *"
+                         + " FROM  "
+                         + "        reservationroom,roomst"
+                         + " WHERE "    
+                         + "     roomst.blockroomid = ?"
+                         + " AND roomst.reservationroomid = reservationroom.reservationroomid";
+         try
+         {
+             c = getConnection();
+             ps = c.prepareStatement(strSQL,ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+             Manager.setLong(ps, 1, pObject.getBlockroomid());
+             return ReservationroomManager.getInstance().loadByPreparedStatement(ps);
+         }
+         finally
+         {
+            getManager().close(ps);
+            freeConnection(c);
+         }
+    }
+
+    /**
+     * Retrieves an array of RoomBean using the relation table Roomst given a BlockroomBean object.
+     *
+     * @param pObject the BlockroomBean pObject to be used
+     * @return an array of RoomBean 
+     */
+    // MANY TO MANY
+    public RoomBean[] loadRoomViaRoomst(BlockroomBean pObject) throws SQLException
+    {
+         Connection c = null;
+         PreparedStatement ps = null;
+         String strSQL =      " SELECT "
+                         + "        *"
+                         + " FROM  "
+                         + "        room,roomst"
+                         + " WHERE "    
+                         + "     roomst.blockroomid = ?"
+                         + " AND roomst.roomid = room.roomid";
+         try
+         {
+             c = getConnection();
+             ps = c.prepareStatement(strSQL,ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+             Manager.setLong(ps, 1, pObject.getBlockroomid());
+             return RoomManager.getInstance().loadByPreparedStatement(ps);
+         }
+         finally
+         {
+            getManager().close(ps);
+            freeConnection(c);
+         }
+    }
+
+    /**
+     * Retrieves an array of RoomtypeBean using the relation table Roomst given a BlockroomBean object.
+     *
+     * @param pObject the BlockroomBean pObject to be used
+     * @return an array of RoomtypeBean 
+     */
+    // MANY TO MANY
+    public RoomtypeBean[] loadRoomtypeViaRoomst(BlockroomBean pObject) throws SQLException
+    {
+         Connection c = null;
+         PreparedStatement ps = null;
+         String strSQL =      " SELECT "
+                         + "        *"
+                         + " FROM  "
+                         + "        roomtype,roomst"
+                         + " WHERE "    
+                         + "     roomst.blockroomid = ?"
+                         + " AND roomst.roomtypeid = roomtype.roomtypeid";
+         try
+         {
+             c = getConnection();
+             ps = c.prepareStatement(strSQL,ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+             Manager.setLong(ps, 1, pObject.getBlockroomid());
+             return RoomtypeManager.getInstance().loadByPreparedStatement(ps);
+         }
+         finally
+         {
+            getManager().close(ps);
+            freeConnection(c);
+         }
+    }
+
+    /**
+     * Retrieves an array of PersonnelBean using the relation table Roomstlog given a BlockroomBean object.
+     *
+     * @param pObject the BlockroomBean pObject to be used
+     * @return an array of PersonnelBean 
+     */
+    // MANY TO MANY
+    public PersonnelBean[] loadPersonnelViaRoomstlog(BlockroomBean pObject) throws SQLException
+    {
+         Connection c = null;
+         PreparedStatement ps = null;
+         String strSQL =      " SELECT "
+                         + "        *"
+                         + " FROM  "
+                         + "        personnel,roomstlog"
+                         + " WHERE "    
+                         + "     roomstlog.blockroomid = ?"
+                         + " AND roomstlog.regbyid = personnel.personnelid";
+         try
+         {
+             c = getConnection();
+             ps = c.prepareStatement(strSQL,ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+             Manager.setLong(ps, 1, pObject.getBlockroomid());
+             return PersonnelManager.getInstance().loadByPreparedStatement(ps);
+         }
+         finally
+         {
+            getManager().close(ps);
+            freeConnection(c);
+         }
+    }
+
+    /**
+     * Retrieves an array of RoomBean using the relation table Roomstlog given a BlockroomBean object.
+     *
+     * @param pObject the BlockroomBean pObject to be used
+     * @return an array of RoomBean 
+     */
+    // MANY TO MANY
+    public RoomBean[] loadRoomViaRoomstlog(BlockroomBean pObject) throws SQLException
+    {
+         Connection c = null;
+         PreparedStatement ps = null;
+         String strSQL =      " SELECT "
+                         + "        *"
+                         + " FROM  "
+                         + "        room,roomstlog"
+                         + " WHERE "    
+                         + "     roomstlog.blockroomid = ?"
+                         + " AND roomstlog.roomid = room.roomid";
+         try
+         {
+             c = getConnection();
+             ps = c.prepareStatement(strSQL,ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+             Manager.setLong(ps, 1, pObject.getBlockroomid());
+             return RoomManager.getInstance().loadByPreparedStatement(ps);
+         }
+         finally
+         {
+            getManager().close(ps);
+            freeConnection(c);
+         }
+    }
+
+    /**
+     * Retrieves an array of RoomtypeBean using the relation table Roomstlog given a BlockroomBean object.
+     *
+     * @param pObject the BlockroomBean pObject to be used
+     * @return an array of RoomtypeBean 
+     */
+    // MANY TO MANY
+    public RoomtypeBean[] loadRoomtypeViaRoomstlog(BlockroomBean pObject) throws SQLException
+    {
+         Connection c = null;
+         PreparedStatement ps = null;
+         String strSQL =      " SELECT "
+                         + "        *"
+                         + " FROM  "
+                         + "        roomtype,roomstlog"
+                         + " WHERE "    
+                         + "     roomstlog.blockroomid = ?"
+                         + " AND roomstlog.roomtypeid = roomtype.roomtypeid";
+         try
+         {
+             c = getConnection();
+             ps = c.prepareStatement(strSQL,ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+             Manager.setLong(ps, 1, pObject.getBlockroomid());
+             return RoomtypeManager.getInstance().loadByPreparedStatement(ps);
+         }
+         finally
+         {
+            getManager().close(ps);
+            freeConnection(c);
+         }
     }
 
 
@@ -1306,11 +1535,11 @@ public class BlockroomManager
                 }
     
                 if (pObject.isBlockstartModified()) {
-                    if (pObject.getBlockstart() == null) ps.setNull(++_dirtyCount, Types.DATE); else ps.setDate(++_dirtyCount, new java.sql.Date(pObject.getBlockstart().getTime()));
+                    ps.setTimestamp(++_dirtyCount, pObject.getBlockstart());
                 }
     
                 if (pObject.isBlockendModified()) {
-                    if (pObject.getBlockend() == null) ps.setNull(++_dirtyCount, Types.DATE); else ps.setDate(++_dirtyCount, new java.sql.Date(pObject.getBlockend().getTime()));
+                    ps.setTimestamp(++_dirtyCount, pObject.getBlockend());
                 }
     
                 if (pObject.isReasonidModified()) {
@@ -1355,8 +1584,8 @@ public class BlockroomManager
         BlockroomBean pObject = createBlockroomBean();
         pObject.setBlockroomid(Manager.getLong(rs, 1));
         pObject.setRoomid(Manager.getInteger(rs, 2));
-        pObject.setBlockstart(rs.getDate(3));
-        pObject.setBlockend(rs.getDate(4));
+        pObject.setBlockstart(rs.getTimestamp(3));
+        pObject.setBlockend(rs.getTimestamp(4));
         pObject.setReasonid(Manager.getInteger(rs, 5));
         pObject.setNote(rs.getString(6));
         pObject.setRegdate(rs.getTimestamp(7));
@@ -1393,11 +1622,11 @@ public class BlockroomManager
                     break;
                 case ID_BLOCKSTART:
                     ++pos;
-                    pObject.setBlockstart(rs.getDate(pos));
+                    pObject.setBlockstart(rs.getTimestamp(pos));
                     break;
                 case ID_BLOCKEND:
                     ++pos;
-                    pObject.setBlockend(rs.getDate(pos));
+                    pObject.setBlockend(rs.getTimestamp(pos));
                     break;
                 case ID_REASONID:
                     ++pos;

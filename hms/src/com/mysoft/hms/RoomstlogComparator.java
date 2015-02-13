@@ -19,9 +19,9 @@ import java.util.Comparator;
 
 
 /**
- * Comparator class is used to sort the RoomstBean objects.
+ * Comparator class is used to sort the RoomstlogBean objects.
  */
-public class RoomstComparator implements Comparator
+public class RoomstlogComparator implements Comparator
 // extends+ 
 
 // extends- 
@@ -37,57 +37,61 @@ public class RoomstComparator implements Comparator
     private boolean bReverse;
 
     /**
-     * Constructor class for RoomstComparator.
+     * Constructor class for RoomstlogComparator.
      * <br>
      * Example:
      * <br>
-     * <code>Arrays.sort(pArray, new RoomstComparator(RoomstManager.ROOMSTID, bReverse));<code>
+     * <code>Arrays.sort(pArray, new RoomstlogComparator(RoomstlogManager.ROOMSTLOGID, bReverse));<code>
      *
      * @param iType the field from which you want to sort
      * <br>
      * Possible values are:
      * <ul>
-     *   <li>RoomstManager.ID_ROOMSTID
-     *   <li>RoomstManager.ID_ROOMID
-     *   <li>RoomstManager.ID_STATUSDATE
-     *   <li>RoomstManager.ID_ST
-     *   <li>RoomstManager.ID_REGBYID
-     *   <li>RoomstManager.ID_REGDATE
-     *   <li>RoomstManager.ID_RESERVATIONROOMID
-     *   <li>RoomstManager.ID_ROOMTYPEID
-     *   <li>RoomstManager.ID_BLOCKROOMID
+     *   <li>RoomstlogManager.ID_ROOMSTLOGID
+     *   <li>RoomstlogManager.ID_ROOMSTID
+     *   <li>RoomstlogManager.ID_ROOMID
+     *   <li>RoomstlogManager.ID_STATUSDATE
+     *   <li>RoomstlogManager.ID_ST
+     *   <li>RoomstlogManager.ID_REGBYID
+     *   <li>RoomstlogManager.ID_REGDATE
+     *   <li>RoomstlogManager.ID_RESERVATIONROOMID
+     *   <li>RoomstlogManager.ID_ROOMTYPEID
+     *   <li>RoomstlogManager.ID_BLOCKROOMID
+     *   <li>RoomstlogManager.ID_LOGDATE
      * </ul>
      */
-    public RoomstComparator(int iType)
+    public RoomstlogComparator(int iType)
     {
         this(iType, false);
     }
 
     /**
-     * Constructor class for RoomstComparator.
+     * Constructor class for RoomstlogComparator.
      * <br>
      * Example:
      * <br>
-     * <code>Arrays.sort(pArray, new RoomstComparator(RoomstManager.ROOMSTID, bReverse));<code>
+     * <code>Arrays.sort(pArray, new RoomstlogComparator(RoomstlogManager.ROOMSTLOGID, bReverse));<code>
      *
      * @param iType the field from which you want to sort.
      * <br>
      * Possible values are:
      * <ul>
-     *   <li>RoomstManager.ID_ROOMSTID
-     *   <li>RoomstManager.ID_ROOMID
-     *   <li>RoomstManager.ID_STATUSDATE
-     *   <li>RoomstManager.ID_ST
-     *   <li>RoomstManager.ID_REGBYID
-     *   <li>RoomstManager.ID_REGDATE
-     *   <li>RoomstManager.ID_RESERVATIONROOMID
-     *   <li>RoomstManager.ID_ROOMTYPEID
-     *   <li>RoomstManager.ID_BLOCKROOMID
+     *   <li>RoomstlogManager.ID_ROOMSTLOGID
+     *   <li>RoomstlogManager.ID_ROOMSTID
+     *   <li>RoomstlogManager.ID_ROOMID
+     *   <li>RoomstlogManager.ID_STATUSDATE
+     *   <li>RoomstlogManager.ID_ST
+     *   <li>RoomstlogManager.ID_REGBYID
+     *   <li>RoomstlogManager.ID_REGDATE
+     *   <li>RoomstlogManager.ID_RESERVATIONROOMID
+     *   <li>RoomstlogManager.ID_ROOMTYPEID
+     *   <li>RoomstlogManager.ID_BLOCKROOMID
+     *   <li>RoomstlogManager.ID_LOGDATE
      * </ul>
      *
      * @param bReverse set this value to true, if you want to reverse the sorting results
      */
-    public RoomstComparator(int iType, boolean bReverse)
+    public RoomstlogComparator(int iType, boolean bReverse)
     {
         this.iType = iType;
         this.bReverse = bReverse;
@@ -98,12 +102,23 @@ public class RoomstComparator implements Comparator
      */
     public int compare(Object pObj1, Object pObj2)
     {
-        RoomstBean b1 = (RoomstBean)pObj1;
-        RoomstBean b2 = (RoomstBean)pObj2;
+        RoomstlogBean b1 = (RoomstlogBean)pObj1;
+        RoomstlogBean b2 = (RoomstlogBean)pObj2;
         int iReturn = 0;
         switch(iType)
         {
-            case RoomstManager.ID_ROOMSTID:
+            case RoomstlogManager.ID_ROOMSTLOGID:
+                if (b1.getRoomstlogid() == null && b2.getRoomstlogid() != null) {
+                    iReturn = -1;
+                } else if (b1.getRoomstlogid() == null && b2.getRoomstlogid() == null) {
+                    iReturn = 0;
+                } else if (b1.getRoomstlogid() != null && b2.getRoomstlogid() == null) {
+                    iReturn = 1;
+                } else { 
+                    iReturn = b1.getRoomstlogid().compareTo(b2.getRoomstlogid());
+                }
+                break;
+            case RoomstlogManager.ID_ROOMSTID:
                 if (b1.getRoomstid() == null && b2.getRoomstid() != null) {
                     iReturn = -1;
                 } else if (b1.getRoomstid() == null && b2.getRoomstid() == null) {
@@ -114,7 +129,7 @@ public class RoomstComparator implements Comparator
                     iReturn = b1.getRoomstid().compareTo(b2.getRoomstid());
                 }
                 break;
-            case RoomstManager.ID_ROOMID:
+            case RoomstlogManager.ID_ROOMID:
                 if (b1.getRoomid() == null && b2.getRoomid() != null) {
                     iReturn = -1;
                 } else if (b1.getRoomid() == null && b2.getRoomid() == null) {
@@ -125,7 +140,7 @@ public class RoomstComparator implements Comparator
                     iReturn = b1.getRoomid().compareTo(b2.getRoomid());
                 }
                 break;
-            case RoomstManager.ID_STATUSDATE:
+            case RoomstlogManager.ID_STATUSDATE:
                 if (b1.getStatusdate() == null && b2.getStatusdate() != null) {
                     iReturn = -1;
                 } else if (b1.getStatusdate() == null && b2.getStatusdate() == null) {
@@ -136,7 +151,7 @@ public class RoomstComparator implements Comparator
                     iReturn = b1.getStatusdate().compareTo(b2.getStatusdate());
                 }
                 break;
-            case RoomstManager.ID_ST:
+            case RoomstlogManager.ID_ST:
                 if (b1.getSt() == null && b2.getSt() != null) {
                     iReturn = -1;
                 } else if (b1.getSt() == null && b2.getSt() == null) {
@@ -147,7 +162,7 @@ public class RoomstComparator implements Comparator
                     iReturn = b1.getSt().compareTo(b2.getSt());
                 }
                 break;
-            case RoomstManager.ID_REGBYID:
+            case RoomstlogManager.ID_REGBYID:
                 if (b1.getRegbyid() == null && b2.getRegbyid() != null) {
                     iReturn = -1;
                 } else if (b1.getRegbyid() == null && b2.getRegbyid() == null) {
@@ -158,7 +173,7 @@ public class RoomstComparator implements Comparator
                     iReturn = b1.getRegbyid().compareTo(b2.getRegbyid());
                 }
                 break;
-            case RoomstManager.ID_REGDATE:
+            case RoomstlogManager.ID_REGDATE:
                 if (b1.getRegdate() == null && b2.getRegdate() != null) {
                     iReturn = -1;
                 } else if (b1.getRegdate() == null && b2.getRegdate() == null) {
@@ -169,7 +184,7 @@ public class RoomstComparator implements Comparator
                     iReturn = b1.getRegdate().compareTo(b2.getRegdate());
                 }
                 break;
-            case RoomstManager.ID_RESERVATIONROOMID:
+            case RoomstlogManager.ID_RESERVATIONROOMID:
                 if (b1.getReservationroomid() == null && b2.getReservationroomid() != null) {
                     iReturn = -1;
                 } else if (b1.getReservationroomid() == null && b2.getReservationroomid() == null) {
@@ -180,7 +195,7 @@ public class RoomstComparator implements Comparator
                     iReturn = b1.getReservationroomid().compareTo(b2.getReservationroomid());
                 }
                 break;
-            case RoomstManager.ID_ROOMTYPEID:
+            case RoomstlogManager.ID_ROOMTYPEID:
                 if (b1.getRoomtypeid() == null && b2.getRoomtypeid() != null) {
                     iReturn = -1;
                 } else if (b1.getRoomtypeid() == null && b2.getRoomtypeid() == null) {
@@ -191,7 +206,7 @@ public class RoomstComparator implements Comparator
                     iReturn = b1.getRoomtypeid().compareTo(b2.getRoomtypeid());
                 }
                 break;
-            case RoomstManager.ID_BLOCKROOMID:
+            case RoomstlogManager.ID_BLOCKROOMID:
                 if (b1.getBlockroomid() == null && b2.getBlockroomid() != null) {
                     iReturn = -1;
                 } else if (b1.getBlockroomid() == null && b2.getBlockroomid() == null) {
@@ -200,6 +215,17 @@ public class RoomstComparator implements Comparator
                     iReturn = 1;
                 } else { 
                     iReturn = b1.getBlockroomid().compareTo(b2.getBlockroomid());
+                }
+                break;
+            case RoomstlogManager.ID_LOGDATE:
+                if (b1.getLogdate() == null && b2.getLogdate() != null) {
+                    iReturn = -1;
+                } else if (b1.getLogdate() == null && b2.getLogdate() == null) {
+                    iReturn = 0;
+                } else if (b1.getLogdate() != null && b2.getLogdate() == null) {
+                    iReturn = 1;
+                } else { 
+                    iReturn = b1.getLogdate().compareTo(b2.getLogdate());
                 }
                 break;
             default: 

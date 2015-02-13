@@ -390,3 +390,6 @@ ol, ul {
     font-size: 17px;
     margin: 10px 0 0;
 }
+.fa {
+    cursor: pointer;
+}

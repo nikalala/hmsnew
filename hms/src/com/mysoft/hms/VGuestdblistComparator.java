@@ -87,6 +87,7 @@ public class VGuestdblistComparator implements Comparator
      *   <li>VGuestdblistManager.ID_SALUTATIONID
      *   <li>VGuestdblistManager.ID_COUNTRYID
      *   <li>VGuestdblistManager.ID_VIPSTATUSID
+     *   <li>VGuestdblistManager.ID_DELETED
      * </ul>
      *
      * @param bReverse set this value to true, if you want to reverse the sorting results

@@ -77,6 +77,20 @@ public class PreferenceManager
     public static final int TYPE_DELETED = Types.BIT;
     public static final String NAME_DELETED = "deleted";
 
+    /**
+     * Column reservationid of type Types.INTEGER mapped to Integer.
+     */
+    public static final int ID_RESERVATIONID = 7;
+    public static final int TYPE_RESERVATIONID = Types.INTEGER;
+    public static final String NAME_RESERVATIONID = "reservationid";
+
+    /**
+     * Column isstandart of type Types.BIT mapped to Boolean.
+     */
+    public static final int ID_ISSTANDART = 8;
+    public static final int TYPE_ISSTANDART = Types.BIT;
+    public static final String NAME_ISSTANDART = "isstandart";
+
 
     private static final String TABLE_NAME = "preference";
 
@@ -92,6 +106,8 @@ public class PreferenceManager
         ,"preference.regdate"
         ,"preference.active"
         ,"preference.deleted"
+        ,"preference.reservationid"
+        ,"preference.isstandart"
     };
 
     /**
@@ -103,7 +119,9 @@ public class PreferenceManager
                             + ",preference.regbyid"
                             + ",preference.regdate"
                             + ",preference.active"
-                            + ",preference.deleted";
+                            + ",preference.deleted"
+                            + ",preference.reservationid"
+                            + ",preference.isstandart";
 
     private static PreferenceManager singleton = new PreferenceManager();
 
@@ -601,6 +619,22 @@ public class PreferenceManager
                     _dirtyCount++;
                 }
 
+                if (pObject.isReservationidModified()) {
+                    if (_dirtyCount>0) {
+                        _sql.append(",");
+                    }
+                    _sql.append("reservationid");
+                    _dirtyCount++;
+                }
+
+                if (pObject.isIsstandartModified()) {
+                    if (_dirtyCount>0) {
+                        _sql.append(",");
+                    }
+                    _sql.append("isstandart");
+                    _dirtyCount++;
+                }
+
                 _sql.append(") values (");
                 if(_dirtyCount > 0) {
                     _sql.append("?");
@@ -639,6 +673,14 @@ public class PreferenceManager
     
                 if (pObject.isDeletedModified()) {
                     Manager.setBoolean(ps, ++_dirtyCount, pObject.getDeleted());
+                }
+    
+                if (pObject.isReservationidModified()) {
+                    Manager.setInteger(ps, ++_dirtyCount, pObject.getReservationid());
+                }
+    
+                if (pObject.isIsstandartModified()) {
+                    Manager.setBoolean(ps, ++_dirtyCount, pObject.getIsstandart());
                 }
     
                 ps.executeUpdate();
@@ -715,6 +757,24 @@ public class PreferenceManager
                     }
                     _sql.append("deleted").append("=?");
                 }
+
+                if (pObject.isReservationidModified()) {
+                    if (useComma) {
+                        _sql.append(",");
+                    } else {
+                        useComma=true;
+                    }
+                    _sql.append("reservationid").append("=?");
+                }
+
+                if (pObject.isIsstandartModified()) {
+                    if (useComma) {
+                        _sql.append(",");
+                    } else {
+                        useComma=true;
+                    }
+                    _sql.append("isstandart").append("=?");
+                }
                 _sql.append(" WHERE ");
                 _sql.append("preference.preferenceid=?");
                 ps = c.prepareStatement(_sql.toString(),ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
@@ -746,6 +806,14 @@ public class PreferenceManager
 
                 if (pObject.isDeletedModified()) {
                       Manager.setBoolean(ps, ++_dirtyCount, pObject.getDeleted());
+                }
+
+                if (pObject.isReservationidModified()) {
+                      Manager.setInteger(ps, ++_dirtyCount, pObject.getReservationid());
+                }
+
+                if (pObject.isIsstandartModified()) {
+                      Manager.setBoolean(ps, ++_dirtyCount, pObject.getIsstandart());
                 }
     
                 if (_dirtyCount == 0) {
@@ -859,6 +927,16 @@ public class PreferenceManager
                  _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("deleted= ?");
              }
     
+             if (pObject.isReservationidModified()) {
+                 _dirtyCount ++; 
+                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("reservationid= ?");
+             }
+    
+             if (pObject.isIsstandartModified()) {
+                 _dirtyCount ++; 
+                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("isstandart= ?");
+             }
+    
              if (_dirtyCount == 0) {
                  throw new SQLException ("The pObject to look for is invalid : not initialized !");
              }
@@ -893,6 +971,14 @@ public class PreferenceManager
     
              if (pObject.isDeletedModified()) {
                  Manager.setBoolean(ps, ++_dirtyCount, pObject.getDeleted());
+             }
+    
+             if (pObject.isReservationidModified()) {
+                 Manager.setInteger(ps, ++_dirtyCount, pObject.getReservationid());
+             }
+    
+             if (pObject.isIsstandartModified()) {
+                 Manager.setBoolean(ps, ++_dirtyCount, pObject.getIsstandart());
              }
     
              ps.executeQuery();
@@ -973,6 +1059,20 @@ public class PreferenceManager
                 _dirtyAnd ++;
             }
     
+            if (pObject.isReservationidInitialized()) {
+                if (_dirtyAnd > 0)
+                    sql.append(" AND ");
+                sql.append("reservationid").append("=?");
+                _dirtyAnd ++;
+            }
+    
+            if (pObject.isIsstandartInitialized()) {
+                if (_dirtyAnd > 0)
+                    sql.append(" AND ");
+                sql.append("isstandart").append("=?");
+                _dirtyAnd ++;
+            }
+    
             c = getConnection();
             ps = c.prepareStatement(sql.toString(),ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             int _dirtyCount = 0;
@@ -1003,6 +1103,14 @@ public class PreferenceManager
     
             if (pObject.isDeletedInitialized()) {
                 Manager.setBoolean(ps, ++_dirtyCount, pObject.getDeleted());
+            }
+    
+            if (pObject.isReservationidInitialized()) {
+                Manager.setInteger(ps, ++_dirtyCount, pObject.getReservationid());
+            }
+    
+            if (pObject.isIsstandartInitialized()) {
+                Manager.setBoolean(ps, ++_dirtyCount, pObject.getIsstandart());
             }
     
             int _rows = ps.executeUpdate();
@@ -1150,6 +1258,16 @@ public class PreferenceManager
                     _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("deleted= ?");
                 }
     
+                if (pObject.isReservationidModified()) {
+                    _dirtyCount++; 
+                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("reservationid= ?");
+                }
+    
+                if (pObject.isIsstandartModified()) {
+                    _dirtyCount++; 
+                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("isstandart= ?");
+                }
+    
                 if (_dirtyCount == 0)
                    throw new SQLException ("The pObject to look is unvalid : not initialized !");
     
@@ -1187,6 +1305,14 @@ public class PreferenceManager
                     Manager.setBoolean(ps, ++_dirtyCount, pObject.getDeleted());
                 }
     
+                if (pObject.isReservationidModified()) {
+                    Manager.setInteger(ps, ++_dirtyCount, pObject.getReservationid());
+                }
+    
+                if (pObject.isIsstandartModified()) {
+                    Manager.setBoolean(ps, ++_dirtyCount, pObject.getIsstandart());
+                }
+    
                 return countByPreparedStatement(ps);
         }
         finally
@@ -1218,6 +1344,8 @@ public class PreferenceManager
         pObject.setRegdate(rs.getTimestamp(5));
         pObject.setActive(Manager.getBoolean(rs, 6));
         pObject.setDeleted(Manager.getBoolean(rs, 7));
+        pObject.setReservationid(Manager.getInteger(rs, 8));
+        pObject.setIsstandart(Manager.getBoolean(rs, 9));
 
         pObject.isNew(false);
         pObject.resetIsModified();
@@ -1267,6 +1395,14 @@ public class PreferenceManager
                 case ID_DELETED:
                     ++pos;
                     pObject.setDeleted(Manager.getBoolean(rs, pos));
+                    break;
+                case ID_RESERVATIONID:
+                    ++pos;
+                    pObject.setReservationid(Manager.getInteger(rs, pos));
+                    break;
+                case ID_ISSTANDART:
+                    ++pos;
+                    pObject.setIsstandart(Manager.getBoolean(rs, pos));
                     break;
             }
         }

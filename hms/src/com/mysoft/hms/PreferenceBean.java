@@ -51,6 +51,14 @@ public class PreferenceBean
     private boolean deleted_is_modified = false;
     private boolean deleted_is_initialized = false;
     
+    private Integer reservationid;
+    private boolean reservationid_is_modified = false;
+    private boolean reservationid_is_initialized = false;
+    
+    private Boolean isstandart;
+    private boolean isstandart_is_modified = false;
+    private boolean isstandart_is_initialized = false;
+    
     private boolean _isNew = true;
     
     /**
@@ -135,7 +143,7 @@ public class PreferenceBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: preference.name
-     * <li>comments: დასახელება
+     * <li>comments: ??????????
      * <li>column size: 2147483647
      * <li>jdbc type returned by the driver: Types.VARCHAR
      * </ul>
@@ -193,7 +201,7 @@ public class PreferenceBean
      * <ul>
      * <li>full name: preference.preferencetypeid
      * <li> foreign key: preferencetype.preferencetypeid
-     * <li>comments: ტიპი
+     * <li>comments: ????
      * <li>column size: 10
      * <li>jdbc type returned by the driver: Types.INTEGER
      * </ul>
@@ -262,7 +270,7 @@ public class PreferenceBean
      * <ul>
      * <li>full name: preference.regbyid
      * <li> foreign key: personnel.personnelid
-     * <li>comments: ავტორი
+     * <li>comments: ??????
      * <li>column size: 10
      * <li>jdbc type returned by the driver: Types.INTEGER
      * </ul>
@@ -330,7 +338,7 @@ public class PreferenceBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: preference.regdate
-     * <li>comments: რეგისტრაციის თარიღი
+     * <li>comments: ???????????? ??????
      * <li>default value: now()
      * <li>column size: 29
      * <li>jdbc type returned by the driver: Types.TIMESTAMP
@@ -399,7 +407,7 @@ public class PreferenceBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: preference.active
-     * <li>comments: აქტიური
+     * <li>comments: ???????
      * <li>default value: true
      * <li>column size: 1
      * <li>jdbc type returned by the driver: Types.BIT
@@ -467,7 +475,7 @@ public class PreferenceBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: preference.deleted
-     * <li>comments: წაშლილი
+     * <li>comments: ???????
      * <li>default value: false
      * <li>column size: 1
      * <li>jdbc type returned by the driver: Types.BIT
@@ -530,6 +538,140 @@ public class PreferenceBean
     }
 
     /**
+     * Getter method for reservationid.
+     * <br>
+     * Meta Data Information (in progress):
+     * <ul>
+     * <li>full name: preference.reservationid
+     * <li>column size: 10
+     * <li>jdbc type returned by the driver: Types.INTEGER
+     * </ul>
+     *
+     * @return the value of reservationid
+     */
+    public Integer getReservationid()
+    {
+        return reservationid; 
+    }
+
+    /**
+     * Setter method for reservationid.
+     * <br>
+     * The new value is set only if compareTo() says it is different,
+     * or if one of either the new value or the current value is null.
+     * In case the new value is different, it is set and the field is marked as 'modified'.
+     *
+     * @param newVal the new value to be assigned to reservationid
+     */
+    public void setReservationid(Integer newVal) {
+        if ((newVal != null && this.reservationid != null && (newVal.compareTo(this.reservationid) == 0)) || 
+            (newVal == null && this.reservationid == null && reservationid_is_initialized)) {
+            return; 
+        } 
+        this.reservationid = newVal; 
+        reservationid_is_modified = true; 
+        reservationid_is_initialized = true; 
+    }
+
+    /**
+     * Setter method for reservationid.
+     * <br>
+     * Convenient for those who do not want to deal with Objects for primary types.
+     *
+     * @param newVal the new value to be assigned to reservationid
+     */
+    public void setReservationid(int newVal) {
+        setReservationid(new Integer(newVal));
+    }
+
+    /**
+     * Determines if the reservationid has been modified.
+     *
+     * @return true if the field has been modified, false if the field has not been modified
+     */
+    public boolean isReservationidModified() {
+        return reservationid_is_modified; 
+    }
+
+    /**
+     * Determines if the reservationid has been initialized.
+     * <br>
+     * It is useful to determine if a field is null on purpose or just because it has not been initialized.
+     *
+     * @return true if the field has been initialized, false otherwise
+     */
+    public boolean isReservationidInitialized() {
+        return reservationid_is_initialized; 
+    }
+
+    /**
+     * Getter method for isstandart.
+     * <br>
+     * Meta Data Information (in progress):
+     * <ul>
+     * <li>full name: preference.isstandart
+     * <li>default value: false
+     * <li>column size: 1
+     * <li>jdbc type returned by the driver: Types.BIT
+     * </ul>
+     *
+     * @return the value of isstandart
+     */
+    public Boolean getIsstandart()
+    {
+        return isstandart; 
+    }
+
+    /**
+     * Setter method for isstandart.
+     * <br>
+     * Attention, there will be no comparison with current value which
+     * means calling this method will mark the field as 'modified' in all cases.
+     *
+     * @param newVal the new value to be assigned to isstandart
+     */
+    public void setIsstandart(Boolean newVal) {
+        if ((newVal != null && this.isstandart != null && newVal.equals(this.isstandart)) || 
+            (newVal == null && this.isstandart == null && isstandart_is_initialized)) {
+            return; 
+        } 
+        this.isstandart = newVal; 
+        isstandart_is_modified = true; 
+        isstandart_is_initialized = true; 
+    }
+
+    /**
+     * Setter method for isstandart.
+     * <br>
+     * Convenient for those who do not want to deal with Objects for primary types.
+     *
+     * @param newVal the new value to be assigned to isstandart
+     */
+    public void setIsstandart(boolean newVal) {
+        setIsstandart(new Boolean(newVal));
+    }
+
+    /**
+     * Determines if the isstandart has been modified.
+     *
+     * @return true if the field has been modified, false if the field has not been modified
+     */
+    public boolean isIsstandartModified() {
+        return isstandart_is_modified; 
+    }
+
+    /**
+     * Determines if the isstandart has been initialized.
+     * <br>
+     * It is useful to determine if a field is null on purpose or just because it has not been initialized.
+     *
+     * @return true if the field has been initialized, false otherwise
+     */
+    public boolean isIsstandartInitialized() {
+        return isstandart_is_initialized; 
+    }
+
+    /**
      * Determines if the current object is new.
      *
      * @return true if the current object is new, false if the object is not new
@@ -561,7 +703,9 @@ public class PreferenceBean
 		regbyid_is_modified || 
 		regdate_is_modified || 
 		active_is_modified || 
-		deleted_is_modified;
+		deleted_is_modified || 
+		reservationid_is_modified || 
+		isstandart_is_modified;
     }
 
     /**
@@ -575,6 +719,8 @@ public class PreferenceBean
         regdate_is_modified = false;
         active_is_modified = false;
         deleted_is_modified = false;
+        reservationid_is_modified = false;
+        isstandart_is_modified = false;
     }
 
     /**
@@ -590,6 +736,8 @@ public class PreferenceBean
         setRegdate(bean.getRegdate());
         setActive(bean.getActive());
         setDeleted(bean.getDeleted());
+        setReservationid(bean.getReservationid());
+        setIsstandart(bean.getIsstandart());
     }
 
     /**
@@ -606,6 +754,8 @@ public class PreferenceBean
                  + "\n - preference.regdate = " + (regdate_is_initialized ? ("[" + (regdate == null ? null : regdate.toString()) + "]") : "not initialized") + ""
                  + "\n - preference.active = " + (active_is_initialized ? ("[" + (active == null ? null : active.toString()) + "]") : "not initialized") + ""
                  + "\n - preference.deleted = " + (deleted_is_initialized ? ("[" + (deleted == null ? null : deleted.toString()) + "]") : "not initialized") + ""
+                 + "\n - preference.reservationid = " + (reservationid_is_initialized ? ("[" + (reservationid == null ? null : reservationid.toString()) + "]") : "not initialized") + ""
+                 + "\n - preference.isstandart = " + (isstandart_is_initialized ? ("[" + (isstandart == null ? null : isstandart.toString()) + "]") : "not initialized") + ""
             ;
     }
 

@@ -52,6 +52,7 @@ public class PreferenceComparator implements Comparator
      *   <li>PreferenceManager.ID_PREFERENCETYPEID
      *   <li>PreferenceManager.ID_REGBYID
      *   <li>PreferenceManager.ID_REGDATE
+     *   <li>PreferenceManager.ID_RESERVATIONID
      * </ul>
      */
     public PreferenceComparator(int iType)
@@ -77,6 +78,8 @@ public class PreferenceComparator implements Comparator
      *   <li>PreferenceManager.ID_REGDATE
      *   <li>PreferenceManager.ID_ACTIVE
      *   <li>PreferenceManager.ID_DELETED
+     *   <li>PreferenceManager.ID_RESERVATIONID
+     *   <li>PreferenceManager.ID_ISSTANDART
      * </ul>
      *
      * @param bReverse set this value to true, if you want to reverse the sorting results
@@ -150,6 +153,17 @@ public class PreferenceComparator implements Comparator
                     iReturn = 1;
                 } else { 
                     iReturn = b1.getRegdate().compareTo(b2.getRegdate());
+                }
+                break;
+            case PreferenceManager.ID_RESERVATIONID:
+                if (b1.getReservationid() == null && b2.getReservationid() != null) {
+                    iReturn = -1;
+                } else if (b1.getReservationid() == null && b2.getReservationid() == null) {
+                    iReturn = 0;
+                } else if (b1.getReservationid() != null && b2.getReservationid() == null) {
+                    iReturn = 1;
+                } else { 
+                    iReturn = b1.getReservationid().compareTo(b2.getReservationid());
                 }
                 break;
             default: 

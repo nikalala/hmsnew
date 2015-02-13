@@ -2,6 +2,14 @@
 <%@page pageEncoding="UTF-8" %>
 <%@include file="../includes/init.jsp" %>
 
+<%
+
+    RoomBean[] rooms = RoomManager.getInstance().loadByWhere("");
+    HouseunitBean[] units = HouseunitManager.getInstance().loadByWhere("");
+    PersonnelBean[] personnelBeans = PersonnelManager.getInstance().loadByWhere("where personneltypeid = 2");
+
+%>
+
 <script type="text/javascript">
 
     $(document).ready(function () {
@@ -74,7 +82,7 @@
                         <span style="float: left; margin: 7px 0 0 10px;">ძიების კრიტერიუმები</span>
                         <button type="button" class="btn btn-default" id="btnExport"
                                 style="border: 0; font-weight: bold; float: right; margin: 3px 5px 0 0;">
-                            ექსპორტი
+                            დამატება
                         </button>
                     </div>
                 </div>
@@ -84,95 +92,82 @@
             <td>
                 <div style="width: 100%;float: left;">
                     <div class="col-md-1">
-                        კატეგორია
-                    </div>
-                    <div class="col-md-3">
-                        <select class="dropdown col-md-2" id="roomBean">
-                            <option value="0">-ოთახის #-</option>
-                            <%--<% for (int i = 0; i < roomBeans.length; i++) { %>
-                            <option value="<%=roomBeans[i].getRoomid()%>"
-                                    roomtypeid="<%=roomBeans[i].getRoomtypeid()%>"><%=roomBeans[i].getName()%>
-                            </option>
-                            <% } %>--%>
-                        </select>
-                    </div>
-                    <div class="col-md-1">
-                        ოთახი
-                    </div>
-                    <div class="col-md-3">
-                        <select class="dropdown col-md-2" id="roomBean">
-                            <option value="0">-ოთახის #-</option>
-                            <%--<% for (int i = 0; i < roomBeans.length; i++) { %>
-                            <option value="<%=roomBeans[i].getRoomid()%>"
-                                    roomtypeid="<%=roomBeans[i].getRoomtypeid()%>"><%=roomBeans[i].getName()%>
-                            </option>
-                            <% } %>--%>
-                        </select>
-                    </div>
-                    <div class="col-md-1">
-                        პრიორიტეტი
-                    </div>
-                    <div class="col-md-3">
-                        <select class="dropdown col-md-2" id="roomBean">
-                            <option value="0">-ოთახის #-</option>
-                            <%--<% for (int i = 0; i < roomBeans.length; i++) { %>
-                            <option value="<%=roomBeans[i].getRoomid()%>"
-                                    roomtypeid="<%=roomBeans[i].getRoomtypeid()%>"><%=roomBeans[i].getName()%>
-                            </option>
-                            <% } %>--%>
-                        </select>
+                        <label>კატეგორია</label>
                     </div>
                     <div class="col-md-4">
+                        <select class="dropdown col-md-2" id="workOrderCategory">
+                            <option value="0">-კატეგორია-</option>
+                            <% for (int i = 0; i < workOrderCategory.length; i++) { %>
+                                <option value="<%=i%>"><%=workOrderCategory[i]%></option>
+                            <% } %>
+                        </select>
+                    </div>
+                    <div class="col-md-1">
+                        <label>ოთახი</label>
+                    </div>
+                    <div class="col-md-3">
+                        <select class="dropdown col-md-2" id="units">
+                            <option value="0">-ოთახის #-</option>
+                            <% for (int i = 0; i < rooms.length; i++) { %>
+                                <option value="<%=rooms[i].getRoomid()%>"roomtypeid="<%=rooms[i].getRoomtypeid()%>"><%=rooms[i].getName()%></option>
+                            <% } %>
+                            <% for (int i = 0; i < units.length; i++) { %>
+                                <option value="<%=units[i].getHouseunitid()%>"><%=units[i].getName()%></option>
+                            <% } %>
+                        </select>
+                    </div>
+                    <div class="col-md-1">
+                        <label>პრიორიტეტი</label>
+                    </div>
+                    <div class="col-md-3">
+                        <select class="dropdown col-md-2" id="workOrderPriority">
+                            <option value="0">-პრიორიტეტი-</option>
+                            <% for (int i = 0; i < workOrderPriority.length; i++) { %>
+                                <option value="<%=i%>"><%=workOrderPriority[i]%></option>
+                            <% } %>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
                         <button type="button" class="btn btn-danger" style="width: 100%;" id="search_reserve_filer"
                                 onclick="doFilter()"
                                 style="width: 69px;">ძებნა
                         </button>
                     </div>
                 </div>
-                <div style="width: 100%;float: left;">
+                <div style="width: 100%;float: left; margin-top: 4px;">
                     <div class="col-md-1">
-                        კატეგორია
-                    </div>
-                    <div class="col-md-3">
-                        <select class="dropdown col-md-2" id="roomBean">
-                            <option value="0">-ოთახის #-</option>
-                            <%--<% for (int i = 0; i < roomBeans.length; i++) { %>
-                            <option value="<%=roomBeans[i].getRoomid()%>"
-                                    roomtypeid="<%=roomBeans[i].getRoomtypeid()%>"><%=roomBeans[i].getName()%>
-                            </option>
-                            <% } %>--%>
-                        </select>
-                    </div>
-                    <div class="col-md-1">
-                        ოთახი
-                    </div>
-                    <div class="col-md-3">
-                        <select class="dropdown col-md-2" id="roomBean">
-                            <option value="0">-ოთახის #-</option>
-                            <%--<% for (int i = 0; i < roomBeans.length; i++) { %>
-                            <option value="<%=roomBeans[i].getRoomid()%>"
-                                    roomtypeid="<%=roomBeans[i].getRoomtypeid()%>"><%=roomBeans[i].getName()%>
-                            </option>
-                            <% } %>--%>
-                        </select>
-                    </div>
-                    <div class="col-md-1">
-                        პრიორიტეტი
-                    </div>
-                    <div class="col-md-3">
-                        <select class="dropdown col-md-2" id="roomBean">
-                            <option value="0">-ოთახის #-</option>
-                            <%--<% for (int i = 0; i < roomBeans.length; i++) { %>
-                            <option value="<%=roomBeans[i].getRoomid()%>"
-                                    roomtypeid="<%=roomBeans[i].getRoomtypeid()%>"><%=roomBeans[i].getName()%>
-                            </option>
-                            <% } %>--%>
-                        </select>
+                        <label>ორდ. #</label>
                     </div>
                     <div class="col-md-4">
-                        <button type="button" class="btn btn-danger" style="width: 100%;" id="search_reserve_filer"
+                        <input type="text" id="ordernum" placeholder=" ორდ. #"/>
+                    </div>
+                    <div class="col-md-1">
+                        <label>სტატუსი</label>
+                    </div>
+                    <div class="col-md-3">
+                        <select class="dropdown col-md-2" id="workOrderStatus">
+                            <option value="0">-სტატუსი-</option>
+                            <% for (int i = 0; i < workOrderStatus.length; i++) { %>
+                                <option value="<%=i%>"><%=workOrderStatus[i]%></option>
+                            <% } %>
+                        </select>
+                    </div>
+                    <div class="col-md-1">
+                        <label>მიმაგრებულია</label>
+                    </div>
+                    <div class="col-md-3">
+                        <select class="dropdown col-md-2" id="personnel">
+                            <option value="0">-აირჩიეთ-</option>
+                            <% for (int i = 0; i < personnelBeans.length; i++) { %>
+                            <option value="<%=personnelBeans[i].getPersonnelid()%>"><%=personnelBeans[i].getFname() + " " + personnelBeans[i].getLname()%>
+                            </option>
+                            <% } %>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <button type="button" class="btn" style="width: 100%;" id="search_filer"
                                 onclick="doFilter()"
-                                style="width: 69px;">ძებნა
+                                style="width: 69px;">მაჩვენე ყველა
                         </button>
                     </div>
                 </div>

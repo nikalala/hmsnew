@@ -2157,7 +2157,7 @@ public class ReservationBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: reservation.status
-     * <li>comments: -1 - finished, 0 - active, 1 - canceled, 2 - no show, 3 - voided
+     * <li>comments: -1 - finished, 0 - active, 1 - canceled, 2 - no show, 3 - voided, 4 - checked out
      * <li>default value: 0
      * <li>column size: 10
      * <li>jdbc type returned by the driver: Types.INTEGER

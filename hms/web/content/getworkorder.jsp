@@ -11,8 +11,13 @@
     <cell>Dummy Data</cell>
     <cell>Test Dummy Data</cell>
     <cell>Dummy Data</cell>
-    <cell>Dummy Data</cell>
-    <cell>Test Dummy Data</cell>
+    <cell>
+      <![CDATA[
+      &nbsp;<i class="fa fa-pencil"></i>
+      &nbsp;<i class="fa fa-edit"></i>
+      &nbsp;<i class="fa fa-print"></i>
+      ]]>
+    </cell>
   </row>
   <% } %>
 </rows>
