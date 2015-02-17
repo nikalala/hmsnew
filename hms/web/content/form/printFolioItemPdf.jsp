@@ -268,6 +268,9 @@ ByteArrayOutputStream oout = new ByteArrayOutputStream();
 PdfStamper stamper = new PdfStamper(pdfTemplate, oout);
 stamper.setFormFlattening(true);
 
+
+
+
 AcroFields form1 = stamper.getAcroFields();
 
 PushbuttonField ad = form1.getNewPushbuttonFromField("hotellogo");
@@ -294,6 +297,8 @@ for(int i=0;i<names.length;i++){
 
 stamper.close();
 pdfTemplate.close();
+
+
 
 response.setContentType("application/pdf");
 response.addHeader("Content-Disposition","filename=rrrr.pdf");

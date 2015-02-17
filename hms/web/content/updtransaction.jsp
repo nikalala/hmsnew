@@ -26,16 +26,44 @@ if(incl){
     else
         manualrate -= tax[0].getAmount().doubleValue();
 }
-System.out.println("manualrate = "+manualrate);
+
 Manager.getInstance().beginTransaction();
 try{
-    String foliosql = "where folioid in (select folioid from folio where reservationroomid = "+rroom.getReservationroomid()+" and guestid = "+rroom.getGuestid()+") and "
-            + "roomid = "+rroom.getRoomid()+" and itemdate = to_date('"+ssdd.format(roomdate)+"','DD/MM/YYYY')";
+    
+    rroom.setAdult(adult);
+    rroom.setChild(child);
+    rroom = ReservationroomManager.getInstance().save(rroom);
+    
+    String foliosql = "where folioid in (select folioid from folio where reservationroomid = "+rroom.getReservationroomid()+" and guestid = "+rroom.getGuestid()+")";   // and "
+//            + "roomid = "+rroom.getRoomid();
+    if(onlydate.booleanValue())
+        foliosql += " and itemdate = to_date('"+ssdd.format(roomdate)+"','DD/MM/YYYY')";
     FolioitemBean[] items = FolioitemManager.getInstance().loadByWhere(foliosql);
-    items[0].setAmount(manualrate);
-    //items[0].set
-    items[0].setDone(true);
-    items[0] = FolioitemManager.getInstance().save(items[0]);
+    
+    for(int i=0;i<items.length;i++){
+        if(onlydate.booleanValue() && i > 0)
+            break;
+        int particular = items[i].getParticular().intValue();
+        tariff trf = new tariff();
+        int day = folio.getFolioDay(items[i]);
+        trf.init(rroom.getReservationroomid().longValue(),day);
+        trf.manualrate = manualrate;
+        trf.getTraiffPars();
+        
+        if(items[i].getRoomid() != null && items[i].getRoomid().intValue() == rroom.getRoomid().intValue()){
+            items[i].setAmount(manualrate);
+            items[i].setDone(true);
+        } else if(particular == 4){
+            items[i].setAmount((-1)*trf.tariff_discount);
+        } else if(particular == -1){
+            if(items[i].getTaxid() != null){
+                items[i].setAmount(trf.tariff_tax);
+            }
+        } else if(particular == 0){
+            
+        }
+        items[i] = FolioitemManager.getInstance().save(items[i]);
+    }
     Manager.getInstance().endTransaction(true);
     msg = "{\"result\":1}";
 }catch(Exception e){

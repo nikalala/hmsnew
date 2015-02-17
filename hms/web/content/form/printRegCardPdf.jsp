@@ -253,6 +253,11 @@ String[] names = {
     "printdate+time"                    // 34
 };
 
+String idtp = "";
+if(idtype != null && idtype.getName() != null)
+    idtp += idtype.getName()+" ";
+idtp += guest.getIdn();
+
 String[] values = {
     hotel.getName(),                                            //  0
     hotel.getAddress1(),                                        //  1
@@ -267,7 +272,7 @@ String[] values = {
     guest.getFax(),                                             // 10
     guest.getCity(),                                            // 11
     gcountry.getName(),                                         // 12
-    idtype.getName()+" "+guest.getIdn(),                        // 13
+    idtp,                        // 13
     "",                                                         // 14
     "",                                                         // 15
     dt.format(res.getArraivaldate()),                           // 16

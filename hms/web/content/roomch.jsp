@@ -205,8 +205,9 @@ function changeRoomchData(){
             if(data.result == 0){
                 BootstrapDialog.alert(data.error);
             } else {
-                var current_index = $("#specialTab").tabs("option","active");
-                $("#specialTab").tabs('load',current_index);
+                //var current_index = $("#specialTab").tabs("option","active");
+                //$("#specialTab").tabs('load',current_index);
+                $("#roomtable1").trigger("reloadGrid");
             }
         },
         "json"

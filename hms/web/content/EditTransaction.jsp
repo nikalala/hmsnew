@@ -18,14 +18,14 @@ if(guest.getCountryid() != null){
 if(guest.getCity() != null) guestaddress += guest.getCity()+" ";
 if(guest.getZip() != null)  guestaddress += guest.getZip();
 
-int sts = 0;
+int sts = getRoomStatus1(dclosedate,rroom.getReservationroomid());
 String rname = "ნომრის გარეშე";
 if(rroom.getRoomid() != null){
     RoomBean room = RoomManager.getInstance().loadByPrimaryKey(rroom.getRoomid());
     rname = room.getCode();
     if(rname == null)   rname = room.getName();
     if(rname == null || rname.trim().length() == 0) rname = "ნომრის გარეშე";
-    sts = getRoomStatus(new Date(), room.getRoomid().intValue());
+    
 }
 
 RoomtypeBean roomtype = RoomtypeManager.getInstance().loadByPrimaryKey(rroom.getRoomtypeid());

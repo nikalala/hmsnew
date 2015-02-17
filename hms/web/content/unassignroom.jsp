@@ -26,7 +26,10 @@
         Manager.getInstance().endTransaction(false);
     }
 %>
-
+<script>
+    $("#myModalSave").remove();
+    $("#myModalCheckin").remove();
+</script>
 <%=errorContrName%>
 
 

@@ -59,6 +59,11 @@ FolioBean[] folio = FolioManager.getInstance().loadByWhere("where reservationroo
     
     $("#addremreason").button().click(function(){adddelreason();});
     
+    $("#myModalSave").remove();
+    $("#myModalCheckin").remove();
+    var r1 = $('<button type="button" class="btn btn-primary" id="myModalSave" onclick="savedata(\'myModal\')">შენახვა</button>');
+    $("#myModalFooter").append(r1);
+    
     $("#reasonid").change(function(){
         var rid = $("#reasonid").val();
         if(rid > 0){

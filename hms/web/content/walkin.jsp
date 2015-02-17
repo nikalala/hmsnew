@@ -219,7 +219,7 @@
         if ($("#" + id).val() == '0') term = '';
         //if(term.length == 0)    BootstrapDialog.alert("შეიყვანეთ საძებნი სიტყვა");
         //else {
-        extramodal0("contactSearch1", "კონტაქტის ძებნა", "id=" + id + "&term=" + term + "&cid=" + cid);
+        extramodal00("contactSearch1", "კონტაქტის ძებნა", "id=" + id + "&term=" + term + "&cid=" + cid);
         //}
     }
 
