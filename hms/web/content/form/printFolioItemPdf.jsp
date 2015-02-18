@@ -186,7 +186,16 @@ ReservationBean res = ReservationManager.getInstance().loadByPrimaryKey(rres.get
 GuestBean guest = GuestManager.getInstance().loadByPrimaryKey(rres.getGuestid());
 SalutationBean slt = SalutationManager.getInstance().loadByPrimaryKey(guest.getSalutationid());
 PaymentBean payment = PaymentManager.getInstance().loadByPrimaryKey(fi.getPaymentid());
-PaymentmethodBean pmethod = PaymentmethodManager.getInstance().loadByPrimaryKey(payment.getPaymentmethodid());
+String pmethodname = "";
+if(payment.getPaymentmethodid() != null){
+    PaymentmethodBean pmethod = PaymentmethodManager.getInstance().loadByPrimaryKey(payment.getPaymentmethodid());
+    pmethodname = pmethod.getName();
+} else if(payment.getContracgentid() != null) {
+    ContragentBean contragent = ContragentManager.getInstance().loadByPrimaryKey(payment.getContracgentid());
+    pmethodname += (contragent.getFname() != null) ? contragent.getFname()+" ":"";
+    pmethodname += (contragent.getLname() != null) ? contragent.getLname()+" ":"";
+    pmethodname += (contragent.getName() != null) ? contragent.getName()+" ":"";
+}
 PersonnelBean pers = PersonnelManager.getInstance().loadByPrimaryKey(payment.getRegbyid());
 CurrencyBean cr = CurrencyManager.getInstance().loadByPrimaryKey(payment.getCurrencyid());
 RoomtypeBean roomtype = RoomtypeManager.getInstance().loadByPrimaryKey(rres.getRoomtypeid());
@@ -221,7 +230,7 @@ String[] values = {
     sroom,                                                      //  4
     slt.getName()+" "+ guest.getFname()+" "+guest.getLname(),   //  5
     dt.format(payment.getPaydate()),                            //  6
-    pmethod.getName(),                                          //  7
+    pmethodname,                                          //  7
     payment.getNote(),                                          //  8
     payment.getPaymentid().toString(),                          //  9
     folio.getNum(),                                             // 10

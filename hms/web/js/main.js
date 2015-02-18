@@ -1023,8 +1023,8 @@ function newWindowWithParams(fname, title, params) {
 }
 
 function removeModal() {
-    $(".modal-body").html('');
-    $('.modal-dialog').hide();
+    //$(".modal-body").html('');
+    //$('.modal-dialog').hide();
 }
 
 function loadModalDefs() {

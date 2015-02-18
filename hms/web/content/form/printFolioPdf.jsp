@@ -477,8 +477,15 @@ for(int i=0;i<items.length;i++){
             break;
         case 3:
             payment = PaymentManager.getInstance().loadByPrimaryKey(items[i].getPaymentid());
-            pmethod = PaymentmethodManager.getInstance().loadByPrimaryKey(payment.getPaymentmethodid());
-            particular = pmethod.getCode();
+            if(payment.getPaymentmethodid() != null){
+                pmethod = PaymentmethodManager.getInstance().loadByPrimaryKey(payment.getPaymentmethodid());
+                particular = pmethod.getCode();
+            } else if(payment.getContracgentid() != null){
+                ContragentBean contragent = ContragentManager.getInstance().loadByPrimaryKey(payment.getContracgentid());
+                particular += (contragent.getFname() != null) ? contragent.getFname()+" ":"";
+                particular += (contragent.getLname() != null) ? contragent.getLname()+" ":"";
+                particular += (contragent.getName() != null) ? contragent.getName()+" ":"";
+            }
             koeff = -1;
             break;
         case 4:

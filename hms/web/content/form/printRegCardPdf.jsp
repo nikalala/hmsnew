@@ -1,4 +1,4 @@
-<%@page contentType="application/pdf"%>
+\<%@page contentType="application/pdf"%>
 <%@page pageEncoding="UTF-8"%>
 <%@include file="../../includes/meta.jsp"%>
 <%!
@@ -199,6 +199,17 @@ if(rres.getRoomid() != null){
 double[] rates = getRoomrateForStay(rres.getReservationroomid().longValue());
 RatetypeBean rttype = RatetypeManager.getInstance().loadByPrimaryKey(rres.getRatetypeid());
 
+String companyname = "";
+if(res.getCompanyid() != null){
+    ContragentBean contragent = ContragentManager.getInstance().loadByPrimaryKey(res.getCompanyid());
+    companyname = contragent.getName();
+}
+String bsourcename = "";
+if(res.getBsourceid() != null){
+    BsourceBean bs = BsourceManager.getInstance().loadByPrimaryKey(res.getBsourceid());
+    bsourcename = bs.getName();
+}
+
 double tot = rates[1]+rates[2]-rates[3]+rates[4];
 double paid = getSum("select sum(amount) from payment where folioid in (select folioid from folio where reservationroomid = "+rres.getReservationroomid()+")");
 
@@ -206,13 +217,21 @@ String ptypes = "";
 String pmethods = "";
 PaymentBean[] pments = PaymentManager.getInstance().loadByWhere("where folioid in (select folioid from folio where reservationroomid = "+rres.getReservationroomid()+") order by paydate");
 for(int i=0;i<pments.length;i++){
-    PaymentmethodBean pmethod = PaymentmethodManager.getInstance().loadByPrimaryKey(pments[i].getPaymentmethodid());
     if(i > 0)   {
         ptypes += ", ";
         pmethods += ", ";
     }
-    pmethods += pmethod.getName();
-    ptypes += paymentmode[pmethod.getPaymentmode().intValue()];
+    if(pments[i].getPaymentmethodid() != null){
+        PaymentmethodBean pmethod = PaymentmethodManager.getInstance().loadByPrimaryKey(pments[i].getPaymentmethodid());
+        
+        pmethods += pmethod.getName();
+        ptypes += paymentmode[pmethod.getPaymentmode().intValue()];
+    } else if(pments[i].getContracgentid() != null){
+        ContragentBean contragent = ContragentManager.getInstance().loadByPrimaryKey(pments[i].getContracgentid());
+        pmethods += (contragent.getFname() != null) ? contragent.getFname()+" ":"";
+        pmethods += (contragent.getLname() != null) ? contragent.getLname()+" ":"";
+        pmethods += (contragent.getName() != null) ? contragent.getName()+" ":"";
+    }
 }
 
 String[] names = {
@@ -271,10 +290,10 @@ String[] values = {
     guest.getEmail(),                                           //  9
     guest.getFax(),                                             // 10
     guest.getCity(),                                            // 11
-    gcountry.getName(),                                         // 12
+    (gcountry != null) ? gcountry.getName():"",                                         // 12
     idtp,                        // 13
-    "",                                                         // 14
-    "",                                                         // 15
+    companyname,                                                         // 14
+    bsourcename,                                                         // 15
     dt.format(res.getArraivaldate()),                           // 16
     dt.format(res.getDeparturedate()),                          // 17
     String.valueOf(days),                                       // 18
