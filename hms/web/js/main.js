@@ -7,7 +7,7 @@ $(document).ready(function () {
 
     loader = $(".loading-panel");
     registerModalFunctions();
-
+    
 });
 
 $(document).keydown(function (e) {
@@ -22,9 +22,11 @@ $(document).keydown(function (e) {
 function registerModalFunctions() {
     //This should not happen if there is at least one error message...
     $(document).on("click", "#myModalCancel, #myModalSave, #myModalCheckin", function () {
-        removeModal();
+        //removeModal();
     });
 }
+
+
 
 function launchLockScreen() {
     $("#mainbody").append('<div id="lockscreen"></div>');
@@ -192,6 +194,7 @@ function savedata(id) {
             if (!isNullOrEmpty(callbackmethod)) {
                 eval(callbackmethod);
             }
+            removeModal();
             //BootstrapDialog.info("ოპერაცია წარმატებით შესრულდა");
         }
     }, "json");
@@ -278,6 +281,7 @@ function savedata1(id, param) {
             $("#action").remove();
             $("#controls").remove();
             //BootstrapDialog.info("ოპერაცია წარმატებით შესრულდა");
+            removeModal();
         }
     }, "json");
 
@@ -713,7 +717,7 @@ function walkinNameSearch(id, cid) {
     if (type == 'SELECT' && $("#" + id).val() > 0) term = $('#' + id).find(":selected").text();
     //if(term.length == 0)    BootstrapDialog.alert("შეიყვანეთ საძებნი სიტყვა");
     //else {
-    extramodal0("contactSearch", "კონტაქტის ძებნა", "id=" + id + "&term=" + term + "&cid=" + cid);
+    extramodal00("contactSearch", "კონტაქტის ძებნა", "id=" + id + "&term=" + term + "&cid=" + cid);
     //}
 }
 
@@ -724,7 +728,7 @@ function editNameSearch(id, cid, prefix) {
     if (type == 'SELECT' && $("#" + id).val() > 0) term = $('#' + id).find(":selected").text();
     //if(term.length == 0)    BootstrapDialog.alert("შეიყვანეთ საძებნი სიტყვა");
     //else {
-    extramodal0("contactSearch", "კონტაქტის ძებნა", "id=" + id + "&term=" + term + "&cid=" + cid + "&prefix=" + prefix);
+    extramodal00("contactSearch", "კონტაქტის ძებნა", "id=" + id + "&term=" + term + "&cid=" + cid + "&prefix=" + prefix);
     //}
 }
 
@@ -1019,13 +1023,13 @@ function newWindowWithParams(fname, title, params) {
 }
 
 function removeModal() {
-    $(".modal-body").html('');
-    $('.modal-dialog').hide();
+    //$(".modal-body").html('');
+    //$('.modal-dialog').hide();
 }
 
 function loadModalDefs() {
     $('.modal-dialog,#myModalFooter').removeAttr('style');
-    $("#maindiv").remove();
+    //$("#maindiv").remove();
 }
 
 

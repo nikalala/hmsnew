@@ -13,6 +13,7 @@ if(reserv.getReservationtypeid() != null){
     ReservationtypeBean restype = ReservationtypeManager.getInstance().loadByPrimaryKey(reserv.getReservationtypeid());
     restp = "<span style=\"color: "+restype.getColor()+"\">"+restype.getName()+"</span>";
 }
+/*
 if(rroom.getRoomid() != null){
     int sts = getRoomStatus(new Date(), rroom.getRoomid().intValue());
     StcolorBean[] stcolor = StcolorManager.getInstance().loadByWhere("where active = true and deleted = false and roomstatus = "+sts);
@@ -21,6 +22,7 @@ if(rroom.getRoomid() != null){
         statuscolor = stcolor[0].getColor();
     restp = "<span style=\"color: "+statuscolor+"\">"+roomstatus[sts]+"</span>";
 }
+*/
 
 if(reserv.getBsourceid()!= null){
     BsourceBean bs = BsourceManager.getInstance().loadByPrimaryKey(reserv.getBsourceid());

@@ -9,6 +9,7 @@ Calendar c2 = Calendar.getInstance();
 c1.setTime(reserv.getArraivaldate());
 c2.setTime(reserv.getDeparturedate());
 RatetypeBean rtp = RatetypeManager.getInstance().loadByPrimaryKey(rroom.getRatetypeid());
+int days = DayDiff(c1,c2)+1;
 %>
 <div class="panel-heading">
     <h3 class="panel-title">
@@ -33,7 +34,7 @@ RatetypeBean rtp = RatetypeManager.getInstance().loadByPrimaryKey(rroom.getRatet
             </tr>
             <tr>
                 <td><b>ღამე(ებ)ი</b></td>
-                <td><%=DayDiff(c1,c2)%></td>
+                <td><%=days%></td>
                 <td></td>
             </tr>
             <tr>

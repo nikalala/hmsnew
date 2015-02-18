@@ -19,8 +19,7 @@
             reservId = rbr.getReservationid().toString();
         }
 
-        System.out.println(rid);
-        System.out.println(reservId);
+        
 /*
         RoomstBean roomstBean = RoomstManager.getInstance().createRoomstBean();
         roomstBean.setRegbyid(user.getPersonnelid());
@@ -45,7 +44,10 @@
         Manager.getInstance().endTransaction(false);
     }
 %>
-
+<script>
+    $("#myModalSave").remove();
+    $("#myModalCheckin").remove();
+</script>
 <%=errorContrName%>
 
 

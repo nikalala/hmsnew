@@ -433,4 +433,30 @@ public class folio {
         }
         items = FolioitemManager.getInstance().loadByWhere("where folioid = "+folioid+" order by itemdate");
     }
+    
+    public static int getFolioDay(FolioitemBean fl) throws Exception {
+        int day = 0;
+        SimpleDateFormat sdt = new SimpleDateFormat("yyyy-MM-dd");
+        Connection con = Manager.getInstance().getConnection();
+        String sql = "select itemdate from folioitem where folioid = "+fl.getFolioid()+" group by itemdate order by itemdate";
+        try{
+            ResultSet rs = con.createStatement().executeQuery(sql);
+
+            for(int i=0;rs.next();i++){
+                String idt = sdt.format(rs.getDate(1));
+                if(sdt.format(fl.getItemdate()).equals(idt)){
+                    day = i;
+                    break;
+                }
+            }
+
+            rs.close();
+        
+        }catch(Exception e){
+            
+        }finally{
+            Manager.getInstance().releaseConnection(con);
+        }
+        return day;
+    }
 }

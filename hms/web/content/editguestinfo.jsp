@@ -142,7 +142,7 @@ for(int i=0;i<gender.length;i++){
                                     <%
                                     for(int i=0;i<countries.length;i++){
                                         String sel = "";
-                                        if(edit && guest.getCountryid().intValue() == countries[i].getCountryid().intValue())
+                                        if(edit && guest.getCountryid() != null && guest.getCountryid().intValue() == countries[i].getCountryid().intValue())
                                             sel = "selected";
                                     %>
                                     <option value="<%=countries[i].getCountryid()%>" <%=sel%>><%=countries[i].getName()%></option>

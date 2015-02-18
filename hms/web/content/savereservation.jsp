@@ -500,6 +500,7 @@ System.out.println("roomid = "+resroom.getRoomid());
     if(v == null)   v = new Vector();
     folio fl = new folio();
 
+    
     fl.setFolio(res, resroom, payment, dateformats2[dff], v,res.getBillto().intValue(),user);
     
     /*
@@ -517,7 +518,7 @@ System.out.println("roomid = "+resroom.getRoomid());
             saveFolio(res, resroom, dateformats2[dff], v, 3, user);
     }
     */
-    
+
     
     Manager.getInstance().endTransaction(true);
     msg = "{\"result\":1,\"id\":"+res.getReservationid()+"}";

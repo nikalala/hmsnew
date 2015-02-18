@@ -39,9 +39,10 @@ cal2.setTimeInMillis(cal1.getTimeInMillis());
 cal2.add(Calendar.DATE,31);
 
 String sql = "where roomid is not null and reservationid in ("
-        + "select reservationid from reservation where departuredate >= to_date('"+dtlong.format(cal1.getTime())+"','DD/MM/YYYY HH24:MI')"
-        + " or arraivaldate < to_date('"+dtlong.format(cal2.getTime())+"','DD/MM/YYYY HH24:MI')"
+        + "select reservationid from reservation where (departuredate >= to_date('"+dflong.format(cal1.getTime())+"','DD/MM/YYYY HH24:MI')"
+        + " or arraivaldate < to_date('"+dtlong.format(cal2.getTime())+"','DD/MM/YYYY HH24:MI')) and status in (-1,0)"
         + ") order by reservationroomid";
+System.out.println(sql);
 ReservationroomBean[] resrooms = ReservationroomManager.getInstance().loadByWhere(sql);
 SimpleDateFormat ssdd = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 JSONArray js = new JSONArray();
