@@ -47,8 +47,27 @@
     $("#btnNext").click(function(){
         getNextRecords();
     });
+
     $("#btnPrev").click(function(){
         getPrevRecords();
+    });
+
+    $("#btnAddNewWorkOrder").click(function(){
+
+        loader.hide();
+
+        $.post("content/addworkorder.jsp",function(result){
+
+            $(".filter-form1").hide();
+
+            $("#workorder_add").html(result);
+
+            $(".filter-form2").show();
+
+            loader.hide();
+
+        });
+
     });
 
     function loadDefaults() {
@@ -73,14 +92,14 @@
 
 <link rel="stylesheet" type="text/css" href="css/grid-filter.css">
 
-<form name="filter-form" id="filter-form">
+<form name="filter-form" id="filter-form" class="filter-form1">
     <table id="grid-table" class="first-table" style="width: 100%">
         <tr>
             <td>
                 <div id="status_bar" class="first-status-bar" align='center'>
                     <div style="width: 100%; float: left;">
                         <span style="float: left; margin: 7px 0 0 10px;">ძიების კრიტერიუმები</span>
-                        <button type="button" class="btn btn-default" id="btnExport"
+                        <button type="button" class="btn btn-default" id="btnAddNewWorkOrder"
                                 style="border: 0; font-weight: bold; float: right; margin: 3px 5px 0 0;">
                             დამატება
                         </button>
@@ -187,6 +206,15 @@
         <tr>
             <td>
                 <table id='list_work_orders' class="table-striped table-hover" align='center'></table>
+            </td>
+        </tr>
+    </table>
+</form>
+<form name="filter-form" id="filter-form" class="filter-form2" style="display: none;">
+    <table id="grid-table" class="first-table" style="width: 100%">
+        <tr>
+            <td id="workorder_add">
+
             </td>
         </tr>
     </table>
