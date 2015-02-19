@@ -5,15 +5,14 @@
 <%
     PreferencetypeBean[] pTypes = PreferencetypeManager.getInstance().loadByWhere("");
     String rid = (String) request.getParameter("reservationid");
-    String roomid = (String) request.getParameter("roomid");
-    String idToremove = "";
 
-    if(roomid != null && roomid.contains("_room")){
-        String delimiter = ":";
-        String[] arr = roomid.split(delimiter);
-        idToremove = arr[1];
-        roomid = arr[0];
-    }
+
+    ReservationroomBean reservationroomBean = ReservationroomManager.getInstance().loadByPrimaryKey(Long.valueOf(rid));
+    RoomBean roomBean = RoomManager.getInstance().loadByPrimaryKey(reservationroomBean.getRoomid());
+    RoomtypeBean roomtypeBean = RoomtypeManager.getInstance().loadByPrimaryKey(roomBean.getRoomtypeid());
+    String roomid = roomBean.getName() + " - " + roomtypeBean.getName();
+    String reservationId = reservationroomBean.getReservationid().toString();
+    String idToremove = roomBean.getRoomid().toString();
     PreferenceBean[] prefs = PreferenceManager.getInstance().loadByWhere("where isstandart = true");
 %>
 
@@ -26,7 +25,7 @@
         $('.modal-dialog').width(600);
         $('#myModalFooter').hide();
         $('.dropdown').selectpicker();
-        preferencesGrid.url = originalUrl + "?rid=<%=rid%>&roomid=<%=roomid%>";
+        preferencesGrid.url = originalUrl + "?rid=<%=reservationId%>&roomid=<%=roomid%>";
         console.log(preferencesGrid.url);
         initializeGrid(preferencesGrid);
         preferencesGrid.url = originalUrl;
@@ -46,7 +45,7 @@
                     sql = "UPDATE preference SET name = '" + txt + "', preferencetypeid = " + $("#pref_type").val() + " WHERE preferenceid = " + idToBeUpdated;
                 }else{
                     sql = "INSERT INTO preference(preferenceid, name, preferencetypeid, regbyid, active,deleted, reservationid, isstandart) " +
-                    "VALUES ((SELECT COALESCE(MAX(preferenceid) + 1,1) FROM preference), '" + txt + "', " + $("#pref_type").val() + ", <%=user.getPersonnelid()%>, TRUE,FALSE,<%=rid%>, FALSE);";
+                    "VALUES ((SELECT COALESCE(MAX(preferenceid) + 1,1) FROM preference), '" + txt + "', " + $("#pref_type").val() + ", <%=user.getPersonnelid()%>, TRUE,FALSE,<%=reservationId%>, FALSE);";
                 }
             }
         }else{
@@ -55,7 +54,7 @@
                     sql = "UPDATE preference SET name = '" + txt + "', preferencetypeid = " + $("#pref_type").val() + " WHERE preferenceid = " + idToBeUpdated;
                 }else{
                     sql = "INSERT INTO preference(preferenceid, name, preferencetypeid, regbyid, active,deleted, reservationid, isstandart) " +
-                    "VALUES ((SELECT COALESCE(MAX(preferenceid) + 1,1) FROM preference), '" + $("#prefs").next().find('.filter-option').text() + "', " + $("#pref_type").val() + ", <%=user.getPersonnelid()%>, TRUE,FALSE,<%=rid%>, FALSE);";
+                    "VALUES ((SELECT COALESCE(MAX(preferenceid) + 1,1) FROM preference), '" + $("#prefs").next().find('.filter-option').text() + "', " + $("#pref_type").val() + ", <%=user.getPersonnelid()%>, TRUE,FALSE,<%=reservationId%>, FALSE);";
                 }
             }
         }
@@ -129,7 +128,7 @@
         $("#pref-desc").val('');
         idToBeUpdated = 0;
         $("#pref-desc").prop('disabled',true);
-        reloadGrid(preferencesGrid.id, originalUrl + "?rid=<%=rid%>&roomid=<%=roomid%>");
+        reloadGrid(preferencesGrid.id, originalUrl + "?rid=<%=reservationId%>&roomid=<%=roomid%>");
     }
 
     function removePref(id){

@@ -391,7 +391,7 @@ paid = getSum("select sum(amount*ratedate("+maincurrency.getCurrencyid()+",curre
                                 </form>
                             </td>
                             <td align="center" style="border: 1px solid #C8C8C8;" width='20%'><b>საკრედიტო ბარათის ინფორმაცია</b></td>
-                            <td align="center" style="border: 1px solid #C8C8C8; cursor: pointer;" width='10%' onclick="newWindowWithParams('setPreference','უპირატესობის მინიჭება','?reservationid=<%=reserv.getReservationid()%>&roomid=<%=rname+rtypecode%>')"><b>უპირატესობები</b></td>
+                            <td align="center" style="border: 1px solid #C8C8C8; cursor: pointer;" width='10%' onclick="newWindowWithParams('setPreference','უპირატესობის მინიჭება','?reservationid=<%=rroom.getReservationroomid()%>')"><b>უპირატესობები</b></td>
                             <td align="center" style="border: 1px solid #C8C8C8;" width='10%'><b>დავალებები</b></td>
                             <td align="center" style="border: 1px solid #C8C8C8;" width='10%'><b>შეტყობინებები</b></td>
                         </tr>
