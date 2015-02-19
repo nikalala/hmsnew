@@ -17,7 +17,6 @@ import java.sql.*;
 
 // imports- 
 
-
 /**
  * Handles database calls for the remarks table.
  */
@@ -25,7 +24,6 @@ public class RemarksManager
 // extends+ 
 
 // extends- 
-
 {
 
     /**
@@ -1176,5 +1174,4 @@ public class RemarksManager
 // class+ 
 
 // class- 
-
 }

@@ -18,7 +18,6 @@ import java.sql.SQLException;
 // imports- 
 
 
-
 /**
  * Listener that is notified of remarks table changes.
  */
@@ -26,7 +25,6 @@ public interface RemarksListener
 // extends+ 
 
 // extends- 
-
 {
     /**
      * Invoked just before inserting a RemarksBean record into the database.
@@ -63,5 +61,4 @@ public interface RemarksListener
 // class+ 
 
 // class- 
-
 }

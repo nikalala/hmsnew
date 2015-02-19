@@ -341,8 +341,43 @@ System.out.println(sql);
         }
         return discount;
     }
-
+    
     double[] getRoomrateForStay(long reservationroomid) throws Exception {
+        double[] rates = new double[5];
+        ReservationroomBean rroom = ReservationroomManager.getInstance().loadByPrimaryKey(reservationroomid);
+        ReservationBean reserv = ReservationManager.getInstance().loadByPrimaryKey(rroom.getReservationid());
+        Calendar calstart = Calendar.getInstance();
+        Calendar calend = Calendar.getInstance();
+        calend.add(Calendar.DATE, 1);
+        calstart.setTime(reserv.getArraivaldate());
+        calend.setTime(reserv.getDeparturedate());
+        for (int i = 0; calstart.before(calend); i++) {
+            tariff trf = new tariff();
+            trf.init(reservationroomid,i);
+            rates[0] += trf.tariff_neto;
+            rates[1] += trf.tariff_rate;
+            rates[2] += trf.tariff_tax;
+            rates[3] += trf.tariff_discount;
+            rates[4] += trf.tariff_fix;
+            calstart.add(Calendar.DATE, 1);
+        }
+        return rates;
+    }
+    
+    double[] getRoomrateForStay(long reservationroomid,int day) throws Exception {
+        double[] rates = new double[5];
+        tariff trf = new tariff();
+        trf.init(reservationroomid,day);
+        rates[0] = trf.tariff_neto;
+        rates[1] = trf.tariff_rate;
+        rates[2] = trf.tariff_tax;
+        rates[3] = trf.tariff_discount;
+        rates[4] = trf.tariff_fix;
+        return rates;
+    }
+    
+
+    double[] getRoomrateForStay1(long reservationroomid) throws Exception {
         double[] rates = new double[5];
         SimpleDateFormat dt = new SimpleDateFormat("dd/MM/yyyy");
         ReservationroomBean rroom = ReservationroomManager.getInstance().loadByPrimaryKey(reservationroomid);

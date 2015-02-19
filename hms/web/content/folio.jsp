@@ -2,6 +2,10 @@
 <%@page pageEncoding="UTF-8"%>
 <%@include file="../includes/init.jsp"%>
 <%
+long fid = 0;
+if(request.getParameter("fid") != null)
+    fid = Long.parseLong(request.getParameter("fid"));
+
 DiscountBean[] discounts = DiscountManager.getInstance().loadByWhere("where extracharge = true and active = true and deleted = false order by name");
 ReservationroomBean rroom = ReservationroomManager.getInstance().loadByPrimaryKey(new Long(request.getParameter("reservationroomid")));
 ReservationBean reserv = ReservationManager.getInstance().loadByPrimaryKey(rroom.getReservationid());
@@ -46,6 +50,11 @@ FolioBean[] folios = FolioManager.getInstance().loadByWhere("where reservationro
     function printFolio(id){
         window.open("content/form/printFolioPdf.jsp?id="+id);
         //addTab("content/form/printInvoiceFolioItem.jsp?act=folio&id="+id,"ფოლიოს ბეჭდვა","foliovoice_"+id);
+    }
+    
+    function newFolio(id){
+        //newmWindow1("newfolio","ახალი ინვოისი","id="+id);
+        extramodal00("contactSearch2", "კონტაქტის ძებნა", "id=0&fid=" + id + "&term=&cid=4");
     }
     
     function refreshFoliolist(id){
@@ -313,8 +322,13 @@ $(document).ready(function(){
                         } else {
                             
                         }
+                        String sel = "";
+                        if(fid == 0 && i == 0)
+                            sel = "selected";
+                        else if(fid == folios[i].getFolioid().longValue())
+                            sel = "selected";
                         %>
-                        <option value="<%=folios[i].getFolioid()%>"><%=folioname%></option>
+                        <option value="<%=folios[i].getFolioid()%>" <%=sel%>><%=folioname%></option>
                         <%
                     }
                     %>
@@ -390,10 +404,10 @@ $(document).ready(function(){
             <td class='pseudobutton' style="background-color: #F9F9F9; text-align: center; width: 70px; border-right-color: #BEBEBE; border-right-style: solid; border-right-width: 1px;">
                 <b>გაყოფა</b>
             </td>
-            <td class='pseudobutton' style="background-color: #F9F9F9; text-align: center; width: 70px; border-right-color: #BEBEBE; border-right-style: solid; border-right-width: 1px;">
+            <td class='pseudobutton' onclick="newFolio(<%=folios[0].getFolioid()%>)" style="background-color: #F9F9F9; text-align: center; width: 70px; border-right-color: #BEBEBE; border-right-style: solid; border-right-width: 1px;">
                 <b>ახალი</b>
             </td>
-            <td class='pseudobutton' style="background-color: #F9F9F9; text-align: center; width: 90px; border-right-color: #BEBEBE; border-right-style: solid; border-right-width: 1px;">
+            <td class='pseudobutton' onclick="moveFolio($('#folio_folioid').val())" style="background-color: #F9F9F9; text-align: center; width: 90px; border-right-color: #BEBEBE; border-right-style: solid; border-right-width: 1px;">
                 <b>გადამხდელი</b>
             </td>
             <td style="background-color: #E9E9E9; text-align: right; color: red; font-size: 11px; padding-right: 5px;">
