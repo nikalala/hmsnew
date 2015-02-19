@@ -159,7 +159,7 @@ public class RoomBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: room.code
-     * <li>comments: ????? ???????????
+     * <li>comments: მოკლე სახელწოდება
      * <li>column size: 2147483647
      * <li>jdbc type returned by the driver: Types.VARCHAR
      * </ul>
@@ -216,7 +216,7 @@ public class RoomBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: room.name
-     * <li>comments: ??????
+     * <li>comments: სახელი
      * <li>column size: 2147483647
      * <li>jdbc type returned by the driver: Types.VARCHAR
      * </ul>
@@ -274,7 +274,7 @@ public class RoomBean
      * <ul>
      * <li>full name: room.roomtypeid
      * <li> foreign key: roomtype.roomtypeid
-     * <li>comments: ?????? ????
+     * <li>comments: ოთახის ტიპი
      * <li>column size: 10
      * <li>jdbc type returned by the driver: Types.INTEGER
      * </ul>
@@ -343,7 +343,7 @@ public class RoomBean
      * <ul>
      * <li>full name: room.bedtypeid
      * <li> foreign key: bedtype.bedtypeid
-     * <li>comments: ??????? ????
+     * <li>comments: საწოლის ტიპი
      * <li>column size: 10
      * <li>jdbc type returned by the driver: Types.INTEGER
      * </ul>
@@ -411,7 +411,7 @@ public class RoomBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: room.phoneext
-     * <li>comments: ???? ?????????? ??????
+     * <li>comments: შიდა სატელეფონო ნომერი
      * <li>column size: 50
      * <li>jdbc type returned by the driver: Types.VARCHAR
      * </ul>
@@ -468,7 +468,7 @@ public class RoomBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: room.keycard
-     * <li>comments: ?? - ???????? ????
+     * <li>comments: ელ - ბოქლომის კოდი
      * <li>column size: 255
      * <li>jdbc type returned by the driver: Types.VARCHAR
      * </ul>
@@ -525,7 +525,7 @@ public class RoomBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: room.ord
-     * <li>comments: ?????????
+     * <li>comments: სორტირება
      * <li>column size: 10
      * <li>jdbc type returned by the driver: Types.INTEGER
      * </ul>
@@ -593,7 +593,7 @@ public class RoomBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: room.nonsmoke
-     * <li>comments: ??????????
+     * <li>comments: არამწეველი
      * <li>default value: true
      * <li>column size: 1
      * <li>jdbc type returned by the driver: Types.BIT
@@ -662,7 +662,7 @@ public class RoomBean
      * <ul>
      * <li>full name: room.regbyid
      * <li> foreign key: personnel.personnelid
-     * <li>comments: ??????
+     * <li>comments: ავტორი
      * <li>column size: 10
      * <li>jdbc type returned by the driver: Types.INTEGER
      * </ul>
@@ -730,7 +730,7 @@ public class RoomBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: room.regdate
-     * <li>comments: ???????????? ??????
+     * <li>comments: რეგისტრაციის თარიღი
      * <li>default value: now()
      * <li>column size: 29
      * <li>jdbc type returned by the driver: Types.TIMESTAMP
@@ -799,7 +799,7 @@ public class RoomBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: room.active
-     * <li>comments: ???????
+     * <li>comments: აქტიური
      * <li>default value: true
      * <li>column size: 1
      * <li>jdbc type returned by the driver: Types.BIT
@@ -867,7 +867,7 @@ public class RoomBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: room.deleted
-     * <li>comments: ???????
+     * <li>comments: წაშლილი
      * <li>default value: false
      * <li>column size: 1
      * <li>jdbc type returned by the driver: Types.BIT

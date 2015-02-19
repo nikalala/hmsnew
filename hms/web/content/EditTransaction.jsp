@@ -102,6 +102,29 @@ function audittrial(id){
     });
     
 }
+
+function updateTransaction(id){
+    var paytype = -1;
+    if($('#paytype1').is(':checked'))   paytype = 0;
+    if($('#paytype2').is(':checked'))   paytype = 1;
+    $.post("content/updateTransaction.jsp",{
+        id: id,
+        payinstruction: $("#payinstruction").val(),
+        paytype: paytype,
+        paymentmethodid: $("#paymentmethodid").val(),
+        reldate: $("#reldate").val(),
+        relterm: $("#relterm").val(),
+        vouchernum: $("#vouchernum").val()
+//        rgnum: $("#rgnum").val(),
+//        billnum: $("#billnum").val(),
+//        platenum: $("#platenum").val()
+    },function(data){
+        if(data.result == 0)    BootstrapDialog.alert(data.error);
+        else {
+            BootstrapDialog.info("ტრანზაქცია წარმატებით დასრულდა");
+        }
+    },"json");
+}
 </script>
 <div class="container-fluid" id="edittransaction0" style="padding-top: 4px; height: 100%;">
     <div class="row" style="margin-bottom: 0px; padding-left: 5px;  padding-right: 5px;">
@@ -203,8 +226,8 @@ function audittrial(id){
                 </td>
                 <td align="right">
                     <button type="button" class="btn btn-sm btn-primary navbar-btn" onclick='audittrial(<%=rroom.getReservationroomid()%>)'>აუდიტი</button>
-                    <button type="button" class="btn btn-sm btn-default navbar-btn">შენახვა</button>
-                    <button type="button" class="btn btn-sm btn-default navbar-btn">გაუქმება</button>
+                    <button type="button" class="btn btn-sm btn-default navbar-btn" onclick="updateTransaction(<%=rroom.getReservationroomid()%>)">შენახვა</button>
+                    <button type="button" class="btn btn-sm btn-default navbar-btn" onclick="voidTransaction(<%=rroom.getReservationroomid()%>)">გაუქმება</button>
                     <%if(sts == 0){%>
                     <button type="button" onclick="checkInEdit()" class="btn btn-sm btn-danger navbar-btn">მიღება</button>
                     <%}%>

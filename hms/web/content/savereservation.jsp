@@ -359,6 +359,9 @@ try{
     //if(res.getPaymentmode()== null)
     //    throw new Exception("აირჩიეთ გადახდის მეთოდი");
     
+    
+    if(payment.getAmount() != null)
+        payment.setPaydate(dclosedate);
     if(payment.getAmount() != null && payment.getPaymentmethodid().intValue() == 0)
         throw new Exception("აირჩიეთ გადახდის ტიპი გადახდაში");
     

@@ -17,7 +17,6 @@ import java.sql.*;
 
 // imports- 
 
-
 /**
  * Handles database calls for the housekeeper table.
  */
@@ -25,7 +24,6 @@ public class HousekeeperManager
 // extends+ 
 
 // extends- 
-
 {
 
     /**
@@ -1176,5 +1174,4 @@ public class HousekeeperManager
 // class+ 
 
 // class- 
-
 }

@@ -1649,6 +1649,70 @@ public class ReservationroomManager
     }
 
     /**
+     * Retrieves an array of GuestBean using the relation table Reservationroompickdrop given a ReservationroomBean object.
+     *
+     * @param pObject the ReservationroomBean pObject to be used
+     * @return an array of GuestBean 
+     */
+    // MANY TO MANY
+    public GuestBean[] loadGuestViaReservationroompickdrop(ReservationroomBean pObject) throws SQLException
+    {
+         Connection c = null;
+         PreparedStatement ps = null;
+         String strSQL =      " SELECT "
+                         + "        *"
+                         + " FROM  "
+                         + "        guest,reservationroompickdrop"
+                         + " WHERE "    
+                         + "     reservationroompickdrop.reservationroomid = ?"
+                         + " AND reservationroompickdrop.guestid = guest.guestid";
+         try
+         {
+             c = getConnection();
+             ps = c.prepareStatement(strSQL,ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+             Manager.setLong(ps, 1, pObject.getReservationroomid());
+             return GuestManager.getInstance().loadByPreparedStatement(ps);
+         }
+         finally
+         {
+            getManager().close(ps);
+            freeConnection(c);
+         }
+    }
+
+    /**
+     * Retrieves an array of PickdropBean using the relation table Reservationroompickdrop given a ReservationroomBean object.
+     *
+     * @param pObject the ReservationroomBean pObject to be used
+     * @return an array of PickdropBean 
+     */
+    // MANY TO MANY
+    public PickdropBean[] loadPickdropViaReservationroompickdrop(ReservationroomBean pObject) throws SQLException
+    {
+         Connection c = null;
+         PreparedStatement ps = null;
+         String strSQL =      " SELECT "
+                         + "        *"
+                         + " FROM  "
+                         + "        pickdrop,reservationroompickdrop"
+                         + " WHERE "    
+                         + "     reservationroompickdrop.reservationroomid = ?"
+                         + " AND reservationroompickdrop.pickdropid = pickdrop.pickdropid";
+         try
+         {
+             c = getConnection();
+             ps = c.prepareStatement(strSQL,ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+             Manager.setLong(ps, 1, pObject.getReservationroomid());
+             return PickdropManager.getInstance().loadByPreparedStatement(ps);
+         }
+         finally
+         {
+            getManager().close(ps);
+            freeConnection(c);
+         }
+    }
+
+    /**
      * Retrieves an array of BlockroomBean using the relation table Roomst given a ReservationroomBean object.
      *
      * @param pObject the ReservationroomBean pObject to be used

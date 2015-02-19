@@ -276,10 +276,7 @@ public class folio {
         
         folioid = folio.getFolioid().longValue();
         
-        if(pm != null && pm.getAmount() != null){
-            pm.setFolioid(folioid);
-            pm = PaymentManager.getInstance().save(pm);
-        }
+        
 
         FolioBean folio1 = null;
         if(type == 3){
@@ -308,6 +305,38 @@ public class folio {
         //        c2.add(Calendar.DATE, 1);
         //}
         int cnt = DayDiff(c1, c2);
+        
+        if(pm != null && pm.getAmount() != null){
+            pm.setFolioid(folioid);
+            pm = PaymentManager.getInstance().save(pm);
+            Calendar calpay = Calendar.getInstance();
+            calpay.setTime(pm.getPaydate());
+            if(calpay.before(c1) || calpay.after(c2)){
+                if(pm.getPaymentmethodid().intValue() == 1){
+                    FolioitemBean fb = FolioitemManager.getInstance().createFolioitemBean();
+                    fb.setFolioid(folio.getFolioid());
+                    fb.setItemdate(pm.getPaydate());
+                    fb.setRegbyid(user.getPersonnelid());
+                    fb.setAmount(pm.getAmount());
+                    fb.setDone(false);
+                    fb.setPaymentid(pm.getPaymentid());
+                    fb.setParticular(2);
+                    fb = FolioitemManager.getInstance().save(fb);
+                }
+                if(pm.getPaymentmethodid().intValue() > 1){
+                    FolioitemBean fb = FolioitemManager.getInstance().createFolioitemBean();
+                    fb.setFolioid(folio.getFolioid());
+                    fb.setItemdate(pm.getPaydate());
+                    fb.setRegbyid(user.getPersonnelid());
+                    fb.setAmount(pm.getAmount());
+                    fb.setDone(false);
+                    fb.setPaymentid(pm.getPaymentid());
+                    fb.setParticular(1);
+                    fb = FolioitemManager.getInstance().save(fb);
+                }
+            }
+        }
+        
         for(int i=0;c1.before(c2);i++){
             tariff trf = new tariff();
             trf.init(resroom.getReservationroomid(),i);

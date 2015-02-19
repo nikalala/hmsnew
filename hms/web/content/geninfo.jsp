@@ -78,7 +78,11 @@ ContragentBean[] contragents = ContragentManager.getInstance().loadByWhere("orde
 String[] paytaypevalue = new String[2];
 paytaypevalue[0] = "<select id='paymentmethodid' style='width: 200px;'><option value='0'>-- აირჩიეთ --</option>";
 for(int i=0;i<ptps.length;i++){
-    paytaypevalue[0] += "<option value='"+ptps[i].getPaymentmethodid()+"'>"+ptps[i].getName()+"</option>";
+    String sel = "";
+    if(reserv.getPaymentmethodid() != null && ptps[i].getPaymentmethodid().intValue() == reserv.getPaymentmethodid().intValue())
+        sel = "selected";
+    paytaypevalue[0] += "<option value='"+ptps[i].getPaymentmethodid()+"' "+sel+">"+ptps[i].getName()+"</option>";
+    
 }
 paytaypevalue[0] += "</select>";
 paytaypevalue[1] = "<select id='paymentmethodid' style='width: 200px;'><option value='0'>-- აირჩიეთ --</option>";
@@ -86,7 +90,10 @@ for(int i=0;i<contragents.length;i++){
     String cname = contragents[i].getName();
     if(cname == null || cname.trim().length() == 0)
         cname = contragents[i].getFname()+" "+contragents[i].getLname();
-    paytaypevalue[1] += "<option value='"+contragents[i].getContragentid()+"'>"+cname+"</option>";
+    String sel = "";
+    if(reserv.getPaymentcontragentid() != null && contragents[i].getContragentid().intValue() == reserv.getPaymentcontragentid().intValue())
+        sel = "selected";
+    paytaypevalue[1] += "<option value='"+contragents[i].getContragentid()+"' "+sel+">"+cname+"</option>";
 }
 paytaypevalue[1] += "</select>";
 
@@ -98,6 +105,10 @@ c2.setTime(reserv.getDeparturedate());
 double[] prices = getRoomrateForStay(rroom.getReservationroomid().longValue());
 topay = prices[0];
 paid = getSum("select sum(amount*ratedate("+maincurrency.getCurrencyid()+",currencyid,paydate)) from payment where folioid in (select folioid from folio where reservationroomid = "+rroom.getReservationroomid()+")");
+
+String reldate = (reserv.getAdvancepaymentdate() == null) ? "":dt.format(reserv.getAdvancepaymentdate());
+String relterm = (reserv.getAdvancepaymentamount() == null) ? "":dc.format(reserv.getAdvancepaymentamount());
+String vouchernum = (reserv.getVoucher() == null) ? "":reserv.getVoucher();
 %>
 <style>
     .trh1 {
@@ -123,7 +134,16 @@ paid = getSum("select sum(amount*ratedate("+maincurrency.getCurrencyid()+",curre
         
         getReasonList1(<%=rroom.getReservationid()%>);
         
-        
+        <%if(reserv.getPaymentmode() != null && reserv.getPaymentmode().intValue() == 0){%>
+            $("#paytypelabel").html("გადახდის მეთოდი");
+            $("#paytaypevalue").html("<%=paytaypevalue[0]%>");
+            $("#paytype1").prop('checked', true);
+        <%} else if(reserv.getPaymentmode() != null && reserv.getPaymentmode().intValue() == 1){%>
+            $("#paytypelabel").html("პირდაპირი დარიცხვა");
+            $("#paytaypevalue").html("<%=paytaypevalue[1]%>");
+            $("#paytype2").prop('checked', true);
+        <%}%>
+       
         //$('#transactiongeninfopanel1').height($("#edittransactionbody").height()-50);
         
         
@@ -190,26 +210,26 @@ paid = getSum("select sum(amount*ratedate("+maincurrency.getCurrencyid()+",curre
                                     <td><b>რელიზის თარიღი</b></td>
                                     <td>
                                         <div class="input-append date" data-date="" data-date-format="dd/mm/yyyy">
-                                            <input class="span2" size="10" value="" readonly="" type="text" id="reldate">
+                                            <input class="span2" size="10" value="<%=reldate%>" readonly="" type="text" id="reldate">
                                         </div>
                                     </td>
                                 </tr>
                                 <tr class="trh">
                                     <td><b>რელიზის პირობა</b></td>
                                     <td>
-                                        <input class="" size="6" value="" type="text" id="relterm" style="text-align: right;">%
+                                        <input class="" size="6" value="<%=relterm%>" type="text" id="relterm" style="text-align: right;">%
                                     </td>
                                 </tr>
                                 <tr class="trh">
                                     <td><b>ქვითრის ნომერი</b></td>
                                     <td>
-                                        <input class="" size="15" value="" type="text" id="vouchernum">
+                                        <input class="" size="15" value="<%=vouchernum%>" type="text" id="vouchernum">
                                     </td>
                                 </tr>
                                 <tr class="trh">
                                     <td><b>რეგისტაციის ბარათი</b></td>
                                     <td>
-                                        <input class="" size="10" value="" type="text" id="rgnum" readonly="">
+                                        <input class="" size="10" value="" type="text" id="rgnum" value="<%=rroom.getReservationroomid()%>" readonly="">
                                     </td>
                                 </tr>
                                 <tr class="trh">
@@ -218,12 +238,14 @@ paid = getSum("select sum(amount*ratedate("+maincurrency.getCurrencyid()+",curre
                                         <input class="" size="10" value="" type="text" id="billnum" readonly="">
                                     </td>
                                 </tr>
+                                <%--
                                 <tr class="trh">
                                     <td><b>მანქანის ნომერი</b></td>
                                     <td>
                                         <input class="" size="15" value="" type="text" id="platenum">
                                     </td>
                                 </tr>
+                                --%>
                             </tbody>
                         </table>
                     </div>

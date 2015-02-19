@@ -135,7 +135,7 @@ public class CurrencyBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: currency.name
-     * <li>comments: ??????????
+     * <li>comments: დასახელება
      * <li>column size: 2147483647
      * <li>jdbc type returned by the driver: Types.VARCHAR
      * </ul>
@@ -192,7 +192,7 @@ public class CurrencyBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: currency.code
-     * <li>comments: ????? ???????????
+     * <li>comments: მოკლე სახელწოდება
      * <li>column size: 10
      * <li>jdbc type returned by the driver: Types.VARCHAR
      * </ul>
@@ -249,7 +249,7 @@ public class CurrencyBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: currency.basic
-     * <li>comments: ???????? ??????
+     * <li>comments: ძირითადი ვალუტა
      * <li>default value: false
      * <li>column size: 1
      * <li>jdbc type returned by the driver: Types.BIT
@@ -317,7 +317,7 @@ public class CurrencyBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: currency.icon
-     * <li>comments: ??????
+     * <li>comments: ნიშანი
      * <li>column size: 2147483647
      * <li>jdbc type returned by the driver: Types.VARCHAR
      * </ul>
@@ -375,7 +375,7 @@ public class CurrencyBean
      * <ul>
      * <li>full name: currency.countryid
      * <li> foreign key: country.countryid
-     * <li>comments: ???????
+     * <li>comments: ქვეყანა
      * <li>column size: 10
      * <li>jdbc type returned by the driver: Types.INTEGER
      * </ul>
@@ -443,7 +443,7 @@ public class CurrencyBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: currency.fixedexrate
-     * <li>comments: ??????????? ????????? ?????
+     * <li>comments: ფიქსირებული გადაცვლის კურსი
      * <li>default value: true
      * <li>column size: 1
      * <li>jdbc type returned by the driver: Types.BIT

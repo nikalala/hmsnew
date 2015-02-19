@@ -1,4 +1,4 @@
-\<%@page contentType="application/pdf"%>
+<%@page contentType="application/pdf"%>
 <%@page pageEncoding="UTF-8"%>
 <%@include file="../../includes/meta.jsp"%>
 <%!
@@ -189,9 +189,9 @@ Calendar calarr = Calendar.getInstance();
 calarr.setTime(res.getArraivaldate());
 Calendar caldep = Calendar.getInstance();
 caldep.setTime(res.getDeparturedate());
-int days = DayDiff(calarr,caldep);
+int days = DayDiff(calarr,caldep)+1;
 RoomtypeBean roomtype = RoomtypeManager.getInstance().loadByPrimaryKey(rres.getRoomtypeid());
-String sroom = roomtype.getCode();
+String sroom = roomtype.getName();  // Code();
 if(rres.getRoomid() != null){
     RoomBean room = RoomManager.getInstance().loadByPrimaryKey(rres.getRoomid());
     sroom = room.getName()+" "+sroom;
@@ -239,28 +239,28 @@ String[] names = {
     "hoteladdress",             //  1
     "hotelphome",               //  2
     "hotelemail",               //  3
-    "registrationcardnumber",   //  4
+    "reg.card#",   //  4
     "guestname",                //  5
     "guestphone",               //  6
     "guestmobile",              //  7
-    "guestaddress",             //  8
+    "guestaddres+zip",             //  8
     "guestemail",               //  9
     "guestfax",                 // 10
     "guestcity",                // 11
     "guestcountry",             // 12
-    "guestidtype+idnumber",     // 13
-    "company",                  // 14
-    "bsource",                  // 15
-    "arrivaldate",              // 16
+    "guestidnumber",     // 13
+    "guestcompany",                  // 14
+    "Bsource",                  // 15
+    "Arrivaldate",              // 16
     "departuredate",            // 17
-    "totnights",                // 18
-    "roomnumber+roomtype",      // 19
+    "totalnights",                // 18
+    "roomtype+number",      // 19
     "rateamountperday",         // 20
     "taxamountparday",          // 21
     "discountamountperday",     // 22
     "adjustmentperday",         // 23
     "netperday",                // 24
-    "arrivaltime",              // 25
+    "Arrivaltime",              // 25
     "departuretime",            // 26
     "pax (a/c)",                // 27
     "ratetype",                 // 28
@@ -269,13 +269,85 @@ String[] names = {
     "amountleft+currencyshortcode",     // 31
     "paymenttype",                      // 32
     "peymentmethod",                    // 33
-    "printdate+time"                    // 34
+    "currentdate+time",                 // 34
+    "adult",                            // 35
+    "child",                            // 36
+    "dailyrate",                        // 37
+    "currencysign",                     // 38
+    "grandtotal",                       // 39
+    "tax",                              // 40
+    "amountpaid",                       // 41
+    "discount",                         // 42
+    "dueamount",                        // 43
+    "adjustment",                       // 44
+    "net",                              // 45
+    "Paymentmode",                      // 46
+    "paymentmethod/direcbilling A/C",   // 47
+    "paymentmethod / contragent",       // 48
+    "currencysign1",                    // 49
+    "currencysign2",                    // 50
+    "currencysign3",                    // 51
+    "currencysign4",                    // 52
+    "currencysign5",                    // 53
+    "currencysign6",                    // 54
+    "currencysign7"                     // 55
 };
 
 String idtp = "";
 if(idtype != null && idtype.getName() != null)
     idtp += idtype.getName()+" ";
 idtp += guest.getIdn();
+
+String pmethodname = "";
+if(res.getPaymentmethodid() != null){
+    PaymentmethodBean pm = PaymentmethodManager.getInstance().loadByPrimaryKey(res.getPaymentmethodid());
+    pmethodname = pm.getName();
+}
+
+String pmode = "";
+if(res.getPaymentmode() != null){
+    pmode = paymentmode[res.getPaymentmode().intValue()];
+    if(res.getPaymentmode().intValue() == 0){
+        PaymentmethodBean pm = PaymentmethodManager.getInstance().loadByPrimaryKey(res.getPaymentmethodid());
+        pmethods = pm.getName();
+        ptypes = "Payment Method";
+        if(pm.getPaymentmode().intValue() == 0){
+            pmode = "CASH";
+        } else {
+            pmode = "BANK";
+        }
+    } else {
+        ptypes = "Direct billing A/C";
+        pmode = "CREDIT";
+        ContragentBean cont = ContragentManager.getInstance().loadByPrimaryKey(res.getPaymentcontragentid());
+        switch(cont.getType().intValue()){
+            case 0:
+                pmethods = cont.getFname()+" "+cont.getLname();
+                break;
+            case 1:
+                pmethods = cont.getName();
+                break;
+            case 2:
+                pmethods = cont.getName();
+                if(pmethods == null || pmethods.trim().length() == 0)
+                    pmethods = cont.getFname()+" "+cont.getLname();
+                break;
+            case 3:
+                pmethods = cont.getName();
+                break;
+            case 4:
+                pmethods = cont.getFname()+" "+cont.getLname();
+                break;
+            case 5:
+                pmethods = cont.getName();
+                break;
+        }
+        
+        
+    }
+}
+
+
 
 String[] values = {
     hotel.getName(),                                            //  0
@@ -286,14 +358,14 @@ String[] values = {
     slt.getName()+" "+ guest.getFname()+" "+guest.getLname(),   //  5
     guest.getPhone(),                                           //  6
     guest.getMobile(),                                          //  7
-    guest.getAddress(),                                         //  8
+    guest.getAddress()+" "+guest.getZip(),                                         //  8
     guest.getEmail(),                                           //  9
     guest.getFax(),                                             // 10
     guest.getCity(),                                            // 11
     (gcountry != null) ? gcountry.getName():"",                                         // 12
     idtp,                        // 13
-    companyname,                                                         // 14
-    bsourcename,                                                         // 15
+    companyname,                                                // 14
+    bsourcename,                                                // 15
     dt.format(res.getArraivaldate()),                           // 16
     dt.format(res.getDeparturedate()),                          // 17
     String.valueOf(days),                                       // 18
@@ -312,7 +384,29 @@ String[] values = {
     maincurrency.getCode()+" "+dc.format(tot-paid),             // 31
     ptypes,                                                     // 32
     pmethods,                                                   // 33
-    dtlong.format(new Date())                                   // 34
+    dtlong.format(new Date()),                                  // 34
+    rres.getAdult().toString(),                                 // 35
+    rres.getChild().toString(),                                 // 36
+    dc.format(rates[1]/days),                                        // 37
+    maincurrency.getCode(),                                     // 38
+    dc.format(tot),                                             // 39
+    dc.format(rates[2]),                                        // 40
+    dc.format(paid),                                            // 41
+    dc.format(rates[3]),                                        // 42
+    dc.format(tot-paid),                                        // 43
+    dc.format(rates[4]),                                        // 44
+    dc.format(rates[0]),                                        // 45
+    pmode,                                                      // 46
+    ptypes,                                                     // 47
+    pmethods,                                                   // 48
+    maincurrency.getCode(),                                     // 49
+    maincurrency.getCode(),                                     // 50
+    maincurrency.getCode(),                                     // 51
+    maincurrency.getCode(),                                     // 52
+    maincurrency.getCode(),                                     // 53
+    maincurrency.getCode(),                                     // 54
+    maincurrency.getCode()                                      // 55
+    
 };
 
 String basedir = session.getServletContext().getRealPath("/");

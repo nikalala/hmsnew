@@ -128,7 +128,7 @@ public class CountryBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: country.name
-     * <li>comments: ??????????
+     * <li>comments: დასახელება
      * <li>column size: 255
      * <li>jdbc type returned by the driver: Types.VARCHAR
      * </ul>
@@ -185,7 +185,7 @@ public class CountryBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: country.code
-     * <li>comments: ????? ???????????
+     * <li>comments: მოკლე სახელწოდება
      * <li>column size: 5
      * <li>jdbc type returned by the driver: Types.VARCHAR
      * </ul>
@@ -242,7 +242,7 @@ public class CountryBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: country.ext
-     * <li>comments: ?????????? ????
+     * <li>comments: სატელეფონო კოდი
      * <li>column size: 10
      * <li>jdbc type returned by the driver: Types.VARCHAR
      * </ul>
@@ -299,7 +299,7 @@ public class CountryBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: country.flag
-     * <li>comments: �?????
+     * <li>comments:  დროშა
      * <li>column size: 255
      * <li>jdbc type returned by the driver: Types.VARCHAR
      * </ul>
