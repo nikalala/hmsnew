@@ -407,7 +407,7 @@ String vouchernum = (reserv.getVoucher() == null) ? "":reserv.getVoucher();
                             <td align="left" width='50%' style="border: 1px solid #C8C8C8;">
                                 <form class="form-inline" role="form">
                                       <div class="form-group">
-                                      &nbsp;&nbsp;&nbsp;<input type="checkbox" id="srrc">&nbsp;
+                                      &nbsp;&nbsp;&nbsp;<input type="checkbox" id="hidetarf">&nbsp;
                                       <label for="srrc">დაფარე ტარიფები რეგისტრაციის ბარათში</label>
                                       </div>
                                 </form>

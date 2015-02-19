@@ -179,11 +179,16 @@ Manager.getInstance().setJdbcUrl(getServletContext().getInitParameter("url"));
 Manager.getInstance().setJdbcUsername(getServletContext().getInitParameter("user"));
 Manager.getInstance().setJdbcPassword(getServletContext().getInitParameter("pass"));
 
+int hideamts = 0;
+if(request.getParameter("hdt") != null)
+    hideamts = 1;
+
 ReservationroomBean rres = ReservationroomManager.getInstance().loadByPrimaryKey(new Long(request.getParameter("id")));
 ReservationBean res = ReservationManager.getInstance().loadByPrimaryKey(rres.getReservationid());
 GuestBean guest = GuestManager.getInstance().loadByPrimaryKey(rres.getGuestid());
 SalutationBean slt = SalutationManager.getInstance().loadByPrimaryKey(guest.getSalutationid());
 CountryBean gcountry = CountryManager.getInstance().loadByPrimaryKey(guest.getCountryid());
+CountryBean hcountry = CountryManager.getInstance().loadByPrimaryKey(hotel.getCountryid());
 IdtypeBean idtype = IdtypeManager.getInstance().loadByPrimaryKey(guest.getIdtypeid());
 Calendar calarr = Calendar.getInstance();
 calarr.setTime(res.getArraivaldate());
@@ -196,7 +201,7 @@ if(rres.getRoomid() != null){
     RoomBean room = RoomManager.getInstance().loadByPrimaryKey(rres.getRoomid());
     sroom = room.getName()+" "+sroom;
 }
-double[] rates = getRoomrateForStay(rres.getReservationroomid().longValue());
+double[] rates = getRoomrateForStay(rres.getReservationroomid().longValue(),0);
 RatetypeBean rttype = RatetypeManager.getInstance().loadByPrimaryKey(rres.getRatetypeid());
 
 String companyname = "";
@@ -236,7 +241,7 @@ for(int i=0;i<pments.length;i++){
 
 String[] names = {
     "hotelname",                //  0
-    "hoteladdress",             //  1
+    "hoteladdress+zip",             //  1
     "hotelphome",               //  2
     "hotelemail",               //  3
     "reg.card#",   //  4
@@ -245,8 +250,8 @@ String[] names = {
     "guestmobile",              //  7
     "guestaddres+zip",             //  8
     "guestemail",               //  9
-    "guestfax",                 // 10
-    "guestcity",                // 11
+    "hotelfacebook",                 // 10
+    "hotelcity+country",                // 11
     "guestcountry",             // 12
     "guestidnumber",     // 13
     "guestcompany",                  // 14
@@ -290,7 +295,8 @@ String[] names = {
     "currencysign4",                    // 52
     "currencysign5",                    // 53
     "currencysign6",                    // 54
-    "currencysign7"                     // 55
+    "currencysign7",                     // 55
+    "hotelaweb"
 };
 
 String idtp = "";
@@ -351,7 +357,7 @@ if(res.getPaymentmode() != null){
 
 String[] values = {
     hotel.getName(),                                            //  0
-    hotel.getAddress1(),                                        //  1
+    hotel.getAddress1()+" "+hotel.getZip(),                                        //  1
     hotel.getPhone(),                                           //  2
     hotel.getEmail(),                                           //  3
     rres.getReservationroomid().toString(),                     //  4
@@ -360,8 +366,8 @@ String[] values = {
     guest.getMobile(),                                          //  7
     guest.getAddress()+" "+guest.getZip(),                                         //  8
     guest.getEmail(),                                           //  9
-    guest.getFax(),                                             // 10
-    guest.getCity(),                                            // 11
+    hotel.getFax(),                                             // 10
+    hotel.getCity(),                                            // 11
     (gcountry != null) ? gcountry.getName():"",                                         // 12
     idtp,                        // 13
     companyname,                                                // 14
@@ -387,25 +393,26 @@ String[] values = {
     dtlong.format(new Date()),                                  // 34
     rres.getAdult().toString(),                                 // 35
     rres.getChild().toString(),                                 // 36
-    dc.format(rates[1]/days),                                        // 37
-    maincurrency.getCode(),                                     // 38
-    dc.format(tot),                                             // 39
-    dc.format(rates[2]),                                        // 40
-    dc.format(paid),                                            // 41
-    dc.format(rates[3]),                                        // 42
-    dc.format(tot-paid),                                        // 43
-    dc.format(rates[4]),                                        // 44
-    dc.format(rates[0]),                                        // 45
+    (hideamts == 1) ? "****":dc.format(rates[1]),                                        // 37
+    (hideamts == 1) ? "":maincurrency.getCode(),                                     // 38
+    (hideamts == 1) ? "****":dc.format(tot),                                             // 39
+    (hideamts == 1) ? "****":dc.format(rates[2]),                                        // 40
+    (hideamts == 1) ? "****":dc.format(paid),                                            // 41
+    (hideamts == 1) ? "****":dc.format(rates[3]),                                        // 42
+    (hideamts == 1) ? "****":dc.format(tot-paid),                                        // 43
+    (hideamts == 1) ? "****":dc.format(rates[4]),                                        // 44
+    (hideamts == 1) ? "****":dc.format(rates[0]),                                        // 45
     pmode,                                                      // 46
     ptypes,                                                     // 47
     pmethods,                                                   // 48
-    maincurrency.getCode(),                                     // 49
-    maincurrency.getCode(),                                     // 50
-    maincurrency.getCode(),                                     // 51
-    maincurrency.getCode(),                                     // 52
-    maincurrency.getCode(),                                     // 53
-    maincurrency.getCode(),                                     // 54
-    maincurrency.getCode()                                      // 55
+    (hideamts == 1) ? "":maincurrency.getCode(),                                     // 49
+    (hideamts == 1) ? "":maincurrency.getCode(),                                     // 50
+    (hideamts == 1) ? "":maincurrency.getCode(),                                     // 51
+    (hideamts == 1) ? "":maincurrency.getCode(),                                     // 52
+    (hideamts == 1) ? "":maincurrency.getCode(),                                     // 53
+    (hideamts == 1) ? "":maincurrency.getCode(),                                     // 54
+    (hideamts == 1) ? "":maincurrency.getCode(),                                      // 55
+    hotel.getUrl()
     
 };
 

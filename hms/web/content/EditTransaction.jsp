@@ -73,7 +73,10 @@ $(document).ready(function(){
 });
 
 function printRegCard(id){
-        window.open("content/form/printRegCardPdf.jsp?id="+id);
+        var url = "content/form/printRegCardPdf.jsp?id="+id;
+        if($("#hidetarf").is(':checked'))
+            url += "&hdt=1";
+        window.open(url);
         //addTab("content/form/printInvoiceFolioItem.jsp?act=regcard&id="+id,"სარეგისტრაციო ბარათის ბეჭდვა","regcard_"+id);
     }
 

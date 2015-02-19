@@ -361,14 +361,20 @@ System.out.println(sql);
             rates[4] += trf.tariff_fix;
             calstart.add(Calendar.DATE, 1);
         }
-        
-        
-        
-        
-        
         return rates;
     }
     
+    double[] getRoomrateForStay(long reservationroomid,int day) throws Exception {
+        double[] rates = new double[5];
+        tariff trf = new tariff();
+        trf.init(reservationroomid,day);
+        rates[0] = trf.tariff_neto;
+        rates[1] = trf.tariff_rate;
+        rates[2] = trf.tariff_tax;
+        rates[3] = trf.tariff_discount;
+        rates[4] = trf.tariff_fix;
+        return rates;
+    }
     
 
     double[] getRoomrateForStay1(long reservationroomid) throws Exception {
