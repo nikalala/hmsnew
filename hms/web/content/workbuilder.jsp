@@ -44,6 +44,22 @@
         reloadGrid(workOrderGrid.id, url);
     }
 
+    function editWorkOrder(id){
+
+        $.post("content/addworkorder.jsp?wid="+id,function(result){
+
+            $(".filter-form1").hide();
+
+            $("#workorder_add").html(result);
+
+            $(".filter-form2").show();
+
+            loader.hide();
+
+        });
+
+    }
+
     $("#btnNext").click(function(){
         getNextRecords();
     });
@@ -54,7 +70,7 @@
 
     $("#btnAddNewWorkOrder").click(function(){
 
-        loader.hide();
+        loader.show();
 
         $.post("content/addworkorder.jsp",function(result){
 

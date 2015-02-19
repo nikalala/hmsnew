@@ -137,7 +137,7 @@
         $.post("content/execute.jsp?query=" + encodeURIComponent(sql), {}, function () {
             loader.hide();
             if($("#list_preferences")[0].rows.length == 2){
-                $('#<%=idToremove%>').find('.fa-sun-o').remove();
+                $('#<%=idToremove%>_room').find('.fa-sun-o').remove();
             }
             resetAll();
         });
