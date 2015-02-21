@@ -17,23 +17,21 @@ import java.sql.*;
 
 // imports- 
 
-
 /**
- * Handles database calls for the reservationroompickdrop table.
+ * Handles database calls for the sharer table.
  */
-public class ReservationroompickdropManager
+public class SharerManager
 // extends+ 
 
 // extends- 
-
 {
 
     /**
-     * Column reservationroompickdropid of type Types.BIGINT mapped to Long.
+     * Column sharerid of type Types.BIGINT mapped to Long.
      */
-    public static final int ID_RESERVATIONROOMPICKDROPID = 0;
-    public static final int TYPE_RESERVATIONROOMPICKDROPID = Types.BIGINT;
-    public static final String NAME_RESERVATIONROOMPICKDROPID = "reservationroompickdropid";
+    public static final int ID_SHARERID = 0;
+    public static final int TYPE_SHARERID = Types.BIGINT;
+    public static final String NAME_SHARERID = "sharerid";
 
     /**
      * Column reservationroomid of type Types.BIGINT mapped to Long.
@@ -43,72 +41,63 @@ public class ReservationroompickdropManager
     public static final String NAME_RESERVATIONROOMID = "reservationroomid";
 
     /**
-     * Column pickdropid of type Types.BIGINT mapped to Long.
-     */
-    public static final int ID_PICKDROPID = 2;
-    public static final int TYPE_PICKDROPID = Types.BIGINT;
-    public static final String NAME_PICKDROPID = "pickdropid";
-
-    /**
      * Column guestid of type Types.BIGINT mapped to Long.
      */
-    public static final int ID_GUESTID = 3;
+    public static final int ID_GUESTID = 2;
     public static final int TYPE_GUESTID = Types.BIGINT;
     public static final String NAME_GUESTID = "guestid";
 
 
-    private static final String TABLE_NAME = "reservationroompickdrop";
+    private static final String TABLE_NAME = "sharer";
 
     /**
-     * Create an array of type string containing all the fields of the reservationroompickdrop table.
+     * Create an array of type string containing all the fields of the sharer table.
      */
     private static final String[] FIELD_NAMES = 
     {
-        "reservationroompickdrop.reservationroompickdropid"
-        ,"reservationroompickdrop.reservationroomid"
-        ,"reservationroompickdrop.pickdropid"
-        ,"reservationroompickdrop.guestid"
+        "sharer.sharerid"
+        ,"sharer.reservationroomid"
+        ,"sharer.guestid"
     };
 
     /**
-     * Field that contains the comma separated fields of the reservationroompickdrop table.
+     * Field that contains the comma separated fields of the sharer table.
      */
-    private static final String ALL_FIELDS = "reservationroompickdrop.reservationroompickdropid"
-                            + ",reservationroompickdrop.reservationroomid"
-                            + ",reservationroompickdrop.pickdropid"
-                            + ",reservationroompickdrop.guestid";
+    private static final String ALL_FIELDS = "sharer.sharerid"
+                            + ",sharer.reservationroomid"
+                            + ",sharer.guestid";
 
-    private static ReservationroompickdropManager singleton = new ReservationroompickdropManager();
+    private static SharerManager singleton = new SharerManager();
 
     /**
-     * Get the ReservationroompickdropManager singleton.
+     * Get the SharerManager singleton.
      *
-     * @return ReservationroompickdropManager 
+     * @return SharerManager 
      */
-    synchronized public static ReservationroompickdropManager getInstance()
+    synchronized public static SharerManager getInstance()
     {
         return singleton;
     }
 
     /**
-     * Sets your own ReservationroompickdropManager instance.
+     * Sets your own SharerManager instance.
      <br>
      * This is optional, by default we provide it for you.
      */
-    synchronized public static void setInstance(ReservationroompickdropManager instance)
+    synchronized public static void setInstance(SharerManager instance)
     {
         singleton = instance;
     }
 
 
     /**
-     * Creates a new ReservationroompickdropBean instance.
+     * Creates a new SharerBean instance.
      *
-     * @return the new ReservationroompickdropBean 
+     * @return the new SharerBean 
      */
-    public ReservationroompickdropBean createReservationroompickdropBean()
+    public SharerBean createSharerBean()
     {
-        return new ReservationroompickdropBean();
+        return new SharerBean();
     }
 
     //////////////////////////////////////
@@ -116,21 +105,21 @@ public class ReservationroompickdropManager
     //////////////////////////////////////
 
     /**
-     * Loads a ReservationroompickdropBean from the reservationroompickdrop using its key fields.
+     * Loads a SharerBean from the sharer using its key fields.
      *
-     * @return a unique ReservationroompickdropBean 
+     * @return a unique SharerBean 
      */
     //12
-    public ReservationroompickdropBean loadByPrimaryKey(Long reservationroompickdropid) throws SQLException
+    public SharerBean loadByPrimaryKey(Long sharerid) throws SQLException
     {
         Connection c = null;
         PreparedStatement ps = null;
         try 
         {
             c = getConnection();
-            ps = c.prepareStatement("SELECT " + ALL_FIELDS + " FROM reservationroompickdrop WHERE reservationroompickdrop.reservationroompickdropid=?",ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-            Manager.setLong(ps, 1, reservationroompickdropid);
-            ReservationroompickdropBean pReturn[] = loadByPreparedStatement(ps);
+            ps = c.prepareStatement("SELECT " + ALL_FIELDS + " FROM sharer WHERE sharer.sharerid=?",ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            Manager.setLong(ps, 1, sharerid);
+            SharerBean pReturn[] = loadByPreparedStatement(ps);
             if (pReturn.length < 1)
                 return null;
             else
@@ -149,15 +138,15 @@ public class ReservationroompickdropManager
      * @return the number of deleted rows
      */
     //60
-    public int deleteByPrimaryKey(Long reservationroompickdropid) throws SQLException
+    public int deleteByPrimaryKey(Long sharerid) throws SQLException
     {
         Connection c = null;
         PreparedStatement ps = null;
         try
         {
             c = getConnection();
-            ps = c.prepareStatement("DELETE from reservationroompickdrop WHERE reservationroompickdrop.reservationroompickdropid=?",ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-            Manager.setLong(ps, 1, reservationroompickdropid);
+            ps = c.prepareStatement("DELETE from sharer WHERE sharer.sharerid=?",ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            Manager.setLong(ps, 1, sharerid);
             return ps.executeUpdate();
         }
         finally
@@ -174,19 +163,19 @@ public class ReservationroompickdropManager
     //////////////////////////////////////
 
     /**
-     * Loads ReservationroompickdropBean array from the reservationroompickdrop table using its guestid field.
+     * Loads SharerBean array from the sharer table using its guestid field.
      *
-     * @return an array of ReservationroompickdropBean 
+     * @return an array of SharerBean 
      */
     // LOAD BY IMPORTED KEY
-    public ReservationroompickdropBean[] loadByGuestid(Long value) throws SQLException 
+    public SharerBean[] loadByGuestid(Long value) throws SQLException 
     {
         Connection c = null;
         PreparedStatement ps = null;
         try 
         {
             c = getConnection();
-            ps = c.prepareStatement("SELECT " + ALL_FIELDS + " FROM reservationroompickdrop WHERE guestid=?",ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            ps = c.prepareStatement("SELECT " + ALL_FIELDS + " FROM sharer WHERE guestid=?",ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             Manager.setLong(ps, 1, value);
             return loadByPreparedStatement(ps);
         }
@@ -199,7 +188,7 @@ public class ReservationroompickdropManager
 
 
     /**
-     * Deletes from the reservationroompickdrop table by guestid field.
+     * Deletes from the sharer table by guestid field.
      *
      * @param value the key value to seek
      * @return the number of rows deleted
@@ -212,7 +201,7 @@ public class ReservationroompickdropManager
         try 
         {
             c = getConnection();
-            ps = c.prepareStatement("DELETE FROM reservationroompickdrop WHERE guestid=?");
+            ps = c.prepareStatement("DELETE FROM sharer WHERE guestid=?");
             Manager.setLong(ps, 1, value);
             return ps.executeUpdate();
         }
@@ -225,19 +214,19 @@ public class ReservationroompickdropManager
 
 
     /**
-     * Loads ReservationroompickdropBean array from the reservationroompickdrop table using its pickdropid field.
+     * Loads SharerBean array from the sharer table using its reservationroomid field.
      *
-     * @return an array of ReservationroompickdropBean 
+     * @return an array of SharerBean 
      */
     // LOAD BY IMPORTED KEY
-    public ReservationroompickdropBean[] loadByPickdropid(Long value) throws SQLException 
+    public SharerBean[] loadByReservationroomid(Long value) throws SQLException 
     {
         Connection c = null;
         PreparedStatement ps = null;
         try 
         {
             c = getConnection();
-            ps = c.prepareStatement("SELECT " + ALL_FIELDS + " FROM reservationroompickdrop WHERE pickdropid=?",ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            ps = c.prepareStatement("SELECT " + ALL_FIELDS + " FROM sharer WHERE reservationroomid=?",ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             Manager.setLong(ps, 1, value);
             return loadByPreparedStatement(ps);
         }
@@ -250,58 +239,7 @@ public class ReservationroompickdropManager
 
 
     /**
-     * Deletes from the reservationroompickdrop table by pickdropid field.
-     *
-     * @param value the key value to seek
-     * @return the number of rows deleted
-     */
-    // DELETE BY IMPORTED KEY
-    public int deleteByPickdropid(Long value) throws SQLException 
-    {
-        Connection c = null;
-        PreparedStatement ps = null;
-        try 
-        {
-            c = getConnection();
-            ps = c.prepareStatement("DELETE FROM reservationroompickdrop WHERE pickdropid=?");
-            Manager.setLong(ps, 1, value);
-            return ps.executeUpdate();
-        }
-        finally
-        {
-            getManager().close(ps);
-            freeConnection(c);
-        }
-    }
-
-
-    /**
-     * Loads ReservationroompickdropBean array from the reservationroompickdrop table using its reservationroomid field.
-     *
-     * @return an array of ReservationroompickdropBean 
-     */
-    // LOAD BY IMPORTED KEY
-    public ReservationroompickdropBean[] loadByReservationroomid(Long value) throws SQLException 
-    {
-        Connection c = null;
-        PreparedStatement ps = null;
-        try 
-        {
-            c = getConnection();
-            ps = c.prepareStatement("SELECT " + ALL_FIELDS + " FROM reservationroompickdrop WHERE reservationroomid=?",ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-            Manager.setLong(ps, 1, value);
-            return loadByPreparedStatement(ps);
-        }
-        finally
-        {
-            getManager().close(ps);
-            freeConnection(c);
-        }
-    }
-
-
-    /**
-     * Deletes from the reservationroompickdrop table by reservationroomid field.
+     * Deletes from the sharer table by reservationroomid field.
      *
      * @param value the key value to seek
      * @return the number of rows deleted
@@ -314,7 +252,7 @@ public class ReservationroompickdropManager
         try 
         {
             c = getConnection();
-            ps = c.prepareStatement("DELETE FROM reservationroompickdrop WHERE reservationroomid=?");
+            ps = c.prepareStatement("DELETE FROM sharer WHERE reservationroomid=?");
             Manager.setLong(ps, 1, value);
             return ps.executeUpdate();
         }
@@ -331,13 +269,13 @@ public class ReservationroompickdropManager
     // GET/SET FOREIGN KEY BEAN METHOD
     //////////////////////////////////////
     /**
-     * Retrieves the GuestBean object from the reservationroompickdrop.guestid field.
+     * Retrieves the GuestBean object from the sharer.guestid field.
      *
-     * @param pObject the ReservationroompickdropBean 
+     * @param pObject the SharerBean 
      * @return the associated GuestBean pObject
      */
     // GET IMPORTED
-    public GuestBean getGuestBean(ReservationroompickdropBean pObject) throws SQLException
+    public GuestBean getGuestBean(SharerBean pObject) throws SQLException
     {
         GuestBean other = GuestManager.getInstance().createGuestBean();
         other.setGuestid(pObject.getGuestid());
@@ -345,55 +283,27 @@ public class ReservationroompickdropManager
     }
 
     /**
-     * Associates the ReservationroompickdropBean object to the GuestBean object.
+     * Associates the SharerBean object to the GuestBean object.
      *
-     * @param pObject the ReservationroompickdropBean object to use
-     * @param pObjectToBeSet the GuestBean object to associate to the ReservationroompickdropBean 
+     * @param pObject the SharerBean object to use
+     * @param pObjectToBeSet the GuestBean object to associate to the SharerBean 
      * @return the associated GuestBean pObject
      */
     // SET IMPORTED
-    public ReservationroompickdropBean setGuestBean(ReservationroompickdropBean pObject,GuestBean pObjectToBeSet)
+    public SharerBean setGuestBean(SharerBean pObject,GuestBean pObjectToBeSet)
     {
         pObject.setGuestid(pObjectToBeSet.getGuestid());
         return pObject;
     }
 
     /**
-     * Retrieves the PickdropBean object from the reservationroompickdrop.pickdropid field.
+     * Retrieves the ReservationroomBean object from the sharer.reservationroomid field.
      *
-     * @param pObject the ReservationroompickdropBean 
-     * @return the associated PickdropBean pObject
-     */
-    // GET IMPORTED
-    public PickdropBean getPickdropBean(ReservationroompickdropBean pObject) throws SQLException
-    {
-        PickdropBean other = PickdropManager.getInstance().createPickdropBean();
-        other.setPickdropid(pObject.getPickdropid());
-        return PickdropManager.getInstance().loadUniqueUsingTemplate(other);
-    }
-
-    /**
-     * Associates the ReservationroompickdropBean object to the PickdropBean object.
-     *
-     * @param pObject the ReservationroompickdropBean object to use
-     * @param pObjectToBeSet the PickdropBean object to associate to the ReservationroompickdropBean 
-     * @return the associated PickdropBean pObject
-     */
-    // SET IMPORTED
-    public ReservationroompickdropBean setPickdropBean(ReservationroompickdropBean pObject,PickdropBean pObjectToBeSet)
-    {
-        pObject.setPickdropid(pObjectToBeSet.getPickdropid());
-        return pObject;
-    }
-
-    /**
-     * Retrieves the ReservationroomBean object from the reservationroompickdrop.reservationroomid field.
-     *
-     * @param pObject the ReservationroompickdropBean 
+     * @param pObject the SharerBean 
      * @return the associated ReservationroomBean pObject
      */
     // GET IMPORTED
-    public ReservationroomBean getReservationroomBean(ReservationroompickdropBean pObject) throws SQLException
+    public ReservationroomBean getReservationroomBean(SharerBean pObject) throws SQLException
     {
         ReservationroomBean other = ReservationroomManager.getInstance().createReservationroomBean();
         other.setReservationroomid(pObject.getReservationroomid());
@@ -401,14 +311,14 @@ public class ReservationroompickdropManager
     }
 
     /**
-     * Associates the ReservationroompickdropBean object to the ReservationroomBean object.
+     * Associates the SharerBean object to the ReservationroomBean object.
      *
-     * @param pObject the ReservationroompickdropBean object to use
-     * @param pObjectToBeSet the ReservationroomBean object to associate to the ReservationroompickdropBean 
+     * @param pObject the SharerBean object to use
+     * @param pObjectToBeSet the ReservationroomBean object to associate to the SharerBean 
      * @return the associated ReservationroomBean pObject
      */
     // SET IMPORTED
-    public ReservationroompickdropBean setReservationroomBean(ReservationroompickdropBean pObject,ReservationroomBean pObjectToBeSet)
+    public SharerBean setReservationroomBean(SharerBean pObject,ReservationroomBean pObjectToBeSet)
     {
         pObject.setReservationroomid(pObjectToBeSet.getReservationroomid());
         return pObject;
@@ -421,19 +331,19 @@ public class ReservationroompickdropManager
     //////////////////////////////////////
 
     /**
-     * Loads all the rows from reservationroompickdrop.
+     * Loads all the rows from sharer.
      *
-     * @return an array of ReservationroompickdropManager pObject
+     * @return an array of SharerManager pObject
      */
     //38
-    public ReservationroompickdropBean[] loadAll() throws SQLException 
+    public SharerBean[] loadAll() throws SQLException 
     {
         Connection c = null;
         PreparedStatement ps = null;
         try 
         {
             c = getConnection();
-            ps = c.prepareStatement("SELECT " + ALL_FIELDS + " FROM reservationroompickdrop",ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            ps = c.prepareStatement("SELECT " + ALL_FIELDS + " FROM sharer",ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             return loadByPreparedStatement(ps);
         }
         finally
@@ -447,31 +357,31 @@ public class ReservationroompickdropManager
     // SQL 'WHERE' METHOD
     //////////////////////////////////////
     /**
-     * Retrieves an array of ReservationroompickdropBean given a sql 'where' clause.
+     * Retrieves an array of SharerBean given a sql 'where' clause.
      *
      * @param where the sql 'where' clause
-     * @return the resulting ReservationroompickdropBean table 
+     * @return the resulting SharerBean table 
      */
     //49
-    public ReservationroompickdropBean[] loadByWhere(String where) throws SQLException
+    public SharerBean[] loadByWhere(String where) throws SQLException
     {
         return loadByWhere(where, null);
     }
 
     /**
-     * Retrieves an array of ReservationroompickdropBean given a sql where clause, and a list of fields.
+     * Retrieves an array of SharerBean given a sql where clause, and a list of fields.
      * It is up to you to pass the 'WHERE' in your where clausis.
      *
      * @param where the sql 'where' clause
      * @param fieldList table of the field's associated constants
-     * @return the resulting ReservationroompickdropBean table 
+     * @return the resulting SharerBean table 
      */
     //51
-    public ReservationroompickdropBean[] loadByWhere(String where, int[] fieldList) throws SQLException
+    public SharerBean[] loadByWhere(String where, int[] fieldList) throws SQLException
     {
         String sql = null;
         if(fieldList == null)
-            sql = "select " + ALL_FIELDS + " from reservationroompickdrop " + where;
+            sql = "select " + ALL_FIELDS + " from sharer " + where;
         else
         {
             StringBuffer buff = new StringBuffer(128);
@@ -482,7 +392,7 @@ public class ReservationroompickdropManager
                     buff.append(",");
                 buff.append(FIELD_NAMES[fieldList[i]]);
             }
-            buff.append(" from reservationroompickdrop ");
+            buff.append(" from sharer ");
             buff.append(where);
             sql = buff.toString();
             buff = null;
@@ -505,7 +415,7 @@ public class ReservationroompickdropManager
                     v.add(decodeRow(rs, fieldList));
             }
 
-            return (ReservationroompickdropBean[])v.toArray(new ReservationroompickdropBean[0]);
+            return (SharerBean[])v.toArray(new SharerBean[0]);
         }
         finally
         {
@@ -517,7 +427,7 @@ public class ReservationroompickdropManager
 
 
     /**
-     * Deletes all rows from reservationroompickdrop table.
+     * Deletes all rows from sharer table.
      * @return the number of deleted rows.
      */
     public int deleteAll() throws SQLException
@@ -527,7 +437,7 @@ public class ReservationroompickdropManager
 
 
     /**
-     * Deletes rows from the reservationroompickdrop table using a 'where' clause.
+     * Deletes rows from the sharer table using a 'where' clause.
      * It is up to you to pass the 'WHERE' in your where clausis.
      * <br>Attention, if 'WHERE' is omitted it will delete all records. 
      *
@@ -542,7 +452,7 @@ public class ReservationroompickdropManager
         try
         {
             c = getConnection();
-            String delByWhereSQL = "DELETE FROM reservationroompickdrop " + where;
+            String delByWhereSQL = "DELETE FROM sharer " + where;
             ps = c.prepareStatement(delByWhereSQL);
             return ps.executeUpdate();
         }
@@ -559,12 +469,12 @@ public class ReservationroompickdropManager
     // SAVE 
     ///////////////////////////////////////////////////////////////////////
     /**
-     * Saves the ReservationroompickdropBean pObject into the database.
+     * Saves the SharerBean pObject into the database.
      *
-     * @param pObject the ReservationroompickdropBean pObject to be saved
+     * @param pObject the SharerBean pObject to be saved
      */
     //100
-    public ReservationroompickdropBean save(ReservationroompickdropBean pObject) throws SQLException
+    public SharerBean save(SharerBean pObject) throws SQLException
     {
         Connection c = null;
         PreparedStatement ps = null;
@@ -575,15 +485,15 @@ public class ReservationroompickdropManager
             c = getConnection();
             if (pObject.isNew())
             { // SAVE 
-                if (!pObject.isReservationroompickdropidModified())
+                if (!pObject.isShareridModified())
                 {
-                    ps = c.prepareStatement("SELECT nextval('reservationroompickdropid_seq')");
+                    ps = c.prepareStatement("SELECT nextval('sharerid_seq')");
                     ResultSet rs = null;
                     try
                     {
                         rs = ps.executeQuery();
                         if(rs.next())
-                            pObject.setReservationroompickdropid(Manager.getLong(rs, 1));
+                            pObject.setSharerid(Manager.getLong(rs, 1));
                         else
                             getManager().log("ATTENTION: Could not retrieve generated key!");
                     }
@@ -595,13 +505,13 @@ public class ReservationroompickdropManager
                 }
                 beforeInsert(pObject); // listener callback
                 int _dirtyCount = 0;
-                _sql = new StringBuffer("INSERT into reservationroompickdrop (");
+                _sql = new StringBuffer("INSERT into sharer (");
     
-                if (pObject.isReservationroompickdropidModified()) {
+                if (pObject.isShareridModified()) {
                     if (_dirtyCount>0) {
                         _sql.append(",");
                     }
-                    _sql.append("reservationroompickdropid");
+                    _sql.append("sharerid");
                     _dirtyCount++;
                 }
 
@@ -610,14 +520,6 @@ public class ReservationroompickdropManager
                         _sql.append(",");
                     }
                     _sql.append("reservationroomid");
-                    _dirtyCount++;
-                }
-
-                if (pObject.isPickdropidModified()) {
-                    if (_dirtyCount>0) {
-                        _sql.append(",");
-                    }
-                    _sql.append("pickdropid");
                     _dirtyCount++;
                 }
 
@@ -641,16 +543,12 @@ public class ReservationroompickdropManager
                 ps = c.prepareStatement(_sql.toString(), ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
                 _dirtyCount = 0;
 
-                if (pObject.isReservationroompickdropidModified()) {
-                    Manager.setLong(ps, ++_dirtyCount, pObject.getReservationroompickdropid());
+                if (pObject.isShareridModified()) {
+                    Manager.setLong(ps, ++_dirtyCount, pObject.getSharerid());
                 }
     
                 if (pObject.isReservationroomidModified()) {
                     Manager.setLong(ps, ++_dirtyCount, pObject.getReservationroomid());
-                }
-    
-                if (pObject.isPickdropidModified()) {
-                    Manager.setLong(ps, ++_dirtyCount, pObject.getPickdropid());
                 }
     
                 if (pObject.isGuestidModified()) {
@@ -666,16 +564,16 @@ public class ReservationroompickdropManager
             else 
             { // UPDATE 
                 beforeUpdate(pObject); // listener callback
-                _sql = new StringBuffer("UPDATE reservationroompickdrop SET ");
+                _sql = new StringBuffer("UPDATE sharer SET ");
                 boolean useComma=false;
 
-                if (pObject.isReservationroompickdropidModified()) {
+                if (pObject.isShareridModified()) {
                     if (useComma) {
                         _sql.append(",");
                     } else {
                         useComma=true;
                     }
-                    _sql.append("reservationroompickdropid").append("=?");
+                    _sql.append("sharerid").append("=?");
                 }
 
                 if (pObject.isReservationroomidModified()) {
@@ -687,15 +585,6 @@ public class ReservationroompickdropManager
                     _sql.append("reservationroomid").append("=?");
                 }
 
-                if (pObject.isPickdropidModified()) {
-                    if (useComma) {
-                        _sql.append(",");
-                    } else {
-                        useComma=true;
-                    }
-                    _sql.append("pickdropid").append("=?");
-                }
-
                 if (pObject.isGuestidModified()) {
                     if (useComma) {
                         _sql.append(",");
@@ -705,20 +594,16 @@ public class ReservationroompickdropManager
                     _sql.append("guestid").append("=?");
                 }
                 _sql.append(" WHERE ");
-                _sql.append("reservationroompickdrop.reservationroompickdropid=?");
+                _sql.append("sharer.sharerid=?");
                 ps = c.prepareStatement(_sql.toString(),ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
                 int _dirtyCount = 0;
 
-                if (pObject.isReservationroompickdropidModified()) {
-                      Manager.setLong(ps, ++_dirtyCount, pObject.getReservationroompickdropid());
+                if (pObject.isShareridModified()) {
+                      Manager.setLong(ps, ++_dirtyCount, pObject.getSharerid());
                 }
 
                 if (pObject.isReservationroomidModified()) {
                       Manager.setLong(ps, ++_dirtyCount, pObject.getReservationroomid());
-                }
-
-                if (pObject.isPickdropidModified()) {
-                      Manager.setLong(ps, ++_dirtyCount, pObject.getPickdropid());
                 }
 
                 if (pObject.isGuestidModified()) {
@@ -729,7 +614,7 @@ public class ReservationroompickdropManager
                      return pObject;
                 }
     
-                Manager.setLong(ps, ++_dirtyCount, pObject.getReservationroompickdropid());
+                Manager.setLong(ps, ++_dirtyCount, pObject.getSharerid());
                 ps.executeUpdate();
                 pObject.resetIsModified();
                 afterUpdate(pObject); // listener callback
@@ -747,13 +632,13 @@ public class ReservationroompickdropManager
 
 
     /**
-     * Saves an array of ReservationroompickdropBean pObjects into the database.
+     * Saves an array of SharerBean pObjects into the database.
      *
-     * @param pObjects the ReservationroompickdropBean pObject table to be saved
-     * @return the saved ReservationroompickdropBean array.
+     * @param pObjects the SharerBean pObject table to be saved
+     * @return the saved SharerBean array.
      */
     //65
-    public ReservationroompickdropBean[] save(ReservationroompickdropBean[] pObjects) throws SQLException 
+    public SharerBean[] save(SharerBean[] pObjects) throws SQLException 
     {
         for (int iIndex = 0; iIndex < pObjects.length; iIndex ++){
             save(pObjects[iIndex]);
@@ -767,15 +652,15 @@ public class ReservationroompickdropManager
     // USING TEMPLATE 
     ///////////////////////////////////////////////////////////////////////
     /**
-     * Loads a unique ReservationroompickdropBean pObject from a template one giving a c
+     * Loads a unique SharerBean pObject from a template one giving a c
      *
-     * @param pObject the ReservationroompickdropBean pObject to look for
+     * @param pObject the SharerBean pObject to look for
      * @return the pObject matching the template
      */
     //85
-    public ReservationroompickdropBean loadUniqueUsingTemplate(ReservationroompickdropBean pObject) throws SQLException
+    public SharerBean loadUniqueUsingTemplate(SharerBean pObject) throws SQLException
     {
-         ReservationroompickdropBean[] pReturn = loadUsingTemplate(pObject);
+         SharerBean[] pReturn = loadUsingTemplate(pObject);
          if (pReturn.length == 0)
              return null;
          if (pReturn.length > 1)
@@ -784,36 +669,31 @@ public class ReservationroompickdropManager
      }
 
     /**
-     * Loads an array of ReservationroompickdropBean from a template one.
+     * Loads an array of SharerBean from a template one.
      *
-     * @param pObject the ReservationroompickdropBean template to look for
-     * @return all the ReservationroompickdropBean matching the template
+     * @param pObject the SharerBean template to look for
+     * @return all the SharerBean matching the template
      */
     //88
-    public ReservationroompickdropBean[] loadUsingTemplate(ReservationroompickdropBean pObject) throws SQLException
+    public SharerBean[] loadUsingTemplate(SharerBean pObject) throws SQLException
     {
         Connection c = null;
         PreparedStatement ps = null;
         StringBuffer where = new StringBuffer("");
-        StringBuffer _sql = new StringBuffer("SELECT " + ALL_FIELDS + " from reservationroompickdrop WHERE ");
+        StringBuffer _sql = new StringBuffer("SELECT " + ALL_FIELDS + " from sharer WHERE ");
         StringBuffer _sqlWhere = new StringBuffer("");
         try
         {
             int _dirtyCount = 0;
     
-             if (pObject.isReservationroompickdropidModified()) {
+             if (pObject.isShareridModified()) {
                  _dirtyCount ++; 
-                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("reservationroompickdropid= ?");
+                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("sharerid= ?");
              }
     
              if (pObject.isReservationroomidModified()) {
                  _dirtyCount ++; 
                  _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("reservationroomid= ?");
-             }
-    
-             if (pObject.isPickdropidModified()) {
-                 _dirtyCount ++; 
-                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("pickdropid= ?");
              }
     
              if (pObject.isGuestidModified()) {
@@ -829,16 +709,12 @@ public class ReservationroompickdropManager
              ps = c.prepareStatement(_sql.toString(),ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
              _dirtyCount = 0;
     
-             if (pObject.isReservationroompickdropidModified()) {
-                 Manager.setLong(ps, ++_dirtyCount, pObject.getReservationroompickdropid());
+             if (pObject.isShareridModified()) {
+                 Manager.setLong(ps, ++_dirtyCount, pObject.getSharerid());
              }
     
              if (pObject.isReservationroomidModified()) {
                  Manager.setLong(ps, ++_dirtyCount, pObject.getReservationroomid());
-             }
-    
-             if (pObject.isPickdropidModified()) {
-                 Manager.setLong(ps, ++_dirtyCount, pObject.getPickdropid());
              }
     
              if (pObject.isGuestidModified()) {
@@ -855,16 +731,16 @@ public class ReservationroompickdropManager
         }
     }
     /**
-     * Deletes rows using a ReservationroompickdropBean template.
+     * Deletes rows using a SharerBean template.
      *
-     * @param pObject the ReservationroompickdropBean object(s) to be deleted
+     * @param pObject the SharerBean object(s) to be deleted
      * @return the number of deleted objects
      */
     //63
-    public int deleteUsingTemplate(ReservationroompickdropBean pObject) throws SQLException
+    public int deleteUsingTemplate(SharerBean pObject) throws SQLException
     {
-        if (pObject.isReservationroompickdropidInitialized())
-            return deleteByPrimaryKey(pObject.getReservationroompickdropid());
+        if (pObject.isShareridInitialized())
+            return deleteByPrimaryKey(pObject.getSharerid());
     
         Connection c = null;
         PreparedStatement ps = null;
@@ -872,12 +748,12 @@ public class ReservationroompickdropManager
     
         try 
         {
-            sql = new StringBuffer("DELETE FROM reservationroompickdrop WHERE ");
+            sql = new StringBuffer("DELETE FROM sharer WHERE ");
             int _dirtyAnd = 0;
-            if (pObject.isReservationroompickdropidInitialized()) {
+            if (pObject.isShareridInitialized()) {
                 if (_dirtyAnd > 0)
                     sql.append(" AND ");
-                sql.append("reservationroompickdropid").append("=?");
+                sql.append("sharerid").append("=?");
                 _dirtyAnd ++;
             }
     
@@ -885,13 +761,6 @@ public class ReservationroompickdropManager
                 if (_dirtyAnd > 0)
                     sql.append(" AND ");
                 sql.append("reservationroomid").append("=?");
-                _dirtyAnd ++;
-            }
-    
-            if (pObject.isPickdropidInitialized()) {
-                if (_dirtyAnd > 0)
-                    sql.append(" AND ");
-                sql.append("pickdropid").append("=?");
                 _dirtyAnd ++;
             }
     
@@ -906,16 +775,12 @@ public class ReservationroompickdropManager
             ps = c.prepareStatement(sql.toString(),ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             int _dirtyCount = 0;
     
-            if (pObject.isReservationroompickdropidInitialized()) {
-                Manager.setLong(ps, ++_dirtyCount, pObject.getReservationroompickdropid());
+            if (pObject.isShareridInitialized()) {
+                Manager.setLong(ps, ++_dirtyCount, pObject.getSharerid());
             }
     
             if (pObject.isReservationroomidInitialized()) {
                 Manager.setLong(ps, ++_dirtyCount, pObject.getReservationroomid());
-            }
-    
-            if (pObject.isPickdropidInitialized()) {
-                Manager.setLong(ps, ++_dirtyCount, pObject.getPickdropid());
             }
     
             if (pObject.isGuestidInitialized()) {
@@ -939,7 +804,7 @@ public class ReservationroompickdropManager
     ///////////////////////////////////////////////////////////////////////
 
     /**
-     * Retrieves the number of rows of the table reservationroompickdrop.
+     * Retrieves the number of rows of the table sharer.
      *
      * @return the number of rows returned
      */
@@ -952,7 +817,7 @@ public class ReservationroompickdropManager
 
 
     /**
-     * Retrieves the number of rows of the table reservationroompickdrop with a 'where' clause.
+     * Retrieves the number of rows of the table sharer with a 'where' clause.
      * It is up to you to pass the 'WHERE' in your where clausis.
      *
      * @param where the restriction clause
@@ -960,7 +825,7 @@ public class ReservationroompickdropManager
      */
     public int countWhere(String where) throws SQLException
     {
-        String sql = "select count(*) as MCOUNT from reservationroompickdrop " + where;
+        String sql = "select count(*) as MCOUNT from sharer " + where;
         Connection c = null;
         Statement pStatement = null;
         ResultSet rs =  null;
@@ -986,7 +851,7 @@ public class ReservationroompickdropManager
     }
 
     /**
-     * Retrieves the number of rows of the table reservationroompickdrop with a prepared statement.
+     * Retrieves the number of rows of the table sharer with a prepared statement.
      *
      * @param ps the PreparedStatement to be used
      * @return the number of rows returned
@@ -1012,13 +877,13 @@ public class ReservationroompickdropManager
     }
 
     /**
-     * Looks for the number of elements of a specific ReservationroompickdropBean pObject given a c
+     * Looks for the number of elements of a specific SharerBean pObject given a c
      *
-     * @param pObject the ReservationroompickdropBean pObject to look for
+     * @param pObject the SharerBean pObject to look for
      * @return the number of rows returned
      */
     //83
-    public int countUsingTemplate(ReservationroompickdropBean pObject) throws SQLException
+    public int countUsingTemplate(SharerBean pObject) throws SQLException
     {
         StringBuffer where = new StringBuffer("");
         Connection c = null;
@@ -1028,23 +893,18 @@ public class ReservationroompickdropManager
     
         try
         {
-                _sql = new StringBuffer("SELECT count(*) as MCOUNT  from reservationroompickdrop WHERE ");
+                _sql = new StringBuffer("SELECT count(*) as MCOUNT  from sharer WHERE ");
                 _sqlWhere = new StringBuffer("");
                 int _dirtyCount = 0;
     
-                if (pObject.isReservationroompickdropidModified()) {
+                if (pObject.isShareridModified()) {
                     _dirtyCount++; 
-                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("reservationroompickdropid= ?");
+                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("sharerid= ?");
                 }
     
                 if (pObject.isReservationroomidModified()) {
                     _dirtyCount++; 
                     _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("reservationroomid= ?");
-                }
-    
-                if (pObject.isPickdropidModified()) {
-                    _dirtyCount++; 
-                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("pickdropid= ?");
                 }
     
                 if (pObject.isGuestidModified()) {
@@ -1061,16 +921,12 @@ public class ReservationroompickdropManager
     
                 _dirtyCount = 0;
     
-                if (pObject.isReservationroompickdropidModified()) {
-                    Manager.setLong(ps, ++_dirtyCount, pObject.getReservationroompickdropid());
+                if (pObject.isShareridModified()) {
+                    Manager.setLong(ps, ++_dirtyCount, pObject.getSharerid());
                 }
     
                 if (pObject.isReservationroomidModified()) {
                     Manager.setLong(ps, ++_dirtyCount, pObject.getReservationroomid());
-                }
-    
-                if (pObject.isPickdropidModified()) {
-                    Manager.setLong(ps, ++_dirtyCount, pObject.getPickdropid());
                 }
     
                 if (pObject.isGuestidModified()) {
@@ -1092,19 +948,18 @@ public class ReservationroompickdropManager
     // DECODE RESULT SET 
     ///////////////////////////////////////////////////////////////////////
     /**
-     * Transforms a ResultSet iterating on the reservationroompickdrop on a ReservationroompickdropBean pObject.
+     * Transforms a ResultSet iterating on the sharer on a SharerBean pObject.
      *
      * @param rs the ResultSet to be transformed
-     * @return pObject resulting ReservationroompickdropBean pObject
+     * @return pObject resulting SharerBean pObject
      */
     //72
-    public ReservationroompickdropBean decodeRow(ResultSet rs) throws SQLException
+    public SharerBean decodeRow(ResultSet rs) throws SQLException
     {
-        ReservationroompickdropBean pObject = createReservationroompickdropBean();
-        pObject.setReservationroompickdropid(Manager.getLong(rs, 1));
+        SharerBean pObject = createSharerBean();
+        pObject.setSharerid(Manager.getLong(rs, 1));
         pObject.setReservationroomid(Manager.getLong(rs, 2));
-        pObject.setPickdropid(Manager.getLong(rs, 3));
-        pObject.setGuestid(Manager.getLong(rs, 4));
+        pObject.setGuestid(Manager.getLong(rs, 3));
 
         pObject.isNew(false);
         pObject.resetIsModified();
@@ -1113,31 +968,27 @@ public class ReservationroompickdropManager
     }
 
     /**
-     * Transforms a ResultSet iterating on the reservationroompickdrop table on a ReservationroompickdropBean pObject according to a list of fields.
+     * Transforms a ResultSet iterating on the sharer table on a SharerBean pObject according to a list of fields.
      *
      * @param rs the ResultSet to be transformed
      * @param fieldList table of the field's associated constants
-     * @return pObject resulting ReservationroompickdropBean pObject
+     * @return pObject resulting SharerBean pObject
      */
     //73
-    public ReservationroompickdropBean decodeRow(ResultSet rs, int[] fieldList) throws SQLException
+    public SharerBean decodeRow(ResultSet rs, int[] fieldList) throws SQLException
     {
-        ReservationroompickdropBean pObject = createReservationroompickdropBean();
+        SharerBean pObject = createSharerBean();
         int pos = 0;
         for(int i = 0; i < fieldList.length; i++)
         {
             switch(fieldList[i]) {
-                case ID_RESERVATIONROOMPICKDROPID:
+                case ID_SHARERID:
                     ++pos;
-                    pObject.setReservationroompickdropid(Manager.getLong(rs, pos));
+                    pObject.setSharerid(Manager.getLong(rs, pos));
                     break;
                 case ID_RESERVATIONROOMID:
                     ++pos;
                     pObject.setReservationroomid(Manager.getLong(rs, pos));
-                    break;
-                case ID_PICKDROPID:
-                    ++pos;
-                    pObject.setPickdropid(Manager.getLong(rs, pos));
                     break;
                 case ID_GUESTID:
                     ++pos;
@@ -1159,10 +1010,10 @@ public class ReservationroompickdropManager
      * Loads all the elements using a prepared statement.
      *
      * @param ps the PreparedStatement to be used
-     * @return an array of ReservationroompickdropBean 
+     * @return an array of SharerBean 
      */
     //41
-    public ReservationroompickdropBean[] loadByPreparedStatement(PreparedStatement ps) throws SQLException
+    public SharerBean[] loadByPreparedStatement(PreparedStatement ps) throws SQLException
     {
         return loadByPreparedStatement(ps, null);
     }
@@ -1172,9 +1023,9 @@ public class ReservationroompickdropManager
      *
      * @param ps the PreparedStatement to be used
      * @param fieldList table of the field's associated constants
-     * @return an array of ReservationroompickdropBean 
+     * @return an array of SharerBean 
      */
-    public ReservationroompickdropBean[] loadByPreparedStatement(PreparedStatement ps, int[] fieldList) throws SQLException
+    public SharerBean[] loadByPreparedStatement(PreparedStatement ps, int[] fieldList) throws SQLException
     {
         ResultSet rs =  null;
         java.util.ArrayList v =  null;
@@ -1189,7 +1040,7 @@ public class ReservationroompickdropManager
                 else 
                     v.add(decodeRow(rs, fieldList));
             }
-            return (ReservationroompickdropBean[])v.toArray(new ReservationroompickdropBean[0]);
+            return (SharerBean[])v.toArray(new SharerBean[0]);
         }
         finally
         {
@@ -1201,56 +1052,56 @@ public class ReservationroompickdropManager
     ///////////////////////////////////////////////////////////////////////
     // LISTENER 
     ///////////////////////////////////////////////////////////////////////
-    private ReservationroompickdropListener listener = null;
+    private SharerListener listener = null;
 
     /**
-     * Registers a unique ReservationroompickdropListener listener.
+     * Registers a unique SharerListener listener.
      */
     //66.5
-    public void registerListener(ReservationroompickdropListener listener) {
+    public void registerListener(SharerListener listener) {
         this.listener = listener;
     }
 
     /**
-     * Before the save of the ReservationroompickdropBean pObject.
+     * Before the save of the SharerBean pObject.
      *
-     * @param pObject the ReservationroompickdropBean pObject to be saved
+     * @param pObject the SharerBean pObject to be saved
      */
     //67
-    void beforeInsert(ReservationroompickdropBean pObject) throws SQLException {
+    void beforeInsert(SharerBean pObject) throws SQLException {
         if (listener != null)
             listener.beforeInsert(pObject);
     }
 
     /**
-     * After the save of the ReservationroompickdropBean pObject.
+     * After the save of the SharerBean pObject.
      *
-     * @param pObject the ReservationroompickdropBean pObject to be saved
+     * @param pObject the SharerBean pObject to be saved
      */
     //68
-    void afterInsert(ReservationroompickdropBean pObject) throws SQLException {
+    void afterInsert(SharerBean pObject) throws SQLException {
         if (listener != null)
             listener.afterInsert(pObject);
     }
 
     /**
-     * Before the update of the ReservationroompickdropBean pObject.
+     * Before the update of the SharerBean pObject.
      *
-     * @param pObject the ReservationroompickdropBean pObject to be updated
+     * @param pObject the SharerBean pObject to be updated
      */
     //69
-    void beforeUpdate(ReservationroompickdropBean pObject) throws SQLException {
+    void beforeUpdate(SharerBean pObject) throws SQLException {
         if (listener != null)
             listener.beforeUpdate(pObject);
     }
 
     /**
-     * After the update of the ReservationroompickdropBean pObject.
+     * After the update of the SharerBean pObject.
      *
-     * @param pObject the ReservationroompickdropBean pObject to be updated
+     * @param pObject the SharerBean pObject to be updated
      */
     //70
-    void afterUpdate(ReservationroompickdropBean pObject) throws SQLException {
+    void afterUpdate(SharerBean pObject) throws SQLException {
         if (listener != null)
             listener.afterUpdate(pObject);
     }
@@ -1287,5 +1138,4 @@ public class ReservationroompickdropManager
 // class+ 
 
 // class- 
-
 }

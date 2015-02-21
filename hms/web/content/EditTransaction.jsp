@@ -72,8 +72,11 @@ $(document).ready(function(){
     //$("#tabpane").height(edittransactionheight*0.58);
 });
 
-function printRegCard(id){
-        var url = "content/form/printRegCardPdf.jsp?id="+id;
+function printRegCard(id,gid){
+        if(gid === undefined)
+            gid = 0;
+        var url = "content/form/printRegCardPdf.jsp?id="+id+"&gid="+gid;
+        
         if($("#hidetarf").is(':checked'))
             url += "&hdt=1";
         window.open(url);

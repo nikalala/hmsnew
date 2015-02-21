@@ -17,6 +17,7 @@ import java.util.Comparator;
 
 // imports- 
 
+
 /**
  * Comparator class is used to sort the RemarksBean objects.
  */
@@ -24,6 +25,7 @@ public class RemarksComparator implements Comparator
 // extends+ 
 
 // extends- 
+
 {
     /**
      * Holds the field on which the comparison is performed.
@@ -158,4 +160,5 @@ public class RemarksComparator implements Comparator
 // class+ 
 
 // class- 
+
 }

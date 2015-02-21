@@ -16,10 +16,12 @@ package com.mysoft.hms;
 
 // imports- 
 
+
 public class HousekeeperBean
 // extends+ 
 
 // extends- 
+
 {
     private Integer housekeeperid;
     private boolean housekeeperid_is_modified = false;
@@ -539,4 +541,5 @@ public class HousekeeperBean
 // class+ 
 
 // class- 
+
 }

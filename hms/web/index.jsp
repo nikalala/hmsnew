@@ -414,7 +414,7 @@
                 <h4 id="mdheader" style='margin-top: -4px;'></h4>
             </div>
             <div class="modal-body" id="mdbody"></div>
-            <div class="modal-footer">
+            <div class="modal-footer" id="mediummodalfooter">
                 <button type="button" class="btn btn-default" id='mediummodalclose' data-dismiss="modal">დახურვა
                 </button>
                 <button type="button" class="btn btn-primary" id='mediummodalsave' onclick="savedata('mediummodal')">

@@ -4,9 +4,10 @@
 <%
 int cid = Integer.parseInt(request.getParameter("cid"));
 long fid = Long.parseLong(request.getParameter("fid"));
+int tp = Integer.parseInt(request.getParameter("tp"));
 FolioBean folio = FolioManager.getInstance().loadByPrimaryKey(fid);
 String term = request.getParameter("term").replaceAll("'", "''").toUpperCase();
-//System.out.println("select * from guest where upper(fname) || ' ' || upper(lname) like '%"+term+"%' or upper(lname) || ' ' || upper(fname) like '%"+term+"%'");
+System.out.println("select * from contragent where type = "+cid+" and upper(name) like '%"+term+"%' or upper(fname) || ' ' || upper(lname) like '%"+term+"%' or upper(lname) || ' ' || upper(fname) like '%"+term+"%'");
 ContragentBean[] contrs = ContragentManager.getInstance().loadByWhere("where type = "+cid+" and upper(name) like '%"+term+"%' or upper(fname) || ' ' || upper(lname) like '%"+term+"%' or upper(lname) || ' ' || upper(fname) like '%"+term+"%'");
 GuestBean[] guests = GuestManager.getInstance().loadByWhere("where upper(fname) || ' ' || upper(lname) like '%"+term+"%' or upper(lname) || ' ' || upper(fname) like '%"+term+"%'");
 %>
@@ -39,10 +40,10 @@ GuestBean[] guests = GuestManager.getInstance().loadByWhere("where upper(fname) 
 <script>
     
     function selGuestFolio(id){
-        $.post("content/newfolio.jsp",{ fid: <%=fid%>, id: id, act: 1 },function(data){
+        $.post("content/newfolio.jsp",{ fid: <%=fid%>, id: id, act: 1, tp: <%=tp%> },function(data){
             if(data.status == 0) BootstrapDialog.alert(data.error);
             else {
-                //$(".specialTab").tabs("refresh");
+                $.post("content/folio.jsp",{ reservationroomid: <%=folio.getReservationroomid()%>, fid: data.id },function(data){ $("#foliodetail").html(data) });
                 $('#extramodal0').modal('hide');
             }
         },"json");
@@ -50,7 +51,7 @@ GuestBean[] guests = GuestManager.getInstance().loadByWhere("where upper(fname) 
     }
     
     function selGuest(id){
-        $.post("content/newfolio.jsp",{ fid: <%=fid%>, id: id, act: 0 },function(data){
+        $.post("content/newfolio.jsp",{ fid: <%=fid%>, id: id, act: 0, tp: <%=tp%> },function(data){
             if(data.status == 0) BootstrapDialog.alert(data.error);
             else {
                 $.post("content/folio.jsp",{ reservationroomid: <%=folio.getReservationroomid()%>, fid: data.id },function(data){ $("#foliodetail").html(data) });
@@ -64,7 +65,7 @@ GuestBean[] guests = GuestManager.getInstance().loadByWhere("where upper(fname) 
         $.post(
         "content/ajax/getContactSearch2.jsp",
         { 
-            cid : <%=cid%>,
+            cid : $("#contact_search_contacttypeid").val(),
             contact_search_name : $("#contact_search_name").val(),
             contact_search_phone : $("#contact_search_phone").val(),
             contact_search_idno : $("#contact_search_phone").val(),
@@ -95,6 +96,8 @@ GuestBean[] guests = GuestManager.getInstance().loadByWhere("where upper(fname) 
                 $(v).width(colWidth[i]);
             });    
         }).resize();
+        
+        contact_search();
     });
 </script>
 <div class="container-fluid" id="registration" style="padding-top: 4px; height: 100%;">
@@ -197,55 +200,7 @@ GuestBean[] guests = GuestManager.getInstance().loadByWhere("where upper(fname) 
                 </thead>
 
                 <tbody id="search_table_body" style="height: 270px;">
-                    <%
-                    if(cid == 4){
-                    for(int i=0;i<guests.length;i++){
-                        String guestname = guests[i].getLname()+" "+guests[i].getFname();
-                        CountryBean country = CountryManager.getInstance().loadByPrimaryKey(guests[i].getCountryid());
-                        String vipstatus = "";
-                        if(guests[i].getVipstatusid() != null){
-                            VipstatusBean vip = VipstatusManager.getInstance().loadByPrimaryKey(guests[i].getVipstatusid());
-                            vipstatus = vip.getName();
-                        }
-                        String phone = guests[i].getPhone();
-                        if(phone == null)   phone = "";
-                        String mobile = guests[i].getMobile();
-                        if(mobile == null)  mobile = "";
-                        String idn = guests[i].getIdn();
-                        if(idn == null) idn = "";
-                    %>
-                    <tr style="cursor: pointer;">
-                        <td style="color: #7DA341; font-weight: bold; width: 100px;" onclick="selGuest(<%=guests[i].getGuestid()%>)"><%=guestname%></td>
-                        <td style='width: 100px;' onclick="selGuest(<%=guests[i].getGuestid()%>)"><%=guests[i].getCity()%></td>
-                        <td style='width: 100px;' onclick="selGuest(<%=guests[i].getGuestid()%>)"><%=country.getName()%></td>
-                        <td style='width: 100px;' onclick="selGuest(<%=guests[i].getGuestid()%>)"><%=vipstatus%></td>
-                        <td style='width: 100px;' onclick="selGuest(<%=guests[i].getGuestid()%>)"><%=phone%></td>
-                        <td style='width: 100px;' onclick="selGuest(<%=guests[i].getGuestid()%>)"><%=mobile%></td>
-                        <td style='width: 100px;' onclick="selGuest(<%=guests[i].getGuestid()%>)"><%=idn%></td>
-                    </tr>
-                    <%}  
-                    } else {
-                    for(int i=0;i<contrs.length;i++){
-                        String guestname = contrs[i].getName();
-                        CountryBean country = CountryManager.getInstance().loadByPrimaryKey(contrs[i].getCountryid());
-                        String vipstatus = "";
-                        String phone = contrs[i].getPhone();
-                        if(phone == null)   phone = "";
-                        String mobile = contrs[i].getMobile();
-                        if(mobile == null)  mobile = "";
-                        String idn = contrs[i].getIdn();
-                        if(idn == null) idn = "";
-                    %>
-                    <tr style="cursor: pointer;">
-                        <td style="color: #7DA341; font-weight: bold; width: 100px;" onclick="selGuestFolio(<%=contrs[i].getContragentid()%>)"><%=guestname%></td>
-                        <td style='width: 100px;' onclick="selGuestFolio(<%=contrs[i].getContragentid()%>)"><%=contrs[i].getCity()%></td>
-                        <td style='width: 100px;' onclick="selGuestFolio(<%=contrs[i].getContragentid()%>)"><%=country.getName()%></td>
-                        <td style='width: 100px;' onclick="selGuestFolio(<%=contrs[i].getContragentid()%>)"><%=vipstatus%></td>
-                        <td style='width: 100px;' onclick="selGuestFolio(<%=contrs[i].getContragentid()%>)"><%=phone%></td>
-                        <td style='width: 100px;' onclick="selGuestFolio(<%=contrs[i].getContragentid()%>)"><%=mobile%></td>
-                        <td style='width: 100px;' onclick="selGuestFolio(<%=contrs[i].getContragentid()%>)"><%=idn%></td>
-                    </tr>
-                    <%}}%>
+                    
                 </tbody>
             </table>
         </div>

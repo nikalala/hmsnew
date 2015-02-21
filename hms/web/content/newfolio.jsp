@@ -3,7 +3,7 @@
 <%@include file="../includes/init.jsp"%>
 <%
 String msg = "";
-
+int tp = Integer.parseInt(request.getParameter("tp"));
 Manager.getInstance().beginTransaction();
 try{
     FolioBean folio = FolioManager.getInstance().loadByPrimaryKey(new Long(request.getParameter("fid")));
@@ -11,20 +11,24 @@ try{
     
     int act = Integer.parseInt(request.getParameter("act"));
     
-    FolioBean folio1 = FolioManager.getInstance().createFolioBean();
-    folio1.setContragentid(folio.getContragentid());
-    folio1.setGuestid(folio.getGuestid());
-    folio1.setReservationroomid(folio.getReservationroomid());
-    folio1.setStatus(folio.getStatus());
-    folio1.setNum(folio.getNum());
-    folio1.setRegbyid(user.getPersonnelid());
-    folio1 = FolioManager.getInstance().save(folio1);
-    folio1.setNum(folio1.getFolioid().toString());
-    folio1 = FolioManager.getInstance().save(folio1);
-    
-    if(act == 1)    folio.setContragentid(cid);
-    else            folio.setGuestid(cid);
-    folio = FolioManager.getInstance().save(folio);
+    if(tp == 0){
+        FolioBean folio1 = FolioManager.getInstance().createFolioBean();
+        if(act == 1)    folio1.setContragentid(cid);
+        else            folio1.setGuestid(cid);
+        folio1.setReservationroomid(folio.getReservationroomid());
+        folio1.setStatus(folio.getStatus());
+        folio1.setNum(folio.getNum());
+        folio1.setRegbyid(user.getPersonnelid());
+        folio1 = FolioManager.getInstance().save(folio1);
+        folio1.setNum(folio1.getFolioid().toString());
+        folio1 = FolioManager.getInstance().save(folio1);
+    } else if(tp == 1){
+        folio.setContragentid(null);
+        folio.setGuestid(null);
+        if(act == 1)    folio.setContragentid(cid);
+        else            folio.setGuestid(cid);
+        folio = FolioManager.getInstance().save(folio);
+    }
     
     
     Manager.getInstance().endTransaction(true);

@@ -6,6 +6,9 @@ String type = request.getParameter("type");
 IdtypeBean[] idtypes = IdtypeManager.getInstance().loadByWhere("order by name");
 VipstatusBean[] vipstatuses = VipstatusManager.getInstance().loadByWhere("order by name");
 NationalityBean[] nationalities = NationalityManager.getInstance().loadByWhere("order by name");
+GuestBean guest = null;
+if(request.getParameter("gid") != null)
+    guest = GuestManager.getInstance().loadByPrimaryKey(new Long(request.getParameter("gid")));
 %>
 <table class="table table-borderless table-condensed">
     <tr>
@@ -19,6 +22,8 @@ NationalityBean[] nationalities = NationalityManager.getInstance().loadByWhere("
                         <%
                         for(int i=0;i<idtypes.length;i++){
                             String sel = "";
+                            if(guest != null && guest.getIdtypeid().intValue() == idtypes[i].getIdtypeid().intValue())
+                                sel = "selected";
                             if(displaysettings.length > 0 && displaysettings[0].getIdtypeid() != null && displaysettings[0].getIdtypeid().intValue() == idtypes[i].getIdtypeid().intValue())
                                 sel = "selected";
                         %>
@@ -27,7 +32,7 @@ NationalityBean[] nationalities = NationalityManager.getInstance().loadByWhere("
                         }
                         %>
                     </select>
-                    <input class="form-control" type="text" id="guestinfo_idn" style="width: 80px;" placeholder="ნომერი">
+                    <input class="form-control" type="text" id="guestinfo_idn" style="width: 80px;" placeholder="ნომერი" value="<%= (guest == null) ? "":guest.getIdn()%>">
                 </div>
             </div>
             </form>
@@ -43,8 +48,11 @@ NationalityBean[] nationalities = NationalityManager.getInstance().loadByWhere("
                 <option value="0">--აირჩიეთ--</option>
                 <%
                 for(int i=0;i<nationalities.length;i++){
+                    String sel = "";
+                    if(guest != null && guest.getNationalityid().intValue() == nationalities[i].getNationalityid().intValue())
+                        sel = "selected";
                 %>
-                <option value="<%=nationalities[i].getNationalityid()%>"><%=nationalities[i].getName()%></option>
+                <option value="<%=nationalities[i].getNationalityid()%>" <%=sel%>><%=nationalities[i].getName()%></option>
                 <%
                 }
                 %>
@@ -62,9 +70,12 @@ NationalityBean[] nationalities = NationalityManager.getInstance().loadByWhere("
                 <div class="input-group-xs">
             <%
             for(int i=0;i<gender.length;i++){
+                String sel = "";
+                if(guest != null && guest.getGender().intValue() == i)
+                    sel = "checked";
             %>
             <label class="radio-inline" style="height: 23px !important;">
-                <input type="radio" name="guestinfo_gender" id="guestinfo_gender<%=i%>" value="<%=i%>"> <%=gender[i]%>
+                <input type="radio" name="guestinfo_gender" id="guestinfo_gender<%=i%>" value="<%=i%>" <%=sel%>> <%=gender[i]%>
             </label>
             <%}%>
                 </div>
@@ -82,8 +93,11 @@ NationalityBean[] nationalities = NationalityManager.getInstance().loadByWhere("
                 <option value="0">--აირჩიეთ--</option>
                 <%
                 for(int i=0;i<vipstatuses.length;i++){
+                    String sel = "";
+                    if(guest != null && guest.getVipstatusid().intValue() == vipstatuses[i].getVipstatusid().intValue())
+                        sel = "selected";
                 %>
-                <option value="<%=vipstatuses[i].getVipstatusid()%>"><%=vipstatuses[i].getName()%></option>
+                <option value="<%=vipstatuses[i].getVipstatusid()%>" <%=sel%>><%=vipstatuses[i].getName()%></option>
                 <%
                 }
                 %>

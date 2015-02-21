@@ -16,10 +16,12 @@ package com.mysoft.hms;
 
 // imports- 
 
+
 public class RemarksBean
 // extends+ 
 
 // extends- 
+
 {
     private Integer remarkid;
     private boolean remarkid_is_modified = false;
@@ -528,4 +530,5 @@ public class RemarksBean
 // class+ 
 
 // class- 
+
 }

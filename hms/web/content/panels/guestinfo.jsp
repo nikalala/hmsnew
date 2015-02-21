@@ -5,6 +5,10 @@
 String type = request.getParameter("type");
 SalutationBean[] salutations = SalutationManager.getInstance().loadByWhere("order by name");
 CountryBean[] countries = CountryManager.getInstance().loadByWhere("order by name");
+GuestBean guest = null;
+if(request.getParameter("gid") != null)
+    guest = GuestManager.getInstance().loadByPrimaryKey(new Long(request.getParameter("gid")));
+
 %>
 <table class="table table-borderless table-condensed">
     <tr>
@@ -17,7 +21,9 @@ CountryBean[] countries = CountryManager.getInstance().loadByWhere("order by nam
                         <%
                         for(int i=0;i<salutations.length;i++){
                             String sel = "";
-                            if(displaysettings.length > 0 && displaysettings[0].getSalutationid() != null && displaysettings[0].getSalutationid().intValue() == salutations[i].getSalutationid().intValue())
+                            if(guest != null && guest.getSalutationid().intValue() == salutations[i].getSalutationid().intValue())
+                                sel = "selected";
+                            if(guest == null && displaysettings.length > 0 && displaysettings[0].getSalutationid() != null && displaysettings[0].getSalutationid().intValue() == salutations[i].getSalutationid().intValue())
                                 sel = "selected";
                         %>
                         <option value="<%=salutations[i].getSalutationid()%>" <%=sel%>><%=salutations[i].getName()%></option>
@@ -27,9 +33,9 @@ CountryBean[] countries = CountryManager.getInstance().loadByWhere("order by nam
                     </select>
                 </div>
                 <div class="input-group">
-                    <input class="form-control" type="text" id="guestinfo_fname" style="width: 50px; padding-left: 1px; padding-right: 1px;" placeholder="სახელი">
-                    <input class="form-control" type="text" id="guestinfo_lname" style="width: 65px; padding-left: 1px; padding-right: 1px;" placeholder="გვარი">
-                    <input type="hidden" id="guestinfo_guestid" value="0">
+                    <input class="form-control" value="<%= (guest == null) ? "":guest.getFname() %>" type="text" id="guestinfo_fname" style="width: 50px; padding-left: 1px; padding-right: 1px;" placeholder="სახელი">
+                    <input class="form-control" value="<%= (guest == null) ? "":guest.getLname() %>" type="text" id="guestinfo_lname" style="width: 65px; padding-left: 1px; padding-right: 1px;" placeholder="გვარი">
+                    <input type="hidden" id="guestinfo_guestid" value="<%= (guest == null) ? "":guest.getGuestid() %>">
                     <div class="input-group-addon glyphicon glyphicon-remove" style="color: red; cursor: pointer;" onclick="remGuestName()"></div>
                     <div class="input-group-addon glyphicon glyphicon-search" style="cursor: pointer;" onclick="walkinNameSearch('guestinfo_lname',4)"></div>
                     <div class="input-group-addon glyphicon glyphicon-credit-card" style="cursor: pointer;" onclick="alert('ბარათი')"></div>
@@ -44,7 +50,7 @@ CountryBean[] countries = CountryManager.getInstance().loadByWhere("order by nam
             <form class="form-inline" role="form">
             <div class="form-group">
                 <div class="input-group-xs">
-                    <textarea class="form-control" id="guestinfo_address" rows="3" style="height: 40px !important; width: 265px;"></textarea>
+                    <textarea class="form-control" id="guestinfo_address" rows="3" style="height: 40px !important; width: 265px;"><%=(guest == null) ? "":guest.getAddress()%></textarea>
                 </div>
             </div>
             </form>
@@ -56,8 +62,8 @@ CountryBean[] countries = CountryManager.getInstance().loadByWhere("order by nam
             <form class="form-inline" role="form">
             <div class="form-group">
                 <div class="input-group-xs">
-                    <input class="form-control" type="text" id="guestinfo_city" style="width: 135px;" placeholder="ქალაქი">
-                    <input class="form-control" type="text" id="guestinfo_zip" style="width: 127px;" placeholder="ინდექსი">
+                    <input class="form-control" value="<%= (guest == null) ? "":guest.getCity() %>" type="text" id="guestinfo_city" style="width: 135px;" placeholder="ქალაქი">
+                    <input class="form-control" value="<%= (guest == null) ? "":guest.getZip() %>" type="text" id="guestinfo_zip" style="width: 127px;" placeholder="ინდექსი">
                 </div>
             </div>
             </form>
@@ -73,8 +79,11 @@ CountryBean[] countries = CountryManager.getInstance().loadByWhere("order by nam
                         <option value="0">--აირჩიეთ--</option>
                         <%
                         for(int i=0;i<countries.length;i++){
+                            String sel = "";
+                            if(guest != null && guest.getCountryid() != null && guest.getCountryid().intValue() == countries[i].getCountryid().intValue())
+                                sel = "selected";
                         %>
-                        <option value="<%=countries[i].getCountryid()%>"><%=countries[i].getName()%></option>
+                        <option value="<%=countries[i].getCountryid()%>" <%=sel%>><%=countries[i].getName()%></option>
                         <%
                         }
                         %>

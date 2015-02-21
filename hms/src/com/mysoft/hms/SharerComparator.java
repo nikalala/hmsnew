@@ -17,15 +17,13 @@ import java.util.Comparator;
 
 // imports- 
 
-
 /**
- * Comparator class is used to sort the ReservationroompickdropBean objects.
+ * Comparator class is used to sort the SharerBean objects.
  */
-public class ReservationroompickdropComparator implements Comparator
+public class SharerComparator implements Comparator
 // extends+ 
 
 // extends- 
-
 {
     /**
      * Holds the field on which the comparison is performed.
@@ -37,47 +35,45 @@ public class ReservationroompickdropComparator implements Comparator
     private boolean bReverse;
 
     /**
-     * Constructor class for ReservationroompickdropComparator.
+     * Constructor class for SharerComparator.
      * <br>
      * Example:
      * <br>
-     * <code>Arrays.sort(pArray, new ReservationroompickdropComparator(ReservationroompickdropManager.RESERVATIONROOMPICKDROPID, bReverse));<code>
+     * <code>Arrays.sort(pArray, new SharerComparator(SharerManager.SHARERID, bReverse));<code>
      *
      * @param iType the field from which you want to sort
      * <br>
      * Possible values are:
      * <ul>
-     *   <li>ReservationroompickdropManager.ID_RESERVATIONROOMPICKDROPID
-     *   <li>ReservationroompickdropManager.ID_RESERVATIONROOMID
-     *   <li>ReservationroompickdropManager.ID_PICKDROPID
-     *   <li>ReservationroompickdropManager.ID_GUESTID
+     *   <li>SharerManager.ID_SHARERID
+     *   <li>SharerManager.ID_RESERVATIONROOMID
+     *   <li>SharerManager.ID_GUESTID
      * </ul>
      */
-    public ReservationroompickdropComparator(int iType)
+    public SharerComparator(int iType)
     {
         this(iType, false);
     }
 
     /**
-     * Constructor class for ReservationroompickdropComparator.
+     * Constructor class for SharerComparator.
      * <br>
      * Example:
      * <br>
-     * <code>Arrays.sort(pArray, new ReservationroompickdropComparator(ReservationroompickdropManager.RESERVATIONROOMPICKDROPID, bReverse));<code>
+     * <code>Arrays.sort(pArray, new SharerComparator(SharerManager.SHARERID, bReverse));<code>
      *
      * @param iType the field from which you want to sort.
      * <br>
      * Possible values are:
      * <ul>
-     *   <li>ReservationroompickdropManager.ID_RESERVATIONROOMPICKDROPID
-     *   <li>ReservationroompickdropManager.ID_RESERVATIONROOMID
-     *   <li>ReservationroompickdropManager.ID_PICKDROPID
-     *   <li>ReservationroompickdropManager.ID_GUESTID
+     *   <li>SharerManager.ID_SHARERID
+     *   <li>SharerManager.ID_RESERVATIONROOMID
+     *   <li>SharerManager.ID_GUESTID
      * </ul>
      *
      * @param bReverse set this value to true, if you want to reverse the sorting results
      */
-    public ReservationroompickdropComparator(int iType, boolean bReverse)
+    public SharerComparator(int iType, boolean bReverse)
     {
         this.iType = iType;
         this.bReverse = bReverse;
@@ -88,23 +84,23 @@ public class ReservationroompickdropComparator implements Comparator
      */
     public int compare(Object pObj1, Object pObj2)
     {
-        ReservationroompickdropBean b1 = (ReservationroompickdropBean)pObj1;
-        ReservationroompickdropBean b2 = (ReservationroompickdropBean)pObj2;
+        SharerBean b1 = (SharerBean)pObj1;
+        SharerBean b2 = (SharerBean)pObj2;
         int iReturn = 0;
         switch(iType)
         {
-            case ReservationroompickdropManager.ID_RESERVATIONROOMPICKDROPID:
-                if (b1.getReservationroompickdropid() == null && b2.getReservationroompickdropid() != null) {
+            case SharerManager.ID_SHARERID:
+                if (b1.getSharerid() == null && b2.getSharerid() != null) {
                     iReturn = -1;
-                } else if (b1.getReservationroompickdropid() == null && b2.getReservationroompickdropid() == null) {
+                } else if (b1.getSharerid() == null && b2.getSharerid() == null) {
                     iReturn = 0;
-                } else if (b1.getReservationroompickdropid() != null && b2.getReservationroompickdropid() == null) {
+                } else if (b1.getSharerid() != null && b2.getSharerid() == null) {
                     iReturn = 1;
                 } else { 
-                    iReturn = b1.getReservationroompickdropid().compareTo(b2.getReservationroompickdropid());
+                    iReturn = b1.getSharerid().compareTo(b2.getSharerid());
                 }
                 break;
-            case ReservationroompickdropManager.ID_RESERVATIONROOMID:
+            case SharerManager.ID_RESERVATIONROOMID:
                 if (b1.getReservationroomid() == null && b2.getReservationroomid() != null) {
                     iReturn = -1;
                 } else if (b1.getReservationroomid() == null && b2.getReservationroomid() == null) {
@@ -115,18 +111,7 @@ public class ReservationroompickdropComparator implements Comparator
                     iReturn = b1.getReservationroomid().compareTo(b2.getReservationroomid());
                 }
                 break;
-            case ReservationroompickdropManager.ID_PICKDROPID:
-                if (b1.getPickdropid() == null && b2.getPickdropid() != null) {
-                    iReturn = -1;
-                } else if (b1.getPickdropid() == null && b2.getPickdropid() == null) {
-                    iReturn = 0;
-                } else if (b1.getPickdropid() != null && b2.getPickdropid() == null) {
-                    iReturn = 1;
-                } else { 
-                    iReturn = b1.getPickdropid().compareTo(b2.getPickdropid());
-                }
-                break;
-            case ReservationroompickdropManager.ID_GUESTID:
+            case SharerManager.ID_GUESTID:
                 if (b1.getGuestid() == null && b2.getGuestid() != null) {
                     iReturn = -1;
                 } else if (b1.getGuestid() == null && b2.getGuestid() == null) {
@@ -146,5 +131,4 @@ public class ReservationroompickdropComparator implements Comparator
 // class+ 
 
 // class- 
-
 }
