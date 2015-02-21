@@ -7,6 +7,8 @@
     String wid = (String) request.getParameter("wid");
     if (wid != null) {
         workorderBean = WorkorderManager.getInstance().loadByWhere("where workorderid = " + wid)[0];
+    }else{
+        workorderBean = WorkorderManager.getInstance().createWorkorderBean();
     }
     RoomBean[] rooms = RoomManager.getInstance().loadByWhere("");
     HouseunitBean[] units = HouseunitManager.getInstance().loadByWhere("");
@@ -25,6 +27,49 @@
         $(".filter-form1").show();
         $("#workorder_add").html('');
         $(".filter-form2").hide();
+    }
+    function saveWorkOrder(){
+
+        var roomid = "NULL";
+        var unitid = "NULL";
+
+        var element = $("#work-units").find('option:selected');
+        var myTag = element.attr("room");
+        if(!isNullOrEmpty(myTag)){
+            roomid = $("#work-units").val();
+        }else{
+            unitid = $("#work-units").val();
+        }
+
+        var sql = "INSERT INTO workorder(" +
+                "workorderid, num, description, category, roomid, houseunitid," +
+                "blockstart, blockend, priority, assignedtoid, orderstatus, deadline," +
+                "regbyid)" +
+                "VALUES (" +
+                "(SELECT COALESCE(MAX(workorderid) + 1,1) FROM workorder)," +
+                "(SELECT COALESCE(MAX(workorderid) + 1,1) FROM workorder)," +
+                "'" + $("#work-descr").val()+ "'," +
+                $("#work-workOrderCategory").val() + "," +
+                roomid + "," +
+                unitid + "," +
+                "to_date('" + $("#dt-block-st").val() + "','dd.mm.yyyy')," +
+                "to_date('" + $("#dt-block-end").val() + "','dd.mm.yyyy')," +
+                $("#work-workOrderPriority").val() + "," +
+                $("#work-personnel").val() + "," +
+                $("#work-workOrderStatus").val() + "," +
+                "to_date('" + $("#dt-dedline").val() + "','dd.mm.yyyy'), <%=user.getPersonnelid()%> )";
+
+        loader.show();
+
+        $.post("content/execute.jsp?query=" + encodeURIComponent(sql), {}, function () {
+
+            reloadGrid(preferencesGrid.id, preferencesGrid.url);
+
+            $("#cancelSave").click();
+
+            loader.hide();
+
+        });
     }
 </script>
 
@@ -94,7 +139,7 @@
                                         <span>ორდ. #</span>
                                     </td>
                                     <td>
-                                        <input type="text" name="work-ordernum" id="work-ordernum" style="background: whitesmoke;" readonly/>
+                                        <input type="text" name="work-ordernum" id="work-ordernum" style="background: whitesmoke;" readonly value="<%=CodeHelpers.ifIsNullOrEmptyReturnEmptryString(workorderBean.getNum())%>"/>
                                     </td>
                                 </tr>
                                 <tr>
@@ -102,7 +147,9 @@
                                         <span>განმარტება</span>
                                     </td>
                                     <td>
-                                        <textarea id="work-descr" style="height: 40px; margin-left: 4px;"></textarea>
+                                        <textarea id="work-descr" style="height: 40px; margin-left: 4px;">
+                                            <%=CodeHelpers.ifIsNullOrEmptyReturnEmptryString(workorderBean.getDescription())%>
+                                        </textarea>
                                     </td>
                                 </tr>
                                 <tr>
@@ -110,11 +157,17 @@
                                         <span>კატეგორია</span>
                                     </td>
                                     <td>
-                                        <select class="dropdown col-md-2" id="workOrderCategory">
-                                            <option value="0">-კატეგორია-</option>
-                                            <% for (int i = 0; i < workOrderCategory.length; i++) { %>
-                                            <option value="<%=i%>"><%=workOrderCategory[i]%>
-                                            </option>
+                                        <select class="dropdown col-md-2" id="work-workOrderCategory">
+                                            <option value="">-კატეგორია-</option>
+                                            <% for (int i = 0; i < workOrderCategory.length; i++) {
+                                                String selected = "";
+                                                if (workorderBean.getCategory() != null && workorderBean.getCategory().equals(i)) {
+                                                    selected = "selected";
+                                                } else {
+                                                    selected = "";
+                                                }
+                                            %>
+                                                <option value="<%=i%>" <%=selected%> ><%=workOrderCategory[i]%></option>
                                             <% } %>
                                         </select>
                                     </td>
@@ -124,15 +177,32 @@
                                         <span>ოთახი</span>
                                     </td>
                                     <td>
-                                        <select class="dropdown col-md-2" id="units">
+                                        <select class="dropdown col-md-2" id="work-units">
                                             <option value="0">-ოთახის #-</option>
-                                            <% for (int i = 0; i < rooms.length; i++) { %>
-                                            <option value="<%=rooms[i].getRoomid()%>"
+                                            <% for (int i = 0; i < rooms.length; i++) {
+
+                                                String selected = "";
+                                                if (workorderBean.getRoomid() != null && rooms[i].getRoomid().equals(workorderBean.getRoomid())) {
+                                                    selected = "selected";
+                                                } else {
+                                                    selected = "";
+                                                }
+                                            %>
+                                            <option <%=selected%> room="room" value="<%=rooms[i].getRoomid()%>"
                                                     roomtypeid="<%=rooms[i].getRoomtypeid()%>"><%=rooms[i].getName()%>
                                             </option>
                                             <% } %>
-                                            <% for (int i = 0; i < units.length; i++) { %>
-                                            <option value="<%=units[i].getHouseunitid()%>"><%=units[i].getName()%>
+                                            <% for (int i = 0; i < units.length; i++) {
+
+                                                String selected = "";
+                                                if (workorderBean.getHouseunitid() != null && units[i].getHouseunitid().equals(workorderBean.getHouseunitid())) {
+                                                    selected = "selected";
+                                                } else {
+                                                    selected = "";
+                                                }
+
+                                            %>
+                                            <option <%=selected%> value="<%=units[i].getHouseunitid()%>"><%=units[i].getName()%>
                                             </option>
                                             <% } %>
                                         </select>
@@ -143,15 +213,19 @@
                                         <span>ბლოკის დასაწყისი</span>
                                     </td>
                                     <td>
-                                        <div class="col-md-2">
-                                            <div class="input-append date" id="dt-block-st-div">
-                                                <input type="text" class="span2 " id="dt-block-st" placeholder=" თარიღიდან"
-                                                       style="">
-                                                <span class="add-on"
-                                                      style="position:absolute !important; right : -104px  !important;background : none  !important;border: none !important;top: 1px;">
-                                                    <i class="glyphicon glyphicon-calendar"></i></span>
+                                        <% if(workorderBean.getBlockstart() != null){ %>
+                                            <%=workorderBean.getBlockstart()%>
+                                        <% }else{ %>
+                                            <div class="col-md-2">
+                                                <div class="input-append date" id="dt-block-st-div">
+                                                    <input type="text" class="span2 " id="dt-block-st"  placeholder=" თარიღიდან"
+                                                           style="">
+                                                    <span class="add-on"
+                                                          style="position:absolute !important; right : -104px  !important;background : none  !important;border: none !important;top: 1px;">
+                                                        <i class="glyphicon glyphicon-calendar"></i></span>
+                                                </div>
                                             </div>
-                                        </div>
+                                        <%} %>
                                     </td>
                                 </tr>
                                 <tr>
@@ -159,6 +233,9 @@
                                         <span>ბლოკის დასასრული</span>
                                     </td>
                                     <td>
+                                        <% if(workorderBean.getBlockend() != null){ %>
+                                            <%=workorderBean.getBlockend()%>
+                                        <% }else{ %>
                                         <div class="input-append date" id="dt-block-end-div"  style="position: relative;">
                                             <input type="text" class="span2 " id="dt-block-end" placeholder=" თარიღიდან"
                                                    style="">
@@ -166,6 +243,7 @@
                                                       style="position:absolute !important; right : 189px  !important;background : none  !important;border: none !important;top: 1px;">
                                                     <i class="glyphicon glyphicon-calendar"></i></span>
                                         </div>
+                                        <%} %>
                                     </td>
                                 </tr>
                                 <tr>
@@ -173,11 +251,17 @@
                                         <span>პრიორიტეტი</span>
                                     </td>
                                     <td>
-                                        <select class="dropdown col-md-2" id="workOrderPriority">
-                                            <option value="0">-პრიორიტეტი-</option>
-                                            <% for (int i = 0; i < workOrderPriority.length; i++) { %>
-                                            <option value="<%=i%>"><%=workOrderPriority[i]%>
-                                            </option>
+                                        <select class="dropdown col-md-2" id="work-workOrderPriority">
+                                            <option value="">-პრიორიტეტი-</option>
+                                            <% for (int i = 0; i < workOrderPriority.length; i++) {
+                                                String selected = "";
+                                                if (workorderBean.getPriority() != null && workorderBean.getPriority().equals(i)) {
+                                                    selected = "selected";
+                                                } else {
+                                                    selected = "";
+                                                }
+                                            %>
+                                                <option value="<%=i%>" <%=selected%> ><%=workOrderPriority[i]%></option>
                                             <% } %>
                                         </select>
                                     </td>
@@ -187,10 +271,17 @@
                                         <span>მიმაგრებულია</span>
                                     </td>
                                     <td>
-                                        <select class="dropdown col-md-2" id="personnel">
+                                        <select class="dropdown col-md-2" id="work-personnel">
                                             <option value="0">-აირჩიეთ-</option>
-                                            <% for (int i = 0; i < personnelBeans.length; i++) { %>
-                                            <option value="<%=personnelBeans[i].getPersonnelid()%>"><%=personnelBeans[i].getFname() + " " + personnelBeans[i].getLname()%>
+                                            <% for (int i = 0; i < personnelBeans.length; i++) {
+                                                String selected = "";
+                                                if (workorderBean.getAssignedtoid() != null && workorderBean.getAssignedtoid().equals(personnelBeans[i].getPersonnelid())) {
+                                                    selected = "selected";
+                                                } else {
+                                                    selected = "";
+                                                }
+                                            %>
+                                            <option value="<%=personnelBeans[i].getPersonnelid()%>" <%=selected%> ><%=personnelBeans[i].getFname() + " " + personnelBeans[i].getLname()%>
                                             </option>
                                             <% } %>
                                         </select>
@@ -201,10 +292,17 @@
                                         <span>სტატუსი</span>
                                     </td>
                                     <td>
-                                        <select class="dropdown col-md-2" id="workOrderStatus">
-                                            <option value="0">-სტატუსი-</option>
-                                            <% for (int i = 0; i < workOrderStatus.length; i++) { %>
-                                            <option value="<%=i%>"><%=workOrderStatus[i]%>
+                                        <select class="dropdown col-md-2" id="work-workOrderStatus">
+                                            <option value="">-სტატუსი-</option>
+                                            <% for (int i = 0; i < workOrderStatus.length; i++) {
+                                                String selected = "";
+                                                if (workorderBean.getOrderstatus() != null && workorderBean.getOrderstatus().equals(i)) {
+                                                    selected = "selected";
+                                                } else {
+                                                    selected = "";
+                                                }
+                                            %>
+                                            <option value="<%=i%>" <%=selected%> ><%=workOrderStatus[i]%>
                                             </option>
                                             <% } %>
                                         </select>
@@ -233,7 +331,7 @@
                                     style="border: 0; font-weight: bold; float: right; margin: 4px 6px 0 0;">
                                 დახურვა
                             </button>
-                            <button type="button" class="btn btn-danger" id="saveAgent" onclick="saveTAgent()"
+                            <button type="button" class="btn btn-danger" id="saveAgent" onclick="saveWorkOrder()"
                                     style="font-weight: bold; float: right; margin: 3px 5px 0 0;">
                                 შენახვა
                             </button>
