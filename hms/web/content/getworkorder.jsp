@@ -13,15 +13,15 @@
     <cell><%=workOrderCategory[workorderBeans[i].getCategory()]%></cell>
     <cell><%=workorderBeans[i].getRoomid()%></cell>
     <cell><%=workOrderPriority[workorderBeans[i].getPriority()]%></cell>
-    <cell><%=workorderBeans[i].getRegdate()%></cell>
-    <cell><%=workorderBeans[i].getRegdate()%></cell>
+    <cell><%=dt.format(workorderBeans[i].getRegdate())%></cell>
+    <cell><% if (workorderBeans[i].getUpdatedon() != null) { %><%=dt.format(workorderBeans[i].getUpdatedon())%><% } %></cell>
     <cell><%=workorderBeans[i].getAssignedtoid()%></cell>
-    <cell><%=workorderBeans[i].getDeadline()%></cell>
+    <cell><% if (workorderBeans[i].getDeadline() != null) { %><%=dt.format(workorderBeans[i].getDeadline())%><% } %></cell>
     <cell><%=workOrderStatus[workorderBeans[i].getOrderstatus()]%></cell>
     <cell>
       <![CDATA[
       &nbsp;<a onclick="editWorkOrder(<%=workorderBeans[i].getWorkorderid()%>)"><i class="fa fa-pencil"></i></a>
-      &nbsp;<i class="fa fa-edit"></i>
+      &nbsp;<i onclick="changeRemark(<%=workorderBeans[i].getWorkorderid()%>,this)" class="fa fa-edit"></i>
       &nbsp;<i class="fa fa-print"></i>
       ]]>
     </cell>

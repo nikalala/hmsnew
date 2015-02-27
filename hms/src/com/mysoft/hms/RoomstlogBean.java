@@ -16,10 +16,12 @@ package com.mysoft.hms;
 
 // imports- 
 
+
 public class RoomstlogBean
 // extends+ 
 
 // extends- 
+
 {
     private Long roomstlogid;
     private boolean roomstlogid_is_modified = false;
@@ -917,4 +919,5 @@ public class RoomstlogBean
 // class+ 
 
 // class- 
+
 }

@@ -126,6 +126,20 @@ public class WorkorderManager
     public static final int TYPE_REGBYID = Types.INTEGER;
     public static final String NAME_REGBYID = "regbyid";
 
+    /**
+     * Column updatedon of type Types.TIMESTAMP mapped to java.sql.Timestamp.
+     */
+    public static final int ID_UPDATEDON = 14;
+    public static final int TYPE_UPDATEDON = Types.TIMESTAMP;
+    public static final String NAME_UPDATEDON = "updatedon";
+
+    /**
+     * Column note of type Types.VARCHAR mapped to String.
+     */
+    public static final int ID_NOTE = 15;
+    public static final int TYPE_NOTE = Types.VARCHAR;
+    public static final String NAME_NOTE = "note";
+
 
     private static final String TABLE_NAME = "workorder";
 
@@ -148,6 +162,8 @@ public class WorkorderManager
         ,"workorder.deadline"
         ,"workorder.regdate"
         ,"workorder.regbyid"
+        ,"workorder.updatedon"
+        ,"workorder.note"
     };
 
     /**
@@ -166,7 +182,9 @@ public class WorkorderManager
                             + ",workorder.orderstatus"
                             + ",workorder.deadline"
                             + ",workorder.regdate"
-                            + ",workorder.regbyid";
+                            + ",workorder.regbyid"
+                            + ",workorder.updatedon"
+                            + ",workorder.note";
 
     private static WorkorderManager singleton = new WorkorderManager();
 
@@ -850,6 +868,22 @@ public class WorkorderManager
                     _dirtyCount++;
                 }
 
+                if (pObject.isUpdatedonModified()) {
+                    if (_dirtyCount>0) {
+                        _sql.append(",");
+                    }
+                    _sql.append("updatedon");
+                    _dirtyCount++;
+                }
+
+                if (pObject.isNoteModified()) {
+                    if (_dirtyCount>0) {
+                        _sql.append(",");
+                    }
+                    _sql.append("note");
+                    _dirtyCount++;
+                }
+
                 _sql.append(") values (");
                 if(_dirtyCount > 0) {
                     _sql.append("?");
@@ -916,6 +950,14 @@ public class WorkorderManager
     
                 if (pObject.isRegbyidModified()) {
                     Manager.setInteger(ps, ++_dirtyCount, pObject.getRegbyid());
+                }
+    
+                if (pObject.isUpdatedonModified()) {
+                    ps.setTimestamp(++_dirtyCount, pObject.getUpdatedon());
+                }
+    
+                if (pObject.isNoteModified()) {
+                    ps.setString(++_dirtyCount, pObject.getNote());
                 }
     
                 ps.executeUpdate();
@@ -1055,6 +1097,24 @@ public class WorkorderManager
                     }
                     _sql.append("regbyid").append("=?");
                 }
+
+                if (pObject.isUpdatedonModified()) {
+                    if (useComma) {
+                        _sql.append(",");
+                    } else {
+                        useComma=true;
+                    }
+                    _sql.append("updatedon").append("=?");
+                }
+
+                if (pObject.isNoteModified()) {
+                    if (useComma) {
+                        _sql.append(",");
+                    } else {
+                        useComma=true;
+                    }
+                    _sql.append("note").append("=?");
+                }
                 _sql.append(" WHERE ");
                 _sql.append("workorder.workorderid=?");
                 ps = c.prepareStatement(_sql.toString(),ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
@@ -1114,6 +1174,14 @@ public class WorkorderManager
 
                 if (pObject.isRegbyidModified()) {
                       Manager.setInteger(ps, ++_dirtyCount, pObject.getRegbyid());
+                }
+
+                if (pObject.isUpdatedonModified()) {
+                      ps.setTimestamp(++_dirtyCount, pObject.getUpdatedon());
+                }
+
+                if (pObject.isNoteModified()) {
+                      ps.setString(++_dirtyCount, pObject.getNote());
                 }
     
                 if (_dirtyCount == 0) {
@@ -1262,6 +1330,16 @@ public class WorkorderManager
                  _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("regbyid= ?");
              }
     
+             if (pObject.isUpdatedonModified()) {
+                 _dirtyCount ++; 
+                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("updatedon= ?");
+             }
+    
+             if (pObject.isNoteModified()) {
+                 _dirtyCount ++; 
+                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("note= ?");
+             }
+    
              if (_dirtyCount == 0) {
                  throw new SQLException ("The pObject to look for is invalid : not initialized !");
              }
@@ -1324,6 +1402,14 @@ public class WorkorderManager
     
              if (pObject.isRegbyidModified()) {
                  Manager.setInteger(ps, ++_dirtyCount, pObject.getRegbyid());
+             }
+    
+             if (pObject.isUpdatedonModified()) {
+                 ps.setTimestamp(++_dirtyCount, pObject.getUpdatedon());
+             }
+    
+             if (pObject.isNoteModified()) {
+                 ps.setString(++_dirtyCount, pObject.getNote());
              }
     
              ps.executeQuery();
@@ -1453,6 +1539,20 @@ public class WorkorderManager
                 _dirtyAnd ++;
             }
     
+            if (pObject.isUpdatedonInitialized()) {
+                if (_dirtyAnd > 0)
+                    sql.append(" AND ");
+                sql.append("updatedon").append("=?");
+                _dirtyAnd ++;
+            }
+    
+            if (pObject.isNoteInitialized()) {
+                if (_dirtyAnd > 0)
+                    sql.append(" AND ");
+                sql.append("note").append("=?");
+                _dirtyAnd ++;
+            }
+    
             c = getConnection();
             ps = c.prepareStatement(sql.toString(),ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             int _dirtyCount = 0;
@@ -1511,6 +1611,14 @@ public class WorkorderManager
     
             if (pObject.isRegbyidInitialized()) {
                 Manager.setInteger(ps, ++_dirtyCount, pObject.getRegbyid());
+            }
+    
+            if (pObject.isUpdatedonInitialized()) {
+                ps.setTimestamp(++_dirtyCount, pObject.getUpdatedon());
+            }
+    
+            if (pObject.isNoteInitialized()) {
+                ps.setString(++_dirtyCount, pObject.getNote());
             }
     
             int _rows = ps.executeUpdate();
@@ -1693,6 +1801,16 @@ public class WorkorderManager
                     _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("regbyid= ?");
                 }
     
+                if (pObject.isUpdatedonModified()) {
+                    _dirtyCount++; 
+                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("updatedon= ?");
+                }
+    
+                if (pObject.isNoteModified()) {
+                    _dirtyCount++; 
+                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("note= ?");
+                }
+    
                 if (_dirtyCount == 0)
                    throw new SQLException ("The pObject to look is unvalid : not initialized !");
     
@@ -1758,6 +1876,14 @@ public class WorkorderManager
                     Manager.setInteger(ps, ++_dirtyCount, pObject.getRegbyid());
                 }
     
+                if (pObject.isUpdatedonModified()) {
+                    ps.setTimestamp(++_dirtyCount, pObject.getUpdatedon());
+                }
+    
+                if (pObject.isNoteModified()) {
+                    ps.setString(++_dirtyCount, pObject.getNote());
+                }
+    
                 return countByPreparedStatement(ps);
         }
         finally
@@ -1796,6 +1922,8 @@ public class WorkorderManager
         pObject.setDeadline(rs.getTimestamp(12));
         pObject.setRegdate(rs.getTimestamp(13));
         pObject.setRegbyid(Manager.getInteger(rs, 14));
+        pObject.setUpdatedon(rs.getTimestamp(15));
+        pObject.setNote(rs.getString(16));
 
         pObject.isNew(false);
         pObject.resetIsModified();
@@ -1873,6 +2001,14 @@ public class WorkorderManager
                 case ID_REGBYID:
                     ++pos;
                     pObject.setRegbyid(Manager.getInteger(rs, pos));
+                    break;
+                case ID_UPDATEDON:
+                    ++pos;
+                    pObject.setUpdatedon(rs.getTimestamp(pos));
+                    break;
+                case ID_NOTE:
+                    ++pos;
+                    pObject.setNote(rs.getString(pos));
                     break;
             }
         }

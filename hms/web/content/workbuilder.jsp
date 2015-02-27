@@ -86,6 +86,43 @@
 
     });
 
+    $(document).on("click", "#dismissbutton, #smallmodalbtn", function () {
+        $("#updateremark").css("display", "none");
+        $("#remarktxt").val('');
+    });
+
+    function saveRemark(id){
+        var remark = $("#remarktxt").val();
+
+        if(remark === "null" || remark == ""){
+            BootstrapDialog.alert("შეიყვანეთ მინიშნება!!!");
+            return;
+        }
+        var sql = "INSERT INTO workorderlog(" +
+        "workorderlogid, workorderid, note, regbyid)" +
+        "VALUES (" +
+        "(SELECT COALESCE(MAX(workorderlogid) + 1,1) FROM workorderlog)," +
+                id + ", " +
+        "N'" + remark + "', " +
+        "N'<%=user.getLoginid()%>');";
+        loader.show();
+        $.post("content/execute.jsp?query=" + encodeURIComponent(sql), {}, function () {
+
+            $("#dismissbutton").click();
+            $("#remarktxt").val('');
+            loader.hide();
+
+        });
+    }
+
+    function changeRemark(id,_this){
+        $("#remarktxt").val('');
+        $("#saveRemarkBtn").attr("onclick","saveRemark("+id+")");
+        $("#updateremark").css("display", "block");
+        $("#updateremark").offset($(_this).offset());
+        $("#updateremark").css({'left': $("#updateremark").position().left - 210});
+    }
+
     function loadDefaults() {
 
         var limit = " LIMIT " + workOrderGrid.limit + " OFFSET " + 0;
@@ -108,6 +145,23 @@
 
 <link rel="stylesheet" type="text/css" href="css/grid-filter.css">
 
+<div class="modal-custom-content" id="updateremark" style="position: absolute; z-index: 10; display: none;">
+    <div class="modal-custom-header" style="background-color: gray; color: white; height: 30px;">
+        <button type="button" id="smallmodalbtn" class="close" data-dismiss="modal" aria-hidden="true"
+                style="margin-top: -6px;">×
+        </button>
+        <h4 style="margin-top: -4px;">შენიშვნა</h4>
+    </div>
+    <div class="modal-custom-body">
+        <textarea id="remarktxt"></textarea>
+    </div>
+    <div class="modal-footer" style="margin-top: 10px;">
+        <button type="button" class="btn btn-default" id="dismissbutton" data-dismiss="modal" onclick="this.click();">
+            დახურვა
+        </button>
+        <button type="button" id="saveRemarkBtn"  class="btn btn-primary">შენახვა</button>
+    </div>
+</div>
 <form name="filter-form" id="filter-form" class="filter-form1">
     <table id="grid-table" class="first-table" style="width: 100%">
         <tr>

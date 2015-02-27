@@ -79,6 +79,14 @@ public class WorkorderBean
     private boolean regbyid_is_modified = false;
     private boolean regbyid_is_initialized = false;
     
+    private java.sql.Timestamp updatedon;
+    private boolean updatedon_is_modified = false;
+    private boolean updatedon_is_initialized = false;
+    
+    private String note;
+    private boolean note_is_modified = false;
+    private boolean note_is_initialized = false;
+    
     private boolean _isNew = true;
     
     /**
@@ -1012,6 +1020,129 @@ public class WorkorderBean
     }
 
     /**
+     * Getter method for updatedon.
+     * <br>
+     * Meta Data Information (in progress):
+     * <ul>
+     * <li>full name: workorder.updatedon
+     * <li>column size: 35
+     * <li>jdbc type returned by the driver: Types.TIMESTAMP
+     * </ul>
+     *
+     * @return the value of updatedon
+     */
+    public java.sql.Timestamp getUpdatedon()
+    {
+        return updatedon; 
+    }
+
+    /**
+     * Setter method for updatedon.
+     * <br>
+     * The new value is set only if compareTo() says it is different,
+     * or if one of either the new value or the current value is null.
+     * In case the new value is different, it is set and the field is marked as 'modified'.
+     *
+     * @param newVal the new value to be assigned to updatedon
+     */
+    public void setUpdatedon(java.sql.Timestamp newVal) {
+        if ((newVal != null && this.updatedon != null && (newVal.compareTo(this.updatedon) == 0)) || 
+            (newVal == null && this.updatedon == null && updatedon_is_initialized)) {
+            return; 
+        } 
+        this.updatedon = newVal; 
+        updatedon_is_modified = true; 
+        updatedon_is_initialized = true; 
+    }
+
+    /**
+     * Setter method for updatedon.
+     * <br>
+     * Convenient for those who do not want to deal with Objects for primary types.
+     *
+     * @param newVal the new value to be assigned to updatedon
+     */
+    public void setUpdatedon(long newVal) {
+        setUpdatedon(new java.sql.Timestamp(newVal));
+    }
+
+    /**
+     * Determines if the updatedon has been modified.
+     *
+     * @return true if the field has been modified, false if the field has not been modified
+     */
+    public boolean isUpdatedonModified() {
+        return updatedon_is_modified; 
+    }
+
+    /**
+     * Determines if the updatedon has been initialized.
+     * <br>
+     * It is useful to determine if a field is null on purpose or just because it has not been initialized.
+     *
+     * @return true if the field has been initialized, false otherwise
+     */
+    public boolean isUpdatedonInitialized() {
+        return updatedon_is_initialized; 
+    }
+
+    /**
+     * Getter method for note.
+     * <br>
+     * Meta Data Information (in progress):
+     * <ul>
+     * <li>full name: workorder.note
+     * <li>column size: 2147483647
+     * <li>jdbc type returned by the driver: Types.VARCHAR
+     * </ul>
+     *
+     * @return the value of note
+     */
+    public String getNote()
+    {
+        return note; 
+    }
+
+    /**
+     * Setter method for note.
+     * <br>
+     * The new value is set only if compareTo() says it is different,
+     * or if one of either the new value or the current value is null.
+     * In case the new value is different, it is set and the field is marked as 'modified'.
+     *
+     * @param newVal the new value to be assigned to note
+     */
+    public void setNote(String newVal) {
+        if ((newVal != null && this.note != null && (newVal.compareTo(this.note) == 0)) || 
+            (newVal == null && this.note == null && note_is_initialized)) {
+            return; 
+        } 
+        this.note = newVal; 
+        note_is_modified = true; 
+        note_is_initialized = true; 
+    }
+
+    /**
+     * Determines if the note has been modified.
+     *
+     * @return true if the field has been modified, false if the field has not been modified
+     */
+    public boolean isNoteModified() {
+        return note_is_modified; 
+    }
+
+    /**
+     * Determines if the note has been initialized.
+     * <br>
+     * It is useful to determine if a field is null on purpose or just because it has not been initialized.
+     *
+     * @return true if the field has been initialized, false otherwise
+     */
+    public boolean isNoteInitialized() {
+        return note_is_initialized; 
+    }
+
+    /**
      * Determines if the current object is new.
      *
      * @return true if the current object is new, false if the object is not new
@@ -1050,7 +1181,9 @@ public class WorkorderBean
 		orderstatus_is_modified || 
 		deadline_is_modified || 
 		regdate_is_modified || 
-		regbyid_is_modified;
+		regbyid_is_modified || 
+		updatedon_is_modified || 
+		note_is_modified;
     }
 
     /**
@@ -1071,6 +1204,8 @@ public class WorkorderBean
         deadline_is_modified = false;
         regdate_is_modified = false;
         regbyid_is_modified = false;
+        updatedon_is_modified = false;
+        note_is_modified = false;
     }
 
     /**
@@ -1093,6 +1228,8 @@ public class WorkorderBean
         setDeadline(bean.getDeadline());
         setRegdate(bean.getRegdate());
         setRegbyid(bean.getRegbyid());
+        setUpdatedon(bean.getUpdatedon());
+        setNote(bean.getNote());
     }
 
     /**
@@ -1116,6 +1253,8 @@ public class WorkorderBean
                  + "\n - workorder.deadline = " + (deadline_is_initialized ? ("[" + (deadline == null ? null : deadline.toString()) + "]") : "not initialized") + ""
                  + "\n - workorder.regdate = " + (regdate_is_initialized ? ("[" + (regdate == null ? null : regdate.toString()) + "]") : "not initialized") + ""
                  + "\n - workorder.regbyid = " + (regbyid_is_initialized ? ("[" + (regbyid == null ? null : regbyid.toString()) + "]") : "not initialized") + ""
+                 + "\n - workorder.updatedon = " + (updatedon_is_initialized ? ("[" + (updatedon == null ? null : updatedon.toString()) + "]") : "not initialized") + ""
+                 + "\n - workorder.note = " + (note_is_initialized ? ("[" + (note == null ? null : note.toString()) + "]") : "not initialized") + ""
             ;
     }
 

@@ -16,10 +16,12 @@ package com.mysoft.hms;
 
 // imports- 
 
+
 public class ReservationroompickdropBean
 // extends+ 
 
 // extends- 
+
 {
     private Long reservationroompickdropid;
     private boolean reservationroompickdropid_is_modified = false;
@@ -390,4 +392,5 @@ public class ReservationroompickdropBean
 // class+ 
 
 // class- 
+
 }

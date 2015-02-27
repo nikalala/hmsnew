@@ -7,72 +7,235 @@
     String wid = (String) request.getParameter("wid");
     if (wid != null) {
         workorderBean = WorkorderManager.getInstance().loadByWhere("where workorderid = " + wid)[0];
-    }else{
+    } else {
         workorderBean = WorkorderManager.getInstance().createWorkorderBean();
     }
     RoomBean[] rooms = RoomManager.getInstance().loadByWhere("");
     HouseunitBean[] units = HouseunitManager.getInstance().loadByWhere("");
     PersonnelBean[] personnelBeans = PersonnelManager.getInstance().loadByWhere("where personneltypeid = 2");
+    String ordNum = "ახალი";
+    if (!CodeHelpers.isNullOrEmpty(workorderBean.getNum())) {
+        ordNum = workorderBean.getNum();
+    }
 %>
 
 <script>
-    $(document).ready(function(){
+    $(document).ready(function () {
         $('.dropdown').selectpicker();
         $(".work-table .btn-group").css("width", "250px", "!important");
-        $(".work-table input").css("height","27px","!important").css("margin-left","4px");
-        $("#dt-block-st").css("margin-left","0");
+        $(".work-table input").css("height", "27px", "!important").css("margin-left", "4px");
+        $("#dt-block-st").css("margin-left", "0");
         $('.work-table .date').datepicker(<%=pickerFormatForDatePickers%>);
+        reloadHistory();
+        $("#work-descr").val($("#work-descr").val().trim());
+        <% if(CodeHelpers.isNullOrEmpty(wid)){ %>
+        $("#work-workOrderStatus").val(3);
+        $("#work-workOrderStatus").change();
+        $("#dt-block-st, #dt-block-end, #dt-dedline").val('');
+        <% } %>
     });
-    function cancelSaveWorkorder(){
+
+    function cancelSaveWorkorder() {
         $(".filter-form1").show();
         $("#workorder_add").html('');
         $(".filter-form2").hide();
     }
-    function saveWorkOrder(){
 
+    function reloadHistory() {
+        $.post("content/getworkorderhistory.jsp?wid=<%=wid%>", function (data) {
+            $("#history-table").html(data);
+        });
+    }
+
+    function saveWorkOrder() {
+
+        var wid = '<%=wid%>';
         var roomid = "NULL";
         var unitid = "NULL";
+        var dtst = $("#dt-block-st").val();
+        var dtbend = $("#dt-block-end").val();
+        var descr = $("#work-descr").val();
+        var cat = $("#work-workOrderCategory").val();
+        var prioval = $("#work-workOrderPriority").val();
+        var roomval = $("#work-units").val();
 
-        var element = $("#work-units").find('option:selected');
-        var myTag = element.attr("room");
-        if(!isNullOrEmpty(myTag)){
+        if (isNullOrEmpty(descr)) {
+            $("#work-descr").addClass("error");
+            return;
+        } else {
+            $("#work-descr").removeClass("error");
+        }
+
+        if (isNullOrEmpty(cat) || cat == "") {
+            $("#work-workOrderCategory").next().addClass("error");
+            return;
+        } else {
+            $("#work-workOrderCategory").next().removeClass("error");
+        }
+
+        if (isNullOrEmpty(roomval) || roomval == "") {
+            $("#work-units").next().addClass("error");
+            return;
+        } else {
+            $("#work-units").next().removeClass("error");
+        }
+
+        if (isNullOrEmpty(prioval) || prioval == "") {
+            $("#work-workOrderPriority").next().addClass("error");
+            return;
+        } else {
+            $("#work-workOrderPriority").next().removeClass("error");
+        }
+
+        if (isNullOrEmpty(dtst) && !isNullOrEmpty(dtbend)) {
+            $("#dt-block-st").addClass("error");
+            return;
+        } else {
+            $("#dt-block-st").removeClass("error");
+        }
+
+        if (!isNullOrEmpty(dtst) && isNullOrEmpty(dtbend)) {
+            $("#dt-block-end").addClass("error");
+            return;
+        } else {
+            $("#dt-block-end").removeClass("error");
+        }
+
+        var blocks = "";
+
+        var dts = "";
+
+        if (!isNullOrEmpty(dtst)) {
+            dts = "to_date('" + $("#dt-block-st").val() + "','dd.mm.yyyy')," + "to_date('" + $("#dt-block-end").val() + "','dd.mm.yyyy'),";
+            blocks = "blockstart, blockend,";
+
+        }
+
+        var dedline = isNullOrEmpty($("#dt-dedline").val()) ? "" : "to_date('" + $("#dt-dedline").val() + "','dd.mm.yyyy'),";
+
+        var dedline_top = isNullOrEmpty($("#dt-dedline").val()) ? "" : "deadline,";
+
+        var workunits = $("#work-units").find('option:selected');
+
+        var wpers = isNullOrEmpty($("#work-personnel").val()) ? "" : $("#work-personnel").val() + ",";
+
+        var wpres_top = isNullOrEmpty($("#work-personnel").val()) ? "" : "assignedtoid,";
+
+        var worderst = isNullOrEmpty($("#work-workOrderStatus").val()) ? "" : $("#work-workOrderStatus").val() + ",";
+
+        var worderst_top = isNullOrEmpty($("#work-workOrderStatus").val()) ? "" : "orderstatus,";
+
+        var room = workunits.attr("room");
+
+        if (!isNullOrEmpty(room)) {
             roomid = $("#work-units").val();
-        }else{
+        } else {
             unitid = $("#work-units").val();
         }
 
         var sql = "INSERT INTO workorder(" +
                 "workorderid, num, description, category, roomid, houseunitid," +
-                "blockstart, blockend, priority, assignedtoid, orderstatus, deadline," +
+                blocks + " priority, " + wpres_top + worderst_top + dedline_top +
                 "regbyid)" +
                 "VALUES (" +
                 "(SELECT COALESCE(MAX(workorderid) + 1,1) FROM workorder)," +
                 "(SELECT COALESCE(MAX(workorderid) + 1,1) FROM workorder)," +
-                "'" + $("#work-descr").val()+ "'," +
+                "'" + $("#work-descr").val().trim() + "'," +
                 $("#work-workOrderCategory").val() + "," +
                 roomid + "," +
                 unitid + "," +
-                "to_date('" + $("#dt-block-st").val() + "','dd.mm.yyyy')," +
-                "to_date('" + $("#dt-block-end").val() + "','dd.mm.yyyy')," +
+                dts +
                 $("#work-workOrderPriority").val() + "," +
-                $("#work-personnel").val() + "," +
-                $("#work-workOrderStatus").val() + "," +
-                "to_date('" + $("#dt-dedline").val() + "','dd.mm.yyyy'), <%=user.getPersonnelid()%> )";
+                wpers +
+                worderst +
+                dedline + " <%=user.getPersonnelid()%> )";
+
+        if (!isNullOrEmpty(wid.trim()) && wid.trim() != "null") {
+            dtst = '';
+            var pr = isNullOrEmpty($("#work-workOrderPriority").val()) ? "NULL" : $("#work-workOrderPriority").val();
+            var pers = isNullOrEmpty($("#work-personnel").val()) ? "NULL" : $("#work-personnel").val();
+            var st = isNullOrEmpty($("#work-workOrderStatus").val()) ? "NULL" : $("#work-workOrderStatus").val();
+            var ded =  isNullOrEmpty($("#dt-dedline").val()) ? "NULL" : "to_date('" + $("#dt-dedline").val() + "','dd.mm.yyyy')";
+            sql = "UPDATE workorder SET description='" + $("#work-descr").val().trim() + "', category=" + $("#work-workOrderCategory").val() + ", roomid=" + roomid + ", " +
+            "houseunitid=" + unitid + ", priority=" + pr + ", " +
+            "assignedtoid=" + pers + ", " +
+            "orderstatus=" + st + ", " +
+            "deadline=" + ded + ", updatedon=now() " +
+            "WHERE workorderid=<%=wid%>;";
+        }
 
         loader.show();
 
-        $.post("content/execute.jsp?query=" + encodeURIComponent(sql), {}, function () {
+        if (!isNullOrEmpty(dtst)) {
+            var select = "select getroomstatusbydate(" + roomid + ",'" + $("#dt-block-st").val() + "','" + $("#dt-block-end").val() + "');";
 
-            reloadGrid(preferencesGrid.id, preferencesGrid.url);
+            loader.show();
 
-            $("#cancelSave").click();
+            $.post("content/checkifavalforblock.jsp?query=" + select, {}, function (data) {
+                if (data.trim() > 1) {
+                    BootstrapDialog.alert("არჩეული თარიღებისთვის შეუძლებელია ნომრის დაბლოკვა");
+                    loader.hide();
+                } else {
+                    var reason = 1;
+                    $.post("content/saveblockunblock.jsp?arrdt=" + $("#dt-block-st").val() + "&dep=" + $("#dt-block-end").val() + "&roomid=" + roomid + "&reason=" + reason, {}, function (data) {
+                        $.post("content/execute.jsp?query=" + encodeURIComponent(sql), {}, function () {
+                            var category = $("#work-workOrderCategory  option:selected").text();
+                            var priority = $("#work-workOrderPriority  option:selected").text();
+                            var personnel = $("#work-personnel  option:selected").text();
+                            var status = $("#work-workOrderStatus  option:selected").text();
 
-            loader.hide();
+                            sql = "INSERT INTO workorderlog(" +
+                            "workorderlogid, workorderid, category, priority, assignedto, status, note, regbyid)" +
+                            "VALUES (" +
+                            "(SELECT COALESCE(MAX(workorderlogid) + 1,1) FROM workorderlog)," +
+                            "(SELECT MAX(workorderid) FROM workorder), " +
+                            "N'" + category + "', " +
+                            "N'" + priority + "', " +
+                            "N'" + personnel + "', " +
+                            "N'" + status + "', " +
+                            "N''," +
+                            "N'<%=user.getLoginid()%>');";
 
-        });
+                            $.post("content/execute.jsp?query=" + encodeURIComponent(sql), {}, function () {
+                                reloadGrid(workOrderGrid.id, workOrderGrid.url);
+                                reloadHistory();
+                                $("#cancelSave").click();
+                                loader.hide();
+                            });
+                        });
+                    });
+                }
+            });
+        } else {
+            $.post("content/execute.jsp?query=" + encodeURIComponent(sql), {}, function () {
+                var category = $("#work-workOrderCategory  option:selected").text();
+                var priority = $("#work-workOrderPriority  option:selected").text();
+                var personnel = $("#work-personnel  option:selected").text();
+                var status = $("#work-workOrderStatus  option:selected").text();
+
+                sql = "INSERT INTO workorderlog(" +
+                "workorderlogid, workorderid, category, priority, assignedto, status, note, regbyid)" +
+                "VALUES (" +
+                "(SELECT COALESCE(MAX(workorderlogid) + 1,1) FROM workorderlog)," +
+                "(SELECT MAX(workorderid) FROM workorder), " +
+                "N'" + category + "', " +
+                "N'" + priority + "', " +
+                "N'" + personnel + "', " +
+                "N'" + status + "', " +
+                "N''," +
+                "N'<%=user.getLoginid()%>');";
+
+                $.post("content/execute.jsp?query=" + encodeURIComponent(sql), {}, function () {
+                    reloadGrid(workOrderGrid.id, workOrderGrid.url);
+                    reloadHistory();
+                    $("#cancelSave").click();
+                    loader.hide();
+                });
+            });
+        }
+
     }
 </script>
-
 <style>
     .work-order-add-maindiv {
         width: 100%;
@@ -110,18 +273,27 @@
         padding: 0 !important;
     }
 
-    .maintable{
+    .maintable {
         width: 500px;
         margin-left: 10px;
         margin-top: -35px;
     }
-    .maintable td{
+
+    .maintable td {
         border: 0 !important;
         padding: 3px !important;
     }
+
+    textarea {
+        width: 200px;
+        min-width: 200px;
+        max-width: 200px;
+        height: 69px;
+        min-height: 69px;
+        max-height: 69px;
+    }
 </style>
 <div class="work-order-add-maindiv">
-
     <table style="width: 100%" class="work-table">
         <tr>
             <td style="">
@@ -139,7 +311,8 @@
                                         <span>ორდ. #</span>
                                     </td>
                                     <td>
-                                        <input type="text" name="work-ordernum" id="work-ordernum" style="background: whitesmoke;" readonly value="<%=CodeHelpers.ifIsNullOrEmptyReturnEmptryString(workorderBean.getNum())%>"/>
+                                        <input type="text" name="work-ordernum" id="work-ordernum"
+                                               style="background: whitesmoke;" readonly value="<%=ordNum%>"/>
                                     </td>
                                 </tr>
                                 <tr>
@@ -147,9 +320,7 @@
                                         <span>განმარტება</span>
                                     </td>
                                     <td>
-                                        <textarea id="work-descr" style="height: 40px; margin-left: 4px;">
-                                            <%=CodeHelpers.ifIsNullOrEmptyReturnEmptryString(workorderBean.getDescription())%>
-                                        </textarea>
+                                        <textarea id="work-descr" style="margin-left: 4px;"><%=CodeHelpers.ifIsNullOrEmptyReturnEmptryString(workorderBean.getDescription())%></textarea>
                                     </td>
                                 </tr>
                                 <tr>
@@ -167,7 +338,8 @@
                                                     selected = "";
                                                 }
                                             %>
-                                                <option value="<%=i%>" <%=selected%> ><%=workOrderCategory[i]%></option>
+                                            <option value="<%=i%>" <%=selected%> ><%=workOrderCategory[i]%>
+                                            </option>
                                             <% } %>
                                         </select>
                                     </td>
@@ -178,7 +350,7 @@
                                     </td>
                                     <td>
                                         <select class="dropdown col-md-2" id="work-units">
-                                            <option value="0">-ოთახის #-</option>
+                                            <option value="">-ოთახის #-</option>
                                             <% for (int i = 0; i < rooms.length; i++) {
 
                                                 String selected = "";
@@ -189,7 +361,7 @@
                                                 }
                                             %>
                                             <option <%=selected%> room="room" value="<%=rooms[i].getRoomid()%>"
-                                                    roomtypeid="<%=rooms[i].getRoomtypeid()%>"><%=rooms[i].getName()%>
+                                                                  roomtypeid="<%=rooms[i].getRoomtypeid()%>"><%=rooms[i].getName()%>
                                             </option>
                                             <% } %>
                                             <% for (int i = 0; i < units.length; i++) {
@@ -202,7 +374,8 @@
                                                 }
 
                                             %>
-                                            <option <%=selected%> value="<%=units[i].getHouseunitid()%>"><%=units[i].getName()%>
+                                            <option <%=selected%>
+                                                    value="<%=units[i].getHouseunitid()%>"><%=units[i].getName()%>
                                             </option>
                                             <% } %>
                                         </select>
@@ -213,18 +386,19 @@
                                         <span>ბლოკის დასაწყისი</span>
                                     </td>
                                     <td>
-                                        <% if(workorderBean.getBlockstart() != null){ %>
-                                            <%=workorderBean.getBlockstart()%>
-                                        <% }else{ %>
-                                            <div class="col-md-2">
-                                                <div class="input-append date" id="dt-block-st-div">
-                                                    <input type="text" class="span2 " id="dt-block-st"  placeholder=" თარიღიდან"
-                                                           style="">
+                                        <% if (workorderBean.getBlockstart() != null) { %>
+                                        <span style="margin-left: 5px;"><%=dt.format(workorderBean.getBlockstart()).trim()%></span>
+                                        <% } else { %>
+                                        <div class="col-md-2">
+                                            <div class="input-append date" id="dt-block-st-div">
+                                                <input type="text" class="span2 " id="dt-block-st"
+                                                       placeholder=" თარიღიდან"
+                                                       style="" value="">
                                                     <span class="add-on"
                                                           style="position:absolute !important; right : -104px  !important;background : none  !important;border: none !important;top: 1px;">
                                                         <i class="glyphicon glyphicon-calendar"></i></span>
-                                                </div>
                                             </div>
+                                        </div>
                                         <%} %>
                                     </td>
                                 </tr>
@@ -233,12 +407,13 @@
                                         <span>ბლოკის დასასრული</span>
                                     </td>
                                     <td>
-                                        <% if(workorderBean.getBlockend() != null){ %>
-                                            <%=workorderBean.getBlockend()%>
-                                        <% }else{ %>
-                                        <div class="input-append date" id="dt-block-end-div"  style="position: relative;">
+                                        <% if (workorderBean.getBlockend() != null) { %>
+                                        <span style="margin-left: 5px;"><%=dt.format(workorderBean.getBlockend()).trim()%></span>
+                                        <% } else { %>
+                                        <div class="input-append date" id="dt-block-end-div"
+                                             style="position: relative;">
                                             <input type="text" class="span2 " id="dt-block-end" placeholder=" თარიღიდან"
-                                                   style="">
+                                                   style="" value="">
                                                 <span class="add-on"
                                                       style="position:absolute !important; right : 189px  !important;background : none  !important;border: none !important;top: 1px;">
                                                     <i class="glyphicon glyphicon-calendar"></i></span>
@@ -261,7 +436,8 @@
                                                     selected = "";
                                                 }
                                             %>
-                                                <option value="<%=i%>" <%=selected%> ><%=workOrderPriority[i]%></option>
+                                            <option value="<%=i%>" <%=selected%> ><%=workOrderPriority[i]%>
+                                            </option>
                                             <% } %>
                                         </select>
                                     </td>
@@ -272,7 +448,7 @@
                                     </td>
                                     <td>
                                         <select class="dropdown col-md-2" id="work-personnel">
-                                            <option value="0">-აირჩიეთ-</option>
+                                            <option value="">-აირჩიეთ-</option>
                                             <% for (int i = 0; i < personnelBeans.length; i++) {
                                                 String selected = "";
                                                 if (workorderBean.getAssignedtoid() != null && workorderBean.getAssignedtoid().equals(personnelBeans[i].getPersonnelid())) {
@@ -293,7 +469,6 @@
                                     </td>
                                     <td>
                                         <select class="dropdown col-md-2" id="work-workOrderStatus">
-                                            <option value="">-სტატუსი-</option>
                                             <% for (int i = 0; i < workOrderStatus.length; i++) {
                                                 String selected = "";
                                                 if (workorderBean.getOrderstatus() != null && workorderBean.getOrderstatus().equals(i)) {
@@ -313,9 +488,10 @@
                                         <span>დედლაინი</span>
                                     </td>
                                     <td>
-                                        <div class="input-append date" id="dt-dedline-div"  style="position: relative;">
+                                        <div class="input-append date" id="dt-dedline-div" style="position: relative;">
                                             <input type="text" class="span2 " id="dt-dedline" placeholder=" თარიღიდან"
-                                                   style="">
+                                                   style=""
+                                                   value="<% if(workorderBean.getDeadline() != null) {%> <%=workorderBean.getDeadline()%> <% } %>">
                                                 <span class="add-on"
                                                       style="position:absolute !important; right : 189px  !important;background : none  !important;border: none !important;top: 1px;">
                                                     <i class="glyphicon glyphicon-calendar"></i></span>
@@ -327,7 +503,8 @@
                     </tr>
                     <tr>
                         <td class="footer-td">
-                            <button type="button" class="btn btn-default" id="cancelSave" onclick="cancelSaveWorkorder()"
+                            <button type="button" class="btn btn-default" id="cancelSave"
+                                    onclick="cancelSaveWorkorder()"
                                     style="border: 0; font-weight: bold; float: right; margin: 4px 6px 0 0;">
                                 დახურვა
                             </button>
@@ -352,6 +529,21 @@
                     <tr>
                         <td>
 
+                        </td>
+                    </tr>
+                </table>
+                <br/>
+                <table style="width: 100%; height: 103px;" class="work-table">
+                    <tr>
+                        <td class="header-td">
+                            <span>ისტორია</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div id="history-table" style="  width: 100%;height: 330px;max-height: 287px;overflow-y: auto; padding: 5px;">
+
+                            </div>
                         </td>
                     </tr>
                 </table>

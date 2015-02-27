@@ -18,6 +18,7 @@ import java.sql.SQLException;
 // imports- 
 
 
+
 /**
  * Listener that is notified of reservationroompickdrop table changes.
  */
@@ -25,6 +26,7 @@ public interface ReservationroompickdropListener
 // extends+ 
 
 // extends- 
+
 {
     /**
      * Invoked just before inserting a ReservationroompickdropBean record into the database.
@@ -61,4 +63,5 @@ public interface ReservationroompickdropListener
 // class+ 
 
 // class- 
+
 }

@@ -61,6 +61,8 @@ public class WorkorderComparator implements Comparator
      *   <li>WorkorderManager.ID_DEADLINE
      *   <li>WorkorderManager.ID_REGDATE
      *   <li>WorkorderManager.ID_REGBYID
+     *   <li>WorkorderManager.ID_UPDATEDON
+     *   <li>WorkorderManager.ID_NOTE
      * </ul>
      */
     public WorkorderComparator(int iType)
@@ -93,6 +95,8 @@ public class WorkorderComparator implements Comparator
      *   <li>WorkorderManager.ID_DEADLINE
      *   <li>WorkorderManager.ID_REGDATE
      *   <li>WorkorderManager.ID_REGBYID
+     *   <li>WorkorderManager.ID_UPDATEDON
+     *   <li>WorkorderManager.ID_NOTE
      * </ul>
      *
      * @param bReverse set this value to true, if you want to reverse the sorting results
@@ -265,6 +269,28 @@ public class WorkorderComparator implements Comparator
                     iReturn = 1;
                 } else { 
                     iReturn = b1.getRegbyid().compareTo(b2.getRegbyid());
+                }
+                break;
+            case WorkorderManager.ID_UPDATEDON:
+                if (b1.getUpdatedon() == null && b2.getUpdatedon() != null) {
+                    iReturn = -1;
+                } else if (b1.getUpdatedon() == null && b2.getUpdatedon() == null) {
+                    iReturn = 0;
+                } else if (b1.getUpdatedon() != null && b2.getUpdatedon() == null) {
+                    iReturn = 1;
+                } else { 
+                    iReturn = b1.getUpdatedon().compareTo(b2.getUpdatedon());
+                }
+                break;
+            case WorkorderManager.ID_NOTE:
+                if (b1.getNote() == null && b2.getNote() != null) {
+                    iReturn = -1;
+                } else if (b1.getNote() == null && b2.getNote() == null) {
+                    iReturn = 0;
+                } else if (b1.getNote() != null && b2.getNote() == null) {
+                    iReturn = 1;
+                } else { 
+                    iReturn = b1.getNote().compareTo(b2.getNote());
                 }
                 break;
             default: 
