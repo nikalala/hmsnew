@@ -103,6 +103,9 @@ paid = getSum("select sum(amount*ratedate("+maincurrency.getCurrencyid()+",curre
 String reldate = (reserv.getAdvancepaymentdate() == null) ? "":dt.format(reserv.getAdvancepaymentdate());
 String relterm = (reserv.getAdvancepaymentamount() == null) ? "":dc.format(reserv.getAdvancepaymentamount());
 String vouchernum = (reserv.getVoucher() == null) ? "":reserv.getVoucher();
+
+int prefCount = PreferenceManager.getInstance().countWhere("where reservationid = " + reserv.getReservationid());
+
 %>
 <script>
     
@@ -456,7 +459,7 @@ String vouchernum = (reserv.getVoucher() == null) ? "":reserv.getVoucher();
                                 </form>
                             </td>
                             <td align="center" style="border: 1px solid #C8C8C8;" width='20%'><b>საკრედიტო ბარათის ინფორმაცია</b></td>
-                            <td align="center" style="border: 1px solid #C8C8C8; cursor: pointer;" width='10%' onclick="newWindowWithParams('setPreference','უპირატესობის მინიჭება','?reservationid=<%=rroom.getReservationroomid()%>')"><b>უპირატესობები</b></td>
+                            <td align="center" style="border: 1px solid #C8C8C8; cursor: pointer;" width='10%' onclick="newWindowWithParams('setPreference','უპირატესობის მინიჭება','?reservationid=<%=rroom.getReservationroomid()%>')"><b>უპირატესობები (<%=prefCount%>)</b></td>
                             <td align="center" style="border: 1px solid #C8C8C8;" width='10%'><b>დავალებები</b></td>
                             <td align="center" style="border: 1px solid #C8C8C8;" width='10%'><b>შეტყობინებები</b></td>
                         </tr>

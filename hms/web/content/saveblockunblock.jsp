@@ -7,8 +7,6 @@
     String errorContrName = "0";
     Manager.getInstance().beginTransaction();
     try {
-/*        String rid = request.getParameter("rid");
-        String rTypeid = request.getParameter("tid");*/
 
         String roomId = request.getParameter("roomid");
         String arrdt = request.getParameter("arrdt");
@@ -25,17 +23,18 @@
         Date prevDay = df3.parse(arrdt);
         Collection<Date> dtsToInsert = new ArrayList<Date>();
         dtsToInsert.add(prevDay);
-        while (!equals) {
-            nextDay = CodeHelpers.getNextDay(prevDay);
-            dtsToInsert.add(nextDay);
-            System.out.println(df3.format(lastDate).split(" ")[0]);
-            if (df3.format(nextDay).split(" ")[0].equals(df3.format(lastDate).split(" ")[0])) {
-                equals = true;
-                break;
+        if(!arrdt.equals(depDate)){
+            while (!equals) {
+                nextDay = CodeHelpers.getNextDay(prevDay);
+                dtsToInsert.add(nextDay);
+                System.out.println(df3.format(lastDate).split(" ")[0] + " " + df3.format(prevDay).split(" ")[0] + " " + df3.format(nextDay).split(" ")[0]);
+                if (df3.format(nextDay).split(" ")[0].equals(df3.format(lastDate).split(" ")[0])) {
+                    equals = true;
+                    break;
+                }
+                prevDay = nextDay;
             }
-            prevDay = nextDay;
         }
-
         String generatedInsert = "";
         for (Date obj : dtsToInsert) {
             generatedInsert += "INSERT INTO roomst(roomstid, roomid, statusdate, st, regbyid) " +

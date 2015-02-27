@@ -1840,38 +1840,6 @@ public class ReservationroomManager
          }
     }
 
-    /**
-     * Retrieves an array of GuestBean using the relation table Sharer given a ReservationroomBean object.
-     *
-     * @param pObject the ReservationroomBean pObject to be used
-     * @return an array of GuestBean 
-     */
-    // MANY TO MANY
-    public GuestBean[] loadGuestViaSharer(ReservationroomBean pObject) throws SQLException
-    {
-         Connection c = null;
-         PreparedStatement ps = null;
-         String strSQL =      " SELECT "
-                         + "        *"
-                         + " FROM  "
-                         + "        guest,sharer"
-                         + " WHERE "    
-                         + "     sharer.reservationroomid = ?"
-                         + " AND sharer.guestid = guest.guestid";
-         try
-         {
-             c = getConnection();
-             ps = c.prepareStatement(strSQL,ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-             Manager.setLong(ps, 1, pObject.getReservationroomid());
-             return GuestManager.getInstance().loadByPreparedStatement(ps);
-         }
-         finally
-         {
-            getManager().close(ps);
-            freeConnection(c);
-         }
-    }
-
 
 
     ///////////////////////////////////////////////////////////////////////

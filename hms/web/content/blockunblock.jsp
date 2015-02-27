@@ -95,6 +95,7 @@
                 }
                 $.post("content/saveblockunblock.jsp?arrdt=" + arrdt + "&dep=" + dep + "&roomid=<%=roomid%>&reason=" + reason, {}, function (data) {
                     reloadGrid(hsGrid.id, hsGrid.url);
+                    $(".closepref").click();
                 });
             }
             loader.hide();
@@ -262,7 +263,7 @@
     <tr>
         <td>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" id="dismissbutton" data-dismiss="modal"
+                <button type="button" class="btn btn-default closepref" id="dismissbutton"  data-dismiss="modal"
                         onclick="this.click();">
                     დახურვა
                 </button>
