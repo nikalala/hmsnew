@@ -122,7 +122,7 @@
     });
 
     $(document).on("change","#compl_work_orders",function(){
-        doFilter();
+        //doFilter();
     });
 
     function saveRemark(id){
