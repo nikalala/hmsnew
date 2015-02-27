@@ -52,9 +52,9 @@ FolioBean[] folios = FolioManager.getInstance().loadByWhere("where reservationro
         //addTab("content/form/printInvoiceFolioItem.jsp?act=folio&id="+id,"ფოლიოს ბეჭდვა","foliovoice_"+id);
     }
     
-    function newFolio(id){
+    function newFolio(id,tp){
         //newmWindow1("newfolio","ახალი ინვოისი","id="+id);
-        extramodal00("contactSearch2", "კონტაქტის ძებნა", "id=0&fid=" + id + "&term=&cid=4");
+        extramodal00("contactSearch2", "კონტაქტის ძებნა", "id=0&fid=" + id + "&term=&cid=4&tp="+tp);
     }
     
     function refreshFoliolist(id){
@@ -401,13 +401,13 @@ $(document).ready(function(){
             <td class='pseudobutton' onclick="printFolio($('#folio_folioid').val())" style="background-color: #F9F9F9; text-align: center; width: 70px; border-right-color: #BEBEBE; border-right-style: solid; border-right-width: 1px;">
                 <b>ბეჭდვა</b>
             </td>
-            <td class='pseudobutton' style="background-color: #F9F9F9; text-align: center; width: 70px; border-right-color: #BEBEBE; border-right-style: solid; border-right-width: 1px;">
+            <td class='pseudobutton' onclick="splitFolio($('#folio_folioid').val())" style="background-color: #F9F9F9; text-align: center; width: 70px; border-right-color: #BEBEBE; border-right-style: solid; border-right-width: 1px;">
                 <b>გაყოფა</b>
             </td>
-            <td class='pseudobutton' onclick="newFolio(<%=folios[0].getFolioid()%>)" style="background-color: #F9F9F9; text-align: center; width: 70px; border-right-color: #BEBEBE; border-right-style: solid; border-right-width: 1px;">
+            <td class='pseudobutton' onclick="newFolio($('#folio_folioid').val(),0)" style="background-color: #F9F9F9; text-align: center; width: 70px; border-right-color: #BEBEBE; border-right-style: solid; border-right-width: 1px;">
                 <b>ახალი</b>
             </td>
-            <td class='pseudobutton' onclick="moveFolio($('#folio_folioid').val())" style="background-color: #F9F9F9; text-align: center; width: 90px; border-right-color: #BEBEBE; border-right-style: solid; border-right-width: 1px;">
+            <td class='pseudobutton' onclick="newFolio($('#folio_folioid').val(),1)" style="background-color: #F9F9F9; text-align: center; width: 90px; border-right-color: #BEBEBE; border-right-style: solid; border-right-width: 1px;">
                 <b>გადამხდელი</b>
             </td>
             <td style="background-color: #E9E9E9; text-align: right; color: red; font-size: 11px; padding-right: 5px;">

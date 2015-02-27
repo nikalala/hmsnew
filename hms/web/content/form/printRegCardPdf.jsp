@@ -183,9 +183,12 @@ int hideamts = 0;
 if(request.getParameter("hdt") != null)
     hideamts = 1;
 
+long gid = Long.parseLong(request.getParameter("gid"));
+
 ReservationroomBean rres = ReservationroomManager.getInstance().loadByPrimaryKey(new Long(request.getParameter("id")));
+if(gid == 0)    gid = rres.getGuestid().longValue();
 ReservationBean res = ReservationManager.getInstance().loadByPrimaryKey(rres.getReservationid());
-GuestBean guest = GuestManager.getInstance().loadByPrimaryKey(rres.getGuestid());
+GuestBean guest = GuestManager.getInstance().loadByPrimaryKey(gid);
 SalutationBean slt = SalutationManager.getInstance().loadByPrimaryKey(guest.getSalutationid());
 CountryBean gcountry = CountryManager.getInstance().loadByPrimaryKey(guest.getCountryid());
 CountryBean hcountry = CountryManager.getInstance().loadByPrimaryKey(hotel.getCountryid());

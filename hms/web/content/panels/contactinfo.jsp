@@ -3,7 +3,9 @@
 <%@include file="../../includes/init.jsp"%>
 <%
 String type = request.getParameter("type");
-
+GuestBean guest = null;
+if(request.getParameter("gid") != null)
+    guest = GuestManager.getInstance().loadByPrimaryKey(new Long(request.getParameter("gid")));
 %>
 <script>
     $(document).ready(function(){
@@ -17,7 +19,7 @@ String type = request.getParameter("type");
             <form class="form-inline" role="form">
             <div class="form-group">
                 <div class="input-group-xs">
-                    <input class="form-control" type="text" id="contacttinfo_email" style="width: 190px;">
+                    <input class="form-control" type="text" id="contacttinfo_email" style="width: 190px;" value="<%= (guest == null) ? "":guest.getEmail() %>">
                 </div>
             </div>
             </form>
@@ -29,7 +31,7 @@ String type = request.getParameter("type");
             <form class="form-inline" role="form">
             <div class="form-group">
                 <div class="input-group-xs">
-                    <input class="form-control" type="text" id="contacttinfo_phone" style="width: 190px;">
+                    <input class="form-control" type="text" id="contacttinfo_phone" style="width: 190px;" value="<%= (guest == null) ? "":guest.getPhone()%>">
                 </div>
             </div>
             </form>
@@ -41,7 +43,7 @@ String type = request.getParameter("type");
             <form class="form-inline" role="form">
             <div class="form-group">
                 <div class="input-group-xs">
-                    <input class="form-control" type="text" id="contacttinfo_mobile" style="width: 190px;">
+                    <input class="form-control" type="text" id="contacttinfo_mobile" style="width: 190px;" value="<%= (guest == null) ? "":guest.getMobile()%>">
                 </div>
             </div>
             </form>
@@ -53,7 +55,7 @@ String type = request.getParameter("type");
             <form class="form-inline" role="form">
             <div class="form-group">
                 <div class="input-group-xs">
-                    <input class="form-control" type="text" id="contacttinfo_fax" style="width: 190px;">
+                    <input class="form-control" type="text" id="contacttinfo_fax" style="width: 190px;" value="<%= (guest == null) ? "":guest.getFax() %>">
                 </div>
             </div>
             </form>

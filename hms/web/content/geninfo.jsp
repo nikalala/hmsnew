@@ -1,15 +1,9 @@
 <%@page contentType="text/html; charset=UTF-8"%>
 <%@page pageEncoding="UTF-8"%>
 <%@include file="../includes/init.jsp"%>
-<script>
-    if(maincontentheight > 654){
-        $("#spacer").height(maincontentheight-654);
-    }
-</script>
 <%
 ReservationroomBean rroom = ReservationroomManager.getInstance().loadByPrimaryKey(new Long(request.getParameter("reservationroomid")));
 ReservationBean reserv = ReservationManager.getInstance().loadByPrimaryKey(rroom.getReservationid());
-ReservationroomBean[] childs = ReservationroomManager.getInstance().loadByWhere("where reservationid = "+reserv.getReservationid()+" and leader = false order by reservationid");
 GuestBean guest = GuestManager.getInstance().loadByPrimaryKey(rroom.getGuestid());
 String guestname = "";
 SalutationBean salutation = SalutationManager.getInstance().loadByPrimaryKey(guest.getSalutationid());
@@ -110,6 +104,41 @@ String reldate = (reserv.getAdvancepaymentdate() == null) ? "":dt.format(reserv.
 String relterm = (reserv.getAdvancepaymentamount() == null) ? "":dc.format(reserv.getAdvancepaymentamount());
 String vouchernum = (reserv.getVoucher() == null) ? "":reserv.getVoucher();
 %>
+<script>
+    
+    $(document).ready(function(){
+    
+        if(maincontentheight > 654){
+            $("#spacer").height(maincontentheight-654);
+        }
+        
+        jQuery('#sharerlist').jqGrid(
+        {
+            url:'content/getsharerlist.jsp?reservationroomid=<%=rroom.getReservationroomid()%>',
+            datatype: 'xml',
+            colNames:['სახელი', 'სქესი', 'მოქმედება'],
+            colModel:[
+                {width: 300, hidden:false, name:'guestname', index:'guestname', align:'left'},
+                {width: 100, hidden:false, name:'gender', index:'gender', align:'left'},
+                {width: 200, hidden:false, name:'action', index:'action', align:'center'}
+            ],
+            rowNum:2000,
+            height: 65,
+            autowidth: true,
+            sortname: 'name',
+            viewrecords: true,
+            sortorder: 'asc',
+            //altRows: true,
+            //altclass: 'altrow',
+            multiselect: true,
+            loadComplete: function() {
+                
+            }
+            })
+        ;
+    
+    });
+</script>
 <style>
     .trh1 {
         line-height: 31px; 
@@ -126,6 +155,18 @@ String vouchernum = (reserv.getVoucher() == null) ? "":reserv.getVoucher();
             $("#paytypelabel").html("პირდაპირი დარიცხვა");
             $("#paytaypevalue").html("<%=paytaypevalue[1]%>");
         }
+    }
+    
+    function newSharer(id){
+        newmWindow1("guestProfile", "სტუმრის პროფილი", "id=" + id);
+    }
+    
+    function editSharer(id,gid){
+        newmWindow1("guestProfile", "სტუმრის პროფილი", "id=" + id+"&gid="+gid);
+    }
+    
+    function refreshSharerlist(){
+        jQuery("#sharerlist").jqGrid().trigger("reloadGrid");
     }
     
     $(document).ready(function(){
@@ -157,7 +198,7 @@ String vouchernum = (reserv.getVoucher() == null) ? "":reserv.getVoucher();
 <table class="" width="100%" style="height: 100%;">
     <tbody>
         <tr id='geninfotr'>
-            <td class="transactiongeninfotd" style="width: 420px; padding-left: 5px; padding-right: 2px; padding-bottom: 0px; padding-top: 5px;">
+            <td class="transactiongeninfotd col-md-6" style="width: 420px; padding-left: 5px; padding-right: 2px; padding-bottom: 0px; padding-top: 5px;">
                 <div class="panel panel-primary" id="transactiongeninfopanel1" style='height: 260px;'>
                     <div class="panel-heading">
                         <h3 class="panel-title">გადახდის ინფორმაცია</h3>
@@ -251,7 +292,7 @@ String vouchernum = (reserv.getVoucher() == null) ? "":reserv.getVoucher();
                     </div>
                 </div>
             </td>
-            <td class="transactiongeninfotd" style="padding-left: 3px; padding-right: 2px; padding-bottom: 0px; padding-top: 5px;">
+            <td class="transactiongeninfotd col-md-5" style="padding-left: 3px; padding-right: 2px; padding-bottom: 0px; padding-top: 5px;">
                 <table width="100%">
                     <tbody>
                         <tr>
@@ -261,12 +302,13 @@ String vouchernum = (reserv.getVoucher() == null) ? "":reserv.getVoucher();
                                         <h3 class="panel-title">
                                             მეზობლის ინფორმაცია
                                             <div class="btn-group pull-right">
-                                                <a href="#" class="glyphicon glyphicon-plus iconblack" style="text-decoration: none;" data-toggle="tooltip" title=""></a>
+                                                <a href="#" onclick="newSharer(<%=rroom.getReservationroomid()%>)" class="glyphicon glyphicon-plus iconblack" style="text-decoration: none;" data-toggle="tooltip" title=""></a>
                                             </div>
                                         </h3>
                                     </div>
                                     <div class="panel-body">
-                                        <table width="100%" class="table table-striped table-condensed table-hover">
+                                        <table width="100%" class="table table-striped table-condensed table-hover" id="sharerlist">
+                                            <%--
                                             <thead style="background-color: #E9E9E9;">
                                                 <tr>
                                                     <td><input type="checkbox" name="allguests" id="allguests" value="0" onclick="checkAll($(this),'guestcheck')"/></td>
@@ -277,8 +319,8 @@ String vouchernum = (reserv.getVoucher() == null) ? "":reserv.getVoucher();
                                             </thead>
                                             <tbody>
                                                 <%
-                                                for(int i=0;i<childs.length;i++){
-                                                    GuestBean gs = GuestManager.getInstance().loadByPrimaryKey(childs[i].getGuestid());
+                                                for(int i=0;i<sharers.length;i++){
+                                                    GuestBean gs = GuestManager.getInstance().loadByPrimaryKey(sharers[i].getGuestid());
                                                     String gname = "";
                                                     salutation = SalutationManager.getInstance().loadByPrimaryKey(guest.getSalutationid());
                                                     gname += salutation.getName()+" ";
@@ -302,6 +344,7 @@ String vouchernum = (reserv.getVoucher() == null) ? "":reserv.getVoucher();
                                                 </tr>
                                                 <%}%>
                                             </tbody>
+                                            --%>
                                         </table>
                                     </div>
                                     <div class="panel-footer">
@@ -337,7 +380,7 @@ String vouchernum = (reserv.getVoucher() == null) ? "":reserv.getVoucher();
                     </tbody>
                 </table>
             </td>
-            <td class="transactiongeninfotd" style="padding-left: 3px; padding-right: 5px; padding-bottom: 0px; padding-top: 5px;">
+            <td class="transactiongeninfotd col-md-5" style="padding-left: 3px; padding-right: 5px; padding-bottom: 0px; padding-top: 5px;">
                 <table width="100%">
                     <tbody>
                         <tr>

@@ -263,7 +263,9 @@ if(folio.getGuestid() != null){
 } else if(folio.getContragentid() != null) {
     ContragentBean contr = ContragentManager.getInstance().loadByPrimaryKey(folio.getContragentid());
     sbillto = contr.getName();
+    if(sbillto == null) sbillto = contr.getFname()+" "+contr.getLname();
 }
+if(sbillto == null) sbillto = "";
 
 CountryBean hotelcountry = CountryManager.getInstance().loadByPrimaryKey(hotel.getCountryid());
 
