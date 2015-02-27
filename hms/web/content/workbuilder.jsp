@@ -17,7 +17,17 @@
         drawFooter();
     });
 
-    function doFilter(){
+    function doFilter(bool){
+        if(bool){
+            $("#filter-form :input").each(function () {
+                $(this).val('');
+            });
+            //clean dropdowns
+            $('#filter-form .dropdown option').removeAttr('selected');
+            $("#filter-form .dropdown").val(-1);
+            $("#filter-form .dropdown").change();
+            $("#compl_work_orders").prop("checked",false);
+        }
         var url = "content/getworkorder.jsp?"+$("#filter-form").serialize();
         var room = $("option:selected", $("#units"));
         var attr = $(room).attr('roomtypeid');
@@ -122,6 +132,11 @@
     });
 
     $(document).on("change","#compl_work_orders",function(){
+        if($(this).prop("checked")){
+            $(this).val("on");
+        }else{
+            $(this).val("");
+        }
         //doFilter();
     });
 
@@ -293,7 +308,7 @@
                     </div>
                     <div class="col-md-3">
                         <button type="button" class="btn" style="width: 100%;" id="search_filer"
-                                onclick="doFilter()"
+                                onclick="doFilter(true)"
                                 style="width: 69px;">მაჩვენე ყველა
                         </button>
                     </div>
