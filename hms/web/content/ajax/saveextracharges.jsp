@@ -38,8 +38,8 @@ try{
         String eid = request.getParameter("extrachargeid");
 
         if(eid.equals("0")) throw new Exception("აირჩიეთ სერვისი");
-        String[] eids = eid.split("_");
-        int extrachargeid = Integer.parseInt(eids[0]);
+        //String[] eids = eid.split("_");
+        int extrachargeid = Integer.parseInt(eid);
         String srate = request.getParameter("rate");
         int postingtype = Integer.parseInt(request.getParameter("postingtype"));
         int chargeapplyrieson = Integer.parseInt(request.getParameter("chargeapplyrieson"));
@@ -87,8 +87,8 @@ try{
         String eid = request.getParameter("extrachargeid");
 
         if(eid.equals("0")) throw new Exception("აირჩიეთ სერვისი");
-        String[] eids = eid.split("_");
-        int extrachargeid = Integer.parseInt(eids[0]);
+        //String[] eids = eid.split("_");
+        int extrachargeid = Integer.parseInt(eid);
         String srate = request.getParameter("rate");
         int postingtype = Integer.parseInt(request.getParameter("postingtype"));
         int chargeapplyrieson = Integer.parseInt(request.getParameter("chargeapplyrieson"));

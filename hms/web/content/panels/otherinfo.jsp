@@ -22,7 +22,7 @@ if(request.getParameter("gid") != null)
                         <%
                         for(int i=0;i<idtypes.length;i++){
                             String sel = "";
-                            if(guest != null && guest.getIdtypeid().intValue() == idtypes[i].getIdtypeid().intValue())
+                            if(guest != null && guest.getIdtypeid() != null && guest.getIdtypeid().intValue() == idtypes[i].getIdtypeid().intValue())
                                 sel = "selected";
                             if(displaysettings.length > 0 && displaysettings[0].getIdtypeid() != null && displaysettings[0].getIdtypeid().intValue() == idtypes[i].getIdtypeid().intValue())
                                 sel = "selected";
@@ -49,7 +49,7 @@ if(request.getParameter("gid") != null)
                 <%
                 for(int i=0;i<nationalities.length;i++){
                     String sel = "";
-                    if(guest != null && guest.getNationalityid().intValue() == nationalities[i].getNationalityid().intValue())
+                    if(guest != null && guest.getNationalityid() != null && guest.getNationalityid().intValue() == nationalities[i].getNationalityid().intValue())
                         sel = "selected";
                 %>
                 <option value="<%=nationalities[i].getNationalityid()%>" <%=sel%>><%=nationalities[i].getName()%></option>
@@ -71,7 +71,7 @@ if(request.getParameter("gid") != null)
             <%
             for(int i=0;i<gender.length;i++){
                 String sel = "";
-                if(guest != null && guest.getGender().intValue() == i)
+                if(guest != null && guest.getGender() != null && guest.getGender().intValue() == i)
                     sel = "checked";
             %>
             <label class="radio-inline" style="height: 23px !important;">
@@ -94,7 +94,7 @@ if(request.getParameter("gid") != null)
                 <%
                 for(int i=0;i<vipstatuses.length;i++){
                     String sel = "";
-                    if(guest != null && guest.getVipstatusid().intValue() == vipstatuses[i].getVipstatusid().intValue())
+                    if(guest != null && guest.getVipstatusid() != null && guest.getVipstatusid().intValue() == vipstatuses[i].getVipstatusid().intValue())
                         sel = "selected";
                 %>
                 <option value="<%=vipstatuses[i].getVipstatusid()%>" <%=sel%>><%=vipstatuses[i].getName()%></option>

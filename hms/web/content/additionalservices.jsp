@@ -2,6 +2,29 @@
 <%@page pageEncoding="UTF-8"%>
 <%@include file="../includes/init.jsp"%>
 <%
+long fid = 0;
+int eid = 0;
+ExtrachargefolioBean exb = null;
+if(request.getParameter("fid") != null){
+    fid = Long.parseLong(request.getParameter("fid"));
+}
+if(request.getParameter("xid") != null){
+    eid = Integer.parseInt(request.getParameter("xid"));
+}
+if(eid > 0 && fid > 0)
+    exb = ExtrachargefolioManager.getInstance().loadByPrimaryKey(fid, eid);
+
+if(fid > 0){
+    Vector v = new Vector();
+    ExtrachargefolioBean[] exbs = ExtrachargefolioManager.getInstance().loadByWhere("where folioitemid in (select folioitemid from folioitem where folioid = "+fid+")");
+    for(int i=0;i<exbs.length;i++)
+        v.addElement((ExtrachargefolioBean)exbs[i]);
+    session.setAttribute("WALKIN_EXTRACHARGES", (Vector)v);
+    System.out.println("v1.size() = "+v.size());
+}
+
+
+
 ExtrachargeBean[] extracharges = ExtrachargeManager.getInstance().loadByWhere("where active = true and deleted = false order by ord");
 %>
 <script>
@@ -27,7 +50,7 @@ ExtrachargeBean[] extracharges = ExtrachargeManager.getInstance().loadByWhere("w
                 function(data){
                     if(data.result == 0) BootstrapDialog.alert(data.error);
                     else {
-                        $("#wlakin_extrachargeid").val(data.extrachargeid+"_"+data.rate.toFixed(2));
+                        $("#wlakin_extrachargeid").val(data.extrachargeid);
                         $("#wlakin_extrachargerate").val(data.rate);
                         $("#wlakin_extrachargepostingtype").val(data.postingtype);
                         $("#wlakin_extrachargechargeapplieson").val(data.chargeapplyrieson);
@@ -169,8 +192,15 @@ ExtrachargeBean[] extracharges = ExtrachargeManager.getInstance().loadByWhere("w
             }
         });
         
-        $("#additionalservices_rst").hide();
-        $("#additionalservices_edt").hide();
+        <%if(exb != null){%>
+            $("#additionalservices_add").hide();
+            $("#additionalservices_rst").show();
+            $("#additionalservices_edt").show();
+        <%}else{%>
+            $("#additionalservices_add").show();
+            $("#additionalservices_rst").hide();
+            $("#additionalservices_edt").hide();
+        <%}%>
         getExtrachargeList();
         
     });
@@ -188,8 +218,11 @@ ExtrachargeBean[] extracharges = ExtrachargeManager.getInstance().loadByWhere("w
                         <%
                         for(int i=0;i<extracharges.length;i++){
                             double erate = extracharges[i].getRate().doubleValue();
+                            String sel = "";
+                            if(eid == extracharges[i].getExtrachargeid().intValue())
+                                sel = "selected";
                         %>
-                        <option value="<%=extracharges[i].getExtrachargeid()%>_<%=dc.format(erate)%>"><%=extracharges[i].getName()%></option>
+                        <option value="<%=extracharges[i].getExtrachargeid()%>" <%=sel%>><%=extracharges[i].getName()%></option>
                         <%
                         }
                         %>
@@ -203,7 +236,7 @@ ExtrachargeBean[] extracharges = ExtrachargeManager.getInstance().loadByWhere("w
             <form class="form-inline" role="form">
             <div class="form-group">
                 <div class="input-group-xs">
-                    <input class="form-control" type="text" id="wlakin_extrachargerate" size="10" readonly="" style="">
+                    <input class="form-control" type="text" id="wlakin_extrachargerate" size="10" readonly="" style="" value="<%=(exb != null && exb.getRate() != null) ? dc.format(exb.getRate()):""%>">
                     <b><%=maincurrency.getCode()%></b>
                 </div>
             </div>
@@ -220,8 +253,11 @@ ExtrachargeBean[] extracharges = ExtrachargeManager.getInstance().loadByWhere("w
                         <option value="-1">--აირჩიეთ--</option>
                         <%
                         for(int i=0;i<extrachargepostingtype.length;i++){
+                            String sel = "";
+                            if(exb != null && exb.getPostingtype().intValue() == i)
+                                sel = "selected";
                         %>
-                        <option value="<%=i%>"><%=extrachargepostingtype[i]%></option>
+                        <option value="<%=i%>" <%=sel%>><%=extrachargepostingtype[i]%></option>
                         <%
                         }
                         %>
@@ -242,8 +278,11 @@ ExtrachargeBean[] extracharges = ExtrachargeManager.getInstance().loadByWhere("w
                         <option value="-1">--აირჩიეთ--</option>
                         <%
                         for(int i=0;i<chargeapplieson.length;i++){
+                            String sel = "";
+                            if(exb != null && exb.getChargeapplyrieson().intValue() == i)
+                                sel = "selected";
                         %>
-                        <option value="<%=i%>"><%=chargeapplieson[i]%></option>
+                        <option value="<%=i%>" <%=sel%>><%=chargeapplieson[i]%></option>
                         <%
                         }
                         %>

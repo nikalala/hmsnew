@@ -74,8 +74,10 @@ else                url += "&action=add";
             </div>
         </div>
         <div class="col-md-4">
+            <%if(gid == 0){%>
             <input type="checkbox" id="createfolio">&nbsp;
             <label for="createfolio">შეიქმნას ფოლიო</label>&nbsp;
+            <%}%>
         </div>
     </div>
 </div>

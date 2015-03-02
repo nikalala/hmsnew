@@ -21,7 +21,7 @@ if(request.getParameter("gid") != null)
                         <%
                         for(int i=0;i<salutations.length;i++){
                             String sel = "";
-                            if(guest != null && guest.getSalutationid().intValue() == salutations[i].getSalutationid().intValue())
+                            if(guest != null && guest.getSalutationid() != null && guest.getSalutationid().intValue() == salutations[i].getSalutationid().intValue())
                                 sel = "selected";
                             if(guest == null && displaysettings.length > 0 && displaysettings[0].getSalutationid() != null && displaysettings[0].getSalutationid().intValue() == salutations[i].getSalutationid().intValue())
                                 sel = "selected";

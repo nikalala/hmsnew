@@ -169,11 +169,20 @@ String vouchernum = (reserv.getVoucher() == null) ? "":reserv.getVoucher();
         jQuery("#sharerlist").jqGrid().trigger("reloadGrid");
     }
     
+    function getExtrachargeList1(id){
+        $.post("content/ajax/getextrachargelist.jsp",{id:id},function(data){ $("#geninfo_extracharges").html(data); });
+    }
+    
+    function editExtracharge1(fid,xid){
+        newmWindow1('additionalservices','დამატებითი სერვისები',"fid="+fid+"&xid="+xid);
+    }
+    
     $(document).ready(function(){
     
         $('#reldate').datepicker();
         
         getReasonList1(<%=rroom.getReservationid()%>);
+        getExtrachargeList1(<%=rroom.getReservationroomid()%>);
         
         <%if(reserv.getPaymentmode() != null && reserv.getPaymentmode().intValue() == 0){%>
             $("#paytypelabel").html("გადახდის მეთოდი");
@@ -308,43 +317,7 @@ String vouchernum = (reserv.getVoucher() == null) ? "":reserv.getVoucher();
                                     </div>
                                     <div class="panel-body">
                                         <table width="100%" class="table table-striped table-condensed table-hover" id="sharerlist">
-                                            <%--
-                                            <thead style="background-color: #E9E9E9;">
-                                                <tr>
-                                                    <td><input type="checkbox" name="allguests" id="allguests" value="0" onclick="checkAll($(this),'guestcheck')"/></td>
-                                                    <td><b>სახელი</b></td>
-                                                    <td><b>სქესი</b></td>
-                                                    <td><b>მოქმედება</b></td>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <%
-                                                for(int i=0;i<sharers.length;i++){
-                                                    GuestBean gs = GuestManager.getInstance().loadByPrimaryKey(sharers[i].getGuestid());
-                                                    String gname = "";
-                                                    salutation = SalutationManager.getInstance().loadByPrimaryKey(guest.getSalutationid());
-                                                    gname += salutation.getName()+" ";
-                                                    gname += guest.getFname() + " " + guest.getLname();
-                                                    String gendername = "?";
-                                                    if(gs.getGender() != null){
-                                                        gendername = gender[gs.getGender().intValue()];
-                                                    }
-                                                %>
-                                                <tr>
-                                                    <td><input type="checkbox" class="guestcheck" name="guest_<%=gs.getGuestid()%>" id="guest_<%=gs.getGuestid()%>" value="<%=gs.getGuestid()%>"/></td>
-                                                    <td><%=gname%></td>
-                                                    <td><%=gendername%></td>
-                                                    <td>
-                                                        <span onclick="" style="cursor: pointer;" class="glyphicon glyphicon-pencil" data-toggle="tooltip" title="რედაქტირება"></span>
-                                                        <span onclick="" style="cursor: pointer;" class="glyphicon glyphicon-arrow-down" data-toggle="tooltip" title="მოყვანა"></span>
-                                                        <span onclick="" style="cursor: pointer;" class="glyphicon glyphicon-arrow-up" data-toggle="tooltip" title="წაყვანა"></span>
-                                                        <span onclick="" style="cursor: pointer;" class="glyphicon glyphicon-user" data-toggle="tooltip" title="შავ სიაში დამატება"></span>
-                                                        <span onclick="" style="cursor: pointer;" class="glyphicon glyphicon-list-alt" data-toggle="tooltip" title="სტუმრის სარეგისტრაციო ბარათი"></span>
-                                                    </td>
-                                                </tr>
-                                                <%}%>
-                                            </tbody>
-                                            --%>
+                                            
                                         </table>
                                     </div>
                                     <div class="panel-footer">
@@ -359,13 +332,13 @@ String vouchernum = (reserv.getVoucher() == null) ? "":reserv.getVoucher();
                                 <div class="panel panel-primary" id="transactiongeninfopanel3" style="height: 98px;">
                                     <div class="panel-heading">
                                         <h3 class="panel-title">
-                                            შეიცავს
+                                            დამატებითი სერვისები
                                             <div class="btn-group pull-right">
-                                                <a href="#" class="glyphicon glyphicon-plus iconblack" style="text-decoration: none;" data-toggle="tooltip" title=""></a>
+                                                <a href="javascript:newmWindow1('additionalservices','დამატებითი სერვისები','reservationroomid=<%=rroom.getReservationroomid()%>')" class="glyphicon glyphicon-plus iconblack" style="text-decoration: none;" data-toggle="tooltip" title=""></a>
                                             </div>
                                         </h3>
                                     </div>
-                                    <div class="panel-body">
+                                    <div class="panel-body" id="geninfo_extracharges">
                                         <table width="100%">
                                             <tbody>
                                                 <tr>

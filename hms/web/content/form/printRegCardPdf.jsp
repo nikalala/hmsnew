@@ -363,7 +363,7 @@ String[] values = {
     hotel.getAddress1()+" "+hotel.getZip(),                                        //  1
     hotel.getPhone(),                                           //  2
     hotel.getEmail(),                                           //  3
-    rres.getReservationroomid().toString(),                     //  4
+    rres.getReservationroomid().toString()+"-"+gid,                     //  4
     slt.getName()+" "+ guest.getFname()+" "+guest.getLname(),   //  5
     guest.getPhone(),                                           //  6
     guest.getMobile(),                                          //  7
