@@ -19,9 +19,9 @@ import java.util.Comparator;
 
 
 /**
- * Comparator class is used to sort the WorkorderBean objects.
+ * Comparator class is used to sort the VWorkorderBean objects.
  */
-public class WorkorderComparator implements Comparator
+public class VWorkorderComparator implements Comparator
 // extends+ 
 
 // extends- 
@@ -37,71 +37,79 @@ public class WorkorderComparator implements Comparator
     private boolean bReverse;
 
     /**
-     * Constructor class for WorkorderComparator.
+     * Constructor class for VWorkorderComparator.
      * <br>
      * Example:
      * <br>
-     * <code>Arrays.sort(pArray, new WorkorderComparator(WorkorderManager.WORKORDERID, bReverse));<code>
+     * <code>Arrays.sort(pArray, new VWorkorderComparator(VWorkorderManager.WORKORDERID, bReverse));<code>
      *
      * @param iType the field from which you want to sort
      * <br>
      * Possible values are:
      * <ul>
-     *   <li>WorkorderManager.ID_WORKORDERID
-     *   <li>WorkorderManager.ID_NUM
-     *   <li>WorkorderManager.ID_DESCRIPTION
-     *   <li>WorkorderManager.ID_CATEGORY
-     *   <li>WorkorderManager.ID_ROOMID
-     *   <li>WorkorderManager.ID_HOUSEUNITID
-     *   <li>WorkorderManager.ID_BLOCKSTART
-     *   <li>WorkorderManager.ID_BLOCKEND
-     *   <li>WorkorderManager.ID_PRIORITY
-     *   <li>WorkorderManager.ID_ASSIGNEDTOID
-     *   <li>WorkorderManager.ID_ORDERSTATUS
-     *   <li>WorkorderManager.ID_DEADLINE
-     *   <li>WorkorderManager.ID_REGDATE
-     *   <li>WorkorderManager.ID_REGBYID
-     *   <li>WorkorderManager.ID_UPDATEDON
-     *   <li>WorkorderManager.ID_NOTE
+     *   <li>VWorkorderManager.ID_WORKORDERID
+     *   <li>VWorkorderManager.ID_NUM
+     *   <li>VWorkorderManager.ID_DESCRIPTION
+     *   <li>VWorkorderManager.ID_CATEGORY
+     *   <li>VWorkorderManager.ID_ROOMID
+     *   <li>VWorkorderManager.ID_HOUSEUNITID
+     *   <li>VWorkorderManager.ID_BLOCKSTART
+     *   <li>VWorkorderManager.ID_BLOCKEND
+     *   <li>VWorkorderManager.ID_PRIORITY
+     *   <li>VWorkorderManager.ID_ASSIGNEDTOID
+     *   <li>VWorkorderManager.ID_ORDERSTATUS
+     *   <li>VWorkorderManager.ID_DEADLINE
+     *   <li>VWorkorderManager.ID_REGDATE
+     *   <li>VWorkorderManager.ID_REGBYID
+     *   <li>VWorkorderManager.ID_UPDATEDON
+     *   <li>VWorkorderManager.ID_NOTE
+     *   <li>VWorkorderManager.ID_RNAME
+     *   <li>VWorkorderManager.ID_CODE
+     *   <li>VWorkorderManager.ID_HNAME
+     *   <li>VWorkorderManager.ID_ASSIGNEDTO
      * </ul>
      */
-    public WorkorderComparator(int iType)
+    public VWorkorderComparator(int iType)
     {
         this(iType, false);
     }
 
     /**
-     * Constructor class for WorkorderComparator.
+     * Constructor class for VWorkorderComparator.
      * <br>
      * Example:
      * <br>
-     * <code>Arrays.sort(pArray, new WorkorderComparator(WorkorderManager.WORKORDERID, bReverse));<code>
+     * <code>Arrays.sort(pArray, new VWorkorderComparator(VWorkorderManager.WORKORDERID, bReverse));<code>
      *
      * @param iType the field from which you want to sort.
      * <br>
      * Possible values are:
      * <ul>
-     *   <li>WorkorderManager.ID_WORKORDERID
-     *   <li>WorkorderManager.ID_NUM
-     *   <li>WorkorderManager.ID_DESCRIPTION
-     *   <li>WorkorderManager.ID_CATEGORY
-     *   <li>WorkorderManager.ID_ROOMID
-     *   <li>WorkorderManager.ID_HOUSEUNITID
-     *   <li>WorkorderManager.ID_BLOCKSTART
-     *   <li>WorkorderManager.ID_BLOCKEND
-     *   <li>WorkorderManager.ID_PRIORITY
-     *   <li>WorkorderManager.ID_ASSIGNEDTOID
-     *   <li>WorkorderManager.ID_ORDERSTATUS
-     *   <li>WorkorderManager.ID_DEADLINE
-     *   <li>WorkorderManager.ID_REGDATE
-     *   <li>WorkorderManager.ID_REGBYID
-     *   <li>WorkorderManager.ID_UPDATEDON
-     *   <li>WorkorderManager.ID_NOTE
+     *   <li>VWorkorderManager.ID_WORKORDERID
+     *   <li>VWorkorderManager.ID_NUM
+     *   <li>VWorkorderManager.ID_DESCRIPTION
+     *   <li>VWorkorderManager.ID_CATEGORY
+     *   <li>VWorkorderManager.ID_ROOMID
+     *   <li>VWorkorderManager.ID_HOUSEUNITID
+     *   <li>VWorkorderManager.ID_BLOCKSTART
+     *   <li>VWorkorderManager.ID_BLOCKEND
+     *   <li>VWorkorderManager.ID_PRIORITY
+     *   <li>VWorkorderManager.ID_ASSIGNEDTOID
+     *   <li>VWorkorderManager.ID_ORDERSTATUS
+     *   <li>VWorkorderManager.ID_DEADLINE
+     *   <li>VWorkorderManager.ID_REGDATE
+     *   <li>VWorkorderManager.ID_REGBYID
+     *   <li>VWorkorderManager.ID_UPDATEDON
+     *   <li>VWorkorderManager.ID_NOTE
+     *   <li>VWorkorderManager.ID_RNAME
+     *   <li>VWorkorderManager.ID_CODE
+     *   <li>VWorkorderManager.ID_HNAME
+     *   <li>VWorkorderManager.ID_ASSIGNEDTO
      * </ul>
      *
      * @param bReverse set this value to true, if you want to reverse the sorting results
      */
-    public WorkorderComparator(int iType, boolean bReverse)
+    public VWorkorderComparator(int iType, boolean bReverse)
     {
         this.iType = iType;
         this.bReverse = bReverse;
@@ -112,12 +120,12 @@ public class WorkorderComparator implements Comparator
      */
     public int compare(Object pObj1, Object pObj2)
     {
-        WorkorderBean b1 = (WorkorderBean)pObj1;
-        WorkorderBean b2 = (WorkorderBean)pObj2;
+        VWorkorderBean b1 = (VWorkorderBean)pObj1;
+        VWorkorderBean b2 = (VWorkorderBean)pObj2;
         int iReturn = 0;
         switch(iType)
         {
-            case WorkorderManager.ID_WORKORDERID:
+            case VWorkorderManager.ID_WORKORDERID:
                 if (b1.getWorkorderid() == null && b2.getWorkorderid() != null) {
                     iReturn = -1;
                 } else if (b1.getWorkorderid() == null && b2.getWorkorderid() == null) {
@@ -128,7 +136,7 @@ public class WorkorderComparator implements Comparator
                     iReturn = b1.getWorkorderid().compareTo(b2.getWorkorderid());
                 }
                 break;
-            case WorkorderManager.ID_NUM:
+            case VWorkorderManager.ID_NUM:
                 if (b1.getNum() == null && b2.getNum() != null) {
                     iReturn = -1;
                 } else if (b1.getNum() == null && b2.getNum() == null) {
@@ -139,7 +147,7 @@ public class WorkorderComparator implements Comparator
                     iReturn = b1.getNum().compareTo(b2.getNum());
                 }
                 break;
-            case WorkorderManager.ID_DESCRIPTION:
+            case VWorkorderManager.ID_DESCRIPTION:
                 if (b1.getDescription() == null && b2.getDescription() != null) {
                     iReturn = -1;
                 } else if (b1.getDescription() == null && b2.getDescription() == null) {
@@ -150,7 +158,7 @@ public class WorkorderComparator implements Comparator
                     iReturn = b1.getDescription().compareTo(b2.getDescription());
                 }
                 break;
-            case WorkorderManager.ID_CATEGORY:
+            case VWorkorderManager.ID_CATEGORY:
                 if (b1.getCategory() == null && b2.getCategory() != null) {
                     iReturn = -1;
                 } else if (b1.getCategory() == null && b2.getCategory() == null) {
@@ -161,7 +169,7 @@ public class WorkorderComparator implements Comparator
                     iReturn = b1.getCategory().compareTo(b2.getCategory());
                 }
                 break;
-            case WorkorderManager.ID_ROOMID:
+            case VWorkorderManager.ID_ROOMID:
                 if (b1.getRoomid() == null && b2.getRoomid() != null) {
                     iReturn = -1;
                 } else if (b1.getRoomid() == null && b2.getRoomid() == null) {
@@ -172,7 +180,7 @@ public class WorkorderComparator implements Comparator
                     iReturn = b1.getRoomid().compareTo(b2.getRoomid());
                 }
                 break;
-            case WorkorderManager.ID_HOUSEUNITID:
+            case VWorkorderManager.ID_HOUSEUNITID:
                 if (b1.getHouseunitid() == null && b2.getHouseunitid() != null) {
                     iReturn = -1;
                 } else if (b1.getHouseunitid() == null && b2.getHouseunitid() == null) {
@@ -183,7 +191,7 @@ public class WorkorderComparator implements Comparator
                     iReturn = b1.getHouseunitid().compareTo(b2.getHouseunitid());
                 }
                 break;
-            case WorkorderManager.ID_BLOCKSTART:
+            case VWorkorderManager.ID_BLOCKSTART:
                 if (b1.getBlockstart() == null && b2.getBlockstart() != null) {
                     iReturn = -1;
                 } else if (b1.getBlockstart() == null && b2.getBlockstart() == null) {
@@ -194,7 +202,7 @@ public class WorkorderComparator implements Comparator
                     iReturn = b1.getBlockstart().compareTo(b2.getBlockstart());
                 }
                 break;
-            case WorkorderManager.ID_BLOCKEND:
+            case VWorkorderManager.ID_BLOCKEND:
                 if (b1.getBlockend() == null && b2.getBlockend() != null) {
                     iReturn = -1;
                 } else if (b1.getBlockend() == null && b2.getBlockend() == null) {
@@ -205,7 +213,7 @@ public class WorkorderComparator implements Comparator
                     iReturn = b1.getBlockend().compareTo(b2.getBlockend());
                 }
                 break;
-            case WorkorderManager.ID_PRIORITY:
+            case VWorkorderManager.ID_PRIORITY:
                 if (b1.getPriority() == null && b2.getPriority() != null) {
                     iReturn = -1;
                 } else if (b1.getPriority() == null && b2.getPriority() == null) {
@@ -216,7 +224,7 @@ public class WorkorderComparator implements Comparator
                     iReturn = b1.getPriority().compareTo(b2.getPriority());
                 }
                 break;
-            case WorkorderManager.ID_ASSIGNEDTOID:
+            case VWorkorderManager.ID_ASSIGNEDTOID:
                 if (b1.getAssignedtoid() == null && b2.getAssignedtoid() != null) {
                     iReturn = -1;
                 } else if (b1.getAssignedtoid() == null && b2.getAssignedtoid() == null) {
@@ -227,7 +235,7 @@ public class WorkorderComparator implements Comparator
                     iReturn = b1.getAssignedtoid().compareTo(b2.getAssignedtoid());
                 }
                 break;
-            case WorkorderManager.ID_ORDERSTATUS:
+            case VWorkorderManager.ID_ORDERSTATUS:
                 if (b1.getOrderstatus() == null && b2.getOrderstatus() != null) {
                     iReturn = -1;
                 } else if (b1.getOrderstatus() == null && b2.getOrderstatus() == null) {
@@ -238,7 +246,7 @@ public class WorkorderComparator implements Comparator
                     iReturn = b1.getOrderstatus().compareTo(b2.getOrderstatus());
                 }
                 break;
-            case WorkorderManager.ID_DEADLINE:
+            case VWorkorderManager.ID_DEADLINE:
                 if (b1.getDeadline() == null && b2.getDeadline() != null) {
                     iReturn = -1;
                 } else if (b1.getDeadline() == null && b2.getDeadline() == null) {
@@ -249,7 +257,7 @@ public class WorkorderComparator implements Comparator
                     iReturn = b1.getDeadline().compareTo(b2.getDeadline());
                 }
                 break;
-            case WorkorderManager.ID_REGDATE:
+            case VWorkorderManager.ID_REGDATE:
                 if (b1.getRegdate() == null && b2.getRegdate() != null) {
                     iReturn = -1;
                 } else if (b1.getRegdate() == null && b2.getRegdate() == null) {
@@ -260,7 +268,7 @@ public class WorkorderComparator implements Comparator
                     iReturn = b1.getRegdate().compareTo(b2.getRegdate());
                 }
                 break;
-            case WorkorderManager.ID_REGBYID:
+            case VWorkorderManager.ID_REGBYID:
                 if (b1.getRegbyid() == null && b2.getRegbyid() != null) {
                     iReturn = -1;
                 } else if (b1.getRegbyid() == null && b2.getRegbyid() == null) {
@@ -271,7 +279,7 @@ public class WorkorderComparator implements Comparator
                     iReturn = b1.getRegbyid().compareTo(b2.getRegbyid());
                 }
                 break;
-            case WorkorderManager.ID_UPDATEDON:
+            case VWorkorderManager.ID_UPDATEDON:
                 if (b1.getUpdatedon() == null && b2.getUpdatedon() != null) {
                     iReturn = -1;
                 } else if (b1.getUpdatedon() == null && b2.getUpdatedon() == null) {
@@ -282,7 +290,7 @@ public class WorkorderComparator implements Comparator
                     iReturn = b1.getUpdatedon().compareTo(b2.getUpdatedon());
                 }
                 break;
-            case WorkorderManager.ID_NOTE:
+            case VWorkorderManager.ID_NOTE:
                 if (b1.getNote() == null && b2.getNote() != null) {
                     iReturn = -1;
                 } else if (b1.getNote() == null && b2.getNote() == null) {
@@ -291,6 +299,50 @@ public class WorkorderComparator implements Comparator
                     iReturn = 1;
                 } else { 
                     iReturn = b1.getNote().compareTo(b2.getNote());
+                }
+                break;
+            case VWorkorderManager.ID_RNAME:
+                if (b1.getRname() == null && b2.getRname() != null) {
+                    iReturn = -1;
+                } else if (b1.getRname() == null && b2.getRname() == null) {
+                    iReturn = 0;
+                } else if (b1.getRname() != null && b2.getRname() == null) {
+                    iReturn = 1;
+                } else { 
+                    iReturn = b1.getRname().compareTo(b2.getRname());
+                }
+                break;
+            case VWorkorderManager.ID_CODE:
+                if (b1.getCode() == null && b2.getCode() != null) {
+                    iReturn = -1;
+                } else if (b1.getCode() == null && b2.getCode() == null) {
+                    iReturn = 0;
+                } else if (b1.getCode() != null && b2.getCode() == null) {
+                    iReturn = 1;
+                } else { 
+                    iReturn = b1.getCode().compareTo(b2.getCode());
+                }
+                break;
+            case VWorkorderManager.ID_HNAME:
+                if (b1.getHname() == null && b2.getHname() != null) {
+                    iReturn = -1;
+                } else if (b1.getHname() == null && b2.getHname() == null) {
+                    iReturn = 0;
+                } else if (b1.getHname() != null && b2.getHname() == null) {
+                    iReturn = 1;
+                } else { 
+                    iReturn = b1.getHname().compareTo(b2.getHname());
+                }
+                break;
+            case VWorkorderManager.ID_ASSIGNEDTO:
+                if (b1.getAssignedto() == null && b2.getAssignedto() != null) {
+                    iReturn = -1;
+                } else if (b1.getAssignedto() == null && b2.getAssignedto() == null) {
+                    iReturn = 0;
+                } else if (b1.getAssignedto() != null && b2.getAssignedto() == null) {
+                    iReturn = 1;
+                } else { 
+                    iReturn = b1.getAssignedto().compareTo(b2.getAssignedto());
                 }
                 break;
             default: 

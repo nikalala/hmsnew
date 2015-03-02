@@ -17,7 +17,7 @@ package com.mysoft.hms;
 // imports- 
 
 
-public class WorkorderBean
+public class VWorkorderBean
 // extends+ 
 
 // extends- 
@@ -87,23 +87,38 @@ public class WorkorderBean
     private boolean note_is_modified = false;
     private boolean note_is_initialized = false;
     
+    private String rname;
+    private boolean rname_is_modified = false;
+    private boolean rname_is_initialized = false;
+    
+    private String code;
+    private boolean code_is_modified = false;
+    private boolean code_is_initialized = false;
+    
+    private String hname;
+    private boolean hname_is_modified = false;
+    private boolean hname_is_initialized = false;
+    
+    private String assignedto;
+    private boolean assignedto_is_modified = false;
+    private boolean assignedto_is_initialized = false;
+    
     private boolean _isNew = true;
     
     /**
      * Do not use this constructor directly, please use the factory method
      * available in the associated manager.
      */
-    WorkorderBean()
+    VWorkorderBean()
     {
     }
     
     /**
      * Getter method for workorderid.
      * <br>
-     * PRIMARY KEY.<br>
      * Meta Data Information (in progress):
      * <ul>
-     * <li>full name: workorder.workorderid
+     * <li>full name: v_workorder.workorderid
      * <li>column size: 19
      * <li>jdbc type returned by the driver: Types.BIGINT
      * </ul>
@@ -170,7 +185,7 @@ public class WorkorderBean
      * <br>
      * Meta Data Information (in progress):
      * <ul>
-     * <li>full name: workorder.num
+     * <li>full name: v_workorder.num
      * <li>column size: 255
      * <li>jdbc type returned by the driver: Types.VARCHAR
      * </ul>
@@ -226,7 +241,7 @@ public class WorkorderBean
      * <br>
      * Meta Data Information (in progress):
      * <ul>
-     * <li>full name: workorder.description
+     * <li>full name: v_workorder.description
      * <li>column size: 2147483647
      * <li>jdbc type returned by the driver: Types.VARCHAR
      * </ul>
@@ -282,7 +297,7 @@ public class WorkorderBean
      * <br>
      * Meta Data Information (in progress):
      * <ul>
-     * <li>full name: workorder.category
+     * <li>full name: v_workorder.category
      * <li>column size: 10
      * <li>jdbc type returned by the driver: Types.INTEGER
      * </ul>
@@ -349,8 +364,7 @@ public class WorkorderBean
      * <br>
      * Meta Data Information (in progress):
      * <ul>
-     * <li>full name: workorder.roomid
-     * <li> foreign key: room.roomid
+     * <li>full name: v_workorder.roomid
      * <li>column size: 10
      * <li>jdbc type returned by the driver: Types.INTEGER
      * </ul>
@@ -417,8 +431,7 @@ public class WorkorderBean
      * <br>
      * Meta Data Information (in progress):
      * <ul>
-     * <li>full name: workorder.houseunitid
-     * <li> foreign key: houseunit.houseunitid
+     * <li>full name: v_workorder.houseunitid
      * <li>column size: 10
      * <li>jdbc type returned by the driver: Types.INTEGER
      * </ul>
@@ -485,7 +498,7 @@ public class WorkorderBean
      * <br>
      * Meta Data Information (in progress):
      * <ul>
-     * <li>full name: workorder.blockstart
+     * <li>full name: v_workorder.blockstart
      * <li>column size: 29
      * <li>jdbc type returned by the driver: Types.TIMESTAMP
      * </ul>
@@ -552,7 +565,7 @@ public class WorkorderBean
      * <br>
      * Meta Data Information (in progress):
      * <ul>
-     * <li>full name: workorder.blockend
+     * <li>full name: v_workorder.blockend
      * <li>column size: 29
      * <li>jdbc type returned by the driver: Types.TIMESTAMP
      * </ul>
@@ -619,7 +632,7 @@ public class WorkorderBean
      * <br>
      * Meta Data Information (in progress):
      * <ul>
-     * <li>full name: workorder.priority
+     * <li>full name: v_workorder.priority
      * <li>column size: 10
      * <li>jdbc type returned by the driver: Types.INTEGER
      * </ul>
@@ -686,8 +699,7 @@ public class WorkorderBean
      * <br>
      * Meta Data Information (in progress):
      * <ul>
-     * <li>full name: workorder.assignedtoid
-     * <li> foreign key: personnel.personnelid
+     * <li>full name: v_workorder.assignedtoid
      * <li>column size: 10
      * <li>jdbc type returned by the driver: Types.INTEGER
      * </ul>
@@ -754,7 +766,7 @@ public class WorkorderBean
      * <br>
      * Meta Data Information (in progress):
      * <ul>
-     * <li>full name: workorder.orderstatus
+     * <li>full name: v_workorder.orderstatus
      * <li>column size: 10
      * <li>jdbc type returned by the driver: Types.INTEGER
      * </ul>
@@ -821,7 +833,7 @@ public class WorkorderBean
      * <br>
      * Meta Data Information (in progress):
      * <ul>
-     * <li>full name: workorder.deadline
+     * <li>full name: v_workorder.deadline
      * <li>column size: 29
      * <li>jdbc type returned by the driver: Types.TIMESTAMP
      * </ul>
@@ -888,8 +900,7 @@ public class WorkorderBean
      * <br>
      * Meta Data Information (in progress):
      * <ul>
-     * <li>full name: workorder.regdate
-     * <li>default value: now()
+     * <li>full name: v_workorder.regdate
      * <li>column size: 29
      * <li>jdbc type returned by the driver: Types.TIMESTAMP
      * </ul>
@@ -956,8 +967,7 @@ public class WorkorderBean
      * <br>
      * Meta Data Information (in progress):
      * <ul>
-     * <li>full name: workorder.regbyid
-     * <li> foreign key: personnel.personnelid
+     * <li>full name: v_workorder.regbyid
      * <li>column size: 10
      * <li>jdbc type returned by the driver: Types.INTEGER
      * </ul>
@@ -1024,7 +1034,7 @@ public class WorkorderBean
      * <br>
      * Meta Data Information (in progress):
      * <ul>
-     * <li>full name: workorder.updatedon
+     * <li>full name: v_workorder.updatedon
      * <li>column size: 35
      * <li>jdbc type returned by the driver: Types.TIMESTAMP
      * </ul>
@@ -1091,7 +1101,7 @@ public class WorkorderBean
      * <br>
      * Meta Data Information (in progress):
      * <ul>
-     * <li>full name: workorder.note
+     * <li>full name: v_workorder.note
      * <li>column size: 2147483647
      * <li>jdbc type returned by the driver: Types.VARCHAR
      * </ul>
@@ -1143,6 +1153,230 @@ public class WorkorderBean
     }
 
     /**
+     * Getter method for rname.
+     * <br>
+     * Meta Data Information (in progress):
+     * <ul>
+     * <li>full name: v_workorder.rname
+     * <li>column size: 2147483647
+     * <li>jdbc type returned by the driver: Types.VARCHAR
+     * </ul>
+     *
+     * @return the value of rname
+     */
+    public String getRname()
+    {
+        return rname; 
+    }
+
+    /**
+     * Setter method for rname.
+     * <br>
+     * The new value is set only if compareTo() says it is different,
+     * or if one of either the new value or the current value is null.
+     * In case the new value is different, it is set and the field is marked as 'modified'.
+     *
+     * @param newVal the new value to be assigned to rname
+     */
+    public void setRname(String newVal) {
+        if ((newVal != null && this.rname != null && (newVal.compareTo(this.rname) == 0)) || 
+            (newVal == null && this.rname == null && rname_is_initialized)) {
+            return; 
+        } 
+        this.rname = newVal; 
+        rname_is_modified = true; 
+        rname_is_initialized = true; 
+    }
+
+    /**
+     * Determines if the rname has been modified.
+     *
+     * @return true if the field has been modified, false if the field has not been modified
+     */
+    public boolean isRnameModified() {
+        return rname_is_modified; 
+    }
+
+    /**
+     * Determines if the rname has been initialized.
+     * <br>
+     * It is useful to determine if a field is null on purpose or just because it has not been initialized.
+     *
+     * @return true if the field has been initialized, false otherwise
+     */
+    public boolean isRnameInitialized() {
+        return rname_is_initialized; 
+    }
+
+    /**
+     * Getter method for code.
+     * <br>
+     * Meta Data Information (in progress):
+     * <ul>
+     * <li>full name: v_workorder.code
+     * <li>column size: 2147483647
+     * <li>jdbc type returned by the driver: Types.VARCHAR
+     * </ul>
+     *
+     * @return the value of code
+     */
+    public String getCode()
+    {
+        return code; 
+    }
+
+    /**
+     * Setter method for code.
+     * <br>
+     * The new value is set only if compareTo() says it is different,
+     * or if one of either the new value or the current value is null.
+     * In case the new value is different, it is set and the field is marked as 'modified'.
+     *
+     * @param newVal the new value to be assigned to code
+     */
+    public void setCode(String newVal) {
+        if ((newVal != null && this.code != null && (newVal.compareTo(this.code) == 0)) || 
+            (newVal == null && this.code == null && code_is_initialized)) {
+            return; 
+        } 
+        this.code = newVal; 
+        code_is_modified = true; 
+        code_is_initialized = true; 
+    }
+
+    /**
+     * Determines if the code has been modified.
+     *
+     * @return true if the field has been modified, false if the field has not been modified
+     */
+    public boolean isCodeModified() {
+        return code_is_modified; 
+    }
+
+    /**
+     * Determines if the code has been initialized.
+     * <br>
+     * It is useful to determine if a field is null on purpose or just because it has not been initialized.
+     *
+     * @return true if the field has been initialized, false otherwise
+     */
+    public boolean isCodeInitialized() {
+        return code_is_initialized; 
+    }
+
+    /**
+     * Getter method for hname.
+     * <br>
+     * Meta Data Information (in progress):
+     * <ul>
+     * <li>full name: v_workorder.hname
+     * <li>column size: 2147483647
+     * <li>jdbc type returned by the driver: Types.VARCHAR
+     * </ul>
+     *
+     * @return the value of hname
+     */
+    public String getHname()
+    {
+        return hname; 
+    }
+
+    /**
+     * Setter method for hname.
+     * <br>
+     * The new value is set only if compareTo() says it is different,
+     * or if one of either the new value or the current value is null.
+     * In case the new value is different, it is set and the field is marked as 'modified'.
+     *
+     * @param newVal the new value to be assigned to hname
+     */
+    public void setHname(String newVal) {
+        if ((newVal != null && this.hname != null && (newVal.compareTo(this.hname) == 0)) || 
+            (newVal == null && this.hname == null && hname_is_initialized)) {
+            return; 
+        } 
+        this.hname = newVal; 
+        hname_is_modified = true; 
+        hname_is_initialized = true; 
+    }
+
+    /**
+     * Determines if the hname has been modified.
+     *
+     * @return true if the field has been modified, false if the field has not been modified
+     */
+    public boolean isHnameModified() {
+        return hname_is_modified; 
+    }
+
+    /**
+     * Determines if the hname has been initialized.
+     * <br>
+     * It is useful to determine if a field is null on purpose or just because it has not been initialized.
+     *
+     * @return true if the field has been initialized, false otherwise
+     */
+    public boolean isHnameInitialized() {
+        return hname_is_initialized; 
+    }
+
+    /**
+     * Getter method for assignedto.
+     * <br>
+     * Meta Data Information (in progress):
+     * <ul>
+     * <li>full name: v_workorder.assignedto
+     * <li>column size: 2147483647
+     * <li>jdbc type returned by the driver: Types.VARCHAR
+     * </ul>
+     *
+     * @return the value of assignedto
+     */
+    public String getAssignedto()
+    {
+        return assignedto; 
+    }
+
+    /**
+     * Setter method for assignedto.
+     * <br>
+     * The new value is set only if compareTo() says it is different,
+     * or if one of either the new value or the current value is null.
+     * In case the new value is different, it is set and the field is marked as 'modified'.
+     *
+     * @param newVal the new value to be assigned to assignedto
+     */
+    public void setAssignedto(String newVal) {
+        if ((newVal != null && this.assignedto != null && (newVal.compareTo(this.assignedto) == 0)) || 
+            (newVal == null && this.assignedto == null && assignedto_is_initialized)) {
+            return; 
+        } 
+        this.assignedto = newVal; 
+        assignedto_is_modified = true; 
+        assignedto_is_initialized = true; 
+    }
+
+    /**
+     * Determines if the assignedto has been modified.
+     *
+     * @return true if the field has been modified, false if the field has not been modified
+     */
+    public boolean isAssignedtoModified() {
+        return assignedto_is_modified; 
+    }
+
+    /**
+     * Determines if the assignedto has been initialized.
+     * <br>
+     * It is useful to determine if a field is null on purpose or just because it has not been initialized.
+     *
+     * @return true if the field has been initialized, false otherwise
+     */
+    public boolean isAssignedtoInitialized() {
+        return assignedto_is_initialized; 
+    }
+
+    /**
      * Determines if the current object is new.
      *
      * @return true if the current object is new, false if the object is not new
@@ -1183,7 +1417,11 @@ public class WorkorderBean
 		regdate_is_modified || 
 		regbyid_is_modified || 
 		updatedon_is_modified || 
-		note_is_modified;
+		note_is_modified || 
+		rname_is_modified || 
+		code_is_modified || 
+		hname_is_modified || 
+		assignedto_is_modified;
     }
 
     /**
@@ -1206,6 +1444,10 @@ public class WorkorderBean
         regbyid_is_modified = false;
         updatedon_is_modified = false;
         note_is_modified = false;
+        rname_is_modified = false;
+        code_is_modified = false;
+        hname_is_modified = false;
+        assignedto_is_modified = false;
     }
 
     /**
@@ -1213,7 +1455,7 @@ public class WorkorderBean
      *
      * @param bean the bean to copy into the current bean
      */
-    public void copy(WorkorderBean bean) {
+    public void copy(VWorkorderBean bean) {
         setWorkorderid(bean.getWorkorderid());
         setNum(bean.getNum());
         setDescription(bean.getDescription());
@@ -1230,6 +1472,10 @@ public class WorkorderBean
         setRegbyid(bean.getRegbyid());
         setUpdatedon(bean.getUpdatedon());
         setNote(bean.getNote());
+        setRname(bean.getRname());
+        setCode(bean.getCode());
+        setHname(bean.getHname());
+        setAssignedto(bean.getAssignedto());
     }
 
     /**
@@ -1238,23 +1484,27 @@ public class WorkorderBean
      * @return the object as a string
      */
     public String toString() {
-        return   "\n[workorder] "
-                 + "\n - workorder.workorderid = " + (workorderid_is_initialized ? ("[" + (workorderid == null ? null : workorderid.toString()) + "]") : "not initialized") + ""
-                 + "\n - workorder.num = " + (num_is_initialized ? ("[" + (num == null ? null : num.toString()) + "]") : "not initialized") + ""
-                 + "\n - workorder.description = " + (description_is_initialized ? ("[" + (description == null ? null : description.toString()) + "]") : "not initialized") + ""
-                 + "\n - workorder.category = " + (category_is_initialized ? ("[" + (category == null ? null : category.toString()) + "]") : "not initialized") + ""
-                 + "\n - workorder.roomid = " + (roomid_is_initialized ? ("[" + (roomid == null ? null : roomid.toString()) + "]") : "not initialized") + ""
-                 + "\n - workorder.houseunitid = " + (houseunitid_is_initialized ? ("[" + (houseunitid == null ? null : houseunitid.toString()) + "]") : "not initialized") + ""
-                 + "\n - workorder.blockstart = " + (blockstart_is_initialized ? ("[" + (blockstart == null ? null : blockstart.toString()) + "]") : "not initialized") + ""
-                 + "\n - workorder.blockend = " + (blockend_is_initialized ? ("[" + (blockend == null ? null : blockend.toString()) + "]") : "not initialized") + ""
-                 + "\n - workorder.priority = " + (priority_is_initialized ? ("[" + (priority == null ? null : priority.toString()) + "]") : "not initialized") + ""
-                 + "\n - workorder.assignedtoid = " + (assignedtoid_is_initialized ? ("[" + (assignedtoid == null ? null : assignedtoid.toString()) + "]") : "not initialized") + ""
-                 + "\n - workorder.orderstatus = " + (orderstatus_is_initialized ? ("[" + (orderstatus == null ? null : orderstatus.toString()) + "]") : "not initialized") + ""
-                 + "\n - workorder.deadline = " + (deadline_is_initialized ? ("[" + (deadline == null ? null : deadline.toString()) + "]") : "not initialized") + ""
-                 + "\n - workorder.regdate = " + (regdate_is_initialized ? ("[" + (regdate == null ? null : regdate.toString()) + "]") : "not initialized") + ""
-                 + "\n - workorder.regbyid = " + (regbyid_is_initialized ? ("[" + (regbyid == null ? null : regbyid.toString()) + "]") : "not initialized") + ""
-                 + "\n - workorder.updatedon = " + (updatedon_is_initialized ? ("[" + (updatedon == null ? null : updatedon.toString()) + "]") : "not initialized") + ""
-                 + "\n - workorder.note = " + (note_is_initialized ? ("[" + (note == null ? null : note.toString()) + "]") : "not initialized") + ""
+        return   "\n[v_workorder] "
+                 + "\n - v_workorder.workorderid = " + (workorderid_is_initialized ? ("[" + (workorderid == null ? null : workorderid.toString()) + "]") : "not initialized") + ""
+                 + "\n - v_workorder.num = " + (num_is_initialized ? ("[" + (num == null ? null : num.toString()) + "]") : "not initialized") + ""
+                 + "\n - v_workorder.description = " + (description_is_initialized ? ("[" + (description == null ? null : description.toString()) + "]") : "not initialized") + ""
+                 + "\n - v_workorder.category = " + (category_is_initialized ? ("[" + (category == null ? null : category.toString()) + "]") : "not initialized") + ""
+                 + "\n - v_workorder.roomid = " + (roomid_is_initialized ? ("[" + (roomid == null ? null : roomid.toString()) + "]") : "not initialized") + ""
+                 + "\n - v_workorder.houseunitid = " + (houseunitid_is_initialized ? ("[" + (houseunitid == null ? null : houseunitid.toString()) + "]") : "not initialized") + ""
+                 + "\n - v_workorder.blockstart = " + (blockstart_is_initialized ? ("[" + (blockstart == null ? null : blockstart.toString()) + "]") : "not initialized") + ""
+                 + "\n - v_workorder.blockend = " + (blockend_is_initialized ? ("[" + (blockend == null ? null : blockend.toString()) + "]") : "not initialized") + ""
+                 + "\n - v_workorder.priority = " + (priority_is_initialized ? ("[" + (priority == null ? null : priority.toString()) + "]") : "not initialized") + ""
+                 + "\n - v_workorder.assignedtoid = " + (assignedtoid_is_initialized ? ("[" + (assignedtoid == null ? null : assignedtoid.toString()) + "]") : "not initialized") + ""
+                 + "\n - v_workorder.orderstatus = " + (orderstatus_is_initialized ? ("[" + (orderstatus == null ? null : orderstatus.toString()) + "]") : "not initialized") + ""
+                 + "\n - v_workorder.deadline = " + (deadline_is_initialized ? ("[" + (deadline == null ? null : deadline.toString()) + "]") : "not initialized") + ""
+                 + "\n - v_workorder.regdate = " + (regdate_is_initialized ? ("[" + (regdate == null ? null : regdate.toString()) + "]") : "not initialized") + ""
+                 + "\n - v_workorder.regbyid = " + (regbyid_is_initialized ? ("[" + (regbyid == null ? null : regbyid.toString()) + "]") : "not initialized") + ""
+                 + "\n - v_workorder.updatedon = " + (updatedon_is_initialized ? ("[" + (updatedon == null ? null : updatedon.toString()) + "]") : "not initialized") + ""
+                 + "\n - v_workorder.note = " + (note_is_initialized ? ("[" + (note == null ? null : note.toString()) + "]") : "not initialized") + ""
+                 + "\n - v_workorder.rname = " + (rname_is_initialized ? ("[" + (rname == null ? null : rname.toString()) + "]") : "not initialized") + ""
+                 + "\n - v_workorder.code = " + (code_is_initialized ? ("[" + (code == null ? null : code.toString()) + "]") : "not initialized") + ""
+                 + "\n - v_workorder.hname = " + (hname_is_initialized ? ("[" + (hname == null ? null : hname.toString()) + "]") : "not initialized") + ""
+                 + "\n - v_workorder.assignedto = " + (assignedto_is_initialized ? ("[" + (assignedto == null ? null : assignedto.toString()) + "]") : "not initialized") + ""
             ;
     }
 

@@ -17,6 +17,46 @@
         drawFooter();
     });
 
+    function doFilter(bool){
+        if(bool){
+            $("#filter-form :input").each(function () {
+                $(this).val('');
+            });
+            //clean dropdowns
+            $('#filter-form .dropdown option').removeAttr('selected');
+            $("#filter-form .dropdown").val(-1);
+            $("#filter-form .dropdown").change();
+            $("#compl_work_orders").prop("checked",false);
+        }
+        var url = "content/getworkorder.jsp?"+$("#filter-form").serialize();
+        var room = $("option:selected", $("#units"));
+        var attr = $(room).attr('roomtypeid');
+        if (typeof attr !== typeof undefined && attr !== false) {
+            url += "&isroom=1";
+        }
+        reloadGrid(workOrderGrid.id, url);
+    }
+
+    $(function() {
+        $("#ordernum").keypress(function(event) {
+            var charCode = (event.which) ? event.which : event.keyCode;
+            if (
+                    (charCode==231 || charCode==199) ||
+                    (charCode==241 || charCode==209) ||
+                    (charCode==8 || charCode==32) ||
+                   (
+                        (charCode >= 65 && charCode <= 90) ||
+                        (charCode >= 97 && charCode <= 122)
+                   ) || (charCode==46||charCode==8||charCode==45||charCode==47) ||(charCode >= 48 && charCode <= 57)
+               ) {
+                return true;
+            }
+            else {
+                event.preventDefault();
+            }
+        });
+    });
+
     var page = workOrderGrid.page;
 
     function getNextRecords() {
@@ -86,6 +126,52 @@
 
     });
 
+    $(document).on("click", "#dismissbutton, #smallmodalbtn", function () {
+        $("#updateremark").css("display", "none");
+        $("#remarktxt").val('');
+    });
+
+    $(document).on("change","#compl_work_orders",function(){
+        if($(this).prop("checked")){
+            $(this).val("on");
+        }else{
+            $(this).val("");
+        }
+        //doFilter();
+    });
+
+    function saveRemark(id){
+        var remark = $("#remarktxt").val();
+
+        if(remark === "null" || remark == ""){
+            BootstrapDialog.alert("შეიყვანეთ მინიშნება!!!");
+            return;
+        }
+        var sql = "INSERT INTO workorderlog(" +
+        "workorderlogid, workorderid, note, regbyid)" +
+        "VALUES (" +
+        "(SELECT COALESCE(MAX(workorderlogid) + 1,1) FROM workorderlog)," +
+                id + ", " +
+        "N'" + remark + "', " +
+        "N'<%=user.getLoginid()%>');";
+        loader.show();
+        $.post("content/execute.jsp?query=" + encodeURIComponent(sql), {}, function () {
+
+            $("#dismissbutton").click();
+            $("#remarktxt").val('');
+            loader.hide();
+
+        });
+    }
+
+    function changeRemark(id,_this){
+        $("#remarktxt").val('');
+        $("#saveRemarkBtn").attr("onclick","saveRemark("+id+")");
+        $("#updateremark").css("display", "block");
+        $("#updateremark").offset($(_this).offset());
+        $("#updateremark").css({'left': $("#updateremark").position().left - 210});
+    }
+
     function loadDefaults() {
 
         var limit = " LIMIT " + workOrderGrid.limit + " OFFSET " + 0;
@@ -107,7 +193,28 @@
 </script>
 
 <link rel="stylesheet" type="text/css" href="css/grid-filter.css">
-
+<style>
+    .truncate {
+        width: auto !important;
+    }
+</style>
+<div class="modal-custom-content" id="updateremark" style="position: absolute; z-index: 10; display: none;">
+    <div class="modal-custom-header" style="background-color: gray; color: white; height: 30px;">
+        <button type="button" id="smallmodalbtn" class="close" data-dismiss="modal" aria-hidden="true"
+                style="margin-top: -6px;">×
+        </button>
+        <h4 style="margin-top: -4px;">შენიშვნა</h4>
+    </div>
+    <div class="modal-custom-body">
+        <textarea id="remarktxt" name="remarktxt"></textarea>
+    </div>
+    <div class="modal-footer" style="margin-top: 10px;">
+        <button type="button" class="btn btn-default" id="dismissbutton" data-dismiss="modal" onclick="this.click();">
+            დახურვა
+        </button>
+        <button type="button" id="saveRemarkBtn"  class="btn btn-primary">შენახვა</button>
+    </div>
+</div>
 <form name="filter-form" id="filter-form" class="filter-form1">
     <table id="grid-table" class="first-table" style="width: 100%">
         <tr>
@@ -130,8 +237,8 @@
                         <label>კატეგორია</label>
                     </div>
                     <div class="col-md-4">
-                        <select class="dropdown col-md-2" id="workOrderCategory">
-                            <option value="0">-კატეგორია-</option>
+                        <select class="dropdown col-md-2" name="workOrderCategory" id="workOrderCategory">
+                            <option value="-1">-კატეგორია-</option>
                             <% for (int i = 0; i < workOrderCategory.length; i++) { %>
                                 <option value="<%=i%>"><%=workOrderCategory[i]%></option>
                             <% } %>
@@ -141,8 +248,8 @@
                         <label>ოთახი</label>
                     </div>
                     <div class="col-md-3">
-                        <select class="dropdown col-md-2" id="units">
-                            <option value="0">-ოთახის #-</option>
+                        <select class="dropdown col-md-2" name="units" id="units">
+                            <option value="-1">-ოთახის #-</option>
                             <% for (int i = 0; i < rooms.length; i++) { %>
                                 <option value="<%=rooms[i].getRoomid()%>"roomtypeid="<%=rooms[i].getRoomtypeid()%>"><%=rooms[i].getName()%></option>
                             <% } %>
@@ -155,8 +262,8 @@
                         <label>პრიორიტეტი</label>
                     </div>
                     <div class="col-md-3">
-                        <select class="dropdown col-md-2" id="workOrderPriority">
-                            <option value="0">-პრიორიტეტი-</option>
+                        <select class="dropdown col-md-2" name="workOrderPriority" id="workOrderPriority">
+                            <option value="-1">-პრიორიტეტი-</option>
                             <% for (int i = 0; i < workOrderPriority.length; i++) { %>
                                 <option value="<%=i%>"><%=workOrderPriority[i]%></option>
                             <% } %>
@@ -174,14 +281,14 @@
                         <label>ორდ. #</label>
                     </div>
                     <div class="col-md-4">
-                        <input type="text" id="ordernum" placeholder=" ორდ. #"/>
+                        <input type="text" id="ordernum" name="ordernum" placeholder=" ორდ. #"/>
                     </div>
                     <div class="col-md-1">
                         <label>სტატუსი</label>
                     </div>
                     <div class="col-md-3">
-                        <select class="dropdown col-md-2" id="workOrderStatus">
-                            <option value="0">-სტატუსი-</option>
+                        <select class="dropdown col-md-2" name="workOrderStatus" id="workOrderStatus">
+                            <option value="-1">-სტატუსი-</option>
                             <% for (int i = 0; i < workOrderStatus.length; i++) { %>
                                 <option value="<%=i%>"><%=workOrderStatus[i]%></option>
                             <% } %>
@@ -191,8 +298,8 @@
                         <label>მიმაგრებულია</label>
                     </div>
                     <div class="col-md-3">
-                        <select class="dropdown col-md-2" id="personnel">
-                            <option value="0">-აირჩიეთ-</option>
+                        <select class="dropdown col-md-2" name="personnel" id="personnel">
+                            <option value="-1">-აირჩიეთ-</option>
                             <% for (int i = 0; i < personnelBeans.length; i++) { %>
                             <option value="<%=personnelBeans[i].getPersonnelid()%>"><%=personnelBeans[i].getFname() + " " + personnelBeans[i].getLname()%>
                             </option>
@@ -201,7 +308,7 @@
                     </div>
                     <div class="col-md-3">
                         <button type="button" class="btn" style="width: 100%;" id="search_filer"
-                                onclick="doFilter()"
+                                onclick="doFilter(true)"
                                 style="width: 69px;">მაჩვენე ყველა
                         </button>
                     </div>

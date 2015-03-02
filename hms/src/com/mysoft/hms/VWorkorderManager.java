@@ -19,9 +19,9 @@ import java.sql.*;
 
 
 /**
- * Handles database calls for the workorder table.
+ * Handles database calls for the v_workorder table.
  */
-public class WorkorderManager
+public class VWorkorderManager
 // extends+ 
 
 // extends- 
@@ -140,437 +140,119 @@ public class WorkorderManager
     public static final int TYPE_NOTE = Types.VARCHAR;
     public static final String NAME_NOTE = "note";
 
-
-    private static final String TABLE_NAME = "workorder";
+    /**
+     * Column rname of type Types.VARCHAR mapped to String.
+     */
+    public static final int ID_RNAME = 16;
+    public static final int TYPE_RNAME = Types.VARCHAR;
+    public static final String NAME_RNAME = "rname";
 
     /**
-     * Create an array of type string containing all the fields of the workorder table.
+     * Column code of type Types.VARCHAR mapped to String.
+     */
+    public static final int ID_CODE = 17;
+    public static final int TYPE_CODE = Types.VARCHAR;
+    public static final String NAME_CODE = "code";
+
+    /**
+     * Column hname of type Types.VARCHAR mapped to String.
+     */
+    public static final int ID_HNAME = 18;
+    public static final int TYPE_HNAME = Types.VARCHAR;
+    public static final String NAME_HNAME = "hname";
+
+    /**
+     * Column assignedto of type Types.VARCHAR mapped to String.
+     */
+    public static final int ID_ASSIGNEDTO = 19;
+    public static final int TYPE_ASSIGNEDTO = Types.VARCHAR;
+    public static final String NAME_ASSIGNEDTO = "assignedto";
+
+
+    private static final String TABLE_NAME = "v_workorder";
+
+    /**
+     * Create an array of type string containing all the fields of the v_workorder table.
      */
     private static final String[] FIELD_NAMES = 
     {
-        "workorder.workorderid"
-        ,"workorder.num"
-        ,"workorder.description"
-        ,"workorder.category"
-        ,"workorder.roomid"
-        ,"workorder.houseunitid"
-        ,"workorder.blockstart"
-        ,"workorder.blockend"
-        ,"workorder.priority"
-        ,"workorder.assignedtoid"
-        ,"workorder.orderstatus"
-        ,"workorder.deadline"
-        ,"workorder.regdate"
-        ,"workorder.regbyid"
-        ,"workorder.updatedon"
-        ,"workorder.note"
+        "v_workorder.workorderid"
+        ,"v_workorder.num"
+        ,"v_workorder.description"
+        ,"v_workorder.category"
+        ,"v_workorder.roomid"
+        ,"v_workorder.houseunitid"
+        ,"v_workorder.blockstart"
+        ,"v_workorder.blockend"
+        ,"v_workorder.priority"
+        ,"v_workorder.assignedtoid"
+        ,"v_workorder.orderstatus"
+        ,"v_workorder.deadline"
+        ,"v_workorder.regdate"
+        ,"v_workorder.regbyid"
+        ,"v_workorder.updatedon"
+        ,"v_workorder.note"
+        ,"v_workorder.rname"
+        ,"v_workorder.code"
+        ,"v_workorder.hname"
+        ,"v_workorder.assignedto"
     };
 
     /**
-     * Field that contains the comma separated fields of the workorder table.
+     * Field that contains the comma separated fields of the v_workorder table.
      */
-    private static final String ALL_FIELDS = "workorder.workorderid"
-                            + ",workorder.num"
-                            + ",workorder.description"
-                            + ",workorder.category"
-                            + ",workorder.roomid"
-                            + ",workorder.houseunitid"
-                            + ",workorder.blockstart"
-                            + ",workorder.blockend"
-                            + ",workorder.priority"
-                            + ",workorder.assignedtoid"
-                            + ",workorder.orderstatus"
-                            + ",workorder.deadline"
-                            + ",workorder.regdate"
-                            + ",workorder.regbyid"
-                            + ",workorder.updatedon"
-                            + ",workorder.note";
+    private static final String ALL_FIELDS = "v_workorder.workorderid"
+                            + ",v_workorder.num"
+                            + ",v_workorder.description"
+                            + ",v_workorder.category"
+                            + ",v_workorder.roomid"
+                            + ",v_workorder.houseunitid"
+                            + ",v_workorder.blockstart"
+                            + ",v_workorder.blockend"
+                            + ",v_workorder.priority"
+                            + ",v_workorder.assignedtoid"
+                            + ",v_workorder.orderstatus"
+                            + ",v_workorder.deadline"
+                            + ",v_workorder.regdate"
+                            + ",v_workorder.regbyid"
+                            + ",v_workorder.updatedon"
+                            + ",v_workorder.note"
+                            + ",v_workorder.rname"
+                            + ",v_workorder.code"
+                            + ",v_workorder.hname"
+                            + ",v_workorder.assignedto";
 
-    private static WorkorderManager singleton = new WorkorderManager();
+    private static VWorkorderManager singleton = new VWorkorderManager();
 
     /**
-     * Get the WorkorderManager singleton.
+     * Get the VWorkorderManager singleton.
      *
-     * @return WorkorderManager 
+     * @return VWorkorderManager 
      */
-    synchronized public static WorkorderManager getInstance()
+    synchronized public static VWorkorderManager getInstance()
     {
         return singleton;
     }
 
     /**
-     * Sets your own WorkorderManager instance.
+     * Sets your own VWorkorderManager instance.
      <br>
      * This is optional, by default we provide it for you.
      */
-    synchronized public static void setInstance(WorkorderManager instance)
+    synchronized public static void setInstance(VWorkorderManager instance)
     {
         singleton = instance;
     }
 
 
     /**
-     * Creates a new WorkorderBean instance.
+     * Creates a new VWorkorderBean instance.
      *
-     * @return the new WorkorderBean 
+     * @return the new VWorkorderBean 
      */
-    public WorkorderBean createWorkorderBean()
+    public VWorkorderBean createVWorkorderBean()
     {
-        return new WorkorderBean();
-    }
-
-    //////////////////////////////////////
-    // PRIMARY KEY METHODS
-    //////////////////////////////////////
-
-    /**
-     * Loads a WorkorderBean from the workorder using its key fields.
-     *
-     * @return a unique WorkorderBean 
-     */
-    //12
-    public WorkorderBean loadByPrimaryKey(Long workorderid) throws SQLException
-    {
-        Connection c = null;
-        PreparedStatement ps = null;
-        try 
-        {
-            c = getConnection();
-            ps = c.prepareStatement("SELECT " + ALL_FIELDS + " FROM workorder WHERE workorder.workorderid=?",ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-            Manager.setLong(ps, 1, workorderid);
-            WorkorderBean pReturn[] = loadByPreparedStatement(ps);
-            if (pReturn.length < 1)
-                return null;
-            else
-                return pReturn[0];
-        }
-        finally
-        {
-            getManager().close(ps);
-            freeConnection(c);
-        }
-    }
-
-    /**
-     * Deletes rows according to its keys.
-     *
-     * @return the number of deleted rows
-     */
-    //60
-    public int deleteByPrimaryKey(Long workorderid) throws SQLException
-    {
-        Connection c = null;
-        PreparedStatement ps = null;
-        try
-        {
-            c = getConnection();
-            ps = c.prepareStatement("DELETE from workorder WHERE workorder.workorderid=?",ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-            Manager.setLong(ps, 1, workorderid);
-            return ps.executeUpdate();
-        }
-        finally
-        {
-            getManager().close(ps);
-            freeConnection(c);
-        }
-    }
-
-    
-    
-    //////////////////////////////////////
-    // FOREIGN KEY METHODS 
-    //////////////////////////////////////
-
-    /**
-     * Loads WorkorderBean array from the workorder table using its houseunitid field.
-     *
-     * @return an array of WorkorderBean 
-     */
-    // LOAD BY IMPORTED KEY
-    public WorkorderBean[] loadByHouseunitid(Integer value) throws SQLException 
-    {
-        Connection c = null;
-        PreparedStatement ps = null;
-        try 
-        {
-            c = getConnection();
-            ps = c.prepareStatement("SELECT " + ALL_FIELDS + " FROM workorder WHERE houseunitid=?",ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-            Manager.setInteger(ps, 1, value);
-            return loadByPreparedStatement(ps);
-        }
-        finally
-        {
-            getManager().close(ps);
-            freeConnection(c);
-        }
-    }
-
-
-    /**
-     * Deletes from the workorder table by houseunitid field.
-     *
-     * @param value the key value to seek
-     * @return the number of rows deleted
-     */
-    // DELETE BY IMPORTED KEY
-    public int deleteByHouseunitid(Integer value) throws SQLException 
-    {
-        Connection c = null;
-        PreparedStatement ps = null;
-        try 
-        {
-            c = getConnection();
-            ps = c.prepareStatement("DELETE FROM workorder WHERE houseunitid=?");
-            Manager.setInteger(ps, 1, value);
-            return ps.executeUpdate();
-        }
-        finally
-        {
-            getManager().close(ps);
-            freeConnection(c);
-        }
-    }
-
-
-    /**
-     * Loads WorkorderBean array from the workorder table using its assignedtoid field.
-     *
-     * @return an array of WorkorderBean 
-     */
-    // LOAD BY IMPORTED KEY
-    public WorkorderBean[] loadByAssignedtoid(Integer value) throws SQLException 
-    {
-        Connection c = null;
-        PreparedStatement ps = null;
-        try 
-        {
-            c = getConnection();
-            ps = c.prepareStatement("SELECT " + ALL_FIELDS + " FROM workorder WHERE assignedtoid=?",ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-            Manager.setInteger(ps, 1, value);
-            return loadByPreparedStatement(ps);
-        }
-        finally
-        {
-            getManager().close(ps);
-            freeConnection(c);
-        }
-    }
-
-
-    /**
-     * Deletes from the workorder table by assignedtoid field.
-     *
-     * @param value the key value to seek
-     * @return the number of rows deleted
-     */
-    // DELETE BY IMPORTED KEY
-    public int deleteByAssignedtoid(Integer value) throws SQLException 
-    {
-        Connection c = null;
-        PreparedStatement ps = null;
-        try 
-        {
-            c = getConnection();
-            ps = c.prepareStatement("DELETE FROM workorder WHERE assignedtoid=?");
-            Manager.setInteger(ps, 1, value);
-            return ps.executeUpdate();
-        }
-        finally
-        {
-            getManager().close(ps);
-            freeConnection(c);
-        }
-    }
-
-
-    /**
-     * Loads WorkorderBean array from the workorder table using its regbyid field.
-     *
-     * @return an array of WorkorderBean 
-     */
-    // LOAD BY IMPORTED KEY
-    public WorkorderBean[] loadByRegbyid(Integer value) throws SQLException 
-    {
-        Connection c = null;
-        PreparedStatement ps = null;
-        try 
-        {
-            c = getConnection();
-            ps = c.prepareStatement("SELECT " + ALL_FIELDS + " FROM workorder WHERE regbyid=?",ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-            Manager.setInteger(ps, 1, value);
-            return loadByPreparedStatement(ps);
-        }
-        finally
-        {
-            getManager().close(ps);
-            freeConnection(c);
-        }
-    }
-
-
-    /**
-     * Deletes from the workorder table by regbyid field.
-     *
-     * @param value the key value to seek
-     * @return the number of rows deleted
-     */
-    // DELETE BY IMPORTED KEY
-    public int deleteByRegbyid(Integer value) throws SQLException 
-    {
-        Connection c = null;
-        PreparedStatement ps = null;
-        try 
-        {
-            c = getConnection();
-            ps = c.prepareStatement("DELETE FROM workorder WHERE regbyid=?");
-            Manager.setInteger(ps, 1, value);
-            return ps.executeUpdate();
-        }
-        finally
-        {
-            getManager().close(ps);
-            freeConnection(c);
-        }
-    }
-
-
-    /**
-     * Loads WorkorderBean array from the workorder table using its roomid field.
-     *
-     * @return an array of WorkorderBean 
-     */
-    // LOAD BY IMPORTED KEY
-    public WorkorderBean[] loadByRoomid(Integer value) throws SQLException 
-    {
-        Connection c = null;
-        PreparedStatement ps = null;
-        try 
-        {
-            c = getConnection();
-            ps = c.prepareStatement("SELECT " + ALL_FIELDS + " FROM workorder WHERE roomid=?",ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-            Manager.setInteger(ps, 1, value);
-            return loadByPreparedStatement(ps);
-        }
-        finally
-        {
-            getManager().close(ps);
-            freeConnection(c);
-        }
-    }
-
-
-    /**
-     * Deletes from the workorder table by roomid field.
-     *
-     * @param value the key value to seek
-     * @return the number of rows deleted
-     */
-    // DELETE BY IMPORTED KEY
-    public int deleteByRoomid(Integer value) throws SQLException 
-    {
-        Connection c = null;
-        PreparedStatement ps = null;
-        try 
-        {
-            c = getConnection();
-            ps = c.prepareStatement("DELETE FROM workorder WHERE roomid=?");
-            Manager.setInteger(ps, 1, value);
-            return ps.executeUpdate();
-        }
-        finally
-        {
-            getManager().close(ps);
-            freeConnection(c);
-        }
-    }
-
-
-
-    //////////////////////////////////////
-    // GET/SET FOREIGN KEY BEAN METHOD
-    //////////////////////////////////////
-    /**
-     * Retrieves the HouseunitBean object from the workorder.houseunitid field.
-     *
-     * @param pObject the WorkorderBean 
-     * @return the associated HouseunitBean pObject
-     */
-    // GET IMPORTED
-    public HouseunitBean getHouseunitBean(WorkorderBean pObject) throws SQLException
-    {
-        HouseunitBean other = HouseunitManager.getInstance().createHouseunitBean();
-        other.setHouseunitid(pObject.getHouseunitid());
-        return HouseunitManager.getInstance().loadUniqueUsingTemplate(other);
-    }
-
-    /**
-     * Associates the WorkorderBean object to the HouseunitBean object.
-     *
-     * @param pObject the WorkorderBean object to use
-     * @param pObjectToBeSet the HouseunitBean object to associate to the WorkorderBean 
-     * @return the associated HouseunitBean pObject
-     */
-    // SET IMPORTED
-    public WorkorderBean setHouseunitBean(WorkorderBean pObject,HouseunitBean pObjectToBeSet)
-    {
-        pObject.setHouseunitid(pObjectToBeSet.getHouseunitid());
-        return pObject;
-    }
-
-    /**
-     * Retrieves the PersonnelBean object from the workorder.personnelid field.
-     *
-     * @param pObject the WorkorderBean 
-     * @return the associated PersonnelBean pObject
-     */
-    // GET IMPORTED
-    public PersonnelBean getPersonnelBean(WorkorderBean pObject) throws SQLException
-    {
-        PersonnelBean other = PersonnelManager.getInstance().createPersonnelBean();
-        other.setPersonnelid(pObject.getAssignedtoid());
-        return PersonnelManager.getInstance().loadUniqueUsingTemplate(other);
-    }
-
-    /**
-     * Associates the WorkorderBean object to the PersonnelBean object.
-     *
-     * @param pObject the WorkorderBean object to use
-     * @param pObjectToBeSet the PersonnelBean object to associate to the WorkorderBean 
-     * @return the associated PersonnelBean pObject
-     */
-    // SET IMPORTED
-    public WorkorderBean setPersonnelBean(WorkorderBean pObject,PersonnelBean pObjectToBeSet)
-    {
-        pObject.setAssignedtoid(pObjectToBeSet.getPersonnelid());
-        return pObject;
-    }
-
-    /**
-     * Retrieves the RoomBean object from the workorder.roomid field.
-     *
-     * @param pObject the WorkorderBean 
-     * @return the associated RoomBean pObject
-     */
-    // GET IMPORTED
-    public RoomBean getRoomBean(WorkorderBean pObject) throws SQLException
-    {
-        RoomBean other = RoomManager.getInstance().createRoomBean();
-        other.setRoomid(pObject.getRoomid());
-        return RoomManager.getInstance().loadUniqueUsingTemplate(other);
-    }
-
-    /**
-     * Associates the WorkorderBean object to the RoomBean object.
-     *
-     * @param pObject the WorkorderBean object to use
-     * @param pObjectToBeSet the RoomBean object to associate to the WorkorderBean 
-     * @return the associated RoomBean pObject
-     */
-    // SET IMPORTED
-    public WorkorderBean setRoomBean(WorkorderBean pObject,RoomBean pObjectToBeSet)
-    {
-        pObject.setRoomid(pObjectToBeSet.getRoomid());
-        return pObject;
+        return new VWorkorderBean();
     }
 
 
@@ -580,19 +262,19 @@ public class WorkorderManager
     //////////////////////////////////////
 
     /**
-     * Loads all the rows from workorder.
+     * Loads all the rows from v_workorder.
      *
-     * @return an array of WorkorderManager pObject
+     * @return an array of VWorkorderManager pObject
      */
     //38
-    public WorkorderBean[] loadAll() throws SQLException 
+    public VWorkorderBean[] loadAll() throws SQLException 
     {
         Connection c = null;
         PreparedStatement ps = null;
         try 
         {
             c = getConnection();
-            ps = c.prepareStatement("SELECT " + ALL_FIELDS + " FROM workorder",ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            ps = c.prepareStatement("SELECT " + ALL_FIELDS + " FROM v_workorder",ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             return loadByPreparedStatement(ps);
         }
         finally
@@ -606,31 +288,31 @@ public class WorkorderManager
     // SQL 'WHERE' METHOD
     //////////////////////////////////////
     /**
-     * Retrieves an array of WorkorderBean given a sql 'where' clause.
+     * Retrieves an array of VWorkorderBean given a sql 'where' clause.
      *
      * @param where the sql 'where' clause
-     * @return the resulting WorkorderBean table 
+     * @return the resulting VWorkorderBean table 
      */
     //49
-    public WorkorderBean[] loadByWhere(String where) throws SQLException
+    public VWorkorderBean[] loadByWhere(String where) throws SQLException
     {
         return loadByWhere(where, null);
     }
 
     /**
-     * Retrieves an array of WorkorderBean given a sql where clause, and a list of fields.
+     * Retrieves an array of VWorkorderBean given a sql where clause, and a list of fields.
      * It is up to you to pass the 'WHERE' in your where clausis.
      *
      * @param where the sql 'where' clause
      * @param fieldList table of the field's associated constants
-     * @return the resulting WorkorderBean table 
+     * @return the resulting VWorkorderBean table 
      */
     //51
-    public WorkorderBean[] loadByWhere(String where, int[] fieldList) throws SQLException
+    public VWorkorderBean[] loadByWhere(String where, int[] fieldList) throws SQLException
     {
         String sql = null;
         if(fieldList == null)
-            sql = "select " + ALL_FIELDS + " from workorder " + where;
+            sql = "select " + ALL_FIELDS + " from v_workorder " + where;
         else
         {
             StringBuffer buff = new StringBuffer(128);
@@ -641,7 +323,7 @@ public class WorkorderManager
                     buff.append(",");
                 buff.append(FIELD_NAMES[fieldList[i]]);
             }
-            buff.append(" from workorder ");
+            buff.append(" from v_workorder ");
             buff.append(where);
             sql = buff.toString();
             buff = null;
@@ -664,7 +346,7 @@ public class WorkorderManager
                     v.add(decodeRow(rs, fieldList));
             }
 
-            return (WorkorderBean[])v.toArray(new WorkorderBean[0]);
+            return (VWorkorderBean[])v.toArray(new VWorkorderBean[0]);
         }
         finally
         {
@@ -676,7 +358,7 @@ public class WorkorderManager
 
 
     /**
-     * Deletes all rows from workorder table.
+     * Deletes all rows from v_workorder table.
      * @return the number of deleted rows.
      */
     public int deleteAll() throws SQLException
@@ -686,7 +368,7 @@ public class WorkorderManager
 
 
     /**
-     * Deletes rows from the workorder table using a 'where' clause.
+     * Deletes rows from the v_workorder table using a 'where' clause.
      * It is up to you to pass the 'WHERE' in your where clausis.
      * <br>Attention, if 'WHERE' is omitted it will delete all records. 
      *
@@ -701,7 +383,7 @@ public class WorkorderManager
         try
         {
             c = getConnection();
-            String delByWhereSQL = "DELETE FROM workorder " + where;
+            String delByWhereSQL = "DELETE FROM v_workorder " + where;
             ps = c.prepareStatement(delByWhereSQL);
             return ps.executeUpdate();
         }
@@ -718,12 +400,12 @@ public class WorkorderManager
     // SAVE 
     ///////////////////////////////////////////////////////////////////////
     /**
-     * Saves the WorkorderBean pObject into the database.
+     * Saves the VWorkorderBean pObject into the database.
      *
-     * @param pObject the WorkorderBean pObject to be saved
+     * @param pObject the VWorkorderBean pObject to be saved
      */
     //100
-    public WorkorderBean save(WorkorderBean pObject) throws SQLException
+    public VWorkorderBean save(VWorkorderBean pObject) throws SQLException
     {
         Connection c = null;
         PreparedStatement ps = null;
@@ -734,27 +416,9 @@ public class WorkorderManager
             c = getConnection();
             if (pObject.isNew())
             { // SAVE 
-                if (!pObject.isWorkorderidModified())
-                {
-                    ps = c.prepareStatement("SELECT nextval('workorderid_seq')");
-                    ResultSet rs = null;
-                    try
-                    {
-                        rs = ps.executeQuery();
-                        if(rs.next())
-                            pObject.setWorkorderid(Manager.getLong(rs, 1));
-                        else
-                            getManager().log("ATTENTION: Could not retrieve generated key!");
-                    }
-                    finally
-                    {
-                        getManager().close(ps, rs);
-                        ps=null;
-                    }
-                }
                 beforeInsert(pObject); // listener callback
                 int _dirtyCount = 0;
-                _sql = new StringBuffer("INSERT into workorder (");
+                _sql = new StringBuffer("INSERT into v_workorder (");
     
                 if (pObject.isWorkorderidModified()) {
                     if (_dirtyCount>0) {
@@ -884,6 +548,38 @@ public class WorkorderManager
                     _dirtyCount++;
                 }
 
+                if (pObject.isRnameModified()) {
+                    if (_dirtyCount>0) {
+                        _sql.append(",");
+                    }
+                    _sql.append("rname");
+                    _dirtyCount++;
+                }
+
+                if (pObject.isCodeModified()) {
+                    if (_dirtyCount>0) {
+                        _sql.append(",");
+                    }
+                    _sql.append("code");
+                    _dirtyCount++;
+                }
+
+                if (pObject.isHnameModified()) {
+                    if (_dirtyCount>0) {
+                        _sql.append(",");
+                    }
+                    _sql.append("hname");
+                    _dirtyCount++;
+                }
+
+                if (pObject.isAssignedtoModified()) {
+                    if (_dirtyCount>0) {
+                        _sql.append(",");
+                    }
+                    _sql.append("assignedto");
+                    _dirtyCount++;
+                }
+
                 _sql.append(") values (");
                 if(_dirtyCount > 0) {
                     _sql.append("?");
@@ -960,6 +656,22 @@ public class WorkorderManager
                     ps.setString(++_dirtyCount, pObject.getNote());
                 }
     
+                if (pObject.isRnameModified()) {
+                    ps.setString(++_dirtyCount, pObject.getRname());
+                }
+    
+                if (pObject.isCodeModified()) {
+                    ps.setString(++_dirtyCount, pObject.getCode());
+                }
+    
+                if (pObject.isHnameModified()) {
+                    ps.setString(++_dirtyCount, pObject.getHname());
+                }
+    
+                if (pObject.isAssignedtoModified()) {
+                    ps.setString(++_dirtyCount, pObject.getAssignedto());
+                }
+    
                 ps.executeUpdate();
     
                 pObject.isNew(false);
@@ -969,7 +681,7 @@ public class WorkorderManager
             else 
             { // UPDATE 
                 beforeUpdate(pObject); // listener callback
-                _sql = new StringBuffer("UPDATE workorder SET ");
+                _sql = new StringBuffer("UPDATE v_workorder SET ");
                 boolean useComma=false;
 
                 if (pObject.isWorkorderidModified()) {
@@ -1115,8 +827,43 @@ public class WorkorderManager
                     }
                     _sql.append("note").append("=?");
                 }
-                _sql.append(" WHERE ");
-                _sql.append("workorder.workorderid=?");
+
+                if (pObject.isRnameModified()) {
+                    if (useComma) {
+                        _sql.append(",");
+                    } else {
+                        useComma=true;
+                    }
+                    _sql.append("rname").append("=?");
+                }
+
+                if (pObject.isCodeModified()) {
+                    if (useComma) {
+                        _sql.append(",");
+                    } else {
+                        useComma=true;
+                    }
+                    _sql.append("code").append("=?");
+                }
+
+                if (pObject.isHnameModified()) {
+                    if (useComma) {
+                        _sql.append(",");
+                    } else {
+                        useComma=true;
+                    }
+                    _sql.append("hname").append("=?");
+                }
+
+                if (pObject.isAssignedtoModified()) {
+                    if (useComma) {
+                        _sql.append(",");
+                    } else {
+                        useComma=true;
+                    }
+                    _sql.append("assignedto").append("=?");
+                }
+                _sql.append("");
                 ps = c.prepareStatement(_sql.toString(),ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
                 int _dirtyCount = 0;
 
@@ -1183,12 +930,27 @@ public class WorkorderManager
                 if (pObject.isNoteModified()) {
                       ps.setString(++_dirtyCount, pObject.getNote());
                 }
+
+                if (pObject.isRnameModified()) {
+                      ps.setString(++_dirtyCount, pObject.getRname());
+                }
+
+                if (pObject.isCodeModified()) {
+                      ps.setString(++_dirtyCount, pObject.getCode());
+                }
+
+                if (pObject.isHnameModified()) {
+                      ps.setString(++_dirtyCount, pObject.getHname());
+                }
+
+                if (pObject.isAssignedtoModified()) {
+                      ps.setString(++_dirtyCount, pObject.getAssignedto());
+                }
     
                 if (_dirtyCount == 0) {
                      return pObject;
                 }
     
-                Manager.setLong(ps, ++_dirtyCount, pObject.getWorkorderid());
                 ps.executeUpdate();
                 pObject.resetIsModified();
                 afterUpdate(pObject); // listener callback
@@ -1206,13 +968,13 @@ public class WorkorderManager
 
 
     /**
-     * Saves an array of WorkorderBean pObjects into the database.
+     * Saves an array of VWorkorderBean pObjects into the database.
      *
-     * @param pObjects the WorkorderBean pObject table to be saved
-     * @return the saved WorkorderBean array.
+     * @param pObjects the VWorkorderBean pObject table to be saved
+     * @return the saved VWorkorderBean array.
      */
     //65
-    public WorkorderBean[] save(WorkorderBean[] pObjects) throws SQLException 
+    public VWorkorderBean[] save(VWorkorderBean[] pObjects) throws SQLException 
     {
         for (int iIndex = 0; iIndex < pObjects.length; iIndex ++){
             save(pObjects[iIndex]);
@@ -1226,15 +988,15 @@ public class WorkorderManager
     // USING TEMPLATE 
     ///////////////////////////////////////////////////////////////////////
     /**
-     * Loads a unique WorkorderBean pObject from a template one giving a c
+     * Loads a unique VWorkorderBean pObject from a template one giving a c
      *
-     * @param pObject the WorkorderBean pObject to look for
+     * @param pObject the VWorkorderBean pObject to look for
      * @return the pObject matching the template
      */
     //85
-    public WorkorderBean loadUniqueUsingTemplate(WorkorderBean pObject) throws SQLException
+    public VWorkorderBean loadUniqueUsingTemplate(VWorkorderBean pObject) throws SQLException
     {
-         WorkorderBean[] pReturn = loadUsingTemplate(pObject);
+         VWorkorderBean[] pReturn = loadUsingTemplate(pObject);
          if (pReturn.length == 0)
              return null;
          if (pReturn.length > 1)
@@ -1243,18 +1005,18 @@ public class WorkorderManager
      }
 
     /**
-     * Loads an array of WorkorderBean from a template one.
+     * Loads an array of VWorkorderBean from a template one.
      *
-     * @param pObject the WorkorderBean template to look for
-     * @return all the WorkorderBean matching the template
+     * @param pObject the VWorkorderBean template to look for
+     * @return all the VWorkorderBean matching the template
      */
     //88
-    public WorkorderBean[] loadUsingTemplate(WorkorderBean pObject) throws SQLException
+    public VWorkorderBean[] loadUsingTemplate(VWorkorderBean pObject) throws SQLException
     {
         Connection c = null;
         PreparedStatement ps = null;
         StringBuffer where = new StringBuffer("");
-        StringBuffer _sql = new StringBuffer("SELECT " + ALL_FIELDS + " from workorder WHERE ");
+        StringBuffer _sql = new StringBuffer("SELECT " + ALL_FIELDS + " from v_workorder WHERE ");
         StringBuffer _sqlWhere = new StringBuffer("");
         try
         {
@@ -1340,6 +1102,26 @@ public class WorkorderManager
                  _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("note= ?");
              }
     
+             if (pObject.isRnameModified()) {
+                 _dirtyCount ++; 
+                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("rname= ?");
+             }
+    
+             if (pObject.isCodeModified()) {
+                 _dirtyCount ++; 
+                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("code= ?");
+             }
+    
+             if (pObject.isHnameModified()) {
+                 _dirtyCount ++; 
+                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("hname= ?");
+             }
+    
+             if (pObject.isAssignedtoModified()) {
+                 _dirtyCount ++; 
+                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("assignedto= ?");
+             }
+    
              if (_dirtyCount == 0) {
                  throw new SQLException ("The pObject to look for is invalid : not initialized !");
              }
@@ -1412,6 +1194,22 @@ public class WorkorderManager
                  ps.setString(++_dirtyCount, pObject.getNote());
              }
     
+             if (pObject.isRnameModified()) {
+                 ps.setString(++_dirtyCount, pObject.getRname());
+             }
+    
+             if (pObject.isCodeModified()) {
+                 ps.setString(++_dirtyCount, pObject.getCode());
+             }
+    
+             if (pObject.isHnameModified()) {
+                 ps.setString(++_dirtyCount, pObject.getHname());
+             }
+    
+             if (pObject.isAssignedtoModified()) {
+                 ps.setString(++_dirtyCount, pObject.getAssignedto());
+             }
+    
              ps.executeQuery();
              return loadByPreparedStatement(ps);
         }
@@ -1422,24 +1220,21 @@ public class WorkorderManager
         }
     }
     /**
-     * Deletes rows using a WorkorderBean template.
+     * Deletes rows using a VWorkorderBean template.
      *
-     * @param pObject the WorkorderBean object(s) to be deleted
+     * @param pObject the VWorkorderBean object(s) to be deleted
      * @return the number of deleted objects
      */
     //63
-    public int deleteUsingTemplate(WorkorderBean pObject) throws SQLException
+    public int deleteUsingTemplate(VWorkorderBean pObject) throws SQLException
     {
-        if (pObject.isWorkorderidInitialized())
-            return deleteByPrimaryKey(pObject.getWorkorderid());
-    
         Connection c = null;
         PreparedStatement ps = null;
         StringBuffer sql = null;
     
         try 
         {
-            sql = new StringBuffer("DELETE FROM workorder WHERE ");
+            sql = new StringBuffer("DELETE FROM v_workorder WHERE ");
             int _dirtyAnd = 0;
             if (pObject.isWorkorderidInitialized()) {
                 if (_dirtyAnd > 0)
@@ -1553,6 +1348,34 @@ public class WorkorderManager
                 _dirtyAnd ++;
             }
     
+            if (pObject.isRnameInitialized()) {
+                if (_dirtyAnd > 0)
+                    sql.append(" AND ");
+                sql.append("rname").append("=?");
+                _dirtyAnd ++;
+            }
+    
+            if (pObject.isCodeInitialized()) {
+                if (_dirtyAnd > 0)
+                    sql.append(" AND ");
+                sql.append("code").append("=?");
+                _dirtyAnd ++;
+            }
+    
+            if (pObject.isHnameInitialized()) {
+                if (_dirtyAnd > 0)
+                    sql.append(" AND ");
+                sql.append("hname").append("=?");
+                _dirtyAnd ++;
+            }
+    
+            if (pObject.isAssignedtoInitialized()) {
+                if (_dirtyAnd > 0)
+                    sql.append(" AND ");
+                sql.append("assignedto").append("=?");
+                _dirtyAnd ++;
+            }
+    
             c = getConnection();
             ps = c.prepareStatement(sql.toString(),ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             int _dirtyCount = 0;
@@ -1621,6 +1444,22 @@ public class WorkorderManager
                 ps.setString(++_dirtyCount, pObject.getNote());
             }
     
+            if (pObject.isRnameInitialized()) {
+                ps.setString(++_dirtyCount, pObject.getRname());
+            }
+    
+            if (pObject.isCodeInitialized()) {
+                ps.setString(++_dirtyCount, pObject.getCode());
+            }
+    
+            if (pObject.isHnameInitialized()) {
+                ps.setString(++_dirtyCount, pObject.getHname());
+            }
+    
+            if (pObject.isAssignedtoInitialized()) {
+                ps.setString(++_dirtyCount, pObject.getAssignedto());
+            }
+    
             int _rows = ps.executeUpdate();
             return _rows;
         }
@@ -1638,7 +1477,7 @@ public class WorkorderManager
     ///////////////////////////////////////////////////////////////////////
 
     /**
-     * Retrieves the number of rows of the table workorder.
+     * Retrieves the number of rows of the table v_workorder.
      *
      * @return the number of rows returned
      */
@@ -1651,7 +1490,7 @@ public class WorkorderManager
 
 
     /**
-     * Retrieves the number of rows of the table workorder with a 'where' clause.
+     * Retrieves the number of rows of the table v_workorder with a 'where' clause.
      * It is up to you to pass the 'WHERE' in your where clausis.
      *
      * @param where the restriction clause
@@ -1659,7 +1498,7 @@ public class WorkorderManager
      */
     public int countWhere(String where) throws SQLException
     {
-        String sql = "select count(*) as MCOUNT from workorder " + where;
+        String sql = "select count(*) as MCOUNT from v_workorder " + where;
         Connection c = null;
         Statement pStatement = null;
         ResultSet rs =  null;
@@ -1685,7 +1524,7 @@ public class WorkorderManager
     }
 
     /**
-     * Retrieves the number of rows of the table workorder with a prepared statement.
+     * Retrieves the number of rows of the table v_workorder with a prepared statement.
      *
      * @param ps the PreparedStatement to be used
      * @return the number of rows returned
@@ -1711,13 +1550,13 @@ public class WorkorderManager
     }
 
     /**
-     * Looks for the number of elements of a specific WorkorderBean pObject given a c
+     * Looks for the number of elements of a specific VWorkorderBean pObject given a c
      *
-     * @param pObject the WorkorderBean pObject to look for
+     * @param pObject the VWorkorderBean pObject to look for
      * @return the number of rows returned
      */
     //83
-    public int countUsingTemplate(WorkorderBean pObject) throws SQLException
+    public int countUsingTemplate(VWorkorderBean pObject) throws SQLException
     {
         StringBuffer where = new StringBuffer("");
         Connection c = null;
@@ -1727,7 +1566,7 @@ public class WorkorderManager
     
         try
         {
-                _sql = new StringBuffer("SELECT count(*) as MCOUNT  from workorder WHERE ");
+                _sql = new StringBuffer("SELECT count(*) as MCOUNT  from v_workorder WHERE ");
                 _sqlWhere = new StringBuffer("");
                 int _dirtyCount = 0;
     
@@ -1811,6 +1650,26 @@ public class WorkorderManager
                     _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("note= ?");
                 }
     
+                if (pObject.isRnameModified()) {
+                    _dirtyCount++; 
+                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("rname= ?");
+                }
+    
+                if (pObject.isCodeModified()) {
+                    _dirtyCount++; 
+                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("code= ?");
+                }
+    
+                if (pObject.isHnameModified()) {
+                    _dirtyCount++; 
+                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("hname= ?");
+                }
+    
+                if (pObject.isAssignedtoModified()) {
+                    _dirtyCount++; 
+                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("assignedto= ?");
+                }
+    
                 if (_dirtyCount == 0)
                    throw new SQLException ("The pObject to look is unvalid : not initialized !");
     
@@ -1884,6 +1743,22 @@ public class WorkorderManager
                     ps.setString(++_dirtyCount, pObject.getNote());
                 }
     
+                if (pObject.isRnameModified()) {
+                    ps.setString(++_dirtyCount, pObject.getRname());
+                }
+    
+                if (pObject.isCodeModified()) {
+                    ps.setString(++_dirtyCount, pObject.getCode());
+                }
+    
+                if (pObject.isHnameModified()) {
+                    ps.setString(++_dirtyCount, pObject.getHname());
+                }
+    
+                if (pObject.isAssignedtoModified()) {
+                    ps.setString(++_dirtyCount, pObject.getAssignedto());
+                }
+    
                 return countByPreparedStatement(ps);
         }
         finally
@@ -1899,15 +1774,15 @@ public class WorkorderManager
     // DECODE RESULT SET 
     ///////////////////////////////////////////////////////////////////////
     /**
-     * Transforms a ResultSet iterating on the workorder on a WorkorderBean pObject.
+     * Transforms a ResultSet iterating on the v_workorder on a VWorkorderBean pObject.
      *
      * @param rs the ResultSet to be transformed
-     * @return pObject resulting WorkorderBean pObject
+     * @return pObject resulting VWorkorderBean pObject
      */
     //72
-    public WorkorderBean decodeRow(ResultSet rs) throws SQLException
+    public VWorkorderBean decodeRow(ResultSet rs) throws SQLException
     {
-        WorkorderBean pObject = createWorkorderBean();
+        VWorkorderBean pObject = createVWorkorderBean();
         pObject.setWorkorderid(Manager.getLong(rs, 1));
         pObject.setNum(rs.getString(2));
         pObject.setDescription(rs.getString(3));
@@ -1924,6 +1799,10 @@ public class WorkorderManager
         pObject.setRegbyid(Manager.getInteger(rs, 14));
         pObject.setUpdatedon(rs.getTimestamp(15));
         pObject.setNote(rs.getString(16));
+        pObject.setRname(rs.getString(17));
+        pObject.setCode(rs.getString(18));
+        pObject.setHname(rs.getString(19));
+        pObject.setAssignedto(rs.getString(20));
 
         pObject.isNew(false);
         pObject.resetIsModified();
@@ -1932,16 +1811,16 @@ public class WorkorderManager
     }
 
     /**
-     * Transforms a ResultSet iterating on the workorder table on a WorkorderBean pObject according to a list of fields.
+     * Transforms a ResultSet iterating on the v_workorder table on a VWorkorderBean pObject according to a list of fields.
      *
      * @param rs the ResultSet to be transformed
      * @param fieldList table of the field's associated constants
-     * @return pObject resulting WorkorderBean pObject
+     * @return pObject resulting VWorkorderBean pObject
      */
     //73
-    public WorkorderBean decodeRow(ResultSet rs, int[] fieldList) throws SQLException
+    public VWorkorderBean decodeRow(ResultSet rs, int[] fieldList) throws SQLException
     {
-        WorkorderBean pObject = createWorkorderBean();
+        VWorkorderBean pObject = createVWorkorderBean();
         int pos = 0;
         for(int i = 0; i < fieldList.length; i++)
         {
@@ -2010,6 +1889,22 @@ public class WorkorderManager
                     ++pos;
                     pObject.setNote(rs.getString(pos));
                     break;
+                case ID_RNAME:
+                    ++pos;
+                    pObject.setRname(rs.getString(pos));
+                    break;
+                case ID_CODE:
+                    ++pos;
+                    pObject.setCode(rs.getString(pos));
+                    break;
+                case ID_HNAME:
+                    ++pos;
+                    pObject.setHname(rs.getString(pos));
+                    break;
+                case ID_ASSIGNEDTO:
+                    ++pos;
+                    pObject.setAssignedto(rs.getString(pos));
+                    break;
             }
         }
         pObject.isNew(false);
@@ -2026,10 +1921,10 @@ public class WorkorderManager
      * Loads all the elements using a prepared statement.
      *
      * @param ps the PreparedStatement to be used
-     * @return an array of WorkorderBean 
+     * @return an array of VWorkorderBean 
      */
     //41
-    public WorkorderBean[] loadByPreparedStatement(PreparedStatement ps) throws SQLException
+    public VWorkorderBean[] loadByPreparedStatement(PreparedStatement ps) throws SQLException
     {
         return loadByPreparedStatement(ps, null);
     }
@@ -2039,9 +1934,9 @@ public class WorkorderManager
      *
      * @param ps the PreparedStatement to be used
      * @param fieldList table of the field's associated constants
-     * @return an array of WorkorderBean 
+     * @return an array of VWorkorderBean 
      */
-    public WorkorderBean[] loadByPreparedStatement(PreparedStatement ps, int[] fieldList) throws SQLException
+    public VWorkorderBean[] loadByPreparedStatement(PreparedStatement ps, int[] fieldList) throws SQLException
     {
         ResultSet rs =  null;
         java.util.ArrayList v =  null;
@@ -2056,7 +1951,7 @@ public class WorkorderManager
                 else 
                     v.add(decodeRow(rs, fieldList));
             }
-            return (WorkorderBean[])v.toArray(new WorkorderBean[0]);
+            return (VWorkorderBean[])v.toArray(new VWorkorderBean[0]);
         }
         finally
         {
@@ -2068,56 +1963,56 @@ public class WorkorderManager
     ///////////////////////////////////////////////////////////////////////
     // LISTENER 
     ///////////////////////////////////////////////////////////////////////
-    private WorkorderListener listener = null;
+    private VWorkorderListener listener = null;
 
     /**
-     * Registers a unique WorkorderListener listener.
+     * Registers a unique VWorkorderListener listener.
      */
     //66.5
-    public void registerListener(WorkorderListener listener) {
+    public void registerListener(VWorkorderListener listener) {
         this.listener = listener;
     }
 
     /**
-     * Before the save of the WorkorderBean pObject.
+     * Before the save of the VWorkorderBean pObject.
      *
-     * @param pObject the WorkorderBean pObject to be saved
+     * @param pObject the VWorkorderBean pObject to be saved
      */
     //67
-    void beforeInsert(WorkorderBean pObject) throws SQLException {
+    void beforeInsert(VWorkorderBean pObject) throws SQLException {
         if (listener != null)
             listener.beforeInsert(pObject);
     }
 
     /**
-     * After the save of the WorkorderBean pObject.
+     * After the save of the VWorkorderBean pObject.
      *
-     * @param pObject the WorkorderBean pObject to be saved
+     * @param pObject the VWorkorderBean pObject to be saved
      */
     //68
-    void afterInsert(WorkorderBean pObject) throws SQLException {
+    void afterInsert(VWorkorderBean pObject) throws SQLException {
         if (listener != null)
             listener.afterInsert(pObject);
     }
 
     /**
-     * Before the update of the WorkorderBean pObject.
+     * Before the update of the VWorkorderBean pObject.
      *
-     * @param pObject the WorkorderBean pObject to be updated
+     * @param pObject the VWorkorderBean pObject to be updated
      */
     //69
-    void beforeUpdate(WorkorderBean pObject) throws SQLException {
+    void beforeUpdate(VWorkorderBean pObject) throws SQLException {
         if (listener != null)
             listener.beforeUpdate(pObject);
     }
 
     /**
-     * After the update of the WorkorderBean pObject.
+     * After the update of the VWorkorderBean pObject.
      *
-     * @param pObject the WorkorderBean pObject to be updated
+     * @param pObject the VWorkorderBean pObject to be updated
      */
     //70
-    void afterUpdate(WorkorderBean pObject) throws SQLException {
+    void afterUpdate(VWorkorderBean pObject) throws SQLException {
         if (listener != null)
             listener.afterUpdate(pObject);
     }
