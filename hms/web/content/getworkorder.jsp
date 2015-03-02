@@ -44,9 +44,9 @@
             where += " AND  orderstatus != 1 ";
         }
         System.out.println(where);
-        workorderBeans = VWorkorderManager.getInstance().loadByWhere(where);
+        workorderBeans = VWorkorderManager.getInstance().loadByWhere(where + " ORDER BY workorderid ASC");
     } else {
-        workorderBeans = VWorkorderManager.getInstance().loadByWhere("where orderstatus != 1");
+        workorderBeans = VWorkorderManager.getInstance().loadByWhere("where orderstatus != 1 ORDER BY workorderid ASC");
     }
 
 %>

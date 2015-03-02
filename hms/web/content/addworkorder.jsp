@@ -31,7 +31,12 @@
         <% if(CodeHelpers.isNullOrEmpty(wid)){ %>
         $("#work-workOrderStatus").val(3);
         $("#work-workOrderStatus").change();
-        $("#dt-block-st, #dt-block-end, #dt-dedline").val('');
+        <% } %>
+        <% if(!CodeHelpers.isNullOrEmpty(wid) && workorderBean.getBlockend() == null){ %>
+        $("#dt-block-st, #dt-block-end").val('');
+        <% } %>
+        <% if(!CodeHelpers.isNullOrEmpty(wid) && workorderBean.getDeadline() == null){ %>
+        $("#dt-dedline").val('');
         <% } %>
     });
 
@@ -151,7 +156,9 @@
                 dedline + " <%=user.getPersonnelid()%> )";
 
         if (!isNullOrEmpty(wid.trim()) && wid.trim() != "null") {
-            dtst = '';
+            if (!isNullOrEmpty(dtst)) {
+                dts = "blockstart = to_date('" + $("#dt-block-st").val() + "','dd.mm.yyyy'), blockend = " + "to_date('" + $("#dt-block-end").val() + "','dd.mm.yyyy'),";
+            }
             var pr = isNullOrEmpty($("#work-workOrderPriority").val()) ? "NULL" : $("#work-workOrderPriority").val();
             var pers = isNullOrEmpty($("#work-personnel").val()) ? "NULL" : $("#work-personnel").val();
             var st = isNullOrEmpty($("#work-workOrderStatus").val()) ? "NULL" : $("#work-workOrderStatus").val();
@@ -160,6 +167,7 @@
             "houseunitid=" + unitid + ", priority=" + pr + ", " +
             "assignedtoid=" + pers + ", " +
             "orderstatus=" + st + ", " +
+            dts +
             "deadline=" + ded + ", updatedon=now() " +
             "WHERE workorderid=<%=wid%>;";
         }
@@ -179,16 +187,18 @@
                     var reason = 1;
                     $.post("content/saveblockunblock.jsp?arrdt=" + $("#dt-block-st").val() + "&dep=" + $("#dt-block-end").val() + "&roomid=" + roomid + "&reason=" + reason, {}, function (data) {
                         $.post("content/execute.jsp?query=" + encodeURIComponent(sql), {}, function () {
-                            var category = $("#work-workOrderCategory  option:selected").text();
-                            var priority = $("#work-workOrderPriority  option:selected").text();
-                            var personnel = $("#work-personnel  option:selected").text();
-                            var status = $("#work-workOrderStatus  option:selected").text();
+                            var category = $("#work-workOrderCategory  option:selected").text().trim();
+                            var priority = $("#work-workOrderPriority  option:selected").text().trim();
+                            var personnel = $("#work-personnel  option:selected").text().trim();
+                            var status = $("#work-workOrderStatus  option:selected").text().trim();
+                            var room = $("#work-units  option:selected").text().trim();
 
                             sql = "INSERT INTO workorderlog(" +
-                            "workorderlogid, workorderid, category, priority, assignedto, status, note, regbyid)" +
+                            "workorderlogid, workorderid, room, category, priority, assignedto, status, note, regbyid)" +
                             "VALUES (" +
                             "(SELECT COALESCE(MAX(workorderlogid) + 1,1) FROM workorderlog)," +
                             "(SELECT MAX(workorderid) FROM workorder), " +
+                            "N'" + room + "', " +
                             "N'" + category + "', " +
                             "N'" + priority + "', " +
                             "N'" + personnel + "', " +
@@ -212,12 +222,14 @@
                 var priority = $("#work-workOrderPriority  option:selected").text();
                 var personnel = $("#work-personnel  option:selected").text();
                 var status = $("#work-workOrderStatus  option:selected").text();
+                var room = $("#work-units  option:selected").text().trim();
 
                 sql = "INSERT INTO workorderlog(" +
-                "workorderlogid, workorderid, category, priority, assignedto, status, note, regbyid)" +
+                "workorderlogid, workorderid, room, category, priority, assignedto, status, note, regbyid)" +
                 "VALUES (" +
                 "(SELECT COALESCE(MAX(workorderlogid) + 1,1) FROM workorderlog)," +
                 "(SELECT MAX(workorderid) FROM workorder), " +
+                "N'" + room + "', " +
                 "N'" + category + "', " +
                 "N'" + priority + "', " +
                 "N'" + personnel + "', " +

@@ -7,7 +7,7 @@
     if (CodeHelpers.isNullOrEmpty(wid)) {
         return;
     }
-    WorkorderlogBean[] logs = WorkorderlogManager.getInstance().loadByWhere("where workorderid = " + wid);
+    WorkorderlogBean[] logs = WorkorderlogManager.getInstance().loadByWhere("where workorderid = " + wid + " ORDER BY workorderlogid DESC");
     String retVal = "";
     if (logs != null) {
         for (int i = 0; i < logs.length; i++) {
