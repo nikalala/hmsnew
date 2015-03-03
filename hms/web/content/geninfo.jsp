@@ -177,7 +177,7 @@ int prefCount = PreferenceManager.getInstance().countWhere("where reservationid 
     }
     
     function editExtracharge1(fid,xid){
-        newmWindow1('additionalservices','დამატებითი სერვისები',"fid="+fid+"&xid="+xid);
+        newmWindow1('additionalservices','დამატებითი სერვისები',"ftid="+fid+"&xid="+xid);
     }
     
     $(document).ready(function(){

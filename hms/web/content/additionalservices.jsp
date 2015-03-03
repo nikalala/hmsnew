@@ -4,15 +4,23 @@
 <%
 long fid = 0;
 int eid = 0;
+long ftid = 0;
+FolioitemBean fbitem = null;
 ExtrachargefolioBean exb = null;
 if(request.getParameter("fid") != null){
     fid = Long.parseLong(request.getParameter("fid"));
 }
+if(request.getParameter("ftid") != null){
+    ftid = Long.parseLong(request.getParameter("ftid"));
+    fbitem = FolioitemManager.getInstance().loadByPrimaryKey(ftid);
+    fid = fbitem.getFolioid().longValue();
+}
 if(request.getParameter("xid") != null){
     eid = Integer.parseInt(request.getParameter("xid"));
 }
-if(eid > 0 && fid > 0)
-    exb = ExtrachargefolioManager.getInstance().loadByPrimaryKey(fid, eid);
+if(eid > 0 && ftid > 0)
+    exb = ExtrachargefolioManager.getInstance().loadByPrimaryKey(ftid, eid);
+
 
 if(fid > 0){
     Vector v = new Vector();
@@ -20,7 +28,6 @@ if(fid > 0){
     for(int i=0;i<exbs.length;i++)
         v.addElement((ExtrachargefolioBean)exbs[i]);
     session.setAttribute("WALKIN_EXTRACHARGES", (Vector)v);
-    System.out.println("v1.size() = "+v.size());
 }
 
 
@@ -196,6 +203,11 @@ ExtrachargeBean[] extracharges = ExtrachargeManager.getInstance().loadByWhere("w
             $("#additionalservices_add").hide();
             $("#additionalservices_rst").show();
             $("#additionalservices_edt").show();
+            var val = $("#wlakin_extrachargechargeapplieson").val();
+            for(var i=0;i<5;i++){
+                if(i == val) $("#extrapar_"+i).show();
+                else $("#extrapar_"+i).hide();
+            }
         <%}else{%>
             $("#additionalservices_add").show();
             $("#additionalservices_rst").hide();
@@ -299,7 +311,7 @@ ExtrachargeBean[] extracharges = ExtrachargeManager.getInstance().loadByWhere("w
                         <form class="form-inline" role="form">
                         <div class="form-group">
                             <div class="input-group-xs">
-                                <input class="form-control" type="text" id="extrapar_0_val" size="3" style="">
+                                <input class="form-control" type="text" id="extrapar_0_val" size="3" style="<%=(exb != null) ? exb.getAdult():""%>">
                             </div>
                         </div>
                         </form>
@@ -313,7 +325,7 @@ ExtrachargeBean[] extracharges = ExtrachargeManager.getInstance().loadByWhere("w
                         <form class="form-inline" role="form">
                         <div class="form-group">
                             <div class="input-group-xs">
-                                <input class="form-control" type="text" id="extrapar_1_val" size="3" style="">
+                                <input class="form-control" type="text" id="extrapar_1_val" size="3" style="<%=(exb != null) ? exb.getChild():""%>">
                             </div>
                         </div>
                         </form>
@@ -332,7 +344,7 @@ ExtrachargeBean[] extracharges = ExtrachargeManager.getInstance().loadByWhere("w
                         <form class="form-inline" role="form">
                         <div class="form-group">
                             <div class="input-group-xs">
-                                <input class="form-control" type="text" id="extrapar_3_val1" size="3" style="">
+                                <input class="form-control" type="text" id="extrapar_3_val1" size="3" style="<%=(exb != null) ? exb.getAdult():""%>">
                             </div>
                         </div>
                         </form>
@@ -342,7 +354,7 @@ ExtrachargeBean[] extracharges = ExtrachargeManager.getInstance().loadByWhere("w
                         <form class="form-inline" role="form">
                         <div class="form-group">
                             <div class="input-group-xs">
-                                <input class="form-control" type="text" id="extrapar_3_val2" size="3" style="">
+                                <input class="form-control" type="text" id="extrapar_3_val2" size="3" style="<%=(exb != null) ? exb.getChild():""%>">
                             </div>
                         </div>
                         </form>
@@ -356,7 +368,7 @@ ExtrachargeBean[] extracharges = ExtrachargeManager.getInstance().loadByWhere("w
                         <form class="form-inline" role="form">
                         <div class="form-group">
                             <div class="input-group-xs">
-                                <input class="form-control" type="text" id="extrapar_4_val" size="3" style="">
+                                <input class="form-control" type="text" id="extrapar_4_val" size="3" style="<%=(exb != null) ? exb.getQty():""%>">
                             </div>
                         </div>
                         </form>
