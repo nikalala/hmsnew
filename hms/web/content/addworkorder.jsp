@@ -48,7 +48,7 @@
 
     function reloadHistory() {
         $.post("content/getworkorderhistory.jsp?wid=<%=wid%>", function (data) {
-            $("#history-table").html(data);
+            $(".history-table").append(data);
         });
     }
 
@@ -162,7 +162,7 @@
             var pr = isNullOrEmpty($("#work-workOrderPriority").val()) ? "NULL" : $("#work-workOrderPriority").val();
             var pers = isNullOrEmpty($("#work-personnel").val()) ? "NULL" : $("#work-personnel").val();
             var st = isNullOrEmpty($("#work-workOrderStatus").val()) ? "NULL" : $("#work-workOrderStatus").val();
-            var ded =  isNullOrEmpty($("#dt-dedline").val()) ? "NULL" : "to_date('" + $("#dt-dedline").val() + "','dd.mm.yyyy')";
+            var ded = isNullOrEmpty($("#dt-dedline").val()) ? "NULL" : "to_date('" + $("#dt-dedline").val() + "','dd.mm.yyyy')";
             sql = "UPDATE workorder SET description='" + $("#work-descr").val().trim() + "', category=" + $("#work-workOrderCategory").val() + ", roomid=" + roomid + ", " +
             "houseunitid=" + unitid + ", priority=" + pr + ", " +
             "assignedtoid=" + pers + ", " +
@@ -249,6 +249,17 @@
     }
 </script>
 <style>
+
+    .history-table tr:nth-child(2) {
+        background-color: #FFF !important;
+    }
+
+    .history-table{
+        margin-top: 10px;
+        background-color: #FFF !important;
+        border-right: solid 1px #D8D8D8;
+    }
+
     .work-order-add-maindiv {
         width: 100%;
         margin-top: -10px;
@@ -332,7 +343,9 @@
                                         <span>განმარტება</span>
                                     </td>
                                     <td>
-                                        <textarea id="work-descr" style="margin-left: 4px;"><%=CodeHelpers.ifIsNullOrEmptyReturnEmptryString(workorderBean.getDescription())%></textarea>
+                                        <textarea id="work-descr"
+                                                  style="margin-left: 4px;"><%=CodeHelpers.ifIsNullOrEmptyReturnEmptryString(workorderBean.getDescription())%>
+                                        </textarea>
                                     </td>
                                 </tr>
                                 <tr>
@@ -527,6 +540,15 @@
                         </td>
                     </tr>
                 </table>
+                <div style="width: 100%; height: 150px; max-height: 150px; overflow-y: auto;">
+                <table style="width: 100%; height: auto;" class="work-table history-table">
+                    <tr>
+                        <td class="header-td">
+                            <span>ისტორია</span>
+                        </td>
+                    </tr>
+                </table>
+                </div>
             </td>
             <td style="width: 10px;">
                 &nbsp;
@@ -545,20 +567,6 @@
                     </tr>
                 </table>
                 <br/>
-                <table style="width: 100%; height: 103px;" class="work-table">
-                    <tr>
-                        <td class="header-td">
-                            <span>ისტორია</span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div id="history-table" style="  width: 100%;height: 330px;max-height: 287px;overflow-y: auto; padding: 5px;">
-
-                            </div>
-                        </td>
-                    </tr>
-                </table>
             </td>
         </tr>
     </table>

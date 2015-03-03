@@ -970,6 +970,12 @@ function checkIfScrollBarExist(divId) {
     }
 })(jQuery);
 
+function strReplace(str,replaceWhat,replaceTo){
+    replaceWhat = replaceWhat.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+    var re = new RegExp(replaceWhat, 'g');
+    return str.replace(re,replaceTo);
+}
+
 function colModelGenerator(width, colName, alligment) {
     var pos = "left";
     switch (alligment) {

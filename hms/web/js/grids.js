@@ -779,3 +779,35 @@ workOrderGrid = {
     }
 };
 
+
+var BlockRoomGridModel = [];
+BlockRoomGridModel.push(
+    colModelGenerator(100, 'room', 0),
+    colModelGenerator(100, 'from', 0),
+    colModelGenerator(100, 'to', 0),
+    colModelGenerator(100, 'blocked', 0),
+    colModelGenerator(100, 'blockedby', 0),
+    colModelGenerator(100, 'reason', 0),
+    colModelGenerator(100, 'action', 0)
+);
+BlockRoomGrid = {
+    id: 'list_blocklist',
+    url: 'content/getblocklist.jsp',
+    type: 'xml',
+    cols: ['ოთახი', 'დან', 'მდე', 'დაიბლოკა', 'დაბლოკა', 'მიზეზი', 'ქმედება'],
+    model: BlockRoomGridModel,
+    order: 'asc',
+    multiselect: true,
+    multikey: "ctrlKey",
+    altRows: true,
+    altclass: 'altrow',
+    isPopup: false,
+    gridComplete: function () {
+        ReDrawTable(BlockRoomGrid);
+    },
+    beforeRequest: function () {
+
+    }
+};
+
+

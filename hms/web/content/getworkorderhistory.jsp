@@ -11,11 +11,15 @@
     String retVal = "";
     if (logs != null) {
         for (int i = 0; i < logs.length; i++) {
+            retVal += "<tr><td style='padding-left: 10px !important; height: 30px;'>";
             if(!CodeHelpers.isNullOrEmpty(logs[i].getNote())){
                 retVal += logs[i].getRegbyid() + " (" + logs[i].getRegdate() + ") => შენიშვნა " + logs[i].getNote() + "<br /><br />";
             }else{
-                retVal += logs[i].getRegbyid() + " (" + logs[i].getRegdate() + ") => მიბმულია " + logs[i].getAssignedto() + URLDecoder.decode(" => სტატუსი ", "UTF-8") + logs[i].getStatus() + "<br /><br />";
+                retVal += logs[i].getRegbyid() + " (" + logs[i].getRegdate() + ") => მიბმულია " + logs[i].getAssignedto() + URLDecoder.decode(" => სტატუსი ", "UTF-8") + logs[i].getStatus() +
+                " => კატეგორია " + logs[i].getCategory() +
+                " => პრიორიტეტი " + logs[i].getPriority();
             }
+            retVal += "</td></tr>";
         }
     }
 %>

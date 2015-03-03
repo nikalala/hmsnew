@@ -1189,6 +1189,7 @@ System.out.println(sql);
     String pickerformat = "{autoclose: true, format: '" + dateformats1[dff] + "', weekStart: 1, endDate: new Date(" + lclosedate + "), autoclose: true, language: 'ka', todayHighlight: true, allowEmpty: false}";
     String pickerformat1 = "{autoclose: true, format: '" + dateformats1[dff] + "', weekStart: 1, autoclose: true, language: 'ka', todayHighlight: true, allowEmpty: false}";
     String pickerFormatForDatePickers = "{autoclose: true, format: '" + dateformats1[dff] + "', weekStart: 1, startDate: new Date(" + lclosedate + "), autoclose: true, language: 'ka', todayHighlight: true, allowEmpty: false}";
+    String pickerFormatForDatePickers3 = "{autoclose: true, format: '" + dateformats1[dff] + "', autoclose: true, language: 'ka', allowEmpty: false}";
     String pickerFormatForDatePickers2 = "{autoclose: true, format: '" + dateformats1[dff] + "', weekStart: 1, autoclose: true, language: 'ka', todayHighlight: true, allowEmpty: false}";
     String pickerformat2 = "{autoclose: true, format: '" + dateformats1[dff] + "', weekStart: 1, startDate: new Date(" + lclosedate + "), language: 'ka', todayHighlight: true, allowEmpty: false}";
     String pickerformat3 = "{autoclose: true, format: '" + dateformats1[dff] + "', weekStart: 1, endDate: new Date(" + lclosedate1 + "), autoclose: true, language: 'ka', todayHighlight: false, allowEmpty: false, setDate: new Date(" + lclosedate1 + ")}";
