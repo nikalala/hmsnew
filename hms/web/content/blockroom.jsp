@@ -105,6 +105,13 @@
         getPrevRecords();
     });
 
+
+    $("#btnBlockMultiple").click(function () {
+
+        newsWindow1('blockunblockmult', 'ოთახის ბლოკირება', "roomid=" + 0);
+
+    });
+
     $("#btnAddNewWorkOrder").click(function () {
 
         loader.show();
@@ -231,6 +238,8 @@
 
     }
 
+
+
     function AddDays(arg, fromDt) {
 
         $('#dtfrom').datepicker(<%=pickerFormatForDatePickers%>);
@@ -280,7 +289,7 @@
                 <div id="status_bar" class="first-status-bar" align='center'>
                     <div style="width: 100%; float: left;">
                         <span style="float: left; margin: 7px 0 0 10px;">ძიების კრიტერიუმები</span>
-                        <button type="button" class="btn btn-default" id="btnAddNewWorkOrder"
+                        <button type="button" class="btn btn-default" id="btnBlockMultiple"
                                 style="border: 0; font-weight: bold; float: right; margin: 3px 5px 0 0;">
                             დაბლოკვა
                         </button>
