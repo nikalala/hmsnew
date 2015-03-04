@@ -70,34 +70,6 @@
         addReason();
     });
 
-    $("#currs").on('change', function () {
-
-    });
-
-    function SaveBlock() {
-        var roomids = "";
-        var select = "select getroomstatusbydate(" + roomids + ",'" + $("#fromdateval").val() + "','" + $("#todateval").val() + "');";
-        loader.show();
-        $.post("content/checkifavalforblock.jsp?query=" + select, {}, function (data) {
-            if (data.trim() > 0) {
-                BootstrapDialog.alert("არჩეული თარიღებისთვის შეუძლებელია ნომრის დაბლოკვა");
-            } else {
-                var arrdt = $("#fromdateval").val();
-                var dep = $("#todateval").val();
-                var reason = $("#reasondrop").val();
-                if (isNullOrEmpty(dep) || isNullOrEmpty(arrdt) || isNullOrEmpty(reason) || reason === "0" || reason == 0) {
-                    BootstrapDialog.alert("შეავსეთ ყველა ველი");
-                    return;
-                }
-                $.post("content/saveblockunblock.jsp?arrdt=" + arrdt + "&dep=" + dep + "&roomid=" + roomids + "&reason=" + reason, {}, function (data) {
-                    reloadGrid(hsGrid.id, hsGrid.url);
-                    $(".closepref").click();
-                });
-            }
-            loader.hide();
-        });
-    }
-
     $(document).on("change", "#fromdateval", function () {
         var currDate = $(this).val();
         if (!isNullOrEmpty(currDate)) {
@@ -109,6 +81,46 @@
         }
         disableSecondDatePicker();
     });
+
+    $("#currs").on('change', function () {
+
+    });
+
+    function SaveBlock() {
+        var roomids = "";
+        $('.checkedrooms').each(function (i, j) {
+            if ($(j).prop('checked')) {
+                roomids += $(j).attr('id') + ",";
+            }
+        });
+        if(!isNullOrEmpty(roomids)){
+            roomids = roomids.substring(0, roomids.trim().lastIndexOf(","));
+            var select = "select SUM(1) from roomst where roomid IN ("+roomids+") " +
+                    "and to_date('" + $("#fromdateval").val() + "','dd.mm.yyyy') <= statusdate::date AND " +
+                    "statusdate::date <= to_date('" + $("#todateval").val() + "','dd.mm.yyyy') AND st NOT IN (7,8);"
+            loader.show();
+            $.post("content/checkifavalforblock.jsp?query=" + select, {}, function (data) {
+                if (data.trim() > 0) {
+                    BootstrapDialog.alert("არჩეული თარიღებისთვის შეუძლებელია მონიშნული ნომრების დაბლოკვა!!!");
+                } else {
+                    var arrdt = $("#fromdateval").val();
+                    var dep = $("#todateval").val();
+                    var reason = $("#reasondrop").val();
+                    if (isNullOrEmpty(dep) || isNullOrEmpty(arrdt) || isNullOrEmpty(reason) || reason === "0" || reason == 0) {
+                        BootstrapDialog.alert("შეავსეთ ყველა ველი!!!");
+                        return;
+                    }
+                    $.post("content/saveblockunblock.jsp?arrdt=" + arrdt + "&dep=" + dep + "&roomid=" + roomids + "&reason=" + reason, {}, function (data) {
+                        reloadGrid(hsGrid.id, hsGrid.url);
+                        $(".closepref").click();
+                    });
+                }
+                loader.hide();
+            });
+        }else{
+            BootstrapDialog.alert("გთხოვთ მონიშნოთ მინიმუმ 1 ოთახი!!!");
+        }
+    }
 
     function disableSecondDatePicker() {
         var fcValue = $("#fromdateval").val();

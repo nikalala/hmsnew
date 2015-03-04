@@ -9,47 +9,32 @@
     try {
 
         String roomId = request.getParameter("roomid");
+
         String arrdt = request.getParameter("arrdt");
 
         String depDate = request.getParameter("dep");
 
         String reason = request.getParameter("reason");
 
-        int status = 5;
-
-        Date lastDate = df3.parse(depDate);
-        boolean equals = false;
-        Date nextDay = null;
-        Date prevDay = df3.parse(arrdt);
-        Collection<Date> dtsToInsert = new ArrayList<Date>();
-        dtsToInsert.add(prevDay);
-        if(!arrdt.equals(depDate)){
-            while (!equals) {
-                nextDay = CodeHelpers.getNextDay(prevDay);
-                dtsToInsert.add(nextDay);
-                System.out.println(df3.format(lastDate).split(" ")[0] + " " + df3.format(prevDay).split(" ")[0] + " " + df3.format(nextDay).split(" ")[0]);
-                if (df3.format(nextDay).split(" ")[0].equals(df3.format(lastDate).split(" ")[0])) {
-                    equals = true;
-                    break;
-                }
-                prevDay = nextDay;
-            }
-        }
         String generatedInsert = "";
-        for (Date obj : dtsToInsert) {
-            generatedInsert += "INSERT INTO roomst(roomstid, roomid, statusdate, st, regbyid) " +
-                    " VALUES " +
-                    "((SELECT COALESCE(MAX(roomstid) + 1,1) FROM roomst), " + roomId + ", '" + obj + "', " + status + ", " + user.getPersonnelid() + ");";
+        if (roomId.contains(",")) {
+            String[] rooms = roomId.split(",");
+            for (String room : rooms) {
+                generatedInsert += "INSERT INTO blockroom(" +
+                        "            blockroomid, roomid, blockstart, blockend, reasonid, note, regbyid) " +
+                        "    VALUES ((SELECT COALESCE(MAX(blockroomid) + 1,1) FROM blockroom), " + room + ", to_timestamp('" + arrdt.replace(".","/") + "','dd/mm/yyyy'), to_timestamp('" + depDate.replace(".", "/") + "','dd/mm/yyyy'), '" + reason + "', '', " + user.getPersonnelid() + ");";
+            }
+        } else {
+            generatedInsert += "INSERT INTO blockroom( " +
+                    "            blockroomid, roomid, blockstart, blockend, reasonid, note, regbyid) " +
+                    "    VALUES ((SELECT COALESCE(MAX(blockroomid) + 1,1) FROM blockroom), " + roomId + ", to_timestamp('" + arrdt.replace(".","/") + "','dd/mm/yyyy'), to_timestamp('" + depDate.replace(".", "/") + "','dd/mm/yyyy'), " + reason + ", '', " + user.getPersonnelid() + ");";
         }
+
+        System.out.println(generatedInsert);
 
         Connection con = Manager.getInstance().getConnection();
         con.createStatement().executeUpdate(generatedInsert);
         Manager.getInstance().releaseConnection(con);
-
-       /* ReservationBean reservationBean = ReservationManager.getInstance().loadByPrimaryKey(Long.parseLong(rid));
-        reservationBean.setReservationtypeid(Integer.parseInt(rTypeid));
-        reservationBean.setRegbyid(user.getPersonnelid());
-        ReservationManager.getInstance().save(reservationBean);*/
 
         Manager.getInstance().endTransaction(true);
         errorContrName = "1";
