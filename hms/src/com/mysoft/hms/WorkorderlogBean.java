@@ -59,6 +59,10 @@ public class WorkorderlogBean
     private boolean regbyid_is_modified = false;
     private boolean regbyid_is_initialized = false;
     
+    private String room;
+    private boolean room_is_modified = false;
+    private boolean room_is_initialized = false;
+    
     private boolean _isNew = true;
     
     /**
@@ -609,6 +613,62 @@ public class WorkorderlogBean
     }
 
     /**
+     * Getter method for room.
+     * <br>
+     * Meta Data Information (in progress):
+     * <ul>
+     * <li>full name: workorderlog.room
+     * <li>column size: 2147483647
+     * <li>jdbc type returned by the driver: Types.VARCHAR
+     * </ul>
+     *
+     * @return the value of room
+     */
+    public String getRoom()
+    {
+        return room; 
+    }
+
+    /**
+     * Setter method for room.
+     * <br>
+     * The new value is set only if compareTo() says it is different,
+     * or if one of either the new value or the current value is null.
+     * In case the new value is different, it is set and the field is marked as 'modified'.
+     *
+     * @param newVal the new value to be assigned to room
+     */
+    public void setRoom(String newVal) {
+        if ((newVal != null && this.room != null && (newVal.compareTo(this.room) == 0)) || 
+            (newVal == null && this.room == null && room_is_initialized)) {
+            return; 
+        } 
+        this.room = newVal; 
+        room_is_modified = true; 
+        room_is_initialized = true; 
+    }
+
+    /**
+     * Determines if the room has been modified.
+     *
+     * @return true if the field has been modified, false if the field has not been modified
+     */
+    public boolean isRoomModified() {
+        return room_is_modified; 
+    }
+
+    /**
+     * Determines if the room has been initialized.
+     * <br>
+     * It is useful to determine if a field is null on purpose or just because it has not been initialized.
+     *
+     * @return true if the field has been initialized, false otherwise
+     */
+    public boolean isRoomInitialized() {
+        return room_is_initialized; 
+    }
+
+    /**
      * Determines if the current object is new.
      *
      * @return true if the current object is new, false if the object is not new
@@ -642,7 +702,8 @@ public class WorkorderlogBean
 		status_is_modified || 
 		note_is_modified || 
 		regdate_is_modified || 
-		regbyid_is_modified;
+		regbyid_is_modified || 
+		room_is_modified;
     }
 
     /**
@@ -658,6 +719,7 @@ public class WorkorderlogBean
         note_is_modified = false;
         regdate_is_modified = false;
         regbyid_is_modified = false;
+        room_is_modified = false;
     }
 
     /**
@@ -675,6 +737,7 @@ public class WorkorderlogBean
         setNote(bean.getNote());
         setRegdate(bean.getRegdate());
         setRegbyid(bean.getRegbyid());
+        setRoom(bean.getRoom());
     }
 
     /**
@@ -693,6 +756,7 @@ public class WorkorderlogBean
                  + "\n - workorderlog.note = " + (note_is_initialized ? ("[" + (note == null ? null : note.toString()) + "]") : "not initialized") + ""
                  + "\n - workorderlog.regdate = " + (regdate_is_initialized ? ("[" + (regdate == null ? null : regdate.toString()) + "]") : "not initialized") + ""
                  + "\n - workorderlog.regbyid = " + (regbyid_is_initialized ? ("[" + (regbyid == null ? null : regbyid.toString()) + "]") : "not initialized") + ""
+                 + "\n - workorderlog.room = " + (room_is_initialized ? ("[" + (room == null ? null : room.toString()) + "]") : "not initialized") + ""
             ;
     }
 

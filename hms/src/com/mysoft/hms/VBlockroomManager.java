@@ -19,9 +19,9 @@ import java.sql.*;
 
 
 /**
- * Handles database calls for the workorderlog table.
+ * Handles database calls for the v_blockroom table.
  */
-public class WorkorderlogManager
+public class VBlockroomManager
 // extends+ 
 
 // extends- 
@@ -29,196 +29,158 @@ public class WorkorderlogManager
 {
 
     /**
-     * Column workorderlogid of type Types.INTEGER mapped to Integer.
+     * Column blockroomid of type Types.BIGINT mapped to Long.
      */
-    public static final int ID_WORKORDERLOGID = 0;
-    public static final int TYPE_WORKORDERLOGID = Types.INTEGER;
-    public static final String NAME_WORKORDERLOGID = "workorderlogid";
+    public static final int ID_BLOCKROOMID = 0;
+    public static final int TYPE_BLOCKROOMID = Types.BIGINT;
+    public static final String NAME_BLOCKROOMID = "blockroomid";
 
     /**
-     * Column workorderid of type Types.INTEGER mapped to Integer.
+     * Column roomid of type Types.INTEGER mapped to Integer.
      */
-    public static final int ID_WORKORDERID = 1;
-    public static final int TYPE_WORKORDERID = Types.INTEGER;
-    public static final String NAME_WORKORDERID = "workorderid";
+    public static final int ID_ROOMID = 1;
+    public static final int TYPE_ROOMID = Types.INTEGER;
+    public static final String NAME_ROOMID = "roomid";
 
     /**
-     * Column category of type Types.VARCHAR mapped to String.
+     * Column blockstart of type Types.TIMESTAMP mapped to java.sql.Timestamp.
      */
-    public static final int ID_CATEGORY = 2;
-    public static final int TYPE_CATEGORY = Types.VARCHAR;
-    public static final String NAME_CATEGORY = "category";
+    public static final int ID_BLOCKSTART = 2;
+    public static final int TYPE_BLOCKSTART = Types.TIMESTAMP;
+    public static final String NAME_BLOCKSTART = "blockstart";
 
     /**
-     * Column priority of type Types.VARCHAR mapped to String.
+     * Column blockend of type Types.TIMESTAMP mapped to java.sql.Timestamp.
      */
-    public static final int ID_PRIORITY = 3;
-    public static final int TYPE_PRIORITY = Types.VARCHAR;
-    public static final String NAME_PRIORITY = "priority";
+    public static final int ID_BLOCKEND = 3;
+    public static final int TYPE_BLOCKEND = Types.TIMESTAMP;
+    public static final String NAME_BLOCKEND = "blockend";
 
     /**
-     * Column assignedto of type Types.VARCHAR mapped to String.
+     * Column reasonid of type Types.INTEGER mapped to Integer.
      */
-    public static final int ID_ASSIGNEDTO = 4;
-    public static final int TYPE_ASSIGNEDTO = Types.VARCHAR;
-    public static final String NAME_ASSIGNEDTO = "assignedto";
-
-    /**
-     * Column status of type Types.VARCHAR mapped to String.
-     */
-    public static final int ID_STATUS = 5;
-    public static final int TYPE_STATUS = Types.VARCHAR;
-    public static final String NAME_STATUS = "status";
+    public static final int ID_REASONID = 4;
+    public static final int TYPE_REASONID = Types.INTEGER;
+    public static final String NAME_REASONID = "reasonid";
 
     /**
      * Column note of type Types.VARCHAR mapped to String.
      */
-    public static final int ID_NOTE = 6;
+    public static final int ID_NOTE = 5;
     public static final int TYPE_NOTE = Types.VARCHAR;
     public static final String NAME_NOTE = "note";
 
     /**
      * Column regdate of type Types.TIMESTAMP mapped to java.sql.Timestamp.
      */
-    public static final int ID_REGDATE = 7;
+    public static final int ID_REGDATE = 6;
     public static final int TYPE_REGDATE = Types.TIMESTAMP;
     public static final String NAME_REGDATE = "regdate";
 
     /**
-     * Column regbyid of type Types.VARCHAR mapped to String.
+     * Column regbyid of type Types.INTEGER mapped to Integer.
      */
-    public static final int ID_REGBYID = 8;
-    public static final int TYPE_REGBYID = Types.VARCHAR;
+    public static final int ID_REGBYID = 7;
+    public static final int TYPE_REGBYID = Types.INTEGER;
     public static final String NAME_REGBYID = "regbyid";
 
     /**
      * Column room of type Types.VARCHAR mapped to String.
      */
-    public static final int ID_ROOM = 9;
+    public static final int ID_ROOM = 8;
     public static final int TYPE_ROOM = Types.VARCHAR;
     public static final String NAME_ROOM = "room";
 
-
-    private static final String TABLE_NAME = "workorderlog";
+    /**
+     * Column roomtype of type Types.VARCHAR mapped to String.
+     */
+    public static final int ID_ROOMTYPE = 9;
+    public static final int TYPE_ROOMTYPE = Types.VARCHAR;
+    public static final String NAME_ROOMTYPE = "roomtype";
 
     /**
-     * Create an array of type string containing all the fields of the workorderlog table.
+     * Column reason of type Types.VARCHAR mapped to String.
+     */
+    public static final int ID_REASON = 10;
+    public static final int TYPE_REASON = Types.VARCHAR;
+    public static final String NAME_REASON = "reason";
+
+    /**
+     * Column createdby of type Types.VARCHAR mapped to String.
+     */
+    public static final int ID_CREATEDBY = 11;
+    public static final int TYPE_CREATEDBY = Types.VARCHAR;
+    public static final String NAME_CREATEDBY = "createdby";
+
+
+    private static final String TABLE_NAME = "v_blockroom";
+
+    /**
+     * Create an array of type string containing all the fields of the v_blockroom table.
      */
     private static final String[] FIELD_NAMES = 
     {
-        "workorderlog.workorderlogid"
-        ,"workorderlog.workorderid"
-        ,"workorderlog.category"
-        ,"workorderlog.priority"
-        ,"workorderlog.assignedto"
-        ,"workorderlog.status"
-        ,"workorderlog.note"
-        ,"workorderlog.regdate"
-        ,"workorderlog.regbyid"
-        ,"workorderlog.room"
+        "v_blockroom.blockroomid"
+        ,"v_blockroom.roomid"
+        ,"v_blockroom.blockstart"
+        ,"v_blockroom.blockend"
+        ,"v_blockroom.reasonid"
+        ,"v_blockroom.note"
+        ,"v_blockroom.regdate"
+        ,"v_blockroom.regbyid"
+        ,"v_blockroom.room"
+        ,"v_blockroom.roomtype"
+        ,"v_blockroom.reason"
+        ,"v_blockroom.createdby"
     };
 
     /**
-     * Field that contains the comma separated fields of the workorderlog table.
+     * Field that contains the comma separated fields of the v_blockroom table.
      */
-    private static final String ALL_FIELDS = "workorderlog.workorderlogid"
-                            + ",workorderlog.workorderid"
-                            + ",workorderlog.category"
-                            + ",workorderlog.priority"
-                            + ",workorderlog.assignedto"
-                            + ",workorderlog.status"
-                            + ",workorderlog.note"
-                            + ",workorderlog.regdate"
-                            + ",workorderlog.regbyid"
-                            + ",workorderlog.room";
+    private static final String ALL_FIELDS = "v_blockroom.blockroomid"
+                            + ",v_blockroom.roomid"
+                            + ",v_blockroom.blockstart"
+                            + ",v_blockroom.blockend"
+                            + ",v_blockroom.reasonid"
+                            + ",v_blockroom.note"
+                            + ",v_blockroom.regdate"
+                            + ",v_blockroom.regbyid"
+                            + ",v_blockroom.room"
+                            + ",v_blockroom.roomtype"
+                            + ",v_blockroom.reason"
+                            + ",v_blockroom.createdby";
 
-    private static WorkorderlogManager singleton = new WorkorderlogManager();
+    private static VBlockroomManager singleton = new VBlockroomManager();
 
     /**
-     * Get the WorkorderlogManager singleton.
+     * Get the VBlockroomManager singleton.
      *
-     * @return WorkorderlogManager 
+     * @return VBlockroomManager 
      */
-    synchronized public static WorkorderlogManager getInstance()
+    synchronized public static VBlockroomManager getInstance()
     {
         return singleton;
     }
 
     /**
-     * Sets your own WorkorderlogManager instance.
+     * Sets your own VBlockroomManager instance.
      <br>
      * This is optional, by default we provide it for you.
      */
-    synchronized public static void setInstance(WorkorderlogManager instance)
+    synchronized public static void setInstance(VBlockroomManager instance)
     {
         singleton = instance;
     }
 
 
     /**
-     * Creates a new WorkorderlogBean instance.
+     * Creates a new VBlockroomBean instance.
      *
-     * @return the new WorkorderlogBean 
+     * @return the new VBlockroomBean 
      */
-    public WorkorderlogBean createWorkorderlogBean()
+    public VBlockroomBean createVBlockroomBean()
     {
-        return new WorkorderlogBean();
-    }
-
-    //////////////////////////////////////
-    // PRIMARY KEY METHODS
-    //////////////////////////////////////
-
-    /**
-     * Loads a WorkorderlogBean from the workorderlog using its key fields.
-     *
-     * @return a unique WorkorderlogBean 
-     */
-    //12
-    public WorkorderlogBean loadByPrimaryKey(Integer workorderlogid) throws SQLException
-    {
-        Connection c = null;
-        PreparedStatement ps = null;
-        try 
-        {
-            c = getConnection();
-            ps = c.prepareStatement("SELECT " + ALL_FIELDS + " FROM workorderlog WHERE workorderlog.workorderlogid=?",ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-            Manager.setInteger(ps, 1, workorderlogid);
-            WorkorderlogBean pReturn[] = loadByPreparedStatement(ps);
-            if (pReturn.length < 1)
-                return null;
-            else
-                return pReturn[0];
-        }
-        finally
-        {
-            getManager().close(ps);
-            freeConnection(c);
-        }
-    }
-
-    /**
-     * Deletes rows according to its keys.
-     *
-     * @return the number of deleted rows
-     */
-    //60
-    public int deleteByPrimaryKey(Integer workorderlogid) throws SQLException
-    {
-        Connection c = null;
-        PreparedStatement ps = null;
-        try
-        {
-            c = getConnection();
-            ps = c.prepareStatement("DELETE from workorderlog WHERE workorderlog.workorderlogid=?",ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-            Manager.setInteger(ps, 1, workorderlogid);
-            return ps.executeUpdate();
-        }
-        finally
-        {
-            getManager().close(ps);
-            freeConnection(c);
-        }
+        return new VBlockroomBean();
     }
 
 
@@ -228,19 +190,19 @@ public class WorkorderlogManager
     //////////////////////////////////////
 
     /**
-     * Loads all the rows from workorderlog.
+     * Loads all the rows from v_blockroom.
      *
-     * @return an array of WorkorderlogManager pObject
+     * @return an array of VBlockroomManager pObject
      */
     //38
-    public WorkorderlogBean[] loadAll() throws SQLException 
+    public VBlockroomBean[] loadAll() throws SQLException 
     {
         Connection c = null;
         PreparedStatement ps = null;
         try 
         {
             c = getConnection();
-            ps = c.prepareStatement("SELECT " + ALL_FIELDS + " FROM workorderlog",ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            ps = c.prepareStatement("SELECT " + ALL_FIELDS + " FROM v_blockroom",ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             return loadByPreparedStatement(ps);
         }
         finally
@@ -254,31 +216,31 @@ public class WorkorderlogManager
     // SQL 'WHERE' METHOD
     //////////////////////////////////////
     /**
-     * Retrieves an array of WorkorderlogBean given a sql 'where' clause.
+     * Retrieves an array of VBlockroomBean given a sql 'where' clause.
      *
      * @param where the sql 'where' clause
-     * @return the resulting WorkorderlogBean table 
+     * @return the resulting VBlockroomBean table 
      */
     //49
-    public WorkorderlogBean[] loadByWhere(String where) throws SQLException
+    public VBlockroomBean[] loadByWhere(String where) throws SQLException
     {
         return loadByWhere(where, null);
     }
 
     /**
-     * Retrieves an array of WorkorderlogBean given a sql where clause, and a list of fields.
+     * Retrieves an array of VBlockroomBean given a sql where clause, and a list of fields.
      * It is up to you to pass the 'WHERE' in your where clausis.
      *
      * @param where the sql 'where' clause
      * @param fieldList table of the field's associated constants
-     * @return the resulting WorkorderlogBean table 
+     * @return the resulting VBlockroomBean table 
      */
     //51
-    public WorkorderlogBean[] loadByWhere(String where, int[] fieldList) throws SQLException
+    public VBlockroomBean[] loadByWhere(String where, int[] fieldList) throws SQLException
     {
         String sql = null;
         if(fieldList == null)
-            sql = "select " + ALL_FIELDS + " from workorderlog " + where;
+            sql = "select " + ALL_FIELDS + " from v_blockroom " + where;
         else
         {
             StringBuffer buff = new StringBuffer(128);
@@ -289,7 +251,7 @@ public class WorkorderlogManager
                     buff.append(",");
                 buff.append(FIELD_NAMES[fieldList[i]]);
             }
-            buff.append(" from workorderlog ");
+            buff.append(" from v_blockroom ");
             buff.append(where);
             sql = buff.toString();
             buff = null;
@@ -312,7 +274,7 @@ public class WorkorderlogManager
                     v.add(decodeRow(rs, fieldList));
             }
 
-            return (WorkorderlogBean[])v.toArray(new WorkorderlogBean[0]);
+            return (VBlockroomBean[])v.toArray(new VBlockroomBean[0]);
         }
         finally
         {
@@ -324,7 +286,7 @@ public class WorkorderlogManager
 
 
     /**
-     * Deletes all rows from workorderlog table.
+     * Deletes all rows from v_blockroom table.
      * @return the number of deleted rows.
      */
     public int deleteAll() throws SQLException
@@ -334,7 +296,7 @@ public class WorkorderlogManager
 
 
     /**
-     * Deletes rows from the workorderlog table using a 'where' clause.
+     * Deletes rows from the v_blockroom table using a 'where' clause.
      * It is up to you to pass the 'WHERE' in your where clausis.
      * <br>Attention, if 'WHERE' is omitted it will delete all records. 
      *
@@ -349,7 +311,7 @@ public class WorkorderlogManager
         try
         {
             c = getConnection();
-            String delByWhereSQL = "DELETE FROM workorderlog " + where;
+            String delByWhereSQL = "DELETE FROM v_blockroom " + where;
             ps = c.prepareStatement(delByWhereSQL);
             return ps.executeUpdate();
         }
@@ -366,12 +328,12 @@ public class WorkorderlogManager
     // SAVE 
     ///////////////////////////////////////////////////////////////////////
     /**
-     * Saves the WorkorderlogBean pObject into the database.
+     * Saves the VBlockroomBean pObject into the database.
      *
-     * @param pObject the WorkorderlogBean pObject to be saved
+     * @param pObject the VBlockroomBean pObject to be saved
      */
     //100
-    public WorkorderlogBean save(WorkorderlogBean pObject) throws SQLException
+    public VBlockroomBean save(VBlockroomBean pObject) throws SQLException
     {
         Connection c = null;
         PreparedStatement ps = null;
@@ -382,73 +344,47 @@ public class WorkorderlogManager
             c = getConnection();
             if (pObject.isNew())
             { // SAVE 
-                if (!pObject.isWorkorderlogidModified())
-                {
-                    ps = c.prepareStatement("SELECT nextval('workorderlogid_seq')");
-                    ResultSet rs = null;
-                    try
-                    {
-                        rs = ps.executeQuery();
-                        if(rs.next())
-                            pObject.setWorkorderlogid(Manager.getInteger(rs, 1));
-                        else
-                            getManager().log("ATTENTION: Could not retrieve generated key!");
-                    }
-                    finally
-                    {
-                        getManager().close(ps, rs);
-                        ps=null;
-                    }
-                }
                 beforeInsert(pObject); // listener callback
                 int _dirtyCount = 0;
-                _sql = new StringBuffer("INSERT into workorderlog (");
+                _sql = new StringBuffer("INSERT into v_blockroom (");
     
-                if (pObject.isWorkorderlogidModified()) {
+                if (pObject.isBlockroomidModified()) {
                     if (_dirtyCount>0) {
                         _sql.append(",");
                     }
-                    _sql.append("workorderlogid");
+                    _sql.append("blockroomid");
                     _dirtyCount++;
                 }
 
-                if (pObject.isWorkorderidModified()) {
+                if (pObject.isRoomidModified()) {
                     if (_dirtyCount>0) {
                         _sql.append(",");
                     }
-                    _sql.append("workorderid");
+                    _sql.append("roomid");
                     _dirtyCount++;
                 }
 
-                if (pObject.isCategoryModified()) {
+                if (pObject.isBlockstartModified()) {
                     if (_dirtyCount>0) {
                         _sql.append(",");
                     }
-                    _sql.append("category");
+                    _sql.append("blockstart");
                     _dirtyCount++;
                 }
 
-                if (pObject.isPriorityModified()) {
+                if (pObject.isBlockendModified()) {
                     if (_dirtyCount>0) {
                         _sql.append(",");
                     }
-                    _sql.append("priority");
+                    _sql.append("blockend");
                     _dirtyCount++;
                 }
 
-                if (pObject.isAssignedtoModified()) {
+                if (pObject.isReasonidModified()) {
                     if (_dirtyCount>0) {
                         _sql.append(",");
                     }
-                    _sql.append("assignedto");
-                    _dirtyCount++;
-                }
-
-                if (pObject.isStatusModified()) {
-                    if (_dirtyCount>0) {
-                        _sql.append(",");
-                    }
-                    _sql.append("status");
+                    _sql.append("reasonid");
                     _dirtyCount++;
                 }
 
@@ -484,6 +420,30 @@ public class WorkorderlogManager
                     _dirtyCount++;
                 }
 
+                if (pObject.isRoomtypeModified()) {
+                    if (_dirtyCount>0) {
+                        _sql.append(",");
+                    }
+                    _sql.append("roomtype");
+                    _dirtyCount++;
+                }
+
+                if (pObject.isReasonModified()) {
+                    if (_dirtyCount>0) {
+                        _sql.append(",");
+                    }
+                    _sql.append("reason");
+                    _dirtyCount++;
+                }
+
+                if (pObject.isCreatedbyModified()) {
+                    if (_dirtyCount>0) {
+                        _sql.append(",");
+                    }
+                    _sql.append("createdby");
+                    _dirtyCount++;
+                }
+
                 _sql.append(") values (");
                 if(_dirtyCount > 0) {
                     _sql.append("?");
@@ -496,28 +456,24 @@ public class WorkorderlogManager
                 ps = c.prepareStatement(_sql.toString(), ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
                 _dirtyCount = 0;
 
-                if (pObject.isWorkorderlogidModified()) {
-                    Manager.setInteger(ps, ++_dirtyCount, pObject.getWorkorderlogid());
+                if (pObject.isBlockroomidModified()) {
+                    Manager.setLong(ps, ++_dirtyCount, pObject.getBlockroomid());
                 }
     
-                if (pObject.isWorkorderidModified()) {
-                    Manager.setInteger(ps, ++_dirtyCount, pObject.getWorkorderid());
+                if (pObject.isRoomidModified()) {
+                    Manager.setInteger(ps, ++_dirtyCount, pObject.getRoomid());
                 }
     
-                if (pObject.isCategoryModified()) {
-                    ps.setString(++_dirtyCount, pObject.getCategory());
+                if (pObject.isBlockstartModified()) {
+                    ps.setTimestamp(++_dirtyCount, pObject.getBlockstart());
                 }
     
-                if (pObject.isPriorityModified()) {
-                    ps.setString(++_dirtyCount, pObject.getPriority());
+                if (pObject.isBlockendModified()) {
+                    ps.setTimestamp(++_dirtyCount, pObject.getBlockend());
                 }
     
-                if (pObject.isAssignedtoModified()) {
-                    ps.setString(++_dirtyCount, pObject.getAssignedto());
-                }
-    
-                if (pObject.isStatusModified()) {
-                    ps.setString(++_dirtyCount, pObject.getStatus());
+                if (pObject.isReasonidModified()) {
+                    Manager.setInteger(ps, ++_dirtyCount, pObject.getReasonid());
                 }
     
                 if (pObject.isNoteModified()) {
@@ -529,11 +485,23 @@ public class WorkorderlogManager
                 }
     
                 if (pObject.isRegbyidModified()) {
-                    ps.setString(++_dirtyCount, pObject.getRegbyid());
+                    Manager.setInteger(ps, ++_dirtyCount, pObject.getRegbyid());
                 }
     
                 if (pObject.isRoomModified()) {
                     ps.setString(++_dirtyCount, pObject.getRoom());
+                }
+    
+                if (pObject.isRoomtypeModified()) {
+                    ps.setString(++_dirtyCount, pObject.getRoomtype());
+                }
+    
+                if (pObject.isReasonModified()) {
+                    ps.setString(++_dirtyCount, pObject.getReason());
+                }
+    
+                if (pObject.isCreatedbyModified()) {
+                    ps.setString(++_dirtyCount, pObject.getCreatedby());
                 }
     
                 ps.executeUpdate();
@@ -545,61 +513,52 @@ public class WorkorderlogManager
             else 
             { // UPDATE 
                 beforeUpdate(pObject); // listener callback
-                _sql = new StringBuffer("UPDATE workorderlog SET ");
+                _sql = new StringBuffer("UPDATE v_blockroom SET ");
                 boolean useComma=false;
 
-                if (pObject.isWorkorderlogidModified()) {
+                if (pObject.isBlockroomidModified()) {
                     if (useComma) {
                         _sql.append(",");
                     } else {
                         useComma=true;
                     }
-                    _sql.append("workorderlogid").append("=?");
+                    _sql.append("blockroomid").append("=?");
                 }
 
-                if (pObject.isWorkorderidModified()) {
+                if (pObject.isRoomidModified()) {
                     if (useComma) {
                         _sql.append(",");
                     } else {
                         useComma=true;
                     }
-                    _sql.append("workorderid").append("=?");
+                    _sql.append("roomid").append("=?");
                 }
 
-                if (pObject.isCategoryModified()) {
+                if (pObject.isBlockstartModified()) {
                     if (useComma) {
                         _sql.append(",");
                     } else {
                         useComma=true;
                     }
-                    _sql.append("category").append("=?");
+                    _sql.append("blockstart").append("=?");
                 }
 
-                if (pObject.isPriorityModified()) {
+                if (pObject.isBlockendModified()) {
                     if (useComma) {
                         _sql.append(",");
                     } else {
                         useComma=true;
                     }
-                    _sql.append("priority").append("=?");
+                    _sql.append("blockend").append("=?");
                 }
 
-                if (pObject.isAssignedtoModified()) {
+                if (pObject.isReasonidModified()) {
                     if (useComma) {
                         _sql.append(",");
                     } else {
                         useComma=true;
                     }
-                    _sql.append("assignedto").append("=?");
-                }
-
-                if (pObject.isStatusModified()) {
-                    if (useComma) {
-                        _sql.append(",");
-                    } else {
-                        useComma=true;
-                    }
-                    _sql.append("status").append("=?");
+                    _sql.append("reasonid").append("=?");
                 }
 
                 if (pObject.isNoteModified()) {
@@ -637,33 +596,55 @@ public class WorkorderlogManager
                     }
                     _sql.append("room").append("=?");
                 }
-                _sql.append(" WHERE ");
-                _sql.append("workorderlog.workorderlogid=?");
+
+                if (pObject.isRoomtypeModified()) {
+                    if (useComma) {
+                        _sql.append(",");
+                    } else {
+                        useComma=true;
+                    }
+                    _sql.append("roomtype").append("=?");
+                }
+
+                if (pObject.isReasonModified()) {
+                    if (useComma) {
+                        _sql.append(",");
+                    } else {
+                        useComma=true;
+                    }
+                    _sql.append("reason").append("=?");
+                }
+
+                if (pObject.isCreatedbyModified()) {
+                    if (useComma) {
+                        _sql.append(",");
+                    } else {
+                        useComma=true;
+                    }
+                    _sql.append("createdby").append("=?");
+                }
+                _sql.append("");
                 ps = c.prepareStatement(_sql.toString(),ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
                 int _dirtyCount = 0;
 
-                if (pObject.isWorkorderlogidModified()) {
-                      Manager.setInteger(ps, ++_dirtyCount, pObject.getWorkorderlogid());
+                if (pObject.isBlockroomidModified()) {
+                      Manager.setLong(ps, ++_dirtyCount, pObject.getBlockroomid());
                 }
 
-                if (pObject.isWorkorderidModified()) {
-                      Manager.setInteger(ps, ++_dirtyCount, pObject.getWorkorderid());
+                if (pObject.isRoomidModified()) {
+                      Manager.setInteger(ps, ++_dirtyCount, pObject.getRoomid());
                 }
 
-                if (pObject.isCategoryModified()) {
-                      ps.setString(++_dirtyCount, pObject.getCategory());
+                if (pObject.isBlockstartModified()) {
+                      ps.setTimestamp(++_dirtyCount, pObject.getBlockstart());
                 }
 
-                if (pObject.isPriorityModified()) {
-                      ps.setString(++_dirtyCount, pObject.getPriority());
+                if (pObject.isBlockendModified()) {
+                      ps.setTimestamp(++_dirtyCount, pObject.getBlockend());
                 }
 
-                if (pObject.isAssignedtoModified()) {
-                      ps.setString(++_dirtyCount, pObject.getAssignedto());
-                }
-
-                if (pObject.isStatusModified()) {
-                      ps.setString(++_dirtyCount, pObject.getStatus());
+                if (pObject.isReasonidModified()) {
+                      Manager.setInteger(ps, ++_dirtyCount, pObject.getReasonid());
                 }
 
                 if (pObject.isNoteModified()) {
@@ -675,18 +656,29 @@ public class WorkorderlogManager
                 }
 
                 if (pObject.isRegbyidModified()) {
-                      ps.setString(++_dirtyCount, pObject.getRegbyid());
+                      Manager.setInteger(ps, ++_dirtyCount, pObject.getRegbyid());
                 }
 
                 if (pObject.isRoomModified()) {
                       ps.setString(++_dirtyCount, pObject.getRoom());
+                }
+
+                if (pObject.isRoomtypeModified()) {
+                      ps.setString(++_dirtyCount, pObject.getRoomtype());
+                }
+
+                if (pObject.isReasonModified()) {
+                      ps.setString(++_dirtyCount, pObject.getReason());
+                }
+
+                if (pObject.isCreatedbyModified()) {
+                      ps.setString(++_dirtyCount, pObject.getCreatedby());
                 }
     
                 if (_dirtyCount == 0) {
                      return pObject;
                 }
     
-                Manager.setInteger(ps, ++_dirtyCount, pObject.getWorkorderlogid());
                 ps.executeUpdate();
                 pObject.resetIsModified();
                 afterUpdate(pObject); // listener callback
@@ -704,13 +696,13 @@ public class WorkorderlogManager
 
 
     /**
-     * Saves an array of WorkorderlogBean pObjects into the database.
+     * Saves an array of VBlockroomBean pObjects into the database.
      *
-     * @param pObjects the WorkorderlogBean pObject table to be saved
-     * @return the saved WorkorderlogBean array.
+     * @param pObjects the VBlockroomBean pObject table to be saved
+     * @return the saved VBlockroomBean array.
      */
     //65
-    public WorkorderlogBean[] save(WorkorderlogBean[] pObjects) throws SQLException 
+    public VBlockroomBean[] save(VBlockroomBean[] pObjects) throws SQLException 
     {
         for (int iIndex = 0; iIndex < pObjects.length; iIndex ++){
             save(pObjects[iIndex]);
@@ -724,15 +716,15 @@ public class WorkorderlogManager
     // USING TEMPLATE 
     ///////////////////////////////////////////////////////////////////////
     /**
-     * Loads a unique WorkorderlogBean pObject from a template one giving a c
+     * Loads a unique VBlockroomBean pObject from a template one giving a c
      *
-     * @param pObject the WorkorderlogBean pObject to look for
+     * @param pObject the VBlockroomBean pObject to look for
      * @return the pObject matching the template
      */
     //85
-    public WorkorderlogBean loadUniqueUsingTemplate(WorkorderlogBean pObject) throws SQLException
+    public VBlockroomBean loadUniqueUsingTemplate(VBlockroomBean pObject) throws SQLException
     {
-         WorkorderlogBean[] pReturn = loadUsingTemplate(pObject);
+         VBlockroomBean[] pReturn = loadUsingTemplate(pObject);
          if (pReturn.length == 0)
              return null;
          if (pReturn.length > 1)
@@ -741,51 +733,46 @@ public class WorkorderlogManager
      }
 
     /**
-     * Loads an array of WorkorderlogBean from a template one.
+     * Loads an array of VBlockroomBean from a template one.
      *
-     * @param pObject the WorkorderlogBean template to look for
-     * @return all the WorkorderlogBean matching the template
+     * @param pObject the VBlockroomBean template to look for
+     * @return all the VBlockroomBean matching the template
      */
     //88
-    public WorkorderlogBean[] loadUsingTemplate(WorkorderlogBean pObject) throws SQLException
+    public VBlockroomBean[] loadUsingTemplate(VBlockroomBean pObject) throws SQLException
     {
         Connection c = null;
         PreparedStatement ps = null;
         StringBuffer where = new StringBuffer("");
-        StringBuffer _sql = new StringBuffer("SELECT " + ALL_FIELDS + " from workorderlog WHERE ");
+        StringBuffer _sql = new StringBuffer("SELECT " + ALL_FIELDS + " from v_blockroom WHERE ");
         StringBuffer _sqlWhere = new StringBuffer("");
         try
         {
             int _dirtyCount = 0;
     
-             if (pObject.isWorkorderlogidModified()) {
+             if (pObject.isBlockroomidModified()) {
                  _dirtyCount ++; 
-                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("workorderlogid= ?");
+                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("blockroomid= ?");
              }
     
-             if (pObject.isWorkorderidModified()) {
+             if (pObject.isRoomidModified()) {
                  _dirtyCount ++; 
-                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("workorderid= ?");
+                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("roomid= ?");
              }
     
-             if (pObject.isCategoryModified()) {
+             if (pObject.isBlockstartModified()) {
                  _dirtyCount ++; 
-                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("category= ?");
+                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("blockstart= ?");
              }
     
-             if (pObject.isPriorityModified()) {
+             if (pObject.isBlockendModified()) {
                  _dirtyCount ++; 
-                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("priority= ?");
+                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("blockend= ?");
              }
     
-             if (pObject.isAssignedtoModified()) {
+             if (pObject.isReasonidModified()) {
                  _dirtyCount ++; 
-                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("assignedto= ?");
-             }
-    
-             if (pObject.isStatusModified()) {
-                 _dirtyCount ++; 
-                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("status= ?");
+                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("reasonid= ?");
              }
     
              if (pObject.isNoteModified()) {
@@ -808,6 +795,21 @@ public class WorkorderlogManager
                  _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("room= ?");
              }
     
+             if (pObject.isRoomtypeModified()) {
+                 _dirtyCount ++; 
+                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("roomtype= ?");
+             }
+    
+             if (pObject.isReasonModified()) {
+                 _dirtyCount ++; 
+                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("reason= ?");
+             }
+    
+             if (pObject.isCreatedbyModified()) {
+                 _dirtyCount ++; 
+                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("createdby= ?");
+             }
+    
              if (_dirtyCount == 0) {
                  throw new SQLException ("The pObject to look for is invalid : not initialized !");
              }
@@ -816,28 +818,24 @@ public class WorkorderlogManager
              ps = c.prepareStatement(_sql.toString(),ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
              _dirtyCount = 0;
     
-             if (pObject.isWorkorderlogidModified()) {
-                 Manager.setInteger(ps, ++_dirtyCount, pObject.getWorkorderlogid());
+             if (pObject.isBlockroomidModified()) {
+                 Manager.setLong(ps, ++_dirtyCount, pObject.getBlockroomid());
              }
     
-             if (pObject.isWorkorderidModified()) {
-                 Manager.setInteger(ps, ++_dirtyCount, pObject.getWorkorderid());
+             if (pObject.isRoomidModified()) {
+                 Manager.setInteger(ps, ++_dirtyCount, pObject.getRoomid());
              }
     
-             if (pObject.isCategoryModified()) {
-                 ps.setString(++_dirtyCount, pObject.getCategory());
+             if (pObject.isBlockstartModified()) {
+                 ps.setTimestamp(++_dirtyCount, pObject.getBlockstart());
              }
     
-             if (pObject.isPriorityModified()) {
-                 ps.setString(++_dirtyCount, pObject.getPriority());
+             if (pObject.isBlockendModified()) {
+                 ps.setTimestamp(++_dirtyCount, pObject.getBlockend());
              }
     
-             if (pObject.isAssignedtoModified()) {
-                 ps.setString(++_dirtyCount, pObject.getAssignedto());
-             }
-    
-             if (pObject.isStatusModified()) {
-                 ps.setString(++_dirtyCount, pObject.getStatus());
+             if (pObject.isReasonidModified()) {
+                 Manager.setInteger(ps, ++_dirtyCount, pObject.getReasonid());
              }
     
              if (pObject.isNoteModified()) {
@@ -849,11 +847,23 @@ public class WorkorderlogManager
              }
     
              if (pObject.isRegbyidModified()) {
-                 ps.setString(++_dirtyCount, pObject.getRegbyid());
+                 Manager.setInteger(ps, ++_dirtyCount, pObject.getRegbyid());
              }
     
              if (pObject.isRoomModified()) {
                  ps.setString(++_dirtyCount, pObject.getRoom());
+             }
+    
+             if (pObject.isRoomtypeModified()) {
+                 ps.setString(++_dirtyCount, pObject.getRoomtype());
+             }
+    
+             if (pObject.isReasonModified()) {
+                 ps.setString(++_dirtyCount, pObject.getReason());
+             }
+    
+             if (pObject.isCreatedbyModified()) {
+                 ps.setString(++_dirtyCount, pObject.getCreatedby());
              }
     
              ps.executeQuery();
@@ -866,64 +876,54 @@ public class WorkorderlogManager
         }
     }
     /**
-     * Deletes rows using a WorkorderlogBean template.
+     * Deletes rows using a VBlockroomBean template.
      *
-     * @param pObject the WorkorderlogBean object(s) to be deleted
+     * @param pObject the VBlockroomBean object(s) to be deleted
      * @return the number of deleted objects
      */
     //63
-    public int deleteUsingTemplate(WorkorderlogBean pObject) throws SQLException
+    public int deleteUsingTemplate(VBlockroomBean pObject) throws SQLException
     {
-        if (pObject.isWorkorderlogidInitialized())
-            return deleteByPrimaryKey(pObject.getWorkorderlogid());
-    
         Connection c = null;
         PreparedStatement ps = null;
         StringBuffer sql = null;
     
         try 
         {
-            sql = new StringBuffer("DELETE FROM workorderlog WHERE ");
+            sql = new StringBuffer("DELETE FROM v_blockroom WHERE ");
             int _dirtyAnd = 0;
-            if (pObject.isWorkorderlogidInitialized()) {
+            if (pObject.isBlockroomidInitialized()) {
                 if (_dirtyAnd > 0)
                     sql.append(" AND ");
-                sql.append("workorderlogid").append("=?");
+                sql.append("blockroomid").append("=?");
                 _dirtyAnd ++;
             }
     
-            if (pObject.isWorkorderidInitialized()) {
+            if (pObject.isRoomidInitialized()) {
                 if (_dirtyAnd > 0)
                     sql.append(" AND ");
-                sql.append("workorderid").append("=?");
+                sql.append("roomid").append("=?");
                 _dirtyAnd ++;
             }
     
-            if (pObject.isCategoryInitialized()) {
+            if (pObject.isBlockstartInitialized()) {
                 if (_dirtyAnd > 0)
                     sql.append(" AND ");
-                sql.append("category").append("=?");
+                sql.append("blockstart").append("=?");
                 _dirtyAnd ++;
             }
     
-            if (pObject.isPriorityInitialized()) {
+            if (pObject.isBlockendInitialized()) {
                 if (_dirtyAnd > 0)
                     sql.append(" AND ");
-                sql.append("priority").append("=?");
+                sql.append("blockend").append("=?");
                 _dirtyAnd ++;
             }
     
-            if (pObject.isAssignedtoInitialized()) {
+            if (pObject.isReasonidInitialized()) {
                 if (_dirtyAnd > 0)
                     sql.append(" AND ");
-                sql.append("assignedto").append("=?");
-                _dirtyAnd ++;
-            }
-    
-            if (pObject.isStatusInitialized()) {
-                if (_dirtyAnd > 0)
-                    sql.append(" AND ");
-                sql.append("status").append("=?");
+                sql.append("reasonid").append("=?");
                 _dirtyAnd ++;
             }
     
@@ -955,32 +955,49 @@ public class WorkorderlogManager
                 _dirtyAnd ++;
             }
     
+            if (pObject.isRoomtypeInitialized()) {
+                if (_dirtyAnd > 0)
+                    sql.append(" AND ");
+                sql.append("roomtype").append("=?");
+                _dirtyAnd ++;
+            }
+    
+            if (pObject.isReasonInitialized()) {
+                if (_dirtyAnd > 0)
+                    sql.append(" AND ");
+                sql.append("reason").append("=?");
+                _dirtyAnd ++;
+            }
+    
+            if (pObject.isCreatedbyInitialized()) {
+                if (_dirtyAnd > 0)
+                    sql.append(" AND ");
+                sql.append("createdby").append("=?");
+                _dirtyAnd ++;
+            }
+    
             c = getConnection();
             ps = c.prepareStatement(sql.toString(),ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             int _dirtyCount = 0;
     
-            if (pObject.isWorkorderlogidInitialized()) {
-                Manager.setInteger(ps, ++_dirtyCount, pObject.getWorkorderlogid());
+            if (pObject.isBlockroomidInitialized()) {
+                Manager.setLong(ps, ++_dirtyCount, pObject.getBlockroomid());
             }
     
-            if (pObject.isWorkorderidInitialized()) {
-                Manager.setInteger(ps, ++_dirtyCount, pObject.getWorkorderid());
+            if (pObject.isRoomidInitialized()) {
+                Manager.setInteger(ps, ++_dirtyCount, pObject.getRoomid());
             }
     
-            if (pObject.isCategoryInitialized()) {
-                ps.setString(++_dirtyCount, pObject.getCategory());
+            if (pObject.isBlockstartInitialized()) {
+                ps.setTimestamp(++_dirtyCount, pObject.getBlockstart());
             }
     
-            if (pObject.isPriorityInitialized()) {
-                ps.setString(++_dirtyCount, pObject.getPriority());
+            if (pObject.isBlockendInitialized()) {
+                ps.setTimestamp(++_dirtyCount, pObject.getBlockend());
             }
     
-            if (pObject.isAssignedtoInitialized()) {
-                ps.setString(++_dirtyCount, pObject.getAssignedto());
-            }
-    
-            if (pObject.isStatusInitialized()) {
-                ps.setString(++_dirtyCount, pObject.getStatus());
+            if (pObject.isReasonidInitialized()) {
+                Manager.setInteger(ps, ++_dirtyCount, pObject.getReasonid());
             }
     
             if (pObject.isNoteInitialized()) {
@@ -992,11 +1009,23 @@ public class WorkorderlogManager
             }
     
             if (pObject.isRegbyidInitialized()) {
-                ps.setString(++_dirtyCount, pObject.getRegbyid());
+                Manager.setInteger(ps, ++_dirtyCount, pObject.getRegbyid());
             }
     
             if (pObject.isRoomInitialized()) {
                 ps.setString(++_dirtyCount, pObject.getRoom());
+            }
+    
+            if (pObject.isRoomtypeInitialized()) {
+                ps.setString(++_dirtyCount, pObject.getRoomtype());
+            }
+    
+            if (pObject.isReasonInitialized()) {
+                ps.setString(++_dirtyCount, pObject.getReason());
+            }
+    
+            if (pObject.isCreatedbyInitialized()) {
+                ps.setString(++_dirtyCount, pObject.getCreatedby());
             }
     
             int _rows = ps.executeUpdate();
@@ -1016,7 +1045,7 @@ public class WorkorderlogManager
     ///////////////////////////////////////////////////////////////////////
 
     /**
-     * Retrieves the number of rows of the table workorderlog.
+     * Retrieves the number of rows of the table v_blockroom.
      *
      * @return the number of rows returned
      */
@@ -1029,7 +1058,7 @@ public class WorkorderlogManager
 
 
     /**
-     * Retrieves the number of rows of the table workorderlog with a 'where' clause.
+     * Retrieves the number of rows of the table v_blockroom with a 'where' clause.
      * It is up to you to pass the 'WHERE' in your where clausis.
      *
      * @param where the restriction clause
@@ -1037,7 +1066,7 @@ public class WorkorderlogManager
      */
     public int countWhere(String where) throws SQLException
     {
-        String sql = "select count(*) as MCOUNT from workorderlog " + where;
+        String sql = "select count(*) as MCOUNT from v_blockroom " + where;
         Connection c = null;
         Statement pStatement = null;
         ResultSet rs =  null;
@@ -1063,7 +1092,7 @@ public class WorkorderlogManager
     }
 
     /**
-     * Retrieves the number of rows of the table workorderlog with a prepared statement.
+     * Retrieves the number of rows of the table v_blockroom with a prepared statement.
      *
      * @param ps the PreparedStatement to be used
      * @return the number of rows returned
@@ -1089,13 +1118,13 @@ public class WorkorderlogManager
     }
 
     /**
-     * Looks for the number of elements of a specific WorkorderlogBean pObject given a c
+     * Looks for the number of elements of a specific VBlockroomBean pObject given a c
      *
-     * @param pObject the WorkorderlogBean pObject to look for
+     * @param pObject the VBlockroomBean pObject to look for
      * @return the number of rows returned
      */
     //83
-    public int countUsingTemplate(WorkorderlogBean pObject) throws SQLException
+    public int countUsingTemplate(VBlockroomBean pObject) throws SQLException
     {
         StringBuffer where = new StringBuffer("");
         Connection c = null;
@@ -1105,38 +1134,33 @@ public class WorkorderlogManager
     
         try
         {
-                _sql = new StringBuffer("SELECT count(*) as MCOUNT  from workorderlog WHERE ");
+                _sql = new StringBuffer("SELECT count(*) as MCOUNT  from v_blockroom WHERE ");
                 _sqlWhere = new StringBuffer("");
                 int _dirtyCount = 0;
     
-                if (pObject.isWorkorderlogidModified()) {
+                if (pObject.isBlockroomidModified()) {
                     _dirtyCount++; 
-                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("workorderlogid= ?");
+                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("blockroomid= ?");
                 }
     
-                if (pObject.isWorkorderidModified()) {
+                if (pObject.isRoomidModified()) {
                     _dirtyCount++; 
-                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("workorderid= ?");
+                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("roomid= ?");
                 }
     
-                if (pObject.isCategoryModified()) {
+                if (pObject.isBlockstartModified()) {
                     _dirtyCount++; 
-                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("category= ?");
+                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("blockstart= ?");
                 }
     
-                if (pObject.isPriorityModified()) {
+                if (pObject.isBlockendModified()) {
                     _dirtyCount++; 
-                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("priority= ?");
+                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("blockend= ?");
                 }
     
-                if (pObject.isAssignedtoModified()) {
+                if (pObject.isReasonidModified()) {
                     _dirtyCount++; 
-                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("assignedto= ?");
-                }
-    
-                if (pObject.isStatusModified()) {
-                    _dirtyCount++; 
-                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("status= ?");
+                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("reasonid= ?");
                 }
     
                 if (pObject.isNoteModified()) {
@@ -1159,6 +1183,21 @@ public class WorkorderlogManager
                     _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("room= ?");
                 }
     
+                if (pObject.isRoomtypeModified()) {
+                    _dirtyCount++; 
+                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("roomtype= ?");
+                }
+    
+                if (pObject.isReasonModified()) {
+                    _dirtyCount++; 
+                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("reason= ?");
+                }
+    
+                if (pObject.isCreatedbyModified()) {
+                    _dirtyCount++; 
+                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("createdby= ?");
+                }
+    
                 if (_dirtyCount == 0)
                    throw new SQLException ("The pObject to look is unvalid : not initialized !");
     
@@ -1168,28 +1207,24 @@ public class WorkorderlogManager
     
                 _dirtyCount = 0;
     
-                if (pObject.isWorkorderlogidModified()) {
-                    Manager.setInteger(ps, ++_dirtyCount, pObject.getWorkorderlogid());
+                if (pObject.isBlockroomidModified()) {
+                    Manager.setLong(ps, ++_dirtyCount, pObject.getBlockroomid());
                 }
     
-                if (pObject.isWorkorderidModified()) {
-                    Manager.setInteger(ps, ++_dirtyCount, pObject.getWorkorderid());
+                if (pObject.isRoomidModified()) {
+                    Manager.setInteger(ps, ++_dirtyCount, pObject.getRoomid());
                 }
     
-                if (pObject.isCategoryModified()) {
-                    ps.setString(++_dirtyCount, pObject.getCategory());
+                if (pObject.isBlockstartModified()) {
+                    ps.setTimestamp(++_dirtyCount, pObject.getBlockstart());
                 }
     
-                if (pObject.isPriorityModified()) {
-                    ps.setString(++_dirtyCount, pObject.getPriority());
+                if (pObject.isBlockendModified()) {
+                    ps.setTimestamp(++_dirtyCount, pObject.getBlockend());
                 }
     
-                if (pObject.isAssignedtoModified()) {
-                    ps.setString(++_dirtyCount, pObject.getAssignedto());
-                }
-    
-                if (pObject.isStatusModified()) {
-                    ps.setString(++_dirtyCount, pObject.getStatus());
+                if (pObject.isReasonidModified()) {
+                    Manager.setInteger(ps, ++_dirtyCount, pObject.getReasonid());
                 }
     
                 if (pObject.isNoteModified()) {
@@ -1201,11 +1236,23 @@ public class WorkorderlogManager
                 }
     
                 if (pObject.isRegbyidModified()) {
-                    ps.setString(++_dirtyCount, pObject.getRegbyid());
+                    Manager.setInteger(ps, ++_dirtyCount, pObject.getRegbyid());
                 }
     
                 if (pObject.isRoomModified()) {
                     ps.setString(++_dirtyCount, pObject.getRoom());
+                }
+    
+                if (pObject.isRoomtypeModified()) {
+                    ps.setString(++_dirtyCount, pObject.getRoomtype());
+                }
+    
+                if (pObject.isReasonModified()) {
+                    ps.setString(++_dirtyCount, pObject.getReason());
+                }
+    
+                if (pObject.isCreatedbyModified()) {
+                    ps.setString(++_dirtyCount, pObject.getCreatedby());
                 }
     
                 return countByPreparedStatement(ps);
@@ -1223,25 +1270,27 @@ public class WorkorderlogManager
     // DECODE RESULT SET 
     ///////////////////////////////////////////////////////////////////////
     /**
-     * Transforms a ResultSet iterating on the workorderlog on a WorkorderlogBean pObject.
+     * Transforms a ResultSet iterating on the v_blockroom on a VBlockroomBean pObject.
      *
      * @param rs the ResultSet to be transformed
-     * @return pObject resulting WorkorderlogBean pObject
+     * @return pObject resulting VBlockroomBean pObject
      */
     //72
-    public WorkorderlogBean decodeRow(ResultSet rs) throws SQLException
+    public VBlockroomBean decodeRow(ResultSet rs) throws SQLException
     {
-        WorkorderlogBean pObject = createWorkorderlogBean();
-        pObject.setWorkorderlogid(Manager.getInteger(rs, 1));
-        pObject.setWorkorderid(Manager.getInteger(rs, 2));
-        pObject.setCategory(rs.getString(3));
-        pObject.setPriority(rs.getString(4));
-        pObject.setAssignedto(rs.getString(5));
-        pObject.setStatus(rs.getString(6));
-        pObject.setNote(rs.getString(7));
-        pObject.setRegdate(rs.getTimestamp(8));
-        pObject.setRegbyid(rs.getString(9));
-        pObject.setRoom(rs.getString(10));
+        VBlockroomBean pObject = createVBlockroomBean();
+        pObject.setBlockroomid(Manager.getLong(rs, 1));
+        pObject.setRoomid(Manager.getInteger(rs, 2));
+        pObject.setBlockstart(rs.getTimestamp(3));
+        pObject.setBlockend(rs.getTimestamp(4));
+        pObject.setReasonid(Manager.getInteger(rs, 5));
+        pObject.setNote(rs.getString(6));
+        pObject.setRegdate(rs.getTimestamp(7));
+        pObject.setRegbyid(Manager.getInteger(rs, 8));
+        pObject.setRoom(rs.getString(9));
+        pObject.setRoomtype(rs.getString(10));
+        pObject.setReason(rs.getString(11));
+        pObject.setCreatedby(rs.getString(12));
 
         pObject.isNew(false);
         pObject.resetIsModified();
@@ -1250,43 +1299,39 @@ public class WorkorderlogManager
     }
 
     /**
-     * Transforms a ResultSet iterating on the workorderlog table on a WorkorderlogBean pObject according to a list of fields.
+     * Transforms a ResultSet iterating on the v_blockroom table on a VBlockroomBean pObject according to a list of fields.
      *
      * @param rs the ResultSet to be transformed
      * @param fieldList table of the field's associated constants
-     * @return pObject resulting WorkorderlogBean pObject
+     * @return pObject resulting VBlockroomBean pObject
      */
     //73
-    public WorkorderlogBean decodeRow(ResultSet rs, int[] fieldList) throws SQLException
+    public VBlockroomBean decodeRow(ResultSet rs, int[] fieldList) throws SQLException
     {
-        WorkorderlogBean pObject = createWorkorderlogBean();
+        VBlockroomBean pObject = createVBlockroomBean();
         int pos = 0;
         for(int i = 0; i < fieldList.length; i++)
         {
             switch(fieldList[i]) {
-                case ID_WORKORDERLOGID:
+                case ID_BLOCKROOMID:
                     ++pos;
-                    pObject.setWorkorderlogid(Manager.getInteger(rs, pos));
+                    pObject.setBlockroomid(Manager.getLong(rs, pos));
                     break;
-                case ID_WORKORDERID:
+                case ID_ROOMID:
                     ++pos;
-                    pObject.setWorkorderid(Manager.getInteger(rs, pos));
+                    pObject.setRoomid(Manager.getInteger(rs, pos));
                     break;
-                case ID_CATEGORY:
+                case ID_BLOCKSTART:
                     ++pos;
-                    pObject.setCategory(rs.getString(pos));
+                    pObject.setBlockstart(rs.getTimestamp(pos));
                     break;
-                case ID_PRIORITY:
+                case ID_BLOCKEND:
                     ++pos;
-                    pObject.setPriority(rs.getString(pos));
+                    pObject.setBlockend(rs.getTimestamp(pos));
                     break;
-                case ID_ASSIGNEDTO:
+                case ID_REASONID:
                     ++pos;
-                    pObject.setAssignedto(rs.getString(pos));
-                    break;
-                case ID_STATUS:
-                    ++pos;
-                    pObject.setStatus(rs.getString(pos));
+                    pObject.setReasonid(Manager.getInteger(rs, pos));
                     break;
                 case ID_NOTE:
                     ++pos;
@@ -1298,11 +1343,23 @@ public class WorkorderlogManager
                     break;
                 case ID_REGBYID:
                     ++pos;
-                    pObject.setRegbyid(rs.getString(pos));
+                    pObject.setRegbyid(Manager.getInteger(rs, pos));
                     break;
                 case ID_ROOM:
                     ++pos;
                     pObject.setRoom(rs.getString(pos));
+                    break;
+                case ID_ROOMTYPE:
+                    ++pos;
+                    pObject.setRoomtype(rs.getString(pos));
+                    break;
+                case ID_REASON:
+                    ++pos;
+                    pObject.setReason(rs.getString(pos));
+                    break;
+                case ID_CREATEDBY:
+                    ++pos;
+                    pObject.setCreatedby(rs.getString(pos));
                     break;
             }
         }
@@ -1320,10 +1377,10 @@ public class WorkorderlogManager
      * Loads all the elements using a prepared statement.
      *
      * @param ps the PreparedStatement to be used
-     * @return an array of WorkorderlogBean 
+     * @return an array of VBlockroomBean 
      */
     //41
-    public WorkorderlogBean[] loadByPreparedStatement(PreparedStatement ps) throws SQLException
+    public VBlockroomBean[] loadByPreparedStatement(PreparedStatement ps) throws SQLException
     {
         return loadByPreparedStatement(ps, null);
     }
@@ -1333,9 +1390,9 @@ public class WorkorderlogManager
      *
      * @param ps the PreparedStatement to be used
      * @param fieldList table of the field's associated constants
-     * @return an array of WorkorderlogBean 
+     * @return an array of VBlockroomBean 
      */
-    public WorkorderlogBean[] loadByPreparedStatement(PreparedStatement ps, int[] fieldList) throws SQLException
+    public VBlockroomBean[] loadByPreparedStatement(PreparedStatement ps, int[] fieldList) throws SQLException
     {
         ResultSet rs =  null;
         java.util.ArrayList v =  null;
@@ -1350,7 +1407,7 @@ public class WorkorderlogManager
                 else 
                     v.add(decodeRow(rs, fieldList));
             }
-            return (WorkorderlogBean[])v.toArray(new WorkorderlogBean[0]);
+            return (VBlockroomBean[])v.toArray(new VBlockroomBean[0]);
         }
         finally
         {
@@ -1362,56 +1419,56 @@ public class WorkorderlogManager
     ///////////////////////////////////////////////////////////////////////
     // LISTENER 
     ///////////////////////////////////////////////////////////////////////
-    private WorkorderlogListener listener = null;
+    private VBlockroomListener listener = null;
 
     /**
-     * Registers a unique WorkorderlogListener listener.
+     * Registers a unique VBlockroomListener listener.
      */
     //66.5
-    public void registerListener(WorkorderlogListener listener) {
+    public void registerListener(VBlockroomListener listener) {
         this.listener = listener;
     }
 
     /**
-     * Before the save of the WorkorderlogBean pObject.
+     * Before the save of the VBlockroomBean pObject.
      *
-     * @param pObject the WorkorderlogBean pObject to be saved
+     * @param pObject the VBlockroomBean pObject to be saved
      */
     //67
-    void beforeInsert(WorkorderlogBean pObject) throws SQLException {
+    void beforeInsert(VBlockroomBean pObject) throws SQLException {
         if (listener != null)
             listener.beforeInsert(pObject);
     }
 
     /**
-     * After the save of the WorkorderlogBean pObject.
+     * After the save of the VBlockroomBean pObject.
      *
-     * @param pObject the WorkorderlogBean pObject to be saved
+     * @param pObject the VBlockroomBean pObject to be saved
      */
     //68
-    void afterInsert(WorkorderlogBean pObject) throws SQLException {
+    void afterInsert(VBlockroomBean pObject) throws SQLException {
         if (listener != null)
             listener.afterInsert(pObject);
     }
 
     /**
-     * Before the update of the WorkorderlogBean pObject.
+     * Before the update of the VBlockroomBean pObject.
      *
-     * @param pObject the WorkorderlogBean pObject to be updated
+     * @param pObject the VBlockroomBean pObject to be updated
      */
     //69
-    void beforeUpdate(WorkorderlogBean pObject) throws SQLException {
+    void beforeUpdate(VBlockroomBean pObject) throws SQLException {
         if (listener != null)
             listener.beforeUpdate(pObject);
     }
 
     /**
-     * After the update of the WorkorderlogBean pObject.
+     * After the update of the VBlockroomBean pObject.
      *
-     * @param pObject the WorkorderlogBean pObject to be updated
+     * @param pObject the VBlockroomBean pObject to be updated
      */
     //70
-    void afterUpdate(WorkorderlogBean pObject) throws SQLException {
+    void afterUpdate(VBlockroomBean pObject) throws SQLException {
         if (listener != null)
             listener.afterUpdate(pObject);
     }

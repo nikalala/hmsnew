@@ -105,7 +105,6 @@
         getPrevRecords();
     });
 
-
     $("#btnBlockMultiple").click(function () {
 
         newsWindow1('blockunblockmult', 'ოთახის ბლოკირება', "roomid=" + 0);
@@ -151,9 +150,9 @@
 
     function doFilter(bool) {
         if (bool) {
-            $("#filter-form :input").each(function () {
+            /* $("#filter-form :input").each(function () {
                 $(this).val('');
-            });
+            });*/
             //clean dropdowns
             $('#filter-form .dropdown option').removeAttr('selected');
             $("#filter-form .dropdown").val(-1);
@@ -345,7 +344,7 @@
                         <label>ოთახი</label>
                     </div>
                     <div class="col-md-3">
-                        <select class="dropdown col-md-2" id="roomBean">
+                        <select class="dropdown col-md-2" name="roomBean" id="roomBean">
                             <option value="0">-ოთახის #-</option>
                             <% for (int i = 0; i < roomBeans.length; i++) { %>
                             <option value="<%=roomBeans[i].getRoomid()%>"
@@ -358,7 +357,7 @@
                         <label>ტიპი</label>
                     </div>
                     <div class="col-md-3">
-                        <select class="dropdown col-md-2" id="roomType">
+                        <select class="dropdown col-md-2" name="roomType" id="roomType">
                             <option value="0">-ოთახის ტიპი-</option>
                             <% for (int i = 0; i < roomTypes.length; i++) { %>
                             <option value="<%=roomTypes[i].getRoomtypeid()%>"><%=roomTypes[i].getName()%>

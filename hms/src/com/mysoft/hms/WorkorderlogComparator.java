@@ -56,6 +56,7 @@ public class WorkorderlogComparator implements Comparator
      *   <li>WorkorderlogManager.ID_NOTE
      *   <li>WorkorderlogManager.ID_REGDATE
      *   <li>WorkorderlogManager.ID_REGBYID
+     *   <li>WorkorderlogManager.ID_ROOM
      * </ul>
      */
     public WorkorderlogComparator(int iType)
@@ -83,6 +84,7 @@ public class WorkorderlogComparator implements Comparator
      *   <li>WorkorderlogManager.ID_NOTE
      *   <li>WorkorderlogManager.ID_REGDATE
      *   <li>WorkorderlogManager.ID_REGBYID
+     *   <li>WorkorderlogManager.ID_ROOM
      * </ul>
      *
      * @param bReverse set this value to true, if you want to reverse the sorting results
@@ -200,6 +202,17 @@ public class WorkorderlogComparator implements Comparator
                     iReturn = 1;
                 } else { 
                     iReturn = b1.getRegbyid().compareTo(b2.getRegbyid());
+                }
+                break;
+            case WorkorderlogManager.ID_ROOM:
+                if (b1.getRoom() == null && b2.getRoom() != null) {
+                    iReturn = -1;
+                } else if (b1.getRoom() == null && b2.getRoom() == null) {
+                    iReturn = 0;
+                } else if (b1.getRoom() != null && b2.getRoom() == null) {
+                    iReturn = 1;
+                } else { 
+                    iReturn = b1.getRoom().compareTo(b2.getRoom());
                 }
                 break;
             default: 

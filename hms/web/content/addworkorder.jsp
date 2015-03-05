@@ -31,6 +31,8 @@
         <% if(CodeHelpers.isNullOrEmpty(wid)){ %>
         $("#work-workOrderStatus").val(3);
         $("#work-workOrderStatus").change();
+        $("#dt-block-st, #dt-block-end").val('');
+        $("#dt-dedline").val('');
         <% } %>
         <% if(!CodeHelpers.isNullOrEmpty(wid) && workorderBean.getBlockend() == null){ %>
         $("#dt-block-st, #dt-block-end").val('');
@@ -38,6 +40,9 @@
         <% if(!CodeHelpers.isNullOrEmpty(wid) && workorderBean.getDeadline() == null){ %>
         $("#dt-dedline").val('');
         <% } %>
+        addReason();
+        $("#reasonblock").hide();
+        $("#reasondrop").next().css("margin-left","4px").css("float","left");
     });
 
     function cancelSaveWorkorder() {
@@ -184,7 +189,7 @@
                     BootstrapDialog.alert("არჩეული თარიღებისთვის შეუძლებელია ნომრის დაბლოკვა");
                     loader.hide();
                 } else {
-                    var reason = 1;
+                    var reason = $("#reasondrop").val();
                     $.post("content/saveblockunblock.jsp?arrdt=" + $("#dt-block-st").val() + "&dep=" + $("#dt-block-end").val() + "&roomid=" + roomid + "&reason=" + reason, {}, function (data) {
                         $.post("content/execute.jsp?query=" + encodeURIComponent(sql), {}, function () {
                             var category = $("#work-workOrderCategory  option:selected").text().trim();
@@ -246,6 +251,50 @@
             });
         }
 
+    }
+
+    $(document).on("change", "#dt-block-st-div, #dt-block-end-div", function () {
+
+        $("#dt-block-end-div").datepicker(<%=pickerFormatForDatePickers%>);
+        $("#dt-block-end-div").datepicker("setStartDate", $("#dt-block-st").val());
+
+        var dt1 = $("#dt-block-st").val();
+        var dt2 = $("#dt-block-end").val();
+
+        if(isNullOrEmpty(dt1) || isNullOrEmpty(dt2)){
+            $('#reasonblock').hide();
+        }else{
+            $('#reasonblock').show();
+        }
+    });
+
+    function addReason() {
+        loader.show();
+        var reason = $("#reasontxt").val();
+        if (!isNullOrEmpty(reason)) {
+            reason = "?reasonid=" + reason;
+        }
+        $.post("content/getroomreason.jsp" + reason, {}, function (data) {
+            $("#reasondrop").html(data);
+            $('#reasondrop').selectpicker("refresh");
+            $("#reasontxt").val("");
+            $('#reasontxt_div').hide();
+            $("#pbutton").find("i").addClass("fa-plus");
+            $("#pbutton").find("i").removeClass("fa-minus");
+            loader.hide();
+        });
+    }
+
+    function toggleReason(_this) {
+        $('#reasontxt_div').toggle();
+        if ($('#reasontxt_div').is(":visible")) {
+            $(_this).find("i").removeClass("fa-plus");
+            $(_this).find("i").addClass("fa-minus");
+        }
+        else {
+            $(_this).find("i").addClass("fa-plus");
+            $(_this).find("i").removeClass("fa-minus");
+        }
     }
 </script>
 <style>
@@ -320,7 +369,7 @@
     <table style="width: 100%" class="work-table">
         <tr>
             <td style="">
-                <table style="width: 100%; height: 472px;" class="work-table">
+                <table style="width: 100%; height: 525px;" class="work-table">
                     <tr>
                         <td class="header-td">
                             <span>შესასრულებელი სამუშაოს დამატება</span>
@@ -343,9 +392,7 @@
                                         <span>განმარტება</span>
                                     </td>
                                     <td>
-                                        <textarea id="work-descr"
-                                                  style="margin-left: 4px;"><%=CodeHelpers.ifIsNullOrEmptyReturnEmptryString(workorderBean.getDescription())%>
-                                        </textarea>
+                                        <textarea id="work-descr"style="margin-left: 4px;"><%=CodeHelpers.ifIsNullOrEmptyReturnEmptryString(workorderBean.getDescription())%></textarea>
                                     </td>
                                 </tr>
                                 <tr>
@@ -416,7 +463,7 @@
                                         <% } else { %>
                                         <div class="col-md-2">
                                             <div class="input-append date" id="dt-block-st-div">
-                                                <input type="text" class="span2 " id="dt-block-st"
+                                                <input type="text" class="span2 " id="dt-block-st" readonly="readonly" disabled
                                                        placeholder=" თარიღიდან"
                                                        style="" value="">
                                                     <span class="add-on"
@@ -437,13 +484,31 @@
                                         <% } else { %>
                                         <div class="input-append date" id="dt-block-end-div"
                                              style="position: relative;">
-                                            <input type="text" class="span2 " id="dt-block-end" placeholder=" თარიღიდან"
+                                            <input type="text" class="span2 " id="dt-block-end" placeholder=" თარიღამდე" readonly="readonly" disabled
                                                    style="" value="">
                                                 <span class="add-on"
                                                       style="position:absolute !important; right : 189px  !important;background : none  !important;border: none !important;top: 1px;">
                                                     <i class="glyphicon glyphicon-calendar"></i></span>
                                         </div>
                                         <%} %>
+                                    </td>
+                                </tr>
+                                <tr id="reasonblock" style="display: none;">
+                                    <td>
+                                        მიზეზი
+                                    </td>
+                                    <td>
+                                        <select id="reasondrop" class="dropdown" style="width:96px; display: none;"></select>
+                                        <div style="cursor: pointer; width: 10px; float: left; margin-top: 6px; margin-left: 6px;" onclick="toggleReason(this)"><i id="pbutton" class="fa fa-plus"></i></div>
+                                        <div id="reasontxt_div" style="display: none; margin-left: 4px;">
+                                            <br/>
+                                            <textarea id="reasontxt" placeholder="შეიყვანეთ მიზეზი" style="margin-top: 4px; margin-bottom: 3px;"></textarea><br/>
+                                            <button type="button" class="btn btn-default" id="dismissreason"
+                                                    onclick="$('#reasontxt_div').hide();">
+                                                დახურვა
+                                            </button>
+                                            <button type="button" class="btn btn-primary" onclick="addReason()">შენახვა</button>
+                                        </div>
                                     </td>
                                 </tr>
                                 <tr>

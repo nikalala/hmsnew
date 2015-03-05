@@ -113,6 +113,7 @@
                     $.post("content/saveblockunblock.jsp?arrdt=" + arrdt + "&dep=" + dep + "&roomid=" + roomids + "&reason=" + reason, {}, function (data) {
                         reloadGrid(hsGrid.id, hsGrid.url);
                         $(".closepref").click();
+                        doFilter(true);
                     });
                 }
                 loader.hide();
