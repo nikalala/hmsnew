@@ -55,6 +55,10 @@ public class VBlockroomBean
     private boolean regbyid_is_modified = false;
     private boolean regbyid_is_initialized = false;
     
+    private Boolean isunblocked;
+    private boolean isunblocked_is_modified = false;
+    private boolean isunblocked_is_initialized = false;
+    
     private String room;
     private boolean room_is_modified = false;
     private boolean room_is_initialized = false;
@@ -607,6 +611,72 @@ public class VBlockroomBean
     }
 
     /**
+     * Getter method for isunblocked.
+     * <br>
+     * Meta Data Information (in progress):
+     * <ul>
+     * <li>full name: v_blockroom.isunblocked
+     * <li>column size: 1
+     * <li>jdbc type returned by the driver: Types.BIT
+     * </ul>
+     *
+     * @return the value of isunblocked
+     */
+    public Boolean getIsunblocked()
+    {
+        return isunblocked; 
+    }
+
+    /**
+     * Setter method for isunblocked.
+     * <br>
+     * Attention, there will be no comparison with current value which
+     * means calling this method will mark the field as 'modified' in all cases.
+     *
+     * @param newVal the new value to be assigned to isunblocked
+     */
+    public void setIsunblocked(Boolean newVal) {
+        if ((newVal != null && this.isunblocked != null && newVal.equals(this.isunblocked)) || 
+            (newVal == null && this.isunblocked == null && isunblocked_is_initialized)) {
+            return; 
+        } 
+        this.isunblocked = newVal; 
+        isunblocked_is_modified = true; 
+        isunblocked_is_initialized = true; 
+    }
+
+    /**
+     * Setter method for isunblocked.
+     * <br>
+     * Convenient for those who do not want to deal with Objects for primary types.
+     *
+     * @param newVal the new value to be assigned to isunblocked
+     */
+    public void setIsunblocked(boolean newVal) {
+        setIsunblocked(new Boolean(newVal));
+    }
+
+    /**
+     * Determines if the isunblocked has been modified.
+     *
+     * @return true if the field has been modified, false if the field has not been modified
+     */
+    public boolean isIsunblockedModified() {
+        return isunblocked_is_modified; 
+    }
+
+    /**
+     * Determines if the isunblocked has been initialized.
+     * <br>
+     * It is useful to determine if a field is null on purpose or just because it has not been initialized.
+     *
+     * @return true if the field has been initialized, false otherwise
+     */
+    public boolean isIsunblockedInitialized() {
+        return isunblocked_is_initialized; 
+    }
+
+    /**
      * Getter method for room.
      * <br>
      * Meta Data Information (in progress):
@@ -864,6 +934,7 @@ public class VBlockroomBean
 		note_is_modified || 
 		regdate_is_modified || 
 		regbyid_is_modified || 
+		isunblocked_is_modified || 
 		room_is_modified || 
 		roomtype_is_modified || 
 		reason_is_modified || 
@@ -882,6 +953,7 @@ public class VBlockroomBean
         note_is_modified = false;
         regdate_is_modified = false;
         regbyid_is_modified = false;
+        isunblocked_is_modified = false;
         room_is_modified = false;
         roomtype_is_modified = false;
         reason_is_modified = false;
@@ -902,6 +974,7 @@ public class VBlockroomBean
         setNote(bean.getNote());
         setRegdate(bean.getRegdate());
         setRegbyid(bean.getRegbyid());
+        setIsunblocked(bean.getIsunblocked());
         setRoom(bean.getRoom());
         setRoomtype(bean.getRoomtype());
         setReason(bean.getReason());
@@ -923,6 +996,7 @@ public class VBlockroomBean
                  + "\n - v_blockroom.note = " + (note_is_initialized ? ("[" + (note == null ? null : note.toString()) + "]") : "not initialized") + ""
                  + "\n - v_blockroom.regdate = " + (regdate_is_initialized ? ("[" + (regdate == null ? null : regdate.toString()) + "]") : "not initialized") + ""
                  + "\n - v_blockroom.regbyid = " + (regbyid_is_initialized ? ("[" + (regbyid == null ? null : regbyid.toString()) + "]") : "not initialized") + ""
+                 + "\n - v_blockroom.isunblocked = " + (isunblocked_is_initialized ? ("[" + (isunblocked == null ? null : isunblocked.toString()) + "]") : "not initialized") + ""
                  + "\n - v_blockroom.room = " + (room_is_initialized ? ("[" + (room == null ? null : room.toString()) + "]") : "not initialized") + ""
                  + "\n - v_blockroom.roomtype = " + (roomtype_is_initialized ? ("[" + (roomtype == null ? null : roomtype.toString()) + "]") : "not initialized") + ""
                  + "\n - v_blockroom.reason = " + (reason_is_initialized ? ("[" + (reason == null ? null : reason.toString()) + "]") : "not initialized") + ""

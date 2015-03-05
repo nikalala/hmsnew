@@ -166,9 +166,9 @@
         if (typeof attr !== typeof undefined && attr !== false) {
             url += "&isroom=" + attr;
         }
-        if (typeof roomtype !== typeof undefined && roomtype !== "") {
-            url += "&roomtype=" + roomtype.val();
-        }
+        /*if (typeof roomtype !== typeof undefined && roomtype !== "") {
+          url += "&roomtype=" + roomtype.val();
+        }*/
         reloadGrid(BlockRoomGrid.id, url);
     }
 

@@ -55,6 +55,10 @@ public class BlockroomBean
     private boolean regbyid_is_modified = false;
     private boolean regbyid_is_initialized = false;
     
+    private Boolean isunblocked;
+    private boolean isunblocked_is_modified = false;
+    private boolean isunblocked_is_initialized = false;
+    
     private boolean _isNew = true;
     
     /**
@@ -596,6 +600,73 @@ public class BlockroomBean
     }
 
     /**
+     * Getter method for isunblocked.
+     * <br>
+     * Meta Data Information (in progress):
+     * <ul>
+     * <li>full name: blockroom.isunblocked
+     * <li>default value: false
+     * <li>column size: 1
+     * <li>jdbc type returned by the driver: Types.BIT
+     * </ul>
+     *
+     * @return the value of isunblocked
+     */
+    public Boolean getIsunblocked()
+    {
+        return isunblocked; 
+    }
+
+    /**
+     * Setter method for isunblocked.
+     * <br>
+     * Attention, there will be no comparison with current value which
+     * means calling this method will mark the field as 'modified' in all cases.
+     *
+     * @param newVal the new value to be assigned to isunblocked
+     */
+    public void setIsunblocked(Boolean newVal) {
+        if ((newVal != null && this.isunblocked != null && newVal.equals(this.isunblocked)) || 
+            (newVal == null && this.isunblocked == null && isunblocked_is_initialized)) {
+            return; 
+        } 
+        this.isunblocked = newVal; 
+        isunblocked_is_modified = true; 
+        isunblocked_is_initialized = true; 
+    }
+
+    /**
+     * Setter method for isunblocked.
+     * <br>
+     * Convenient for those who do not want to deal with Objects for primary types.
+     *
+     * @param newVal the new value to be assigned to isunblocked
+     */
+    public void setIsunblocked(boolean newVal) {
+        setIsunblocked(new Boolean(newVal));
+    }
+
+    /**
+     * Determines if the isunblocked has been modified.
+     *
+     * @return true if the field has been modified, false if the field has not been modified
+     */
+    public boolean isIsunblockedModified() {
+        return isunblocked_is_modified; 
+    }
+
+    /**
+     * Determines if the isunblocked has been initialized.
+     * <br>
+     * It is useful to determine if a field is null on purpose or just because it has not been initialized.
+     *
+     * @return true if the field has been initialized, false otherwise
+     */
+    public boolean isIsunblockedInitialized() {
+        return isunblocked_is_initialized; 
+    }
+
+    /**
      * Determines if the current object is new.
      *
      * @return true if the current object is new, false if the object is not new
@@ -628,7 +699,8 @@ public class BlockroomBean
 		reasonid_is_modified || 
 		note_is_modified || 
 		regdate_is_modified || 
-		regbyid_is_modified;
+		regbyid_is_modified || 
+		isunblocked_is_modified;
     }
 
     /**
@@ -643,6 +715,7 @@ public class BlockroomBean
         note_is_modified = false;
         regdate_is_modified = false;
         regbyid_is_modified = false;
+        isunblocked_is_modified = false;
     }
 
     /**
@@ -659,6 +732,7 @@ public class BlockroomBean
         setNote(bean.getNote());
         setRegdate(bean.getRegdate());
         setRegbyid(bean.getRegbyid());
+        setIsunblocked(bean.getIsunblocked());
     }
 
     /**
@@ -676,6 +750,7 @@ public class BlockroomBean
                  + "\n - blockroom.note = " + (note_is_initialized ? ("[" + (note == null ? null : note.toString()) + "]") : "not initialized") + ""
                  + "\n - blockroom.regdate = " + (regdate_is_initialized ? ("[" + (regdate == null ? null : regdate.toString()) + "]") : "not initialized") + ""
                  + "\n - blockroom.regbyid = " + (regbyid_is_initialized ? ("[" + (regbyid == null ? null : regbyid.toString()) + "]") : "not initialized") + ""
+                 + "\n - blockroom.isunblocked = " + (isunblocked_is_initialized ? ("[" + (isunblocked == null ? null : isunblocked.toString()) + "]") : "not initialized") + ""
             ;
     }
 

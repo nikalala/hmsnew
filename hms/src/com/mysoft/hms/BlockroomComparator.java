@@ -81,6 +81,7 @@ public class BlockroomComparator implements Comparator
      *   <li>BlockroomManager.ID_NOTE
      *   <li>BlockroomManager.ID_REGDATE
      *   <li>BlockroomManager.ID_REGBYID
+     *   <li>BlockroomManager.ID_ISUNBLOCKED
      * </ul>
      *
      * @param bReverse set this value to true, if you want to reverse the sorting results

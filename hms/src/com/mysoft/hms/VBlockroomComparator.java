@@ -85,6 +85,7 @@ public class VBlockroomComparator implements Comparator
      *   <li>VBlockroomManager.ID_NOTE
      *   <li>VBlockroomManager.ID_REGDATE
      *   <li>VBlockroomManager.ID_REGBYID
+     *   <li>VBlockroomManager.ID_ISUNBLOCKED
      *   <li>VBlockroomManager.ID_ROOM
      *   <li>VBlockroomManager.ID_ROOMTYPE
      *   <li>VBlockroomManager.ID_REASON

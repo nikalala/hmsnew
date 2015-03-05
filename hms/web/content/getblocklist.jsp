@@ -11,12 +11,13 @@
     String where = "";
 
     if(!CodeHelpers.isNullOrEmpty(unblock) && unblock.equals("on")){
-        where += "where (" + unblock + " = on OR on = " + unblock + ")";
+        where += " where isunblocked = true ";
     }else{
-        where += "where 2 = 2";
+        where += " where 2 = 2 ";
     }
+
     if(!CodeHelpers.isNullOrEmpty(dtfrom) && !CodeHelpers.isNullOrEmpty(dtto)){
-        where += " AND blockstart::date >= to_date('" + dtfrom + "','dd.mm.yyyy') AND to_date('" + dtto + "','dd.mm.yyyy') <= blockend::date " +
+        where += " AND blockstart::date >= to_date('" + dtfrom + "','dd.mm.yyyy') AND to_date('" + dtto + "','dd.mm.yyyy') >= blockend::date " +
                 " AND (" + roomBean + " = 0 OR roomid = " + roomBean + ")";
     }
     System.out.println(where);

@@ -84,6 +84,13 @@ public class BlockroomManager
     public static final int TYPE_REGBYID = Types.INTEGER;
     public static final String NAME_REGBYID = "regbyid";
 
+    /**
+     * Column isunblocked of type Types.BIT mapped to Boolean.
+     */
+    public static final int ID_ISUNBLOCKED = 8;
+    public static final int TYPE_ISUNBLOCKED = Types.BIT;
+    public static final String NAME_ISUNBLOCKED = "isunblocked";
+
 
     private static final String TABLE_NAME = "blockroom";
 
@@ -100,6 +107,7 @@ public class BlockroomManager
         ,"blockroom.note"
         ,"blockroom.regdate"
         ,"blockroom.regbyid"
+        ,"blockroom.isunblocked"
     };
 
     /**
@@ -112,7 +120,8 @@ public class BlockroomManager
                             + ",blockroom.reasonid"
                             + ",blockroom.note"
                             + ",blockroom.regdate"
-                            + ",blockroom.regbyid";
+                            + ",blockroom.regbyid"
+                            + ",blockroom.isunblocked";
 
     private static BlockroomManager singleton = new BlockroomManager();
 
@@ -697,6 +706,14 @@ public class BlockroomManager
                     _dirtyCount++;
                 }
 
+                if (pObject.isIsunblockedModified()) {
+                    if (_dirtyCount>0) {
+                        _sql.append(",");
+                    }
+                    _sql.append("isunblocked");
+                    _dirtyCount++;
+                }
+
                 _sql.append(") values (");
                 if(_dirtyCount > 0) {
                     _sql.append("?");
@@ -739,6 +756,10 @@ public class BlockroomManager
     
                 if (pObject.isRegbyidModified()) {
                     Manager.setInteger(ps, ++_dirtyCount, pObject.getRegbyid());
+                }
+    
+                if (pObject.isIsunblockedModified()) {
+                    Manager.setBoolean(ps, ++_dirtyCount, pObject.getIsunblocked());
                 }
     
                 ps.executeUpdate();
@@ -824,6 +845,15 @@ public class BlockroomManager
                     }
                     _sql.append("regbyid").append("=?");
                 }
+
+                if (pObject.isIsunblockedModified()) {
+                    if (useComma) {
+                        _sql.append(",");
+                    } else {
+                        useComma=true;
+                    }
+                    _sql.append("isunblocked").append("=?");
+                }
                 _sql.append(" WHERE ");
                 _sql.append("blockroom.blockroomid=?");
                 ps = c.prepareStatement(_sql.toString(),ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
@@ -859,6 +889,10 @@ public class BlockroomManager
 
                 if (pObject.isRegbyidModified()) {
                       Manager.setInteger(ps, ++_dirtyCount, pObject.getRegbyid());
+                }
+
+                if (pObject.isIsunblockedModified()) {
+                      Manager.setBoolean(ps, ++_dirtyCount, pObject.getIsunblocked());
                 }
     
                 if (_dirtyCount == 0) {
@@ -977,6 +1011,11 @@ public class BlockroomManager
                  _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("regbyid= ?");
              }
     
+             if (pObject.isIsunblockedModified()) {
+                 _dirtyCount ++; 
+                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("isunblocked= ?");
+             }
+    
              if (_dirtyCount == 0) {
                  throw new SQLException ("The pObject to look for is invalid : not initialized !");
              }
@@ -1015,6 +1054,10 @@ public class BlockroomManager
     
              if (pObject.isRegbyidModified()) {
                  Manager.setInteger(ps, ++_dirtyCount, pObject.getRegbyid());
+             }
+    
+             if (pObject.isIsunblockedModified()) {
+                 Manager.setBoolean(ps, ++_dirtyCount, pObject.getIsunblocked());
              }
     
              ps.executeQuery();
@@ -1102,6 +1145,13 @@ public class BlockroomManager
                 _dirtyAnd ++;
             }
     
+            if (pObject.isIsunblockedInitialized()) {
+                if (_dirtyAnd > 0)
+                    sql.append(" AND ");
+                sql.append("isunblocked").append("=?");
+                _dirtyAnd ++;
+            }
+    
             c = getConnection();
             ps = c.prepareStatement(sql.toString(),ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             int _dirtyCount = 0;
@@ -1136,6 +1186,10 @@ public class BlockroomManager
     
             if (pObject.isRegbyidInitialized()) {
                 Manager.setInteger(ps, ++_dirtyCount, pObject.getRegbyid());
+            }
+    
+            if (pObject.isIsunblockedInitialized()) {
+                Manager.setBoolean(ps, ++_dirtyCount, pObject.getIsunblocked());
             }
     
             int _rows = ps.executeUpdate();
@@ -1517,6 +1571,11 @@ public class BlockroomManager
                     _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("regbyid= ?");
                 }
     
+                if (pObject.isIsunblockedModified()) {
+                    _dirtyCount++; 
+                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("isunblocked= ?");
+                }
+    
                 if (_dirtyCount == 0)
                    throw new SQLException ("The pObject to look is unvalid : not initialized !");
     
@@ -1558,6 +1617,10 @@ public class BlockroomManager
                     Manager.setInteger(ps, ++_dirtyCount, pObject.getRegbyid());
                 }
     
+                if (pObject.isIsunblockedModified()) {
+                    Manager.setBoolean(ps, ++_dirtyCount, pObject.getIsunblocked());
+                }
+    
                 return countByPreparedStatement(ps);
         }
         finally
@@ -1590,6 +1653,7 @@ public class BlockroomManager
         pObject.setNote(rs.getString(6));
         pObject.setRegdate(rs.getTimestamp(7));
         pObject.setRegbyid(Manager.getInteger(rs, 8));
+        pObject.setIsunblocked(Manager.getBoolean(rs, 9));
 
         pObject.isNew(false);
         pObject.resetIsModified();
@@ -1643,6 +1707,10 @@ public class BlockroomManager
                 case ID_REGBYID:
                     ++pos;
                     pObject.setRegbyid(Manager.getInteger(rs, pos));
+                    break;
+                case ID_ISUNBLOCKED:
+                    ++pos;
+                    pObject.setIsunblocked(Manager.getBoolean(rs, pos));
                     break;
             }
         }

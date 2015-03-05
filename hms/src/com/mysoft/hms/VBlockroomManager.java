@@ -85,30 +85,37 @@ public class VBlockroomManager
     public static final String NAME_REGBYID = "regbyid";
 
     /**
+     * Column isunblocked of type Types.BIT mapped to Boolean.
+     */
+    public static final int ID_ISUNBLOCKED = 8;
+    public static final int TYPE_ISUNBLOCKED = Types.BIT;
+    public static final String NAME_ISUNBLOCKED = "isunblocked";
+
+    /**
      * Column room of type Types.VARCHAR mapped to String.
      */
-    public static final int ID_ROOM = 8;
+    public static final int ID_ROOM = 9;
     public static final int TYPE_ROOM = Types.VARCHAR;
     public static final String NAME_ROOM = "room";
 
     /**
      * Column roomtype of type Types.VARCHAR mapped to String.
      */
-    public static final int ID_ROOMTYPE = 9;
+    public static final int ID_ROOMTYPE = 10;
     public static final int TYPE_ROOMTYPE = Types.VARCHAR;
     public static final String NAME_ROOMTYPE = "roomtype";
 
     /**
      * Column reason of type Types.VARCHAR mapped to String.
      */
-    public static final int ID_REASON = 10;
+    public static final int ID_REASON = 11;
     public static final int TYPE_REASON = Types.VARCHAR;
     public static final String NAME_REASON = "reason";
 
     /**
      * Column createdby of type Types.VARCHAR mapped to String.
      */
-    public static final int ID_CREATEDBY = 11;
+    public static final int ID_CREATEDBY = 12;
     public static final int TYPE_CREATEDBY = Types.VARCHAR;
     public static final String NAME_CREATEDBY = "createdby";
 
@@ -128,6 +135,7 @@ public class VBlockroomManager
         ,"v_blockroom.note"
         ,"v_blockroom.regdate"
         ,"v_blockroom.regbyid"
+        ,"v_blockroom.isunblocked"
         ,"v_blockroom.room"
         ,"v_blockroom.roomtype"
         ,"v_blockroom.reason"
@@ -145,6 +153,7 @@ public class VBlockroomManager
                             + ",v_blockroom.note"
                             + ",v_blockroom.regdate"
                             + ",v_blockroom.regbyid"
+                            + ",v_blockroom.isunblocked"
                             + ",v_blockroom.room"
                             + ",v_blockroom.roomtype"
                             + ",v_blockroom.reason"
@@ -412,6 +421,14 @@ public class VBlockroomManager
                     _dirtyCount++;
                 }
 
+                if (pObject.isIsunblockedModified()) {
+                    if (_dirtyCount>0) {
+                        _sql.append(",");
+                    }
+                    _sql.append("isunblocked");
+                    _dirtyCount++;
+                }
+
                 if (pObject.isRoomModified()) {
                     if (_dirtyCount>0) {
                         _sql.append(",");
@@ -486,6 +503,10 @@ public class VBlockroomManager
     
                 if (pObject.isRegbyidModified()) {
                     Manager.setInteger(ps, ++_dirtyCount, pObject.getRegbyid());
+                }
+    
+                if (pObject.isIsunblockedModified()) {
+                    Manager.setBoolean(ps, ++_dirtyCount, pObject.getIsunblocked());
                 }
     
                 if (pObject.isRoomModified()) {
@@ -588,6 +609,15 @@ public class VBlockroomManager
                     _sql.append("regbyid").append("=?");
                 }
 
+                if (pObject.isIsunblockedModified()) {
+                    if (useComma) {
+                        _sql.append(",");
+                    } else {
+                        useComma=true;
+                    }
+                    _sql.append("isunblocked").append("=?");
+                }
+
                 if (pObject.isRoomModified()) {
                     if (useComma) {
                         _sql.append(",");
@@ -657,6 +687,10 @@ public class VBlockroomManager
 
                 if (pObject.isRegbyidModified()) {
                       Manager.setInteger(ps, ++_dirtyCount, pObject.getRegbyid());
+                }
+
+                if (pObject.isIsunblockedModified()) {
+                      Manager.setBoolean(ps, ++_dirtyCount, pObject.getIsunblocked());
                 }
 
                 if (pObject.isRoomModified()) {
@@ -790,6 +824,11 @@ public class VBlockroomManager
                  _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("regbyid= ?");
              }
     
+             if (pObject.isIsunblockedModified()) {
+                 _dirtyCount ++; 
+                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("isunblocked= ?");
+             }
+    
              if (pObject.isRoomModified()) {
                  _dirtyCount ++; 
                  _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("room= ?");
@@ -848,6 +887,10 @@ public class VBlockroomManager
     
              if (pObject.isRegbyidModified()) {
                  Manager.setInteger(ps, ++_dirtyCount, pObject.getRegbyid());
+             }
+    
+             if (pObject.isIsunblockedModified()) {
+                 Manager.setBoolean(ps, ++_dirtyCount, pObject.getIsunblocked());
              }
     
              if (pObject.isRoomModified()) {
@@ -948,6 +991,13 @@ public class VBlockroomManager
                 _dirtyAnd ++;
             }
     
+            if (pObject.isIsunblockedInitialized()) {
+                if (_dirtyAnd > 0)
+                    sql.append(" AND ");
+                sql.append("isunblocked").append("=?");
+                _dirtyAnd ++;
+            }
+    
             if (pObject.isRoomInitialized()) {
                 if (_dirtyAnd > 0)
                     sql.append(" AND ");
@@ -1010,6 +1060,10 @@ public class VBlockroomManager
     
             if (pObject.isRegbyidInitialized()) {
                 Manager.setInteger(ps, ++_dirtyCount, pObject.getRegbyid());
+            }
+    
+            if (pObject.isIsunblockedInitialized()) {
+                Manager.setBoolean(ps, ++_dirtyCount, pObject.getIsunblocked());
             }
     
             if (pObject.isRoomInitialized()) {
@@ -1178,6 +1232,11 @@ public class VBlockroomManager
                     _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("regbyid= ?");
                 }
     
+                if (pObject.isIsunblockedModified()) {
+                    _dirtyCount++; 
+                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("isunblocked= ?");
+                }
+    
                 if (pObject.isRoomModified()) {
                     _dirtyCount++; 
                     _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("room= ?");
@@ -1239,6 +1298,10 @@ public class VBlockroomManager
                     Manager.setInteger(ps, ++_dirtyCount, pObject.getRegbyid());
                 }
     
+                if (pObject.isIsunblockedModified()) {
+                    Manager.setBoolean(ps, ++_dirtyCount, pObject.getIsunblocked());
+                }
+    
                 if (pObject.isRoomModified()) {
                     ps.setString(++_dirtyCount, pObject.getRoom());
                 }
@@ -1287,10 +1350,11 @@ public class VBlockroomManager
         pObject.setNote(rs.getString(6));
         pObject.setRegdate(rs.getTimestamp(7));
         pObject.setRegbyid(Manager.getInteger(rs, 8));
-        pObject.setRoom(rs.getString(9));
-        pObject.setRoomtype(rs.getString(10));
-        pObject.setReason(rs.getString(11));
-        pObject.setCreatedby(rs.getString(12));
+        pObject.setIsunblocked(Manager.getBoolean(rs, 9));
+        pObject.setRoom(rs.getString(10));
+        pObject.setRoomtype(rs.getString(11));
+        pObject.setReason(rs.getString(12));
+        pObject.setCreatedby(rs.getString(13));
 
         pObject.isNew(false);
         pObject.resetIsModified();
@@ -1344,6 +1408,10 @@ public class VBlockroomManager
                 case ID_REGBYID:
                     ++pos;
                     pObject.setRegbyid(Manager.getInteger(rs, pos));
+                    break;
+                case ID_ISUNBLOCKED:
+                    ++pos;
+                    pObject.setIsunblocked(Manager.getBoolean(rs, pos));
                     break;
                 case ID_ROOM:
                     ++pos;
