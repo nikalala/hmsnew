@@ -743,6 +743,11 @@ function urlencode(str) {
     return str.replace(' ', '!!!');
 }
 
+String.prototype.replaceAll = function(str1, str2, ignore)
+{
+    return this.replace(new RegExp(str1.replace(/([\/\,\!\\\^\$\{\}\[\]\(\)\.\*\+\?\|\<\>\-\&])/g,"\\$&"),(ignore?"gi":"g")),(typeof(str2)=="string")?str2.replace(/\$/g,"$$$$"):str2);
+}
+
 var hmsDaysMin = ["კვი", "ორშ", "სამ", "ოთხ", "ხუთ", "პარ", "შაბ", "კვი"];
 var hmsMonthsMin = ["იან", "თებ", "მარ", "აპრ", "მაი", "ივნ", "ივლ", "აგვ", "სექ", "ოქტ", "ნოე", "დეკ"];
 
@@ -840,6 +845,14 @@ function getSelectedRowIds(id) {
         }
     });
     return ids.substring(0, ids.trim().lastIndexOf(","));
+}
+function getArrayOfSelectedRowIds(id) {
+    var ids = getSelectedRowIds(id);
+    if(!isNullOrEmpty(ids)){
+        return ids.split(',');
+    }else{
+        return null;
+    }
 }
 
 function getRadioRowIds(id) {

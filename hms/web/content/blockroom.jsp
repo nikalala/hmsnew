@@ -16,8 +16,52 @@
 
     $(document).ready(function () {
         loadDefaults();
-        drawFooter();
+        drawTwoDimFooter();
     });
+
+    function unblockSelected(){
+        var ids = getSelectedRowIds(BlockRoomGrid.id);
+        if(isNullOrEmpty(ids)){
+            BootstrapDialog.alert("აირჩიეთ მინიმუმ ჩანაწერი");
+            return;
+        }
+        var sql = "UPDATE blockroom set isunblocked = true where blockroomid IN ("+ids+")";
+        loader.show();
+        $.post("content/execute.jsp?query=" + encodeURIComponent(sql), function (data) {
+            doFilter(true,true);
+            loader.hide();
+        });
+
+    }
+
+    function drawTwoDimFooter(){
+        $(".ui-jqgrid-bdiv").height($(".ui-jqgrid-bdiv").height() - 100);
+        var html =
+                '<div class="panel-footer" style="height: 50px !important; display:table; width: 100%; padding-bottom: 1px; background-color: #FFF;">' +
+                '<span style="margin: 15px 10px 0 10px; float: left;">მონიშნულის: </span>' +
+                '<div class="footercont" style="border-right: 0;">' +
+                '<button type="button" class="btn btn-primary" id="btnUnblock" onclick="unblockSelected()" style="font-weight: bold; margin: 9px 10px 0 5px;">' +
+                'ბლოკის მოხსნა' +
+                '</button>' +
+                '</div>' +
+                '</div>'+
+                '<div class="panel-footer" style="height: 50px !important; display:table; width: 100%; padding-bottom: 1px; background-color: #FFF;">' +
+                '<div>' +
+                '<span style="margin: 15px 10px 0 10px; float: left;">ჩანაწერების რაოდენობა გვერდზე</span>' +
+                '<select id="limitselectbox" style="float: left; margin: 15px 10px 0 10px;">' +
+                '<option value="5">5</option>' +
+                '<option value="15">15</option>' +
+                '<option value="25">25</option>' +
+                '<option value="50">50</option>' +
+                '</select>' +
+                '<button type="button" class="btn btn-default" id="btnNext" style="font-weight: bold; float: right; margin: 9px 10px 0 0;">' +
+                'შემდეგი</button>' +
+                '<button type="button" class="btn btn-danger" id="btnPrev" style="font-weight: bold; float: right; margin: 9px 10px 0 0;">' +
+                'წინა</button>' +
+                '</div></div>';
+        $(".ui-jqgrid-view").find(".panel-footer").remove();
+        $(".ui-jqgrid-view").append(html);
+    }
 
     $(document).on("click", "#dismissbutton, #smallmodalbtn", function () {
         $("#updateremark").css("display", "none");
@@ -148,7 +192,7 @@
         }
     });
 
-    function doFilter(bool) {
+    function doFilter(bool,showall) {
         if (bool) {
             /* $("#filter-form :input").each(function () {
                 $(this).val('');
@@ -159,7 +203,8 @@
             $("#filter-form .dropdown").change();
             $("#unblock").prop("checked", false);
         }
-        var url = "content/getblocklist.jsp?" + $("#filter-form").serialize();
+        var s = showall ? "&showall=true" : "";
+        var url = "content/getblocklist.jsp?" + $("#filter-form").serialize() + s;
         var room = $("option:selected", $("#units"));
         var roomtype = $("option:selected", $("#roomtype"));
         var attr = $(room).attr('roomtypeid');

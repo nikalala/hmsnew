@@ -1,3 +1,4 @@
+<%@ page import="org.apache.xmlbeans.impl.xb.ltgfmt.Code" %>
 <%@page contentType="text/html; charset=UTF-8" %>
 <%@page pageEncoding="UTF-8" %>
 <%@include file="../includes/init.jsp" %>
@@ -5,9 +6,18 @@
 <%
     request.setCharacterEncoding("UTF-8");
     String param = (String) request.getParameter("roomid");
+    String blockroomid = (String) request.getParameter("blockroomid");
+    BlockroomBean blockroom = null;
+    if(!CodeHelpers.isNullOrEmpty(blockroomid)){
+         blockroom = BlockroomManager.getInstance().loadByPrimaryKey(new Long(blockroomid));
+    }
     String roomid = "";
+    RoomBean r = null;
+    RoomtypeBean rt = null;
     if (!CodeHelpers.isNullOrEmpty(param)) {
         roomid = param;
+        r = RoomManager.getInstance().loadByPrimaryKey(new Integer(roomid));
+        rt = RoomtypeManager.getInstance().loadByPrimaryKey(r.getRoomtypeid());
     }
 %>
 
@@ -70,7 +80,14 @@
         $("#smbody").next().hide();
         $(".modal-sm").css("width", "580px");
         $('#curr_table .date').datepicker(<%=pickerFormatForDatePickers%>);
+        <% if(blockroom == null) { %>
         $('#fromdateval, #todateval').val('');
+        <% }else{  %>
+        $('#fromdateval').val('<%=df3.format(blockroom.getBlockstart())%>');
+        $('#todateval').val('<%=df3.format(blockroom.getBlockend())%>');
+        $('#reasondrop').val(<%=blockroom.getReasonid()%>);
+        $('#reasondrop').change();
+        <% } %>
         disableSecondDatePicker();
         addReason();
     });
@@ -78,6 +95,15 @@
     $("#currs").on('change', function () {
 
     });
+
+    function unblockRoom(){
+        var sql = "UPDATE blockroom set isunblocked = true where blockroomid = <%=blockroomid%>";
+        loader.show();
+        $.post("content/execute.jsp?query=" + encodeURIComponent(sql), function (data) {
+            $("#dismissbutton").click();
+            loader.hide();
+        });
+    }
 
     function SaveBlock() {
         var select = "select getroomstatusbydate(<%=roomid%>,'" + $("#fromdateval").val() + "','" + $("#todateval").val() + "');";
@@ -93,10 +119,25 @@
                     BootstrapDialog.alert("შეავსეთ ყველა ველი");
                     return;
                 }
+                <% if(!CodeHelpers.isNullOrEmpty(blockroomid)){ %>
+                select = "select getroomstatusbydateforblock(<%=roomid%>,'" + $("#fromdateval").val() + "','" + $("#todateval").val() + "',<%=blockroomid%>);";
+                $.post("content/checkifavalforblock.jsp?query=" + select, {}, function (data) {
+                    if (data.trim() > 0) {
+                        BootstrapDialog.alert("არჩეული თარიღებისთვის შეუძლებელია ნომრის დაბლოკვა");
+                    }else{
+                        var sql = "update blockroom set blockstart = to_timestamp('" + arrdt.replaceAll(".","/") + "','dd/mm/yyyy'), blockend = " + dep.replaceAll(".","/") + ", reasonid = " + reason + " where blockroomid = <%=blockroomid%>";
+                        $.post("content/execute.jsp?query=" + encodeURIComponent(sql), {}, function () {
+                            $("#dismissbutton").click();
+                            doFilter(true);
+                        });
+                    }
+                });
+                <% }else { %>
                 $.post("content/saveblockunblock.jsp?arrdt=" + arrdt + "&dep=" + dep + "&roomid=<%=roomid%>&reason=" + reason, {}, function (data) {
                     reloadGrid(hsGrid.id, hsGrid.url);
                     $(".closepref").click();
                 });
+                <% } %>
             }
             loader.hide();
         });
@@ -162,7 +203,7 @@
                     <div class="fieldset">
                         <span class="label_sm disp_label1">ოთახი</span>
                         <span class="label_display">&nbsp;-&nbsp;</span>
-                        <span class="label_display"><%=roomid%></span>
+                        <span class="label_display"><% if(r != null) { %><%=r.getName() + " - " + rt.getCode() %><% } %></span>
                     </div>
                     <table style="  width: 100%;  border-spacing: 5px;  border-collapse: separate;">
                         <tr>
@@ -263,6 +304,11 @@
     <tr>
         <td>
             <div class="modal-footer">
+                <% if(blockroom != null){ %>
+                <button type="button" class="btn btn-default unblockbtn" id="unblockbutton" onclick="unblockRoom()"  data-dismiss="modal">
+                    ბლოკის მოხსნა
+                </button>
+                <% } %>
                 <button type="button" class="btn btn-default closepref" id="dismissbutton"  data-dismiss="modal"
                         onclick="this.click();">
                     დახურვა
