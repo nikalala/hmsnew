@@ -160,6 +160,10 @@ int prefCount = PreferenceManager.getInstance().countWhere("where reservationid 
         }
     }
     
+    function refreshExtrachargeList(){
+        getExtrachargeList1(<%=rroom.getReservationroomid()%>);
+    }
+    
     function newSharer(id){
         newmWindow1("guestProfile", "სტუმრის პროფილი", "id=" + id);
     }
@@ -176,8 +180,8 @@ int prefCount = PreferenceManager.getInstance().countWhere("where reservationid 
         $.post("content/ajax/getextrachargelist.jsp",{id:id},function(data){ $("#geninfo_extracharges").html(data); });
     }
     
-    function editExtracharge1(fid,xid){
-        newmWindow1('additionalservices','დამატებითი სერვისები',"ftid="+fid+"&xid="+xid);
+    function editExtracharge1(fid,xid,n){
+        newmWindow1('additionalservices','დამატებითი სერვისები',"ftid="+fid+"&xid="+xid+"&n="+n);
     }
     
     $(document).ready(function(){

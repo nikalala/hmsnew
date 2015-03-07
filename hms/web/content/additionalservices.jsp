@@ -5,30 +5,54 @@
 long fid = 0;
 int eid = 0;
 long ftid = 0;
+long rid = 0;
+int n = 0;
+
 FolioitemBean fbitem = null;
 ExtrachargefolioBean exb = null;
+FolioBean[] folios = new FolioBean[0];
+
+if(request.getParameter("n") != null)
+    n = Integer.parseInt(request.getParameter("n"));
+
 if(request.getParameter("fid") != null){
     fid = Long.parseLong(request.getParameter("fid"));
+    FolioBean folio = FolioManager.getInstance().loadByPrimaryKey(fid);
+    folios = FolioManager.getInstance().loadByWhere("where reservationroomid = "+folio.getReservationroomid()+" order by reservationroomid");
 }
 if(request.getParameter("ftid") != null){
     ftid = Long.parseLong(request.getParameter("ftid"));
     fbitem = FolioitemManager.getInstance().loadByPrimaryKey(ftid);
     fid = fbitem.getFolioid().longValue();
+    FolioBean folio = FolioManager.getInstance().loadByPrimaryKey(fid);
+    folios = FolioManager.getInstance().loadByWhere("where reservationroomid = "+folio.getReservationroomid()+" order by reservationroomid");
 }
 if(request.getParameter("xid") != null){
     eid = Integer.parseInt(request.getParameter("xid"));
 }
+
+
+if(request.getParameter("reservationroomid") != null){
+    //ReservationroomBean rb = ReservationroomManager.getInstance().loadByPrimaryKey(new Long(request.getParameter("reservationroomid")));
+    //ReservationBean rv = ReservationManager.getInstance().loadByPrimaryKey(rb.getReservationid());
+    folios = FolioManager.getInstance().loadByWhere("where reservationroomid = "+request.getParameter("reservationroomid")+" order by reservationroomid");
+    if(folios.length > 0)
+        fid = folios[0].getFolioid().longValue();
+}
+
 if(eid > 0 && ftid > 0)
     exb = ExtrachargefolioManager.getInstance().loadByPrimaryKey(ftid, eid);
 
 
 if(fid > 0){
+    FolioBean folio = FolioManager.getInstance().loadByPrimaryKey(fid);
+    rid = folio.getReservationroomid().longValue();
     Vector v = new Vector();
-    ExtrachargefolioBean[] exbs = ExtrachargefolioManager.getInstance().loadByWhere("where folioitemid in (select folioitemid from folioitem where folioid = "+fid+")");
+    ExtrachargefolioBean[] exbs = ExtrachargefolioManager.getInstance().loadByWhere("where folioitemid in (select folioitemid from folioitem where folioid in (select folioid from folio where reservationroomid = "+rid+")) order by extrachargeid");
     for(int i=0;i<exbs.length;i++)
         v.addElement((ExtrachargefolioBean)exbs[i]);
     session.setAttribute("WALKIN_EXTRACHARGES", (Vector)v);
-}
+} else session.removeAttribute("WALKIN_EXTRACHARGES");
 
 
 
@@ -70,10 +94,17 @@ ExtrachargeBean[] extracharges = ExtrachargeManager.getInstance().loadByWhere("w
                         $("#additionalservices_rst").show();
                         $("#additionalservices_edt").attr("onclick","updExtracharge("+n+")");
                         $("#additionalservices_edt").show();
+                        <%if(folios.length > 1){%>
+                        $("#wlakin_extrachargefolioid").val(data.folioid);
+                        <%}%>
                         for(var i=0;i<5;i++){
                             if(i == data.chargeapplyrieson) $("#extrapar_"+i).show();
                             else $("#extrapar_"+i).hide();
                         }
+                        <%if(folios.length > 1){%>
+                        $(".folioclass0").show();
+                        <%}%>
+                        calcRate(false);
                     }
                 },
                 "json"
@@ -85,6 +116,7 @@ ExtrachargeBean[] extracharges = ExtrachargeManager.getInstance().loadByWhere("w
                 "content/ajax/saveextracharges.jsp",
                 {
                     act: "edt",
+                    save: true,
                     num: i,
                     extrachargeid: $("#wlakin_extrachargeid").val(),
                     rate: $("#wlakin_extrachargerate").val(),
@@ -94,7 +126,12 @@ ExtrachargeBean[] extracharges = ExtrachargeManager.getInstance().loadByWhere("w
                     child: $("#extrapar_1_val").val(),
                     qty: $("#extrapar_4_val").val(),
                     adult1: $("#extrapar_3_val1").val(),
-                    child1: $("#extrapar_3_val2").val()
+                    child1: $("#extrapar_3_val2").val(),
+                    <%if(folios.length > 1){%>
+                    folioid: $("#wlakin_extrachargefolioid").val()
+                    <%} else {%>
+                    folioid: <%=fid%>
+                    <%}%>
                 },
                 function(data){
                     if(data.result == 0) BootstrapDialog.alert(data.error);
@@ -104,6 +141,8 @@ ExtrachargeBean[] extracharges = ExtrachargeManager.getInstance().loadByWhere("w
                         $("#additionalservices_edt").hide();
                         resetExtracharge();
                         getExtrachargeList();
+                        refreshExtrachargeList();
+                        calcRate(false);
                     }
                 },
                 "json"
@@ -115,6 +154,7 @@ ExtrachargeBean[] extracharges = ExtrachargeManager.getInstance().loadByWhere("w
                 "content/ajax/saveextracharges.jsp",
                 {
                     act: "add",
+                    save: true,
                     extrachargeid: $("#wlakin_extrachargeid").val(),
                     rate: $("#wlakin_extrachargerate").val(),
                     postingtype: $("#wlakin_extrachargepostingtype").val(),
@@ -123,13 +163,20 @@ ExtrachargeBean[] extracharges = ExtrachargeManager.getInstance().loadByWhere("w
                     child: $("#extrapar_1_val").val(),
                     qty: $("#extrapar_4_val").val(),
                     adult1: $("#extrapar_3_val1").val(),
-                    child1: $("#extrapar_3_val2").val()
+                    child1: $("#extrapar_3_val2").val(),
+                    <%if(folios.length > 1){%>
+                    folioid: $("#wlakin_extrachargefolioid").val()
+                    <%} else {%>
+                    folioid: <%=fid%>
+                    <%}%>
                 },
                 function(data){
                     if(data.result == 0) BootstrapDialog.alert(data.error);
                     else {
                         resetExtracharge();
                         getExtrachargeList();
+                        refreshExtrachargeList();
+                        calcRate(false);
                     }
                 },
                 "json"
@@ -146,7 +193,10 @@ ExtrachargeBean[] extracharges = ExtrachargeManager.getInstance().loadByWhere("w
                 function(data){
                     if(data.result == 0) BootstrapDialog.alert(data.error);
                     else {
+                        resetExtracharge();
                         getExtrachargeList();
+                        refreshExtrachargeList();
+                        calcRate(false);
                     }
                 },
                 "json"
@@ -167,6 +217,32 @@ ExtrachargeBean[] extracharges = ExtrachargeManager.getInstance().loadByWhere("w
         $("#additionalservices_rst").hide();
         $("#additionalservices_edt").attr("onclick","");
         $("#additionalservices_edt").hide();
+        $(".folioclass0").hide();
+        calcRate(false);
+    }
+    
+    function calcRate(c){
+        var exts = {};
+        var extvals = {};
+        <%
+        for(int i=0;i<extracharges.length;i++){
+
+            %>
+            exts["<%=extracharges[i].getExtrachargeid()%>"] = <%=extracharges[i].getFixedprice()%>;
+            extvals["<%=extracharges[i].getExtrachargeid()%>"] = <%=extracharges[i].getRate()%>;
+            <%
+        }
+        %>
+
+
+        var val = $("#wlakin_extrachargeid").val();
+        if(exts[$("#wlakin_extrachargeid").val()] == true)
+            $("#wlakin_extrachargerate").attr("readonly",true);
+        else
+            $("#wlakin_extrachargerate").attr("readonly",false);
+        if(c)
+            $("#wlakin_extrachargerate").val(extvals[$("#wlakin_extrachargeid").val()]);
+        
     }
     
     $(document).ready(function(){
@@ -188,15 +264,7 @@ ExtrachargeBean[] extracharges = ExtrachargeManager.getInstance().loadByWhere("w
         });
         
         $("#wlakin_extrachargeid").change(function(){
-            var val = $(this).val();
-            if(val != '0'){
-                var vals = val.split("_");
-                $("#wlakin_extrachargerate").val(vals[1]);
-                $("#wlakin_extrachargerate").attr("readonly",false);
-            } else {
-                $("#wlakin_extrachargerate").val("");
-                $("#wlakin_extrachargerate").attr("readonly",true);
-            }
+            calcRate(true);
         });
         
         <%if(exb != null){%>
@@ -228,11 +296,15 @@ ExtrachargeBean[] extracharges = ExtrachargeManager.getInstance().loadByWhere("w
                     <select class="form-control dropdown" name="wlakin_extrachargeid" id="wlakin_extrachargeid" style="">
                         <option value="0">--აირჩიეთ--</option>
                         <%
+                        boolean rdonly = false;
                         for(int i=0;i<extracharges.length;i++){
                             double erate = extracharges[i].getRate().doubleValue();
                             String sel = "";
-                            if(eid == extracharges[i].getExtrachargeid().intValue())
+                            if(eid == extracharges[i].getExtrachargeid().intValue()){
+                                if(extracharges[i].getFixedprice().booleanValue())
+                                    rdonly = true;
                                 sel = "selected";
+                            }
                         %>
                         <option value="<%=extracharges[i].getExtrachargeid()%>" <%=sel%>><%=extracharges[i].getName()%></option>
                         <%
@@ -248,7 +320,7 @@ ExtrachargeBean[] extracharges = ExtrachargeManager.getInstance().loadByWhere("w
             <form class="form-inline" role="form">
             <div class="form-group">
                 <div class="input-group-xs">
-                    <input class="form-control" type="text" id="wlakin_extrachargerate" size="10" readonly="" style="" value="<%=(exb != null && exb.getRate() != null) ? dc.format(exb.getRate()):""%>">
+                    <input class="form-control" type="text" id="wlakin_extrachargerate" size="10" style="" <%=(rdonly) ? "readonly=\"\"":""%> value="<%=(exb != null && exb.getRate() != null) ? dc.format(exb.getRate()):""%>">
                     <b><%=maincurrency.getCode()%></b>
                 </div>
             </div>
@@ -278,7 +350,42 @@ ExtrachargeBean[] extracharges = ExtrachargeManager.getInstance().loadByWhere("w
             </div>
             </form>
         </td>
+        <%if(folios.length > 1){%>
+        <td class="tbllabel folioclass0" style=""><b>ფოლიო</b></td>
+        <td>
+            <form class="form-inline" role="form">
+            <div class="form-group folioclass0">
+                <div class="input-group-xs">
+                    <select class="form-control dropdown" name="wlakin_extrachargefolioid" id="wlakin_extrachargefolioid" style="">
+                        <%
+                        for(int i=0;i<folios.length;i++){
+                            String folioname = folios[i].getNum();
+                            if(folios[i].getGuestid() != null){
+                                GuestBean guest = GuestManager.getInstance().loadByPrimaryKey(folios[i].getGuestid());
+                                SalutationBean slt = SalutationManager.getInstance().loadByPrimaryKey(guest.getSalutationid());
+                                folioname += " - "+slt.getName()+" "+guest.getFname()+" "+guest.getLname();
+                            } else if(folios[i].getContragentid() != null) {
+                                ContragentBean contr = ContragentManager.getInstance().loadByPrimaryKey(folios[i].getContragentid());
+                                folioname += " - "+contr.getName();
+                            } else {
+
+                            }
+                            String sel = "";
+                            if(fid == folios[i].getFolioid().longValue())
+                                sel = "selected";
+                        %>
+                        <option value="<%=folios[i].getFolioid()%>" <%=sel%>><%=folioname%></option>
+                        <%
+                        }
+                        %>
+                    </select>
+                </div>
+            </div>
+            </form>
+        </td>
+        <%}else{%>
         <td colspan="2"></td>
+        <%}%>
     </tr>
     <tr>
         <td class="tbllabel" style=""><b>წესი</b></td>
@@ -311,7 +418,7 @@ ExtrachargeBean[] extracharges = ExtrachargeManager.getInstance().loadByWhere("w
                         <form class="form-inline" role="form">
                         <div class="form-group">
                             <div class="input-group-xs">
-                                <input class="form-control" type="text" id="extrapar_0_val" size="3" style="<%=(exb != null) ? exb.getAdult():""%>">
+                                <input class="form-control" type="text" id="extrapar_0_val" size="3" value="<%=(exb != null) ? exb.getAdult():""%>">
                             </div>
                         </div>
                         </form>
@@ -325,7 +432,7 @@ ExtrachargeBean[] extracharges = ExtrachargeManager.getInstance().loadByWhere("w
                         <form class="form-inline" role="form">
                         <div class="form-group">
                             <div class="input-group-xs">
-                                <input class="form-control" type="text" id="extrapar_1_val" size="3" style="<%=(exb != null) ? exb.getChild():""%>">
+                                <input class="form-control" type="text" id="extrapar_1_val" size="3" value="<%=(exb != null) ? exb.getChild():""%>">
                             </div>
                         </div>
                         </form>
@@ -344,7 +451,7 @@ ExtrachargeBean[] extracharges = ExtrachargeManager.getInstance().loadByWhere("w
                         <form class="form-inline" role="form">
                         <div class="form-group">
                             <div class="input-group-xs">
-                                <input class="form-control" type="text" id="extrapar_3_val1" size="3" style="<%=(exb != null) ? exb.getAdult():""%>">
+                                <input class="form-control" type="text" id="extrapar_3_val1" size="3" value="<%=(exb != null) ? exb.getAdult():""%>">
                             </div>
                         </div>
                         </form>
@@ -354,7 +461,7 @@ ExtrachargeBean[] extracharges = ExtrachargeManager.getInstance().loadByWhere("w
                         <form class="form-inline" role="form">
                         <div class="form-group">
                             <div class="input-group-xs">
-                                <input class="form-control" type="text" id="extrapar_3_val2" size="3" style="<%=(exb != null) ? exb.getChild():""%>">
+                                <input class="form-control" type="text" id="extrapar_3_val2" size="3" value="<%=(exb != null) ? exb.getChild():""%>">
                             </div>
                         </div>
                         </form>
@@ -368,7 +475,7 @@ ExtrachargeBean[] extracharges = ExtrachargeManager.getInstance().loadByWhere("w
                         <form class="form-inline" role="form">
                         <div class="form-group">
                             <div class="input-group-xs">
-                                <input class="form-control" type="text" id="extrapar_4_val" size="3" style="<%=(exb != null) ? exb.getQty():""%>">
+                                <input class="form-control" type="text" id="extrapar_4_val" size="3" value="<%=(exb != null) ? exb.getQty():""%>">
                             </div>
                         </div>
                         </form>
@@ -380,7 +487,7 @@ ExtrachargeBean[] extracharges = ExtrachargeManager.getInstance().loadByWhere("w
     <tr style="background-color: silver;">
         <td class="tbllabel" style="" colspan="4" align="right">
             <button type="button" class="btn btn-warning" id='additionalservices_rst' hidden="" onclick="resetExtracharge()">გაუქმება</button>
-            <button type="button" class="btn btn-danger" id='additionalservices_edt' hidden="" onclick="">განახლება</button>
+            <button type="button" class="btn btn-danger" id='additionalservices_edt' hidden="" onclick="updExtracharge(<%=n%>)">განახლება</button>
             <button type="button" class="btn btn-danger" id='additionalservices_add' onclick="addExtracharge()">დამატება</button>
         </td>
     </tr>

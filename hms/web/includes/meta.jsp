@@ -204,7 +204,6 @@ System.out.println(rid+" = "+statusid);
         String sql = "select getroomstatus1(" + rid + ",";
         if (dt == null) dt = new Date();
         sql += "'" + dtlong.format(dt) + "')";
-System.out.println(sql);
         n = (int) getSum(sql);
         return n;
     }

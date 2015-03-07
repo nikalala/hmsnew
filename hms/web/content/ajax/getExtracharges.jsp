@@ -20,9 +20,12 @@ if(v.size()>0){
 </thead>
 <tbody id="walkin_extracharges_body">
 <%
+String olds = "";
 for(int i=0;i<v.size();i++){
     ExtrachargefolioBean efb = (ExtrachargefolioBean)v.elementAt(i);
     ExtrachargeBean extracharge = ExtrachargeManager.getInstance().loadByPrimaryKey(efb.getExtrachargeid());
+    if(olds.indexOf(","+efb.getExtrachargeid().toString()) >= 0)    continue;
+    olds += ","+efb.getExtrachargeid().toString();
     String qt = "";
     if(efb.getChargeapplyrieson().intValue() == 0) qt = efb.getAdult().toString();
     if(efb.getChargeapplyrieson().intValue() == 1) qt = efb.getChild().toString();
