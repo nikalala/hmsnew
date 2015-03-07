@@ -20,21 +20,23 @@
         if (roomId.contains(",")) {
             String[] rooms = roomId.split(",");
             for (String room : rooms) {
-                generatedInsert += "INSERT INTO blockroom(" +
-                        "            blockroomid, roomid, blockstart, blockend, reasonid, note, regbyid) " +
-                        "    VALUES ((SELECT COALESCE(MAX(blockroomid) + 1,1) FROM blockroom), " + room + ", to_timestamp('" + arrdt.replace(".","/") + "','dd/mm/yyyy'), to_timestamp('" + depDate.replace(".", "/") + "','dd/mm/yyyy'), '" + reason + "', '', " + user.getPersonnelid() + ");";
+                BlockroomBean br = BlockroomManager.getInstance().createBlockroomBean();
+                br.setRoomid(new Integer(room));
+                br.setBlockstart(dt.parse(arrdt).getTime());
+                br.setBlockend(dt.parse(depDate).getTime());
+                br.setReasonid(new Integer(reason));
+                br.setRegbyid(user.getPersonnelid());
+                br = BlockroomManager.getInstance().save(br);
             }
         } else {
-            generatedInsert += "INSERT INTO blockroom( " +
-                    "            blockroomid, roomid, blockstart, blockend, reasonid, note, regbyid) " +
-                    "    VALUES ((SELECT COALESCE(MAX(blockroomid) + 1,1) FROM blockroom), " + roomId + ", to_timestamp('" + arrdt.replace(".","/") + "','dd/mm/yyyy'), to_timestamp('" + depDate.replace(".", "/") + "','dd/mm/yyyy'), " + reason + ", '', " + user.getPersonnelid() + ");";
+            BlockroomBean br = BlockroomManager.getInstance().createBlockroomBean();
+            br.setRoomid(new Integer(roomId));
+            br.setBlockstart(dt.parse(arrdt).getTime());
+            br.setBlockend(dt.parse(depDate).getTime());
+            br.setReasonid(new Integer(reason));
+            br.setRegbyid(user.getPersonnelid());
+            br = BlockroomManager.getInstance().save(br);
         }
-
-        System.out.println(generatedInsert);
-
-        Connection con = Manager.getInstance().getConnection();
-        con.createStatement().executeUpdate(generatedInsert);
-        Manager.getInstance().releaseConnection(con);
 
         Manager.getInstance().endTransaction(true);
         errorContrName = "1";

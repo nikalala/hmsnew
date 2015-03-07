@@ -252,7 +252,7 @@
         var sql = "INSERT INTO workorderlog(" +
                 "workorderlogid, workorderid, note, regbyid)" +
                 "VALUES (" +
-                "(SELECT COALESCE(MAX(workorderlogid) + 1,1) FROM workorderlog)," +
+                "nextval('workorderlogid_seq'), "+  // (SELECT COALESCE(MAX(workorderlogid) + 1,1) FROM workorderlog)," +
                 id + ", " +
                 "N'" + remark + "', " +
                 "N'<%=user.getLoginid()%>');";

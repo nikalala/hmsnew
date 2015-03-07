@@ -31,7 +31,7 @@
             }
             prevDay = nextDay;
         }
-
+/*
         String generatedInsert = "";
         for (Date obj : dtsToInsert) {
             generatedInsert += "INSERT INTO roomst(roomstsid, roomid, statusdate, st, regbyid) " +
@@ -42,7 +42,7 @@
         Connection con = Manager.getInstance().getConnection();
         con.createStatement().executeUpdate(generatedInsert);
         Manager.getInstance().releaseConnection(con);
-
+*/
         ReservationBean reservationBean = ReservationManager.getInstance().loadByPrimaryKey(Long.parseLong(rid));
         reservationBean.setReservationtypeid(Integer.parseInt(rTypeid));
         reservationBean.setRegbyid(user.getPersonnelid());

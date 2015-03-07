@@ -17,6 +17,7 @@ import java.util.Comparator;
 
 // imports- 
 
+
 /**
  * Comparator class is used to sort the SharerBean objects.
  */
@@ -24,6 +25,7 @@ public class SharerComparator implements Comparator
 // extends+ 
 
 // extends- 
+
 {
     /**
      * Holds the field on which the comparison is performed.
@@ -131,4 +133,5 @@ public class SharerComparator implements Comparator
 // class+ 
 
 // class- 
+
 }

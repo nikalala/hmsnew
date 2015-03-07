@@ -16,10 +16,12 @@ package com.mysoft.hms;
 
 // imports- 
 
+
 public class SharerBean
 // extends+ 
 
 // extends- 
+
 {
     private Long sharerid;
     private boolean sharerid_is_modified = false;
@@ -314,4 +316,5 @@ public class SharerBean
 // class+ 
 
 // class- 
+
 }

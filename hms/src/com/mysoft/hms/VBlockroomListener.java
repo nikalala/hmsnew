@@ -18,7 +18,6 @@ import java.sql.SQLException;
 // imports- 
 
 
-
 /**
  * Listener that is notified of v_blockroom table changes.
  */
@@ -26,7 +25,6 @@ public interface VBlockroomListener
 // extends+ 
 
 // extends- 
-
 {
     /**
      * Invoked just before inserting a VBlockroomBean record into the database.
@@ -63,5 +61,4 @@ public interface VBlockroomListener
 // class+ 
 
 // class- 
-
 }

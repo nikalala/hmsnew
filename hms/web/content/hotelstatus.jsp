@@ -138,7 +138,7 @@
             var hkid = $(".changestatus2").val();
 
             var sql = "?query=INSERT INTO roomhst(roomhstid, roomid, housekeepingstatusid, regdate, regbyid, houseunitid) " +
-                    " VALUES ((SELECT COALESCE(MAX(roomhstid) %2B 1,1) FROM roomhst), " + trid + ", " + hkid + ", '<%=df2.format(dclosedate)%>', <%=user.getPersonnelid()%>, " + thuid + ")";
+                    " VALUES (nextval('roomhstid_seq'), " + trid + ", " + hkid + ", '<%=df2.format(dclosedate)%>', <%=user.getPersonnelid()%>, " + thuid + ")";
 
             $.post("content/execute.jsp" + roomquery, {}, function (data1) {
                 $.post("content/execute.jsp" + sql, {}, function (data2) {
@@ -197,7 +197,7 @@
             }
 
             generatedSQL += "INSERT INTO roomhst(roomhstid, roomid, housekeepingstatusid, regdate, regbyid, houseunitid) " +
-            " VALUES ((SELECT COALESCE(MAX(roomhstid) + 1,1) FROM roomhst), " + trid + ", " + hkid + ", '<%=df2.format(dclosedate)%>', <%=user.getPersonnelid()%>, " + thuid + ");";
+            " VALUES (nextval('roomhstid_seq'), " + trid + ", " + hkid + ", '<%=df2.format(dclosedate)%>', <%=user.getPersonnelid()%>, " + thuid + ");";
 
         });
 
@@ -271,7 +271,7 @@
 
             generatedSQL += " INSERT INTO housekeeper(housekeeperid, personnelid, roomid, houseunitid) " +
             " VALUES " +
-            "((SELECT COALESCE(MAX(housekeeperid) + 1,1) FROM housekeeper), '" + $("#assigntohk").val() + "', " + trid + ", " + thuid + ");";
+            "(nextval('housekeeperid_seq'), '" + $("#assigntohk").val() + "', " + trid + ", " + thuid + ");";
 
         });
 
@@ -436,7 +436,7 @@
 
         var sql = deleteRemarks + " INSERT INTO remarks(remarkid, remark, roomid, houseunitid) " +
                 "VALUES " +
-                "((SELECT COALESCE(MAX(remarkid) + 1,1) FROM remarks), '" + remark + "', " + roomId + ", " + huId + ");";
+                "(nextval('remarkid_seq'), '" + remark + "', " + roomId + ", " + huId + ");";
 
         $.post("content/execute.jsp?query=" + encodeURIComponent(sql), {}, function () {
 
@@ -482,7 +482,7 @@
 
         var sql = deleteRK + " INSERT INTO housekeeper(housekeeperid, personnelid, roomid, houseunitid) " +
                 "VALUES " +
-                "((SELECT COALESCE(MAX(housekeeperid) + 1,1) FROM housekeeper), '" + $("#changekeeper").val() + "', " + roomId + ", " + huId + ");";
+                "(nextval('housekeeperid_seq'), '" + $("#changekeeper").val() + "', " + roomId + ", " + huId + ");";
 
         $.post("content/execute.jsp?query=" + encodeURIComponent(sql), {}, function () {
 

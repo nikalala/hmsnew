@@ -148,8 +148,8 @@
                 blocks + " priority, " + wpres_top + worderst_top + dedline_top +
                 "regbyid)" +
                 "VALUES (" +
-                "(SELECT COALESCE(MAX(workorderid) + 1,1) FROM workorder)," +
-                "(SELECT COALESCE(MAX(workorderid) + 1,1) FROM workorder)," +
+                "nextval('workorderid_seq'), " + //(SELECT COALESCE(MAX(workorderid) + 1,1) FROM workorder)," +
+                "currval('workorderid_seq'), " + //(SELECT COALESCE(MAX(workorderid) + 1,1) FROM workorder)," +
                 "'" + $("#work-descr").val().trim() + "'," +
                 $("#work-workOrderCategory").val() + "," +
                 roomid + "," +
@@ -201,7 +201,8 @@
                             sql = "INSERT INTO workorderlog(" +
                             "workorderlogid, workorderid, room, category, priority, assignedto, status, note, regbyid)" +
                             "VALUES (" +
-                            "(SELECT COALESCE(MAX(workorderlogid) + 1,1) FROM workorderlog)," +
+                            "nextval('workorderlogid_seq'), "+
+                            //"(SELECT COALESCE(MAX(workorderlogid) + 1,1) FROM workorderlog)," +
                             "(SELECT MAX(workorderid) FROM workorder), " +
                             "N'" + room + "', " +
                             "N'" + category + "', " +
@@ -232,7 +233,7 @@
                 sql = "INSERT INTO workorderlog(" +
                 "workorderlogid, workorderid, room, category, priority, assignedto, status, note, regbyid)" +
                 "VALUES (" +
-                "(SELECT COALESCE(MAX(workorderlogid) + 1,1) FROM workorderlog)," +
+                "nextval('workorderlogid_seq'), " + //(SELECT COALESCE(MAX(workorderlogid) + 1,1) FROM workorderlog)," +
                 "(SELECT MAX(workorderid) FROM workorder), " +
                 "N'" + room + "', " +
                 "N'" + category + "', " +

@@ -17,6 +17,7 @@ import java.sql.*;
 
 // imports- 
 
+
 /**
  * Handles database calls for the sharer table.
  */
@@ -24,6 +25,7 @@ public class SharerManager
 // extends+ 
 
 // extends- 
+
 {
 
     /**
@@ -1138,4 +1140,5 @@ public class SharerManager
 // class+ 
 
 // class- 
+
 }

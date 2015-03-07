@@ -45,7 +45,7 @@
                     sql = "UPDATE preference SET name = '" + txt + "', preferencetypeid = " + $("#pref_type").val() + " WHERE preferenceid = " + idToBeUpdated;
                 }else{
                     sql = "INSERT INTO preference(preferenceid, name, preferencetypeid, regbyid, active,deleted, reservationid, isstandart) " +
-                    "VALUES ((SELECT COALESCE(MAX(preferenceid) + 1,1) FROM preference), '" + txt + "', " + $("#pref_type").val() + ", <%=user.getPersonnelid()%>, TRUE,FALSE,<%=reservationId%>, FALSE);";
+                    "VALUES (nextval('preferenceid_seq'), '" + txt + "', " + $("#pref_type").val() + ", <%=user.getPersonnelid()%>, TRUE,FALSE,<%=reservationId%>, FALSE);";
                 }
             }
         }else{
@@ -54,7 +54,7 @@
                     sql = "UPDATE preference SET name = '" + txt + "', preferencetypeid = " + $("#pref_type").val() + " WHERE preferenceid = " + idToBeUpdated;
                 }else{
                     sql = "INSERT INTO preference(preferenceid, name, preferencetypeid, regbyid, active,deleted, reservationid, isstandart) " +
-                    "VALUES ((SELECT COALESCE(MAX(preferenceid) + 1,1) FROM preference), '" + $("#prefs").next().find('.filter-option').text() + "', " + $("#pref_type").val() + ", <%=user.getPersonnelid()%>, TRUE,FALSE,<%=reservationId%>, FALSE);";
+                    "VALUES (nextval('preferenceid_seq'), '" + $("#prefs").next().find('.filter-option').text() + "', " + $("#pref_type").val() + ", <%=user.getPersonnelid()%>, TRUE,FALSE,<%=reservationId%>, FALSE);";
                 }
             }
         }
