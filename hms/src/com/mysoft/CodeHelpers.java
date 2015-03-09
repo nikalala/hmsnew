@@ -1,8 +1,10 @@
 package com.mysoft;
 
 
-import com.mysoft.hms.HousekeepingstatusBean;
+import com.mysoft.hms.*;
 
+import javax.servlet.http.HttpServletRequest;
+import java.net.URLDecoder;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -13,6 +15,38 @@ import java.util.Date;
  */
 
 public class CodeHelpers {
+
+    public static VsReservationlistBean[] buildReservationSearchString(HttpServletRequest request) throws Exception {
+
+        request.setCharacterEncoding("UTF-8");
+        String paramName = request.getParameter("filterby");
+        String searchTerm = URLDecoder.decode(request.getParameter("searchterm"), "UTF-8");
+        VsReservationlistBean[] ReservationBeanList = null;
+        String sql = "";
+        String limit = " limit 50";
+
+        if (paramName.equals("name")) {
+            sql = "where guest LIKE N'%" + searchTerm + "%'";
+        } else if (paramName.equals("roomtype")) {
+            sql = "where roomtypecode = N'" + searchTerm + "'";
+        } else if (paramName.equals("room")) {
+            sql = "where roomcode = N'" + searchTerm + "'";
+        } else if (paramName.equals("reserv")) {
+            sql = "where reservationid = " + searchTerm;
+        } else if (paramName.equals("folio")) {
+            sql = "where folionumber = " + searchTerm;
+        } else if (paramName.equals("mobile")) {
+            sql = "where mobile LIKE N'%" + searchTerm + "%' OR  phone LIKE N'%" + searchTerm + "%'";
+        } else if (paramName.equals("invoice")) {
+            sql = "where folionumber = " + searchTerm;
+        } else if (paramName.equals("voucher")) {
+            sql = "where companyname LIKE N'%" + searchTerm + "%'";
+        }
+        System.out.println("QUERY = " + sql + limit);
+        ReservationBeanList = VsReservationlistManager.getInstance().loadByWhere(sql + limit);
+
+        return ReservationBeanList;
+    }
 
     public static String ifIsNullOrEmptyReturnEmptryString(String object) {
         return object == null || object.length() == 0 ? "" : object;
@@ -56,15 +90,14 @@ public class CodeHelpers {
         return nextDate;
     }
 
-    public static Long addDays(Date date, int days)
-    {
+    public static Long addDays(Date date, int days) {
         Calendar cal = Calendar.getInstance();
         cal.setTime(date);
         cal.add(Calendar.DATE, days); //minus number would decrement the days
         return cal.getTimeInMillis();
     }
 
-    public static String getCurrentHouseKeepingStatus(int hsid,HousekeepingstatusBean[] arr){
+    public static String getCurrentHouseKeepingStatus(int hsid, HousekeepingstatusBean[] arr) {
         for (HousekeepingstatusBean item : arr) {
             if (item.getHousekeepingstatusid().equals(hsid)) {
                 return item.getName();

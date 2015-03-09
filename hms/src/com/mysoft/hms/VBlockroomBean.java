@@ -16,10 +16,12 @@ package com.mysoft.hms;
 
 // imports- 
 
+
 public class VBlockroomBean
 // extends+ 
 
 // extends- 
+
 {
     private Long blockroomid;
     private boolean blockroomid_is_modified = false;
@@ -1005,4 +1007,5 @@ public class VBlockroomBean
 // class+ 
 
 // class- 
+
 }

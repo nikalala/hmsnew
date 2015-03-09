@@ -153,19 +153,19 @@ table.lscroll tr {
                             <tr>
                                 <td align="left">
                                     
-                                    <form class="form-horizontal" role="form" style="">
+                                    <form class="form-horizontal" role="form" id="filterbyfrm" style="">
                                         <div class="form-group" style="">
                                             <label for="filterby" class="col-sm-4" style="margin-top:7px; padding-left: 10px;">ფილტრი</label>
                                             <div class="col-sm-12">
-                                                <select id="filterby" class="form-control">
-                                                    <option value="">სტუმრის სახელი</option>
-                                                    <option value="">ოთახის ტიპი</option>
-                                                    <option value="">ოთახი</option>
-                                                    <option value="">რეზერვაცია</option>
-                                                    <option value="">ფოლიო</option>
-                                                    <option value="">მობილური</option>
-                                                    <option value="">ინვოისი</option>
-                                                    <option value="">ვაუჩერი</option>
+                                                <select id="filterby" name="filterby" class="form-control">
+                                                    <option value="name">სტუმრის სახელი</option>
+                                                    <option value="roomtype">ოთახის ტიპი</option>
+                                                    <option value="room">ოთახი</option>
+                                                    <option value="reserv">რეზერვაცია</option>
+                                                    <option value="folio">ფოლიო</option>
+                                                    <option value="mobile">მობილური</option>
+                                                    <option value="invoice">ინვოისი</option>
+                                                    <option value="voucher">ვაუჩერი</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -173,8 +173,8 @@ table.lscroll tr {
                                             <label for="searchterm" class="col-sm-4" style="margin-top:7px; padding-left: 10px;">ტექსტი</label>
                                             <div class="col-sm-12">
                                                 <div class="input-group">
-                                                    <input class="form-control" id="searchterm">
-                                                    <div class="input-group-addon" style="cursor: pointer;" onclick="alert('ძებნა');">
+                                                    <input class="form-control" id="searchterm" name="searchterm">
+                                                    <div class="input-group-addon" style="cursor: pointer;" onclick="search()">
                                                         <span class="glyphicon glyphicon-search"></span>
                                                     </div>
                                                 </div>

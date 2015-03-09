@@ -479,6 +479,14 @@ function getLBody(fname) {
     });
 }
 
+function search(){
+
+    var frm = $("#filterbyfrm").serialize();
+    var params = encodeURIComponent(frm);
+    getBody('stayviewleft', 'trsearch', 'ტრანზაქციების ძიება', 'res1', '?' + params,true);
+
+}
+
 function getBody(fname1, fname2, name, id, param, isFirst) {
 
     loader.show();

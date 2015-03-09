@@ -36,6 +36,44 @@ resGrid = {
     beforeRequest: function () {
     }
 };
+
+var searchresGridModel = [];
+searchresGridModel.push(
+    colModelGenerator(120, 'guest', 0),
+    colModelGenerator(60, 'arraivaldate', 0),
+    colModelGenerator(60, 'departuredate', 0),
+    colModelGenerator(90, 'roomcode', 0),
+    colModelGenerator(60, 'folio', 0),
+    colModelGenerator(80, 'res', 0),
+    colModelGenerator(80,'invoice', 0),
+    colModelGenerator(110,'contrname', 0),
+    colModelGenerator(94, 'status', 0),
+    colModelGenerator(94, 'trandate', 0),
+    colModelGenerator(44, 'action', 0)
+);
+searchresGrid = {
+    id: 'list_reservs',
+    url: 'content/gettrsearch.jsp',
+    type: 'xml',
+    cols: ['სტუმარი', 'ჩამოსვლა', 'წასვლა', 'ოთახი', 'ფოლიო', 'რეზ#', 'ინვოისი', 'ტურ. აგენტი', 'სტატუსი', 'ტრ. თაირიღი',''],
+    model: searchresGridModel,
+    sort: 'arraivaldate',
+    order: 'asc',
+    limit: 5,
+    offset: 0,
+    isPopup: false,
+    page: 1,
+    gridComplete: function () {
+        ReDrawTable(searchresGrid);
+        //Line below makes the height of the row to be 38 px!!!
+        $("#grid-table .ui-widget-content").css("height", "38px");
+        /*<div align="center" id="grid-footer" style="background: transparent; margin-left: -4px; width: 100%;height: 33px;line-height: 33px; position: absolute;bottom: 0;">*/
+
+    },
+    beforeRequest: function () {
+    }
+};
+
 /* -------------------------------- Reservation List Model ------------------------------------*/
 
 
