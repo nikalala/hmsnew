@@ -1044,6 +1044,20 @@ System.out.println(rid+" = "+statusid);
     String[] arrdepdateformats = {"dd.MM", "dd/MM", "dd-MM", "MM.dd", "MM/dd", "MM-dd"};
     String[] timezones = TimeZone.getAvailableIDs();
 
+    
+/*
+    particular:
+ -1 - გადასახადი
+ 0 - დამრგვალება
+ 1 - bank
+ 2 - cash
+ 3 - 
+ 4 - ფასდაკლება
+ 5 - დამატებითი მომსახურება
+ 6 - ოთახის გადასახადი
+    
+*/
+    
     String[] roomstatus =
             {
                     "დადასტურებული რეზერვაცია",     //  0

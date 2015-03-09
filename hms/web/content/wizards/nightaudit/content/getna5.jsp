@@ -2,7 +2,7 @@
 <%@page contentType="text/xml;charset=utf-8"%>
 <%@include file="../../../../includes/initxml.jsp"%>
 <%
-String sql = "where roomid is not null and itemdate = to_date('"+df.format(dclosedate)+"','DD/MM/YYYY') and done = false";
+String sql = "where particular in (5,6) and itemdate = to_date('"+df.format(dclosedate)+"','DD/MM/YYYY') and done = false";
     
 int ipg = 1;
 int ilmt = 10;
@@ -35,19 +35,64 @@ FolioitemBean[] items = FolioitemManager.getInstance().loadByWhere(sql+" "+order
 	for(int i=0;i<items.length;i++){
             FolioBean folio = FolioManager.getInstance().loadByPrimaryKey(items[i].getFolioid());
             ReservationroomBean res = ReservationroomManager.getInstance().loadByPrimaryKey(folio.getReservationroomid());
-            GuestBean guest = GuestManager.getInstance().loadByPrimaryKey(folio.getGuestid());
-            SalutationBean salutation = SalutationManager.getInstance().loadByPrimaryKey(guest.getSalutationid());
-            int istatus = 0;
+            String guestname = "";
             String roomname = "";
             if(items[i].getRoomid() != null){
                 RoomBean room = RoomManager.getInstance().loadByPrimaryKey(items[i].getRoomid());
-                istatus = getRoomStatus(null,room.getRoomid().intValue());
+                //istatus = getRoomStatus(null,room.getRoomid().intValue());
                 roomname = room.getName()+" ";
+            }
+            
+            if(folio.getGuestid() != null){
+                GuestBean guest = GuestManager.getInstance().loadByPrimaryKey(folio.getGuestid());
+                SalutationBean salutation = null;
+                if(guest.getSalutationid() != null)
+                    salutation = SalutationManager.getInstance().loadByPrimaryKey(guest.getSalutationid());
+                if(salutation != null)
+                    guestname += salutation.getName()+" ";
+                guestname += guest.getFname() + " " + guest.getLname();
+            } else {
+                ContragentBean contragent = ContragentManager.getInstance().loadByPrimaryKey(folio.getContragentid());
+                switch(contragent.getType().intValue()){
+                    case 0:
+                        if(contragent.getSalutationid() != null){
+                            SalutationBean salt = SalutationManager.getInstance().loadByPrimaryKey(contragent.getSalutationid());
+                            guestname = salt.getName() + " ";
+                        }
+                        guestname += contragent.getFname() + " " + contragent.getLname();
+                        break;
+                    case 1:
+                        guestname = contragent.getName();
+                        break;
+                    case 2:
+                        if(contragent.getName() != null)    guestname = contragent.getName();
+                        else {
+                            if(contragent.getSalutationid() != null){
+                                SalutationBean salt = SalutationManager.getInstance().loadByPrimaryKey(contragent.getSalutationid());
+                                guestname = salt.getName() + " ";
+                            }
+                            guestname += contragent.getFname() + " " + contragent.getLname();
+                        }
+                        break;
+                    case 3:
+                        guestname = contragent.getName();
+                        break;
+                    case 4:
+                        if(contragent.getSalutationid() != null){
+                            SalutationBean salt = SalutationManager.getInstance().loadByPrimaryKey(contragent.getSalutationid());
+                            guestname = salt.getName() + " ";
+                        }
+                        guestname += contragent.getFname() + " " + contragent.getLname();
+                        break;
+                    case 5:
+                        guestname = "WEB";
+                        break;
+                    default:
+                        guestname = "N/A";
+                }
             }
             RoomtypeBean roomtype = RoomtypeManager.getInstance().loadByPrimaryKey(res.getRoomtypeid());
             if(roomtype != null)    roomname += roomtype.getName();
-            String guestname = salutation.getName()+" ";
-            guestname += guest.getFname() + " " + guest.getLname();
             
             String actions = "";
             actions += "<a href=\"#\" title=\"AMEND STAY\" class=\"btn btn-xs btn-default\"><i class=\"fa fa-remove\"></i></a>";
@@ -55,32 +100,41 @@ FolioitemBean[] items = FolioitemManager.getInstance().loadByWhere(sql+" "+order
             double koeff = 1;
             String particular = "";
             boolean noroom = false;
-            if(items[i].getRoomid() != null)    {
-                particular = "ოთახის გადასახადი";
-            }
-            else if(items[i].getTaxid() != null){
-                TaxBean tax = TaxManager.getInstance().loadByPrimaryKey(items[i].getTaxid());
-                particular = tax.getName() + " " + dc.format(tax.getAmount().doubleValue());
-                if(tax.getPostingtype().intValue() == 0)    particular += "%";
-                noroom = true;
-            } else if(items[i].getDiscountid() != null){
-                DiscountBean discount = DiscountManager.getInstance().loadByPrimaryKey(items[i].getDiscountid());
-                particular = discount.getName();
-                noroom = true;
-            } else if(items[i].getExtrachargeid() != null){
-                ExtrachargeBean extracharge = ExtrachargeManager.getInstance().loadByPrimaryKey(items[i].getExtrachargeid());
-                particular = extracharge.getName();
-            } else if(items[i].getOrdermainid() != null){
-                particular = "კვება";
-            } else if(items[i].getPaymentid() != null){
-                particular = "გადახდა: ";
-                PaymentBean payment = PaymentManager.getInstance().loadByPrimaryKey(items[i].getPaymentid());
-                PaymentmethodBean pmethod = PaymentmethodManager.getInstance().loadByPrimaryKey(payment.getPaymentmethodid());
-                particular += pmethod.getCode();
-                koeff = -1;
-            } else {
-                noroom = true;
-                particular = "დამრგვალება";
+            switch(items[i].getParticular().intValue()){
+                case -1:
+                    TaxBean tax = TaxManager.getInstance().loadByPrimaryKey(items[i].getTaxid());
+                    particular = tax.getName() + " " + dc.format(tax.getAmount().doubleValue());
+                    if(tax.getPostingtype().intValue() == 0)    particular += "%";
+                    noroom = true;
+                    break;
+                case 0:
+                    noroom = true;
+                    particular = "დამრგვალება";
+                    break;
+                case 1:
+                case 2:
+                    particular = "გადახდა: ";
+                    PaymentBean payment = PaymentManager.getInstance().loadByPrimaryKey(items[i].getPaymentid());
+                    PaymentmethodBean pmethod = PaymentmethodManager.getInstance().loadByPrimaryKey(payment.getPaymentmethodid());
+                    particular += pmethod.getCode();
+                    koeff = -1;
+                    break;
+                case 3:
+                    break;
+                case 4:
+                    DiscountBean discount = DiscountManager.getInstance().loadByPrimaryKey(items[i].getDiscountid());
+                    particular = discount.getName();
+                    noroom = true;
+                    break;
+                case 5:
+                    ExtrachargeBean extracharge = ExtrachargeManager.getInstance().loadByPrimaryKey(items[i].getExtrachargeid());
+                    particular = extracharge.getName();
+                    break;
+                case 6:
+                    particular = "ოთახის გადასახადი";
+                    break;
+                default:
+                    
             }
             %>
                 <%--reservs[i].getReservationroomid()--%>

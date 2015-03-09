@@ -20,7 +20,7 @@ if(reserv.getBillto() == 0) bid = reserv.getCompanyid().longValue();
 //if(reserv.getBillto() == 1) bid = rroom.getGuestid().longValue();
 //if(reserv.getBillto() == 2) bid = rroom.getGuestid().longValue();
 //if(reserv.getBillto() == 3) bid = rroom.getGuestid().longValue();
-String sql = "where folioid = "+folio.getFolioid();
+String sql = "where folioid = "+folio.getFolioid()+" and (particular != 5 or done = true) ";
 if(hideunposted)
     sql += " and done = true ";
 if(hidevoid)

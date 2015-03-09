@@ -116,25 +116,25 @@ try{
             lastday.add(Calendar.DATE,-1);
             switch(postingtype){
                 case 0:
-                    fisql = "where particular = 6 and folioid = "+fisid+" and (itemdate = to_date('"+df.format(res.getArraivaldate().getTime())+"','DD/MM/YYYY') or itemdate = to_date('"+df.format(lastday.getTime())+"','DD/MM/YYYY')) order by itemdate";
+                    fisql = "where itemdate >= to_date('"+df.format(dclosedate)+"','DD/MM/YYYY') and particular = 6 and folioid = "+fisid+" and (itemdate = to_date('"+df.format(res.getArraivaldate().getTime())+"','DD/MM/YYYY') or itemdate = to_date('"+df.format(lastday.getTime())+"','DD/MM/YYYY')) order by itemdate";
                     break;
                 case 1:
-                    fisql = "where particular = 6 and folioid = "+fisid+" order by itemdate";
+                    fisql = "where itemdate >= to_date('"+df.format(dclosedate)+"','DD/MM/YYYY') and particular = 6 and folioid = "+fisid+" order by itemdate";
                     break;
                 case 2: 
-                    fisql = "where particular = 6 and folioid = "+fisid+" and itemdate != to_date('"+df.format(res.getArraivaldate().getTime())+"','DD/MM/YYYY') order by itemdate";
+                    fisql = "where itemdate >= to_date('"+df.format(dclosedate)+"','DD/MM/YYYY') and particular = 6 and folioid = "+fisid+" and itemdate != to_date('"+df.format(res.getArraivaldate().getTime())+"','DD/MM/YYYY') order by itemdate";
                     break;
                 case 3: 
-                    fisql = "where particular = 6 and folioid = "+fisid+" and itemdate != to_date('"+df.format(res.getArraivaldate().getTime())+"','DD/MM/YYYY') and itemdate != to_date('"+df.format(lastday.getTime())+"','DD/MM/YYYY') order by itemdate";
+                    fisql = "where itemdate >= to_date('"+df.format(dclosedate)+"','DD/MM/YYYY') and particular = 6 and folioid = "+fisid+" and itemdate != to_date('"+df.format(res.getArraivaldate().getTime())+"','DD/MM/YYYY') and itemdate != to_date('"+df.format(lastday.getTime())+"','DD/MM/YYYY') order by itemdate";
                     break;
                 case 4:
-                    fisql = "where particular = 6 and folioid = "+fisid+" and itemdate != to_date('"+df.format(lastday.getTime())+"','DD/MM/YYYY') order by itemdate";
+                    fisql = "where itemdate >= to_date('"+df.format(dclosedate)+"','DD/MM/YYYY') and particular = 6 and folioid = "+fisid+" and itemdate != to_date('"+df.format(lastday.getTime())+"','DD/MM/YYYY') order by itemdate";
                     break;
                 case 5: 
-                    fisql = "where particular = 6 and folioid = "+fisid+" and itemdate = to_date('"+df.format(res.getArraivaldate().getTime())+"','DD/MM/YYYY') order by itemdate";
+                    fisql = "where itemdate >= to_date('"+df.format(dclosedate)+"','DD/MM/YYYY') and particular = 6 and folioid = "+fisid+" and itemdate = to_date('"+df.format(res.getArraivaldate().getTime())+"','DD/MM/YYYY') order by itemdate";
                     break;
                 case 6: 
-                    fisql = "where particular = 6 and folioid = "+fisid+" and itemdate = to_date('"+df.format(lastday.getTime())+"','DD/MM/YYYY') order by itemdate";
+                    fisql = "where itemdate >= to_date('"+df.format(dclosedate)+"','DD/MM/YYYY') and particular = 6 and folioid = "+fisid+" and itemdate = to_date('"+df.format(lastday.getTime())+"','DD/MM/YYYY') order by itemdate";
                     break;
                 default:
                     fisql = "where folioitemid = 0";
@@ -160,10 +160,10 @@ try{
             }
 
             FolioitemBean[] fis = FolioitemManager.getInstance().loadByWhere(fisql);
-            ExtrachargefolioManager.getInstance().deleteByWhere("where extrachargeid = "+efb.getExtrachargeid()+" and folioitemid in (select folioitemid from folioitem where folioid = "+ofolioid+")");
-            FoliologManager.getInstance().deleteByWhere("where folioitemid in (select folioitemid from folioitem where extrachargeid = "+efb.getExtrachargeid()+" and folioid = "+ofolioid+")");
-            FolioitemManager.getInstance().deleteByWhere("where extrachargeid = "+efb.getExtrachargeid()+" and folioid = "+ofolioid);
-            if(ExtrachargefolioManager.getInstance().countWhere("where extrachargeid != "+efb.getExtrachargeid()+" and extrachargeid = "+extrachargeid+" and folioitemid in (select folioitemid from folioitem where folioid in (select folioid from folio where reservationroomid = "+rr.getReservationroomid()+"))") > 0)
+            ExtrachargefolioManager.getInstance().deleteByWhere("where extrachargeid = "+efb.getExtrachargeid()+" and folioitemid in (select folioitemid from folioitem where folioid = "+ofolioid+" and done = false)");
+            FoliologManager.getInstance().deleteByWhere("where folioitemid in (select folioitemid from folioitem where extrachargeid = "+efb.getExtrachargeid()+" and folioid = "+ofolioid+" and done = false)");
+            FolioitemManager.getInstance().deleteByWhere("where extrachargeid = "+efb.getExtrachargeid()+" and folioid = "+ofolioid+" and done = false");
+            if(ExtrachargefolioManager.getInstance().countWhere("where extrachargeid != "+efb.getExtrachargeid()+" and extrachargeid = "+extrachargeid+" and folioitemid in (select folioitemid from folioitem where done = false and folioid in (select folioid from folio where reservationroomid = "+rr.getReservationroomid()+"))") > 0)
                 throw new Exception("ასეთი სერვისი უკვე არსებობს!");
             for(int i=0;i<fis.length;i++){
                 FolioitemBean fb = FolioitemManager.getInstance().createFolioitemBean();
