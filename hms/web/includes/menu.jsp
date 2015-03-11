@@ -115,7 +115,7 @@
                     <a href="javascript:getBody('stayviewleft','overview','მიმოხილვა', 'res1','',true);" data-toggle="tooltip" title="მიმოხილვა"><span class="glyphicon glyphicon-eye-open"></span></a>
                 </li>
                 <li>
-                    <a href="javascript:getBody('stayviewleft','construction');" data-toggle="tooltip" title="სამუშაო მაგიდა"><span class="glyphicon glyphicon-dashboard"></span></a>
+                    <a href="javascript:getBody('stayviewleft','dashboard','სამუშაო მაგიდა', 'res1','',true);" data-toggle="tooltip" title="სამუშაო მაგიდა"><span class="glyphicon glyphicon-dashboard"></span></a>
                 </li>
                 <li>
                     <a href="javascript:getBody('stayviewleft','construction');" data-toggle="tooltip" title="ოთახები"><span class="glyphicon glyphicon-th"></span></a>

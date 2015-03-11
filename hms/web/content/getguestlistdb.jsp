@@ -1,4 +1,4 @@
-<%@ page import="javax.mail.internet.MimeUtility" %><?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <%@page contentType="text/xml;charset=utf-8" %>
 <%@include file="../includes/initxml.jsp" %>
 
