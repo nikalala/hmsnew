@@ -241,6 +241,7 @@ try{
             efb.setPostingtype(postingtype);
             efb.setQty(qty);
             efb.setRate(extrachanrgerate);
+            v.addElement((ExtrachargefolioBean)efb);
         } else {
 
             FolioBean folio = FolioManager.getInstance().loadByPrimaryKey(folioid);
@@ -322,10 +323,10 @@ try{
                 ex.setRate(extrachanrgerate);
                 ex.setFolioitemid(fb.getFolioitemid());
                 v.addElement((ExtrachargefolioBean)ex);
+
                 if(save)        ex = ExtrachargefolioManager.getInstance().save(ex);
             }
         }
-        
         msg = "{\"result\":1}";
     }
     

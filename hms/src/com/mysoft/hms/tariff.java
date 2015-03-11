@@ -46,6 +46,15 @@ public class tariff {
     public double tariff_discount = 0;
     public double tariff_fix = 0;
     public double tariff_neto = 0;
+    public double tariff_discount1 = 0;
+    
+    public double[] tariff_discounts = new double[0];
+    public double[] discplans = new double[0];
+    public double[] discamounts = new double[0];
+    public double[] disctypes = new double[0];
+    public double[] discnightss = new double[0];
+
+    public ReservationdiscountBean[] discounts = new ReservationdiscountBean[0];
     
     SimpleDateFormat dt = new SimpleDateFormat("dd/MM/yyyy");
     
@@ -93,21 +102,19 @@ public class tariff {
     public void init(long reservationroomid,int day) throws Exception {
         ReservationroomBean rroom = ReservationroomManager.getInstance().loadByPrimaryKey(reservationroomid);
         ReservationBean reserv = ReservationManager.getInstance().loadByPrimaryKey(rroom.getReservationid());
-        RoomBean room = RoomManager.getInstance().loadByPrimaryKey(rroom.getRoomid());
+        discounts = ReservationdiscountManager.getInstance().loadByReservationid(reserv.getReservationid());
+        this.tariff_discounts = new double[discounts.length];
+        this.discplans = new double[discounts.length];
+        this.discamounts = new double[discounts.length];
+        this.disctypes = new double[discounts.length];
+        this.discnightss = new double[discounts.length];
         
-        this.discnights = 0;
-        if(reserv.getDiscountnights() != null) this.discnights = reserv.getDiscountnights().intValue();
+        
         this.contragentid = 0;
         if(reserv.getContractcontragentid() != null)    this.contragentid = reserv.getContractcontragentid().longValue();
         this.ratetypeid = rroom.getRatetypeid().intValue();
-        
-        this.discplan = 0;
-        if(reserv.getPostingtype() != null) this.discplan = reserv.getPostingtype().intValue();
         this.manualrate = 0;
         if(reserv.getManualrate() != null)  this.manualrate = reserv.getManualrate().doubleValue();
-        this.discamount = 0;
-        if(reserv.getPostingvalueevery() != null)
-            this.discamount = reserv.getPostingvalueevery().doubleValue();
         this.payinforatetype = reserv.getRatetype().intValue();
         this.adult = rroom.getAdult().intValue();
         this.child = rroom.getChild().intValue();
@@ -118,12 +125,33 @@ public class tariff {
         this.calend.setTime(reserv.getDeparturedate());
         this.roomtype = RoomtypeManager.getInstance().loadByPrimaryKey(rroom.getRoomtypeid());
         
+        this.discnights = 0;
+        if(reserv.getDiscountnights() != null) this.discnights = reserv.getDiscountnights().intValue();
+        this.discplan = 0;
+        if(reserv.getPostingtype() != null) this.discplan = reserv.getPostingtype().intValue();
+        this.discamount = 0;
+        if(reserv.getPostingvalueevery() != null)
+            this.discamount = reserv.getPostingvalueevery().doubleValue();
         this.disctype = 0;
         DiscountBean disc = null;
         if(reserv.getDiscountid() != null){
             disc = DiscountManager.getInstance().loadByPrimaryKey(reserv.getDiscountid());
             if(!disc.getPerctype().booleanValue()) disctype = 1;
         }
+        
+        for(int i=0;i<discounts.length;i++){
+            this.discnightss[i] = 0;
+            if(discounts[i].getDiscountnights() != null) this.discnightss[i] = discounts[i].getDiscountnights().intValue();
+            this.discplans[i] = 0;
+            if(discounts[i].getPostingtype() != null) this.discplans[i] = discounts[i].getPostingtype().intValue();
+            this.discamounts[i] = 0;
+            if(discounts[i].getPostingvalueevery() != null)
+                this.discamounts[i] = discounts[i].getPostingvalueevery().doubleValue();
+            this.disctypes[i] = 0;
+            disc = DiscountManager.getInstance().loadByPrimaryKey(discounts[i].getDiscountid());
+            if(!disc.getPerctype().booleanValue()) this.disctypes[i] = 1;
+        }
+        
         DisplaysettingsBean[] displaysettingss = DisplaysettingsManager.getInstance().loadByWhere("limit 1");
         if(displaysettingss.length > 0){
             this.displaysettings = DisplaysettingsManager.getInstance().loadByPrimaryKey(displaysettingss[0].getDisplaysettingsid());
@@ -162,7 +190,7 @@ public class tariff {
                     + "discnights = "+discnights+"\n"
                     + "discamount = "+discamount+"\n"
                     + "i = "+i+"";
-            System.out.println(s);
+            //System.out.println(s);
         }
         
         
@@ -220,85 +248,68 @@ public class tariff {
         else if(discplan == 2 && i > 0) discamt = 0;
         else if(discplan == 3 && i < count-1) discamt = 0;
 
-
-
+        double[] discamts = new double[discamounts.length];
+        for(int j=0;j<discamounts.length;j++){
+            discamts[j] = discamounts[j];
+            if(discplans[j] == 0 && discnightss[j] != 0 && (i+1)%(discnightss[j]+1) != 0) discamts[j] = 0;
+            else if(discplans[j] == 2 && i > 0) discamts[j] = 0;
+            else if(discplans[j] == 3 && i < count-1) discamts[j] = 0;
+        }
+        
         double price = 0;
         double tax = 0;
         double discount = 0;
         double fix = 0;
+        
+        if(dbf){
+            if(incl){
+                if(taxtype == 0)    price = rate-(rate/(taxamount+100))*taxamount;
+                else                price = rate - taxamount;
+            } else {
+                price = rate;
+            }
+        } else {
+            if(incl){
+                if(taxtype == 0)    price = rate - (rate/(taxamount+100))*taxamount;
+                else                price = rate - taxamount;
+            } else {
+                price = rate;
+            }
+        }
+        
+        if(disctype == 0)   discount = price*discamt/100;
+        else                discount = discamt;
+        
+        tariff_discount1 = discount;
+
+        for(int j=0;j<discamts.length;j++){
+            if(disctypes[j] == 0)
+                this.discamounts[j] = price*discamts[j]/100;
+            else
+                this.discamounts[j] = discamts[j];
+            discount += this.discamounts[j];
+        }
 
         if(dbf){
 
             if(incl){
-                if(taxtype == 0){
-                    price = rate-(rate/(taxamount+100))*taxamount;
-                    if(disctype == 0){
-                        tax = ((rate-(rate*discamt/100))/(taxamount+100))*taxamount;
-                        discount = price*discamt/100;
-                    } else {
-                        tax = ((rate-discamt)/(taxamount+100))*taxamount;
-                        discount = discamt;
-                    }
-                } else {
-                    price = rate - taxamount;
-                    if(disctype == 0)
-                        discount = rate*discamt/100;
-                    else
-                        discount = discamt;
-                    tax = taxamount;
-                }
+                if(taxtype == 0)    tax = ((rate-discount)/(taxamount+100))*taxamount;
+                else                tax = taxamount;
             } else {
-                price = rate;
-                if(taxtype == 0){
-                    if(disctype == 0){
-                        tax = (rate - (rate*discamt/100))*taxamount/100;
-                        discount = rate*discamt/100;
-                    } else {
-                        tax = ((rate - discamt)*taxamount)/100;
-                        discount = discamt;
-                    }
-                } else {
-                    tax = taxamount;
-                    if(disctype == 0)
-                        discount = rate*discamt/100;
-                    else
-                        discount = discamt;
-                }
+                if(taxtype == 0)    tax = ((rate - discount)*taxamount)/100;
+                else                tax = taxamount;
             }
         } else {
             if(incl){
-                if(taxtype == 0){
-                    price = rate - (rate/(taxamount+100))*taxamount;
-                    tax = (rate/(taxamount+100))*taxamount;
-                    if(disctype == 0)
-                        discount = rate*discamt/100;
-                    else
-                        discount = discamt;
-                } else {
-                    price = rate - taxamount;
-                    tax = taxamount;
-                    if(disctype == 0)
-                        discount = rate*discamt/100;
-                    else
-                        discount = discamt;
-                }
+                if(taxtype == 0)    tax = (rate/(taxamount+100))*taxamount;
+                else                tax = taxamount;
             } else {
-                price = rate;
-                if(taxtype == 0){
-                    tax = rate*taxamount/100;
-                    if(disctype == 0)
-                        discount = rate*discamt/100;
-                    else
-                        discount = discamt;
-                } else {
-                    tax = taxamount;
-                    if(disctype == 0)
-                        discount = rate*discamt/100;
-                    else
-                        discount = discamt;
-                }
+                if(taxtype == 0)    tax = rate*taxamount/100;
+                else                tax = taxamount;
             }
         }
+        
+        
         if(notax)   tax = 0;
         double net = price + tax - discount;
         fix = roundOff(net, roundoff) - net;

@@ -52,7 +52,8 @@ if(fid > 0){
     for(int i=0;i<exbs.length;i++)
         v.addElement((ExtrachargefolioBean)exbs[i]);
     session.setAttribute("WALKIN_EXTRACHARGES", (Vector)v);
-} else session.removeAttribute("WALKIN_EXTRACHARGES");
+}
+//else session.removeAttribute("WALKIN_EXTRACHARGES");
 
 
 
@@ -175,7 +176,7 @@ ExtrachargeBean[] extracharges = ExtrachargeManager.getInstance().loadByWhere("w
                     else {
                         resetExtracharge();
                         getExtrachargeList();
-                        refreshExtrachargeList();
+                        //refreshExtrachargeList();
                         calcRate(false);
                     }
                 },

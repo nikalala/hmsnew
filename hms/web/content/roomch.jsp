@@ -111,6 +111,10 @@ function selunsel(val){
     jQuery("#roomtable1").jqGrid('setSelection',"roomch"+val);
 }
 
+function setDiscount(rid){
+    newmWindow1('setdiscount','ვადის გაგრძელება','rid=' + rid);
+}
+
 function roomchAction(n,rid){
     selunsel(rid);
     for(var i=1;i<4;i++)
@@ -421,7 +425,7 @@ $(document).ready(function(){
             <a class="legenditem" id="legend3"><span class="glyphicon glyphicon-user" style="width: 18px; padding-left: 4px;"></span>უფრ./ბავშ. ოპერაცია</a>
         </li>
         <li style="float:right; margin-right:-8px; height: 28px;">
-            <button style="width: 80px; margin-top: 2px;" type="button" class="btn btn-sm btn-danger navbar-btn">ფასდაკლება</button>
+            <button style="width: 80px; margin-top: 2px;" type="button" onclick="setDiscount(<%=rroom.getReservationroomid()%>)" class="btn btn-sm btn-danger navbar-btn">ფასდაკლება</button>
         </li>
     </ul>
 </div>

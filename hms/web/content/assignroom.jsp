@@ -143,9 +143,10 @@
     }
     $(document).ready(function(){
         populateRoomFirst($("#roomType").val());
-        $("#myModalCheckin").remove();
-        $("#myModalSave").remove();
-        $("#myModalFooter").append('<button type="button" class="btn btn-primary" id="myModalSave" onclick="savedata(\'myModal\')">შენახვა</button>');
+        $("#mediummodalsave").remove();
+        var r1 = $('<button type="button" class="btn btn-primary" id="mediummodalsave" onclick="savedata(\'mediummodal\')">შენახვა</button>');
+        $("#mediummodalfooter").append(r1);
+
         
     });
 

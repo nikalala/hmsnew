@@ -1247,7 +1247,7 @@ public class DisplaysettingsBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: displaysettings.zip
-     * <li>default value: '???????'::text
+     * <li>default value: 'ინდექსი'::text
      * <li>column size: 2147483647
      * <li>jdbc type returned by the driver: Types.VARCHAR
      * </ul>

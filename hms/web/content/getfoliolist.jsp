@@ -122,6 +122,8 @@ for(int i=0;i<items.length;i++){
             ExtrachargeBean extracharge = ExtrachargeManager.getInstance().loadByPrimaryKey(items[i].getExtrachargeid());
             particular = extracharge.getName();
             if(items[i].getOrdermainid() != null)   particular = "კვება";
+            if(items[i].getManual().booleanValue() == false)
+                particular = "<font color='red'>*</font>"+particular;
             break;
         case 6:
             particular = "ოთახის გადასახადი";

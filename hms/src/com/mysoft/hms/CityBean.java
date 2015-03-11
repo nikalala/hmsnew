@@ -128,7 +128,7 @@ public class CityBean
      * <ul>
      * <li>full name: city.regionid
      * <li> foreign key: region.regionid
-     * <li>comments: ???????
+     * <li>comments: რეგიონი
      * <li>column size: 10
      * <li>jdbc type returned by the driver: Types.INTEGER
      * </ul>
@@ -196,7 +196,7 @@ public class CityBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: city.name
-     * <li>comments: ??????
+     * <li>comments: სახელი
      * <li>column size: 2147483647
      * <li>jdbc type returned by the driver: Types.VARCHAR
      * </ul>
@@ -253,7 +253,7 @@ public class CityBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: city.code
-     * <li>comments: ????? ??????
+     * <li>comments: მოკლე სახელი
      * <li>column size: 2147483647
      * <li>jdbc type returned by the driver: Types.VARCHAR
      * </ul>
@@ -310,7 +310,7 @@ public class CityBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: city.ext
-     * <li>comments: ?????????? ????
+     * <li>comments: სატელეფონი კოდი
      * <li>column size: 2147483647
      * <li>jdbc type returned by the driver: Types.VARCHAR
      * </ul>

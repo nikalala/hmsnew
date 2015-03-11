@@ -363,7 +363,7 @@ public class folio {
             // discount
             double discamount = 0;
             DiscountBean disc = null;
-            if(res.getDiscountid() != null){
+            if(res.getDiscountid() != null && trf.tariff_discount > 0){
                 discamount = trf.tariff_discount;
                 fb = FolioitemManager.getInstance().createFolioitemBean();
                 fb.setFolioid(folio.getFolioid());

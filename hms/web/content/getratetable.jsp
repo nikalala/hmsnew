@@ -26,7 +26,7 @@ int disctype = 0;
 if(disctid > 0){
     disc = DiscountManager.getInstance().loadByPrimaryKey(disctid);
     if(!disc.getPerctype().booleanValue()) disctype = 1;
-}
+} else discamount = 0;
 
 
 Calendar calstart = Calendar.getInstance();

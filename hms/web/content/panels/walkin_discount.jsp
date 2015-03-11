@@ -4,7 +4,7 @@
 <%
 String type = request.getParameter("type");
 
-DiscountBean[] discounts = DiscountManager.getInstance().loadByWhere("order by name");
+DiscountBean[] discounts = DiscountManager.getInstance().loadByWhere("where roomrate = true and extracharge = false order by name");
 
 ContragentBean[] tas = ContragentManager.getInstance().loadByWhere("where type = 2 order by name");
 MarketBean[] markets = MarketManager.getInstance().loadByWhere("order by name");

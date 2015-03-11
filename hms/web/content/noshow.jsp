@@ -125,11 +125,10 @@
             $("#nowshow_totalvalue").html("<%=maincurrency.getCode()%> "+total.toFixed(2));
         });
         
-        $("#myModalSave").remove();
-        $("#myModalCheckin").remove();
-        
-        var r1 = $('<button type="button" class="btn btn-primary" id="myModalSave" onclick="savedata(\'myModal\')">შენახვა</button>');
-        $("#myModalFooter").append(r1);
+        $("#mediummodalsave").remove();
+        var r1 = $('<button type="button" class="btn btn-primary" id="mediummodalsave" onclick="savedata(\'mediummodal\')">შენახვა</button>');
+        $("#mediummodalfooter").append(r1);
+
     });
     
     function reloadAfterNoShow(){
