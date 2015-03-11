@@ -416,7 +416,6 @@ try{
         }
     }
     
-System.out.println("roomid = "+resroom.getRoomid());
     if(resroom.getRoomid() != null && resroom.getRoomid().intValue() == 0)
         resroom.setRoomid(null);
     

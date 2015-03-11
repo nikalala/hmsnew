@@ -37,8 +37,8 @@ FolioitemBean[] items = FolioitemManager.getInstance().loadByWhere(sql+" "+order
             ReservationroomBean res = ReservationroomManager.getInstance().loadByPrimaryKey(folio.getReservationroomid());
             String guestname = "";
             String roomname = "";
-            if(items[i].getRoomid() != null){
-                RoomBean room = RoomManager.getInstance().loadByPrimaryKey(items[i].getRoomid());
+            if(res.getRoomid() != null){
+                RoomBean room = RoomManager.getInstance().loadByPrimaryKey(res.getRoomid());
                 //istatus = getRoomStatus(null,room.getRoomid().intValue());
                 roomname = room.getName()+" ";
             }
@@ -92,7 +92,7 @@ FolioitemBean[] items = FolioitemManager.getInstance().loadByWhere(sql+" "+order
                 }
             }
             RoomtypeBean roomtype = RoomtypeManager.getInstance().loadByPrimaryKey(res.getRoomtypeid());
-            if(roomtype != null)    roomname += roomtype.getName();
+            if(roomtype != null)    roomname += roomtype.getCode();
             
             String actions = "";
             actions += "<a href=\"#\" title=\"AMEND STAY\" class=\"btn btn-xs btn-default\"><i class=\"fa fa-remove\"></i></a>";
@@ -128,7 +128,7 @@ FolioitemBean[] items = FolioitemManager.getInstance().loadByWhere(sql+" "+order
                     break;
                 case 5:
                     ExtrachargeBean extracharge = ExtrachargeManager.getInstance().loadByPrimaryKey(items[i].getExtrachargeid());
-                    particular = extracharge.getName();
+                    particular = "<font color='red'>*</font>"+extracharge.getName();
                     break;
                 case 6:
                     particular = "ოთახის გადასახადი";

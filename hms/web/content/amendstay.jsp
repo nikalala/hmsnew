@@ -80,8 +80,6 @@
         $('#amenddeparturedate').datepicker(<%=pickerformat2%>);
         
         $("#mediummodalsave").remove();
-        //$("#myModalCheckin").remove();
-        
         var r1 = $('<button type="button" class="btn btn-primary" id="mediummodalsave" onclick="savedata(\'mediummodal\')">შენახვა</button>');
         $("#mediummodalfooter").append(r1);
     });

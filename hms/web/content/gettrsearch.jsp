@@ -34,6 +34,7 @@
         if (sord == null) sord = "";
         String order = " order by " + sidx + " " + sord;
         int total = VReservationlistManager.getInstance().countWhere(where);
+System.out.println(where);
         ReservationBeanList = VsReservationlistManager.getInstance().loadByWhere(where + " " + order + limit);
     }
 %>
@@ -44,14 +45,16 @@
             <records><%=count%></records>--%>
     <%
         if (ReservationBeanList != null) {
-            for (int i = 0; i < ReservationBeanList.length; i++) { %>
-    <%
-        int st = ReservationBeanList[i].getStatus();
-        if (ReservationBeanList[i].getRoomcode() != null) {
-            room = ReservationBeanList[i].getRoomcode() + " - ";
-        } else {
-            room = "";
-        }
+            for (int i = 0; i < ReservationBeanList.length; i++) { 
+                int st = ReservationBeanList[i].getStatus();
+                if (ReservationBeanList[i].getRoomcode() != null) {
+                    room = ReservationBeanList[i].getRoomcode() + " - ";
+                } else {
+                    room = "";
+                }
+                String statusname = "";
+                if(ReservationBeanList[i].getStatus().intValue() >= 0)   statusname = reservationstatus[ReservationBeanList[i].getStatus().intValue()];
+                else    statusname = roomstatus[(int)getSum("select getroomstatus1("+ReservationBeanList[i].getReservationroomid()+",'"+dflong.format(dclosedate)+"')")];
     %>
     <row id='<%=ReservationBeanList[i].getReservationid()%>'>
         <cell><![CDATA[<%=ReservationBeanList[i].getGuest()%>]]></cell>
@@ -62,7 +65,7 @@
         <cell><![CDATA[<%=ReservationBeanList[i].getReservationid()%>]]></cell>
         <cell><![CDATA[<%=ReservationBeanList[i].getFolionumber()%>]]></cell>
         <cell><![CDATA[<%=ReservationBeanList[i].getCompanyname()%>]]></cell>
-        <cell><![CDATA[<%=reservationstatus[ReservationBeanList[i].getStatus()]%>]]></cell>
+        <cell><![CDATA[<%=statusname%>]]></cell>
         <cell><![CDATA[<%=df3.format(ReservationBeanList[i].getRegdate())%>]]></cell>
         <cell><![CDATA[
         <i onclick="addTab('content/EditTransaction.jsp?reservationroomid=<%=ReservationBeanList[i].getReservationroomid()%>','<span class=\'glyphicon glyphicon-saved\'></span>&nbsp;&nbsp;<%=ReservationBeanList[i].getReservationroomid()%> - DXR','TAB_EditTransaction_<%=ReservationBeanList[i].getReservationroomid()%>');" style="font-size: 15px;  margin-left:10px;" class="fa fa-pencil"></i>

@@ -4,7 +4,6 @@
 <%
 Vector v = (Vector)session.getAttribute("WALKIN_EXTRACHARGES");
 if(v == null)   v = new Vector();
-System.out.println("v2.size() = "+v.size());
 if(v.size()>0){
 %>
 <table class="scrollwk table table-condensed table-hover table-striped" width="100%">

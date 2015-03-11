@@ -124,7 +124,7 @@ public class CurrencyrateBean
      * <ul>
      * <li>full name: currencyrate.currencyid
      * <li> foreign key: currency.currencyid
-     * <li>comments: ??????
+     * <li>comments: ვალუტა
      * <li>column size: 10
      * <li>jdbc type returned by the driver: Types.INTEGER
      * </ul>
@@ -192,7 +192,7 @@ public class CurrencyrateBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: currencyrate.ratedate
-     * <li>comments: ??????
+     * <li>comments: თარიღი
      * <li>default value: now()
      * <li>column size: 13
      * <li>jdbc type returned by the driver: Types.DATE
@@ -261,7 +261,7 @@ public class CurrencyrateBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: currencyrate.value
-     * <li>comments: ???????
+     * <li>comments: ოდენობა
      * <li>column size: 17
      * <li>jdbc type returned by the driver: Types.DOUBLE
      * </ul>
