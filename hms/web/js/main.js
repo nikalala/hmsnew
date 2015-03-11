@@ -612,6 +612,22 @@ function reloadMenu() {
     $('.nav li').css("float", "left");
 }
 
+function loadStats(page,heading){
+    loader.show();
+    $.ajax({
+        type: "POST",
+        url: "content/reports/heading" + heading + "/" + page + ".jsp",
+        data: {},
+        success: function (data) {
+            $($("#centerTabContent").children()[0]).html(data);
+            loader.hide();
+        },
+        error: function () {
+            loader.hide();
+        },
+        async: false
+    });
+}
 
 /*
  function addTab(fname2, name, id) {
