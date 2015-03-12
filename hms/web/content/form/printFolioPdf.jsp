@@ -189,7 +189,12 @@ String language = "en";
 String fontname = "arial.ttf";
 //if(language.equalsIgnoreCase("ka"))
     fontname = "sylfaen.ttf";
-    
+int cid = maincurrency.getCurrencyid().intValue();
+if(request.getParameter("currencyid") != null)
+    cid = Integer.parseInt(request.getParameter("currencyid"));
+CurrencyBean crn = CurrencyManager.getInstance().loadByPrimaryKey(cid);
+double crate = getRate(cid,maincurrency.getCurrencyid().intValue(),df.format(new Date()));
+
 FolioBean folio = FolioManager.getInstance().loadByPrimaryKey(new Long(request.getParameter("id")));
 ReservationroomBean rroom = ReservationroomManager.getInstance().loadByPrimaryKey(folio.getReservationroomid());
 RoomtypeBean rtp = RoomtypeManager.getInstance().loadByPrimaryKey(rroom.getRoomtypeid());
@@ -326,8 +331,8 @@ String[] values = {
     dt.format(caldep.getTime()),
     dtime.format(calarr.getTime()),
     dtime.format(caldep.getTime()),
-    dc.format(drate),
-    maincurrency.getCode(),
+    dc.format(drate*crate),
+    crn.getCode(),
     rttype.getName(),
     sbillto,
     hotel.getAddress1(),
@@ -562,7 +567,7 @@ for(int i=0;i<items.length;i++){
     cell.setPaddingBottom(2);
     table.addCell(cell);
     
-    cell = new PdfPCell(new com.itextpdf.text.Phrase(new com.itextpdf.text.Chunk(dc.format(charges),font)));
+    cell = new PdfPCell(new com.itextpdf.text.Phrase(new com.itextpdf.text.Chunk(dc.format(charges*crate),font)));
     //cell.setBorderColorTop(new BaseColor(0, 0, 0));
     //cell.setBorderColorBottom(new BaseColor(0, 0, 0));
     //cell.setBorderColorLeft(new BaseColor(255, 255, 255));
@@ -573,7 +578,7 @@ for(int i=0;i<items.length;i++){
     cell.setPaddingBottom(2);
     table.addCell(cell);
     
-    cell = new PdfPCell(new com.itextpdf.text.Phrase(new com.itextpdf.text.Chunk(dc.format(payment),font)));
+    cell = new PdfPCell(new com.itextpdf.text.Phrase(new com.itextpdf.text.Chunk(dc.format(payment*crate),font)));
     //cell.setBorderColorTop(new BaseColor(0, 0, 0));
     //cell.setBorderColorBottom(new BaseColor(0, 0, 0));
     //cell.setBorderColorLeft(new BaseColor(255, 255, 255));
@@ -584,7 +589,7 @@ for(int i=0;i<items.length;i++){
     cell.setPaddingBottom(2);
     table.addCell(cell);
 
-    cell = new PdfPCell(new com.itextpdf.text.Phrase(new com.itextpdf.text.Chunk(dc.format(balance),font)));
+    cell = new PdfPCell(new com.itextpdf.text.Phrase(new com.itextpdf.text.Chunk(dc.format(balance*crate),font)));
     //cell.setBorderColorTop(new BaseColor(0, 0, 0));
     //cell.setBorderColorBottom(new BaseColor(0, 0, 0));
     //cell.setBorderColorLeft(new BaseColor(255, 255, 255));
@@ -596,9 +601,9 @@ for(int i=0;i<items.length;i++){
     table.addCell(cell);
     cr++;
     
-    tots[0] += charges;
-    tots[1] += payment;
-    tots[2] += balance;
+    tots[0] += charges*crate;
+    tots[1] += payment*crate;
+    tots[2] += balance*crate;
     
     if((items.length > (i+1) && items[i+1].getItemdate().getTime() != datelong) || items.length == (i+1)){
         if(items.length > (i+1))   datelong = items[i+1].getItemdate().getTime();
@@ -627,7 +632,7 @@ for(int i=0;i<items.length;i++){
         cell.setPaddingBottom(2);
         table.addCell(cell);
         
-        cell = new PdfPCell(new com.itextpdf.text.Phrase(new com.itextpdf.text.Chunk(dc.format(bal),bfont)));
+        cell = new PdfPCell(new com.itextpdf.text.Phrase(new com.itextpdf.text.Chunk(dc.format(bal*crate),bfont)));
         //cell.setBorderColorTop(new BaseColor(0, 0, 0));
         //cell.setBorderColorBottom(new BaseColor(0, 0, 0));
         //cell.setBorderColorLeft(new BaseColor(255, 255, 255));

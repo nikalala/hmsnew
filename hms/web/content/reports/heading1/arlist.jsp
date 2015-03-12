@@ -89,7 +89,12 @@
         }
     });
 
-    function doFilter(reload) {
+
+    function doFilter(){
+        
+    }
+
+    function doFilter1(reload) {
 
         if (reload) {
             resetDates();

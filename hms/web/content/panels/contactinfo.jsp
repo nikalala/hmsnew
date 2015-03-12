@@ -3,6 +3,7 @@
 <%@include file="../../includes/init.jsp"%>
 <%
 String type = request.getParameter("type");
+if(type == null)    type = "";
 GuestBean guest = null;
 if(request.getParameter("gid") != null)
     guest = GuestManager.getInstance().loadByPrimaryKey(new Long(request.getParameter("gid")));
@@ -19,7 +20,7 @@ if(request.getParameter("gid") != null)
             <form class="form-inline" role="form">
             <div class="form-group">
                 <div class="input-group-xs">
-                    <input class="form-control" type="text" id="contacttinfo_email" style="width: 190px;" value="<%= (guest == null) ? "":guest.getEmail() %>">
+                    <input class="form-control" type="text" id="<%=type%>contacttinfo_email" style="width: 190px;" value="<%= (guest == null) ? "":guest.getEmail() %>">
                 </div>
             </div>
             </form>
@@ -31,7 +32,7 @@ if(request.getParameter("gid") != null)
             <form class="form-inline" role="form">
             <div class="form-group">
                 <div class="input-group-xs">
-                    <input class="form-control" type="text" id="contacttinfo_phone" style="width: 190px;" value="<%= (guest == null) ? "":guest.getPhone()%>">
+                    <input class="form-control" type="text" id="<%=type%>contacttinfo_phone" style="width: 190px;" value="<%= (guest == null) ? "":guest.getPhone()%>">
                 </div>
             </div>
             </form>
@@ -43,7 +44,7 @@ if(request.getParameter("gid") != null)
             <form class="form-inline" role="form">
             <div class="form-group">
                 <div class="input-group-xs">
-                    <input class="form-control" type="text" id="contacttinfo_mobile" style="width: 190px;" value="<%= (guest == null) ? "":guest.getMobile()%>">
+                    <input class="form-control" type="text" id="<%=type%>contacttinfo_mobile" style="width: 190px;" value="<%= (guest == null) ? "":guest.getMobile()%>">
                 </div>
             </div>
             </form>
@@ -55,7 +56,7 @@ if(request.getParameter("gid") != null)
             <form class="form-inline" role="form">
             <div class="form-group">
                 <div class="input-group-xs">
-                    <input class="form-control" type="text" id="contacttinfo_fax" style="width: 190px;" value="<%= (guest == null) ? "":guest.getFax() %>">
+                    <input class="form-control" type="text" id="<%=type%>contacttinfo_fax" style="width: 190px;" value="<%= (guest == null) ? "":guest.getFax() %>">
                 </div>
             </div>
             </form>

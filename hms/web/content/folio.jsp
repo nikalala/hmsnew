@@ -25,6 +25,10 @@ FolioBean[] folios = FolioManager.getInstance().loadByWhere("where reservationro
 %>
 <script>
     
+    function splitFolio(id){
+        newmWindow1("splitfolio","გაყოფა","folioid="+id);
+    }
+    
     function folioZvoid(id,ids){
         if(ids.length > 0){
             
@@ -48,7 +52,10 @@ FolioBean[] folios = FolioManager.getInstance().loadByWhere("where reservationro
     }
     
     function printFolio(id){
-        window.open("content/form/printFolioPdf.jsp?id="+id);
+        
+        newsWindow1("askcurrency", 'აირჩიეთ ვალუტა', "file=printFolioPdf&id="+id);
+        
+        //window.open("content/form/printFolioPdf.jsp?id="+id);
         //addTab("content/form/printInvoiceFolioItem.jsp?act=folio&id="+id,"ფოლიოს ბეჭდვა","foliovoice_"+id);
     }
     
@@ -101,7 +108,7 @@ FolioBean[] folios = FolioManager.getInstance().loadByWhere("where reservationro
     
 $(document).ready(function(){
     
-    $('#foliodate').datepicker(<%=pickerformat2%>);
+    $('#foliodate').datepicker(<%=pickerformat%>);
     
     //$("#foliotab").height(edittransactionheight*0.5);
     

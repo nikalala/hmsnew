@@ -48,6 +48,8 @@ String order = "order by "+sidx+" "+sord;
             actions += "<span onclick=\"\" style=\"cursor: pointer;\" class=\"glyphicon glyphicon-arrow-up\" data-toggle=\"tooltip\" title=\"წაყვანა\"></span>&nbsp;";
             actions += "<span onclick=\"\" style=\"cursor: pointer;\" class=\"glyphicon glyphicon-user\" data-toggle=\"tooltip\" title=\"შავ სიაში დამატება\"></span>&nbsp;";
             actions += "<span onclick=\"printRegCard("+rroom.getReservationroomid()+","+sharers[i].getGuestid()+")\" style=\"cursor: pointer;\" class=\"glyphicon glyphicon-list-alt\" data-toggle=\"tooltip\" title=\"სტუმრის სარეგისტრაციო ბარათი\"></span>";
+            if(sharers[i].getGuestid().longValue() != rroom.getGuestid().longValue())
+                actions += "&nbsp;<span onclick=\"delSharer("+rroom.getReservationroomid()+","+sharers[i].getGuestid()+")\" style=\"cursor: pointer;\" class=\"glyphicon glyphicon-trash\" data-toggle=\"tooltip\" title=\"სტუმრის წაშლა\"></span>";
             %>
                 <row id='<%=sharers[i].getGuestid()%>'>
                     <cell><![CDATA[<%=gname%>]]></cell>

@@ -483,6 +483,11 @@ System.out.println(rid+" = "+statusid);
         return rates;
     }
 
+    double getRate(int c1, int c2, String fordate) throws Exception {
+        //SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        return getSum("select ratedate("+c1+","+c2+",to_date('"+fordate+"','DD/MM/YYYY'))");
+    }
+    
     double getRoomrate(int payinforatetype, Double manualrate, Long lcontragentid, String dateformats2, Calendar calstart, int roomtypeid, int adult, int child, int ratetypeid) throws Exception {
         long contragentid = 0;
         if (lcontragentid != null) contragentid = lcontragentid;

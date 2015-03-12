@@ -396,7 +396,7 @@
                 </div>
                 <div class="panel-body" style="height: 140px;">
                     <jsp:include page="panels/guestinfo.jsp">
-                        <jsp:param name="type" value="walkin"/>
+                        <jsp:param name="type" value=""/>
                     </jsp:include>
                 </div>
             </div>
@@ -408,7 +408,7 @@
                 </div>
                 <div class="panel-body" style="height: 140px;">
                     <jsp:include page="panels/stayinfo.jsp">
-                        <jsp:param name="type" value="walkin"/>
+                        <jsp:param name="type" value=""/>
                         <jsp:param name="wintype" value="<%=wintype%>"/>
                     </jsp:include>
                 </div>
@@ -421,7 +421,7 @@
                 </div>
                 <div class="panel-body" style="height: 140px;">
                     <jsp:include page="panels/contactinfo.jsp">
-                        <jsp:param name="type" value="walkin"/>
+                        <jsp:param name="type" value=""/>
                     </jsp:include>
                 </div>
             </div>
@@ -435,7 +435,7 @@
                 </div>
                 <div class="panel-body" style="height: 125px;">
                     <jsp:include page="panels/otherinfo.jsp">
-                        <jsp:param name="type" value="walkin"/>
+                        <jsp:param name="type" value=""/>
                     </jsp:include>
                 </div>
             </div>
@@ -447,7 +447,7 @@
                 </div>
                 <div class="panel-body" style="height: 125px;">
                     <jsp:include page="panels/payinfo.jsp">
-                        <jsp:param name="type" value="walkin"/>
+                        <jsp:param name="type" value=""/>
                     </jsp:include>
                 </div>
             </div>
@@ -472,22 +472,22 @@
                      style="height: 123px; padding-bottom: 0px;">
                     <div class="tab-pane active" id="walkin_other" style="height: 100%;">
                         <jsp:include page="panels/walkin_other.jsp">
-                            <jsp:param name="type" value="walkin"/>
+                            <jsp:param name="type" value=""/>
                         </jsp:include>
                     </div>
                     <div class="tab-pane" id="walkin_ta" style="height: 100%;">
                         <jsp:include page="panels/walkin_ta.jsp">
-                            <jsp:param name="type" value="walkin"/>
+                            <jsp:param name="type" value=""/>
                         </jsp:include>
                     </div>
                     <div class="tab-pane" id="walkin_discount" style="height: 100%;">
                         <jsp:include page="panels/walkin_discount.jsp">
-                            <jsp:param name="type" value="walkin"/>
+                            <jsp:param name="type" value=""/>
                         </jsp:include>
                     </div>
                     <div class="tab-pane" id="walkin_payment" style="height: 100%;">
                         <jsp:include page="panels/walkin_payment.jsp">
-                            <jsp:param name="type" value="walkin"/>
+                            <jsp:param name="type" value=""/>
                         </jsp:include>
                     </div>
                     <p style="height: 0px;" id='spacer'></p>

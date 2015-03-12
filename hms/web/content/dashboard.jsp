@@ -12,11 +12,27 @@
   int year = cal.get(Calendar.YEAR);
   int month = cal.get(Calendar.MONTH);
 
+  String qr = "";
 %>
 
 <script src="js/zabuto_calendar.js"></script>
 
 <script>
+    
+  function doCalSearch(){
+      var roomtypeid = $("#roomType").val();
+      var ratetypeid = $("#RatetypeBeans").val();
+      var adult = $("#adult").val();
+      var child = $("#child").val();
+      var discountid = $("#discount").val();
+      var valuenumbe = $("#valuenumbe").val();
+      var notax = $("#tax").is(":checked");
+      if(roomtypeid > 0 && ratetypeid > 0){
+        var qr = "?act=1&notax="+notax+"&roomtypeid="+roomtypeid+"&ratetypeid="+ratetypeid+"&adult="+adult+"&child="+child+"&discountid="+discountid+"&valuenumbe="+valuenumbe;
+        reInit(qr);
+    } else BootstrapDialog.alert("ოთახის და ტარიფის ტიპი აუცილებელია");
+  }
+    
   function loadDefaults() {
     $('.q-main-div .dropdown').selectpicker();
     $(".q-main-div .btn-group").css("width", "100%", "!important").css("padding-left", "0px").css("padding-right", "0px");
@@ -214,7 +230,7 @@
   <div class="col-md-9">
     <div id="status_bar" class="first-status-bar" align='center'>
       <div class="q-statusbar-div">
-        <span class="q-statusbar-span">Availability & Rate Chart</span>
+        <span class="q-statusbar-span">თავისუფალი ოთახები და ტარიფები (<%=maincurrency.getCode()%>)</span>
       </div>
       <div class="q-table-div" style="height : 100px;">
         <table style="width: 98%; text-align: right;">
@@ -277,20 +293,21 @@
                 </tr>
               </table>
             </td>
-            <td style="padding-right: 10px;">
-              შეიცავს Tax
+            <td colspan="2" style="height: 5px;"></td>
+            <%--td style="padding-right: 10px;">
+              შეიცავს გადასახადებს
             </td>
             <td style="padding-right: 10px; text-align: left;">
               <input type="checkbox" name="tax" id="tax" />
-            </td>
+            </td--%>
             <td style="padding-right: 10px;" colspan="2">
-              <input type="button" name="go" id="go" value="Go!" />
+                <input type="button" name="go" id="go" value="Go!" onclick="doCalSearch()" />
             </td>
           </tr>
         </table>
       </div>
-      <div class="q-table-div" style="height : 347px;">
-        <div id="dash-calendar"></div>
+      <div class="q-table-div" style="height : 347px;" id="dash-calendar-container">
+        
       </div>
     </div>
   </div>
@@ -319,11 +336,14 @@
 
 
 <script type="application/javascript">
-  $(document).ready(function () {
-    $("#dash-calendar").zabuto_calendar({
+    
+  function reInit(qr){
+      $("#dash-calendar").remove();
+      $("#dash-calendar-container").html('<div id="dash-calendar"></div>');
+      $("#dash-calendar").zabuto_calendar({
       language : "ge",
       year : <%=year%>,
-      month : <%=month%>,
+      month : <%=month+1%>,
       show_previous : 0,
       /* show_next : 2,*/
       // show_reminder: true,
@@ -348,9 +368,15 @@
 
       },
       ajax: {
-        url: "content/getdashdata.jsp",
+        url: "content/getdashdata.jsp"+qr,
         modal : false
       }
     });
+    
+    
+  }
+    
+  $(document).ready(function () {
+    reInit('<%=qr%>');
   });
 </script>

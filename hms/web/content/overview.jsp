@@ -1,7 +1,83 @@
 <%@page contentType="text/html; charset=UTF-8" %>
 <%@page pageEncoding="UTF-8" %>
 <%@include file="../includes/init.jsp" %>
+<%
+    
+String[] stats1 = {
+    "მიმდინარე დაკავებული ოთახები",
+    "უფასო ოთახები",
+    "გასაწერი ოთახები",
+    "ვადაგადაცილებული ოთახები",
+    "მომსვლელები (დადასტურებული)",
+    "მომსვლელები (დაუდასტურებული)",
+    "გასაყიდი ოთახები (სულ)",
+    "გეგმიურად დაკავებული ოთახები",
+    "დაგეგმილი განთავსება",
+    "დაგეგმილი ADR",
+    "დაგეგმილი RevPar"
+};
+double[] pars1 = new double[stats1.length];
+String[] stats2 = {"ამჟამად სასტუმროში","წამსვლელი","ვადაგადაცილებული","ჩამომსვლელი","მოსალოდნელი"};
+int[][] pars2 = new int[stats2.length][3];
+String[] stats3 = {"დღეს მოსული","რეზერვაციის გარეშე შემოსული","მომსვლელი","გაწერილი","წამსვლელი","დღიური გამოყენება"};
+int[] pars3 = new int[stats3.length];
+String[] stats4 = {"ოთახები სასტუმროში","მწყობრიდან გამოსული","ხელმისაწვდომი ოთახები (სულ)"};
+int[] pars4 = new int[stats4.length];
 
+
+RoomBean[] rooms = RoomManager.getInstance().loadByWhere("where active = true and deleted = false");
+
+int blockedrooms = (int)getSum("select count(roomid) from blockroom where blockstart::date <= to_date('"+df.format(dclosedate)+"','DD/MM/YYYY') and blockend::date >= to_date('"+df.format(dclosedate)+"','DD/MM/YYYY')");
+
+pars1[4] = (int)getSum("select count(reservationid) from reservation where arraivaldate::date = to_date('"+df.format(dclosedate)+"','DD/MM/YYYY') and status = 0 and reservationtypeid in (select reservationtypeid from reservationtype where confirmed = true)");
+pars1[5] = (int)getSum("select count(reservationid) from reservation where arraivaldate::date = to_date('"+df.format(dclosedate)+"','DD/MM/YYYY') and status = 0 and reservationtypeid in (select reservationtypeid from reservationtype where confirmed = false)");
+pars1[6] = rooms.length-blockedrooms;
+pars1[7] = (int)getSum("select count(reservationid) from reservation where arraivaldate::date <= to_date('"+df.format(dclosedate)+"','DD/MM/YYYY') and departuredate::date >= to_date('"+df.format(dclosedate)+"','DD/MM/YYYY') and status in (-1,0)");
+pars1[8] = pars1[7]*100/rooms.length;
+pars1[9] = getSum("select avg(amount) from folioitem where particular = 6 and itemdate = to_date('"+df.format(dclosedate)+"','DD/MM/YYYY')");
+
+pars2[0][0] = (int)getSum("select sum(t.adult) from reservation r, reservationroom t where r.reservationid = t.reservationid and r.arraivaldate::date <= to_date('"+df.format(dclosedate)+"','DD/MM/YYYY') and r.departuredate::date >= to_date('"+df.format(dclosedate)+"','DD/MM/YYYY') and r.status = -1");
+pars2[0][1] = (int)getSum("select sum(t.child) from reservation r, reservationroom t where r.reservationid = t.reservationid and r.arraivaldate::date <= to_date('"+df.format(dclosedate)+"','DD/MM/YYYY') and r.departuredate::date >= to_date('"+df.format(dclosedate)+"','DD/MM/YYYY') and r.status = -1");
+pars2[0][2] = pars2[0][0] + pars2[0][1];
+
+pars2[1][0] = (int)getSum("select sum(adult) from reservationroom where roomid is not null and getroomstatus(roomid,'"+df.format(dclosedate)+"') = 3");
+pars2[1][1] = (int)getSum("select sum(child) from reservationroom where roomid is not null and getroomstatus(roomid,'"+df.format(dclosedate)+"') = 3");
+pars2[1][2] = pars2[1][0] + pars2[1][1];
+
+pars2[2][0] = (int)getSum("select sum(adult) from reservationroom where roomid is not null and getroomstatus(roomid,'"+df.format(dclosedate)+"') = 2");
+pars2[2][1] = (int)getSum("select sum(child) from reservationroom where roomid is not null and getroomstatus(roomid,'"+df.format(dclosedate)+"') = 2");
+pars2[2][2] = pars2[2][0] + pars2[2][1];
+
+pars2[3][0] = (int)getSum("select sum(t.adult) from reservation r, reservationroom t where r.reservationid = t.reservationid and r.arraivaldate::date = to_date('"+df.format(dclosedate)+"','DD/MM/YYYY') and r.status = -1")-pars2[0][0];
+pars2[3][1] = (int)getSum("select sum(t.child) from reservation r, reservationroom t where r.reservationid = t.reservationid and r.arraivaldate::date = to_date('"+df.format(dclosedate)+"','DD/MM/YYYY') and r.status = -1")-pars2[0][1];
+pars2[3][2] = pars2[3][0] + pars2[3][1];
+
+pars2[4][0] = (int)getSum("select sum(t.adult) from reservation r, reservationroom t where r.reservationid = t.reservationid and r.arraivaldate::date = to_date('"+df.format(dclosedate)+"','DD/MM/YYYY') and r.status = 0");
+pars2[4][1] = (int)getSum("select sum(t.child) from reservation r, reservationroom t where r.reservationid = t.reservationid and r.arraivaldate::date = to_date('"+df.format(dclosedate)+"','DD/MM/YYYY') and r.status = 0");
+pars2[4][2] = pars2[4][0] + pars2[4][1];
+
+pars3[0] = (int)getSum("select count(distinct r.reservationid) from reservation r, reservationroom t where r.reservationid = t.reservationid and r.arraivaldate::date = to_date('"+df.format(dclosedate)+"','DD/MM/YYYY') and r.status = -1");
+pars3[1] = 0;   //(int)getSum("select sum(t.adult+t.child) from reservation r, reservationroom t where r.reservationid = t.reservationid and r.arraivaldate::date = to_date('"+df.format(dclosedate)+"','DD/MM/YYYY') and r.status = -1");
+pars3[2] = (int)getSum("select count(r.reservationid) from reservation r, reservationroom t where r.reservationid = t.reservationid and r.arraivaldate::date = to_date('"+df.format(dclosedate)+"','DD/MM/YYYY') and r.status = 0");
+pars3[3] = (int)getSum("select count(r.reservationid) from reservation r, reservationroom t where r.reservationid = t.reservationid and r.arraivaldate::date = to_date('"+df.format(dclosedate)+"','DD/MM/YYYY') and r.status = 4");
+pars3[4] = (int)getSum("select count(r.reservationid) from reservation r, reservationroom t where r.reservationid = t.reservationid and r.departuredate::date = to_date('"+df.format(dclosedate)+"','DD/MM/YYYY') and r.status = -1");
+pars3[5] = (int)getSum("select count(distinct reservationid) from reservationroom where roomid is not null and getroomstatus(roomid,'"+df.format(dclosedate)+"') = 6");
+pars3[0] -= pars3[5];
+
+pars4[0] = rooms.length;
+pars4[1] = (int)getSum("select count(roomid) from blockroom where blockstart::date <= to_date('"+df.format(dclosedate)+"','DD/MM/YYYY') and blockend::date >= to_date('"+df.format(dclosedate)+"','DD/MM/YYYY')");
+pars4[2] = pars4[0] - pars4[1];
+
+
+for(int i=0;i<rooms.length;i++){
+    int status = (int)getSum("select getroomstatus("+rooms[i].getRoomid()+",'"+df.format(dclosedate)+"')");
+    if(status == 1 || status == 2 || status == 3 || status == 6)  pars1[0]++;
+    if(status == 3) pars1[2]++;
+    if(status == 2) pars1[3]++;
+    //if(status == 1 || status == 3 || status == 6)  pars1[6]++;
+}
+pars1[6] -= pars1[7];
+%>
 <link rel="stylesheet" type="text/css" href="css/grid-filter.css">
 
 <script>
@@ -192,50 +268,12 @@
         </div>
         <div class="q-table-div">
             <table class="t-s-table table-striped table-hover">
+                <%for(int i=0;i<stats1.length;i++){%>
                 <tr>
-                    <td><span>მიმდინარე დაკავებული ოთახები</span></td>
-                    <td>3</td>
+                    <td><span><%=stats1[i]%></span></td>
+                    <td><%=(i > 7) ? dc.format(pars1[i]):dcint.format(pars1[i])%></td>
                 </tr>
-                <tr>
-                    <td><span>უფასო ოთახები</span></td>
-                    <td>1</td>
-                </tr>
-                <tr>
-                    <td><span>გასაწერი ოთახები</span></td>
-                    <td>11</td>
-                </tr>
-                <tr>
-                    <td><span>ვადაგადაცილებული ოთახები</span></td>
-                    <td>7</td>
-                </tr>
-                <tr>
-                    <td><span>მომსვლელები (დადასტურებული)</span></td>
-                    <td>3</td>
-                </tr>
-                <tr>
-                    <td><span>მომსვლელები (დაუდასტურებული)</span></td>
-                    <td>3</td>
-                </tr>
-                <tr>
-                    <td><span>გასაყიდი ოთახები (სულ)</span></td>
-                    <td>0</td>
-                </tr>
-                <tr>
-                    <td><span>გეგმიურად დაკავებული ოთახები</span></td>
-                    <td>3</td>
-                </tr>
-                <tr>
-                    <td><span>დაგეგმილი განთავსება</span></td>
-                    <td>3</td>
-                </tr>
-                <tr>
-                    <td><span>დაგეგმილი ADR</span></td>
-                    <td>150</td>
-                </tr>
-                <tr>
-                    <td><span>დაგეგმილი RevPar</span></td>
-                    <td>0</td>
-                </tr>
+                <%}%>
             </table>
         </div>
     </div>
@@ -253,36 +291,14 @@
                     <th>ბავშვი</th>
                     <th>სულ</th>
                 </tr>
+                <%for(int i=0;i<stats2.length;i++){%>
                 <tr>
-                    <td><span>ამჟამად სასტუმროში</span></td>
-                    <td><span>3</span></td>
-                    <td><span>6</span></td>
-                    <td><span>9</span></td>
+                    <td><span><%=stats2[i]%></span></td>
+                    <%for(int j=0;j<pars2[i].length;j++){%>
+                    <td><span><%=pars2[i][j]%></span></td>
+                    <%}%>
                 </tr>
-                <tr>
-                    <td><span>წამსვლელი</span></td>
-                    <td><span>3</span></td>
-                    <td><span>6</span></td>
-                    <td><span>9</span></td>
-                </tr>
-                <tr>
-                    <td><span>ვადაგადაცილებული</span></td>
-                    <td><span>3</span></td>
-                    <td><span>6</span></td>
-                    <td><span>9</span></td>
-                </tr>
-                <tr>
-                    <td><span>ჩამომსვლელი</span></td>
-                    <td><span>3</span></td>
-                    <td><span>6</span></td>
-                    <td><span>9</span></td>
-                </tr>
-                <tr>
-                    <td><span>მოსალოდნელი</span></td>
-                    <td><span>3</span></td>
-                    <td><span>6</span></td>
-                    <td><span>9</span></td>
-                </tr>
+                <%}%>
             </table>
         </div>
     </div>
@@ -294,30 +310,12 @@
         </div>
         <div class="q-table-div">
             <table class="t-s-table table-striped table-hover">
+                <%for(int i=0;i<stats3.length;i++){%>
                 <tr>
-                    <td><span>მცხოვრები</span></td>
-                    <td><span>3</span></td>
+                    <td><span><%=stats3[i]%></span></td>
+                    <td><span><%=pars3[i]%></span></td>
                 </tr>
-                <tr>
-                    <td><span>მოსული</span></td>
-                    <td><span>6</span></td>
-                </tr>
-                <tr>
-                    <td><span>მომსვლელი</span></td>
-                    <td><span>6</span></td>
-                </tr>
-                <tr>
-                    <td><span>გაწერილი</span></td>
-                    <td><span>6</span></td>
-                </tr>
-                <tr>
-                    <td><span>წამსვლელი</span></td>
-                    <td><span>6</span></td>
-                </tr>
-                <tr>
-                    <td><span>დღიური გამოყენება</span></td>
-                    <td><span>6</span></td>
-                </tr>
+                <%}%>
             </table>
         </div>
     </div>
@@ -331,18 +329,12 @@
         </div>
         <div class="q-table-div">
             <table class="t-s-table table-striped table-hover">
+                <%for(int i=0;i<stats4.length;i++){%>
                 <tr>
-                    <td><span>ოთახები სასტუმროში</span></td>
-                    <td><span>6</span></td>
+                    <td><span><%=stats4[i]%></span></td>
+                    <td><span><%=pars4[i]%></span></td>
                 </tr>
-                <tr>
-                    <td><span>მწყობრიდან გამოსული</span></td>
-                    <td><span>6</span></td>
-                </tr>
-                <tr>
-                    <td><span>ხელმისაწვდომი ოთახები (სულ)</span></td>
-                    <td><span>6</span></td>
-                </tr>
+                <%}%>
             </table>
         </div>
     </div>

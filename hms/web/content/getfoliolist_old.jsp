@@ -7,13 +7,36 @@ boolean hideunposted = new java.lang.Boolean(request.getParameter("hideunposted"
 boolean hidevoid = new java.lang.Boolean(request.getParameter("hidevoid"));
 
 FolioBean folio = FolioManager.getInstance().loadByPrimaryKey(new Long(request.getParameter("folioid")));
-
+ReservationroomBean rroom = ReservationroomManager.getInstance().loadByPrimaryKey(new Long(request.getParameter("reservationroomid")));
+RoomtypeBean rtp = RoomtypeManager.getInstance().loadByPrimaryKey(rroom.getRoomtypeid());
+ReservationBean reserv = ReservationManager.getInstance().loadByPrimaryKey(rroom.getReservationid());
+String roomname = rtp.getCode();
+if(rroom.getRoomid() != null){
+    RoomBean room = RoomManager.getInstance().loadByPrimaryKey(rroom.getRoomid());
+    roomname = " - "+room.getName();
+}
+long bid = 0;
+if(reserv.getBillto() == 0) bid = reserv.getCompanyid().longValue();
+//if(reserv.getBillto() == 1) bid = rroom.getGuestid().longValue();
+//if(reserv.getBillto() == 2) bid = rroom.getGuestid().longValue();
+//if(reserv.getBillto() == 3) bid = rroom.getGuestid().longValue();
 String sql = "where folioid = "+folio.getFolioid()+" and (particular != 5 or done = true) ";
 if(hideunposted)
     sql += " and done = true ";
 if(hidevoid)
     sql += " and zvoid = false ";
-sql += " order by itemdate, reservationroomid, (case when particular = 6 then 1 when particular = -1 then 2 when particular = 0 then 3 when particular = 1 then 4 when particular = 2 then 5 when particular = 4 then 6 when particular = 5 then 7 else 8 end)";
+/*
+        + "(select folioid from folio where "
+        + "reservationroomid = "+rroom.getReservationroomid()+" and ";
+if(bid > 0)
+        sql += "contragentid = "+bid+" and ";
+sql += "guestid = "+rroom.getGuestid()+") ";
+*/
+sql += " order by itemdate, (case when particular = 6 then 1 when particular = -1 then 2 when particular = 0 then 3 when particular = 1 then 4 when particular = 2 then 5 when particular = 4 then 6 when particular = 5 then 7 else 8 end)";
+
+//System.out.println(sql);
+
+
 
 FolioitemBean[] items = FolioitemManager.getInstance().loadByWhere(sql);
 
@@ -42,18 +65,6 @@ for(int i=0;i<items.length;i++){
     double koeff = 1;
     String particular = "";
     boolean noroom = false;
-    
-    ReservationroomBean rroom = ReservationroomManager.getInstance().loadByPrimaryKey(items[i].getReservationroomid());
-    RoomtypeBean rtp = RoomtypeManager.getInstance().loadByPrimaryKey(rroom.getRoomtypeid());
-    
-    String roomname = rtp.getCode();
-    if(rroom.getRoomid() != null){
-        RoomBean room = RoomManager.getInstance().loadByPrimaryKey(rroom.getRoomid());
-        roomname = " - "+room.getName();
-    }
-
-    
-    
     int z = 1;
     if(items[i].getZvoid().booleanValue()) z = 0;
     if(items[i].getRoomid() != null){
@@ -62,7 +73,6 @@ for(int i=0;i<items.length;i++){
         //roomname = rtp.getCode() + " - "+room.getName();
         roomname = room.getName();
     }
-    String note = items[i].getNote();
     switch(items[i].getParticular().intValue()){
         case -1:
             TaxBean tax = TaxManager.getInstance().loadByPrimaryKey(items[i].getTaxid());
@@ -78,22 +88,12 @@ for(int i=0;i<items.length;i++){
             PaymentBean payment = PaymentManager.getInstance().loadByPrimaryKey(items[i].getPaymentid());
             PaymentmethodBean pmethod = PaymentmethodManager.getInstance().loadByPrimaryKey(payment.getPaymentmethodid());
             particular = pmethod.getCode();
-            if(payment.getCurrencyid().intValue() != maincurrency.getCurrencyid().intValue()){
-                CurrencyBean crn = CurrencyManager.getInstance().loadByPrimaryKey(payment.getCurrencyid());
-                double crate = getRate(payment.getCurrencyid().intValue(),maincurrency.getCurrencyid().intValue(),df.format(payment.getPaydate()));
-                note += " ["+dc.format(payment.getAmount()*crate)+"] "+crn.getCode();
-            }
             koeff = -1;
             break;
         case 2:
             payment = PaymentManager.getInstance().loadByPrimaryKey(items[i].getPaymentid());
             pmethod = PaymentmethodManager.getInstance().loadByPrimaryKey(payment.getPaymentmethodid());
             particular = pmethod.getCode();
-            if(payment.getCurrencyid().intValue() != maincurrency.getCurrencyid().intValue()){
-                CurrencyBean crn = CurrencyManager.getInstance().loadByPrimaryKey(payment.getCurrencyid());
-                double crate = getRate(payment.getCurrencyid().intValue(),maincurrency.getCurrencyid().intValue(),df.format(payment.getPaydate()));
-                note += " ["+dc.format(payment.getAmount()*crate)+"] "+crn.getCode();
-            }
             koeff = -1;
             break;
         case 3:
@@ -109,11 +109,6 @@ for(int i=0;i<items.length;i++){
                 } else {
                     pmethod = PaymentmethodManager.getInstance().loadByPrimaryKey(payment.getPaymentmethodid());
                     particular = pmethod.getCode();
-                }
-                if(payment.getCurrencyid().intValue() != maincurrency.getCurrencyid().intValue()){
-                    CurrencyBean crn = CurrencyManager.getInstance().loadByPrimaryKey(payment.getCurrencyid());
-                    double crate = getRate(payment.getCurrencyid().intValue(),maincurrency.getCurrencyid().intValue(),df.format(payment.getPaydate()));
-                    note += " ["+dc.format(payment.getAmount()*crate)+"] "+crn.getCode();
                 }
                 koeff = -1;
             }
@@ -151,7 +146,7 @@ for(int i=0;i<items.length;i++){
             sact += "<span onclick=\"printFolioAction("+items[i].getFolioitemid()+")\" style=\"padding-left: 5px; cursor: pointer;\" class=\"glyphicon glyphicon-print\" data-toggle=\"tooltip\" title=\"ბეჭდვა\"></span>";
         st = 1;
     }
-    
+    String note = items[i].getNote();
     double amt = items[i].getAmount();
     if(!itemize){
         if(noroom && n > 0){

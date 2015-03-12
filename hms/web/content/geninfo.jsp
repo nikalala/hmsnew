@@ -172,6 +172,33 @@ int prefCount = PreferenceManager.getInstance().countWhere("where reservationid 
         newmWindow1("guestProfile", "სტუმრის პროფილი", "id=" + id+"&gid="+gid);
     }
     
+    function delSharer(id,gid){
+        
+        if(confirm("დარწმუნებული ხართ რომ გინდათ სტუმრის წაშლა?")){
+            $.post("content/ajax/deletesharer.jsp",{id:id, gid: gid},function (data0) { alert(data0.result);
+                    if(data0.result == 0)    BootstrapDialog.alert(data0.error);
+                    else jQuery("#sharerlist").jqGrid().trigger("reloadGrid");
+                },"json");
+                jQuery("#sharerlist").jqGrid().trigger("reloadGrid");
+            }
+            
+        /*
+        BootstrapDialog.confirm("დარწმუნებული ხართ რომ გინდათ სტუმრის წაშლა?",function(){
+            $.ajax({
+                type: 'POST',
+                url: "content/ajax/deletesharer.jsp",
+                data: {id:id, gid: gid},
+                success: function (data0) {
+                    if(data0.result == 0)    BootstrapDialog.alert(data0.error);
+                    else refreshSharerlist();
+                },
+                dataType: "json",
+                async: false
+            });
+        });
+        */
+    }
+    
     function refreshSharerlist(){
         jQuery("#sharerlist").jqGrid().trigger("reloadGrid");
     }

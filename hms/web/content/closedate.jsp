@@ -13,11 +13,25 @@ try{
     cal.set(Calendar.MINUTE,59);
     cal.set(Calendar.SECOND,59);
     cal.set(Calendar.MILLISECOND,999);
-    
+
     ClosedateBean cldate = ClosedateManager.getInstance().createClosedateBean();
     cldate.setRegbyid(user.getPersonnelid());
     cldate.setCldate(cal.getTime());
     cldate = ClosedateManager.getInstance().save(cldate);
+    
+    if(checkinsettings.getNightauditdirty().booleanValue()){
+        RoomBean[] rooms = RoomManager.getInstance().loadByWhere("where active = true and deleted = false and getroomstatus(roomid,'"+df.format(dclosedate)+"') in (1,2,3,4,5,6)");
+        for(int i=0;i<rooms.length;i++){
+            RoomhstBean r = RoomhstManager.getInstance().createRoomhstBean();
+            r.setHousekeepingstatusid(2);
+            r.setRegbyid(user.getPersonnelid());
+            r.setRegdate(cal.getTimeInMillis());
+            r.setRoomid(rooms[i].getRoomid());
+            r = RoomhstManager.getInstance().save(r);
+        }
+    }
+    
+    
     
     Manager.getInstance().endTransaction(true);
     msg = "{\"result\":1}";

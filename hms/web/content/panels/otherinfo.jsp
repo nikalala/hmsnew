@@ -3,6 +3,7 @@
 <%@include file="../../includes/init.jsp"%>
 <%
 String type = request.getParameter("type");
+if(type == null)    type = "";
 IdtypeBean[] idtypes = IdtypeManager.getInstance().loadByWhere("order by name");
 VipstatusBean[] vipstatuses = VipstatusManager.getInstance().loadByWhere("order by name");
 NationalityBean[] nationalities = NationalityManager.getInstance().loadByWhere("order by name");
@@ -17,7 +18,7 @@ if(request.getParameter("gid") != null)
             <form class="form-inline" role="form">
             <div class="form-group">
                 <div class="input-group-xs">
-                    <select class="form-control dropdown" name="guestinfo_idtypeid" id="guestinfo_idtypeid" style="width: 170px;">
+                    <select class="form-control dropdown" name="<%=type%>guestinfo_idtypeid" id="<%=type%>guestinfo_idtypeid" style="width: 170px;">
                         <option value="0">--აირჩიეთ--</option>
                         <%
                         for(int i=0;i<idtypes.length;i++){
@@ -32,7 +33,7 @@ if(request.getParameter("gid") != null)
                         }
                         %>
                     </select>
-                    <input class="form-control" type="text" id="guestinfo_idn" style="width: 80px;" placeholder="ნომერი" value="<%= (guest == null) ? "":guest.getIdn()%>">
+                    <input class="form-control" type="text" id="<%=type%>guestinfo_idn" style="width: 80px;" placeholder="ნომერი" value="<%= (guest == null) ? "":guest.getIdn()%>">
                 </div>
             </div>
             </form>
@@ -44,7 +45,7 @@ if(request.getParameter("gid") != null)
             <form class="form-inline" role="form">
             <div class="form-group">
                 <div class="input-group-xs">
-            <select class="form-control dropdown" name="guestinfo_nationalityid" id="guestinfo_nationalityid" style="width: 252px;">
+            <select class="form-control dropdown" name="<%=type%>guestinfo_nationalityid" id="<%=type%>guestinfo_nationalityid" style="width: 252px;">
                 <option value="0">--აირჩიეთ--</option>
                 <%
                 for(int i=0;i<nationalities.length;i++){
@@ -75,7 +76,7 @@ if(request.getParameter("gid") != null)
                     sel = "checked";
             %>
             <label class="radio-inline" style="height: 23px !important;">
-                <input type="radio" name="guestinfo_gender" id="guestinfo_gender<%=i%>" value="<%=i%>" <%=sel%>> <%=gender[i]%>
+                <input type="radio" name="<%=type%>guestinfo_gender" id="<%=type%>guestinfo_gender<%=i%>" value="<%=i%>" <%=sel%>> <%=gender[i]%>
             </label>
             <%}%>
                 </div>
@@ -89,7 +90,7 @@ if(request.getParameter("gid") != null)
             <form class="form-inline" role="form">
             <div class="form-group">
                 <div class="input-group-xs">
-            <select class="form-control dropdown" name="guestinfo_vipstatusid" id="guestinfo_vipstatusid" style="width: 252px;">
+            <select class="form-control dropdown" name="<%=type%>guestinfo_vipstatusid" id="<%=type%>guestinfo_vipstatusid" style="width: 252px;">
                 <option value="0">--აირჩიეთ--</option>
                 <%
                 for(int i=0;i<vipstatuses.length;i++){

@@ -71,7 +71,7 @@ for(int i=0;calstart.before(calend);i++){
     String roomnm = roomname;
     String ratetp = rtp.getName();  // !!!!
     String sql = "where folioid in (select folioid from folio where reservationroomid = "+rroom.getReservationroomid()+") and "
-            + "itemdate = to_date('"+df.format(calstart.getTime())+"','DD/MM/YYYY')";
+            + "itemdate = to_date('"+df.format(calstart.getTime())+"','DD/MM/YYYY') and reservationroomid = "+rroom.getReservationroomid();
     FolioitemBean[] folioitems = FolioitemManager.getInstance().loadByWhere(sql+" and particular = 6 limit 1");
     if(folioitems.length > 0){
         if(folioitems[0].getRoomid() != null){

@@ -25,10 +25,11 @@ try{
         if(actiontype < 0)  throw new Exception("აირჩიეთ ტიპი");
         int actionvalue = Integer.parseInt(request.getParameter("actionvalue"));
         int currencyid = Integer.parseInt(request.getParameter("currencyid"));
+        double crate = getRate(maincurrency.getCurrencyid().intValue(),currencyid,df.format(date));
         int discountid = 0;
         try{ discountid = Integer.parseInt(request.getParameter("discountid")); }catch(Exception ign){}
         double amount = 0;
-        try{ amount = Double.parseDouble(request.getParameter("amount")); }catch(Exception ign){ throw new Exception("აირჩიეთ თანხა"); }
+        try{ amount = Double.parseDouble(request.getParameter("amount"))*crate; }catch(Exception ign){ throw new Exception("აირჩიეთ თანხა"); }
         double qty = 0;
         try{ qty = Double.parseDouble(request.getParameter("qty")); }catch(Exception ign){}
         String voucher = request.getParameter("voucher").trim();
@@ -55,7 +56,7 @@ try{
         fitem.setRegbyid(user.getPersonnelid());
         fitem.setManual(true);
         fitem.setDone(false);
-        
+        fitem.setReservationroomid(folio.getReservationroomid());
         ExtrachargefolioBean ex = null;
 
         if(actiontype == 0){                // შესწორება

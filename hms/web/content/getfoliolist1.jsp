@@ -62,7 +62,6 @@ for(int i=0;i<items.length;i++){
         //roomname = rtp.getCode() + " - "+room.getName();
         roomname = room.getName();
     }
-    String note = items[i].getNote();
     switch(items[i].getParticular().intValue()){
         case -1:
             TaxBean tax = TaxManager.getInstance().loadByPrimaryKey(items[i].getTaxid());
@@ -78,22 +77,12 @@ for(int i=0;i<items.length;i++){
             PaymentBean payment = PaymentManager.getInstance().loadByPrimaryKey(items[i].getPaymentid());
             PaymentmethodBean pmethod = PaymentmethodManager.getInstance().loadByPrimaryKey(payment.getPaymentmethodid());
             particular = pmethod.getCode();
-            if(payment.getCurrencyid().intValue() != maincurrency.getCurrencyid().intValue()){
-                CurrencyBean crn = CurrencyManager.getInstance().loadByPrimaryKey(payment.getCurrencyid());
-                double crate = getRate(payment.getCurrencyid().intValue(),maincurrency.getCurrencyid().intValue(),df.format(payment.getPaydate()));
-                note += " ["+dc.format(payment.getAmount()*crate)+"] "+crn.getCode();
-            }
             koeff = -1;
             break;
         case 2:
             payment = PaymentManager.getInstance().loadByPrimaryKey(items[i].getPaymentid());
             pmethod = PaymentmethodManager.getInstance().loadByPrimaryKey(payment.getPaymentmethodid());
             particular = pmethod.getCode();
-            if(payment.getCurrencyid().intValue() != maincurrency.getCurrencyid().intValue()){
-                CurrencyBean crn = CurrencyManager.getInstance().loadByPrimaryKey(payment.getCurrencyid());
-                double crate = getRate(payment.getCurrencyid().intValue(),maincurrency.getCurrencyid().intValue(),df.format(payment.getPaydate()));
-                note += " ["+dc.format(payment.getAmount()*crate)+"] "+crn.getCode();
-            }
             koeff = -1;
             break;
         case 3:
@@ -109,11 +98,6 @@ for(int i=0;i<items.length;i++){
                 } else {
                     pmethod = PaymentmethodManager.getInstance().loadByPrimaryKey(payment.getPaymentmethodid());
                     particular = pmethod.getCode();
-                }
-                if(payment.getCurrencyid().intValue() != maincurrency.getCurrencyid().intValue()){
-                    CurrencyBean crn = CurrencyManager.getInstance().loadByPrimaryKey(payment.getCurrencyid());
-                    double crate = getRate(payment.getCurrencyid().intValue(),maincurrency.getCurrencyid().intValue(),df.format(payment.getPaydate()));
-                    note += " ["+dc.format(payment.getAmount()*crate)+"] "+crn.getCode();
                 }
                 koeff = -1;
             }
@@ -151,7 +135,7 @@ for(int i=0;i<items.length;i++){
             sact += "<span onclick=\"printFolioAction("+items[i].getFolioitemid()+")\" style=\"padding-left: 5px; cursor: pointer;\" class=\"glyphicon glyphicon-print\" data-toggle=\"tooltip\" title=\"ბეჭდვა\"></span>";
         st = 1;
     }
-    
+    String note = items[i].getNote();
     double amt = items[i].getAmount();
     if(!itemize){
         if(noroom && n > 0){

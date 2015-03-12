@@ -2,6 +2,9 @@
 <%@page pageEncoding="UTF-8"%>
 <%@include file="../includes/init.jsp"%>
 <%
+String type = request.getParameter("type");
+if(type == null)    type = "";
+
 String s = "";
 
 for(Enumeration e=request.getParameterNames();e.hasMoreElements();){
@@ -13,7 +16,8 @@ for(Enumeration e=request.getParameterNames();e.hasMoreElements();){
         s += val[i]+"; ";
     s += "\n";
 }
-//System.out.println(s);
+System.out.println(s);
+
 String action = request.getParameter("action");
 String msg = "";
 Manager.getInstance().beginTransaction();
@@ -32,46 +36,46 @@ try{
         
         if(name.equalsIgnoreCase("createfolio")){
             createfolio = true;
-        } else if(name.equalsIgnoreCase("guestinfo_salutationid")){
+        } else if(name.equalsIgnoreCase(type+"guestinfo_salutationid")){
             guest.setSalutationid(new Integer(val));
-        } else if(name.equalsIgnoreCase("guestinfo_fname")){
+        } else if(name.equalsIgnoreCase(type+"guestinfo_fname")){
             //String[] names = val.split(" ");
             //guest.setLname(names[0]);
             //if(names.length > 1)
             guest.setFname(val);
-        } else if(name.equalsIgnoreCase("guestinfo_lname")){
+        } else if(name.equalsIgnoreCase(type+"guestinfo_lname")){
             //String[] names = val.split(" ");
             //guest.setLname(names[0]);
             //if(names.length > 1)
             guest.setLname(val);
-        } else if(name.equalsIgnoreCase("guestinfo_address")){
+        } else if(name.equalsIgnoreCase(type+"guestinfo_address")){
             guest.setAddress(val);
-        } else if(name.equalsIgnoreCase("guestinfo_city")){
+        } else if(name.equalsIgnoreCase(type+"guestinfo_city")){
             guest.setCity(val);
-        } else if(name.equalsIgnoreCase("guestinfo_zip")){
+        } else if(name.equalsIgnoreCase(type+"guestinfo_zip")){
             guest.setZip(val);
-        } else if(name.equalsIgnoreCase("guestinfo_countryid")){
+        } else if(name.equalsIgnoreCase(type+"guestinfo_countryid")){
             int countryid = Integer.parseInt(val);
             if(countryid > 0)
                 //throw new Exception("აირჩიეთ ქვეყანა");
             guest.setCountryid(countryid);
-        } else if(name.equalsIgnoreCase("contacttinfo_email")){
+        } else if(name.equalsIgnoreCase(type+"contacttinfo_email")){
             guest.setEmail(val);
-        } else if(name.equalsIgnoreCase("contacttinfo_phone")){
+        } else if(name.equalsIgnoreCase(type+"contacttinfo_phone")){
             guest.setPhone(val);
-        } else if(name.equalsIgnoreCase("contacttinfo_mobile")){
+        } else if(name.equalsIgnoreCase(type+"contacttinfo_mobile")){
             guest.setMobile(val);
-        } else if(name.equalsIgnoreCase("contacttinfo_fax")){
+        } else if(name.equalsIgnoreCase(type+"contacttinfo_fax")){
             guest.setFax(val);
-        } else if(name.equalsIgnoreCase("guestinfo_idtypeid")){
+        } else if(name.equalsIgnoreCase(type+"guestinfo_idtypeid")){
             if(val.equals("0")) guest.setIdtypeid(null);
             else                guest.setIdtypeid(new Integer(val));
-        } else if(name.equalsIgnoreCase("guestinfo_idn")){
+        } else if(name.equalsIgnoreCase(type+"guestinfo_idn")){
             guest.setIdn(val);
-        } else if(name.equalsIgnoreCase("guestinfo_nationalityid")){
+        } else if(name.equalsIgnoreCase(type+"guestinfo_nationalityid")){
             if(val.equals("0")) guest.setNationalityid(null);
             else guest.setNationalityid(new Integer(val));
-        } else if(name.equalsIgnoreCase("guestinfo_vipstatusid")){
+        } else if(name.equalsIgnoreCase(type+"guestinfo_vipstatusid")){
             if(val.equals("0")) guest.setVipstatusid(null);
             else guest.setVipstatusid(new Integer(val));
         }
@@ -98,7 +102,13 @@ try{
     }
 
     guest.setRegbyid(user.getPersonnelid());
+    
+System.out.println("gid1 = "+guest.getGuestid());
+    
     guest = GuestManager.getInstance().save(guest);
+    
+System.out.println("gid2 = "+guest.getGuestid());
+
     SharerBean sh = SharerManager.getInstance().createSharerBean();
     sh.setGuestid(guest.getGuestid());
     sh.setReservationroomid(rroom.getReservationroomid());

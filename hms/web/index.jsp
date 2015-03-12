@@ -396,7 +396,7 @@
                 <h4 id="smheader" style='margin-top: -4px;'></h4>
             </div>
             <div class="modal-body" id="smbody"></div>
-            <div class="modal-footer">
+            <div class="modal-footer" id="smallmodalfooter">
                 <button type="button" class="btn btn-default" data-dismiss="modal">დახურვა</button>
                 <button type="button" class="btn btn-primary" onclick="savedata('smallmodal')">შენახვა</button>
             </div>

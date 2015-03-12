@@ -204,6 +204,7 @@ public class folio {
             fb.setAmount(amount);
             fb.setDone(false);
             fb.setParticular(6);
+            fb.setReservationroomid(folio.getReservationroomid());
             fb = FolioitemManager.getInstance().save(fb);
 
             double price = amount;
@@ -220,6 +221,7 @@ public class folio {
                 fb.setAmount((-1)*discamount);
                 fb.setDone(false);
                 fb.setParticular(4);
+                fb.setReservationroomid(folio.getReservationroomid());
                 fb = FolioitemManager.getInstance().save(fb);
                 price -= discamount;
             }
@@ -233,6 +235,7 @@ public class folio {
                 fb.setAmount(trf.tariff_tax);
                 fb.setDone(false);
                 fb.setParticular(-1);
+                fb.setReservationroomid(folio.getReservationroomid());
                 fb = FolioitemManager.getInstance().save(fb);
                 price += trf.tariff_tax;
             }
@@ -248,7 +251,9 @@ public class folio {
             fb.setRegbyid(user.getPersonnelid());
             fb.setAmount(roundOff(price,prc)-price);
             fb.setDone(false);
+            fb.setReservationroomid(folio.getReservationroomid());
             fb.setParticular(0);
+            
             fb = FolioitemManager.getInstance().save(fb);
             
             c1.add(Calendar.DATE, 1);
@@ -321,6 +326,7 @@ public class folio {
                     fb.setDone(false);
                     fb.setPaymentid(pm.getPaymentid());
                     fb.setParticular(2);
+                    fb.setReservationroomid(resroom.getReservationroomid());
                     fb = FolioitemManager.getInstance().save(fb);
                 }
                 if(pm.getPaymentmethodid().intValue() > 1){
@@ -332,6 +338,7 @@ public class folio {
                     fb.setDone(false);
                     fb.setPaymentid(pm.getPaymentid());
                     fb.setParticular(1);
+                    fb.setReservationroomid(resroom.getReservationroomid());
                     fb = FolioitemManager.getInstance().save(fb);
                 }
             }
@@ -357,6 +364,7 @@ public class folio {
             fb.setAmount(amount);
             fb.setDone(false);
             fb.setParticular(6);
+            fb.setReservationroomid(resroom.getReservationroomid());
             fb = FolioitemManager.getInstance().save(fb);
 
             double price = amount;
@@ -373,6 +381,7 @@ public class folio {
                 fb.setAmount((-1)*discamount);
                 fb.setDone(false);
                 fb.setParticular(4);
+                fb.setReservationroomid(resroom.getReservationroomid());
                 fb = FolioitemManager.getInstance().save(fb);
                 price -= discamount;
             }
@@ -386,6 +395,7 @@ public class folio {
                 fb.setAmount(trf.tariff_tax);
                 fb.setDone(false);
                 fb.setParticular(-1);
+                fb.setReservationroomid(resroom.getReservationroomid());
                 fb = FolioitemManager.getInstance().save(fb);
                 price += trf.tariff_tax;
             }
@@ -414,6 +424,7 @@ public class folio {
                 fb.setAmount(ecamount);
                 fb.setDone(false);
                 fb.setParticular(5);
+                fb.setReservationroomid(resroom.getReservationroomid());
                 fb = FolioitemManager.getInstance().save(fb);
                 ec.setFolioitemid(fb.getFolioitemid());
                 ec = ExtrachargefolioManager.getInstance().save(ec);
@@ -432,6 +443,7 @@ public class folio {
             fb.setAmount(roundOff(price,prc)-price);
             fb.setDone(false);
             fb.setParticular(0);
+            fb.setReservationroomid(resroom.getReservationroomid());
             fb = FolioitemManager.getInstance().save(fb);
             
             // payment
@@ -444,6 +456,7 @@ public class folio {
                 fb.setDone(false);
                 fb.setPaymentid(paid1[0].getPaymentid());
                 fb.setParticular(2);
+                fb.setReservationroomid(resroom.getReservationroomid());
                 fb = FolioitemManager.getInstance().save(fb);
             }
             if(paid2.length > 0){
@@ -455,6 +468,7 @@ public class folio {
                 fb.setDone(false);
                 fb.setPaymentid(paid2[0].getPaymentid());
                 fb.setParticular(1);
+                fb.setReservationroomid(resroom.getReservationroomid());
                 fb = FolioitemManager.getInstance().save(fb);
             }
 
