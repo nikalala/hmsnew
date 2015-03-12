@@ -3,8 +3,8 @@
 <%@include file="../../../includes/init.jsp" %>
 
 <% RoomtypeBean[] roomTypes = RoomtypeManager.getInstance().loadByWhere("ORDER BY ord"); %>
-<% PersonnelBean[] PersonellBeans = PersonnelManager.getInstance().loadByWhere(""); %>
 <% RatetypeBean[] RatetypeBeans = RatetypeManager.getInstance().loadByWhere(""); %>
+<% PersonnelBean[] PersonellBeans = PersonnelManager.getInstance().loadByWhere(""); %>
 <% ContragentBean[] bSources = ContragentManager.getInstance().loadByWhere("where deleted = false and bsource = true"); %>
 <% ContragentBean[] ContragentBeans = ContragentManager.getInstance().loadByWhere("where type = 2 and deleted = false"); %>
 
