@@ -1011,7 +1011,7 @@ System.out.println(rid+" = "+statusid);
     PersonnelBean[] hkeeper = PersonnelManager.getInstance().loadByWhere("where personneltypeid = 2");
 
     String[] months = {"იანვარი", "თებერვალი", "მარტი", "აპრილი", "მაისი", "ივნისი", "ივლისი", "აგვისტო", "სექტემბერი", "ოქტომბერი", "ნოემბერი", "დეკემბერი"};
-
+    String[] pickUpDropOffType = {"დახვედრა","გაცილება"};
     String[] workOrderCategory = {"დასუფთავება", "მოვლა", "სხვა დავალება", "შეკეთება"};
     String[] workOrderStatus = {"მინიჭებული", "შესრულებული", "პროცესში", "ახალი"};
     String[] workOrderPriority =  {"მაღალი", "საშუალო", "დაბალი"};

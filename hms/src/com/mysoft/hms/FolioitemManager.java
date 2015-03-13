@@ -161,13 +161,6 @@ public class FolioitemManager
     public static final int TYPE_ROOMOPER = Types.INTEGER;
     public static final String NAME_ROOMOPER = "roomoper";
 
-    /**
-     * Column reservationroomid of type Types.BIGINT mapped to Long.
-     */
-    public static final int ID_RESERVATIONROOMID = 19;
-    public static final int TYPE_RESERVATIONROOMID = Types.BIGINT;
-    public static final String NAME_RESERVATIONROOMID = "reservationroomid";
-
 
     private static final String TABLE_NAME = "folioitem";
 
@@ -195,7 +188,6 @@ public class FolioitemManager
         ,"folioitem.note"
         ,"folioitem.manual"
         ,"folioitem.roomoper"
-        ,"folioitem.reservationroomid"
     };
 
     /**
@@ -219,8 +211,7 @@ public class FolioitemManager
                             + ",folioitem.regdate"
                             + ",folioitem.note"
                             + ",folioitem.manual"
-                            + ",folioitem.roomoper"
-                            + ",folioitem.reservationroomid";
+                            + ",folioitem.roomoper";
 
     private static FolioitemManager singleton = new FolioitemManager();
 
@@ -573,57 +564,6 @@ public class FolioitemManager
 
 
     /**
-     * Loads FolioitemBean array from the folioitem table using its reservationroomid field.
-     *
-     * @return an array of FolioitemBean 
-     */
-    // LOAD BY IMPORTED KEY
-    public FolioitemBean[] loadByReservationroomid(Long value) throws SQLException 
-    {
-        Connection c = null;
-        PreparedStatement ps = null;
-        try 
-        {
-            c = getConnection();
-            ps = c.prepareStatement("SELECT " + ALL_FIELDS + " FROM folioitem WHERE reservationroomid=?",ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-            Manager.setLong(ps, 1, value);
-            return loadByPreparedStatement(ps);
-        }
-        finally
-        {
-            getManager().close(ps);
-            freeConnection(c);
-        }
-    }
-
-
-    /**
-     * Deletes from the folioitem table by reservationroomid field.
-     *
-     * @param value the key value to seek
-     * @return the number of rows deleted
-     */
-    // DELETE BY IMPORTED KEY
-    public int deleteByReservationroomid(Long value) throws SQLException 
-    {
-        Connection c = null;
-        PreparedStatement ps = null;
-        try 
-        {
-            c = getConnection();
-            ps = c.prepareStatement("DELETE FROM folioitem WHERE reservationroomid=?");
-            Manager.setLong(ps, 1, value);
-            return ps.executeUpdate();
-        }
-        finally
-        {
-            getManager().close(ps);
-            freeConnection(c);
-        }
-    }
-
-
-    /**
      * Loads FolioitemBean array from the folioitem table using its roomid field.
      *
      * @return an array of FolioitemBean 
@@ -866,34 +806,6 @@ public class FolioitemManager
     public FolioitemBean setPersonnelBean(FolioitemBean pObject,PersonnelBean pObjectToBeSet)
     {
         pObject.setRegbyid(pObjectToBeSet.getPersonnelid());
-        return pObject;
-    }
-
-    /**
-     * Retrieves the ReservationroomBean object from the folioitem.reservationroomid field.
-     *
-     * @param pObject the FolioitemBean 
-     * @return the associated ReservationroomBean pObject
-     */
-    // GET IMPORTED
-    public ReservationroomBean getReservationroomBean(FolioitemBean pObject) throws SQLException
-    {
-        ReservationroomBean other = ReservationroomManager.getInstance().createReservationroomBean();
-        other.setReservationroomid(pObject.getReservationroomid());
-        return ReservationroomManager.getInstance().loadUniqueUsingTemplate(other);
-    }
-
-    /**
-     * Associates the FolioitemBean object to the ReservationroomBean object.
-     *
-     * @param pObject the FolioitemBean object to use
-     * @param pObjectToBeSet the ReservationroomBean object to associate to the FolioitemBean 
-     * @return the associated ReservationroomBean pObject
-     */
-    // SET IMPORTED
-    public FolioitemBean setReservationroomBean(FolioitemBean pObject,ReservationroomBean pObjectToBeSet)
-    {
-        pObject.setReservationroomid(pObjectToBeSet.getReservationroomid());
         return pObject;
     }
 
@@ -1288,14 +1200,6 @@ public class FolioitemManager
                     _dirtyCount++;
                 }
 
-                if (pObject.isReservationroomidModified()) {
-                    if (_dirtyCount>0) {
-                        _sql.append(",");
-                    }
-                    _sql.append("reservationroomid");
-                    _dirtyCount++;
-                }
-
                 _sql.append(") values (");
                 if(_dirtyCount > 0) {
                     _sql.append("?");
@@ -1382,10 +1286,6 @@ public class FolioitemManager
     
                 if (pObject.isRoomoperModified()) {
                     Manager.setInteger(ps, ++_dirtyCount, pObject.getRoomoper());
-                }
-    
-                if (pObject.isReservationroomidModified()) {
-                    Manager.setLong(ps, ++_dirtyCount, pObject.getReservationroomid());
                 }
     
                 ps.executeUpdate();
@@ -1570,15 +1470,6 @@ public class FolioitemManager
                     }
                     _sql.append("roomoper").append("=?");
                 }
-
-                if (pObject.isReservationroomidModified()) {
-                    if (useComma) {
-                        _sql.append(",");
-                    } else {
-                        useComma=true;
-                    }
-                    _sql.append("reservationroomid").append("=?");
-                }
                 _sql.append(" WHERE ");
                 _sql.append("folioitem.folioitemid=?");
                 ps = c.prepareStatement(_sql.toString(),ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
@@ -1658,10 +1549,6 @@ public class FolioitemManager
 
                 if (pObject.isRoomoperModified()) {
                       Manager.setInteger(ps, ++_dirtyCount, pObject.getRoomoper());
-                }
-
-                if (pObject.isReservationroomidModified()) {
-                      Manager.setLong(ps, ++_dirtyCount, pObject.getReservationroomid());
                 }
     
                 if (_dirtyCount == 0) {
@@ -1835,11 +1722,6 @@ public class FolioitemManager
                  _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("roomoper= ?");
              }
     
-             if (pObject.isReservationroomidModified()) {
-                 _dirtyCount ++; 
-                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("reservationroomid= ?");
-             }
-    
              if (_dirtyCount == 0) {
                  throw new SQLException ("The pObject to look for is invalid : not initialized !");
              }
@@ -1922,10 +1804,6 @@ public class FolioitemManager
     
              if (pObject.isRoomoperModified()) {
                  Manager.setInteger(ps, ++_dirtyCount, pObject.getRoomoper());
-             }
-    
-             if (pObject.isReservationroomidModified()) {
-                 Manager.setLong(ps, ++_dirtyCount, pObject.getReservationroomid());
              }
     
              ps.executeQuery();
@@ -2090,13 +1968,6 @@ public class FolioitemManager
                 _dirtyAnd ++;
             }
     
-            if (pObject.isReservationroomidInitialized()) {
-                if (_dirtyAnd > 0)
-                    sql.append(" AND ");
-                sql.append("reservationroomid").append("=?");
-                _dirtyAnd ++;
-            }
-    
             c = getConnection();
             ps = c.prepareStatement(sql.toString(),ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             int _dirtyCount = 0;
@@ -2175,10 +2046,6 @@ public class FolioitemManager
     
             if (pObject.isRoomoperInitialized()) {
                 Manager.setInteger(ps, ++_dirtyCount, pObject.getRoomoper());
-            }
-    
-            if (pObject.isReservationroomidInitialized()) {
-                Manager.setLong(ps, ++_dirtyCount, pObject.getReservationroomid());
             }
     
             int _rows = ps.executeUpdate();
@@ -2423,11 +2290,6 @@ public class FolioitemManager
                     _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("roomoper= ?");
                 }
     
-                if (pObject.isReservationroomidModified()) {
-                    _dirtyCount++; 
-                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("reservationroomid= ?");
-                }
-    
                 if (_dirtyCount == 0)
                    throw new SQLException ("The pObject to look is unvalid : not initialized !");
     
@@ -2513,10 +2375,6 @@ public class FolioitemManager
                     Manager.setInteger(ps, ++_dirtyCount, pObject.getRoomoper());
                 }
     
-                if (pObject.isReservationroomidModified()) {
-                    Manager.setLong(ps, ++_dirtyCount, pObject.getReservationroomid());
-                }
-    
                 return countByPreparedStatement(ps);
         }
         finally
@@ -2560,7 +2418,6 @@ public class FolioitemManager
         pObject.setNote(rs.getString(17));
         pObject.setManual(Manager.getBoolean(rs, 18));
         pObject.setRoomoper(Manager.getInteger(rs, 19));
-        pObject.setReservationroomid(Manager.getLong(rs, 20));
 
         pObject.isNew(false);
         pObject.resetIsModified();
@@ -2658,10 +2515,6 @@ public class FolioitemManager
                 case ID_ROOMOPER:
                     ++pos;
                     pObject.setRoomoper(Manager.getInteger(rs, pos));
-                    break;
-                case ID_RESERVATIONROOMID:
-                    ++pos;
-                    pObject.setReservationroomid(Manager.getLong(rs, pos));
                     break;
             }
         }

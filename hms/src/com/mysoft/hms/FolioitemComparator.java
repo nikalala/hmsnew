@@ -63,7 +63,6 @@ public class FolioitemComparator implements Comparator
      *   <li>FolioitemManager.ID_REGDATE
      *   <li>FolioitemManager.ID_NOTE
      *   <li>FolioitemManager.ID_ROOMOPER
-     *   <li>FolioitemManager.ID_RESERVATIONROOMID
      * </ul>
      */
     public FolioitemComparator(int iType)
@@ -101,7 +100,6 @@ public class FolioitemComparator implements Comparator
      *   <li>FolioitemManager.ID_NOTE
      *   <li>FolioitemManager.ID_MANUAL
      *   <li>FolioitemManager.ID_ROOMOPER
-     *   <li>FolioitemManager.ID_RESERVATIONROOMID
      * </ul>
      *
      * @param bReverse set this value to true, if you want to reverse the sorting results
@@ -296,17 +294,6 @@ public class FolioitemComparator implements Comparator
                     iReturn = 1;
                 } else { 
                     iReturn = b1.getRoomoper().compareTo(b2.getRoomoper());
-                }
-                break;
-            case FolioitemManager.ID_RESERVATIONROOMID:
-                if (b1.getReservationroomid() == null && b2.getReservationroomid() != null) {
-                    iReturn = -1;
-                } else if (b1.getReservationroomid() == null && b2.getReservationroomid() == null) {
-                    iReturn = 0;
-                } else if (b1.getReservationroomid() != null && b2.getReservationroomid() == null) {
-                    iReturn = 1;
-                } else { 
-                    iReturn = b1.getReservationroomid().compareTo(b2.getReservationroomid());
                 }
                 break;
             default: 

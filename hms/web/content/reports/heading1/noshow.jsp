@@ -12,6 +12,14 @@
     loadDefaults();
   });
 
+  function doFilter(){
+    loader.show();
+    $.post("content/reports/content/noshow-reservation.html",function(data){
+      $("#grid-table").html(data);
+      loader.hide();
+    });
+  }
+
   function resetFilterPanel() {
     resetDates();
   }

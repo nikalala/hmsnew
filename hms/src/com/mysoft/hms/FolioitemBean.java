@@ -99,10 +99,6 @@ public class FolioitemBean
     private boolean roomoper_is_modified = false;
     private boolean roomoper_is_initialized = false;
     
-    private Long reservationroomid;
-    private boolean reservationroomid_is_modified = false;
-    private boolean reservationroomid_is_initialized = false;
-    
     private boolean _isNew = true;
     
     /**
@@ -1377,74 +1373,6 @@ public class FolioitemBean
     }
 
     /**
-     * Getter method for reservationroomid.
-     * <br>
-     * Meta Data Information (in progress):
-     * <ul>
-     * <li>full name: folioitem.reservationroomid
-     * <li> foreign key: reservationroom.reservationroomid
-     * <li>column size: 19
-     * <li>jdbc type returned by the driver: Types.BIGINT
-     * </ul>
-     *
-     * @return the value of reservationroomid
-     */
-    public Long getReservationroomid()
-    {
-        return reservationroomid; 
-    }
-
-    /**
-     * Setter method for reservationroomid.
-     * <br>
-     * The new value is set only if compareTo() says it is different,
-     * or if one of either the new value or the current value is null.
-     * In case the new value is different, it is set and the field is marked as 'modified'.
-     *
-     * @param newVal the new value to be assigned to reservationroomid
-     */
-    public void setReservationroomid(Long newVal) {
-        if ((newVal != null && this.reservationroomid != null && (newVal.compareTo(this.reservationroomid) == 0)) || 
-            (newVal == null && this.reservationroomid == null && reservationroomid_is_initialized)) {
-            return; 
-        } 
-        this.reservationroomid = newVal; 
-        reservationroomid_is_modified = true; 
-        reservationroomid_is_initialized = true; 
-    }
-
-    /**
-     * Setter method for reservationroomid.
-     * <br>
-     * Convenient for those who do not want to deal with Objects for primary types.
-     *
-     * @param newVal the new value to be assigned to reservationroomid
-     */
-    public void setReservationroomid(long newVal) {
-        setReservationroomid(new Long(newVal));
-    }
-
-    /**
-     * Determines if the reservationroomid has been modified.
-     *
-     * @return true if the field has been modified, false if the field has not been modified
-     */
-    public boolean isReservationroomidModified() {
-        return reservationroomid_is_modified; 
-    }
-
-    /**
-     * Determines if the reservationroomid has been initialized.
-     * <br>
-     * It is useful to determine if a field is null on purpose or just because it has not been initialized.
-     *
-     * @return true if the field has been initialized, false otherwise
-     */
-    public boolean isReservationroomidInitialized() {
-        return reservationroomid_is_initialized; 
-    }
-
-    /**
      * Determines if the current object is new.
      *
      * @return true if the current object is new, false if the object is not new
@@ -1488,8 +1416,7 @@ public class FolioitemBean
 		regdate_is_modified || 
 		note_is_modified || 
 		manual_is_modified || 
-		roomoper_is_modified || 
-		reservationroomid_is_modified;
+		roomoper_is_modified;
     }
 
     /**
@@ -1515,7 +1442,6 @@ public class FolioitemBean
         note_is_modified = false;
         manual_is_modified = false;
         roomoper_is_modified = false;
-        reservationroomid_is_modified = false;
     }
 
     /**
@@ -1543,7 +1469,6 @@ public class FolioitemBean
         setNote(bean.getNote());
         setManual(bean.getManual());
         setRoomoper(bean.getRoomoper());
-        setReservationroomid(bean.getReservationroomid());
     }
 
     /**
@@ -1572,7 +1497,6 @@ public class FolioitemBean
                  + "\n - folioitem.note = " + (note_is_initialized ? ("[" + (note == null ? null : note.toString()) + "]") : "not initialized") + ""
                  + "\n - folioitem.manual = " + (manual_is_initialized ? ("[" + (manual == null ? null : manual.toString()) + "]") : "not initialized") + ""
                  + "\n - folioitem.roomoper = " + (roomoper_is_initialized ? ("[" + (roomoper == null ? null : roomoper.toString()) + "]") : "not initialized") + ""
-                 + "\n - folioitem.reservationroomid = " + (reservationroomid_is_initialized ? ("[" + (reservationroomid == null ? null : reservationroomid.toString()) + "]") : "not initialized") + ""
             ;
     }
 

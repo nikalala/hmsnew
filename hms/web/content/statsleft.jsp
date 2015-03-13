@@ -171,17 +171,17 @@
                 <div id="collapseOne2" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
                     <div class="panel-body">
                         <ul>
-                            <li><i class="fa fa-dot-circle-o"></i> <a href="#">Guest Checked In </a></li>
-                            <li><i class="fa fa-dot-circle-o"></i> <a href="#">Guest Checked Out</a></li>
-                            <li><i class="fa fa-dot-circle-o"></i> <a href="#">Guest List </a></li>
-                            <li><i class="fa fa-dot-circle-o"></i> <a href="#">Guest Message</a></li>
-                            <li><i class="fa fa-dot-circle-o"></i> <a href="#">Inclusion Report </a></li>
-                            <li><i class="fa fa-dot-circle-o"></i> <a href="#">Inventory By Room Type</a></li>
-                            <li><i class="fa fa-dot-circle-o"></i> <a href="#">Invoice Breakdown</a></li>
-                            <li><i class="fa fa-dot-circle-o"></i> <a href="#">Night Audit </a></li>
-                            <li><i class="fa fa-dot-circle-o"></i> <a href="#">Pickup Dropoff</a></li>
-                            <li><i class="fa fa-dot-circle-o"></i> <a href="#">Room Availability</a></li>
-                            <li><i class="fa fa-dot-circle-o"></i> <a href="#">Room Status Report</a></li>
+                            <li><i class="fa fa-dot-circle-o"></i> <a href="javascript:loadStats('guestcheckedin','2');">Guest Checked In </a></li>
+                            <li><i class="fa fa-dot-circle-o"></i> <a href="javascript:loadStats('guestcheckedout','2');">Guest Checked Out</a></li>
+                            <li><i class="fa fa-dot-circle-o"></i> <a href="javascript:loadStats('guestlist','2');">Guest List </a></li>
+                            <li><i class="fa fa-dot-circle-o"></i> <a href="javascript:loadStats('guestmessage','2');">Guest Message</a></li>
+                            <li><i class="fa fa-dot-circle-o"></i> <a href="javascript:loadStats('inclusionreport','2');">Inclusion Report </a></li>
+                            <li><i class="fa fa-dot-circle-o"></i> <a href="javascript:loadStats('invbyroomtype','2');">Inventory By Room Type</a></li>
+                            <li><i class="fa fa-dot-circle-o"></i> <a href="javascript:loadStats('invoicebr','2');">Invoice Breakdown</a></li>
+                            <li><i class="fa fa-dot-circle-o"></i> <a href="javascript:loadStats('nightaudit','2');">Night Audit </a></li>
+                            <li><i class="fa fa-dot-circle-o"></i> <a href="javascript:loadStats('pickupdropoff','2');">Pickup Dropoff</a></li>
+                            <li><i class="fa fa-dot-circle-o"></i> <a href="javascript:loadStats('roomaval','2');">Room Availability</a></li>
+                            <li><i class="fa fa-dot-circle-o"></i> <a href="javascript:loadStats('roomstreport','2');">Room Status Report</a></li>
                         </ul>
                     </div>
                 </div>

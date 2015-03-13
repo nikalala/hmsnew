@@ -2,7 +2,6 @@
 <%@page pageEncoding="UTF-8" %>
 <%@include file="../../../includes/init.jsp" %>
 
-<% RoomBean[] roomBeans = RoomManager.getInstance().loadByWhere("ORDER BY ord"); %>
 <% RoomtypeBean[] roomTypes = RoomtypeManager.getInstance().loadByWhere("ORDER BY ord"); %>
 <% ReservationtypeBean[] reservTypes = ReservationtypeManager.getInstance().loadByWhere(""); %>
 <% PersonnelBean[] PersonellBeans = PersonnelManager.getInstance().loadByWhere(""); %>
@@ -22,76 +21,18 @@
         $('#reserv_dateTo').datepicker(<%=pickerFormatForDatePickers%>);
         $('#reserv_dateFrom').datepicker(<%=pickerFormatForDatePickers%>);
         loadDefaults();
+        $("#ratefrom, #rateto").ForceNumericOnly();
     });
-
-    $("#roomType").on('change', function () {
-        var element = $("option:selected", this);
-        var id = $(this).val();
-        var selected = "";
-        if (id > 0) {
-            var html = "<option value='0'>-ოთახის #-</option>";
-            <% for (int i = 0; i < roomBeans.length; i++) {%>
-            var value = "<%=roomBeans[i].getRoomtypeid()%>";
-            var roomid = "<%=roomBeans[i].getRoomid()%>";
-            if (roomid == lastroomtypeId) {
-                selected = 'selected="selected"';
-            } else {
-                selected = '';
-            }
-            if (id == value) {
-                html +=
-                        "<option value='<%=roomBeans[i].getRoomid()%>' roomtypeid='<%=roomBeans[i].getRoomtypeid()%>' " + selected + "><%=roomBeans[i].getName()%>";
-                html += "</option>";
-            }
-            <% } %>
-        } else {
-            var html = "<option value='0'>-ოთახის #-</option>";
-            <% for (int i = 0; i < roomBeans.length; i++) {%>
-            html += "<option value='<%=roomBeans[i].getRoomid()%>' roomtypeid='<%=roomBeans[i].getRoomtypeid()%>'><%=roomBeans[i].getName()%>";
-            html += "</option>";
-            <% }%>
-        }
-        selected = ""
-        lastroomtypeId = 0;
-        //console.log(html);
-        $("#roomBean").html(html);
-        $('#roomBean').selectpicker("refresh");
-        $('#roomBean').next().css("width", "100%").css("padding-left", "0px");
-        /**/
-        /*$('#roomBean').change();*/
-    });
-
-    $("#roomBean").on('change', function () {
-        var element = $("option:selected", this);
-        var id = element.attr("roomtypeid");
-        if (id > 0) {
-            $("#roomType").val(id);
-            lastroomtypeId = element.val();
-            $('#roomType').change();
-        } else {
-            var html = "<option value='0' selected='selected'>-ოთახის ტიპი-</option>";
-            <% for (int i = 0; i < roomTypes.length; i++) { %>
-            html += "<option value='<%=roomTypes[i].getRoomtypeid()%>'><%=roomTypes[i].getName()%></option>";
-            <% } %>
-            $("#roomType").html(html);
-            $('#roomType').selectpicker("refresh");
-            $('#roomType').next().css("width", "100%").css("padding-left", "0px");
-
-            var rooms = "<option value='0'>-ოთახის #-</option>";
-            <% for (int i = 0; i < roomBeans.length; i++) {%>
-            rooms += "<option value='<%=roomBeans[i].getRoomid()%>' roomtypeid='<%=roomBeans[i].getRoomtypeid()%>'><%=roomBeans[i].getName()%>";
-            rooms += "</option>";
-            <% }%>
-
-            $("#roomBean").html(rooms);
-            $('#roomBean').selectpicker("refresh");
-            $('#roomBean').next().css("width", "100%").css("padding-left", "0px");
-        }
-    });
-
 
     function doFilter(){
-        
+
+        var data = $("#filter-form").serialize();
+
+        loader.show();
+        $.post("content/reports/content/arrivallist.jsp?"+data,function(data){
+            $("#grid-table").html(data);
+            loader.hide();
+        });
     }
 
     function doFilter1(reload) {
@@ -204,7 +145,7 @@
 
     $("#todaycheckedinlist").change(function () {
         if (this.checked) {
-            var url = "content/getarrivallist.jsp?where=where roomstatus = -1 and arraivaldate::date = to_date('<%=df.format(dclosedate)%>','DD/MM/YYYY')";
+            var url = "content/arrivallist.jsp.jsp?where=where roomstatus = -1 and arraivaldate::date = to_date('<%=df.format(dclosedate)%>','DD/MM/YYYY')";
             resetDates();
             $('#reserv_dateFrom, #reserv_dateTo').prop("disabled", true);
             $('#grid-table .date .glyphicon-calendar').css("display", "none");
@@ -247,7 +188,7 @@
             </td>
             <td>
                 <div class="input-append date">
-                    <input type="text" class="span2 " id="reserv_dateFrom" placeholder=" თარიღიდან">
+                    <input type="text" class="span2 " name="reserv_dateFrom" id="reserv_dateFrom" placeholder=" თარიღიდან">
                     <span class="add-on"
                           style="position:absolute !important; right : 4px  !important;background : none  !important;border: none !important;top: 1px;">
                         <i class="glyphicon glyphicon-calendar"></i></span>
@@ -255,7 +196,7 @@
             </td>
             <td>
                 <div class="input-append date">
-                    <input type="text" class="span2" id="reserv_dateTo" placeholder=" თარიღამდე">
+                    <input type="text" class="span2" name="reserv_dateTo" id="reserv_dateTo" placeholder=" თარიღამდე">
                     <span class="add-on"
                           style="position:absolute !important; right : 4px  !important;background : none  !important;border: none !important;top: 1px;">
                         <i class="glyphicon glyphicon-calendar"></i></span>
@@ -267,8 +208,8 @@
                 <label>რეზერვაციის ტიპი:</label>
             </td>
             <td colspan="2">
-                <select class="dropdown" id="reservType">
-                    <option value="">-აირჩიეთ-</option>
+                <select class="dropdown"  name="reservType" id="reservType">
+                    <option value="0">-აირჩიეთ-</option>
                     <% for (int i = 0; i <= reservTypes.length - 1; i++) { %>
                     <option value="<%=reservTypes[i].getReservationtypeid()%>"><%=reservTypes[i].getName()%>
                     </option>
@@ -281,8 +222,8 @@
                 <label>მომხმარებელი:</label>
             </td>
             <td colspan="2">
-                <select class="dropdown" id="PersonellBeans">
-                    <option value="">-აირჩიეთ-</option>
+                <select class="dropdown" name="PersonellBeans" id="PersonellBeans">
+                    <option value="0">-აირჩიეთ-</option>
                     <% for (int i = 0; i <= PersonellBeans.length - 1; i++) { %>
                     <option value="<%=PersonellBeans[i].getPersonnelid()%>"><%=PersonellBeans[i].getLoginid()%>
                     </option>
@@ -295,7 +236,7 @@
                 <label>ოთახის ტიპი:</label>
             </td>
             <td colspan="2">
-                <select class="dropdown col-md-2" id="roomType">
+                <select class="dropdown col-md-2" name="roomType" id="roomType">
                     <option value="0">-აირჩიეთ-</option>
                     <% for (int i = 0; i < roomTypes.length; i++) { %>
                     <option value="<%=roomTypes[i].getRoomtypeid()%>"><%=roomTypes[i].getName()%>
@@ -309,7 +250,7 @@
                 <label>ტარიფის ტიპი:</label>
             </td>
             <td colspan="2">
-                <select class="dropdown col-md-2" id="RatetypeBeans">
+                <select class="dropdown col-md-2" name="RatetypeBeans" id="RatetypeBeans">
                     <option value="0">-აირჩიეთ-</option>
                     <% for (int i = 0; i < RatetypeBeans.length; i++) { %>
                     <option value="<%=RatetypeBeans[i].getRatetypeid()%>"><%=RatetypeBeans[i].getName()%>
@@ -323,10 +264,10 @@
                 <label>ტარიფი:</label>
             </td>
             <td>
-                <input type="text" id="ratefrom"/> დან
+                <input type="text" id="ratefrom" name="ratefrom"/> დან
             </td>
             <td>
-                <input type="text" id="rateto"/> მდე
+                <input type="text" id="rateto"  name="rateto"/> მდე
             </td>
         </tr>
         <tr>
@@ -334,7 +275,7 @@
                 <label>სეგმენტი:</label>
             </td>
             <td colspan="2">
-                <select class="dropdown col-md-2" id="MarketBeans">
+                <select class="dropdown col-md-2" name="MarketBeans" id="MarketBeans">
                     <option value="0">-აირჩიეთ-</option>
                     <% for (int i = 0; i < MarketBeans.length; i++) { %>
                     <option value="<%=MarketBeans[i].getMarketid()%>"><%=MarketBeans[i].getName()%>
@@ -348,8 +289,8 @@
                 <label>ტურისტული აგენტი:</label>
             </td>
             <td colspan="2">
-                <select class="dropdown" id="ContragentBeans">
-                    <option value="">-აირჩიეთ-</option>
+                <select class="dropdown" name="ContragentBeans" id="ContragentBeans">
+                    <option value="0">-აირჩიეთ-</option>
                     <% for (int i = 0; i <= ContragentBeans.length - 1; i++) { %>
                     <option value="<%=ContragentBeans[i].getContragentid()%>"><%=ContragentBeans[i].getName()%>
                     </option>
@@ -362,8 +303,8 @@
                 <label>კომპანია:</label>
             </td>
             <td colspan="2">
-                <select class="dropdown" id="CompanyBeans">
-                    <option value="">-აირჩიეთ-</option>
+                <select class="dropdown" name="CompanyBeans" id="CompanyBeans">
+                    <option value="0">-აირჩიეთ-</option>
                     <% for (int i = 0; i <= CompanyBeans.length - 1; i++) { %>
                     <option value="<%=CompanyBeans[i].getContragentid()%>"><%=CompanyBeans[i].getName()%>
                     </option>
@@ -376,8 +317,8 @@
                 <label>ბიზნეს წყარო:</label>
             </td>
             <td colspan="2">
-                <select class="dropdown" id="bSources">
-                    <option value="">-აირჩიეთ-</option>
+                <select class="dropdown" name="bSources" id="bSources">
+                    <option value="0">-აირჩიეთ-</option>
                     <% for (int i = 0; i <= bSources.length - 1; i++) { %>
                     <option value="<%=bSources[i].getContragentid()%>"><%=bSources[i].getName()%>
                     </option>

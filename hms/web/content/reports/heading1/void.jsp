@@ -16,6 +16,14 @@
     resetDates();
   }
 
+  function doFilter(){
+    loader.show();
+    $.post("content/reports/content/void-reservation.html",function(data){
+      $("#grid-table").html(data);
+      loader.hide();
+    });
+  }
+
   $("#reserv_dateFrom").on('change', function () {
     var value = $(this).val();
     $("#reserv_dateTo").val(value);

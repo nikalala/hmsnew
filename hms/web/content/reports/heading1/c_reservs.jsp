@@ -18,6 +18,14 @@
     loadDefaults();
   });
 
+  function doFilter(){
+    loader.show();
+    $.post("content/reports/content/cancelled-reservation.html",function(data){
+      $("#grid-table").html(data);
+      loader.hide();
+    });
+  }
+
   function resetFilterPanel() {
     $("#filter-form :input").each(function () {
       console.log($(this).attr('id'))

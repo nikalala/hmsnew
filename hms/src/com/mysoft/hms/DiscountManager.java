@@ -1340,38 +1340,6 @@ public class DiscountManager
     }
 
     /**
-     * Retrieves an array of ReservationroomBean using the relation table Folioitem given a DiscountBean object.
-     *
-     * @param pObject the DiscountBean pObject to be used
-     * @return an array of ReservationroomBean 
-     */
-    // MANY TO MANY
-    public ReservationroomBean[] loadReservationroomViaFolioitem(DiscountBean pObject) throws SQLException
-    {
-         Connection c = null;
-         PreparedStatement ps = null;
-         String strSQL =      " SELECT "
-                         + "        *"
-                         + " FROM  "
-                         + "        reservationroom,folioitem"
-                         + " WHERE "    
-                         + "     folioitem.discountid = ?"
-                         + " AND folioitem.reservationroomid = reservationroom.reservationroomid";
-         try
-         {
-             c = getConnection();
-             ps = c.prepareStatement(strSQL,ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-             Manager.setInteger(ps, 1, pObject.getDiscountid());
-             return ReservationroomManager.getInstance().loadByPreparedStatement(ps);
-         }
-         finally
-         {
-            getManager().close(ps);
-            freeConnection(c);
-         }
-    }
-
-    /**
      * Retrieves an array of RoomBean using the relation table Folioitem given a DiscountBean object.
      *
      * @param pObject the DiscountBean pObject to be used
@@ -1619,70 +1587,6 @@ public class DiscountManager
              ps = c.prepareStatement(strSQL,ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
              Manager.setInteger(ps, 1, pObject.getDiscountid());
              return ReservationtypeManager.getInstance().loadByPreparedStatement(ps);
-         }
-         finally
-         {
-            getManager().close(ps);
-            freeConnection(c);
-         }
-    }
-
-    /**
-     * Retrieves an array of PersonnelBean using the relation table Reservationdiscount given a DiscountBean object.
-     *
-     * @param pObject the DiscountBean pObject to be used
-     * @return an array of PersonnelBean 
-     */
-    // MANY TO MANY
-    public PersonnelBean[] loadPersonnelViaReservationdiscount(DiscountBean pObject) throws SQLException
-    {
-         Connection c = null;
-         PreparedStatement ps = null;
-         String strSQL =      " SELECT "
-                         + "        *"
-                         + " FROM  "
-                         + "        personnel,reservationdiscount"
-                         + " WHERE "    
-                         + "     reservationdiscount.discountid = ?"
-                         + " AND reservationdiscount.regbyid = personnel.personnelid";
-         try
-         {
-             c = getConnection();
-             ps = c.prepareStatement(strSQL,ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-             Manager.setInteger(ps, 1, pObject.getDiscountid());
-             return PersonnelManager.getInstance().loadByPreparedStatement(ps);
-         }
-         finally
-         {
-            getManager().close(ps);
-            freeConnection(c);
-         }
-    }
-
-    /**
-     * Retrieves an array of ReservationBean using the relation table Reservationdiscount given a DiscountBean object.
-     *
-     * @param pObject the DiscountBean pObject to be used
-     * @return an array of ReservationBean 
-     */
-    // MANY TO MANY
-    public ReservationBean[] loadReservationViaReservationdiscount(DiscountBean pObject) throws SQLException
-    {
-         Connection c = null;
-         PreparedStatement ps = null;
-         String strSQL =      " SELECT "
-                         + "        *"
-                         + " FROM  "
-                         + "        reservation,reservationdiscount"
-                         + " WHERE "    
-                         + "     reservationdiscount.discountid = ?"
-                         + " AND reservationdiscount.reservationid = reservation.reservationid";
-         try
-         {
-             c = getConnection();
-             ps = c.prepareStatement(strSQL,ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-             Manager.setInteger(ps, 1, pObject.getDiscountid());
-             return ReservationManager.getInstance().loadByPreparedStatement(ps);
          }
          finally
          {

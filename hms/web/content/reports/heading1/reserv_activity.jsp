@@ -43,6 +43,14 @@
     $("#reserv_dateTo").val(value);
   });
 
+  function doFilter(){
+    loader.show();
+    $.post("content/reports/content/Reservation-Activity.html",function(data){
+      $("#grid-table").html(data);
+      loader.hide();
+    });
+  }
+
   function resetDates() {
     var today = new Date(<%=lclosedate%>);
     $("#reserv_dateTo").datepicker("setDate", today);

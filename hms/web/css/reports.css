@@ -1,0 +1,14 @@
+@font-face {
+    font-family: table-font;
+    src: url(font/helvetica-neue-medium-1361522099.ttf);
+}
+
+body {
+    font-family: table-font;
+    font-size: 10px;
+}
+
+td {
+    padding-left: 5px;
+    padding-right: 5px;
+}
