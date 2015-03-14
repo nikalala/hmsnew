@@ -36,128 +36,135 @@ public class VArrivallistManager
     public static final String NAME_RESERVATIONID = "reservationid";
 
     /**
+     * Column status of type Types.INTEGER mapped to Integer.
+     */
+    public static final int ID_STATUS = 1;
+    public static final int TYPE_STATUS = Types.INTEGER;
+    public static final String NAME_STATUS = "status";
+
+    /**
      * Column reservationroomid of type Types.BIGINT mapped to Long.
      */
-    public static final int ID_RESERVATIONROOMID = 1;
+    public static final int ID_RESERVATIONROOMID = 2;
     public static final int TYPE_RESERVATIONROOMID = Types.BIGINT;
     public static final String NAME_RESERVATIONROOMID = "reservationroomid";
 
     /**
      * Column roomid of type Types.INTEGER mapped to Integer.
      */
-    public static final int ID_ROOMID = 2;
+    public static final int ID_ROOMID = 3;
     public static final int TYPE_ROOMID = Types.INTEGER;
     public static final String NAME_ROOMID = "roomid";
 
     /**
      * Column roomtypeid of type Types.INTEGER mapped to Integer.
      */
-    public static final int ID_ROOMTYPEID = 3;
+    public static final int ID_ROOMTYPEID = 4;
     public static final int TYPE_ROOMTYPEID = Types.INTEGER;
     public static final String NAME_ROOMTYPEID = "roomtypeid";
 
     /**
      * Column arraivaldate of type Types.TIMESTAMP mapped to java.sql.Timestamp.
      */
-    public static final int ID_ARRAIVALDATE = 4;
+    public static final int ID_ARRAIVALDATE = 5;
     public static final int TYPE_ARRAIVALDATE = Types.TIMESTAMP;
     public static final String NAME_ARRAIVALDATE = "arraivaldate";
 
     /**
      * Column departuredate of type Types.TIMESTAMP mapped to java.sql.Timestamp.
      */
-    public static final int ID_DEPARTUREDATE = 5;
+    public static final int ID_DEPARTUREDATE = 6;
     public static final int TYPE_DEPARTUREDATE = Types.TIMESTAMP;
     public static final String NAME_DEPARTUREDATE = "departuredate";
 
     /**
      * Column regbyid of type Types.INTEGER mapped to Integer.
      */
-    public static final int ID_REGBYID = 6;
+    public static final int ID_REGBYID = 7;
     public static final int TYPE_REGBYID = Types.INTEGER;
     public static final String NAME_REGBYID = "regbyid";
 
     /**
      * Column reservationtypeid of type Types.INTEGER mapped to Integer.
      */
-    public static final int ID_RESERVATIONTYPEID = 7;
+    public static final int ID_RESERVATIONTYPEID = 8;
     public static final int TYPE_RESERVATIONTYPEID = Types.INTEGER;
     public static final String NAME_RESERVATIONTYPEID = "reservationtypeid";
 
     /**
      * Column guestid of type Types.BIGINT mapped to Long.
      */
-    public static final int ID_GUESTID = 8;
+    public static final int ID_GUESTID = 9;
     public static final int TYPE_GUESTID = Types.BIGINT;
     public static final String NAME_GUESTID = "guestid";
 
     /**
      * Column guest of type Types.VARCHAR mapped to String.
      */
-    public static final int ID_GUEST = 9;
+    public static final int ID_GUEST = 10;
     public static final int TYPE_GUEST = Types.VARCHAR;
     public static final String NAME_GUEST = "guest";
 
     /**
      * Column roomcode of type Types.VARCHAR mapped to String.
      */
-    public static final int ID_ROOMCODE = 10;
+    public static final int ID_ROOMCODE = 11;
     public static final int TYPE_ROOMCODE = Types.VARCHAR;
     public static final String NAME_ROOMCODE = "roomcode";
 
     /**
      * Column roomtypecode of type Types.VARCHAR mapped to String.
      */
-    public static final int ID_ROOMTYPECODE = 11;
+    public static final int ID_ROOMTYPECODE = 12;
     public static final int TYPE_ROOMTYPECODE = Types.VARCHAR;
     public static final String NAME_ROOMTYPECODE = "roomtypecode";
 
     /**
      * Column bsourcename of type Types.VARCHAR mapped to String.
      */
-    public static final int ID_BSOURCENAME = 12;
+    public static final int ID_BSOURCENAME = 13;
     public static final int TYPE_BSOURCENAME = Types.VARCHAR;
     public static final String NAME_BSOURCENAME = "bsourcename";
 
     /**
      * Column bsourceid of type Types.INTEGER mapped to Integer.
      */
-    public static final int ID_BSOURCEID = 13;
+    public static final int ID_BSOURCEID = 14;
     public static final int TYPE_BSOURCEID = Types.INTEGER;
     public static final String NAME_BSOURCEID = "bsourceid";
 
     /**
      * Column companyname of type Types.VARCHAR mapped to String.
      */
-    public static final int ID_COMPANYNAME = 14;
+    public static final int ID_COMPANYNAME = 15;
     public static final int TYPE_COMPANYNAME = Types.VARCHAR;
     public static final String NAME_COMPANYNAME = "companyname";
 
     /**
      * Column adult of type Types.INTEGER mapped to Integer.
      */
-    public static final int ID_ADULT = 15;
+    public static final int ID_ADULT = 16;
     public static final int TYPE_ADULT = Types.INTEGER;
     public static final String NAME_ADULT = "adult";
 
     /**
      * Column child of type Types.INTEGER mapped to Integer.
      */
-    public static final int ID_CHILD = 16;
+    public static final int ID_CHILD = 17;
     public static final int TYPE_CHILD = Types.INTEGER;
     public static final String NAME_CHILD = "child";
 
     /**
      * Column reservtype of type Types.VARCHAR mapped to String.
      */
-    public static final int ID_RESERVTYPE = 17;
+    public static final int ID_RESERVTYPE = 18;
     public static final int TYPE_RESERVTYPE = Types.VARCHAR;
     public static final String NAME_RESERVTYPE = "reservtype";
 
     /**
      * Column roomstatus of type Types.INTEGER mapped to Integer.
      */
-    public static final int ID_ROOMSTATUS = 18;
+    public static final int ID_ROOMSTATUS = 19;
     public static final int TYPE_ROOMSTATUS = Types.INTEGER;
     public static final String NAME_ROOMSTATUS = "roomstatus";
 
@@ -170,6 +177,7 @@ public class VArrivallistManager
     private static final String[] FIELD_NAMES = 
     {
         "v_arrivallist.reservationid"
+        ,"v_arrivallist.status"
         ,"v_arrivallist.reservationroomid"
         ,"v_arrivallist.roomid"
         ,"v_arrivallist.roomtypeid"
@@ -194,6 +202,7 @@ public class VArrivallistManager
      * Field that contains the comma separated fields of the v_arrivallist table.
      */
     private static final String ALL_FIELDS = "v_arrivallist.reservationid"
+                            + ",v_arrivallist.status"
                             + ",v_arrivallist.reservationroomid"
                             + ",v_arrivallist.roomid"
                             + ",v_arrivallist.roomtypeid"
@@ -419,6 +428,14 @@ public class VArrivallistManager
                     _dirtyCount++;
                 }
 
+                if (pObject.isStatusModified()) {
+                    if (_dirtyCount>0) {
+                        _sql.append(",");
+                    }
+                    _sql.append("status");
+                    _dirtyCount++;
+                }
+
                 if (pObject.isReservationroomidModified()) {
                     if (_dirtyCount>0) {
                         _sql.append(",");
@@ -579,6 +596,10 @@ public class VArrivallistManager
                     Manager.setLong(ps, ++_dirtyCount, pObject.getReservationid());
                 }
     
+                if (pObject.isStatusModified()) {
+                    Manager.setInteger(ps, ++_dirtyCount, pObject.getStatus());
+                }
+    
                 if (pObject.isReservationroomidModified()) {
                     Manager.setLong(ps, ++_dirtyCount, pObject.getReservationroomid());
                 }
@@ -670,6 +691,15 @@ public class VArrivallistManager
                         useComma=true;
                     }
                     _sql.append("reservationid").append("=?");
+                }
+
+                if (pObject.isStatusModified()) {
+                    if (useComma) {
+                        _sql.append(",");
+                    } else {
+                        useComma=true;
+                    }
+                    _sql.append("status").append("=?");
                 }
 
                 if (pObject.isReservationroomidModified()) {
@@ -841,6 +871,10 @@ public class VArrivallistManager
                       Manager.setLong(ps, ++_dirtyCount, pObject.getReservationid());
                 }
 
+                if (pObject.isStatusModified()) {
+                      Manager.setInteger(ps, ++_dirtyCount, pObject.getStatus());
+                }
+
                 if (pObject.isReservationroomidModified()) {
                       Manager.setLong(ps, ++_dirtyCount, pObject.getReservationroomid());
                 }
@@ -993,6 +1027,11 @@ public class VArrivallistManager
                  _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("reservationid= ?");
              }
     
+             if (pObject.isStatusModified()) {
+                 _dirtyCount ++; 
+                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("status= ?");
+             }
+    
              if (pObject.isReservationroomidModified()) {
                  _dirtyCount ++; 
                  _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("reservationroomid= ?");
@@ -1093,6 +1132,10 @@ public class VArrivallistManager
     
              if (pObject.isReservationidModified()) {
                  Manager.setLong(ps, ++_dirtyCount, pObject.getReservationid());
+             }
+    
+             if (pObject.isStatusModified()) {
+                 Manager.setInteger(ps, ++_dirtyCount, pObject.getStatus());
              }
     
              if (pObject.isReservationroomidModified()) {
@@ -1197,6 +1240,13 @@ public class VArrivallistManager
                 if (_dirtyAnd > 0)
                     sql.append(" AND ");
                 sql.append("reservationid").append("=?");
+                _dirtyAnd ++;
+            }
+    
+            if (pObject.isStatusInitialized()) {
+                if (_dirtyAnd > 0)
+                    sql.append(" AND ");
+                sql.append("status").append("=?");
                 _dirtyAnd ++;
             }
     
@@ -1332,6 +1382,10 @@ public class VArrivallistManager
     
             if (pObject.isReservationidInitialized()) {
                 Manager.setLong(ps, ++_dirtyCount, pObject.getReservationid());
+            }
+    
+            if (pObject.isStatusInitialized()) {
+                Manager.setInteger(ps, ++_dirtyCount, pObject.getStatus());
             }
     
             if (pObject.isReservationroomidInitialized()) {
@@ -1521,6 +1575,11 @@ public class VArrivallistManager
                     _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("reservationid= ?");
                 }
     
+                if (pObject.isStatusModified()) {
+                    _dirtyCount++; 
+                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("status= ?");
+                }
+    
                 if (pObject.isReservationroomidModified()) {
                     _dirtyCount++; 
                     _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("reservationroomid= ?");
@@ -1624,6 +1683,10 @@ public class VArrivallistManager
                     Manager.setLong(ps, ++_dirtyCount, pObject.getReservationid());
                 }
     
+                if (pObject.isStatusModified()) {
+                    Manager.setInteger(ps, ++_dirtyCount, pObject.getStatus());
+                }
+    
                 if (pObject.isReservationroomidModified()) {
                     Manager.setLong(ps, ++_dirtyCount, pObject.getReservationroomid());
                 }
@@ -1721,24 +1784,25 @@ public class VArrivallistManager
     {
         VArrivallistBean pObject = createVArrivallistBean();
         pObject.setReservationid(Manager.getLong(rs, 1));
-        pObject.setReservationroomid(Manager.getLong(rs, 2));
-        pObject.setRoomid(Manager.getInteger(rs, 3));
-        pObject.setRoomtypeid(Manager.getInteger(rs, 4));
-        pObject.setArraivaldate(rs.getTimestamp(5));
-        pObject.setDeparturedate(rs.getTimestamp(6));
-        pObject.setRegbyid(Manager.getInteger(rs, 7));
-        pObject.setReservationtypeid(Manager.getInteger(rs, 8));
-        pObject.setGuestid(Manager.getLong(rs, 9));
-        pObject.setGuest(rs.getString(10));
-        pObject.setRoomcode(rs.getString(11));
-        pObject.setRoomtypecode(rs.getString(12));
-        pObject.setBsourcename(rs.getString(13));
-        pObject.setBsourceid(Manager.getInteger(rs, 14));
-        pObject.setCompanyname(rs.getString(15));
-        pObject.setAdult(Manager.getInteger(rs, 16));
-        pObject.setChild(Manager.getInteger(rs, 17));
-        pObject.setReservtype(rs.getString(18));
-        pObject.setRoomstatus(Manager.getInteger(rs, 19));
+        pObject.setStatus(Manager.getInteger(rs, 2));
+        pObject.setReservationroomid(Manager.getLong(rs, 3));
+        pObject.setRoomid(Manager.getInteger(rs, 4));
+        pObject.setRoomtypeid(Manager.getInteger(rs, 5));
+        pObject.setArraivaldate(rs.getTimestamp(6));
+        pObject.setDeparturedate(rs.getTimestamp(7));
+        pObject.setRegbyid(Manager.getInteger(rs, 8));
+        pObject.setReservationtypeid(Manager.getInteger(rs, 9));
+        pObject.setGuestid(Manager.getLong(rs, 10));
+        pObject.setGuest(rs.getString(11));
+        pObject.setRoomcode(rs.getString(12));
+        pObject.setRoomtypecode(rs.getString(13));
+        pObject.setBsourcename(rs.getString(14));
+        pObject.setBsourceid(Manager.getInteger(rs, 15));
+        pObject.setCompanyname(rs.getString(16));
+        pObject.setAdult(Manager.getInteger(rs, 17));
+        pObject.setChild(Manager.getInteger(rs, 18));
+        pObject.setReservtype(rs.getString(19));
+        pObject.setRoomstatus(Manager.getInteger(rs, 20));
 
         pObject.isNew(false);
         pObject.resetIsModified();
@@ -1764,6 +1828,10 @@ public class VArrivallistManager
                 case ID_RESERVATIONID:
                     ++pos;
                     pObject.setReservationid(Manager.getLong(rs, pos));
+                    break;
+                case ID_STATUS:
+                    ++pos;
+                    pObject.setStatus(Manager.getInteger(rs, pos));
                     break;
                 case ID_RESERVATIONROOMID:
                     ++pos;

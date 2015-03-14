@@ -48,6 +48,7 @@ public class VArrivallistComparator implements Comparator
      * Possible values are:
      * <ul>
      *   <li>VArrivallistManager.ID_RESERVATIONID
+     *   <li>VArrivallistManager.ID_STATUS
      *   <li>VArrivallistManager.ID_RESERVATIONROOMID
      *   <li>VArrivallistManager.ID_ROOMID
      *   <li>VArrivallistManager.ID_ROOMTYPEID
@@ -85,6 +86,7 @@ public class VArrivallistComparator implements Comparator
      * Possible values are:
      * <ul>
      *   <li>VArrivallistManager.ID_RESERVATIONID
+     *   <li>VArrivallistManager.ID_STATUS
      *   <li>VArrivallistManager.ID_RESERVATIONROOMID
      *   <li>VArrivallistManager.ID_ROOMID
      *   <li>VArrivallistManager.ID_ROOMTYPEID
@@ -132,6 +134,17 @@ public class VArrivallistComparator implements Comparator
                     iReturn = 1;
                 } else { 
                     iReturn = b1.getReservationid().compareTo(b2.getReservationid());
+                }
+                break;
+            case VArrivallistManager.ID_STATUS:
+                if (b1.getStatus() == null && b2.getStatus() != null) {
+                    iReturn = -1;
+                } else if (b1.getStatus() == null && b2.getStatus() == null) {
+                    iReturn = 0;
+                } else if (b1.getStatus() != null && b2.getStatus() == null) {
+                    iReturn = 1;
+                } else { 
+                    iReturn = b1.getStatus().compareTo(b2.getStatus());
                 }
                 break;
             case VArrivallistManager.ID_RESERVATIONROOMID:

@@ -9,6 +9,29 @@
 
 <link rel="stylesheet" type="text/css" href="css/grid-filter.css">
 
+<style>
+  .pull-right table td {
+    border-bottom: 0px !important;
+    padding-top: 0px !important;
+  }
+
+  .pull-right table td:first-child {
+    border-left: solid 1px slategrey;
+  }
+  .pull-right table td:nth-child(even) {
+    border-right: solid 1px slategrey;
+    text-align: left;
+  }
+  .pull-right input[type="checkbox"] {
+    height: 13px;
+    margin-left: 10px;
+  }
+
+  .pull-right{
+    width : auto !important;
+  }
+</style>
+
 <script type="text/javascript">
 
   var lastroomtypeId = 0;
@@ -147,7 +170,7 @@
       $(this).css("float", "right", "!important");
       $(this).css("line-height", "27px", "!important");
     });
-    $("#grid-table input").height($("#grid-table .btn-group").height() - 6, "!important");
+    $("#grid-table input").height(21);
     $("#filter-form input[type='text']").css("width", "100%", "!important");
     $("#grid-table .date input[type='text']").css("position", "relative");
     $("#roomBean").next().css("padding-left", "0");
@@ -287,9 +310,32 @@
           <div style="width: 100%; float: left;">
             <span style="float: left; margin: 7px 0 0 10px;">ძიების კრიტერიუმები</span>
             <button type="button" class="btn btn-default" id="btnExport"
-                    style="border: 0; font-weight: bold; float: right; margin: 3px 5px 0 0;">
+                    style=" display: none; border: 0; font-weight: bold; float: right; margin: 3px 5px 0 0;">
               ექსპორტი
             </button>
+            <div class="btn-group pull-right" style="  margin: 2px 9px 0px 0px;  width: auto !important;  float: right !important;">
+
+        
+              <table style="width: 700px;">
+                <tr>
+                  <td><input type="checkbox" name="Reservation" checked></td>
+                  <td>Reservation</td>
+                  <td><input type="checkbox" name="InHouse" checked></td>
+                  <td>In House</td>
+                  <td><input type="checkbox" name="CheckedOut" checked></td>
+                  <td>CheckedOut</td>
+                  <td><input type="checkbox" name="Void" checked></td>
+                  <td>Void</td>
+                  <td><input type="checkbox" name="cancel" checked></td>
+                  <td>Cancel</td>
+                  <td><input type="checkbox" name="NoShow" checked></td>
+                  <td>NoShow</td>
+                </tr>
+              </table>
+              
+            
+
+            </div>
           </div>
         </div>
       </td>
