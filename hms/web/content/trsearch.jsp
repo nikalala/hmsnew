@@ -193,88 +193,13 @@
 
   function doFilter(donotreload, limit) {
 
-    var filterQuery = "";
-    var contQuery = " AND ";
-    var fitlerEquals = " = ";
-
-    var checkNum = $("#checkNumb");
-    var name = $("#firstlast");
-    var dtFrom = $("#arrival_dateFrom");
-    var dtTo = $("#arrival_dateTo");
-    var reservNum = $("#reservNumb");
-    var roomBean = $("#roomBean");
-    var roomType = $("#roomType");
-    var reserv_dateFrom = $("#reserv_dateFrom");
-    var reserv_dateTo = $("#reserv_dateTo");
-    var cancelNumb = $("#cancelNumb");
-    var txtSource = $("#txtSource");
-    var reservStatus = $("#reservStatus");
-    var reservType = $("#reservType");
-    var showMrooms = $("#showMrooms");
-    var showIncomplOrders = $("#showIncomplOrders");
-
-    if (!isNullOrEmpty(name.val())) {
-      filterQuery += " guest LIKE '%" + name.val() + "%'" + contQuery;
-    }
-
-    if (!isNullOrEmpty(dtFrom.val()) && !isNullOrEmpty(dtTo.val())) {
-      filterQuery += "to_date('" + dtFrom.val() + "', '<%=dateformats2[0]%>') <= arraivaldate::date AND arraivaldate::date <= to_date('" + dtTo.val() + "','<%=dateformats2[0]%>')" + contQuery;
-    }
-
-    if (!isNullOrEmpty(reserv_dateFrom.val()) && !isNullOrEmpty(reserv_dateTo.val())) {
-      filterQuery += "to_date('" + reserv_dateFrom.val() + "', '<%=dateformats2[0]%>') <= regdate::date AND regdate::date <= to_date('" + reserv_dateTo.val() + "','<%=dateformats2[0]%>')" + contQuery;
-    }
-
-    if (!isNullOrEmpty(reservNum.val())) {
-      filterQuery += " vouchernum LIKE '%" + reservNum.val() + "%'" + contQuery;
-    }
-
-    if (!isNullOrEmpty(roomBean.val()) && roomBean.val() != 0) {
-      filterQuery += " roomid " + fitlerEquals + roomBean.val() + contQuery;
-    }
-
-    if (!isNullOrEmpty(roomType.val()) && roomType.val() != 0) {
-      filterQuery += " roomtypeid " + fitlerEquals + roomType.val() + contQuery;
-    }
-
-    if (!isNullOrEmpty(txtSource.val())) {
-      filterQuery += " bsourcename LIKE '%" + txtSource.val() + "%'" + contQuery;
-    }
-
-    if (!isNullOrEmpty(reservType.val()) && reservType.val() != 0) {
-      filterQuery += " reservationtypeid " + fitlerEquals + reservType.val() + contQuery;
-    }
-
-    if (!isNullOrEmpty(reservStatus.val())) {
-      if (reservStatus.val() == 4) {
-        filterQuery += " status IN(0,1,2,3) " + contQuery;
-      } else {
-        filterQuery += " status " + fitlerEquals + reservStatus.val() + contQuery;
-      }
-    }
-    if (!showMrooms.is(':checked') && donotreload) {
-      filterQuery += "  1=1 "; //
-    } else if (showMrooms.is(':checked') && !donotreload) {
-      filterQuery += " roomid is null ";
-    } else {
-      filterQuery += " 1=1 ";
-    }
-
-    var retVal = filterQuery;
-
-    if (!isNullOrEmpty(checkNum.val())) {
-      retVal = " reservationroomid " + fitlerEquals + checkNum.val();
-    }
-
     var l = "";
     if (!isNullOrEmpty(limit)) {
       l = "&limit=" + limit;
     }
-    var url = "content/getreservationlist.jsp?query=" + encodeURIComponent("where " + retVal) + l;
-    if (!donotreload) {
-      //console.log("Starting filtering with > " + url);
-      reloadGrid(searchresGrid.id, url);
-    }
+    var url = "content/gettrsearch.jsp?" + $("#filter-form").serialize() + l;
+    console.log(url)
+    reloadGrid(searchresGrid.id, url);
     return url;
   }
 
@@ -357,7 +282,7 @@
           </div>
           <div class="col-md-3">
             <div class="input-append date" id="dateFrom">
-              <input type="text" class="span2 " id="arrival_dateFrom" placeholder=" თარიღიდან"
+              <input type="text" class="span2 " name="arrival_dateFrom" id="arrival_dateFrom" placeholder=" თარიღიდან"
                      style="">
                     <span class="add-on"
                           style="position:absolute !important; right : 4px  !important;background : none  !important;border: none !important;top: 1px;">
@@ -366,7 +291,7 @@
           </div>
           <div class="col-md-3">
             <div class="input-append date" id="dateTo">
-              <input type="text" class="span2 " id="arrival_dateTo" placeholder=" თარიღამდე">
+              <input type="text" class="span2 " name="arrival_dateTo" id="arrival_dateTo" placeholder=" თარიღამდე">
                     <span class="add-on"
                           style="position:absolute !important; right : 4px  !important;background : none  !important;border: none !important;top: 1px;">
                         <i class="glyphicon glyphicon-calendar"></i></span>
@@ -395,7 +320,7 @@
           </div>
 
           <div class="col-md-3">
-            <select class="dropdown col-md-2" id="roomBean">
+            <select class="dropdown col-md-2" name="roomBean" id="roomBean">
               <option value="0">-ოთახის #-</option>
               <% for (int i = 0; i < roomBeans.length; i++) { %>
               <option value="<%=roomBeans[i].getRoomid()%>"
@@ -405,7 +330,7 @@
             </select>
           </div>
           <div class="col-md-3">
-            <select class="dropdown col-md-2" id="roomType">
+            <select class="dropdown col-md-2" name="roomType" id="roomType">
               <option value="0">-ოთახის ტიპი-</option>
               <% for (int i = 0; i < roomTypes.length; i++) { %>
               <option value="<%=roomTypes[i].getRoomtypeid()%>"><%=roomTypes[i].getName()%>
