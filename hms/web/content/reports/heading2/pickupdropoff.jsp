@@ -19,7 +19,7 @@
 
   function doFilter(){
     loader.show();
-    $.post("content/reports/content/void-reservation.html",function(data){
+    $.post("content/reports/content/Pickup-Dropoff.html",function(data){
       $("#grid-table").html(data);
       loader.hide();
     });

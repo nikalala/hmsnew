@@ -2,6 +2,29 @@
 <%@page pageEncoding="UTF-8" %>
 <%@include file="../includes/init.jsp" %>
 
+<%
+  String rromid = request.getParameter("rroomid");
+  String roomid = "";
+  String resId = "";
+  String folionum = "";
+
+  if (!CodeHelpers.isNullOrEmpty(rromid)) {
+    ReservationroomBean rr = ReservationroomManager.getInstance().loadByPrimaryKey(new Long(rromid));
+    if (rr != null) {
+      resId = rr.getReservationid().toString();
+      FolioBean[] fb = FolioManager.getInstance().loadByWhere("where reservationroomid = " + rromid);
+      if (fb != null) {
+        folionum = fb[0].getNum();
+      }
+      if (rr.getRoomid() != null) {
+        RoomBean rb = RoomManager.getInstance().loadByPrimaryKey(new Integer(rr.getRoomid()));
+        roomid = rb.getName() + " - " + rb.getCode();
+      }
+    }
+  }
+
+%>
+
 <% RoomtypeBean[] roomTypes = RoomtypeManager.getInstance().loadByWhere("ORDER BY ord"); %>
 <% RatetypeBean[] RatetypeBeans = RatetypeManager.getInstance().loadByWhere("where active = true and deleted = false"); %>
 <% DiscountBean[] discountBeans = DiscountManager.getInstance().loadByWhere("where roomrate = true");%>
@@ -77,7 +100,16 @@
   $(document).ready(function(){
     loadDefaults();
   });
+
+  $("#roomlistitems tr").click(function(e) {
+    loader.show();
+    e.preventDefault();
+    var id = $(this).prop('id');
+    getBody('stayviewleft', 'dashboard', 'სამუშაო მაგიდა', 'res1', '?rroomid=' + id ,true);
+    return;
+  })
 </script>
+
 <link rel="stylesheet" type="text/css" href="css/zabuto_calendar.css">
 
 <style>
@@ -197,6 +229,19 @@
   }
 </style>
 
+<div class="q-main-div">
+  <div class="col-md-16">
+    <div id="status_bar" class="first-status-bar" align='center'>
+      <div class="q-statusbar-div" style="  background: #FFF;">
+        <span class="q-statusbar-span">
+          <div style="  float: left;  margin-right: 10px;">ოთახი: <b><%=roomid%></b></div>
+          <div style="float: left; border-left: solid 1px #999; margin-right: 10px;">ფოლიო:  <b><%=folionum%></b></div>
+          <div style="float: left; border-left: solid 1px #999; margin-right: 10px;">რეზ #:  <b><%=resId%></b></div>
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
 <div class="q-main-div">
   <div class="col-md-7">
     <div id="status_bar" class="first-status-bar" align='center'>

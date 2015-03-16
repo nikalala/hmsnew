@@ -8,28 +8,34 @@
 
   $(document).ready(function () {
     $('#reserv_dateTo').datepicker(<%=pickerFormatForDatePickers%>);
+    $('#reserv_dateFrom').datepicker(<%=pickerFormatForDatePickers%>);
     loadDefaults();
   });
-
-  function doFilter(){
-    loader.show();
-    $.post("content/reports/content/guest-list.html",function(data){
-      $("#grid-table").html(data);
-      loader.hide();
-    });
-  }
 
   function resetFilterPanel() {
     resetDates();
   }
 
+  function doFilter(){
+    loader.show();
+    $.post("content/reports/content/advance-deposit-ledger.html",function(data){
+      $("#grid-table").html(data);
+      loader.hide();
+    });
+  }
+
+  $("#reserv_dateFrom").on('change', function () {
+    var value = $(this).val();
+    $("#reserv_dateTo").val(value);
+  });
+
   function resetDates() {
     var today = new Date(<%=lclosedate%>);
+    $("#reserv_dateTo").datepicker("setDate", today);
     $("#reserv_dateFrom").datepicker("setDate", today);
   }
 
   function loadDefaults() {
-    $('#reserv_dateFrom').datepicker(<%=pickerFormatForDatePickers%>);
     $("#grid-table .btn-group").css("width", "100%", "!important").css("padding-left", "0px").css("padding-right", "0px");
     $("#grid-table label").each(function () {
       $(this).css("float", "left", "!important");
@@ -48,11 +54,19 @@
   <table id="grid-table" style="margin: 10px;">
     <tr>
       <td style="width: 150px;">
-        <label>Guest List:</label>
+        <label>From:</label>
       </td>
       <td>
         <div class="input-append date">
           <input type="text" class="span2 " id="reserv_dateFrom" placeholder=" თარიღიდან">
+                    <span class="add-on"
+                          style="position:absolute !important; right : 4px  !important;background : none  !important;border: none !important;top: 1px;">
+                        <i class="glyphicon glyphicon-calendar"></i></span>
+        </div>
+      </td>
+      <td>
+        <div class="input-append date">
+          <input type="text" class="span2" id="reserv_dateTo" placeholder=" თარიღამდე">
                     <span class="add-on"
                           style="position:absolute !important; right : 4px  !important;background : none  !important;border: none !important;top: 1px;">
                         <i class="glyphicon glyphicon-calendar"></i></span>

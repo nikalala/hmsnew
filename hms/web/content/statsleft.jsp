@@ -200,8 +200,8 @@
                 <div id="collapseOne3" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading3">
                     <div class="panel-body">
                         <ul>
-                            <li><i class="fa fa-dot-circle-o"></i> <a href="#">Advance Deposit Ledger </a></li>
-                            <li><i class="fa fa-dot-circle-o"></i> <a href="#">City Ledger - Detail </a></li>
+                            <li><i class="fa fa-dot-circle-o"></i> <a href="javascript:loadStats('advancedeposit','3');">Advance Deposit Ledger </a></li>
+                            <li><i class="fa fa-dot-circle-o"></i> <a href="javascript:loadStats('cityledger','3');">City Ledger - Detail </a></li>
                             <li><i class="fa fa-dot-circle-o"></i> <a href="#">City Ledger - Summary </a></li>
                             <li><i class="fa fa-dot-circle-o"></i> <a href="#">Credit Card Process - DetailDaily </a>
                             </li>
