@@ -29,7 +29,7 @@
         var data = $("#filter-form").serialize();
 
         loader.show();
-        $.post("content/reports/content/arrivallist.jsp?"+data,function(data){
+        $.post("content/reports/getreport.jsp?reportid=1",function(data){
             $("#grid-table").html(data);
             loader.hide();
         });

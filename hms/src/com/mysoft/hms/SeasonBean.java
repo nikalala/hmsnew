@@ -159,7 +159,7 @@ public class SeasonBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: season.code
-     * <li>comments: ????? ??????????
+     * <li>comments: მოკლე დასახელება
      * <li>column size: 2147483647
      * <li>jdbc type returned by the driver: Types.VARCHAR
      * </ul>
@@ -216,7 +216,7 @@ public class SeasonBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: season.name
-     * <li>comments: ??????????
+     * <li>comments: დასახელება
      * <li>column size: 2147483647
      * <li>jdbc type returned by the driver: Types.VARCHAR
      * </ul>
@@ -273,7 +273,7 @@ public class SeasonBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: season.fday
-     * <li>comments: ??????
+     * <li>comments: დღიდან
      * <li>column size: 10
      * <li>jdbc type returned by the driver: Types.INTEGER
      * </ul>
@@ -341,7 +341,7 @@ public class SeasonBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: season.tday
-     * <li>comments: ??????
+     * <li>comments: დღემდე
      * <li>column size: 10
      * <li>jdbc type returned by the driver: Types.INTEGER
      * </ul>
@@ -409,7 +409,7 @@ public class SeasonBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: season.fmonth
-     * <li>comments: ??????
+     * <li>comments: თვიდან
      * <li>column size: 10
      * <li>jdbc type returned by the driver: Types.INTEGER
      * </ul>
@@ -477,7 +477,7 @@ public class SeasonBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: season.tmonth
-     * <li>comments: ??????
+     * <li>comments: თვემდე
      * <li>column size: 10
      * <li>jdbc type returned by the driver: Types.INTEGER
      * </ul>
@@ -545,7 +545,7 @@ public class SeasonBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: season.startdate
-     * <li>comments: ?????????
+     * <li>comments: თარიღიდან
      * <li>column size: 13
      * <li>jdbc type returned by the driver: Types.DATE
      * </ul>
@@ -613,7 +613,7 @@ public class SeasonBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: season.enddate
-     * <li>comments: ?????????
+     * <li>comments: თარიღამდე
      * <li>column size: 13
      * <li>jdbc type returned by the driver: Types.DATE
      * </ul>
@@ -682,7 +682,7 @@ public class SeasonBean
      * <ul>
      * <li>full name: season.regbyid
      * <li> foreign key: personnel.personnelid
-     * <li>comments: ??????
+     * <li>comments: ავტორი
      * <li>column size: 10
      * <li>jdbc type returned by the driver: Types.INTEGER
      * </ul>
@@ -750,7 +750,7 @@ public class SeasonBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: season.regdate
-     * <li>comments: ???????????? ??????
+     * <li>comments: რეგისტრაციის თარიღი
      * <li>default value: now()
      * <li>column size: 29
      * <li>jdbc type returned by the driver: Types.TIMESTAMP
@@ -819,7 +819,7 @@ public class SeasonBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: season.active
-     * <li>comments: ???????
+     * <li>comments: აქტიური
      * <li>default value: true
      * <li>column size: 1
      * <li>jdbc type returned by the driver: Types.BIT
@@ -887,7 +887,7 @@ public class SeasonBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: season.deleted
-     * <li>comments: ???????
+     * <li>comments: წაშლილი
      * <li>default value: false
      * <li>column size: 1
      * <li>jdbc type returned by the driver: Types.BIT

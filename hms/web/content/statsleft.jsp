@@ -1,7 +1,11 @@
 <%@page contentType="text/html; charset=UTF-8" %>
 <%@page pageEncoding="UTF-8" %>
 <%@include file="../includes/init.jsp" %>
-
+<%
+  
+    String[] hdrs = {"რეზერვაციების ანგარიშგება","წინა მხარის რეპორტი","ბექ ოფისის რეპორტი","აუდიტის რეპორტები","სტატისტიკური რეპორტები","გრაფები და დიაგრამები"};
+    RepcatBean[] cats = RepcatManager.getInstance().loadByWhere("order by repcatid");
+%>
 <script>
 
     $('.panel-group .panel-collapse.in').prev().addClass('actives');
@@ -117,189 +121,38 @@
         <b style='vertical-align: middle; color: #FFFFFF;'>ანგარიშგებები</b>
     </div>
     <div class="panel-body stats" style="background-color: #F5F5F5;">
-        <div class="panel-group accordion-group accordion-caret" id="accordion" role="tablist"
-             aria-multiselectable="true">
+        <div class="panel-group accordion-group accordion-caret" id="accordion" role="tablist" aria-multiselectable="true">
+            <%
+            for(int i=0;i<cats.length;i++){
+                ReportBean[] reps = ReportManager.getInstance().loadByWhere("where repcatid = "+cats[i].getRepcatid()+" order by displayname");
+            
+            %>
             <div class="panel panel-default">
-                <div class="panel-heading" role="tab" id="headingOne">
+                <div class="panel-heading" role="tab" id="heading<%=i%>">
                     <h4 class="panel-title">
-                        <a data-toggle="collapse" class="accordion-toggle" data-parent="#accordion" href="#collapseOne"
+                        <a data-toggle="collapse" class="accordion-toggle" data-parent="#accordion" href="#collapseOne<%=i%>"
                            aria-expanded="true"
-                           aria-controls="collapseOne">
-                            რეზერვაციების ანგარიშგება
+                           aria-controls="collapseOne<%=i%>">
+                            <%=cats[i].getName()%>
                         </a>
 
                     </h4>
                 </div>
-                <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+                <div id="collapseOne<%=i%>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading<%=i%>">
                     <div class="panel-body">
                         <ul>
+                            <%for(int j=0;j<reps.length;j++){%>
                             <li>
                                 <i class="fa fa-dot-circle-o"></i>
-                                <a href="javascript:loadStats('arlist','1');">ჩამომსვლელთა სია</a>
+                                <a href="javascript:loadStats(<%=reps[j].getReportid()%>,'');"><%=reps[j].getDisplayname()%></a>
                             </li>
-                            <li>
-                                <i class="fa fa-dot-circle-o"></i>
-                                <a href="javascript:loadStats('c_reservs','1');">გაუქმებული რეზერვაციები</a>
-                            </li>
-                            <li>
-                                <i class="fa fa-dot-circle-o"></i>
-                                <a href="javascript:loadStats('noshow','1');">არ გამოცხადებული (რეზ)</a>
-                            </li>
-                            <li>
-                                <i class="fa fa-dot-circle-o"></i>
-                                <a href="javascript:loadStats('reserv_activity','1');">რეზერვაციის აქტივობა</a>
-                            </li>
-                            <li>
-                                <i class="fa fa-dot-circle-o"></i>
-                                <a href="javascript:loadStats('void','1');">წაშლილი რეზერვაციები</a>
-                            </li>
+                            <%}%>
                         </ul>
                     </div>
                 </div>
             </div>
-            <div class="panel panel-default">
-                <div class="panel-heading" role="tab" id="heading2">
-                    <h4 class="panel-title">
-                        <a data-toggle="collapse" class="accordion-toggle" data-parent="#accordion" href="#collapseOne2"
-                           aria-expanded="true"
-                           aria-controls="collapseOne2">
-                            წინა მხარის რეპორტი
-                        </a>
-
-                    </h4>
-                </div>
-                <div id="collapseOne2" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
-                    <div class="panel-body">
-                        <ul>
-                            <li><i class="fa fa-dot-circle-o"></i> <a href="javascript:loadStats('guestcheckedin','2');">Guest Checked In </a></li>
-                            <li><i class="fa fa-dot-circle-o"></i> <a href="javascript:loadStats('guestcheckedout','2');">Guest Checked Out</a></li>
-                            <li><i class="fa fa-dot-circle-o"></i> <a href="javascript:loadStats('guestlist','2');">Guest List </a></li>
-                            <li><i class="fa fa-dot-circle-o"></i> <a href="javascript:loadStats('guestmessage','2');">Guest Message</a></li>
-                            <li><i class="fa fa-dot-circle-o"></i> <a href="javascript:loadStats('inclusionreport','2');">Inclusion Report </a></li>
-                            <li><i class="fa fa-dot-circle-o"></i> <a href="javascript:loadStats('invbyroomtype','2');">Inventory By Room Type</a></li>
-                            <li><i class="fa fa-dot-circle-o"></i> <a href="javascript:loadStats('invoicebr','2');">Invoice Breakdown</a></li>
-                            <li><i class="fa fa-dot-circle-o"></i> <a href="javascript:loadStats('nightaudit','2');">Night Audit </a></li>
-                            <li><i class="fa fa-dot-circle-o"></i> <a href="javascript:loadStats('pickupdropoff','2');">Pickup Dropoff</a></li>
-                            <li><i class="fa fa-dot-circle-o"></i> <a href="javascript:loadStats('roomaval','2');">Room Availability</a></li>
-                            <li><i class="fa fa-dot-circle-o"></i> <a href="javascript:loadStats('roomstreport','2');">Room Status Report</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="panel panel-default">
-                <div class="panel-heading" role="tab" id="heading3">
-                    <h4 class="panel-title">
-                        <a data-toggle="collapse" class="accordion-toggle" data-parent="#accordion" href="#collapseOne3"
-                           aria-expanded="true"
-                           aria-controls="collapseOne3">
-                            ბექ ოფისის რეპორტი
-                        </a>
-
-                    </h4>
-                </div>
-                <div id="collapseOne3" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading3">
-                    <div class="panel-body">
-                        <ul>
-                            <li><i class="fa fa-dot-circle-o"></i> <a href="#">Advance Deposit Ledger </a></li>
-                            <li><i class="fa fa-dot-circle-o"></i> <a href="#">City Ledger - Detail </a></li>
-                            <li><i class="fa fa-dot-circle-o"></i> <a href="#">City Ledger - Summary </a></li>
-                            <li><i class="fa fa-dot-circle-o"></i> <a href="#">Credit Card Process - DetailDaily </a>
-                            </li>
-                            <li><i class="fa fa-dot-circle-o"></i> <a href="#">Extra Charge - Detail </a></li>
-                            <li><i class="fa fa-dot-circle-o"></i> <a href="#">Daily Receipt - Detail </a></li>
-                            <li><i class="fa fa-dot-circle-o"></i> <a href="#">Daily Receipt - Summary </a></li>
-                            <li><i class="fa fa-dot-circle-o"></i> <a href="#">Daily Refund Report </a></li>
-                            <li><i class="fa fa-dot-circle-o"></i> <a href="#">Daily Revenue </a></li>
-                            <li><i class="fa fa-dot-circle-o"></i> <a href="#">Expense Voucher </a></li>
-                            <li><i class="fa fa-dot-circle-o"></i> <a href="#">Folio List </a></li>
-                            <li><i class="fa fa-dot-circle-o"></i> <a href="#">Guest Ledger </a></li>
-                            <li><i class="fa fa-dot-circle-o"></i> <a href="#">House Status </a></li>
-                            <li><i class="fa fa-dot-circle-o"></i> <a href="#">Maintenance Block </a></li>
-                            <li><i class="fa fa-dot-circle-o"></i> <a href="#">Manager Report </a></li>
-                            <li><i class="fa fa-dot-circle-o"></i> <a href="#">Owner Statement </a></li>
-                            <li><i class="fa fa-dot-circle-o"></i> <a href="#">Rate Card </a></li>
-                            <li><i class="fa fa-dot-circle-o"></i> <a href="#">Revenue By Rate Type </a></li>
-                            <li><i class="fa fa-dot-circle-o"></i> <a href="#">Revenue By Room Type </a></li>
-                            <li><i class="fa fa-dot-circle-o"></i> <a href="#">Travel Agent Commission - Detail </a>
-                            </li>
-                            <li><i class="fa fa-dot-circle-o"></i> <a href="#">Travel Agent Commission - Summary </a>
-                            </li>
-                            <li><i class="fa fa-dot-circle-o"></i> <a href="#">Work Order List </a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="panel panel-default">
-                <div class="panel-heading" role="tab" id="heading4">
-                    <h4 class="panel-title">
-                        <a data-toggle="collapse" class="accordion-toggle" data-parent="#accordion" href="#collapseOne4"
-                           aria-expanded="true"
-                           aria-controls="collapseOne4">
-                           აუდიტის რეპორტები
-                        </a>
-
-                    </h4>
-                </div>
-                <div id="collapseOne4" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading4">
-                    <div class="panel-body">
-                        <ul>
-                            <li><i class="fa fa-dot-circle-o"></i> <a href="#">Audit Trails</a></li>
-                            <li><i class="fa fa-dot-circle-o"></i> <a href="#">IP Report</a></li>
-                            <li><i class="fa fa-dot-circle-o"></i> <a href="#">Void Report</a></li>
-                            <li><i class="fa fa-dot-circle-o"></i> <a href="#">Void Payment</a></li>
-                            <li><i class="fa fa-dot-circle-o"></i> <a href="#">Void Transaction</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="panel panel-default">
-                <div class="panel-heading" role="tab" id="heading5">
-                    <h4 class="panel-title">
-                        <a data-toggle="collapse" class="accordion-toggle" data-parent="#accordion" href="#collapseOne5"
-                           aria-expanded="true"
-                           aria-controls="collapseOne5">
-                            სტატისტიკური რეპორტები
-                        </a>
-
-                    </h4>
-                </div>
-                <div id="collapseOne5" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading5">
-                    <div class="panel-body">
-                        <ul>
-                            <li><i class="fa fa-dot-circle-o"></i> <a href="#">Business Analysis </a></li>
-                            <li><i class="fa fa-dot-circle-o"></i> <a href="#">Contribution Analysis Report </a></li>
-                            <li><i class="fa fa-dot-circle-o"></i> <a href="#">Monthly Country wise Pax Analysis </a></li>
-                            <li><i class="fa fa-dot-circle-o"></i> <a href="#">Monthly Statistics </a></li>
-                            <li><i class="fa fa-dot-circle-o"></i> <a href="#">Monthly Summary </a></li>
-                            <li><i class="fa fa-dot-circle-o"></i> <a href="#">Monthly Tax </a></li>
-                            <li><i class="fa fa-dot-circle-o"></i> <a href="#">Room Sale Statistics </a></li>
-                            <li><i class="fa fa-dot-circle-o"></i> <a href="#">Room Statistics </a></li>
-                            <li><i class="fa fa-dot-circle-o"></i> <a href="#">Yearly Statistics </a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="panel panel-default">
-                <div class="panel-heading" role="tab" id="heading6">
-                    <h4 class="panel-title">
-                        <a data-toggle="collapse" class="accordion-toggle" data-parent="#accordion" href="#collapseOne6"
-                           aria-expanded="true"
-                           aria-controls="collapseOne6">
-                            გრაფები და დიაგრამები
-                        </a>
-
-                    </h4>
-                </div>
-                <div id="collapseOne6" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading6">
-                    <div class="panel-body">
-                        <ul>
-                            <li><i class="fa fa-dot-circle-o"></i> <a href="#">Monthly Occupancy</a></li>
-                            <li><i class="fa fa-dot-circle-o"></i> <a href="#">Monthly Revenue</a></li>
-                            <li><i class="fa fa-dot-circle-o"></i> <a href="#">Payment Summary</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+            <%}%>
+            
         </div>
     </div>
 </div>

@@ -452,6 +452,8 @@ com.itextpdf.text.Font pfont = new com.itextpdf.text.Font(utf, bigsize,com.itext
 com.itextpdf.text.Chunk tab1 = new com.itextpdf.text.Chunk(new VerticalPositionMark(), 8, false);
 com.itextpdf.text.Chunk tab2 = new com.itextpdf.text.Chunk(new VerticalPositionMark(), 4, false);
 
+System.out.println(basedir+"/templates/Guest_Registration_Card.pdf");
+
 PdfReader pdfTemplate = new PdfReader(basedir+"/templates/Guest_Registration_Card.pdf");
 ByteArrayOutputStream oout = new ByteArrayOutputStream();
 PdfStamper stamper = new PdfStamper(pdfTemplate, oout);
@@ -468,7 +470,6 @@ form1.replacePushbuttonField("hotellogo", ad.getField());
 addImage(stamper,form1,"hotellogo",basedir+"/logos/logo1.png");
 
 
-
 /*
 PdfContentByte content = stamper.getOverContent(pdfTemplate.getNumberOfPages());
 com.itextpdf.text.Image img = com.itextpdf.text.Image.getInstance(basedir+"/logos/logo1.png");
@@ -482,12 +483,12 @@ for(int i=0;i<names.length;i++){
     form1.setField(names[i], values[i]);
 }
 
-pdfTemplate.close();
+//pdfTemplate.close();
 stamper.close();
 
 
 response.setContentType("application/pdf");
-response.addHeader("Content-Disposition","filename=rrrr.pdf");
+response.addHeader("Content-Disposition","filename=regcard.pdf");
 OutputStream oout0 = response.getOutputStream();
 oout0.write(oout.toByteArray());
 oout0.close();

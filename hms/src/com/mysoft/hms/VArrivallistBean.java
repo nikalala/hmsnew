@@ -27,6 +27,10 @@ public class VArrivallistBean
     private boolean reservationid_is_modified = false;
     private boolean reservationid_is_initialized = false;
     
+    private Integer status;
+    private boolean status_is_modified = false;
+    private boolean status_is_initialized = false;
+    
     private Long reservationroomid;
     private boolean reservationroomid_is_modified = false;
     private boolean reservationroomid_is_initialized = false;
@@ -174,6 +178,73 @@ public class VArrivallistBean
      */
     public boolean isReservationidInitialized() {
         return reservationid_is_initialized; 
+    }
+
+    /**
+     * Getter method for status.
+     * <br>
+     * Meta Data Information (in progress):
+     * <ul>
+     * <li>full name: v_arrivallist.status
+     * <li>column size: 10
+     * <li>jdbc type returned by the driver: Types.INTEGER
+     * </ul>
+     *
+     * @return the value of status
+     */
+    public Integer getStatus()
+    {
+        return status; 
+    }
+
+    /**
+     * Setter method for status.
+     * <br>
+     * The new value is set only if compareTo() says it is different,
+     * or if one of either the new value or the current value is null.
+     * In case the new value is different, it is set and the field is marked as 'modified'.
+     *
+     * @param newVal the new value to be assigned to status
+     */
+    public void setStatus(Integer newVal) {
+        if ((newVal != null && this.status != null && (newVal.compareTo(this.status) == 0)) || 
+            (newVal == null && this.status == null && status_is_initialized)) {
+            return; 
+        } 
+        this.status = newVal; 
+        status_is_modified = true; 
+        status_is_initialized = true; 
+    }
+
+    /**
+     * Setter method for status.
+     * <br>
+     * Convenient for those who do not want to deal with Objects for primary types.
+     *
+     * @param newVal the new value to be assigned to status
+     */
+    public void setStatus(int newVal) {
+        setStatus(new Integer(newVal));
+    }
+
+    /**
+     * Determines if the status has been modified.
+     *
+     * @return true if the field has been modified, false if the field has not been modified
+     */
+    public boolean isStatusModified() {
+        return status_is_modified; 
+    }
+
+    /**
+     * Determines if the status has been initialized.
+     * <br>
+     * It is useful to determine if a field is null on purpose or just because it has not been initialized.
+     *
+     * @return true if the field has been initialized, false otherwise
+     */
+    public boolean isStatusInitialized() {
+        return status_is_initialized; 
     }
 
     /**
@@ -1343,6 +1414,7 @@ public class VArrivallistBean
      */
     public boolean isModified() {
         return reservationid_is_modified || 
+		status_is_modified || 
 		reservationroomid_is_modified || 
 		roomid_is_modified || 
 		roomtypeid_is_modified || 
@@ -1368,6 +1440,7 @@ public class VArrivallistBean
      */
     public void resetIsModified() {
         reservationid_is_modified = false;
+        status_is_modified = false;
         reservationroomid_is_modified = false;
         roomid_is_modified = false;
         roomtypeid_is_modified = false;
@@ -1395,6 +1468,7 @@ public class VArrivallistBean
      */
     public void copy(VArrivallistBean bean) {
         setReservationid(bean.getReservationid());
+        setStatus(bean.getStatus());
         setReservationroomid(bean.getReservationroomid());
         setRoomid(bean.getRoomid());
         setRoomtypeid(bean.getRoomtypeid());
@@ -1423,6 +1497,7 @@ public class VArrivallistBean
     public String toString() {
         return   "\n[v_arrivallist] "
                  + "\n - v_arrivallist.reservationid = " + (reservationid_is_initialized ? ("[" + (reservationid == null ? null : reservationid.toString()) + "]") : "not initialized") + ""
+                 + "\n - v_arrivallist.status = " + (status_is_initialized ? ("[" + (status == null ? null : status.toString()) + "]") : "not initialized") + ""
                  + "\n - v_arrivallist.reservationroomid = " + (reservationroomid_is_initialized ? ("[" + (reservationroomid == null ? null : reservationroomid.toString()) + "]") : "not initialized") + ""
                  + "\n - v_arrivallist.roomid = " + (roomid_is_initialized ? ("[" + (roomid == null ? null : roomid.toString()) + "]") : "not initialized") + ""
                  + "\n - v_arrivallist.roomtypeid = " + (roomtypeid_is_initialized ? ("[" + (roomtypeid == null ? null : roomtypeid.toString()) + "]") : "not initialized") + ""

@@ -1642,6 +1642,38 @@ public class ExtrachargeManager
     }
 
     /**
+     * Retrieves an array of ReservationroomBean using the relation table Folioitem given a ExtrachargeBean object.
+     *
+     * @param pObject the ExtrachargeBean pObject to be used
+     * @return an array of ReservationroomBean 
+     */
+    // MANY TO MANY
+    public ReservationroomBean[] loadReservationroomViaFolioitem(ExtrachargeBean pObject) throws SQLException
+    {
+         Connection c = null;
+         PreparedStatement ps = null;
+         String strSQL =      " SELECT "
+                         + "        *"
+                         + " FROM  "
+                         + "        reservationroom,folioitem"
+                         + " WHERE "    
+                         + "     folioitem.extrachargeid = ?"
+                         + " AND folioitem.reservationroomid = reservationroom.reservationroomid";
+         try
+         {
+             c = getConnection();
+             ps = c.prepareStatement(strSQL,ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+             Manager.setInteger(ps, 1, pObject.getExtrachargeid());
+             return ReservationroomManager.getInstance().loadByPreparedStatement(ps);
+         }
+         finally
+         {
+            getManager().close(ps);
+            freeConnection(c);
+         }
+    }
+
+    /**
      * Retrieves an array of RoomBean using the relation table Folioitem given a ExtrachargeBean object.
      *
      * @param pObject the ExtrachargeBean pObject to be used

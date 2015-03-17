@@ -1305,6 +1305,38 @@ public class OrdermainManager
     }
 
     /**
+     * Retrieves an array of ReservationroomBean using the relation table Folioitem given a OrdermainBean object.
+     *
+     * @param pObject the OrdermainBean pObject to be used
+     * @return an array of ReservationroomBean 
+     */
+    // MANY TO MANY
+    public ReservationroomBean[] loadReservationroomViaFolioitem(OrdermainBean pObject) throws SQLException
+    {
+         Connection c = null;
+         PreparedStatement ps = null;
+         String strSQL =      " SELECT "
+                         + "        *"
+                         + " FROM  "
+                         + "        reservationroom,folioitem"
+                         + " WHERE "    
+                         + "     folioitem.ordermainid = ?"
+                         + " AND folioitem.reservationroomid = reservationroom.reservationroomid";
+         try
+         {
+             c = getConnection();
+             ps = c.prepareStatement(strSQL,ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+             Manager.setLong(ps, 1, pObject.getOrdermainid());
+             return ReservationroomManager.getInstance().loadByPreparedStatement(ps);
+         }
+         finally
+         {
+            getManager().close(ps);
+            freeConnection(c);
+         }
+    }
+
+    /**
      * Retrieves an array of RoomBean using the relation table Folioitem given a OrdermainBean object.
      *
      * @param pObject the OrdermainBean pObject to be used

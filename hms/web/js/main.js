@@ -616,7 +616,8 @@ function loadStats(page,heading){
     loader.show();
     $.ajax({
         type: "POST",
-        url: "content/reports/heading" + heading + "/" + page + ".jsp",
+        //url: "content/reports/heading" + heading + "/" + page + ".jsp",
+        url: "content/reports/getreport.jsp?reportid=" + page,
         data: {},
         success: function (data) {
             $($("#centerTabContent").children()[0]).html(data);
@@ -1094,3 +1095,4 @@ function checkOut1(rid, reloadid) {
         }
     }, "json");
 }
+
