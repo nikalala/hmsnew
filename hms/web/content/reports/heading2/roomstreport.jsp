@@ -17,7 +17,7 @@
 
   function doFilter(){
     loader.show();
-    $.post("content/reports/content/night-audit.html",function(data){
+    $.post("content/reports/content/Room-Status-Report.html",function(data){
       $("#grid-table").html(data);
       loader.hide();
     });

@@ -2,6 +2,29 @@
 <%@page pageEncoding="UTF-8" %>
 <%@include file="../includes/init.jsp" %>
 
+<%
+  String rromid = request.getParameter("rroomid");
+  String roomid = "";
+  String resId = "";
+  String folionum = "";
+
+  if (!CodeHelpers.isNullOrEmpty(rromid)) {
+    ReservationroomBean rr = ReservationroomManager.getInstance().loadByPrimaryKey(new Long(rromid));
+    if (rr != null) {
+      resId = rr.getReservationid().toString();
+      FolioBean[] fb = FolioManager.getInstance().loadByWhere("where reservationroomid = " + rromid);
+      if (fb != null) {
+        folionum = fb[0].getNum();
+      }
+      if (rr.getRoomid() != null) {
+        RoomBean rb = RoomManager.getInstance().loadByPrimaryKey(new Integer(rr.getRoomid()));
+        roomid = rb.getName() + " - " + rb.getCode();
+      }
+    }
+  }
+
+%>
+
 <% RoomtypeBean[] roomTypes = RoomtypeManager.getInstance().loadByWhere("ORDER BY ord"); %>
 <% RatetypeBean[] RatetypeBeans = RatetypeManager.getInstance().loadByWhere("where active = true and deleted = false"); %>
 <% DiscountBean[] discountBeans = DiscountManager.getInstance().loadByWhere("where roomrate = true");%>
@@ -77,7 +100,16 @@
   $(document).ready(function(){
     loadDefaults();
   });
+
+  $("#roomlistitems tr").click(function(e) {
+    loader.show();
+    e.preventDefault();
+    var id = $(this).prop('id');
+    getBody('stayviewleft', 'dashboard', 'სამუშაო მაგიდა', 'res1', '?rroomid=' + id ,true);
+    return;
+  })
 </script>
+
 <link rel="stylesheet" type="text/css" href="css/zabuto_calendar.css">
 
 <style>
@@ -192,46 +224,153 @@
     margin: 2px 4px 0px 0px;
   }
 
+  .pull-right{
+    width : auto !important;
+  }
 </style>
 
+<div class="q-main-div">
+  <div class="col-md-16">
+    <div id="status_bar" class="first-status-bar" align='center'>
+      <div class="q-statusbar-div" style="  background: #FFF;">
+        <span class="q-statusbar-span">
+          <div style="  float: left;  margin-right: 10px;">ოთახი: <b><%=roomid%></b></div>
+          <div style="float: left; border-left: solid 1px #999; margin-right: 10px;">ფოლიო:  <b><%=folionum%></b></div>
+          <div style="float: left; border-left: solid 1px #999; margin-right: 10px;">რეზ #:  <b><%=resId%></b></div>
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
 <div class="q-main-div">
   <div class="col-md-7">
     <div id="status_bar" class="first-status-bar" align='center'>
       <div class="q-statusbar-div">
-        <span class="q-statusbar-span">Availability & Rate Chart</span>
+        <span class="q-statusbar-span">
+          <div>სტუმრის ინფორმაცია</div>
+        </span>
+        <div class="btn-group pull-right" style="width: auto !important; float: right !important;  margin: 6px 9px 0px 0;">
+          <a href="javascript:printRegCard(<% //rroom.getReservationroomid()%>)" class="glyphicon glyphicon-credit-card iconblack" style="text-decoration: none;" data-toggle="tooltip" title="ბარათის გატარება"></a>
+          <a href="javascript:newmWindow1('editguestinfo','სტუმრის პროფილის რედაქტირება','reservationroomid=<% //rroom.getReservationroomid()%>&mode=edit');" class="glyphicon glyphicon-pencil iconblack" style="text-decoration: none; padding-left: 10px; padding-right: 10px;" data-toggle="tooltip" title="სტუმრის პროფილის რედაქტირება"></a>
+          <a href="javascript:newmWindow1('editguestinfo','სტუმრის პროფილის დამატება','reservationroomid=<% //rroom.getReservationroomid()%>&mode=add');" class="glyphicon glyphicon-plus iconblack" style="text-decoration: none;" data-toggle="tooltip" title="სტუმრის პროფილის დამატება"></a>
+        </div>
       </div>
-      <div class="q-table-div">
+      <div class="q-table-div" style="height: 157px;">
+        <table width="100%" class="table table-borderless">
+          <tbody>
+          <tr>
+            <td style="width: 50%"><b><span style="color: #598904"><%//guestname%></span></b></td>
+            <td><b>მობილური</b></td>
+            <td><%//(guest.getMobile() != null) ? guest.getMobile():""%></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td><b>ტელეფონი</b></td>
+            <td><%//(guest.getPhone() != null) ? guest.getPhone():""%></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td><b>ელფოსტა</b></td>
+            <td><%//(guest.getEmail()!= null) ? guest.getEmail():""%></td>
+          </tr>
+          <tr>
+            <td colspan="3">
+              <%//guestaddress%>
+            </td>
+          </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   </div>
   <div class="col-md-4">
     <div id="status_bar" class="first-status-bar" align='center'>
       <div class="q-statusbar-div">
-        <span class="q-statusbar-span">ფოლიო</span>
+        <span class="q-statusbar-span">
+          <div>დარჩენის ინფორმაცია</div>
+        </span>
+        <div class="btn-group pull-right" style="width: auto !important; float: right !important;  margin: 6px 9px 0px 0;">
+           <a href="javascript:newsWindow1('editarrivalinfo','დროის რედაქტირება','reservationroomid=<%//=rroom.getReservationroomid()%>');" class="glyphicon glyphicon-pencil iconblack" style="text-decoration: none;" data-toggle="tooltip" title="ჩამოსვლა/წასვლის დროების რედაქტირება"></a>
+        </div>
       </div>
     </div>
-    <div class="q-table-div">
-
+    <div class="q-table-div" style="height: 157px;">
+      <table width="100%" class="table table-borderless">
+        <tbody>
+        <tr>
+          <td style="width: 50%"><b>ჩამოსვლა</b></td>
+          <td><%//=dt.format(reserv.getArraivaldate())%></td>
+          <td><%//=dtime.format(reserv.getArraivaldate())%></td>
+        </tr>
+        <tr>
+          <td><b>წასვლა</b></td>
+          <td><%//=dt.format(reserv.getDeparturedate())%></td>
+          <td><%//=dtime.format(reserv.getDeparturedate())%></td>
+        </tr>
+        <tr>
+          <td><b>ღამე(ებ)ი</b></td>
+          <td><%//=days%></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td><b>ტარიფი</b></td>
+          <td><%//=rtp.getName()%></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td><b>Pax</b></td>
+          <td><%//=rroom.getAdult()%> / <%//=rroom.getChild()%></td>
+          <td>(უ / ბ)</td>
+        </tr>
+        </tbody>
+      </table>
     </div>
   </div>
   <div class="col-md-5">
     <div id="status_bar" class="first-status-bar" align='center'>
       <div class="q-statusbar-div">
-        <span class="q-statusbar-span">ფოლიო</span>
+        <span class="q-statusbar-span">სხვა ინფორმაცია</span>
+      <div class="btn-group pull-right" style="width: auto !important; float: right !important;  margin: 6px 9px 0px 0;">
+        <a href="javascript:newsWindow1('editotherinfo','სხვა ინფორმაციის რედაქტირება','reservationroomid=<%//=rroom.getReservationroomid()%>');" class="glyphicon glyphicon-pencil iconblack" style="text-decoration: none;" data-toggle="tooltip" title="სხვა ინფორმაციის რედაქტირება"></a>
+
+      </div>
       </div>
     </div>
-    <div class="q-table-div">
-
+    <div class="q-table-div" style="height: 157px;">
+      <table width="100%" class="table table-borderless">
+        <tbody>
+        <tr>
+          <td style="width: 50%"><b>რეზერვაციის ტიპი</b></td>
+          <td><%//=restp%></td>
+        </tr>
+        <tr>
+          <td><b>ბიზნეს წყარო</b></td>
+          <td><%//=bsrc%></td>
+        </tr>
+        <tr>
+          <td><b>ბაზრის კოდი</b></td>
+          <td><%//=marketname%></td>
+        </tr>
+        <tr>
+          <td><b>ტურ. აგენტი</b></td>
+          <td><%//=agentname%></td>
+        </tr>
+        <tr>
+          <td><b>კომპანია</b></td>
+          <td><%//=companyname%></td>
+        </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </div>
 
 <div class="q-main-div">
-  <div class="col-md-9">
+  <div class="col-md-10">
     <div id="status_bar" class="first-status-bar" align='center'>
       <div class="q-statusbar-div">
         <span class="q-statusbar-span">თავისუფალი ოთახები და ტარიფები (<%=maincurrency.getCode()%>)</span>
-      </div>
+       </div>
       <div class="q-table-div" style="height : 100px;">
         <table style="width: 98%; text-align: right;">
           <tr>
@@ -311,10 +450,15 @@
       </div>
     </div>
   </div>
-  <div class="col-md-7">
+  <div class="col-md-6">
     <div id="status_bar" class="first-status-bar" align='center'>
       <div class="q-statusbar-div">
         <span class="q-statusbar-span">ფოლიო</span>
+        <div class="btn-group pull-right" style="width: auto !important; float: right !important;  margin: 6px 9px 0px 0;">
+
+        <a href="javascript:newsWindow1('editotherinfo','სხვა ინფორმაციის რედაქტირება','reservationroomid=<%//=rroom.getReservationroomid()%>');" class="glyphicon glyphicon-pencil iconblack" style="text-decoration: none;" data-toggle="tooltip" title="სხვა ინფორმაციის რედაქტირება"></a>
+
+      </div>
       </div>
     </div>
     <div class="q-table-div" style="height: 270px;">

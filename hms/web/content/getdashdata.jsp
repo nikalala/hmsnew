@@ -86,7 +86,7 @@ System.out.println("discountid = "+discountid);
             obj.put("date", sdpg.format(cal.getTime()));
             obj.put("badge", true);
             obj.put("title", String.valueOf(rooms.length));
-            obj.put("body", "<p class='lead'>Information for this date</p><p>You can add <strong>html</strong> in this block</p>");
+            obj.put("body", "");
             obj.put("footer", dc.format(drate));
             array.add(obj);
         }

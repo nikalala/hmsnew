@@ -16,7 +16,7 @@
 
   function doFilter(){
     loader.show();
-    $.post("content/reports/content/guest-message.html",function(data){
+    $.post("content/reports/content/Inclusion-Report.html",function(data){
       $("#grid-table").html(data);
       loader.hide();
     });

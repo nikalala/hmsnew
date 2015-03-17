@@ -424,10 +424,10 @@ $.fn.zabuto_calendar = function (options) {
                         var price = '';
                         var avalCount = '';
                         if (typeof(value.title) !== 'undefined') {
-                            price = '<span style="float: left; margin-left: 5px; font-weight: bold; color: #000;">'+value.title+'</span>';
-                            avalCount = '<span style="float: right; margin-right: 5px; font-weight: bold; color: red;">'+value.footer+'</span>';
+                            price = '<span style="right: 4px; position: absolute;font-weight: bold; color: #000;">'+value.title+'</span>';
+                            avalCount = '<span style="position: absolute; left: 3px; font-weight: bold; color: red;">'+value.footer+'</span>';
                         }
-                        $dayElement.html(avalCount + '<span class="badge badge-event' + badgeClass + '">' + dayLabel + '</span>' + price);
+                        $dayElement.html(avalCount + '<br /><span class="badge badge-event' + badgeClass + '">' + dayLabel + '</span><br />' + price);
                     }
 
                     if (typeof(value.body) !== 'undefined') {
