@@ -3,6 +3,16 @@
 <%@include file="../../includes/init.jsp"%>
 <%
     ReportBean report = ReportManager.getInstance().loadByPrimaryKey(new Integer(request.getParameter("reportid")));
+    
+    boolean manual = false;
+    String pagename = "";
+    int pos = report.getSqlquery().toUpperCase().indexOf("MANUAL:");
+    if(pos >= 0){
+        pagename = report.getSqlquery().substring(pos+7).trim();
+        manual = true;
+    }
+    
+    
     ReportitemBean[] items = ReportitemManager.getInstance().loadByWhere("where reportid = "+report.getReportid()+" order by idx");
     int sindex = 0;
     
@@ -20,7 +30,7 @@
         colnames += "'"+items[i].getName()+"'";
         colmodel += "{width: "+items[i].getWd()+", hidden:false, name:'"+tablename+"_"+i+"', index:'"+tablename+"_"+i+"', align:'"+items[i].getAlign()+"'}";
         headers += "$(\"#jqgh_"+tablename+"_"+tablename+"_"+i+"\").css('text-align', '"+items[i].getAlign()+"');\n";
-        if(i == sindex)
+        if(items[i].getOrdered().booleanValue())
             sortname = tablename+"_"+i;
     }
 %>
@@ -54,8 +64,12 @@
         });
     }
 */    
+
 $(document).ready(function(){
     
+   <%if(manual){%>
+        $.post("content/reports/content/<%=pagename%>",{},function(data){$("#<%=tablename%>").html(data);});
+   <%} else {%>
    jQuery('#<%=tablename%>').jqGrid(
     {
         url:'content/reports/getreportlist.jsp?rid=<%=report.getReportid()%>',
@@ -78,7 +92,7 @@ $(document).ready(function(){
         }
         })
         .jqGrid('bindKeys')
-        .jqGrid('filterToolbar', { searchOnEnter: true, enableClear: true })
+        //.jqGrid('filterToolbar', { searchOnEnter: true, enableClear: true })
 	//.navButtonAdd('#pager1',{caption:'',buttonicon:'ui-icon-circle-plus',onClickButton: function(){ setInsurance(jQuery('#listcurrency').jqGrid('getGridParam','selrow')); },position:'last'})
 	;
 /*
@@ -94,9 +108,10 @@ $(document).ready(function(){
         $("#jqgh_listfolio_price").css('text-align', 'right');
 */
         <%=headers%>
+        <%}%>
 });
 </script>
-<table width='1000'>
+<table width='100%'>
     <thead>
     <tr>
         <td style="border-bottom: 1px solid #000;">

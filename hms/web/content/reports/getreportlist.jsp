@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <%@page contentType="text/xml;charset=utf-8"%>
 <%@include file="../../includes/initxml.jsp"%>
+<%@page import="java.sql.ResultSetMetaData"%>
 <%
 
 ReportBean report = ReportManager.getInstance().loadByPrimaryKey(new Integer(request.getParameter("rid")));
@@ -29,19 +30,33 @@ if(ipg > total_pages) ipg=total_pages;
 int start = ilmt*ipg - ilmt;
 if(start < 0)   start = 0;
 String limit = "limit "+ilmt+" offset "+start;
-String order = "order by "+sidx+" "+sord;
+//String order = "order by "+sidx+" "+sord;
 Connection c = Manager.getInstance().getConnection();
 try{
-    ResultSet rs = c.createStatement().executeQuery(sql);
-    
+    ResultSet rs = null;
+    if(sidx.trim().length() > 0){
+        String[] ssidx = sidx.split("_");
+        int idx = Integer.parseInt(ssidx[ssidx.length-1]);
+        rs = c.createStatement().executeQuery(sql+" limit 1");
+        ResultSetMetaData ms = rs.getMetaData();
+        for(int i=0;i<ms.getColumnCount();i++){
+            if(idx == i){
+                sidx = ms.getColumnName(i+1);
+                break;
+            }
+        }
+        rs.close();
+        sql = sql+" order by "+sidx+" "+sord+" "+limit;
+    }
+    rs = c.createStatement().executeQuery(sql);
 %>
 <rows>
 	<page><%=ipg%></page>
 	<total><%=total_pages%></total>
 	<records><%=count%></records>
 	<%
+        SimpleDateFormat tmpfmt = null;
 	for(int i=0;rs.next();i++){
-            
             %>
                 <row id='<%=i%>'>
                     <%
@@ -62,6 +77,14 @@ try{
                                 break;
                             case 4:
                                 val = dtlong.format(rs.getTimestamp(j+1).getTime());
+                                break;
+                            case 5:
+                                tmpfmt = new SimpleDateFormat(arrdepdateformats[dff]);
+                                val = tmpfmt.format(rs.getTimestamp(j+1).getTime());
+                                break;
+                            case 6:
+                                tmpfmt = new SimpleDateFormat(yaermonthdateformats[dff]);
+                                val = tmpfmt.format(rs.getTimestamp(j+1).getTime());
                                 break;
                             default:
                                 val = rs.getString(j+1);

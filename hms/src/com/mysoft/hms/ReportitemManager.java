@@ -84,6 +84,13 @@ public class ReportitemManager
     public static final int TYPE_HASSUM = Types.BIT;
     public static final String NAME_HASSUM = "hassum";
 
+    /**
+     * Column ordered of type Types.BIT mapped to Boolean.
+     */
+    public static final int ID_ORDERED = 8;
+    public static final int TYPE_ORDERED = Types.BIT;
+    public static final String NAME_ORDERED = "ordered";
+
 
     private static final String TABLE_NAME = "reportitem";
 
@@ -100,6 +107,7 @@ public class ReportitemManager
         ,"reportitem.align"
         ,"reportitem.wd"
         ,"reportitem.hassum"
+        ,"reportitem.ordered"
     };
 
     /**
@@ -112,7 +120,8 @@ public class ReportitemManager
                             + ",reportitem.fieldtype"
                             + ",reportitem.align"
                             + ",reportitem.wd"
-                            + ",reportitem.hassum";
+                            + ",reportitem.hassum"
+                            + ",reportitem.ordered";
 
     private static ReportitemManager singleton = new ReportitemManager();
 
@@ -539,6 +548,14 @@ public class ReportitemManager
                     _dirtyCount++;
                 }
 
+                if (pObject.isOrderedModified()) {
+                    if (_dirtyCount>0) {
+                        _sql.append(",");
+                    }
+                    _sql.append("ordered");
+                    _dirtyCount++;
+                }
+
                 _sql.append(") values (");
                 if(_dirtyCount > 0) {
                     _sql.append("?");
@@ -581,6 +598,10 @@ public class ReportitemManager
     
                 if (pObject.isHassumModified()) {
                     Manager.setBoolean(ps, ++_dirtyCount, pObject.getHassum());
+                }
+    
+                if (pObject.isOrderedModified()) {
+                    Manager.setBoolean(ps, ++_dirtyCount, pObject.getOrdered());
                 }
     
                 ps.executeUpdate();
@@ -666,6 +687,15 @@ public class ReportitemManager
                     }
                     _sql.append("hassum").append("=?");
                 }
+
+                if (pObject.isOrderedModified()) {
+                    if (useComma) {
+                        _sql.append(",");
+                    } else {
+                        useComma=true;
+                    }
+                    _sql.append("ordered").append("=?");
+                }
                 _sql.append(" WHERE ");
                 _sql.append("reportitem.reportitemid=?");
                 ps = c.prepareStatement(_sql.toString(),ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
@@ -701,6 +731,10 @@ public class ReportitemManager
 
                 if (pObject.isHassumModified()) {
                       Manager.setBoolean(ps, ++_dirtyCount, pObject.getHassum());
+                }
+
+                if (pObject.isOrderedModified()) {
+                      Manager.setBoolean(ps, ++_dirtyCount, pObject.getOrdered());
                 }
     
                 if (_dirtyCount == 0) {
@@ -819,6 +853,11 @@ public class ReportitemManager
                  _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("hassum= ?");
              }
     
+             if (pObject.isOrderedModified()) {
+                 _dirtyCount ++; 
+                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("ordered= ?");
+             }
+    
              if (_dirtyCount == 0) {
                  throw new SQLException ("The pObject to look for is invalid : not initialized !");
              }
@@ -857,6 +896,10 @@ public class ReportitemManager
     
              if (pObject.isHassumModified()) {
                  Manager.setBoolean(ps, ++_dirtyCount, pObject.getHassum());
+             }
+    
+             if (pObject.isOrderedModified()) {
+                 Manager.setBoolean(ps, ++_dirtyCount, pObject.getOrdered());
              }
     
              ps.executeQuery();
@@ -944,6 +987,13 @@ public class ReportitemManager
                 _dirtyAnd ++;
             }
     
+            if (pObject.isOrderedInitialized()) {
+                if (_dirtyAnd > 0)
+                    sql.append(" AND ");
+                sql.append("ordered").append("=?");
+                _dirtyAnd ++;
+            }
+    
             c = getConnection();
             ps = c.prepareStatement(sql.toString(),ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             int _dirtyCount = 0;
@@ -978,6 +1028,10 @@ public class ReportitemManager
     
             if (pObject.isHassumInitialized()) {
                 Manager.setBoolean(ps, ++_dirtyCount, pObject.getHassum());
+            }
+    
+            if (pObject.isOrderedInitialized()) {
+                Manager.setBoolean(ps, ++_dirtyCount, pObject.getOrdered());
             }
     
             int _rows = ps.executeUpdate();
@@ -1130,6 +1184,11 @@ public class ReportitemManager
                     _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("hassum= ?");
                 }
     
+                if (pObject.isOrderedModified()) {
+                    _dirtyCount++; 
+                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("ordered= ?");
+                }
+    
                 if (_dirtyCount == 0)
                    throw new SQLException ("The pObject to look is unvalid : not initialized !");
     
@@ -1171,6 +1230,10 @@ public class ReportitemManager
                     Manager.setBoolean(ps, ++_dirtyCount, pObject.getHassum());
                 }
     
+                if (pObject.isOrderedModified()) {
+                    Manager.setBoolean(ps, ++_dirtyCount, pObject.getOrdered());
+                }
+    
                 return countByPreparedStatement(ps);
         }
         finally
@@ -1203,6 +1266,7 @@ public class ReportitemManager
         pObject.setAlign(rs.getString(6));
         pObject.setWd(Manager.getInteger(rs, 7));
         pObject.setHassum(Manager.getBoolean(rs, 8));
+        pObject.setOrdered(Manager.getBoolean(rs, 9));
 
         pObject.isNew(false);
         pObject.resetIsModified();
@@ -1256,6 +1320,10 @@ public class ReportitemManager
                 case ID_HASSUM:
                     ++pos;
                     pObject.setHassum(Manager.getBoolean(rs, pos));
+                    break;
+                case ID_ORDERED:
+                    ++pos;
+                    pObject.setOrdered(Manager.getBoolean(rs, pos));
                     break;
             }
         }

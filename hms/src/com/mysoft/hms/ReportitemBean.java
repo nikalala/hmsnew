@@ -55,6 +55,10 @@ public class ReportitemBean
     private boolean hassum_is_modified = false;
     private boolean hassum_is_initialized = false;
     
+    private Boolean ordered;
+    private boolean ordered_is_modified = false;
+    private boolean ordered_is_initialized = false;
+    
     private boolean _isNew = true;
     
     /**
@@ -589,6 +593,73 @@ public class ReportitemBean
     }
 
     /**
+     * Getter method for ordered.
+     * <br>
+     * Meta Data Information (in progress):
+     * <ul>
+     * <li>full name: reportitem.ordered
+     * <li>default value: false
+     * <li>column size: 1
+     * <li>jdbc type returned by the driver: Types.BIT
+     * </ul>
+     *
+     * @return the value of ordered
+     */
+    public Boolean getOrdered()
+    {
+        return ordered; 
+    }
+
+    /**
+     * Setter method for ordered.
+     * <br>
+     * Attention, there will be no comparison with current value which
+     * means calling this method will mark the field as 'modified' in all cases.
+     *
+     * @param newVal the new value to be assigned to ordered
+     */
+    public void setOrdered(Boolean newVal) {
+        if ((newVal != null && this.ordered != null && newVal.equals(this.ordered)) || 
+            (newVal == null && this.ordered == null && ordered_is_initialized)) {
+            return; 
+        } 
+        this.ordered = newVal; 
+        ordered_is_modified = true; 
+        ordered_is_initialized = true; 
+    }
+
+    /**
+     * Setter method for ordered.
+     * <br>
+     * Convenient for those who do not want to deal with Objects for primary types.
+     *
+     * @param newVal the new value to be assigned to ordered
+     */
+    public void setOrdered(boolean newVal) {
+        setOrdered(new Boolean(newVal));
+    }
+
+    /**
+     * Determines if the ordered has been modified.
+     *
+     * @return true if the field has been modified, false if the field has not been modified
+     */
+    public boolean isOrderedModified() {
+        return ordered_is_modified; 
+    }
+
+    /**
+     * Determines if the ordered has been initialized.
+     * <br>
+     * It is useful to determine if a field is null on purpose or just because it has not been initialized.
+     *
+     * @return true if the field has been initialized, false otherwise
+     */
+    public boolean isOrderedInitialized() {
+        return ordered_is_initialized; 
+    }
+
+    /**
      * Determines if the current object is new.
      *
      * @return true if the current object is new, false if the object is not new
@@ -621,7 +692,8 @@ public class ReportitemBean
 		fieldtype_is_modified || 
 		align_is_modified || 
 		wd_is_modified || 
-		hassum_is_modified;
+		hassum_is_modified || 
+		ordered_is_modified;
     }
 
     /**
@@ -636,6 +708,7 @@ public class ReportitemBean
         align_is_modified = false;
         wd_is_modified = false;
         hassum_is_modified = false;
+        ordered_is_modified = false;
     }
 
     /**
@@ -652,6 +725,7 @@ public class ReportitemBean
         setAlign(bean.getAlign());
         setWd(bean.getWd());
         setHassum(bean.getHassum());
+        setOrdered(bean.getOrdered());
     }
 
     /**
@@ -669,6 +743,7 @@ public class ReportitemBean
                  + "\n - reportitem.align = " + (align_is_initialized ? ("[" + (align == null ? null : align.toString()) + "]") : "not initialized") + ""
                  + "\n - reportitem.wd = " + (wd_is_initialized ? ("[" + (wd == null ? null : wd.toString()) + "]") : "not initialized") + ""
                  + "\n - reportitem.hassum = " + (hassum_is_initialized ? ("[" + (hassum == null ? null : hassum.toString()) + "]") : "not initialized") + ""
+                 + "\n - reportitem.ordered = " + (ordered_is_initialized ? ("[" + (ordered == null ? null : ordered.toString()) + "]") : "not initialized") + ""
             ;
     }
 

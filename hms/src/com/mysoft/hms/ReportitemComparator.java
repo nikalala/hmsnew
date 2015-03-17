@@ -80,6 +80,7 @@ public class ReportitemComparator implements Comparator
      *   <li>ReportitemManager.ID_ALIGN
      *   <li>ReportitemManager.ID_WD
      *   <li>ReportitemManager.ID_HASSUM
+     *   <li>ReportitemManager.ID_ORDERED
      * </ul>
      *
      * @param bReverse set this value to true, if you want to reverse the sorting results

@@ -1047,6 +1047,7 @@ System.out.println(rid+" = "+statusid);
     String[] dateformats1 = {"dd.mm.yyyy", "dd/mm/yyyy", "dd-mm-yyyy", "dd.mm.yy", "dd/mm/yy", "dd-mm-yy", "mm.dd.yyyy", "mm/dd/yyyy", "mm-dd-yyyy", "mm.dd.yy", "mm/dd/yy", "mm-dd-yy"};
     String[] dateformats2 = {"DD.MM.YYYY", "DD/MM/YYYY", "DD-MM-YYYY", "DD.MM.YY", "DD/MM/YY", "DD-MM-YY", "MM.DD.YYYY", "MM/DD/YYYY", "MM-DD-YYYY", "MM.DD.YY", "MM/DD/YY", "MM-DD-YY"};
     String[] arrdepdateformats = {"dd.MM", "dd/MM", "dd-MM", "MM.dd", "MM/dd", "MM-dd"};
+    String[] yaermonthdateformats = {"yy.MM", "yy/MM", "yy-MM", "MM.yy", "MM/yy", "MM-yy"};
     String[] timezones = TimeZone.getAvailableIDs();
 
     

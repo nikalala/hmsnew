@@ -16,10 +16,12 @@ package com.mysoft.hms;
 
 // imports- 
 
+
 public class RepcatBean
 // extends+ 
 
 // extends- 
+
 {
     private Integer repcatid;
     private boolean repcatid_is_modified = false;
@@ -226,4 +228,5 @@ public class RepcatBean
 // class+ 
 
 // class- 
+
 }
