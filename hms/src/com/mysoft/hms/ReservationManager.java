@@ -245,6 +245,13 @@ public class ReservationManager
     public static final int TYPE_STATUS = Types.INTEGER;
     public static final String NAME_STATUS = "status";
 
+    /**
+     * Column walkin of type Types.BIT mapped to Boolean.
+     */
+    public static final int ID_WALKIN = 31;
+    public static final int TYPE_WALKIN = Types.BIT;
+    public static final String NAME_WALKIN = "walkin";
+
 
     private static final String TABLE_NAME = "reservation";
 
@@ -284,6 +291,7 @@ public class ReservationManager
         ,"reservation.notax"
         ,"reservation.discountnights"
         ,"reservation.status"
+        ,"reservation.walkin"
     };
 
     /**
@@ -319,7 +327,8 @@ public class ReservationManager
                             + ",reservation.nomanualtax"
                             + ",reservation.notax"
                             + ",reservation.discountnights"
-                            + ",reservation.status";
+                            + ",reservation.status"
+                            + ",reservation.walkin";
 
     private static ReservationManager singleton = new ReservationManager();
 
@@ -1557,6 +1566,14 @@ public class ReservationManager
                     _dirtyCount++;
                 }
 
+                if (pObject.isWalkinModified()) {
+                    if (_dirtyCount>0) {
+                        _sql.append(",");
+                    }
+                    _sql.append("walkin");
+                    _dirtyCount++;
+                }
+
                 _sql.append(") values (");
                 if(_dirtyCount > 0) {
                     _sql.append("?");
@@ -1691,6 +1708,10 @@ public class ReservationManager
     
                 if (pObject.isStatusModified()) {
                     Manager.setInteger(ps, ++_dirtyCount, pObject.getStatus());
+                }
+    
+                if (pObject.isWalkinModified()) {
+                    Manager.setBoolean(ps, ++_dirtyCount, pObject.getWalkin());
                 }
     
                 ps.executeUpdate();
@@ -1983,6 +2004,15 @@ public class ReservationManager
                     }
                     _sql.append("status").append("=?");
                 }
+
+                if (pObject.isWalkinModified()) {
+                    if (useComma) {
+                        _sql.append(",");
+                    } else {
+                        useComma=true;
+                    }
+                    _sql.append("walkin").append("=?");
+                }
                 _sql.append(" WHERE ");
                 _sql.append("reservation.reservationid=?");
                 ps = c.prepareStatement(_sql.toString(),ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
@@ -2110,6 +2140,10 @@ public class ReservationManager
 
                 if (pObject.isStatusModified()) {
                       Manager.setInteger(ps, ++_dirtyCount, pObject.getStatus());
+                }
+
+                if (pObject.isWalkinModified()) {
+                      Manager.setBoolean(ps, ++_dirtyCount, pObject.getWalkin());
                 }
     
                 if (_dirtyCount == 0) {
@@ -2343,6 +2377,11 @@ public class ReservationManager
                  _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("status= ?");
              }
     
+             if (pObject.isWalkinModified()) {
+                 _dirtyCount ++; 
+                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("walkin= ?");
+             }
+    
              if (_dirtyCount == 0) {
                  throw new SQLException ("The pObject to look for is invalid : not initialized !");
              }
@@ -2473,6 +2512,10 @@ public class ReservationManager
     
              if (pObject.isStatusModified()) {
                  Manager.setInteger(ps, ++_dirtyCount, pObject.getStatus());
+             }
+    
+             if (pObject.isWalkinModified()) {
+                 Manager.setBoolean(ps, ++_dirtyCount, pObject.getWalkin());
              }
     
              ps.executeQuery();
@@ -2721,6 +2764,13 @@ public class ReservationManager
                 _dirtyAnd ++;
             }
     
+            if (pObject.isWalkinInitialized()) {
+                if (_dirtyAnd > 0)
+                    sql.append(" AND ");
+                sql.append("walkin").append("=?");
+                _dirtyAnd ++;
+            }
+    
             c = getConnection();
             ps = c.prepareStatement(sql.toString(),ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             int _dirtyCount = 0;
@@ -2847,6 +2897,10 @@ public class ReservationManager
     
             if (pObject.isStatusInitialized()) {
                 Manager.setInteger(ps, ++_dirtyCount, pObject.getStatus());
+            }
+    
+            if (pObject.isWalkinInitialized()) {
+                Manager.setBoolean(ps, ++_dirtyCount, pObject.getWalkin());
             }
     
             int _rows = ps.executeUpdate();
@@ -3375,6 +3429,11 @@ public class ReservationManager
                     _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("status= ?");
                 }
     
+                if (pObject.isWalkinModified()) {
+                    _dirtyCount++; 
+                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("walkin= ?");
+                }
+    
                 if (_dirtyCount == 0)
                    throw new SQLException ("The pObject to look is unvalid : not initialized !");
     
@@ -3508,6 +3567,10 @@ public class ReservationManager
                     Manager.setInteger(ps, ++_dirtyCount, pObject.getStatus());
                 }
     
+                if (pObject.isWalkinModified()) {
+                    Manager.setBoolean(ps, ++_dirtyCount, pObject.getWalkin());
+                }
+    
                 return countByPreparedStatement(ps);
         }
         finally
@@ -3563,6 +3626,7 @@ public class ReservationManager
         pObject.setNotax(Manager.getBoolean(rs, 29));
         pObject.setDiscountnights(Manager.getInteger(rs, 30));
         pObject.setStatus(Manager.getInteger(rs, 31));
+        pObject.setWalkin(Manager.getBoolean(rs, 32));
 
         pObject.isNew(false);
         pObject.resetIsModified();
@@ -3708,6 +3772,10 @@ public class ReservationManager
                 case ID_STATUS:
                     ++pos;
                     pObject.setStatus(Manager.getInteger(rs, pos));
+                    break;
+                case ID_WALKIN:
+                    ++pos;
+                    pObject.setWalkin(Manager.getBoolean(rs, pos));
                     break;
             }
         }

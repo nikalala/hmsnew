@@ -955,6 +955,42 @@ System.out.println(rid+" = "+statusid);
 
         return s;
     }
+    
+    public double getRoomTariff(ReservationroomBean rroom, Calendar fordate) throws Exception {
+        double rate = 0;
+        SimpleDateFormat dt = new SimpleDateFormat("dd/MM/yyyy");
+        RoomBean room = RoomManager.getInstance().loadByPrimaryKey(rroom.getRoomid());
+        RoomtypeBean roomtype = RoomtypeManager.getInstance().loadByPrimaryKey(room.getRoomtypeid());
+        int day = fordate.get(Calendar.DATE);
+        int mon = fordate.get(Calendar.MONTH);
+        String sqlseason = "where seasonid > 0 and active = true and deleted = false"
+                + " and startdate <= to_date('"+dt.format(fordate.getTime())+"','DD/MM/YYYY')"
+                + " and enddate >= to_date('"+dt.format(fordate.getTime())+"','DD/MM/YYYY')"
+                + " and to_date('2000-' || fmonth::text || '-' || fday::text,'YYYY-MM-DD') <= to_date('2000-"+mon+"-"+day+"','YYYY-MM-DD')"
+                + " and to_date('2000-' || tmonth::text || '-' || tday::text,'YYYY-MM-DD') >= to_date('2000-"+mon+"-"+day+"','YYYY-MM-DD')";
+        SeasonBean[] ses = SeasonManager.getInstance().loadByWhere(sqlseason);
+        int seasonid = 0;
+        if(ses.length > 0)
+            seasonid = ses[0].getSeasonid().intValue();
+        String sqlrmr = "where ratetypeid = "+rroom.getRatetypeid()+" and roomtypeid = "+room.getRoomtypeid()+" and seasonid = "+seasonid+" and contragentid = 0";
+        int extraadult = rroom.getAdult().intValue() - roomtype.getBadult().intValue();
+        int extrachild = rroom.getChild().intValue() - roomtype.getBchild().intValue();
+        int baseadult = rroom.getAdult().intValue() - extraadult;
+        int basechild = rroom.getChild().intValue() - extrachild;
+        if(baseadult < 0)   baseadult = 0;
+        if(basechild < 0)   basechild = 0;
+        RoomrateBean[] rmr = RoomrateManager.getInstance().loadByWhere(sqlrmr);
+        if(rmr.length > 0){
+            rate = rmr[0].getRate().doubleValue()*(baseadult+basechild);
+            rate += rmr[0].getRateadult().doubleValue()*extraadult;
+            rate += rmr[0].getRatechild().doubleValue()*extrachild;
+            if(rmr[0].getTax().booleanValue()){
+                TaxBean[] taxes = TaxManager.getInstance().loadByWhere("where startfrom <= to_date('"+dt.format(fordate.getTime())+"','DD/MM/YYYY') and active = true and deleted = false");
+                rate -= taxes[0].getAmount().doubleValue();
+            }
+        }
+        return rate;
+    }
 
 %>
 <%

@@ -125,6 +125,7 @@ public class ReservationComparator implements Comparator
      *   <li>ReservationManager.ID_NOTAX
      *   <li>ReservationManager.ID_DISCOUNTNIGHTS
      *   <li>ReservationManager.ID_STATUS
+     *   <li>ReservationManager.ID_WALKIN
      * </ul>
      *
      * @param bReverse set this value to true, if you want to reverse the sorting results

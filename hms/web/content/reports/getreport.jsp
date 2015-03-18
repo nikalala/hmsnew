@@ -68,7 +68,7 @@
 $(document).ready(function(){
     
    <%if(manual){%>
-        $.post("content/reports/content/<%=pagename%>",{},function(data){$("#<%=tablename%>").html(data);});
+        $.post("content/reports/content/<%=pagename%>",{ rid: <%=report.getReportid()%> },function(data){$("#<%=tablename%>").html(data);});
    <%} else {%>
    jQuery('#<%=tablename%>').jqGrid(
     {

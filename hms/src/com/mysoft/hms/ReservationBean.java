@@ -147,6 +147,10 @@ public class ReservationBean
     private boolean status_is_modified = false;
     private boolean status_is_initialized = false;
     
+    private Boolean walkin;
+    private boolean walkin_is_modified = false;
+    private boolean walkin_is_initialized = false;
+    
     private boolean _isNew = true;
     
     /**
@@ -2221,6 +2225,73 @@ public class ReservationBean
     }
 
     /**
+     * Getter method for walkin.
+     * <br>
+     * Meta Data Information (in progress):
+     * <ul>
+     * <li>full name: reservation.walkin
+     * <li>default value: false
+     * <li>column size: 1
+     * <li>jdbc type returned by the driver: Types.BIT
+     * </ul>
+     *
+     * @return the value of walkin
+     */
+    public Boolean getWalkin()
+    {
+        return walkin; 
+    }
+
+    /**
+     * Setter method for walkin.
+     * <br>
+     * Attention, there will be no comparison with current value which
+     * means calling this method will mark the field as 'modified' in all cases.
+     *
+     * @param newVal the new value to be assigned to walkin
+     */
+    public void setWalkin(Boolean newVal) {
+        if ((newVal != null && this.walkin != null && newVal.equals(this.walkin)) || 
+            (newVal == null && this.walkin == null && walkin_is_initialized)) {
+            return; 
+        } 
+        this.walkin = newVal; 
+        walkin_is_modified = true; 
+        walkin_is_initialized = true; 
+    }
+
+    /**
+     * Setter method for walkin.
+     * <br>
+     * Convenient for those who do not want to deal with Objects for primary types.
+     *
+     * @param newVal the new value to be assigned to walkin
+     */
+    public void setWalkin(boolean newVal) {
+        setWalkin(new Boolean(newVal));
+    }
+
+    /**
+     * Determines if the walkin has been modified.
+     *
+     * @return true if the field has been modified, false if the field has not been modified
+     */
+    public boolean isWalkinModified() {
+        return walkin_is_modified; 
+    }
+
+    /**
+     * Determines if the walkin has been initialized.
+     * <br>
+     * It is useful to determine if a field is null on purpose or just because it has not been initialized.
+     *
+     * @return true if the field has been initialized, false otherwise
+     */
+    public boolean isWalkinInitialized() {
+        return walkin_is_initialized; 
+    }
+
+    /**
      * Determines if the current object is new.
      *
      * @return true if the current object is new, false if the object is not new
@@ -2276,7 +2347,8 @@ public class ReservationBean
 		nomanualtax_is_modified || 
 		notax_is_modified || 
 		discountnights_is_modified || 
-		status_is_modified;
+		status_is_modified || 
+		walkin_is_modified;
     }
 
     /**
@@ -2314,6 +2386,7 @@ public class ReservationBean
         notax_is_modified = false;
         discountnights_is_modified = false;
         status_is_modified = false;
+        walkin_is_modified = false;
     }
 
     /**
@@ -2353,6 +2426,7 @@ public class ReservationBean
         setNotax(bean.getNotax());
         setDiscountnights(bean.getDiscountnights());
         setStatus(bean.getStatus());
+        setWalkin(bean.getWalkin());
     }
 
     /**
@@ -2393,6 +2467,7 @@ public class ReservationBean
                  + "\n - reservation.notax = " + (notax_is_initialized ? ("[" + (notax == null ? null : notax.toString()) + "]") : "not initialized") + ""
                  + "\n - reservation.discountnights = " + (discountnights_is_initialized ? ("[" + (discountnights == null ? null : discountnights.toString()) + "]") : "not initialized") + ""
                  + "\n - reservation.status = " + (status_is_initialized ? ("[" + (status == null ? null : status.toString()) + "]") : "not initialized") + ""
+                 + "\n - reservation.walkin = " + (walkin_is_initialized ? ("[" + (walkin == null ? null : walkin.toString()) + "]") : "not initialized") + ""
             ;
     }
 
