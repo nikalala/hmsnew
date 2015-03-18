@@ -70,7 +70,7 @@
         }
 
         String status = "";
-
+        //{"აქტიური", "გაუქმებული", "არ გამოცხადებული", "წაშლილი", "გაწერილი"};
         if (!CodeHelpers.isNullOrEmpty(Reservation) && Reservation.equals("on")) {
             status += "0,";
         }
@@ -81,13 +81,13 @@
             status += "4,";
         }
         if (!CodeHelpers.isNullOrEmpty(Void) && Void.equals("on")) {
-            status += "1,";
+            status += "3,";
         }
         if (!CodeHelpers.isNullOrEmpty(cancel) && cancel.equals("on")) {
-            status += "2,";
+            status += "1,";
         }
         if (!CodeHelpers.isNullOrEmpty(NoShow) && NoShow.equals("on")) {
-            status += "3,";
+            status += "2,";
         }
 
         if(!CodeHelpers.isNullOrEmpty(status)){
