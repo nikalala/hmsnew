@@ -144,7 +144,7 @@
                             <%for(int j=0;j<reps.length;j++){%>
                             <li>
                                 <i class="fa fa-dot-circle-o"></i>
-                                <a href="javascript:loadStats(<%=reps[j].getReportid()%>,'');"><%=reps[j].getDisplayname()%></a>
+                                <a href="javascript:loadStats('<%=reps[j].getReportid()%>','');"><%=reps[j].getDisplayname()%></a>
                             </li>
                             <%}%>
                         </ul>
