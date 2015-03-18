@@ -449,10 +449,16 @@ try{
     if(DateUtils.isBeforeDay(new Date(res.getDeparturedate().getTime()), dclosedate)){
         if(resroom.getRoomid() == null) throw new Exception("აირჩიეთ ოთახი");
         res.setStatus(4);
-    } else if(DateUtils.isBeforeDay(new Date(res.getArraivaldate().getTime()), dclosedate) || DateUtils.isSameDay(new Date(res.getArraivaldate().getTime()), dclosedate)){
+    } else if(DateUtils.isBeforeDay(new Date(res.getArraivaldate().getTime()), dclosedate)){
         if(resroom.getRoomid() == null) throw new Exception("აირჩიეთ ოთახი");
+        
         res.setStatus(-1);
     }
+    
+    //if(DateUtils.isBeforeDay(new Date(res.getArraivaldate().getTime()), dclosedate) || DateUtils.isSameDay(new Date(res.getArraivaldate().getTime()), dclosedate)){
+     //   if(resroom.getRoomid() == null) throw new Exception("აირჩიეთ ოთახი");
+     //   res.setStatus(-1);
+    //}
     
     res = ReservationManager.getInstance().save(res);
     ReservationtypeBean restype = ReservationtypeManager.getInstance().loadByPrimaryKey(res.getReservationtypeid());
