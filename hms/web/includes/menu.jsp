@@ -1,17 +1,24 @@
 <%@page contentType="text/html; charset=UTF-8"%>
 <%@page pageEncoding="UTF-8"%>
+<style>
+    #head .dropdown-menu li {
+        width: 100%;
+        font-size: 13px;
+        line-height: 2 !important;
+    }
+    #head .dropdown-menu li a {
+        line-height: 2 !important;
+    }
+    #head .dropdown-menu  li  a:hover {
+        background-color: rgba(185, 185, 185, 0.57);
+    }
+</style>
 <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container-fluid">
-        <div class="navbar-header col-md-2">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#">Selfin HMS</a>
+        <div class="navbar-header col-md-3" style="text-align: center;">
+            <a href="index.jsp"><img src="img/logo-hms.png" alt=""/></a>  
         </div>
-        <div class="navbar-collapse collapse">
+        <div id="head" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                 <li class="dropdown">
                     <a href="#mb59" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-briefcase" style="padding-right: 10px;"></span>მიმღები <b class="caret"></b></a>
