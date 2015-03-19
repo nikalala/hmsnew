@@ -1,0 +1,67 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Mar 19, 2015, 3:47:30 PM
+    Author     : djorj
+*/
+<style>
+        .sidebar-nav {
+  background-color: #f9f9f9;
+  border: solid 1px #eee;
+  margin: 0;
+  padding: 0;
+  font-size: .9em;
+  margin-bottom: 40px;
+}
+.sidebar-nav li {
+  padding: 0;
+  list-style: none;
+}
+.sidebar-nav li a > i {
+  margin: 2px 5px 0 0;
+  font-size: 1.1em;
+  color: #999;
+}
+.sidebar-nav li a {
+  display: block;
+  padding: 5px 15px;
+  color: #333;
+  text-decoration: none;
+  border-left: solid 3px #333;
+  background-color: #f3f3f3;
+}
+.sidebar-nav > li > a:after {
+  font-family: 'FontAwesome';
+  content: "\f107";
+  font-size: 1.2em;
+  float: right;
+}
+.sidebar-nav > li > a.collapsed:after {
+  content: "\f105";
+}
+.sidebar-nav li a.collapsed {
+  background-color: transparent;
+  border-left: solid 3px #0099da;
+}
+.sidebar-nav li a:hover,
+.sidebar-nav li a:focus,
+.sidebar-nav li a:active {
+  border-color: #333;
+  background-color: #f3f3f3;
+}
+.menu-submenu li a {
+  border-color: #ddd;
+  padding-left: 35px;
+  background-color: transparent;
+}
+.menu-submenu li.active a {
+  border-color: #333;
+  background-color: #f3f3f3;
+}
+.menu-submenu li:last-child a {
+  border-bottom: solid 1px #eee;
+}
+</style>

@@ -59,6 +59,10 @@ public class ReportitemBean
     private boolean ordered_is_modified = false;
     private boolean ordered_is_initialized = false;
     
+    private Boolean search;
+    private boolean search_is_modified = false;
+    private boolean search_is_initialized = false;
+    
     private boolean _isNew = true;
     
     /**
@@ -660,6 +664,73 @@ public class ReportitemBean
     }
 
     /**
+     * Getter method for search.
+     * <br>
+     * Meta Data Information (in progress):
+     * <ul>
+     * <li>full name: reportitem.search
+     * <li>default value: false
+     * <li>column size: 1
+     * <li>jdbc type returned by the driver: Types.BIT
+     * </ul>
+     *
+     * @return the value of search
+     */
+    public Boolean getSearch()
+    {
+        return search; 
+    }
+
+    /**
+     * Setter method for search.
+     * <br>
+     * Attention, there will be no comparison with current value which
+     * means calling this method will mark the field as 'modified' in all cases.
+     *
+     * @param newVal the new value to be assigned to search
+     */
+    public void setSearch(Boolean newVal) {
+        if ((newVal != null && this.search != null && newVal.equals(this.search)) || 
+            (newVal == null && this.search == null && search_is_initialized)) {
+            return; 
+        } 
+        this.search = newVal; 
+        search_is_modified = true; 
+        search_is_initialized = true; 
+    }
+
+    /**
+     * Setter method for search.
+     * <br>
+     * Convenient for those who do not want to deal with Objects for primary types.
+     *
+     * @param newVal the new value to be assigned to search
+     */
+    public void setSearch(boolean newVal) {
+        setSearch(new Boolean(newVal));
+    }
+
+    /**
+     * Determines if the search has been modified.
+     *
+     * @return true if the field has been modified, false if the field has not been modified
+     */
+    public boolean isSearchModified() {
+        return search_is_modified; 
+    }
+
+    /**
+     * Determines if the search has been initialized.
+     * <br>
+     * It is useful to determine if a field is null on purpose or just because it has not been initialized.
+     *
+     * @return true if the field has been initialized, false otherwise
+     */
+    public boolean isSearchInitialized() {
+        return search_is_initialized; 
+    }
+
+    /**
      * Determines if the current object is new.
      *
      * @return true if the current object is new, false if the object is not new
@@ -693,7 +764,8 @@ public class ReportitemBean
 		align_is_modified || 
 		wd_is_modified || 
 		hassum_is_modified || 
-		ordered_is_modified;
+		ordered_is_modified || 
+		search_is_modified;
     }
 
     /**
@@ -709,6 +781,7 @@ public class ReportitemBean
         wd_is_modified = false;
         hassum_is_modified = false;
         ordered_is_modified = false;
+        search_is_modified = false;
     }
 
     /**
@@ -726,6 +799,7 @@ public class ReportitemBean
         setWd(bean.getWd());
         setHassum(bean.getHassum());
         setOrdered(bean.getOrdered());
+        setSearch(bean.getSearch());
     }
 
     /**
@@ -744,6 +818,7 @@ public class ReportitemBean
                  + "\n - reportitem.wd = " + (wd_is_initialized ? ("[" + (wd == null ? null : wd.toString()) + "]") : "not initialized") + ""
                  + "\n - reportitem.hassum = " + (hassum_is_initialized ? ("[" + (hassum == null ? null : hassum.toString()) + "]") : "not initialized") + ""
                  + "\n - reportitem.ordered = " + (ordered_is_initialized ? ("[" + (ordered == null ? null : ordered.toString()) + "]") : "not initialized") + ""
+                 + "\n - reportitem.search = " + (search_is_initialized ? ("[" + (search == null ? null : search.toString()) + "]") : "not initialized") + ""
             ;
     }
 
