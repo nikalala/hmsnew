@@ -18,7 +18,7 @@
         <div class="navbar-header col-md-3" style="text-align: center;">
             <a href="index.jsp"><img src="img/logo-hms.png" alt=""/></a>  
         </div>
-        <div id="head" class="navbar-collapse collapse">
+        <div id="head" class="navbar-collapse collapse"> 
             <ul class="nav navbar-nav">
                 <li class="dropdown">
                     <a href="#mb59" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-briefcase" style="padding-right: 10px;"></span>მიმღები <b class="caret"></b></a>
