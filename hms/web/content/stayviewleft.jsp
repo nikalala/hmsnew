@@ -141,7 +141,7 @@ table.lscroll tr {
         </div>
         <div class="panel-footer" style="width: 100%; padding-bottom: 1px; padding-top: 10px;">
             
-            <div class="panel panel-default" style="">
+            <div class="panel panel-default" style="height: 119px;">
                 <div class="panel-heading  panel-title" style="text-align: center;height: 31px;background-color: #474544 !important; color: #FFF !important; font-family: bgmtavr; line-height: 26px;">
                     <b>ძებნა</b>
                 </div>
@@ -174,7 +174,7 @@ table.lscroll tr {
                                             <div class="col-sm-12">
                                                 <div class="input-group">
                                                     <input class="form-control" id="searchterm" name="searchterm">
-                                                    <div class="input-group-addon" style="cursor: pointer;" onclick="search()">
+                                                    <div class="input-group-addon" style="cursor: pointer; padding: 5px 10px;" onclick="search()">
                                                         <span class="glyphicon glyphicon-search"></span>
                                                     </div>
                                                 </div>

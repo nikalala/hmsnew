@@ -258,7 +258,7 @@ $(document).ready(function(){
 
 });
 </script>
-<div id="foliotab" style="height: 100%;">
+<div id="foliotab">
     <table width="100%" style="border-color: #BEBEBE; border-style: solid; border-width: 1px;">
         <tr>
             <td style="padding-left: 5px; width: 80px;"><b>თარიღი</b></td>

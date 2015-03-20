@@ -69,9 +69,11 @@ table.scroll tr {
 }
 
 .list_statusbar {
-    background-color: #E9E9E9;
+    background-color: white;
     padding: 0px 7px;
     line-height: 17px;
+    height: 29px;
+    border-bottom: none !important;
 }
 
 .legenditem {
@@ -100,6 +102,20 @@ table.scroll tr {
     background: -o-linear-gradient(left, rgba(255,0,0,0), rgba(255,0,0,1)); /* For Opera 11.1 to 12.0 */
     background: -moz-linear-gradient(left, rgba(255,0,0,0), rgba(255,0,0,1)); /* For Firefox 3.6 to 15 */
     background: linear-gradient(to left, rgba(255,0,0,0), rgba(255,0,0,1)); /* Standard syntax (must be last) */
+}
+.ui-jqgrid-bdiv {
+    background: white;
+}
+.ui-jqgrid-sdiv {
+    background-color: white !important;
+}
+.ui-jqgrid-sdiv td {
+    border: none !important;
+    border-top: 1px solid #ccc !important;
+}
+.ui-jqgrid-labels {
+    background: white;
+    border-bottom: 1px solid #ccc;
 }
 </style>
 <script>
@@ -219,7 +235,6 @@ function changeRoomchData(){
 }
 
 $(document).ready(function(){
-    $("#spacer").height(0);
     
     $("#roomtable1").width(edittransactionwidth);
     /*

@@ -111,9 +111,7 @@ int prefCount = PreferenceManager.getInstance().countWhere("where reservationid 
     
     $(document).ready(function(){
     
-        if(maincontentheight > 654){
-            $("#spacer").height(maincontentheight-654);
-        }
+    
         
         jQuery('#sharerlist').jqGrid(
         {

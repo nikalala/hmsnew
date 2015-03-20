@@ -132,7 +132,7 @@ function updateTransaction(id){
     },"json");
 }
 </script>
-<div class="container-fluid" id="edittransaction0" style="padding-top: 4px; height: 100%;">
+<div class="container-fluid" id="edittransaction0" style="padding-top: 4px; height: calc(100vh - 150px);">
     <div class="row" style="margin-bottom: 0px; padding-left: 5px;  padding-right: 5px;">
         <div class="col-md-16" style="height: 24px;">
             <table class="table table-condensed table-bordered" width="100%" cellspacing="0" id="transaction-title" style="background-color: #FFFFFF;">
@@ -173,14 +173,14 @@ function updateTransaction(id){
     </div>
     <div class="row" style="margin-top: 0px; padding-left: 5px;  padding-right: 5px;" id="tabpane">
         <div class="col-md-16" style="height: 100%;">
-            <div class="panel panel-default" id="tabpanel" style="height: 100%;">
+            <div class="panel panel-default" id="tabpanel" style="height: 100%; margin-bottom: 0;">
                 <ul class="nav nav-tabs" id="infotabs" style="background-color: #F5F5F5;" role="tablist">
                   <li class="active"><a class="specialTab" href="content/geninfo.jsp?reservationroomid=<%=rroom.getReservationroomid()%>" role="tab" data-target="#geninfo" data-toggle="tab">ძირითადი ინფორმაცია</a></li>
                   <li><a class="specialTab" href="content/roomch.jsp?reservationroomid=<%=rroom.getReservationroomid()%>" role="tab" data-target="#roomcharges" data-toggle="tab">ოთახის ფასები</a></li>
                   <li><a class="specialTab" href="content/folio.jsp?reservationroomid=<%=rroom.getReservationroomid()%>" role="tab" data-target="#foliodetail" data-toggle="tab">ინვოისი</a></li>
                 </ul>
-                <div class="tab-content panel-body" id="edittransactionbody" style="height: 100%; padding-bottom: 0px;">
-                    <div class="tab-pane active" id="geninfo" style="height: 100%;">
+                <div class="tab-content panel-body" id="edittransactionbody" style="height: calc(100vh - 410px); padding-bottom: 0px;">
+                    <div class="tab-pane active" id="geninfo">
                         <jsp:include page="geninfo.jsp">
                             <jsp:param name="reservationroomid" value="<%=rroom.getReservationroomid()%>"/>
                         </jsp:include>
