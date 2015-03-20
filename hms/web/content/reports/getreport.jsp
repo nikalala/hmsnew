@@ -37,6 +37,64 @@
 <link rel="stylesheet" type="text/css" href="css/reports.css">
 <script type="text/javascript" src="js/daterangepicker.jQuery.compressed.js"></script>
 
+<style>
+        .sidebar-nav {
+  background-color: #f9f9f9;
+  border: solid 1px #eee;
+  margin: 0;
+  padding: 0;
+  font-size: .9em;
+  margin-bottom: 40px;
+}
+.sidebar-nav li {
+  padding: 0;
+  list-style: none;
+}
+.sidebar-nav li a > i {
+  margin: 2px 5px 0 0;
+  font-size: 1.1em;
+  color: #999;
+}
+.sidebar-nav li a {
+  display: block;
+  padding: 5px 15px;
+  color: #333;
+  text-decoration: none;
+  border-left: solid 3px #333;
+  background-color: #f3f3f3;
+}
+.sidebar-nav > li > a:after {
+  font-family: 'FontAwesome';
+  content: "\f107";
+  font-size: 1.2em;
+  float: right;
+}
+.sidebar-nav > li > a.collapsed:after {
+  content: "\f105";
+}
+.sidebar-nav li a.collapsed {
+  background-color: transparent;
+  border-left: solid 3px #0099da;
+}
+.sidebar-nav li a:hover,
+.sidebar-nav li a:focus,
+.sidebar-nav li a:active {
+  border-color: #333;
+  background-color: #f3f3f3;
+}
+.menu-submenu li a {
+  border-color: #ddd;
+  padding-left: 35px;
+  background-color: transparent;
+}
+.menu-submenu li.active a {
+  border-color: #333;
+  background-color: #f3f3f3;
+}
+.menu-submenu li:last-child a {
+  border-bottom: solid 1px #eee;
+}
+</style>
 <script>
 /*
     function sper(element,gridname)
@@ -66,6 +124,8 @@
 */    
 
 $(document).ready(function(){
+    
+   
     
    <%if(manual){%>
         $.post("content/reports/content/<%=pagename%>",{ rid: <%=report.getReportid()%> },function(data){$("#<%=tablename%>").html(data);});
@@ -118,16 +178,23 @@ $(document).ready(function(){
             <b style="font-size: 20px;">Laerton Tbilisi</b>
         </td>
         <td style="border-bottom: 1px solid #000;">
-            <b style="float: right; font-size: 22px;"><%=reportname%></b>
+            <b style="float: right; font-size: 22px;">&nbsp;</b>
         </td>
     </tr>
-    <%--tr>
+    <tr>
         <td style="border-bottom: 1px solid #000;" colspan="2">
-            <b style="font-size: 13px;">Date From: </b> <span></span>
-            <b style="font-size: 13px;">to: </b> <span></span>
-            <b style="font-size: 13px;">Order By: Room </b>
+            <ul class="sidebar-nav">
+                <li>
+                    <a id="collcss" data-toggle="collapse" href="#coll-css" class=""><i class="fa fa-filter fa-2x"></i> <%=reportname%></a>
+                    <ul id="coll-css" class="menu-submenu list-unstyled">
+                        <jsp:include page="getfilters.jsp">
+                            <jsp:param name="rid" value="<%=report.getReportid()%>"/>
+                        </jsp:include>
+                    </ul>
+                </li>
+            </ul>
         </td>
-    </tr--%>
+    </tr>
     </thead>
     <tbody>
         <tr>

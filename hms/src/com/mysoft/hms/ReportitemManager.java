@@ -91,6 +91,13 @@ public class ReportitemManager
     public static final int TYPE_ORDERED = Types.BIT;
     public static final String NAME_ORDERED = "ordered";
 
+    /**
+     * Column search of type Types.BIT mapped to Boolean.
+     */
+    public static final int ID_SEARCH = 9;
+    public static final int TYPE_SEARCH = Types.BIT;
+    public static final String NAME_SEARCH = "search";
+
 
     private static final String TABLE_NAME = "reportitem";
 
@@ -108,6 +115,7 @@ public class ReportitemManager
         ,"reportitem.wd"
         ,"reportitem.hassum"
         ,"reportitem.ordered"
+        ,"reportitem.search"
     };
 
     /**
@@ -121,7 +129,8 @@ public class ReportitemManager
                             + ",reportitem.align"
                             + ",reportitem.wd"
                             + ",reportitem.hassum"
-                            + ",reportitem.ordered";
+                            + ",reportitem.ordered"
+                            + ",reportitem.search";
 
     private static ReportitemManager singleton = new ReportitemManager();
 
@@ -556,6 +565,14 @@ public class ReportitemManager
                     _dirtyCount++;
                 }
 
+                if (pObject.isSearchModified()) {
+                    if (_dirtyCount>0) {
+                        _sql.append(",");
+                    }
+                    _sql.append("search");
+                    _dirtyCount++;
+                }
+
                 _sql.append(") values (");
                 if(_dirtyCount > 0) {
                     _sql.append("?");
@@ -602,6 +619,10 @@ public class ReportitemManager
     
                 if (pObject.isOrderedModified()) {
                     Manager.setBoolean(ps, ++_dirtyCount, pObject.getOrdered());
+                }
+    
+                if (pObject.isSearchModified()) {
+                    Manager.setBoolean(ps, ++_dirtyCount, pObject.getSearch());
                 }
     
                 ps.executeUpdate();
@@ -696,6 +717,15 @@ public class ReportitemManager
                     }
                     _sql.append("ordered").append("=?");
                 }
+
+                if (pObject.isSearchModified()) {
+                    if (useComma) {
+                        _sql.append(",");
+                    } else {
+                        useComma=true;
+                    }
+                    _sql.append("search").append("=?");
+                }
                 _sql.append(" WHERE ");
                 _sql.append("reportitem.reportitemid=?");
                 ps = c.prepareStatement(_sql.toString(),ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
@@ -735,6 +765,10 @@ public class ReportitemManager
 
                 if (pObject.isOrderedModified()) {
                       Manager.setBoolean(ps, ++_dirtyCount, pObject.getOrdered());
+                }
+
+                if (pObject.isSearchModified()) {
+                      Manager.setBoolean(ps, ++_dirtyCount, pObject.getSearch());
                 }
     
                 if (_dirtyCount == 0) {
@@ -858,6 +892,11 @@ public class ReportitemManager
                  _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("ordered= ?");
              }
     
+             if (pObject.isSearchModified()) {
+                 _dirtyCount ++; 
+                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("search= ?");
+             }
+    
              if (_dirtyCount == 0) {
                  throw new SQLException ("The pObject to look for is invalid : not initialized !");
              }
@@ -900,6 +939,10 @@ public class ReportitemManager
     
              if (pObject.isOrderedModified()) {
                  Manager.setBoolean(ps, ++_dirtyCount, pObject.getOrdered());
+             }
+    
+             if (pObject.isSearchModified()) {
+                 Manager.setBoolean(ps, ++_dirtyCount, pObject.getSearch());
              }
     
              ps.executeQuery();
@@ -994,6 +1037,13 @@ public class ReportitemManager
                 _dirtyAnd ++;
             }
     
+            if (pObject.isSearchInitialized()) {
+                if (_dirtyAnd > 0)
+                    sql.append(" AND ");
+                sql.append("search").append("=?");
+                _dirtyAnd ++;
+            }
+    
             c = getConnection();
             ps = c.prepareStatement(sql.toString(),ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             int _dirtyCount = 0;
@@ -1032,6 +1082,10 @@ public class ReportitemManager
     
             if (pObject.isOrderedInitialized()) {
                 Manager.setBoolean(ps, ++_dirtyCount, pObject.getOrdered());
+            }
+    
+            if (pObject.isSearchInitialized()) {
+                Manager.setBoolean(ps, ++_dirtyCount, pObject.getSearch());
             }
     
             int _rows = ps.executeUpdate();
@@ -1189,6 +1243,11 @@ public class ReportitemManager
                     _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("ordered= ?");
                 }
     
+                if (pObject.isSearchModified()) {
+                    _dirtyCount++; 
+                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("search= ?");
+                }
+    
                 if (_dirtyCount == 0)
                    throw new SQLException ("The pObject to look is unvalid : not initialized !");
     
@@ -1234,6 +1293,10 @@ public class ReportitemManager
                     Manager.setBoolean(ps, ++_dirtyCount, pObject.getOrdered());
                 }
     
+                if (pObject.isSearchModified()) {
+                    Manager.setBoolean(ps, ++_dirtyCount, pObject.getSearch());
+                }
+    
                 return countByPreparedStatement(ps);
         }
         finally
@@ -1267,6 +1330,7 @@ public class ReportitemManager
         pObject.setWd(Manager.getInteger(rs, 7));
         pObject.setHassum(Manager.getBoolean(rs, 8));
         pObject.setOrdered(Manager.getBoolean(rs, 9));
+        pObject.setSearch(Manager.getBoolean(rs, 10));
 
         pObject.isNew(false);
         pObject.resetIsModified();
@@ -1324,6 +1388,10 @@ public class ReportitemManager
                 case ID_ORDERED:
                     ++pos;
                     pObject.setOrdered(Manager.getBoolean(rs, pos));
+                    break;
+                case ID_SEARCH:
+                    ++pos;
+                    pObject.setSearch(Manager.getBoolean(rs, pos));
                     break;
             }
         }
