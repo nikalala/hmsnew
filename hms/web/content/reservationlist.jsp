@@ -120,13 +120,14 @@
         $('#grid-table .date').datepicker(<%=pickerFormatForDatePickers%>);
         $('#grid-table .dropdown').selectpicker();
         $("#grid-table .btn-group").css("width", "100%", "!important");
+        $("#filter-form input[type='text']").css("width", "100%", "!important");
+        $("#grid-table .date input[type='text']").css("position", "relative");
         $("#grid-table label").each(function () {
             $(this).css("float", "right", "!important");
             $(this).css("line-height", "27px", "!important");
         });
         $("#grid-table input").height($("#grid-table .btn-group").height() - 6, "!important");
-        $("#filter-form input[type='text']").css("width", "100%", "!important");
-        $("#grid-table .date input[type='text']").css("position", "relative");
+
         $("#roomBean").next().css("padding-left", "0");
         $("#roomType").next().css("padding-right", "0");
     }

@@ -123,7 +123,7 @@ public class VipstatusBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: vipstatus.name
-     * <li>comments: დასახელება
+     * <li>comments: ??????????
      * <li>column size: 2147483647
      * <li>jdbc type returned by the driver: Types.VARCHAR
      * </ul>
@@ -180,7 +180,7 @@ public class VipstatusBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: vipstatus.active
-     * <li>comments: აქტიური
+     * <li>comments: ???????
      * <li>default value: true
      * <li>column size: 1
      * <li>jdbc type returned by the driver: Types.BIT
@@ -248,7 +248,7 @@ public class VipstatusBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: vipstatus.deleted
-     * <li>comments: წაშლილი
+     * <li>comments: ???????
      * <li>default value: false
      * <li>column size: 1
      * <li>jdbc type returned by the driver: Types.BIT

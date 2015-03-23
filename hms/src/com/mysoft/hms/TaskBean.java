@@ -17,47 +17,31 @@ package com.mysoft.hms;
 // imports- 
 
 
-public class SeasonBean
+public class TaskBean
 // extends+ 
 
 // extends- 
 
 {
-    private Integer seasonid;
-    private boolean seasonid_is_modified = false;
-    private boolean seasonid_is_initialized = false;
-    
-    private String code;
-    private boolean code_is_modified = false;
-    private boolean code_is_initialized = false;
+    private Integer taskid;
+    private boolean taskid_is_modified = false;
+    private boolean taskid_is_initialized = false;
     
     private String name;
     private boolean name_is_modified = false;
     private boolean name_is_initialized = false;
     
-    private Integer fday;
-    private boolean fday_is_modified = false;
-    private boolean fday_is_initialized = false;
+    private Integer depid;
+    private boolean depid_is_modified = false;
+    private boolean depid_is_initialized = false;
     
-    private Integer tday;
-    private boolean tday_is_modified = false;
-    private boolean tday_is_initialized = false;
+    private Integer stid;
+    private boolean stid_is_modified = false;
+    private boolean stid_is_initialized = false;
     
-    private Integer fmonth;
-    private boolean fmonth_is_modified = false;
-    private boolean fmonth_is_initialized = false;
-    
-    private Integer tmonth;
-    private boolean tmonth_is_modified = false;
-    private boolean tmonth_is_initialized = false;
-    
-    private java.util.Date startdate;
-    private boolean startdate_is_modified = false;
-    private boolean startdate_is_initialized = false;
-    
-    private java.util.Date enddate;
-    private boolean enddate_is_modified = false;
-    private boolean enddate_is_initialized = false;
+    private Integer alertid;
+    private boolean alertid_is_modified = false;
+    private boolean alertid_is_initialized = false;
     
     private Integer regbyid;
     private boolean regbyid_is_modified = false;
@@ -67,6 +51,10 @@ public class SeasonBean
     private boolean regdate_is_modified = false;
     private boolean regdate_is_initialized = false;
     
+    private java.sql.Timestamp duedate;
+    private boolean duedate_is_modified = false;
+    private boolean duedate_is_initialized = false;
+    
     private Boolean active;
     private boolean active_is_modified = false;
     private boolean active_is_initialized = false;
@@ -75,139 +63,86 @@ public class SeasonBean
     private boolean deleted_is_modified = false;
     private boolean deleted_is_initialized = false;
     
+    private Integer reservationid;
+    private boolean reservationid_is_modified = false;
+    private boolean reservationid_is_initialized = false;
+    
     private boolean _isNew = true;
     
     /**
      * Do not use this constructor directly, please use the factory method
      * available in the associated manager.
      */
-    SeasonBean()
+    TaskBean()
     {
     }
     
     /**
-     * Getter method for seasonid.
+     * Getter method for taskid.
      * <br>
      * PRIMARY KEY.<br>
      * Meta Data Information (in progress):
      * <ul>
-     * <li>full name: season.seasonid
+     * <li>full name: task.taskid
      * <li>column size: 10
      * <li>jdbc type returned by the driver: Types.INTEGER
      * </ul>
      *
-     * @return the value of seasonid
+     * @return the value of taskid
      */
-    public Integer getSeasonid()
+    public Integer getTaskid()
     {
-        return seasonid; 
+        return taskid; 
     }
 
     /**
-     * Setter method for seasonid.
+     * Setter method for taskid.
      * <br>
      * The new value is set only if compareTo() says it is different,
      * or if one of either the new value or the current value is null.
      * In case the new value is different, it is set and the field is marked as 'modified'.
      *
-     * @param newVal the new value to be assigned to seasonid
+     * @param newVal the new value to be assigned to taskid
      */
-    public void setSeasonid(Integer newVal) {
-        if ((newVal != null && this.seasonid != null && (newVal.compareTo(this.seasonid) == 0)) || 
-            (newVal == null && this.seasonid == null && seasonid_is_initialized)) {
+    public void setTaskid(Integer newVal) {
+        if ((newVal != null && this.taskid != null && (newVal.compareTo(this.taskid) == 0)) || 
+            (newVal == null && this.taskid == null && taskid_is_initialized)) {
             return; 
         } 
-        this.seasonid = newVal; 
-        seasonid_is_modified = true; 
-        seasonid_is_initialized = true; 
+        this.taskid = newVal; 
+        taskid_is_modified = true; 
+        taskid_is_initialized = true; 
     }
 
     /**
-     * Setter method for seasonid.
+     * Setter method for taskid.
      * <br>
      * Convenient for those who do not want to deal with Objects for primary types.
      *
-     * @param newVal the new value to be assigned to seasonid
+     * @param newVal the new value to be assigned to taskid
      */
-    public void setSeasonid(int newVal) {
-        setSeasonid(new Integer(newVal));
+    public void setTaskid(int newVal) {
+        setTaskid(new Integer(newVal));
     }
 
     /**
-     * Determines if the seasonid has been modified.
+     * Determines if the taskid has been modified.
      *
      * @return true if the field has been modified, false if the field has not been modified
      */
-    public boolean isSeasonidModified() {
-        return seasonid_is_modified; 
+    public boolean isTaskidModified() {
+        return taskid_is_modified; 
     }
 
     /**
-     * Determines if the seasonid has been initialized.
+     * Determines if the taskid has been initialized.
      * <br>
      * It is useful to determine if a field is null on purpose or just because it has not been initialized.
      *
      * @return true if the field has been initialized, false otherwise
      */
-    public boolean isSeasonidInitialized() {
-        return seasonid_is_initialized; 
-    }
-
-    /**
-     * Getter method for code.
-     * <br>
-     * Meta Data Information (in progress):
-     * <ul>
-     * <li>full name: season.code
-     * <li>comments: ????? ??????????
-     * <li>column size: 2147483647
-     * <li>jdbc type returned by the driver: Types.VARCHAR
-     * </ul>
-     *
-     * @return the value of code
-     */
-    public String getCode()
-    {
-        return code; 
-    }
-
-    /**
-     * Setter method for code.
-     * <br>
-     * The new value is set only if compareTo() says it is different,
-     * or if one of either the new value or the current value is null.
-     * In case the new value is different, it is set and the field is marked as 'modified'.
-     *
-     * @param newVal the new value to be assigned to code
-     */
-    public void setCode(String newVal) {
-        if ((newVal != null && this.code != null && (newVal.compareTo(this.code) == 0)) || 
-            (newVal == null && this.code == null && code_is_initialized)) {
-            return; 
-        } 
-        this.code = newVal; 
-        code_is_modified = true; 
-        code_is_initialized = true; 
-    }
-
-    /**
-     * Determines if the code has been modified.
-     *
-     * @return true if the field has been modified, false if the field has not been modified
-     */
-    public boolean isCodeModified() {
-        return code_is_modified; 
-    }
-
-    /**
-     * Determines if the code has been initialized.
-     * <br>
-     * It is useful to determine if a field is null on purpose or just because it has not been initialized.
-     *
-     * @return true if the field has been initialized, false otherwise
-     */
-    public boolean isCodeInitialized() {
-        return code_is_initialized; 
+    public boolean isTaskidInitialized() {
+        return taskid_is_initialized; 
     }
 
     /**
@@ -215,8 +150,7 @@ public class SeasonBean
      * <br>
      * Meta Data Information (in progress):
      * <ul>
-     * <li>full name: season.name
-     * <li>comments: ??????????
+     * <li>full name: task.name
      * <li>column size: 2147483647
      * <li>jdbc type returned by the driver: Types.VARCHAR
      * </ul>
@@ -268,411 +202,204 @@ public class SeasonBean
     }
 
     /**
-     * Getter method for fday.
+     * Getter method for depid.
      * <br>
      * Meta Data Information (in progress):
      * <ul>
-     * <li>full name: season.fday
-     * <li>comments: ??????
+     * <li>full name: task.depid
      * <li>column size: 10
      * <li>jdbc type returned by the driver: Types.INTEGER
      * </ul>
      *
-     * @return the value of fday
+     * @return the value of depid
      */
-    public Integer getFday()
+    public Integer getDepid()
     {
-        return fday; 
+        return depid; 
     }
 
     /**
-     * Setter method for fday.
+     * Setter method for depid.
      * <br>
      * The new value is set only if compareTo() says it is different,
      * or if one of either the new value or the current value is null.
      * In case the new value is different, it is set and the field is marked as 'modified'.
      *
-     * @param newVal the new value to be assigned to fday
+     * @param newVal the new value to be assigned to depid
      */
-    public void setFday(Integer newVal) {
-        if ((newVal != null && this.fday != null && (newVal.compareTo(this.fday) == 0)) || 
-            (newVal == null && this.fday == null && fday_is_initialized)) {
+    public void setDepid(Integer newVal) {
+        if ((newVal != null && this.depid != null && (newVal.compareTo(this.depid) == 0)) || 
+            (newVal == null && this.depid == null && depid_is_initialized)) {
             return; 
         } 
-        this.fday = newVal; 
-        fday_is_modified = true; 
-        fday_is_initialized = true; 
+        this.depid = newVal; 
+        depid_is_modified = true; 
+        depid_is_initialized = true; 
     }
 
     /**
-     * Setter method for fday.
+     * Setter method for depid.
      * <br>
      * Convenient for those who do not want to deal with Objects for primary types.
      *
-     * @param newVal the new value to be assigned to fday
+     * @param newVal the new value to be assigned to depid
      */
-    public void setFday(int newVal) {
-        setFday(new Integer(newVal));
+    public void setDepid(int newVal) {
+        setDepid(new Integer(newVal));
     }
 
     /**
-     * Determines if the fday has been modified.
+     * Determines if the depid has been modified.
      *
      * @return true if the field has been modified, false if the field has not been modified
      */
-    public boolean isFdayModified() {
-        return fday_is_modified; 
+    public boolean isDepidModified() {
+        return depid_is_modified; 
     }
 
     /**
-     * Determines if the fday has been initialized.
+     * Determines if the depid has been initialized.
      * <br>
      * It is useful to determine if a field is null on purpose or just because it has not been initialized.
      *
      * @return true if the field has been initialized, false otherwise
      */
-    public boolean isFdayInitialized() {
-        return fday_is_initialized; 
+    public boolean isDepidInitialized() {
+        return depid_is_initialized; 
     }
 
     /**
-     * Getter method for tday.
+     * Getter method for stid.
      * <br>
      * Meta Data Information (in progress):
      * <ul>
-     * <li>full name: season.tday
-     * <li>comments: ??????
+     * <li>full name: task.stid
      * <li>column size: 10
      * <li>jdbc type returned by the driver: Types.INTEGER
      * </ul>
      *
-     * @return the value of tday
+     * @return the value of stid
      */
-    public Integer getTday()
+    public Integer getStid()
     {
-        return tday; 
+        return stid; 
     }
 
     /**
-     * Setter method for tday.
+     * Setter method for stid.
      * <br>
      * The new value is set only if compareTo() says it is different,
      * or if one of either the new value or the current value is null.
      * In case the new value is different, it is set and the field is marked as 'modified'.
      *
-     * @param newVal the new value to be assigned to tday
+     * @param newVal the new value to be assigned to stid
      */
-    public void setTday(Integer newVal) {
-        if ((newVal != null && this.tday != null && (newVal.compareTo(this.tday) == 0)) || 
-            (newVal == null && this.tday == null && tday_is_initialized)) {
+    public void setStid(Integer newVal) {
+        if ((newVal != null && this.stid != null && (newVal.compareTo(this.stid) == 0)) || 
+            (newVal == null && this.stid == null && stid_is_initialized)) {
             return; 
         } 
-        this.tday = newVal; 
-        tday_is_modified = true; 
-        tday_is_initialized = true; 
+        this.stid = newVal; 
+        stid_is_modified = true; 
+        stid_is_initialized = true; 
     }
 
     /**
-     * Setter method for tday.
+     * Setter method for stid.
      * <br>
      * Convenient for those who do not want to deal with Objects for primary types.
      *
-     * @param newVal the new value to be assigned to tday
+     * @param newVal the new value to be assigned to stid
      */
-    public void setTday(int newVal) {
-        setTday(new Integer(newVal));
+    public void setStid(int newVal) {
+        setStid(new Integer(newVal));
     }
 
     /**
-     * Determines if the tday has been modified.
+     * Determines if the stid has been modified.
      *
      * @return true if the field has been modified, false if the field has not been modified
      */
-    public boolean isTdayModified() {
-        return tday_is_modified; 
+    public boolean isStidModified() {
+        return stid_is_modified; 
     }
 
     /**
-     * Determines if the tday has been initialized.
+     * Determines if the stid has been initialized.
      * <br>
      * It is useful to determine if a field is null on purpose or just because it has not been initialized.
      *
      * @return true if the field has been initialized, false otherwise
      */
-    public boolean isTdayInitialized() {
-        return tday_is_initialized; 
+    public boolean isStidInitialized() {
+        return stid_is_initialized; 
     }
 
     /**
-     * Getter method for fmonth.
+     * Getter method for alertid.
      * <br>
      * Meta Data Information (in progress):
      * <ul>
-     * <li>full name: season.fmonth
-     * <li>comments: ??????
+     * <li>full name: task.alertid
      * <li>column size: 10
      * <li>jdbc type returned by the driver: Types.INTEGER
      * </ul>
      *
-     * @return the value of fmonth
+     * @return the value of alertid
      */
-    public Integer getFmonth()
+    public Integer getAlertid()
     {
-        return fmonth; 
+        return alertid; 
     }
 
     /**
-     * Setter method for fmonth.
+     * Setter method for alertid.
      * <br>
      * The new value is set only if compareTo() says it is different,
      * or if one of either the new value or the current value is null.
      * In case the new value is different, it is set and the field is marked as 'modified'.
      *
-     * @param newVal the new value to be assigned to fmonth
+     * @param newVal the new value to be assigned to alertid
      */
-    public void setFmonth(Integer newVal) {
-        if ((newVal != null && this.fmonth != null && (newVal.compareTo(this.fmonth) == 0)) || 
-            (newVal == null && this.fmonth == null && fmonth_is_initialized)) {
+    public void setAlertid(Integer newVal) {
+        if ((newVal != null && this.alertid != null && (newVal.compareTo(this.alertid) == 0)) || 
+            (newVal == null && this.alertid == null && alertid_is_initialized)) {
             return; 
         } 
-        this.fmonth = newVal; 
-        fmonth_is_modified = true; 
-        fmonth_is_initialized = true; 
+        this.alertid = newVal; 
+        alertid_is_modified = true; 
+        alertid_is_initialized = true; 
     }
 
     /**
-     * Setter method for fmonth.
+     * Setter method for alertid.
      * <br>
      * Convenient for those who do not want to deal with Objects for primary types.
      *
-     * @param newVal the new value to be assigned to fmonth
+     * @param newVal the new value to be assigned to alertid
      */
-    public void setFmonth(int newVal) {
-        setFmonth(new Integer(newVal));
+    public void setAlertid(int newVal) {
+        setAlertid(new Integer(newVal));
     }
 
     /**
-     * Determines if the fmonth has been modified.
+     * Determines if the alertid has been modified.
      *
      * @return true if the field has been modified, false if the field has not been modified
      */
-    public boolean isFmonthModified() {
-        return fmonth_is_modified; 
+    public boolean isAlertidModified() {
+        return alertid_is_modified; 
     }
 
     /**
-     * Determines if the fmonth has been initialized.
+     * Determines if the alertid has been initialized.
      * <br>
      * It is useful to determine if a field is null on purpose or just because it has not been initialized.
      *
      * @return true if the field has been initialized, false otherwise
      */
-    public boolean isFmonthInitialized() {
-        return fmonth_is_initialized; 
-    }
-
-    /**
-     * Getter method for tmonth.
-     * <br>
-     * Meta Data Information (in progress):
-     * <ul>
-     * <li>full name: season.tmonth
-     * <li>comments: ??????
-     * <li>column size: 10
-     * <li>jdbc type returned by the driver: Types.INTEGER
-     * </ul>
-     *
-     * @return the value of tmonth
-     */
-    public Integer getTmonth()
-    {
-        return tmonth; 
-    }
-
-    /**
-     * Setter method for tmonth.
-     * <br>
-     * The new value is set only if compareTo() says it is different,
-     * or if one of either the new value or the current value is null.
-     * In case the new value is different, it is set and the field is marked as 'modified'.
-     *
-     * @param newVal the new value to be assigned to tmonth
-     */
-    public void setTmonth(Integer newVal) {
-        if ((newVal != null && this.tmonth != null && (newVal.compareTo(this.tmonth) == 0)) || 
-            (newVal == null && this.tmonth == null && tmonth_is_initialized)) {
-            return; 
-        } 
-        this.tmonth = newVal; 
-        tmonth_is_modified = true; 
-        tmonth_is_initialized = true; 
-    }
-
-    /**
-     * Setter method for tmonth.
-     * <br>
-     * Convenient for those who do not want to deal with Objects for primary types.
-     *
-     * @param newVal the new value to be assigned to tmonth
-     */
-    public void setTmonth(int newVal) {
-        setTmonth(new Integer(newVal));
-    }
-
-    /**
-     * Determines if the tmonth has been modified.
-     *
-     * @return true if the field has been modified, false if the field has not been modified
-     */
-    public boolean isTmonthModified() {
-        return tmonth_is_modified; 
-    }
-
-    /**
-     * Determines if the tmonth has been initialized.
-     * <br>
-     * It is useful to determine if a field is null on purpose or just because it has not been initialized.
-     *
-     * @return true if the field has been initialized, false otherwise
-     */
-    public boolean isTmonthInitialized() {
-        return tmonth_is_initialized; 
-    }
-
-    /**
-     * Getter method for startdate.
-     * <br>
-     * Meta Data Information (in progress):
-     * <ul>
-     * <li>full name: season.startdate
-     * <li>comments: ?????????
-     * <li>column size: 13
-     * <li>jdbc type returned by the driver: Types.DATE
-     * </ul>
-     *
-     * @return the value of startdate
-     */
-    public java.util.Date getStartdate()
-    {
-        return startdate; 
-    }
-
-    /**
-     * Setter method for startdate.
-     * <br>
-     * The new value is set only if compareTo() says it is different,
-     * or if one of either the new value or the current value is null.
-     * In case the new value is different, it is set and the field is marked as 'modified'.
-     *
-     * @param newVal the new value to be assigned to startdate
-     */
-    public void setStartdate(java.util.Date newVal) {
-        if ((newVal != null && this.startdate != null && (newVal.compareTo(this.startdate) == 0)) || 
-            (newVal == null && this.startdate == null && startdate_is_initialized)) {
-            return; 
-        } 
-        this.startdate = newVal; 
-        startdate_is_modified = true; 
-        startdate_is_initialized = true; 
-    }
-
-    /**
-     * Setter method for startdate.
-     * <br>
-     * Convenient for those who do not want to deal with Objects for primary types.
-     *
-     * @param newVal the new value to be assigned to startdate
-     */
-    public void setStartdate(long newVal) {
-        setStartdate(new java.util.Date(newVal));
-    }
-
-    /**
-     * Determines if the startdate has been modified.
-     *
-     * @return true if the field has been modified, false if the field has not been modified
-     */
-    public boolean isStartdateModified() {
-        return startdate_is_modified; 
-    }
-
-    /**
-     * Determines if the startdate has been initialized.
-     * <br>
-     * It is useful to determine if a field is null on purpose or just because it has not been initialized.
-     *
-     * @return true if the field has been initialized, false otherwise
-     */
-    public boolean isStartdateInitialized() {
-        return startdate_is_initialized; 
-    }
-
-    /**
-     * Getter method for enddate.
-     * <br>
-     * Meta Data Information (in progress):
-     * <ul>
-     * <li>full name: season.enddate
-     * <li>comments: ?????????
-     * <li>column size: 13
-     * <li>jdbc type returned by the driver: Types.DATE
-     * </ul>
-     *
-     * @return the value of enddate
-     */
-    public java.util.Date getEnddate()
-    {
-        return enddate; 
-    }
-
-    /**
-     * Setter method for enddate.
-     * <br>
-     * The new value is set only if compareTo() says it is different,
-     * or if one of either the new value or the current value is null.
-     * In case the new value is different, it is set and the field is marked as 'modified'.
-     *
-     * @param newVal the new value to be assigned to enddate
-     */
-    public void setEnddate(java.util.Date newVal) {
-        if ((newVal != null && this.enddate != null && (newVal.compareTo(this.enddate) == 0)) || 
-            (newVal == null && this.enddate == null && enddate_is_initialized)) {
-            return; 
-        } 
-        this.enddate = newVal; 
-        enddate_is_modified = true; 
-        enddate_is_initialized = true; 
-    }
-
-    /**
-     * Setter method for enddate.
-     * <br>
-     * Convenient for those who do not want to deal with Objects for primary types.
-     *
-     * @param newVal the new value to be assigned to enddate
-     */
-    public void setEnddate(long newVal) {
-        setEnddate(new java.util.Date(newVal));
-    }
-
-    /**
-     * Determines if the enddate has been modified.
-     *
-     * @return true if the field has been modified, false if the field has not been modified
-     */
-    public boolean isEnddateModified() {
-        return enddate_is_modified; 
-    }
-
-    /**
-     * Determines if the enddate has been initialized.
-     * <br>
-     * It is useful to determine if a field is null on purpose or just because it has not been initialized.
-     *
-     * @return true if the field has been initialized, false otherwise
-     */
-    public boolean isEnddateInitialized() {
-        return enddate_is_initialized; 
+    public boolean isAlertidInitialized() {
+        return alertid_is_initialized; 
     }
 
     /**
@@ -680,9 +407,8 @@ public class SeasonBean
      * <br>
      * Meta Data Information (in progress):
      * <ul>
-     * <li>full name: season.regbyid
+     * <li>full name: task.regbyid
      * <li> foreign key: personnel.personnelid
-     * <li>comments: ??????
      * <li>column size: 10
      * <li>jdbc type returned by the driver: Types.INTEGER
      * </ul>
@@ -749,8 +475,7 @@ public class SeasonBean
      * <br>
      * Meta Data Information (in progress):
      * <ul>
-     * <li>full name: season.regdate
-     * <li>comments: ???????????? ??????
+     * <li>full name: task.regdate
      * <li>default value: now()
      * <li>column size: 29
      * <li>jdbc type returned by the driver: Types.TIMESTAMP
@@ -814,12 +539,78 @@ public class SeasonBean
     }
 
     /**
+     * Getter method for duedate.
+     * <br>
+     * Meta Data Information (in progress):
+     * <ul>
+     * <li>full name: task.duedate
+     * <li>column size: 29
+     * <li>jdbc type returned by the driver: Types.TIMESTAMP
+     * </ul>
+     *
+     * @return the value of duedate
+     */
+    public java.sql.Timestamp getDuedate()
+    {
+        return duedate; 
+    }
+
+    /**
+     * Setter method for duedate.
+     * <br>
+     * The new value is set only if compareTo() says it is different,
+     * or if one of either the new value or the current value is null.
+     * In case the new value is different, it is set and the field is marked as 'modified'.
+     *
+     * @param newVal the new value to be assigned to duedate
+     */
+    public void setDuedate(java.sql.Timestamp newVal) {
+        if ((newVal != null && this.duedate != null && (newVal.compareTo(this.duedate) == 0)) || 
+            (newVal == null && this.duedate == null && duedate_is_initialized)) {
+            return; 
+        } 
+        this.duedate = newVal; 
+        duedate_is_modified = true; 
+        duedate_is_initialized = true; 
+    }
+
+    /**
+     * Setter method for duedate.
+     * <br>
+     * Convenient for those who do not want to deal with Objects for primary types.
+     *
+     * @param newVal the new value to be assigned to duedate
+     */
+    public void setDuedate(long newVal) {
+        setDuedate(new java.sql.Timestamp(newVal));
+    }
+
+    /**
+     * Determines if the duedate has been modified.
+     *
+     * @return true if the field has been modified, false if the field has not been modified
+     */
+    public boolean isDuedateModified() {
+        return duedate_is_modified; 
+    }
+
+    /**
+     * Determines if the duedate has been initialized.
+     * <br>
+     * It is useful to determine if a field is null on purpose or just because it has not been initialized.
+     *
+     * @return true if the field has been initialized, false otherwise
+     */
+    public boolean isDuedateInitialized() {
+        return duedate_is_initialized; 
+    }
+
+    /**
      * Getter method for active.
      * <br>
      * Meta Data Information (in progress):
      * <ul>
-     * <li>full name: season.active
-     * <li>comments: ???????
+     * <li>full name: task.active
      * <li>default value: true
      * <li>column size: 1
      * <li>jdbc type returned by the driver: Types.BIT
@@ -886,8 +677,7 @@ public class SeasonBean
      * <br>
      * Meta Data Information (in progress):
      * <ul>
-     * <li>full name: season.deleted
-     * <li>comments: ???????
+     * <li>full name: task.deleted
      * <li>default value: false
      * <li>column size: 1
      * <li>jdbc type returned by the driver: Types.BIT
@@ -950,6 +740,73 @@ public class SeasonBean
     }
 
     /**
+     * Getter method for reservationid.
+     * <br>
+     * Meta Data Information (in progress):
+     * <ul>
+     * <li>full name: task.reservationid
+     * <li>column size: 10
+     * <li>jdbc type returned by the driver: Types.INTEGER
+     * </ul>
+     *
+     * @return the value of reservationid
+     */
+    public Integer getReservationid()
+    {
+        return reservationid; 
+    }
+
+    /**
+     * Setter method for reservationid.
+     * <br>
+     * The new value is set only if compareTo() says it is different,
+     * or if one of either the new value or the current value is null.
+     * In case the new value is different, it is set and the field is marked as 'modified'.
+     *
+     * @param newVal the new value to be assigned to reservationid
+     */
+    public void setReservationid(Integer newVal) {
+        if ((newVal != null && this.reservationid != null && (newVal.compareTo(this.reservationid) == 0)) || 
+            (newVal == null && this.reservationid == null && reservationid_is_initialized)) {
+            return; 
+        } 
+        this.reservationid = newVal; 
+        reservationid_is_modified = true; 
+        reservationid_is_initialized = true; 
+    }
+
+    /**
+     * Setter method for reservationid.
+     * <br>
+     * Convenient for those who do not want to deal with Objects for primary types.
+     *
+     * @param newVal the new value to be assigned to reservationid
+     */
+    public void setReservationid(int newVal) {
+        setReservationid(new Integer(newVal));
+    }
+
+    /**
+     * Determines if the reservationid has been modified.
+     *
+     * @return true if the field has been modified, false if the field has not been modified
+     */
+    public boolean isReservationidModified() {
+        return reservationid_is_modified; 
+    }
+
+    /**
+     * Determines if the reservationid has been initialized.
+     * <br>
+     * It is useful to determine if a field is null on purpose or just because it has not been initialized.
+     *
+     * @return true if the field has been initialized, false otherwise
+     */
+    public boolean isReservationidInitialized() {
+        return reservationid_is_initialized; 
+    }
+
+    /**
      * Determines if the current object is new.
      *
      * @return true if the current object is new, false if the object is not new
@@ -975,38 +832,34 @@ public class SeasonBean
      * @return true if the object has been modified, false if the object has not been modified
      */
     public boolean isModified() {
-        return seasonid_is_modified || 
-		code_is_modified || 
+        return taskid_is_modified || 
 		name_is_modified || 
-		fday_is_modified || 
-		tday_is_modified || 
-		fmonth_is_modified || 
-		tmonth_is_modified || 
-		startdate_is_modified || 
-		enddate_is_modified || 
+		depid_is_modified || 
+		stid_is_modified || 
+		alertid_is_modified || 
 		regbyid_is_modified || 
 		regdate_is_modified || 
+		duedate_is_modified || 
 		active_is_modified || 
-		deleted_is_modified;
+		deleted_is_modified || 
+		reservationid_is_modified;
     }
 
     /**
      * Resets the object modification status to 'not modified'.
      */
     public void resetIsModified() {
-        seasonid_is_modified = false;
-        code_is_modified = false;
+        taskid_is_modified = false;
         name_is_modified = false;
-        fday_is_modified = false;
-        tday_is_modified = false;
-        fmonth_is_modified = false;
-        tmonth_is_modified = false;
-        startdate_is_modified = false;
-        enddate_is_modified = false;
+        depid_is_modified = false;
+        stid_is_modified = false;
+        alertid_is_modified = false;
         regbyid_is_modified = false;
         regdate_is_modified = false;
+        duedate_is_modified = false;
         active_is_modified = false;
         deleted_is_modified = false;
+        reservationid_is_modified = false;
     }
 
     /**
@@ -1014,20 +867,18 @@ public class SeasonBean
      *
      * @param bean the bean to copy into the current bean
      */
-    public void copy(SeasonBean bean) {
-        setSeasonid(bean.getSeasonid());
-        setCode(bean.getCode());
+    public void copy(TaskBean bean) {
+        setTaskid(bean.getTaskid());
         setName(bean.getName());
-        setFday(bean.getFday());
-        setTday(bean.getTday());
-        setFmonth(bean.getFmonth());
-        setTmonth(bean.getTmonth());
-        setStartdate(bean.getStartdate());
-        setEnddate(bean.getEnddate());
+        setDepid(bean.getDepid());
+        setStid(bean.getStid());
+        setAlertid(bean.getAlertid());
         setRegbyid(bean.getRegbyid());
         setRegdate(bean.getRegdate());
+        setDuedate(bean.getDuedate());
         setActive(bean.getActive());
         setDeleted(bean.getDeleted());
+        setReservationid(bean.getReservationid());
     }
 
     /**
@@ -1036,20 +887,18 @@ public class SeasonBean
      * @return the object as a string
      */
     public String toString() {
-        return   "\n[season] "
-                 + "\n - season.seasonid = " + (seasonid_is_initialized ? ("[" + (seasonid == null ? null : seasonid.toString()) + "]") : "not initialized") + ""
-                 + "\n - season.code = " + (code_is_initialized ? ("[" + (code == null ? null : code.toString()) + "]") : "not initialized") + ""
-                 + "\n - season.name = " + (name_is_initialized ? ("[" + (name == null ? null : name.toString()) + "]") : "not initialized") + ""
-                 + "\n - season.fday = " + (fday_is_initialized ? ("[" + (fday == null ? null : fday.toString()) + "]") : "not initialized") + ""
-                 + "\n - season.tday = " + (tday_is_initialized ? ("[" + (tday == null ? null : tday.toString()) + "]") : "not initialized") + ""
-                 + "\n - season.fmonth = " + (fmonth_is_initialized ? ("[" + (fmonth == null ? null : fmonth.toString()) + "]") : "not initialized") + ""
-                 + "\n - season.tmonth = " + (tmonth_is_initialized ? ("[" + (tmonth == null ? null : tmonth.toString()) + "]") : "not initialized") + ""
-                 + "\n - season.startdate = " + (startdate_is_initialized ? ("[" + (startdate == null ? null : startdate.toString()) + "]") : "not initialized") + ""
-                 + "\n - season.enddate = " + (enddate_is_initialized ? ("[" + (enddate == null ? null : enddate.toString()) + "]") : "not initialized") + ""
-                 + "\n - season.regbyid = " + (regbyid_is_initialized ? ("[" + (regbyid == null ? null : regbyid.toString()) + "]") : "not initialized") + ""
-                 + "\n - season.regdate = " + (regdate_is_initialized ? ("[" + (regdate == null ? null : regdate.toString()) + "]") : "not initialized") + ""
-                 + "\n - season.active = " + (active_is_initialized ? ("[" + (active == null ? null : active.toString()) + "]") : "not initialized") + ""
-                 + "\n - season.deleted = " + (deleted_is_initialized ? ("[" + (deleted == null ? null : deleted.toString()) + "]") : "not initialized") + ""
+        return   "\n[task] "
+                 + "\n - task.taskid = " + (taskid_is_initialized ? ("[" + (taskid == null ? null : taskid.toString()) + "]") : "not initialized") + ""
+                 + "\n - task.name = " + (name_is_initialized ? ("[" + (name == null ? null : name.toString()) + "]") : "not initialized") + ""
+                 + "\n - task.depid = " + (depid_is_initialized ? ("[" + (depid == null ? null : depid.toString()) + "]") : "not initialized") + ""
+                 + "\n - task.stid = " + (stid_is_initialized ? ("[" + (stid == null ? null : stid.toString()) + "]") : "not initialized") + ""
+                 + "\n - task.alertid = " + (alertid_is_initialized ? ("[" + (alertid == null ? null : alertid.toString()) + "]") : "not initialized") + ""
+                 + "\n - task.regbyid = " + (regbyid_is_initialized ? ("[" + (regbyid == null ? null : regbyid.toString()) + "]") : "not initialized") + ""
+                 + "\n - task.regdate = " + (regdate_is_initialized ? ("[" + (regdate == null ? null : regdate.toString()) + "]") : "not initialized") + ""
+                 + "\n - task.duedate = " + (duedate_is_initialized ? ("[" + (duedate == null ? null : duedate.toString()) + "]") : "not initialized") + ""
+                 + "\n - task.active = " + (active_is_initialized ? ("[" + (active == null ? null : active.toString()) + "]") : "not initialized") + ""
+                 + "\n - task.deleted = " + (deleted_is_initialized ? ("[" + (deleted == null ? null : deleted.toString()) + "]") : "not initialized") + ""
+                 + "\n - task.reservationid = " + (reservationid_is_initialized ? ("[" + (reservationid == null ? null : reservationid.toString()) + "]") : "not initialized") + ""
             ;
     }
 

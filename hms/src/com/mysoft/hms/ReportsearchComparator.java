@@ -17,6 +17,7 @@ import java.util.Comparator;
 
 // imports- 
 
+
 /**
  * Comparator class is used to sort the ReportsearchBean objects.
  */
@@ -24,6 +25,7 @@ public class ReportsearchComparator implements Comparator
 // extends+ 
 
 // extends- 
+
 {
     /**
      * Holds the field on which the comparison is performed.
@@ -157,4 +159,5 @@ public class ReportsearchComparator implements Comparator
 // class+ 
 
 // class- 
+
 }

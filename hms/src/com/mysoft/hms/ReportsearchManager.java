@@ -17,6 +17,7 @@ import java.sql.*;
 
 // imports- 
 
+
 /**
  * Handles database calls for the reportsearch table.
  */
@@ -24,6 +25,7 @@ public class ReportsearchManager
 // extends+ 
 
 // extends- 
+
 {
 
     /**
@@ -1195,4 +1197,5 @@ public class ReportsearchManager
 // class+ 
 
 // class- 
+
 }

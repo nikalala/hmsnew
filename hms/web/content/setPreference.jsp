@@ -179,12 +179,14 @@
             ან<br/>
         </td>
     </tr>
+    <tr>
     <td>
         &nbsp;
     </td>
     <td colspan="2">
         <textarea id="pref-desc" style="width: 100%; height: 80px !important;" disabled></textarea>
     </td>
+    </tr>
 </table>
 <div class="modal-footer" style="margin-top: 10px;">
     <button type="button" class="btn btn-default" id="dismissbutton" data-dismiss="modal" onclick="this.click();">
