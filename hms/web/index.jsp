@@ -468,6 +468,32 @@
     </ul>
 </div>
 <div class="loading-panel"></div>
+<link rel="stylesheet" href="css/smartadmin-production.min.css">
+<script type="text/javascript" src="js/SmartNotification.min.js"></script>
+<script>
+
+    var seen = 0;
+
+    setInterval(function(){
+        if(seen < 5){
+            showAlert();
+        }
+    },5000);
+
+    function showAlert(){
+        for(var i = 0; i < 2; i++){
+            $.bigBox({
+                title : "Hello. You have new message"+i,
+                content : "Please confirm you job # " +i*16,
+                color : "#5384AF",
+                //timeout: 8000,
+                icon : "fa fa-bell swing animated",
+                number : "2"
+            });
+            seen++;
+        }
+    }
+</script>
 </body>
 
 </html>
