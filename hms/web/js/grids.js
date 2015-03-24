@@ -785,6 +785,41 @@ preferencesGrid = {
 };
 
 
+var tasksGridModel = [];
+tasksGridModel.push(
+    colModelGenerator(130, 'task', 0),
+    colModelGenerator(120, 'dep', 0),
+    colModelGenerator(120, 'room', 0),
+    colModelGenerator(120, 'alert', 0),
+    colModelGenerator(120, 'status', 0),
+    colModelGenerator(120, 'action', 0));
+taskGrid = {
+    id: 'list_tasks',
+    url: 'content/gettasks.jsp',
+    type: 'xml',
+    cols: ['დავალება', 'დეპ.', 'ოთახი', 'შეტყობინება', 'სტატუსი', 'ქმედება'],
+    model: tasksGridModel,
+    order: 'asc',
+    altRows: true,
+    altclass: 'altrow',
+    isPopup: false,
+    gridComplete: function () {
+        ReDrawTable(taskGrid);
+        var width = $(".modal-custom-body").width();
+        $("#gbox_list_preferences").width(width-3);
+        $("#list_preferences").width(width-10);
+        $(".modal-custom-body .ui-jqgrid-view").width(width);
+        $(".modal-custom-body .ui-jqgrid-sdiv").width(width);
+        $(".modal-custom-body .ui-jqgrid-ftable").width(width);
+        $(".footrow td").css("border-right","0");
+        $(".modal-custom-body .ui-jqgrid-bdiv").css("height","244px");
+    },
+    beforeRequest: function () {
+        $(".modal-custom-body .ui-jqgrid-bdiv").css("height","120","!important");
+    }
+};
+
+
 var workOrderGridModel = [];
 workOrderGridModel.push(
     colModelGenerator(60, 'ordernum', 0),

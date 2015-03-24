@@ -16,10 +16,12 @@ package com.mysoft.hms;
 
 // imports- 
 
+
 public class ReportsearchBean
 // extends+ 
 
 // extends- 
+
 {
     private Integer reportsearchid;
     private boolean reportsearchid_is_modified = false;
@@ -441,4 +443,5 @@ public class ReportsearchBean
 // class+ 
 
 // class- 
+
 }
