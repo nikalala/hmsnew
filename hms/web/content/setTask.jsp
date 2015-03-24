@@ -4,14 +4,21 @@
 
 <%
     String rid = (String) request.getParameter("reservationid");
-
-
+    String roomid = "";
+    String idToremove = "";
     ReservationroomBean reservationroomBean = ReservationroomManager.getInstance().loadByPrimaryKey(Long.valueOf(rid));
-    RoomBean roomBean = RoomManager.getInstance().loadByPrimaryKey(reservationroomBean.getRoomid());
-    RoomtypeBean roomtypeBean = RoomtypeManager.getInstance().loadByPrimaryKey(roomBean.getRoomtypeid());
-    String roomid = roomBean.getName() + " - " + roomtypeBean.getName();
+    RoomtypeBean roomtypeBean = RoomtypeManager.getInstance().loadByPrimaryKey(reservationroomBean.getRoomtypeid());
+    if(reservationroomBean.getRoomid() == null || reservationroomBean.getRoomid() < 1)
+    {
+        roomid = roomtypeBean.getName();
+    }else{
+        RoomBean roomBean = RoomManager.getInstance().loadByPrimaryKey(reservationroomBean.getRoomid());
+        roomid = roomBean.getName() + " - " + roomtypeBean.getName();
+        idToremove = roomBean.getRoomid().toString();
+    }
+
     String reservationId = reservationroomBean.getReservationid().toString();
-    String idToremove = roomBean.getRoomid().toString();
+
     TaskBean[] prefs = TaskManager.getInstance().loadByWhere("");
     Calendar currDate = Calendar.getInstance();
     int hour = currDate.get(Calendar.HOUR_OF_DAY);
