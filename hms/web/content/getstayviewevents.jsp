@@ -26,23 +26,28 @@ for(Enumeration e=request.getParameterNames();e.hasMoreElements();){
         if(i > 0)   dbg += "; ";
         dbg += vals[i];
     }
-    //System.out.println(dbg);
+    System.out.println("dbg = "+dbg);
 }
+long mss = Long.parseLong(request.getParameter("startdate"));
+//System.out.println("mss = "+mss);
 
 Calendar cal1 = Calendar.getInstance();
-cal1.setTimeInMillis(Long.parseLong(request.getParameter("_dc")));
+cal1.setTimeInMillis(mss);
 cal1.set(Calendar.HOUR, 0);
 cal1.set(Calendar.MINUTE, 0);
 cal1.set(Calendar.MILLISECOND, 0);
 Calendar cal2 = Calendar.getInstance();
 cal2.setTimeInMillis(cal1.getTimeInMillis());
 cal2.add(Calendar.DATE,31);
-
+//System.out.println("cal1 =  "+dflong.format(cal1.getTime()));
+//System.out.println("cal2 =  "+dflong.format(cal2.getTime()));
 String sql = "where roomid is not null and reservationid in ("
-        + "select reservationid from reservation where (departuredate >= to_date('"+dflong.format(cal1.getTime())+"','DD/MM/YYYY HH24:MI')"
-        + " or arraivaldate < to_date('"+dtlong.format(cal2.getTime())+"','DD/MM/YYYY HH24:MI')) and status in (-1,0)"
-        + " and reservationtypeid in (select reservationtypeid from reservationtype where confirmed = true)"
+        + "select reservationid from reservation where"
+        + " departuredate::date >= to_date('"+df.format(cal1.getTime())+"','DD/MM/YYYY')"
+        + " and arraivaldate::date < to_date('"+df.format(cal2.getTime())+"','DD/MM/YYYY') and status in (-1,0)"
+        + " and (status = -1 or reservationtypeid in (select reservationtypeid from reservationtype where confirmed = true))"
         + ") order by reservationroomid";
+System.out.println("select * from reservationroom "+sql);
 String nroom = "";
 ReservationroomBean[] resrooms = ReservationroomManager.getInstance().loadByWhere(sql);
 SimpleDateFormat ssdd = new SimpleDateFormat("yyyy-MM-dd HH:mm");
@@ -86,11 +91,12 @@ for(int i=0;i<resrooms.length;i++){
     nroom += room.getRoomid().toString();
 }
 
-sql = "where blockstart < to_date('"+dtlong.format(cal2.getTime())+"','DD/MM/YYYY HH24:MI') and blockend >= to_date('"+dflong.format(cal1.getTime())+"','DD/MM/YYYY HH24:MI')";
+sql = "where blockstart::date < to_date('"+df.format(cal2.getTime())+"','DD/MM/YYYY') and blockend::date >= to_date('"+df.format(cal1.getTime())+"','DD/MM/YYYY')";
 if(nroom.length() > 0)  sql += " and roomid not in ("+nroom+")";
+
 BlockroomBean[] rooms = BlockroomManager.getInstance().loadByWhere(sql);
 for(int i=0;i<rooms.length;i++){
-    RoomBean room = RoomManager.getInstance().loadByPrimaryKey(resrooms[i].getRoomid());
+    RoomBean room = RoomManager.getInstance().loadByPrimaryKey(rooms[i].getRoomid());
     RoomtypeBean roomtype = RoomtypeManager.getInstance().loadByPrimaryKey(room.getRoomtypeid());
     String statuscolor = "#A9A9A9";
     String color = "#FFFFFF";
@@ -107,7 +113,7 @@ for(int i=0;i<rooms.length;i++){
         color = "#FFFFFF";
     }
     JSONObject obj = new JSONObject();
-    obj.put("Id", resrooms[i].getReservationroomid().toString());
+    obj.put("Id", "0");
     obj.put("ResourceId", roomtype.getRoomtypeid().toString()+"_"+room.getRoomid().toString());
     obj.put("Name", "<b>ბლოკირებული<b>");
     obj.put("StartDate",ssdd.format(rooms[i].getBlockstart()));
@@ -119,5 +125,6 @@ for(int i=0;i<rooms.length;i++){
     obj.put("Status",5);
     js.add((JSONObject)obj);
 }
+System.out.println(js.toString());
 %>
 <%=js.toString()%>

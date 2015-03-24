@@ -151,7 +151,7 @@ $.fn.serializeObject = function (form) {
 };
 
 function savedata(id) {
-
+    loader.show();
 
     var callbackurl = $("#callbackurl").val();
     var callbackdata = $("#callbackdata").val();
@@ -176,6 +176,7 @@ function savedata(id) {
         else action += "&" + params[i] + "=" + $("#" + params[i]).val();
     }
     $.post("content/" + action, {}, function (data) {
+        loader.hide();
         if (data.result == 0)    BootstrapDialog.alert(data.error);
         else {
             if (callbackurl.indexOf('script:') >= 0) {
@@ -202,6 +203,7 @@ function savedata(id) {
 }
 
 function savedataprefix(id, prefix) {
+    loader.show();
     var callbackurl = $("#" + prefix + "callbackurl").val();
     var callbackdata = $("#" + prefix + "callbackdata").val();
     var action = $("#" + prefix + "action").val();
@@ -223,6 +225,7 @@ function savedataprefix(id, prefix) {
         else action += "&" + params[i] + "=" + $("#" + params[i]).val();
     }
     $.post("content/" + action, {}, function (data) {
+        loader.hide();
         if (data.result == 0)    BootstrapDialog.alert(data.error);
         else {
             if (callbackurl.indexOf('script:') >= 0) {
@@ -245,6 +248,7 @@ function savedataprefix(id, prefix) {
 }
 
 function savedata1(id, param) {
+    loader.show();
     var callbackurl = $("#callbackurl").val();
     var callbackdata = $("#callbackdata").val();
     var action = $("#action").val();
@@ -268,6 +272,7 @@ function savedata1(id, param) {
     }
     if (param.length > 0) action += "&" + param;
     $.post("content/" + action, {}, function (data) {
+        loader.hide();
         if (data.result == 0)    BootstrapDialog.alert(data.error);
         else {
             if (callbackurl != '') {

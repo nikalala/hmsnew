@@ -191,7 +191,7 @@
             model: 'Sch.model.Event',
             proxy: {
                 type: 'ajax',
-                url: 'content/getstayviewevents.jsp',
+                url: 'content/getstayviewevents.jsp?startdate=<%=dt.parse(startdate).getTime()%>&days=<%=days%>',
                 reader: {
                     type: 'json'
                 }
