@@ -5,9 +5,9 @@
 JSONObject js = new JSONObject();
 Manager.getInstance().beginTransaction();
 try{
-    long id = 0;
+//    long id = 0;
     ReservationroomBean reserv = ReservationroomManager.getInstance().loadByPrimaryKey(new Long(request.getParameter("rrid")));
-    ReservationBean res = ReservationManager.getInstance().loadByPrimaryKey(reserv.getReservationid());
+//    ReservationBean res = ReservationManager.getInstance().loadByPrimaryKey(reserv.getReservationid());
     int newroomid = Integer.parseInt(request.getParameter("rid"));
     RoomBean room = RoomManager.getInstance().loadByPrimaryKey(newroomid);
     int oldroomid = reserv.getRoomid().intValue();
@@ -20,7 +20,7 @@ try{
     
     //int oldstatus = (int)getSum("select getroomstatus("+oldroomid+",'"+dtlongs.format(new Date())+"')");
     
-    int status = getRoomStatus(dclosedate, oldroomid);
+//    int status = getRoomStatus(dclosedate, oldroomid);
     /*
     RoomstBean rms = RoomstManager.getInstance().createRoomstBean();
     rms.setRoomid(oldroomid);
@@ -45,6 +45,7 @@ try{
     FolioitemBean[] folioitems = FolioitemManager.getInstance().loadByWhere(sql);
     for(int i=0;i<folioitems.length;i++){
         folioitems[i].setRoomid(newroomid);
+        folioitems[i].setReservationroomid(reserv.getReservationroomid());
     }
     folioitems = FolioitemManager.getInstance().save(folioitems);
     

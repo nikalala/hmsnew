@@ -135,7 +135,7 @@ public class ReportBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: report.name
-     * <li>comments: ??????????
+     * <li>comments: დასახელება
      * <li>column size: 2147483647
      * <li>jdbc type returned by the driver: Types.VARCHAR
      * </ul>
@@ -192,7 +192,7 @@ public class ReportBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: report.displayname
-     * <li>comments: ???????
+     * <li>comments: სათაური
      * <li>column size: 2147483647
      * <li>jdbc type returned by the driver: Types.VARCHAR
      * </ul>
@@ -249,7 +249,7 @@ public class ReportBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: report.sqlquery
-     * <li>comments: SQL ????
+     * <li>comments: SQL კოდი
      * <li>column size: 2147483647
      * <li>jdbc type returned by the driver: Types.VARCHAR
      * </ul>
@@ -307,7 +307,7 @@ public class ReportBean
      * <ul>
      * <li>full name: report.regbyid
      * <li> foreign key: personnel.personnelid
-     * <li>comments: ??????
+     * <li>comments: ავტორი
      * <li>column size: 10
      * <li>jdbc type returned by the driver: Types.INTEGER
      * </ul>
@@ -375,7 +375,7 @@ public class ReportBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: report.regdate
-     * <li>comments: ???. ??????
+     * <li>comments: რეგ. თარიღი
      * <li>default value: now()
      * <li>column size: 29
      * <li>jdbc type returned by the driver: Types.TIMESTAMP

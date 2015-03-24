@@ -17,7 +17,6 @@ import java.util.Comparator;
 
 // imports- 
 
-
 /**
  * Comparator class is used to sort the VsArrivallistBean objects.
  */
@@ -25,7 +24,6 @@ public class VsArrivallistComparator implements Comparator
 // extends+ 
 
 // extends- 
-
 {
     /**
      * Holds the field on which the comparison is performed.
@@ -224,5 +222,4 @@ public class VsArrivallistComparator implements Comparator
 // class+ 
 
 // class- 
-
 }

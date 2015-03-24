@@ -67,6 +67,7 @@ try{
             fb.setParticular(6);
             fb.setRoomoper(4);
             fb.setNote(reason.getName());
+            fb.setReservationroomid(reserv.getReservationroomid());
             fb = FolioitemManager.getInstance().save(fb);
 
             tariff trf = new tariff();
@@ -81,6 +82,7 @@ try{
             fb.setDone(true);
             fb.setParticular(-1);
             fb.setNote(reason.getName());
+            fb.setReservationroomid(reserv.getReservationroomid());
             fb = FolioitemManager.getInstance().save(fb);
         }
     }   
