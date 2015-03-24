@@ -44,7 +44,7 @@ try{
         msg += ",\"chargeapplyrieson\":"+efb.getChargeapplyrieson();
         msg += ",\"postingtype\":"+efb.getPostingtype();
         msg += ",\"rate\":"+dc.format(efb.getRate());
-        msg += ",\"folioid\":"+fi.getFolioid();
+        msg += ",\"folioid\":"+((fi != null) ? fi.getFolioid():"0");
         msg += "}";
     } else if(act.equalsIgnoreCase("edt")){
         int adult = 0;
@@ -174,6 +174,7 @@ try{
                 fb.setAmount(rate0);
                 fb.setDone(false);
                 fb.setParticular(5);
+                fb.setReservationroomid(rr.getReservationroomid());
                 fb = FolioitemManager.getInstance().save(fb);
 
                 
@@ -311,6 +312,7 @@ try{
                 fb.setAmount(rate0);
                 fb.setDone(false);
                 fb.setParticular(5);
+                fb.setReservationroomid(rr.getReservationroomid());
                 fb = FolioitemManager.getInstance().save(fb);
                 
                 ExtrachargefolioBean ex = ExtrachargefolioManager.getInstance().createExtrachargefolioBean();

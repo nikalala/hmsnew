@@ -41,8 +41,9 @@ cal2.add(Calendar.DATE,31);
 String sql = "where roomid is not null and reservationid in ("
         + "select reservationid from reservation where (departuredate >= to_date('"+dflong.format(cal1.getTime())+"','DD/MM/YYYY HH24:MI')"
         + " or arraivaldate < to_date('"+dtlong.format(cal2.getTime())+"','DD/MM/YYYY HH24:MI')) and status in (-1,0)"
+        + " and reservationtypeid in (select reservationtypeid from reservationtype where confirmed = true)"
         + ") order by reservationroomid";
-System.out.println(sql);
+String nroom = "";
 ReservationroomBean[] resrooms = ReservationroomManager.getInstance().loadByWhere(sql);
 SimpleDateFormat ssdd = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 JSONArray js = new JSONArray();
@@ -81,7 +82,42 @@ for(int i=0;i<resrooms.length;i++){
     obj.put("Color",color);
     obj.put("Status",istatus);
     js.add((JSONObject)obj);
+    if(i > 0)   nroom += ",";
+    nroom += room.getRoomid().toString();
 }
-System.out.println(js.toString());
+
+sql = "where blockstart < to_date('"+dtlong.format(cal2.getTime())+"','DD/MM/YYYY HH24:MI') and blockend >= to_date('"+dflong.format(cal1.getTime())+"','DD/MM/YYYY HH24:MI')";
+if(nroom.length() > 0)  sql += " and roomid not in ("+nroom+")";
+BlockroomBean[] rooms = BlockroomManager.getInstance().loadByWhere(sql);
+for(int i=0;i<rooms.length;i++){
+    RoomBean room = RoomManager.getInstance().loadByPrimaryKey(resrooms[i].getRoomid());
+    RoomtypeBean roomtype = RoomtypeManager.getInstance().loadByPrimaryKey(room.getRoomtypeid());
+    String statuscolor = "#A9A9A9";
+    String color = "#FFFFFF";
+    StcolorBean[] stcolor = StcolorManager.getInstance().loadByWhere("where active = true and deleted = false and roomstatus = 5");
+    if(stcolor.length > 0){
+        statuscolor = stcolor[0].getColor();
+        java.awt.Color oldColor = parseStringtoColor(statuscolor);
+
+        int v = ( oldColor.getRed() + oldColor.getGreen() + oldColor.getBlue() ) / 3 > 0.5 ? 0 : 1;
+        java.awt.Color newColor = new java.awt.Color( v, v, v );
+
+        //java.awt.Color newColor = new java.awt.Color(255-oldColor.getRed(), 255-oldColor.getGreen(), 255-oldColor.getBlue());
+        color = toHexString(newColor);
+        color = "#FFFFFF";
+    }
+    JSONObject obj = new JSONObject();
+    obj.put("Id", resrooms[i].getReservationroomid().toString());
+    obj.put("ResourceId", roomtype.getRoomtypeid().toString()+"_"+room.getRoomid().toString());
+    obj.put("Name", "<b>ბლოკირებული<b>");
+    obj.put("StartDate",ssdd.format(rooms[i].getBlockstart()));
+    obj.put("EndDate",ssdd.format(rooms[i].getBlockend()));
+    obj.put("Description",roomtype.getName());
+    obj.put("ReservedTo","");
+    obj.put("Bgcolor",statuscolor);
+    obj.put("Color",color);
+    obj.put("Status",5);
+    js.add((JSONObject)obj);
+}
 %>
 <%=js.toString()%>

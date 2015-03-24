@@ -15,10 +15,30 @@ try{
     String froms = request.getParameter("ids");
     String fid1 = request.getParameter("fromfolio");
     String fid2 = request.getParameter("tofolio");
+    String gid = request.getParameter("gid");
     
+    long rid = 0;
     FolioitemBean[] fols = FolioitemManager.getInstance().loadByWhere("where folioid = "+fid1+" and itemdate in (select itemdate from folioitem where folioitemid in ("+froms+"))");
-    for(int i=0;i<fols.length;i++)
+    if(fid2.equals("0")){
+        FolioBean fol = FolioManager.getInstance().createFolioBean();
+        fol.setGuestid(new Long(gid));
+        fol.setRegbyid(user.getPersonnelid());
+        fol.setReservationroomid(fols[0].getReservationroomid());
+        fol.setStatus(0);
+        fol.setNum("");
+        fol = FolioManager.getInstance().save(fol);
+        fol.setNum(fol.getFolioid().toString());
+        fol = FolioManager.getInstance().save(fol);
+        rid = fols[0].getReservationroomid();
+        fid2 = fol.getFolioid().toString();
+    } else {
+        FolioBean fol = FolioManager.getInstance().loadByPrimaryKey(new Long(fid2));
+        rid = fol.getReservationroomid();
+    }
+    for(int i=0;i<fols.length;i++){
         fols[i].setFolioid(new Long(fid2));
+        fols[i].setReservationroomid(rid);
+    }
     fols = FolioitemManager.getInstance().save(fols);
     
     

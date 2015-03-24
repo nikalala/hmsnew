@@ -35,7 +35,8 @@ try{
         val = val.trim();
         
         if(name.equalsIgnoreCase("createfolio")){
-            createfolio = true;
+            if(val.equalsIgnoreCase("true"))
+                createfolio = true;
         } else if(name.equalsIgnoreCase(type+"guestinfo_salutationid")){
             guest.setSalutationid(new Integer(val));
         } else if(name.equalsIgnoreCase(type+"guestinfo_fname")){

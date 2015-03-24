@@ -3,15 +3,21 @@
 <%@include file="../includes/init.jsp"%>
 <%
 FolioBean folio = FolioManager.getInstance().loadByPrimaryKey(new Long(request.getParameter("folioid")));
-FolioBean[] folios1 = FolioManager.getInstance().loadByWhere("where folioid != "+folio.getFolioid()+" and guestid in (select t.guestid from reservationroom t, reservation r where t.reservationid = r.reservationid and r.status = -1)");
-FolioBean[] folios2 = FolioManager.getInstance().loadByWhere("where folioid != "+folio.getFolioid()+" and guestid in (select t.guestid from reservationroom t, reservation r where t.reservationid = r.reservationid and r.status = 0)");
-FolioBean[] folios3 = FolioManager.getInstance().loadByWhere("where folioid != "+folio.getFolioid()+" and guestid in (select t.guestid from reservationroom t, reservation r where t.reservationid = r.reservationid and r.status = 4)");
+
+FolioBean[] folios1 = FolioManager.getInstance().loadByWhere("where guestid not in (select guestid from sharer where reservationroomid = "+folio.getReservationroomid()+") and folioid != "+folio.getFolioid()+" and guestid in (select t.guestid from reservationroom t, reservation r where t.reservationid = r.reservationid and r.status = -1)");
+FolioBean[] folios2 = FolioManager.getInstance().loadByWhere("where guestid not in (select guestid from sharer where reservationroomid = "+folio.getReservationroomid()+") and folioid != "+folio.getFolioid()+" and guestid in (select t.guestid from reservationroom t, reservation r where t.reservationid = r.reservationid and r.status = 0)");
+FolioBean[] folios3 = FolioManager.getInstance().loadByWhere("where guestid not in (select guestid from sharer where reservationroomid = "+folio.getReservationroomid()+") and folioid != "+folio.getFolioid()+" and guestid in (select t.guestid from reservationroom t, reservation r where t.reservationid = r.reservationid and r.status = 4)");
+FolioBean[] folios4 = FolioManager.getInstance().loadByWhere("where guestid in (select guestid from sharer where reservationroomid = "+folio.getReservationroomid()+") and folioid != "+folio.getFolioid()+"");
+//SharerBean[] sharers = SharerManager.getInstance().loadByWhere("where reservationroomid = "+folio.getReservationroomid()+" order by guestid");
 %>
 <script>
     
     function chFolioSplit(){
         var rrr = $("#foliolists").val().split("_");
-        jQuery("#listfoliosplit1").jqGrid().setGridParam({url: 'content/getfoliolist1.jsp?reservationroomid='+rrr[0]+'&itemize=true&folioid='+rrr[1]+'&hideunposted=false&hidevoid=false'}).trigger("reloadGrid");
+        var gid = 0;
+        if(rrr.length == 3)
+            gid = rrr[2];
+        jQuery("#listfoliosplit1").jqGrid().setGridParam({url: 'content/getfoliolist1.jsp?reservationroomid='+rrr[0]+'&itemize=true&folioid='+rrr[1]+'&hideunposted=false&hidevoid=false&guestid='+gid}).trigger("reloadGrid");
     }
     
     function moveFolioitem(ids){
@@ -19,16 +25,24 @@ FolioBean[] folios3 = FolioManager.getInstance().loadByWhere("where folioid != "
         var rrr = $("#foliolists").val().split("_");
         if(ids.length == 0) BootstrapDialog.alert("აირჩიეთ ჩანაწერები მარცხენა ცხრილიდან");
         else if(rrr.length == 1) BootstrapDialog.alert("აირჩიეთ საბოლოო ფოლიო");
-        else
-            $.post("content/ajax/movefolio.jsp",{ fromfolio: <%=folio.getFolioid()%>, ids: ids.join(","), tofolio: rrr[1] },function(data){
+        else{
+            var gid = 0;
+            if(rrr.length == 3) gid = rrr[2];
+            $.post("content/ajax/movefolio.jsp",{ fromfolio: <%=folio.getFolioid()%>, ids: ids.join(","), tofolio: rrr[1], gid: gid },function(data){
                 if(data.result == 0)    BootstrapDialog.alert(data.error);
                 else {
                     jQuery("#listfoliosplit").jqGrid().trigger("reloadGrid");
                     jQuery("#listfoliosplit1").jqGrid().trigger("reloadGrid");
+                    jQuery('#listfolio').jqGrid().trigger("reloadGrid");
                 }
             },"json");
-        
+        }
     }
+    
+    $(document).ready(function(){
+        $("#mediummodalsave").remove();
+
+        
     
     jQuery('#listfoliosplit').jqGrid(
     {
@@ -136,6 +150,10 @@ jQuery('#listfoliosplit1').jqGrid(
         }
         })
         .jqGrid('bindKeys')
+
+
+    });
+
 </script>
 <table width="100%">
     <tr>
@@ -148,6 +166,42 @@ jQuery('#listfoliosplit1').jqGrid(
         <td width="48%" valign="top" align="center">
             <select id="foliolists" style="width: 200px;" onchange="chFolioSplit()">
                 <option value="-1">-- აირჩიეთ --</option>
+                <optgroup label="შარერები">
+                <%
+                for(int i=0;i<folios4.length;i++){
+                    String sel = "";
+                    GuestBean gs = GuestManager.getInstance().loadByPrimaryKey(folios4[i].getGuestid());
+                    String gname = "";
+                    SalutationBean salutation = SalutationManager.getInstance().loadByPrimaryKey(gs.getSalutationid());
+                    gname += salutation.getName()+" ";
+                    gname += gs.getFname() + " " + gs.getLname();
+                    String gendername = "?";
+                    if(gs.getGender() != null){
+                        gendername = gender[gs.getGender().intValue()];
+                    }
+                %>
+                <option value="<%=folios4[i].getReservationroomid()%>_<%=folios4[i].getFolioid()%>" <%=sel%>><%=folios4[i].getNum()%> <%=gname%></option>
+                <%
+                }
+                %>
+                <%--
+                for(int i=0;i<sharers.length;i++){
+                    String sel = "";
+                    GuestBean gs = GuestManager.getInstance().loadByPrimaryKey(sharers[i].getGuestid());
+                    String gname = "";
+                    SalutationBean salutation = SalutationManager.getInstance().loadByPrimaryKey(gs.getSalutationid());
+                    gname += salutation.getName()+" ";
+                    gname += gs.getFname() + " " + gs.getLname();
+                    String gendername = "?";
+                    if(gs.getGender() != null){
+                        gendername = gender[gs.getGender().intValue()];
+                    }
+                %>
+                <option value="<%=folio.getReservationroomid()%>_0_<%=sharers[i].getGuestid()%>" <%=sel%>><%=gname%></option>
+                <%
+                }
+                --%>
+                </optgroup>
                 <optgroup label="მცხოვრები სტუმრები">
                 <%
                 for(int i=0;i<folios1.length;i++){

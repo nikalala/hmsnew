@@ -124,9 +124,9 @@ if(checkinsettings.getPostcancellationfee().intValue() == 1){
             $("#cancel_totalvalue").html("<%=maincurrency.getCode()%> "+total.toFixed(2));
         });
         
-        $("#mediummodalsave").remove();
-        var r1 = $('<button type="button" class="btn btn-primary" id="mediummodalsave" onclick="savedata(\'mediummodal\')">შენახვა</button>');
-        $("#mediummodalfooter").append(r1);
+        $("#myModalSave").remove();
+        var r1 = $('<button type="button" class="btn btn-primary" id="myModalSave" onclick="savedata(\'myModal\')">შენახვა</button>');
+        $("#myModalFooter").append(r1);
 
     });
     

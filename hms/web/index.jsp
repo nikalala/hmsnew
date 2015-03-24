@@ -468,15 +468,15 @@
     </ul>
 </div>
 <div class="loading-panel"></div>
-<link rel="stylesheet" href="css/smartadmin-production.min.css">
-<script type="text/javascript" src="js/SmartNotification.min.js"></script>
+<%--link rel="stylesheet" href="css/smartadmin-production.min.css">
+<script type="text/javascript" src="js/SmartNotification.min.js"></script--%>
 <script>
 
     var seen = 0;
 
     setInterval(function(){
         if(seen < 5){
-            showAlert();
+            //showAlert();
         }
     },5000);
 

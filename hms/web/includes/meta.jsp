@@ -1127,6 +1127,7 @@ System.out.println(rid+" = "+statusid);
     String[] reservationstatus = {
             "აქტიური", "გაუქმებული", "არ გამოცხადებული", "წაშლილი", "გაწერილი"
     };
+    //0 - Reserved, 1 - Cancelled, 2 - No Show, 3 - Checked In, 4 - Checked Out, 5 - Void
     String[] roundtype = {
             "ხელით", "-10 &lt;-&gt; 10", "-1 &lt;-&gt; 1", "-0.5 &lt;-&gt; 0.5", "-0.05 &lt;-&gt; 0.05", "-0.005 &lt;-&gt; 0.005", "-0.0005 &lt;-&gt; 0.0005"
     };
