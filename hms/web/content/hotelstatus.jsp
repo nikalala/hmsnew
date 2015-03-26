@@ -64,7 +64,7 @@
     }
 
     function drawTwoDimFooterForGuestDbList() {
-        $(".ui-jqgrid-bdiv").height($(".ui-jqgrid-bdiv").height() - 100);
+        $("#list_hsgrid").closest('.ui-jqgrid-bdiv').height($("#list_hsgrid").closest(".ui-jqgrid-bdiv").height() - 100);
         var html =
                 '<div class="panel-footer" style="height: 50px !important; display:table; width: 100%; padding-bottom: 1px; background-color: #FFF;">' +
                 '<div>' +
@@ -108,8 +108,8 @@
                 '<button type="button" class="btn btn-danger" id="btnPrev" style="font-weight: bold; float: right; margin: 9px 10px 0 0;">' +
                 'წინა</button>' +
                 '</div></div>';
-        $(".ui-jqgrid-view").find(".panel-footer").remove();
-        $(".ui-jqgrid-view").append(html);
+        $("#list_hsgrid").closest(".ui-jqgrid-view").find(".panel-footer").remove();
+        $("#list_hsgrid").closest(".ui-jqgrid-view").append(html);
     }
 
     function updateselectedhs(id, _this) {

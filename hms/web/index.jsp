@@ -45,7 +45,7 @@
         "assignroom",                   //  8
         "unassignroom",                 //  9
         "remarks",                      // 10
-        "SetTasks",                     // 11
+        "setTask",                     // 11
         "setPreference",                // 12
         "StopRoomMove",                 // 13
         "ExchangeRoom",                 // 14

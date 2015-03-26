@@ -35,6 +35,11 @@
                 <a style="cursor:pointer;" onclick="blockunbloc(<%=rs.getInt("roomid")%>)">
                     <i style="font-size: 15px; margin-left:10px;" class="fa fa-lock"></i>
                 </a>
+                <% if(rs.getInt("task") > 0){%>
+                <a style="cursor:pointer;" onclick="newWindowWithParams('setTask','დავალებები','?reservationid=<%=rs.getInt("task")%>')">
+                    <i style="font-size: 15px; margin-left:10px;" class="fa fa-wrench"></i>
+                </a>
+                <% } %>
                 <% if(rs.getInt("reservationid") > 0){%>
                 <a style="cursor:pointer;" onclick="newWindowWithParams('setPreference','უპირატესობის მინიჭება','?reservationid=<%=rs.getInt("reservationid")%>')">
                     <i style="font-size: 15px; margin-left:10px;" class="fa fa-sun-o"></i>

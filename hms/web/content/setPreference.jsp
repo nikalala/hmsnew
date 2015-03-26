@@ -6,13 +6,21 @@
     PreferencetypeBean[] pTypes = PreferencetypeManager.getInstance().loadByWhere("");
     String rid = (String) request.getParameter("reservationid");
 
-
+    String roomid = "";
+    //String idToremove = "";
     ReservationroomBean reservationroomBean = ReservationroomManager.getInstance().loadByPrimaryKey(Long.valueOf(rid));
-    RoomBean roomBean = RoomManager.getInstance().loadByPrimaryKey(reservationroomBean.getRoomid());
-    RoomtypeBean roomtypeBean = RoomtypeManager.getInstance().loadByPrimaryKey(roomBean.getRoomtypeid());
-    String roomid = roomBean.getName() + " - " + roomtypeBean.getName();
+    RoomtypeBean roomtypeBean = RoomtypeManager.getInstance().loadByPrimaryKey(reservationroomBean.getRoomtypeid());
+
+    if(reservationroomBean.getRoomid() != null){
+        RoomBean roomBean = RoomManager.getInstance().loadByPrimaryKey(reservationroomBean.getRoomid());
+        roomid = roomBean.getName() + " - " + roomtypeBean.getName();
+    }else{
+        roomid = roomtypeBean.getName();
+    }
+
     String reservationId = reservationroomBean.getReservationid().toString();
-    String idToremove = roomBean.getRoomid().toString();
+
+
     PreferenceBean[] prefs = PreferenceManager.getInstance().loadByWhere("where isstandart = true");
 %>
 
@@ -137,7 +145,7 @@
         $.post("content/execute.jsp?query=" + encodeURIComponent(sql), {}, function () {
             loader.hide();
             if($("#list_preferences")[0].rows.length == 2){
-                $('#<%=idToremove%>_room').find('.fa-sun-o').remove();
+                getBody('stayviewleft','hotelstatus','სასტუმროს სტატუსი','res1','',true);
             }
             resetAll();
         });

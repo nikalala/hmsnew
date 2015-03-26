@@ -17,14 +17,15 @@
 %>
     <% for(int i = 0; i < prefs.length; i++){ %>
         <row id='<%=prefs[i].getTaskid()%>'>
-            <cell><![CDATA[<%=prefs[i].getName()%><br/><%=prefs[i].getDuedate()%>]]></cell>
+            <cell><![CDATA[<%=prefs[i].getName()%><br/><%=df3.format(prefs[i].getDuedate())%>]]></cell>
             <cell><![CDATA[<%=departments[prefs[i].getDepid()]%>]]></cell>
             <cell><![CDATA[<%=room%>]]></cell>
             <cell><![CDATA[<%=alerts[prefs[i].getAlertid()]%>]]></cell>
             <cell><![CDATA[<%=taskStatuses[prefs[i].getStid()]%>]]></cell>
             <cell><![CDATA[
 
-            <i onclick="editPref(<%=prefs[i].getTaskid()%>,,'<%=prefs[i].getName()%>')" style="font-size: 15px; cursor:pointer;  margin-left:10px;" class="fa fa-edit"></i>
+            <i onclick="updateST(<%=prefs[i].getTaskid()%>,this)" style="font-size: 15px;  margin-left:10px; cursor:pointer;" class="fa fa-wrench"></i>
+            <i onclick="editPref(<%=prefs[i].getTaskid()%>,<%=prefs[i].getDepid()%>,'<%=prefs[i].getName()%>','<%=df3.format(prefs[i].getDuedate())%>','<%=dftime.format(prefs[i].getDuedate())%>',<%=prefs[i].getAlertid()%>)" style="font-size: 15px; cursor:pointer;  margin-left:10px;" class="fa fa-edit"></i>
             <i onclick="removePref(<%=prefs[i].getTaskid()%>)" style="font-size: 15px;  margin-left:10px; cursor:pointer;" class="fa fa-times"></i>
 
                     ]]></cell>
