@@ -148,7 +148,7 @@ public class RoomrateBean
      * <ul>
      * <li>full name: roomrate.roomtypeid
      * <li> foreign key: roomtype.roomtypeid
-     * <li>comments: ოთახის ტიპი
+     * <li>comments: ?????? ????
      * <li>column size: 10
      * <li>jdbc type returned by the driver: Types.INTEGER
      * </ul>
@@ -217,7 +217,7 @@ public class RoomrateBean
      * <ul>
      * <li>full name: roomrate.seasonid
      * <li> foreign key: season.seasonid
-     * <li>comments: სეზონი
+     * <li>comments: ??????
      * <li>column size: 10
      * <li>jdbc type returned by the driver: Types.INTEGER
      * </ul>
@@ -286,7 +286,7 @@ public class RoomrateBean
      * <ul>
      * <li>full name: roomrate.contragentid
      * <li> foreign key: contragent.contragentid
-     * <li>comments: კონტრაგენტი
+     * <li>comments: ???????????
      * <li>column size: 19
      * <li>jdbc type returned by the driver: Types.BIGINT
      * </ul>
@@ -354,7 +354,7 @@ public class RoomrateBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: roomrate.tax
-     * <li>comments: გადასახადების ჩათვლით
+     * <li>comments: ????????????? ???????
      * <li>default value: false
      * <li>column size: 1
      * <li>jdbc type returned by the driver: Types.BIT
@@ -422,7 +422,7 @@ public class RoomrateBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: roomrate.rate
-     * <li>comments: ტარიფი
+     * <li>comments: ??????
      * <li>default value: 0
      * <li>column size: 17
      * <li>jdbc type returned by the driver: Types.DOUBLE
@@ -491,7 +491,7 @@ public class RoomrateBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: roomrate.rateadult
-     * <li>comments: ტარიფი უფროსისთვის
+     * <li>comments: ?????? ???????????
      * <li>default value: 0
      * <li>column size: 17
      * <li>jdbc type returned by the driver: Types.DOUBLE
@@ -560,7 +560,7 @@ public class RoomrateBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: roomrate.ratechild
-     * <li>comments: ტარიფი ბავშვისთვის
+     * <li>comments: ?????? ???????????
      * <li>default value: 0
      * <li>column size: 17
      * <li>jdbc type returned by the driver: Types.DOUBLE
@@ -630,7 +630,7 @@ public class RoomrateBean
      * <ul>
      * <li>full name: roomrate.ratetypeid
      * <li> foreign key: ratetype.ratetypeid
-     * <li>comments: ტარიფის ტიპი
+     * <li>comments: ??????? ????
      * <li>column size: 10
      * <li>jdbc type returned by the driver: Types.INTEGER
      * </ul>
@@ -698,7 +698,7 @@ public class RoomrateBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: roomrate.ord
-     * <li>comments: სორტირება
+     * <li>comments: ?????????
      * <li>default value: 0
      * <li>column size: 10
      * <li>jdbc type returned by the driver: Types.INTEGER

@@ -19,9 +19,9 @@ import java.sql.*;
 
 
 /**
- * Handles database calls for the task table.
+ * Handles database calls for the message table.
  */
-public class TaskManager
+public class MessageManager
 // extends+ 
 
 // extends- 
@@ -29,11 +29,11 @@ public class TaskManager
 {
 
     /**
-     * Column taskid of type Types.INTEGER mapped to Integer.
+     * Column messageid of type Types.INTEGER mapped to Integer.
      */
-    public static final int ID_TASKID = 0;
-    public static final int TYPE_TASKID = Types.INTEGER;
-    public static final String NAME_TASKID = "taskid";
+    public static final int ID_MESSAGEID = 0;
+    public static final int TYPE_MESSAGEID = Types.INTEGER;
+    public static final String NAME_MESSAGEID = "messageid";
 
     /**
      * Column name of type Types.VARCHAR mapped to String.
@@ -43,11 +43,11 @@ public class TaskManager
     public static final String NAME_NAME = "name";
 
     /**
-     * Column depid of type Types.INTEGER mapped to Integer.
+     * Column guestid of type Types.BIGINT mapped to Long.
      */
-    public static final int ID_DEPID = 2;
-    public static final int TYPE_DEPID = Types.INTEGER;
-    public static final String NAME_DEPID = "depid";
+    public static final int ID_GUESTID = 2;
+    public static final int TYPE_GUESTID = Types.BIGINT;
+    public static final String NAME_GUESTID = "guestid";
 
     /**
      * Column stid of type Types.INTEGER mapped to Integer.
@@ -57,121 +57,103 @@ public class TaskManager
     public static final String NAME_STID = "stid";
 
     /**
-     * Column alertid of type Types.INTEGER mapped to Integer.
-     */
-    public static final int ID_ALERTID = 4;
-    public static final int TYPE_ALERTID = Types.INTEGER;
-    public static final String NAME_ALERTID = "alertid";
-
-    /**
      * Column regbyid of type Types.INTEGER mapped to Integer.
      */
-    public static final int ID_REGBYID = 5;
+    public static final int ID_REGBYID = 4;
     public static final int TYPE_REGBYID = Types.INTEGER;
     public static final String NAME_REGBYID = "regbyid";
 
     /**
      * Column regdate of type Types.TIMESTAMP mapped to java.sql.Timestamp.
      */
-    public static final int ID_REGDATE = 6;
+    public static final int ID_REGDATE = 5;
     public static final int TYPE_REGDATE = Types.TIMESTAMP;
     public static final String NAME_REGDATE = "regdate";
 
     /**
-     * Column duedate of type Types.TIMESTAMP mapped to java.sql.Timestamp.
-     */
-    public static final int ID_DUEDATE = 7;
-    public static final int TYPE_DUEDATE = Types.TIMESTAMP;
-    public static final String NAME_DUEDATE = "duedate";
-
-    /**
      * Column active of type Types.BIT mapped to Boolean.
      */
-    public static final int ID_ACTIVE = 8;
+    public static final int ID_ACTIVE = 6;
     public static final int TYPE_ACTIVE = Types.BIT;
     public static final String NAME_ACTIVE = "active";
 
     /**
      * Column deleted of type Types.BIT mapped to Boolean.
      */
-    public static final int ID_DELETED = 9;
+    public static final int ID_DELETED = 7;
     public static final int TYPE_DELETED = Types.BIT;
     public static final String NAME_DELETED = "deleted";
 
     /**
      * Column reservationid of type Types.INTEGER mapped to Integer.
      */
-    public static final int ID_RESERVATIONID = 10;
+    public static final int ID_RESERVATIONID = 8;
     public static final int TYPE_RESERVATIONID = Types.INTEGER;
     public static final String NAME_RESERVATIONID = "reservationid";
 
 
-    private static final String TABLE_NAME = "task";
+    private static final String TABLE_NAME = "message";
 
     /**
-     * Create an array of type string containing all the fields of the task table.
+     * Create an array of type string containing all the fields of the message table.
      */
     private static final String[] FIELD_NAMES = 
     {
-        "task.taskid"
-        ,"task.name"
-        ,"task.depid"
-        ,"task.stid"
-        ,"task.alertid"
-        ,"task.regbyid"
-        ,"task.regdate"
-        ,"task.duedate"
-        ,"task.active"
-        ,"task.deleted"
-        ,"task.reservationid"
+        "message.messageid"
+        ,"message.name"
+        ,"message.guestid"
+        ,"message.stid"
+        ,"message.regbyid"
+        ,"message.regdate"
+        ,"message.active"
+        ,"message.deleted"
+        ,"message.reservationid"
     };
 
     /**
-     * Field that contains the comma separated fields of the task table.
+     * Field that contains the comma separated fields of the message table.
      */
-    private static final String ALL_FIELDS = "task.taskid"
-                            + ",task.name"
-                            + ",task.depid"
-                            + ",task.stid"
-                            + ",task.alertid"
-                            + ",task.regbyid"
-                            + ",task.regdate"
-                            + ",task.duedate"
-                            + ",task.active"
-                            + ",task.deleted"
-                            + ",task.reservationid";
+    private static final String ALL_FIELDS = "message.messageid"
+                            + ",message.name"
+                            + ",message.guestid"
+                            + ",message.stid"
+                            + ",message.regbyid"
+                            + ",message.regdate"
+                            + ",message.active"
+                            + ",message.deleted"
+                            + ",message.reservationid";
 
-    private static TaskManager singleton = new TaskManager();
+    private static MessageManager singleton = new MessageManager();
 
     /**
-     * Get the TaskManager singleton.
+     * Get the MessageManager singleton.
      *
-     * @return TaskManager 
+     * @return MessageManager 
      */
-    synchronized public static TaskManager getInstance()
+    synchronized public static MessageManager getInstance()
     {
         return singleton;
     }
 
     /**
-     * Sets your own TaskManager instance.
+     * Sets your own MessageManager instance.
      <br>
      * This is optional, by default we provide it for you.
      */
-    synchronized public static void setInstance(TaskManager instance)
+    synchronized public static void setInstance(MessageManager instance)
     {
         singleton = instance;
     }
 
 
     /**
-     * Creates a new TaskBean instance.
+     * Creates a new MessageBean instance.
      *
-     * @return the new TaskBean 
+     * @return the new MessageBean 
      */
-    public TaskBean createTaskBean()
+    public MessageBean createMessageBean()
     {
-        return new TaskBean();
+        return new MessageBean();
     }
 
     //////////////////////////////////////
@@ -179,21 +161,21 @@ public class TaskManager
     //////////////////////////////////////
 
     /**
-     * Loads a TaskBean from the task using its key fields.
+     * Loads a MessageBean from the message using its key fields.
      *
-     * @return a unique TaskBean 
+     * @return a unique MessageBean 
      */
     //12
-    public TaskBean loadByPrimaryKey(Integer taskid) throws SQLException
+    public MessageBean loadByPrimaryKey(Integer messageid) throws SQLException
     {
         Connection c = null;
         PreparedStatement ps = null;
         try 
         {
             c = getConnection();
-            ps = c.prepareStatement("SELECT " + ALL_FIELDS + " FROM task WHERE task.taskid=?",ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-            Manager.setInteger(ps, 1, taskid);
-            TaskBean pReturn[] = loadByPreparedStatement(ps);
+            ps = c.prepareStatement("SELECT " + ALL_FIELDS + " FROM message WHERE message.messageid=?",ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            Manager.setInteger(ps, 1, messageid);
+            MessageBean pReturn[] = loadByPreparedStatement(ps);
             if (pReturn.length < 1)
                 return null;
             else
@@ -212,15 +194,15 @@ public class TaskManager
      * @return the number of deleted rows
      */
     //60
-    public int deleteByPrimaryKey(Integer taskid) throws SQLException
+    public int deleteByPrimaryKey(Integer messageid) throws SQLException
     {
         Connection c = null;
         PreparedStatement ps = null;
         try
         {
             c = getConnection();
-            ps = c.prepareStatement("DELETE from task WHERE task.taskid=?",ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-            Manager.setInteger(ps, 1, taskid);
+            ps = c.prepareStatement("DELETE from message WHERE message.messageid=?",ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            Manager.setInteger(ps, 1, messageid);
             return ps.executeUpdate();
         }
         finally
@@ -237,19 +219,19 @@ public class TaskManager
     //////////////////////////////////////
 
     /**
-     * Loads TaskBean array from the task table using its regbyid field.
+     * Loads MessageBean array from the message table using its regbyid field.
      *
-     * @return an array of TaskBean 
+     * @return an array of MessageBean 
      */
     // LOAD BY IMPORTED KEY
-    public TaskBean[] loadByRegbyid(Integer value) throws SQLException 
+    public MessageBean[] loadByRegbyid(Integer value) throws SQLException 
     {
         Connection c = null;
         PreparedStatement ps = null;
         try 
         {
             c = getConnection();
-            ps = c.prepareStatement("SELECT " + ALL_FIELDS + " FROM task WHERE regbyid=?",ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            ps = c.prepareStatement("SELECT " + ALL_FIELDS + " FROM message WHERE regbyid=?",ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             Manager.setInteger(ps, 1, value);
             return loadByPreparedStatement(ps);
         }
@@ -262,7 +244,7 @@ public class TaskManager
 
 
     /**
-     * Deletes from the task table by regbyid field.
+     * Deletes from the message table by regbyid field.
      *
      * @param value the key value to seek
      * @return the number of rows deleted
@@ -275,7 +257,7 @@ public class TaskManager
         try 
         {
             c = getConnection();
-            ps = c.prepareStatement("DELETE FROM task WHERE regbyid=?");
+            ps = c.prepareStatement("DELETE FROM message WHERE regbyid=?");
             Manager.setInteger(ps, 1, value);
             return ps.executeUpdate();
         }
@@ -292,13 +274,13 @@ public class TaskManager
     // GET/SET FOREIGN KEY BEAN METHOD
     //////////////////////////////////////
     /**
-     * Retrieves the PersonnelBean object from the task.personnelid field.
+     * Retrieves the PersonnelBean object from the message.personnelid field.
      *
-     * @param pObject the TaskBean 
+     * @param pObject the MessageBean 
      * @return the associated PersonnelBean pObject
      */
     // GET IMPORTED
-    public PersonnelBean getPersonnelBean(TaskBean pObject) throws SQLException
+    public PersonnelBean getPersonnelBean(MessageBean pObject) throws SQLException
     {
         PersonnelBean other = PersonnelManager.getInstance().createPersonnelBean();
         other.setPersonnelid(pObject.getRegbyid());
@@ -306,14 +288,14 @@ public class TaskManager
     }
 
     /**
-     * Associates the TaskBean object to the PersonnelBean object.
+     * Associates the MessageBean object to the PersonnelBean object.
      *
-     * @param pObject the TaskBean object to use
-     * @param pObjectToBeSet the PersonnelBean object to associate to the TaskBean 
+     * @param pObject the MessageBean object to use
+     * @param pObjectToBeSet the PersonnelBean object to associate to the MessageBean 
      * @return the associated PersonnelBean pObject
      */
     // SET IMPORTED
-    public TaskBean setPersonnelBean(TaskBean pObject,PersonnelBean pObjectToBeSet)
+    public MessageBean setPersonnelBean(MessageBean pObject,PersonnelBean pObjectToBeSet)
     {
         pObject.setRegbyid(pObjectToBeSet.getPersonnelid());
         return pObject;
@@ -326,19 +308,19 @@ public class TaskManager
     //////////////////////////////////////
 
     /**
-     * Loads all the rows from task.
+     * Loads all the rows from message.
      *
-     * @return an array of TaskManager pObject
+     * @return an array of MessageManager pObject
      */
     //38
-    public TaskBean[] loadAll() throws SQLException 
+    public MessageBean[] loadAll() throws SQLException 
     {
         Connection c = null;
         PreparedStatement ps = null;
         try 
         {
             c = getConnection();
-            ps = c.prepareStatement("SELECT " + ALL_FIELDS + " FROM task",ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            ps = c.prepareStatement("SELECT " + ALL_FIELDS + " FROM message",ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             return loadByPreparedStatement(ps);
         }
         finally
@@ -352,31 +334,31 @@ public class TaskManager
     // SQL 'WHERE' METHOD
     //////////////////////////////////////
     /**
-     * Retrieves an array of TaskBean given a sql 'where' clause.
+     * Retrieves an array of MessageBean given a sql 'where' clause.
      *
      * @param where the sql 'where' clause
-     * @return the resulting TaskBean table 
+     * @return the resulting MessageBean table 
      */
     //49
-    public TaskBean[] loadByWhere(String where) throws SQLException
+    public MessageBean[] loadByWhere(String where) throws SQLException
     {
         return loadByWhere(where, null);
     }
 
     /**
-     * Retrieves an array of TaskBean given a sql where clause, and a list of fields.
+     * Retrieves an array of MessageBean given a sql where clause, and a list of fields.
      * It is up to you to pass the 'WHERE' in your where clausis.
      *
      * @param where the sql 'where' clause
      * @param fieldList table of the field's associated constants
-     * @return the resulting TaskBean table 
+     * @return the resulting MessageBean table 
      */
     //51
-    public TaskBean[] loadByWhere(String where, int[] fieldList) throws SQLException
+    public MessageBean[] loadByWhere(String where, int[] fieldList) throws SQLException
     {
         String sql = null;
         if(fieldList == null)
-            sql = "select " + ALL_FIELDS + " from task " + where;
+            sql = "select " + ALL_FIELDS + " from message " + where;
         else
         {
             StringBuffer buff = new StringBuffer(128);
@@ -387,7 +369,7 @@ public class TaskManager
                     buff.append(",");
                 buff.append(FIELD_NAMES[fieldList[i]]);
             }
-            buff.append(" from task ");
+            buff.append(" from message ");
             buff.append(where);
             sql = buff.toString();
             buff = null;
@@ -410,7 +392,7 @@ public class TaskManager
                     v.add(decodeRow(rs, fieldList));
             }
 
-            return (TaskBean[])v.toArray(new TaskBean[0]);
+            return (MessageBean[])v.toArray(new MessageBean[0]);
         }
         finally
         {
@@ -422,7 +404,7 @@ public class TaskManager
 
 
     /**
-     * Deletes all rows from task table.
+     * Deletes all rows from message table.
      * @return the number of deleted rows.
      */
     public int deleteAll() throws SQLException
@@ -432,7 +414,7 @@ public class TaskManager
 
 
     /**
-     * Deletes rows from the task table using a 'where' clause.
+     * Deletes rows from the message table using a 'where' clause.
      * It is up to you to pass the 'WHERE' in your where clausis.
      * <br>Attention, if 'WHERE' is omitted it will delete all records. 
      *
@@ -447,7 +429,7 @@ public class TaskManager
         try
         {
             c = getConnection();
-            String delByWhereSQL = "DELETE FROM task " + where;
+            String delByWhereSQL = "DELETE FROM message " + where;
             ps = c.prepareStatement(delByWhereSQL);
             return ps.executeUpdate();
         }
@@ -464,12 +446,12 @@ public class TaskManager
     // SAVE 
     ///////////////////////////////////////////////////////////////////////
     /**
-     * Saves the TaskBean pObject into the database.
+     * Saves the MessageBean pObject into the database.
      *
-     * @param pObject the TaskBean pObject to be saved
+     * @param pObject the MessageBean pObject to be saved
      */
     //100
-    public TaskBean save(TaskBean pObject) throws SQLException
+    public MessageBean save(MessageBean pObject) throws SQLException
     {
         Connection c = null;
         PreparedStatement ps = null;
@@ -480,15 +462,15 @@ public class TaskManager
             c = getConnection();
             if (pObject.isNew())
             { // SAVE 
-                if (!pObject.isTaskidModified())
+                if (!pObject.isMessageidModified())
                 {
-                    ps = c.prepareStatement("SELECT nextval('taskid_seq')");
+                    ps = c.prepareStatement("SELECT nextval('messageid_seq')");
                     ResultSet rs = null;
                     try
                     {
                         rs = ps.executeQuery();
                         if(rs.next())
-                            pObject.setTaskid(Manager.getInteger(rs, 1));
+                            pObject.setMessageid(Manager.getInteger(rs, 1));
                         else
                             getManager().log("ATTENTION: Could not retrieve generated key!");
                     }
@@ -500,13 +482,13 @@ public class TaskManager
                 }
                 beforeInsert(pObject); // listener callback
                 int _dirtyCount = 0;
-                _sql = new StringBuffer("INSERT into task (");
+                _sql = new StringBuffer("INSERT into message (");
     
-                if (pObject.isTaskidModified()) {
+                if (pObject.isMessageidModified()) {
                     if (_dirtyCount>0) {
                         _sql.append(",");
                     }
-                    _sql.append("taskid");
+                    _sql.append("messageid");
                     _dirtyCount++;
                 }
 
@@ -518,11 +500,11 @@ public class TaskManager
                     _dirtyCount++;
                 }
 
-                if (pObject.isDepidModified()) {
+                if (pObject.isGuestidModified()) {
                     if (_dirtyCount>0) {
                         _sql.append(",");
                     }
-                    _sql.append("depid");
+                    _sql.append("guestid");
                     _dirtyCount++;
                 }
 
@@ -531,14 +513,6 @@ public class TaskManager
                         _sql.append(",");
                     }
                     _sql.append("stid");
-                    _dirtyCount++;
-                }
-
-                if (pObject.isAlertidModified()) {
-                    if (_dirtyCount>0) {
-                        _sql.append(",");
-                    }
-                    _sql.append("alertid");
                     _dirtyCount++;
                 }
 
@@ -555,14 +529,6 @@ public class TaskManager
                         _sql.append(",");
                     }
                     _sql.append("regdate");
-                    _dirtyCount++;
-                }
-
-                if (pObject.isDuedateModified()) {
-                    if (_dirtyCount>0) {
-                        _sql.append(",");
-                    }
-                    _sql.append("duedate");
                     _dirtyCount++;
                 }
 
@@ -602,24 +568,20 @@ public class TaskManager
                 ps = c.prepareStatement(_sql.toString(), ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
                 _dirtyCount = 0;
 
-                if (pObject.isTaskidModified()) {
-                    Manager.setInteger(ps, ++_dirtyCount, pObject.getTaskid());
+                if (pObject.isMessageidModified()) {
+                    Manager.setInteger(ps, ++_dirtyCount, pObject.getMessageid());
                 }
     
                 if (pObject.isNameModified()) {
                     ps.setString(++_dirtyCount, pObject.getName());
                 }
     
-                if (pObject.isDepidModified()) {
-                    Manager.setInteger(ps, ++_dirtyCount, pObject.getDepid());
+                if (pObject.isGuestidModified()) {
+                    Manager.setLong(ps, ++_dirtyCount, pObject.getGuestid());
                 }
     
                 if (pObject.isStidModified()) {
                     Manager.setInteger(ps, ++_dirtyCount, pObject.getStid());
-                }
-    
-                if (pObject.isAlertidModified()) {
-                    Manager.setInteger(ps, ++_dirtyCount, pObject.getAlertid());
                 }
     
                 if (pObject.isRegbyidModified()) {
@@ -628,10 +590,6 @@ public class TaskManager
     
                 if (pObject.isRegdateModified()) {
                     ps.setTimestamp(++_dirtyCount, pObject.getRegdate());
-                }
-    
-                if (pObject.isDuedateModified()) {
-                    ps.setTimestamp(++_dirtyCount, pObject.getDuedate());
                 }
     
                 if (pObject.isActiveModified()) {
@@ -655,16 +613,16 @@ public class TaskManager
             else 
             { // UPDATE 
                 beforeUpdate(pObject); // listener callback
-                _sql = new StringBuffer("UPDATE task SET ");
+                _sql = new StringBuffer("UPDATE message SET ");
                 boolean useComma=false;
 
-                if (pObject.isTaskidModified()) {
+                if (pObject.isMessageidModified()) {
                     if (useComma) {
                         _sql.append(",");
                     } else {
                         useComma=true;
                     }
-                    _sql.append("taskid").append("=?");
+                    _sql.append("messageid").append("=?");
                 }
 
                 if (pObject.isNameModified()) {
@@ -676,13 +634,13 @@ public class TaskManager
                     _sql.append("name").append("=?");
                 }
 
-                if (pObject.isDepidModified()) {
+                if (pObject.isGuestidModified()) {
                     if (useComma) {
                         _sql.append(",");
                     } else {
                         useComma=true;
                     }
-                    _sql.append("depid").append("=?");
+                    _sql.append("guestid").append("=?");
                 }
 
                 if (pObject.isStidModified()) {
@@ -692,15 +650,6 @@ public class TaskManager
                         useComma=true;
                     }
                     _sql.append("stid").append("=?");
-                }
-
-                if (pObject.isAlertidModified()) {
-                    if (useComma) {
-                        _sql.append(",");
-                    } else {
-                        useComma=true;
-                    }
-                    _sql.append("alertid").append("=?");
                 }
 
                 if (pObject.isRegbyidModified()) {
@@ -719,15 +668,6 @@ public class TaskManager
                         useComma=true;
                     }
                     _sql.append("regdate").append("=?");
-                }
-
-                if (pObject.isDuedateModified()) {
-                    if (useComma) {
-                        _sql.append(",");
-                    } else {
-                        useComma=true;
-                    }
-                    _sql.append("duedate").append("=?");
                 }
 
                 if (pObject.isActiveModified()) {
@@ -757,28 +697,24 @@ public class TaskManager
                     _sql.append("reservationid").append("=?");
                 }
                 _sql.append(" WHERE ");
-                _sql.append("task.taskid=?");
+                _sql.append("message.messageid=?");
                 ps = c.prepareStatement(_sql.toString(),ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
                 int _dirtyCount = 0;
 
-                if (pObject.isTaskidModified()) {
-                      Manager.setInteger(ps, ++_dirtyCount, pObject.getTaskid());
+                if (pObject.isMessageidModified()) {
+                      Manager.setInteger(ps, ++_dirtyCount, pObject.getMessageid());
                 }
 
                 if (pObject.isNameModified()) {
                       ps.setString(++_dirtyCount, pObject.getName());
                 }
 
-                if (pObject.isDepidModified()) {
-                      Manager.setInteger(ps, ++_dirtyCount, pObject.getDepid());
+                if (pObject.isGuestidModified()) {
+                      Manager.setLong(ps, ++_dirtyCount, pObject.getGuestid());
                 }
 
                 if (pObject.isStidModified()) {
                       Manager.setInteger(ps, ++_dirtyCount, pObject.getStid());
-                }
-
-                if (pObject.isAlertidModified()) {
-                      Manager.setInteger(ps, ++_dirtyCount, pObject.getAlertid());
                 }
 
                 if (pObject.isRegbyidModified()) {
@@ -787,10 +723,6 @@ public class TaskManager
 
                 if (pObject.isRegdateModified()) {
                       ps.setTimestamp(++_dirtyCount, pObject.getRegdate());
-                }
-
-                if (pObject.isDuedateModified()) {
-                      ps.setTimestamp(++_dirtyCount, pObject.getDuedate());
                 }
 
                 if (pObject.isActiveModified()) {
@@ -809,7 +741,7 @@ public class TaskManager
                      return pObject;
                 }
     
-                Manager.setInteger(ps, ++_dirtyCount, pObject.getTaskid());
+                Manager.setInteger(ps, ++_dirtyCount, pObject.getMessageid());
                 ps.executeUpdate();
                 pObject.resetIsModified();
                 afterUpdate(pObject); // listener callback
@@ -827,13 +759,13 @@ public class TaskManager
 
 
     /**
-     * Saves an array of TaskBean pObjects into the database.
+     * Saves an array of MessageBean pObjects into the database.
      *
-     * @param pObjects the TaskBean pObject table to be saved
-     * @return the saved TaskBean array.
+     * @param pObjects the MessageBean pObject table to be saved
+     * @return the saved MessageBean array.
      */
     //65
-    public TaskBean[] save(TaskBean[] pObjects) throws SQLException 
+    public MessageBean[] save(MessageBean[] pObjects) throws SQLException 
     {
         for (int iIndex = 0; iIndex < pObjects.length; iIndex ++){
             save(pObjects[iIndex]);
@@ -847,15 +779,15 @@ public class TaskManager
     // USING TEMPLATE 
     ///////////////////////////////////////////////////////////////////////
     /**
-     * Loads a unique TaskBean pObject from a template one giving a c
+     * Loads a unique MessageBean pObject from a template one giving a c
      *
-     * @param pObject the TaskBean pObject to look for
+     * @param pObject the MessageBean pObject to look for
      * @return the pObject matching the template
      */
     //85
-    public TaskBean loadUniqueUsingTemplate(TaskBean pObject) throws SQLException
+    public MessageBean loadUniqueUsingTemplate(MessageBean pObject) throws SQLException
     {
-         TaskBean[] pReturn = loadUsingTemplate(pObject);
+         MessageBean[] pReturn = loadUsingTemplate(pObject);
          if (pReturn.length == 0)
              return null;
          if (pReturn.length > 1)
@@ -864,26 +796,26 @@ public class TaskManager
      }
 
     /**
-     * Loads an array of TaskBean from a template one.
+     * Loads an array of MessageBean from a template one.
      *
-     * @param pObject the TaskBean template to look for
-     * @return all the TaskBean matching the template
+     * @param pObject the MessageBean template to look for
+     * @return all the MessageBean matching the template
      */
     //88
-    public TaskBean[] loadUsingTemplate(TaskBean pObject) throws SQLException
+    public MessageBean[] loadUsingTemplate(MessageBean pObject) throws SQLException
     {
         Connection c = null;
         PreparedStatement ps = null;
         StringBuffer where = new StringBuffer("");
-        StringBuffer _sql = new StringBuffer("SELECT " + ALL_FIELDS + " from task WHERE ");
+        StringBuffer _sql = new StringBuffer("SELECT " + ALL_FIELDS + " from message WHERE ");
         StringBuffer _sqlWhere = new StringBuffer("");
         try
         {
             int _dirtyCount = 0;
     
-             if (pObject.isTaskidModified()) {
+             if (pObject.isMessageidModified()) {
                  _dirtyCount ++; 
-                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("taskid= ?");
+                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("messageid= ?");
              }
     
              if (pObject.isNameModified()) {
@@ -891,19 +823,14 @@ public class TaskManager
                  _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("name= ?");
              }
     
-             if (pObject.isDepidModified()) {
+             if (pObject.isGuestidModified()) {
                  _dirtyCount ++; 
-                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("depid= ?");
+                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("guestid= ?");
              }
     
              if (pObject.isStidModified()) {
                  _dirtyCount ++; 
                  _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("stid= ?");
-             }
-    
-             if (pObject.isAlertidModified()) {
-                 _dirtyCount ++; 
-                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("alertid= ?");
              }
     
              if (pObject.isRegbyidModified()) {
@@ -914,11 +841,6 @@ public class TaskManager
              if (pObject.isRegdateModified()) {
                  _dirtyCount ++; 
                  _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("regdate= ?");
-             }
-    
-             if (pObject.isDuedateModified()) {
-                 _dirtyCount ++; 
-                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("duedate= ?");
              }
     
              if (pObject.isActiveModified()) {
@@ -944,24 +866,20 @@ public class TaskManager
              ps = c.prepareStatement(_sql.toString(),ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
              _dirtyCount = 0;
     
-             if (pObject.isTaskidModified()) {
-                 Manager.setInteger(ps, ++_dirtyCount, pObject.getTaskid());
+             if (pObject.isMessageidModified()) {
+                 Manager.setInteger(ps, ++_dirtyCount, pObject.getMessageid());
              }
     
              if (pObject.isNameModified()) {
                  ps.setString(++_dirtyCount, pObject.getName());
              }
     
-             if (pObject.isDepidModified()) {
-                 Manager.setInteger(ps, ++_dirtyCount, pObject.getDepid());
+             if (pObject.isGuestidModified()) {
+                 Manager.setLong(ps, ++_dirtyCount, pObject.getGuestid());
              }
     
              if (pObject.isStidModified()) {
                  Manager.setInteger(ps, ++_dirtyCount, pObject.getStid());
-             }
-    
-             if (pObject.isAlertidModified()) {
-                 Manager.setInteger(ps, ++_dirtyCount, pObject.getAlertid());
              }
     
              if (pObject.isRegbyidModified()) {
@@ -970,10 +888,6 @@ public class TaskManager
     
              if (pObject.isRegdateModified()) {
                  ps.setTimestamp(++_dirtyCount, pObject.getRegdate());
-             }
-    
-             if (pObject.isDuedateModified()) {
-                 ps.setTimestamp(++_dirtyCount, pObject.getDuedate());
              }
     
              if (pObject.isActiveModified()) {
@@ -998,16 +912,16 @@ public class TaskManager
         }
     }
     /**
-     * Deletes rows using a TaskBean template.
+     * Deletes rows using a MessageBean template.
      *
-     * @param pObject the TaskBean object(s) to be deleted
+     * @param pObject the MessageBean object(s) to be deleted
      * @return the number of deleted objects
      */
     //63
-    public int deleteUsingTemplate(TaskBean pObject) throws SQLException
+    public int deleteUsingTemplate(MessageBean pObject) throws SQLException
     {
-        if (pObject.isTaskidInitialized())
-            return deleteByPrimaryKey(pObject.getTaskid());
+        if (pObject.isMessageidInitialized())
+            return deleteByPrimaryKey(pObject.getMessageid());
     
         Connection c = null;
         PreparedStatement ps = null;
@@ -1015,12 +929,12 @@ public class TaskManager
     
         try 
         {
-            sql = new StringBuffer("DELETE FROM task WHERE ");
+            sql = new StringBuffer("DELETE FROM message WHERE ");
             int _dirtyAnd = 0;
-            if (pObject.isTaskidInitialized()) {
+            if (pObject.isMessageidInitialized()) {
                 if (_dirtyAnd > 0)
                     sql.append(" AND ");
-                sql.append("taskid").append("=?");
+                sql.append("messageid").append("=?");
                 _dirtyAnd ++;
             }
     
@@ -1031,10 +945,10 @@ public class TaskManager
                 _dirtyAnd ++;
             }
     
-            if (pObject.isDepidInitialized()) {
+            if (pObject.isGuestidInitialized()) {
                 if (_dirtyAnd > 0)
                     sql.append(" AND ");
-                sql.append("depid").append("=?");
+                sql.append("guestid").append("=?");
                 _dirtyAnd ++;
             }
     
@@ -1042,13 +956,6 @@ public class TaskManager
                 if (_dirtyAnd > 0)
                     sql.append(" AND ");
                 sql.append("stid").append("=?");
-                _dirtyAnd ++;
-            }
-    
-            if (pObject.isAlertidInitialized()) {
-                if (_dirtyAnd > 0)
-                    sql.append(" AND ");
-                sql.append("alertid").append("=?");
                 _dirtyAnd ++;
             }
     
@@ -1063,13 +970,6 @@ public class TaskManager
                 if (_dirtyAnd > 0)
                     sql.append(" AND ");
                 sql.append("regdate").append("=?");
-                _dirtyAnd ++;
-            }
-    
-            if (pObject.isDuedateInitialized()) {
-                if (_dirtyAnd > 0)
-                    sql.append(" AND ");
-                sql.append("duedate").append("=?");
                 _dirtyAnd ++;
             }
     
@@ -1098,24 +998,20 @@ public class TaskManager
             ps = c.prepareStatement(sql.toString(),ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             int _dirtyCount = 0;
     
-            if (pObject.isTaskidInitialized()) {
-                Manager.setInteger(ps, ++_dirtyCount, pObject.getTaskid());
+            if (pObject.isMessageidInitialized()) {
+                Manager.setInteger(ps, ++_dirtyCount, pObject.getMessageid());
             }
     
             if (pObject.isNameInitialized()) {
                 ps.setString(++_dirtyCount, pObject.getName());
             }
     
-            if (pObject.isDepidInitialized()) {
-                Manager.setInteger(ps, ++_dirtyCount, pObject.getDepid());
+            if (pObject.isGuestidInitialized()) {
+                Manager.setLong(ps, ++_dirtyCount, pObject.getGuestid());
             }
     
             if (pObject.isStidInitialized()) {
                 Manager.setInteger(ps, ++_dirtyCount, pObject.getStid());
-            }
-    
-            if (pObject.isAlertidInitialized()) {
-                Manager.setInteger(ps, ++_dirtyCount, pObject.getAlertid());
             }
     
             if (pObject.isRegbyidInitialized()) {
@@ -1124,10 +1020,6 @@ public class TaskManager
     
             if (pObject.isRegdateInitialized()) {
                 ps.setTimestamp(++_dirtyCount, pObject.getRegdate());
-            }
-    
-            if (pObject.isDuedateInitialized()) {
-                ps.setTimestamp(++_dirtyCount, pObject.getDuedate());
             }
     
             if (pObject.isActiveInitialized()) {
@@ -1159,7 +1051,7 @@ public class TaskManager
     ///////////////////////////////////////////////////////////////////////
 
     /**
-     * Retrieves the number of rows of the table task.
+     * Retrieves the number of rows of the table message.
      *
      * @return the number of rows returned
      */
@@ -1172,7 +1064,7 @@ public class TaskManager
 
 
     /**
-     * Retrieves the number of rows of the table task with a 'where' clause.
+     * Retrieves the number of rows of the table message with a 'where' clause.
      * It is up to you to pass the 'WHERE' in your where clausis.
      *
      * @param where the restriction clause
@@ -1180,7 +1072,7 @@ public class TaskManager
      */
     public int countWhere(String where) throws SQLException
     {
-        String sql = "select count(*) as MCOUNT from task " + where;
+        String sql = "select count(*) as MCOUNT from message " + where;
         Connection c = null;
         Statement pStatement = null;
         ResultSet rs =  null;
@@ -1206,7 +1098,7 @@ public class TaskManager
     }
 
     /**
-     * Retrieves the number of rows of the table task with a prepared statement.
+     * Retrieves the number of rows of the table message with a prepared statement.
      *
      * @param ps the PreparedStatement to be used
      * @return the number of rows returned
@@ -1232,13 +1124,13 @@ public class TaskManager
     }
 
     /**
-     * Looks for the number of elements of a specific TaskBean pObject given a c
+     * Looks for the number of elements of a specific MessageBean pObject given a c
      *
-     * @param pObject the TaskBean pObject to look for
+     * @param pObject the MessageBean pObject to look for
      * @return the number of rows returned
      */
     //83
-    public int countUsingTemplate(TaskBean pObject) throws SQLException
+    public int countUsingTemplate(MessageBean pObject) throws SQLException
     {
         StringBuffer where = new StringBuffer("");
         Connection c = null;
@@ -1248,13 +1140,13 @@ public class TaskManager
     
         try
         {
-                _sql = new StringBuffer("SELECT count(*) as MCOUNT  from task WHERE ");
+                _sql = new StringBuffer("SELECT count(*) as MCOUNT  from message WHERE ");
                 _sqlWhere = new StringBuffer("");
                 int _dirtyCount = 0;
     
-                if (pObject.isTaskidModified()) {
+                if (pObject.isMessageidModified()) {
                     _dirtyCount++; 
-                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("taskid= ?");
+                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("messageid= ?");
                 }
     
                 if (pObject.isNameModified()) {
@@ -1262,19 +1154,14 @@ public class TaskManager
                     _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("name= ?");
                 }
     
-                if (pObject.isDepidModified()) {
+                if (pObject.isGuestidModified()) {
                     _dirtyCount++; 
-                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("depid= ?");
+                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("guestid= ?");
                 }
     
                 if (pObject.isStidModified()) {
                     _dirtyCount++; 
                     _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("stid= ?");
-                }
-    
-                if (pObject.isAlertidModified()) {
-                    _dirtyCount++; 
-                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("alertid= ?");
                 }
     
                 if (pObject.isRegbyidModified()) {
@@ -1285,11 +1172,6 @@ public class TaskManager
                 if (pObject.isRegdateModified()) {
                     _dirtyCount++; 
                     _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("regdate= ?");
-                }
-    
-                if (pObject.isDuedateModified()) {
-                    _dirtyCount++; 
-                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("duedate= ?");
                 }
     
                 if (pObject.isActiveModified()) {
@@ -1316,24 +1198,20 @@ public class TaskManager
     
                 _dirtyCount = 0;
     
-                if (pObject.isTaskidModified()) {
-                    Manager.setInteger(ps, ++_dirtyCount, pObject.getTaskid());
+                if (pObject.isMessageidModified()) {
+                    Manager.setInteger(ps, ++_dirtyCount, pObject.getMessageid());
                 }
     
                 if (pObject.isNameModified()) {
                     ps.setString(++_dirtyCount, pObject.getName());
                 }
     
-                if (pObject.isDepidModified()) {
-                    Manager.setInteger(ps, ++_dirtyCount, pObject.getDepid());
+                if (pObject.isGuestidModified()) {
+                    Manager.setLong(ps, ++_dirtyCount, pObject.getGuestid());
                 }
     
                 if (pObject.isStidModified()) {
                     Manager.setInteger(ps, ++_dirtyCount, pObject.getStid());
-                }
-    
-                if (pObject.isAlertidModified()) {
-                    Manager.setInteger(ps, ++_dirtyCount, pObject.getAlertid());
                 }
     
                 if (pObject.isRegbyidModified()) {
@@ -1342,10 +1220,6 @@ public class TaskManager
     
                 if (pObject.isRegdateModified()) {
                     ps.setTimestamp(++_dirtyCount, pObject.getRegdate());
-                }
-    
-                if (pObject.isDuedateModified()) {
-                    ps.setTimestamp(++_dirtyCount, pObject.getDuedate());
                 }
     
                 if (pObject.isActiveModified()) {
@@ -1375,26 +1249,24 @@ public class TaskManager
     // DECODE RESULT SET 
     ///////////////////////////////////////////////////////////////////////
     /**
-     * Transforms a ResultSet iterating on the task on a TaskBean pObject.
+     * Transforms a ResultSet iterating on the message on a MessageBean pObject.
      *
      * @param rs the ResultSet to be transformed
-     * @return pObject resulting TaskBean pObject
+     * @return pObject resulting MessageBean pObject
      */
     //72
-    public TaskBean decodeRow(ResultSet rs) throws SQLException
+    public MessageBean decodeRow(ResultSet rs) throws SQLException
     {
-        TaskBean pObject = createTaskBean();
-        pObject.setTaskid(Manager.getInteger(rs, 1));
+        MessageBean pObject = createMessageBean();
+        pObject.setMessageid(Manager.getInteger(rs, 1));
         pObject.setName(rs.getString(2));
-        pObject.setDepid(Manager.getInteger(rs, 3));
+        pObject.setGuestid(Manager.getLong(rs, 3));
         pObject.setStid(Manager.getInteger(rs, 4));
-        pObject.setAlertid(Manager.getInteger(rs, 5));
-        pObject.setRegbyid(Manager.getInteger(rs, 6));
-        pObject.setRegdate(rs.getTimestamp(7));
-        pObject.setDuedate(rs.getTimestamp(8));
-        pObject.setActive(Manager.getBoolean(rs, 9));
-        pObject.setDeleted(Manager.getBoolean(rs, 10));
-        pObject.setReservationid(Manager.getInteger(rs, 11));
+        pObject.setRegbyid(Manager.getInteger(rs, 5));
+        pObject.setRegdate(rs.getTimestamp(6));
+        pObject.setActive(Manager.getBoolean(rs, 7));
+        pObject.setDeleted(Manager.getBoolean(rs, 8));
+        pObject.setReservationid(Manager.getInteger(rs, 9));
 
         pObject.isNew(false);
         pObject.resetIsModified();
@@ -1403,39 +1275,35 @@ public class TaskManager
     }
 
     /**
-     * Transforms a ResultSet iterating on the task table on a TaskBean pObject according to a list of fields.
+     * Transforms a ResultSet iterating on the message table on a MessageBean pObject according to a list of fields.
      *
      * @param rs the ResultSet to be transformed
      * @param fieldList table of the field's associated constants
-     * @return pObject resulting TaskBean pObject
+     * @return pObject resulting MessageBean pObject
      */
     //73
-    public TaskBean decodeRow(ResultSet rs, int[] fieldList) throws SQLException
+    public MessageBean decodeRow(ResultSet rs, int[] fieldList) throws SQLException
     {
-        TaskBean pObject = createTaskBean();
+        MessageBean pObject = createMessageBean();
         int pos = 0;
         for(int i = 0; i < fieldList.length; i++)
         {
             switch(fieldList[i]) {
-                case ID_TASKID:
+                case ID_MESSAGEID:
                     ++pos;
-                    pObject.setTaskid(Manager.getInteger(rs, pos));
+                    pObject.setMessageid(Manager.getInteger(rs, pos));
                     break;
                 case ID_NAME:
                     ++pos;
                     pObject.setName(rs.getString(pos));
                     break;
-                case ID_DEPID:
+                case ID_GUESTID:
                     ++pos;
-                    pObject.setDepid(Manager.getInteger(rs, pos));
+                    pObject.setGuestid(Manager.getLong(rs, pos));
                     break;
                 case ID_STID:
                     ++pos;
                     pObject.setStid(Manager.getInteger(rs, pos));
-                    break;
-                case ID_ALERTID:
-                    ++pos;
-                    pObject.setAlertid(Manager.getInteger(rs, pos));
                     break;
                 case ID_REGBYID:
                     ++pos;
@@ -1444,10 +1312,6 @@ public class TaskManager
                 case ID_REGDATE:
                     ++pos;
                     pObject.setRegdate(rs.getTimestamp(pos));
-                    break;
-                case ID_DUEDATE:
-                    ++pos;
-                    pObject.setDuedate(rs.getTimestamp(pos));
                     break;
                 case ID_ACTIVE:
                     ++pos;
@@ -1477,10 +1341,10 @@ public class TaskManager
      * Loads all the elements using a prepared statement.
      *
      * @param ps the PreparedStatement to be used
-     * @return an array of TaskBean 
+     * @return an array of MessageBean 
      */
     //41
-    public TaskBean[] loadByPreparedStatement(PreparedStatement ps) throws SQLException
+    public MessageBean[] loadByPreparedStatement(PreparedStatement ps) throws SQLException
     {
         return loadByPreparedStatement(ps, null);
     }
@@ -1490,9 +1354,9 @@ public class TaskManager
      *
      * @param ps the PreparedStatement to be used
      * @param fieldList table of the field's associated constants
-     * @return an array of TaskBean 
+     * @return an array of MessageBean 
      */
-    public TaskBean[] loadByPreparedStatement(PreparedStatement ps, int[] fieldList) throws SQLException
+    public MessageBean[] loadByPreparedStatement(PreparedStatement ps, int[] fieldList) throws SQLException
     {
         ResultSet rs =  null;
         java.util.ArrayList v =  null;
@@ -1507,7 +1371,7 @@ public class TaskManager
                 else 
                     v.add(decodeRow(rs, fieldList));
             }
-            return (TaskBean[])v.toArray(new TaskBean[0]);
+            return (MessageBean[])v.toArray(new MessageBean[0]);
         }
         finally
         {
@@ -1519,56 +1383,56 @@ public class TaskManager
     ///////////////////////////////////////////////////////////////////////
     // LISTENER 
     ///////////////////////////////////////////////////////////////////////
-    private TaskListener listener = null;
+    private MessageListener listener = null;
 
     /**
-     * Registers a unique TaskListener listener.
+     * Registers a unique MessageListener listener.
      */
     //66.5
-    public void registerListener(TaskListener listener) {
+    public void registerListener(MessageListener listener) {
         this.listener = listener;
     }
 
     /**
-     * Before the save of the TaskBean pObject.
+     * Before the save of the MessageBean pObject.
      *
-     * @param pObject the TaskBean pObject to be saved
+     * @param pObject the MessageBean pObject to be saved
      */
     //67
-    void beforeInsert(TaskBean pObject) throws SQLException {
+    void beforeInsert(MessageBean pObject) throws SQLException {
         if (listener != null)
             listener.beforeInsert(pObject);
     }
 
     /**
-     * After the save of the TaskBean pObject.
+     * After the save of the MessageBean pObject.
      *
-     * @param pObject the TaskBean pObject to be saved
+     * @param pObject the MessageBean pObject to be saved
      */
     //68
-    void afterInsert(TaskBean pObject) throws SQLException {
+    void afterInsert(MessageBean pObject) throws SQLException {
         if (listener != null)
             listener.afterInsert(pObject);
     }
 
     /**
-     * Before the update of the TaskBean pObject.
+     * Before the update of the MessageBean pObject.
      *
-     * @param pObject the TaskBean pObject to be updated
+     * @param pObject the MessageBean pObject to be updated
      */
     //69
-    void beforeUpdate(TaskBean pObject) throws SQLException {
+    void beforeUpdate(MessageBean pObject) throws SQLException {
         if (listener != null)
             listener.beforeUpdate(pObject);
     }
 
     /**
-     * After the update of the TaskBean pObject.
+     * After the update of the MessageBean pObject.
      *
-     * @param pObject the TaskBean pObject to be updated
+     * @param pObject the MessageBean pObject to be updated
      */
     //70
-    void afterUpdate(TaskBean pObject) throws SQLException {
+    void afterUpdate(MessageBean pObject) throws SQLException {
         if (listener != null)
             listener.afterUpdate(pObject);
     }

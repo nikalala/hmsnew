@@ -18,6 +18,7 @@ import java.sql.SQLException;
 // imports- 
 
 
+
 /**
  * Listener that is notified of vs_arrivallist table changes.
  */
@@ -25,6 +26,7 @@ public interface VsArrivallistListener
 // extends+ 
 
 // extends- 
+
 {
     /**
      * Invoked just before inserting a VsArrivallistBean record into the database.
@@ -61,4 +63,5 @@ public interface VsArrivallistListener
 // class+ 
 
 // class- 
+
 }

@@ -1184,6 +1184,11 @@ System.out.println(rid+" = "+statusid);
             "მიმდინარე"
     };
 
+    String[] messageStatuses = {
+            "მიმდინარე",
+            "მიწოდებული"
+    };
+
     String[] roomstatus = {
             "დადასტურებული რეზერვაცია", //  0
             "მცხოვრები", //  1

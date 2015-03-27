@@ -64,6 +64,9 @@ public class FolioitemComparator implements Comparator
      *   <li>FolioitemManager.ID_NOTE
      *   <li>FolioitemManager.ID_ROOMOPER
      *   <li>FolioitemManager.ID_RESERVATIONROOMID
+     *   <li>FolioitemManager.ID_ADULT
+     *   <li>FolioitemManager.ID_CHILD
+     *   <li>FolioitemManager.ID_RATETYPEID
      * </ul>
      */
     public FolioitemComparator(int iType)
@@ -102,6 +105,9 @@ public class FolioitemComparator implements Comparator
      *   <li>FolioitemManager.ID_MANUAL
      *   <li>FolioitemManager.ID_ROOMOPER
      *   <li>FolioitemManager.ID_RESERVATIONROOMID
+     *   <li>FolioitemManager.ID_ADULT
+     *   <li>FolioitemManager.ID_CHILD
+     *   <li>FolioitemManager.ID_RATETYPEID
      * </ul>
      *
      * @param bReverse set this value to true, if you want to reverse the sorting results
@@ -307,6 +313,39 @@ public class FolioitemComparator implements Comparator
                     iReturn = 1;
                 } else { 
                     iReturn = b1.getReservationroomid().compareTo(b2.getReservationroomid());
+                }
+                break;
+            case FolioitemManager.ID_ADULT:
+                if (b1.getAdult() == null && b2.getAdult() != null) {
+                    iReturn = -1;
+                } else if (b1.getAdult() == null && b2.getAdult() == null) {
+                    iReturn = 0;
+                } else if (b1.getAdult() != null && b2.getAdult() == null) {
+                    iReturn = 1;
+                } else { 
+                    iReturn = b1.getAdult().compareTo(b2.getAdult());
+                }
+                break;
+            case FolioitemManager.ID_CHILD:
+                if (b1.getChild() == null && b2.getChild() != null) {
+                    iReturn = -1;
+                } else if (b1.getChild() == null && b2.getChild() == null) {
+                    iReturn = 0;
+                } else if (b1.getChild() != null && b2.getChild() == null) {
+                    iReturn = 1;
+                } else { 
+                    iReturn = b1.getChild().compareTo(b2.getChild());
+                }
+                break;
+            case FolioitemManager.ID_RATETYPEID:
+                if (b1.getRatetypeid() == null && b2.getRatetypeid() != null) {
+                    iReturn = -1;
+                } else if (b1.getRatetypeid() == null && b2.getRatetypeid() == null) {
+                    iReturn = 0;
+                } else if (b1.getRatetypeid() != null && b2.getRatetypeid() == null) {
+                    iReturn = 1;
+                } else { 
+                    iReturn = b1.getRatetypeid().compareTo(b2.getRatetypeid());
                 }
                 break;
             default: 

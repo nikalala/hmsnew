@@ -19,9 +19,9 @@ import java.util.Comparator;
 
 
 /**
- * Comparator class is used to sort the TaskBean objects.
+ * Comparator class is used to sort the MessageBean objects.
  */
-public class TaskComparator implements Comparator
+public class MessageComparator implements Comparator
 // extends+ 
 
 // extends- 
@@ -37,59 +37,55 @@ public class TaskComparator implements Comparator
     private boolean bReverse;
 
     /**
-     * Constructor class for TaskComparator.
+     * Constructor class for MessageComparator.
      * <br>
      * Example:
      * <br>
-     * <code>Arrays.sort(pArray, new TaskComparator(TaskManager.TASKID, bReverse));<code>
+     * <code>Arrays.sort(pArray, new MessageComparator(MessageManager.MESSAGEID, bReverse));<code>
      *
      * @param iType the field from which you want to sort
      * <br>
      * Possible values are:
      * <ul>
-     *   <li>TaskManager.ID_TASKID
-     *   <li>TaskManager.ID_NAME
-     *   <li>TaskManager.ID_DEPID
-     *   <li>TaskManager.ID_STID
-     *   <li>TaskManager.ID_ALERTID
-     *   <li>TaskManager.ID_REGBYID
-     *   <li>TaskManager.ID_REGDATE
-     *   <li>TaskManager.ID_DUEDATE
-     *   <li>TaskManager.ID_RESERVATIONID
+     *   <li>MessageManager.ID_MESSAGEID
+     *   <li>MessageManager.ID_NAME
+     *   <li>MessageManager.ID_GUESTID
+     *   <li>MessageManager.ID_STID
+     *   <li>MessageManager.ID_REGBYID
+     *   <li>MessageManager.ID_REGDATE
+     *   <li>MessageManager.ID_RESERVATIONID
      * </ul>
      */
-    public TaskComparator(int iType)
+    public MessageComparator(int iType)
     {
         this(iType, false);
     }
 
     /**
-     * Constructor class for TaskComparator.
+     * Constructor class for MessageComparator.
      * <br>
      * Example:
      * <br>
-     * <code>Arrays.sort(pArray, new TaskComparator(TaskManager.TASKID, bReverse));<code>
+     * <code>Arrays.sort(pArray, new MessageComparator(MessageManager.MESSAGEID, bReverse));<code>
      *
      * @param iType the field from which you want to sort.
      * <br>
      * Possible values are:
      * <ul>
-     *   <li>TaskManager.ID_TASKID
-     *   <li>TaskManager.ID_NAME
-     *   <li>TaskManager.ID_DEPID
-     *   <li>TaskManager.ID_STID
-     *   <li>TaskManager.ID_ALERTID
-     *   <li>TaskManager.ID_REGBYID
-     *   <li>TaskManager.ID_REGDATE
-     *   <li>TaskManager.ID_DUEDATE
-     *   <li>TaskManager.ID_ACTIVE
-     *   <li>TaskManager.ID_DELETED
-     *   <li>TaskManager.ID_RESERVATIONID
+     *   <li>MessageManager.ID_MESSAGEID
+     *   <li>MessageManager.ID_NAME
+     *   <li>MessageManager.ID_GUESTID
+     *   <li>MessageManager.ID_STID
+     *   <li>MessageManager.ID_REGBYID
+     *   <li>MessageManager.ID_REGDATE
+     *   <li>MessageManager.ID_ACTIVE
+     *   <li>MessageManager.ID_DELETED
+     *   <li>MessageManager.ID_RESERVATIONID
      * </ul>
      *
      * @param bReverse set this value to true, if you want to reverse the sorting results
      */
-    public TaskComparator(int iType, boolean bReverse)
+    public MessageComparator(int iType, boolean bReverse)
     {
         this.iType = iType;
         this.bReverse = bReverse;
@@ -100,23 +96,23 @@ public class TaskComparator implements Comparator
      */
     public int compare(Object pObj1, Object pObj2)
     {
-        TaskBean b1 = (TaskBean)pObj1;
-        TaskBean b2 = (TaskBean)pObj2;
+        MessageBean b1 = (MessageBean)pObj1;
+        MessageBean b2 = (MessageBean)pObj2;
         int iReturn = 0;
         switch(iType)
         {
-            case TaskManager.ID_TASKID:
-                if (b1.getTaskid() == null && b2.getTaskid() != null) {
+            case MessageManager.ID_MESSAGEID:
+                if (b1.getMessageid() == null && b2.getMessageid() != null) {
                     iReturn = -1;
-                } else if (b1.getTaskid() == null && b2.getTaskid() == null) {
+                } else if (b1.getMessageid() == null && b2.getMessageid() == null) {
                     iReturn = 0;
-                } else if (b1.getTaskid() != null && b2.getTaskid() == null) {
+                } else if (b1.getMessageid() != null && b2.getMessageid() == null) {
                     iReturn = 1;
                 } else { 
-                    iReturn = b1.getTaskid().compareTo(b2.getTaskid());
+                    iReturn = b1.getMessageid().compareTo(b2.getMessageid());
                 }
                 break;
-            case TaskManager.ID_NAME:
+            case MessageManager.ID_NAME:
                 if (b1.getName() == null && b2.getName() != null) {
                     iReturn = -1;
                 } else if (b1.getName() == null && b2.getName() == null) {
@@ -127,18 +123,18 @@ public class TaskComparator implements Comparator
                     iReturn = b1.getName().compareTo(b2.getName());
                 }
                 break;
-            case TaskManager.ID_DEPID:
-                if (b1.getDepid() == null && b2.getDepid() != null) {
+            case MessageManager.ID_GUESTID:
+                if (b1.getGuestid() == null && b2.getGuestid() != null) {
                     iReturn = -1;
-                } else if (b1.getDepid() == null && b2.getDepid() == null) {
+                } else if (b1.getGuestid() == null && b2.getGuestid() == null) {
                     iReturn = 0;
-                } else if (b1.getDepid() != null && b2.getDepid() == null) {
+                } else if (b1.getGuestid() != null && b2.getGuestid() == null) {
                     iReturn = 1;
                 } else { 
-                    iReturn = b1.getDepid().compareTo(b2.getDepid());
+                    iReturn = b1.getGuestid().compareTo(b2.getGuestid());
                 }
                 break;
-            case TaskManager.ID_STID:
+            case MessageManager.ID_STID:
                 if (b1.getStid() == null && b2.getStid() != null) {
                     iReturn = -1;
                 } else if (b1.getStid() == null && b2.getStid() == null) {
@@ -149,18 +145,7 @@ public class TaskComparator implements Comparator
                     iReturn = b1.getStid().compareTo(b2.getStid());
                 }
                 break;
-            case TaskManager.ID_ALERTID:
-                if (b1.getAlertid() == null && b2.getAlertid() != null) {
-                    iReturn = -1;
-                } else if (b1.getAlertid() == null && b2.getAlertid() == null) {
-                    iReturn = 0;
-                } else if (b1.getAlertid() != null && b2.getAlertid() == null) {
-                    iReturn = 1;
-                } else { 
-                    iReturn = b1.getAlertid().compareTo(b2.getAlertid());
-                }
-                break;
-            case TaskManager.ID_REGBYID:
+            case MessageManager.ID_REGBYID:
                 if (b1.getRegbyid() == null && b2.getRegbyid() != null) {
                     iReturn = -1;
                 } else if (b1.getRegbyid() == null && b2.getRegbyid() == null) {
@@ -171,7 +156,7 @@ public class TaskComparator implements Comparator
                     iReturn = b1.getRegbyid().compareTo(b2.getRegbyid());
                 }
                 break;
-            case TaskManager.ID_REGDATE:
+            case MessageManager.ID_REGDATE:
                 if (b1.getRegdate() == null && b2.getRegdate() != null) {
                     iReturn = -1;
                 } else if (b1.getRegdate() == null && b2.getRegdate() == null) {
@@ -182,18 +167,7 @@ public class TaskComparator implements Comparator
                     iReturn = b1.getRegdate().compareTo(b2.getRegdate());
                 }
                 break;
-            case TaskManager.ID_DUEDATE:
-                if (b1.getDuedate() == null && b2.getDuedate() != null) {
-                    iReturn = -1;
-                } else if (b1.getDuedate() == null && b2.getDuedate() == null) {
-                    iReturn = 0;
-                } else if (b1.getDuedate() != null && b2.getDuedate() == null) {
-                    iReturn = 1;
-                } else { 
-                    iReturn = b1.getDuedate().compareTo(b2.getDuedate());
-                }
-                break;
-            case TaskManager.ID_RESERVATIONID:
+            case MessageManager.ID_RESERVATIONID:
                 if (b1.getReservationid() == null && b2.getReservationid() != null) {
                     iReturn = -1;
                 } else if (b1.getReservationid() == null && b2.getReservationid() == null) {

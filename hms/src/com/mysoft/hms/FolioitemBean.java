@@ -103,6 +103,18 @@ public class FolioitemBean
     private boolean reservationroomid_is_modified = false;
     private boolean reservationroomid_is_initialized = false;
     
+    private Integer adult;
+    private boolean adult_is_modified = false;
+    private boolean adult_is_initialized = false;
+    
+    private Integer child;
+    private boolean child_is_modified = false;
+    private boolean child_is_initialized = false;
+    
+    private Integer ratetypeid;
+    private boolean ratetypeid_is_modified = false;
+    private boolean ratetypeid_is_initialized = false;
+    
     private boolean _isNew = true;
     
     /**
@@ -1445,6 +1457,207 @@ public class FolioitemBean
     }
 
     /**
+     * Getter method for adult.
+     * <br>
+     * Meta Data Information (in progress):
+     * <ul>
+     * <li>full name: folioitem.adult
+     * <li>column size: 10
+     * <li>jdbc type returned by the driver: Types.INTEGER
+     * </ul>
+     *
+     * @return the value of adult
+     */
+    public Integer getAdult()
+    {
+        return adult; 
+    }
+
+    /**
+     * Setter method for adult.
+     * <br>
+     * The new value is set only if compareTo() says it is different,
+     * or if one of either the new value or the current value is null.
+     * In case the new value is different, it is set and the field is marked as 'modified'.
+     *
+     * @param newVal the new value to be assigned to adult
+     */
+    public void setAdult(Integer newVal) {
+        if ((newVal != null && this.adult != null && (newVal.compareTo(this.adult) == 0)) || 
+            (newVal == null && this.adult == null && adult_is_initialized)) {
+            return; 
+        } 
+        this.adult = newVal; 
+        adult_is_modified = true; 
+        adult_is_initialized = true; 
+    }
+
+    /**
+     * Setter method for adult.
+     * <br>
+     * Convenient for those who do not want to deal with Objects for primary types.
+     *
+     * @param newVal the new value to be assigned to adult
+     */
+    public void setAdult(int newVal) {
+        setAdult(new Integer(newVal));
+    }
+
+    /**
+     * Determines if the adult has been modified.
+     *
+     * @return true if the field has been modified, false if the field has not been modified
+     */
+    public boolean isAdultModified() {
+        return adult_is_modified; 
+    }
+
+    /**
+     * Determines if the adult has been initialized.
+     * <br>
+     * It is useful to determine if a field is null on purpose or just because it has not been initialized.
+     *
+     * @return true if the field has been initialized, false otherwise
+     */
+    public boolean isAdultInitialized() {
+        return adult_is_initialized; 
+    }
+
+    /**
+     * Getter method for child.
+     * <br>
+     * Meta Data Information (in progress):
+     * <ul>
+     * <li>full name: folioitem.child
+     * <li>column size: 10
+     * <li>jdbc type returned by the driver: Types.INTEGER
+     * </ul>
+     *
+     * @return the value of child
+     */
+    public Integer getChild()
+    {
+        return child; 
+    }
+
+    /**
+     * Setter method for child.
+     * <br>
+     * The new value is set only if compareTo() says it is different,
+     * or if one of either the new value or the current value is null.
+     * In case the new value is different, it is set and the field is marked as 'modified'.
+     *
+     * @param newVal the new value to be assigned to child
+     */
+    public void setChild(Integer newVal) {
+        if ((newVal != null && this.child != null && (newVal.compareTo(this.child) == 0)) || 
+            (newVal == null && this.child == null && child_is_initialized)) {
+            return; 
+        } 
+        this.child = newVal; 
+        child_is_modified = true; 
+        child_is_initialized = true; 
+    }
+
+    /**
+     * Setter method for child.
+     * <br>
+     * Convenient for those who do not want to deal with Objects for primary types.
+     *
+     * @param newVal the new value to be assigned to child
+     */
+    public void setChild(int newVal) {
+        setChild(new Integer(newVal));
+    }
+
+    /**
+     * Determines if the child has been modified.
+     *
+     * @return true if the field has been modified, false if the field has not been modified
+     */
+    public boolean isChildModified() {
+        return child_is_modified; 
+    }
+
+    /**
+     * Determines if the child has been initialized.
+     * <br>
+     * It is useful to determine if a field is null on purpose or just because it has not been initialized.
+     *
+     * @return true if the field has been initialized, false otherwise
+     */
+    public boolean isChildInitialized() {
+        return child_is_initialized; 
+    }
+
+    /**
+     * Getter method for ratetypeid.
+     * <br>
+     * Meta Data Information (in progress):
+     * <ul>
+     * <li>full name: folioitem.ratetypeid
+     * <li>column size: 10
+     * <li>jdbc type returned by the driver: Types.INTEGER
+     * </ul>
+     *
+     * @return the value of ratetypeid
+     */
+    public Integer getRatetypeid()
+    {
+        return ratetypeid; 
+    }
+
+    /**
+     * Setter method for ratetypeid.
+     * <br>
+     * The new value is set only if compareTo() says it is different,
+     * or if one of either the new value or the current value is null.
+     * In case the new value is different, it is set and the field is marked as 'modified'.
+     *
+     * @param newVal the new value to be assigned to ratetypeid
+     */
+    public void setRatetypeid(Integer newVal) {
+        if ((newVal != null && this.ratetypeid != null && (newVal.compareTo(this.ratetypeid) == 0)) || 
+            (newVal == null && this.ratetypeid == null && ratetypeid_is_initialized)) {
+            return; 
+        } 
+        this.ratetypeid = newVal; 
+        ratetypeid_is_modified = true; 
+        ratetypeid_is_initialized = true; 
+    }
+
+    /**
+     * Setter method for ratetypeid.
+     * <br>
+     * Convenient for those who do not want to deal with Objects for primary types.
+     *
+     * @param newVal the new value to be assigned to ratetypeid
+     */
+    public void setRatetypeid(int newVal) {
+        setRatetypeid(new Integer(newVal));
+    }
+
+    /**
+     * Determines if the ratetypeid has been modified.
+     *
+     * @return true if the field has been modified, false if the field has not been modified
+     */
+    public boolean isRatetypeidModified() {
+        return ratetypeid_is_modified; 
+    }
+
+    /**
+     * Determines if the ratetypeid has been initialized.
+     * <br>
+     * It is useful to determine if a field is null on purpose or just because it has not been initialized.
+     *
+     * @return true if the field has been initialized, false otherwise
+     */
+    public boolean isRatetypeidInitialized() {
+        return ratetypeid_is_initialized; 
+    }
+
+    /**
      * Determines if the current object is new.
      *
      * @return true if the current object is new, false if the object is not new
@@ -1489,7 +1702,10 @@ public class FolioitemBean
 		note_is_modified || 
 		manual_is_modified || 
 		roomoper_is_modified || 
-		reservationroomid_is_modified;
+		reservationroomid_is_modified || 
+		adult_is_modified || 
+		child_is_modified || 
+		ratetypeid_is_modified;
     }
 
     /**
@@ -1516,6 +1732,9 @@ public class FolioitemBean
         manual_is_modified = false;
         roomoper_is_modified = false;
         reservationroomid_is_modified = false;
+        adult_is_modified = false;
+        child_is_modified = false;
+        ratetypeid_is_modified = false;
     }
 
     /**
@@ -1544,6 +1763,9 @@ public class FolioitemBean
         setManual(bean.getManual());
         setRoomoper(bean.getRoomoper());
         setReservationroomid(bean.getReservationroomid());
+        setAdult(bean.getAdult());
+        setChild(bean.getChild());
+        setRatetypeid(bean.getRatetypeid());
     }
 
     /**
@@ -1573,6 +1795,9 @@ public class FolioitemBean
                  + "\n - folioitem.manual = " + (manual_is_initialized ? ("[" + (manual == null ? null : manual.toString()) + "]") : "not initialized") + ""
                  + "\n - folioitem.roomoper = " + (roomoper_is_initialized ? ("[" + (roomoper == null ? null : roomoper.toString()) + "]") : "not initialized") + ""
                  + "\n - folioitem.reservationroomid = " + (reservationroomid_is_initialized ? ("[" + (reservationroomid == null ? null : reservationroomid.toString()) + "]") : "not initialized") + ""
+                 + "\n - folioitem.adult = " + (adult_is_initialized ? ("[" + (adult == null ? null : adult.toString()) + "]") : "not initialized") + ""
+                 + "\n - folioitem.child = " + (child_is_initialized ? ("[" + (child == null ? null : child.toString()) + "]") : "not initialized") + ""
+                 + "\n - folioitem.ratetypeid = " + (ratetypeid_is_initialized ? ("[" + (ratetypeid == null ? null : ratetypeid.toString()) + "]") : "not initialized") + ""
             ;
     }
 

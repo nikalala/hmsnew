@@ -44,12 +44,12 @@
         "noshow",                       //  7
         "assignroom",                   //  8
         "unassignroom",                 //  9
-        "remarks",                      // 10
+        "setMessages",                  // 10
         "setTask",                     // 11
         "setPreference",                // 12
         "StopRoomMove",                 // 13
         "ExchangeRoom",                 // 14
-        "void"                          // 15
+        "void"
     };
     
     String cmenunames[] = {
@@ -70,6 +70,7 @@
         "ოთახის შეცვლა",                // 14
         "ტრანზაქციის გაუქმება"          // 15
     };
+
     String cmenuicons[] = {
         "რედაქტირება",                  //  0
         "ოთახის გადატანა",              //  1
@@ -119,6 +120,7 @@
             {true, true, true, true, false, false, true, true, false, true, true, true, true, false, true, true},                   // 12
             // დღიური რეზერვაცია 9 + roomid is null
             {true, true, true, true, false, false, true, true, true, false, true, true, true, false, true, true}                    // 13
+
 
     };
 
