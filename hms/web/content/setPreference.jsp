@@ -4,6 +4,7 @@
 
 <%
     PreferencetypeBean[] pTypes = PreferencetypeManager.getInstance().loadByWhere("");
+    String isHotelStatus = request.getParameter("ishotelstatus");
     String rid = (String) request.getParameter("reservationid");
 
     String roomid = "";
@@ -145,7 +146,9 @@
         $.post("content/execute.jsp?query=" + encodeURIComponent(sql), {}, function () {
             loader.hide();
             if($("#list_preferences")[0].rows.length == 2){
+                <% if (!CodeHelpers.isNullOrEmpty(isHotelStatus)){ %>
                 getBody('stayviewleft','hotelstatus','სასტუმროს სტატუსი','res1','',true);
+                <% } %>
             }
             resetAll();
         });
