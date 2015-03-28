@@ -106,7 +106,7 @@ String vouchernum = (reserv.getVoucher() == null) ? "":reserv.getVoucher();
 
 int prefCount = PreferenceManager.getInstance().countWhere("where reservationid = " + reserv.getReservationid());
 int taskfCount = TaskManager.getInstance().countWhere("where reservationid = " + reserv.getReservationid());
-
+int messageCount = MessageManager.getInstance().countWhere("where reservationid = " + reserv.getReservationid());
 %>
 <script>
     
@@ -464,7 +464,7 @@ int taskfCount = TaskManager.getInstance().countWhere("where reservationid = " +
                             <td align="center" style="border: 1px solid #C8C8C8;" width='20%'><b>საკრედიტო ბარათის ინფორმაცია</b></td>
                             <td align="center" style="border: 1px solid #C8C8C8; cursor: pointer;" width='10%' onclick="newWindowWithParams('setPreference','უპირატესობის მინიჭება','?reservationid=<%=rroom.getReservationroomid()%>')"><b>უპირატესობები (<%=prefCount%>)</b></td>
                             <td align="center" style="border: 1px solid #C8C8C8; cursor: pointer;" width='10%' onclick="newWindowWithParams('setTask','დავალებები','?reservationid=<%=rroom.getReservationroomid()%>')"><b>დავალებები (<%=taskfCount%>)</b></td>
-                            <td align="center" style="border: 1px solid #C8C8C8;" width='10%'><b>შეტყობინებები</b></td>
+                            <td align="center" style="border: 1px solid #C8C8C8; cursor: pointer;" width='10%' onclick="newWindowWithParams('setMessages','შეტყობინებები','?reservationid=<%=rroom.getReservationroomid()%>')"><b>შეტყობინებები (<%=messageCount%>)</b></td>
                         </tr>
                     </tbody>
                 </table>

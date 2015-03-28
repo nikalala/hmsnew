@@ -17,27 +17,27 @@ package com.mysoft.hms;
 // imports- 
 
 
-public class ReportBean
+public class MessageBean
 // extends+ 
 
 // extends- 
 
 {
-    private Integer reportid;
-    private boolean reportid_is_modified = false;
-    private boolean reportid_is_initialized = false;
+    private Integer messageid;
+    private boolean messageid_is_modified = false;
+    private boolean messageid_is_initialized = false;
     
     private String name;
     private boolean name_is_modified = false;
     private boolean name_is_initialized = false;
     
-    private String displayname;
-    private boolean displayname_is_modified = false;
-    private boolean displayname_is_initialized = false;
+    private Long guestid;
+    private boolean guestid_is_modified = false;
+    private boolean guestid_is_initialized = false;
     
-    private String sqlquery;
-    private boolean sqlquery_is_modified = false;
-    private boolean sqlquery_is_initialized = false;
+    private Integer stid;
+    private boolean stid_is_modified = false;
+    private boolean stid_is_initialized = false;
     
     private Integer regbyid;
     private boolean regbyid_is_modified = false;
@@ -47,9 +47,17 @@ public class ReportBean
     private boolean regdate_is_modified = false;
     private boolean regdate_is_initialized = false;
     
-    private Integer repcatid;
-    private boolean repcatid_is_modified = false;
-    private boolean repcatid_is_initialized = false;
+    private Boolean active;
+    private boolean active_is_modified = false;
+    private boolean active_is_initialized = false;
+    
+    private Boolean deleted;
+    private boolean deleted_is_modified = false;
+    private boolean deleted_is_initialized = false;
+    
+    private Integer reservationid;
+    private boolean reservationid_is_modified = false;
+    private boolean reservationid_is_initialized = false;
     
     private boolean _isNew = true;
     
@@ -57,76 +65,76 @@ public class ReportBean
      * Do not use this constructor directly, please use the factory method
      * available in the associated manager.
      */
-    ReportBean()
+    MessageBean()
     {
     }
     
     /**
-     * Getter method for reportid.
+     * Getter method for messageid.
      * <br>
      * PRIMARY KEY.<br>
      * Meta Data Information (in progress):
      * <ul>
-     * <li>full name: report.reportid
+     * <li>full name: message.messageid
      * <li>column size: 10
      * <li>jdbc type returned by the driver: Types.INTEGER
      * </ul>
      *
-     * @return the value of reportid
+     * @return the value of messageid
      */
-    public Integer getReportid()
+    public Integer getMessageid()
     {
-        return reportid; 
+        return messageid; 
     }
 
     /**
-     * Setter method for reportid.
+     * Setter method for messageid.
      * <br>
      * The new value is set only if compareTo() says it is different,
      * or if one of either the new value or the current value is null.
      * In case the new value is different, it is set and the field is marked as 'modified'.
      *
-     * @param newVal the new value to be assigned to reportid
+     * @param newVal the new value to be assigned to messageid
      */
-    public void setReportid(Integer newVal) {
-        if ((newVal != null && this.reportid != null && (newVal.compareTo(this.reportid) == 0)) || 
-            (newVal == null && this.reportid == null && reportid_is_initialized)) {
+    public void setMessageid(Integer newVal) {
+        if ((newVal != null && this.messageid != null && (newVal.compareTo(this.messageid) == 0)) || 
+            (newVal == null && this.messageid == null && messageid_is_initialized)) {
             return; 
         } 
-        this.reportid = newVal; 
-        reportid_is_modified = true; 
-        reportid_is_initialized = true; 
+        this.messageid = newVal; 
+        messageid_is_modified = true; 
+        messageid_is_initialized = true; 
     }
 
     /**
-     * Setter method for reportid.
+     * Setter method for messageid.
      * <br>
      * Convenient for those who do not want to deal with Objects for primary types.
      *
-     * @param newVal the new value to be assigned to reportid
+     * @param newVal the new value to be assigned to messageid
      */
-    public void setReportid(int newVal) {
-        setReportid(new Integer(newVal));
+    public void setMessageid(int newVal) {
+        setMessageid(new Integer(newVal));
     }
 
     /**
-     * Determines if the reportid has been modified.
+     * Determines if the messageid has been modified.
      *
      * @return true if the field has been modified, false if the field has not been modified
      */
-    public boolean isReportidModified() {
-        return reportid_is_modified; 
+    public boolean isMessageidModified() {
+        return messageid_is_modified; 
     }
 
     /**
-     * Determines if the reportid has been initialized.
+     * Determines if the messageid has been initialized.
      * <br>
      * It is useful to determine if a field is null on purpose or just because it has not been initialized.
      *
      * @return true if the field has been initialized, false otherwise
      */
-    public boolean isReportidInitialized() {
-        return reportid_is_initialized; 
+    public boolean isMessageidInitialized() {
+        return messageid_is_initialized; 
     }
 
     /**
@@ -134,8 +142,7 @@ public class ReportBean
      * <br>
      * Meta Data Information (in progress):
      * <ul>
-     * <li>full name: report.name
-     * <li>comments: ??????????
+     * <li>full name: message.name
      * <li>column size: 2147483647
      * <li>jdbc type returned by the driver: Types.VARCHAR
      * </ul>
@@ -187,117 +194,137 @@ public class ReportBean
     }
 
     /**
-     * Getter method for displayname.
+     * Getter method for guestid.
      * <br>
      * Meta Data Information (in progress):
      * <ul>
-     * <li>full name: report.displayname
-     * <li>comments: ???????
-     * <li>column size: 2147483647
-     * <li>jdbc type returned by the driver: Types.VARCHAR
+     * <li>full name: message.guestid
+     * <li>column size: 19
+     * <li>jdbc type returned by the driver: Types.BIGINT
      * </ul>
      *
-     * @return the value of displayname
+     * @return the value of guestid
      */
-    public String getDisplayname()
+    public Long getGuestid()
     {
-        return displayname; 
+        return guestid; 
     }
 
     /**
-     * Setter method for displayname.
+     * Setter method for guestid.
      * <br>
      * The new value is set only if compareTo() says it is different,
      * or if one of either the new value or the current value is null.
      * In case the new value is different, it is set and the field is marked as 'modified'.
      *
-     * @param newVal the new value to be assigned to displayname
+     * @param newVal the new value to be assigned to guestid
      */
-    public void setDisplayname(String newVal) {
-        if ((newVal != null && this.displayname != null && (newVal.compareTo(this.displayname) == 0)) || 
-            (newVal == null && this.displayname == null && displayname_is_initialized)) {
+    public void setGuestid(Long newVal) {
+        if ((newVal != null && this.guestid != null && (newVal.compareTo(this.guestid) == 0)) || 
+            (newVal == null && this.guestid == null && guestid_is_initialized)) {
             return; 
         } 
-        this.displayname = newVal; 
-        displayname_is_modified = true; 
-        displayname_is_initialized = true; 
+        this.guestid = newVal; 
+        guestid_is_modified = true; 
+        guestid_is_initialized = true; 
     }
 
     /**
-     * Determines if the displayname has been modified.
+     * Setter method for guestid.
+     * <br>
+     * Convenient for those who do not want to deal with Objects for primary types.
+     *
+     * @param newVal the new value to be assigned to guestid
+     */
+    public void setGuestid(long newVal) {
+        setGuestid(new Long(newVal));
+    }
+
+    /**
+     * Determines if the guestid has been modified.
      *
      * @return true if the field has been modified, false if the field has not been modified
      */
-    public boolean isDisplaynameModified() {
-        return displayname_is_modified; 
+    public boolean isGuestidModified() {
+        return guestid_is_modified; 
     }
 
     /**
-     * Determines if the displayname has been initialized.
+     * Determines if the guestid has been initialized.
      * <br>
      * It is useful to determine if a field is null on purpose or just because it has not been initialized.
      *
      * @return true if the field has been initialized, false otherwise
      */
-    public boolean isDisplaynameInitialized() {
-        return displayname_is_initialized; 
+    public boolean isGuestidInitialized() {
+        return guestid_is_initialized; 
     }
 
     /**
-     * Getter method for sqlquery.
+     * Getter method for stid.
      * <br>
      * Meta Data Information (in progress):
      * <ul>
-     * <li>full name: report.sqlquery
-     * <li>comments: SQL ????
-     * <li>column size: 2147483647
-     * <li>jdbc type returned by the driver: Types.VARCHAR
+     * <li>full name: message.stid
+     * <li>column size: 10
+     * <li>jdbc type returned by the driver: Types.INTEGER
      * </ul>
      *
-     * @return the value of sqlquery
+     * @return the value of stid
      */
-    public String getSqlquery()
+    public Integer getStid()
     {
-        return sqlquery; 
+        return stid; 
     }
 
     /**
-     * Setter method for sqlquery.
+     * Setter method for stid.
      * <br>
      * The new value is set only if compareTo() says it is different,
      * or if one of either the new value or the current value is null.
      * In case the new value is different, it is set and the field is marked as 'modified'.
      *
-     * @param newVal the new value to be assigned to sqlquery
+     * @param newVal the new value to be assigned to stid
      */
-    public void setSqlquery(String newVal) {
-        if ((newVal != null && this.sqlquery != null && (newVal.compareTo(this.sqlquery) == 0)) || 
-            (newVal == null && this.sqlquery == null && sqlquery_is_initialized)) {
+    public void setStid(Integer newVal) {
+        if ((newVal != null && this.stid != null && (newVal.compareTo(this.stid) == 0)) || 
+            (newVal == null && this.stid == null && stid_is_initialized)) {
             return; 
         } 
-        this.sqlquery = newVal; 
-        sqlquery_is_modified = true; 
-        sqlquery_is_initialized = true; 
+        this.stid = newVal; 
+        stid_is_modified = true; 
+        stid_is_initialized = true; 
     }
 
     /**
-     * Determines if the sqlquery has been modified.
+     * Setter method for stid.
+     * <br>
+     * Convenient for those who do not want to deal with Objects for primary types.
+     *
+     * @param newVal the new value to be assigned to stid
+     */
+    public void setStid(int newVal) {
+        setStid(new Integer(newVal));
+    }
+
+    /**
+     * Determines if the stid has been modified.
      *
      * @return true if the field has been modified, false if the field has not been modified
      */
-    public boolean isSqlqueryModified() {
-        return sqlquery_is_modified; 
+    public boolean isStidModified() {
+        return stid_is_modified; 
     }
 
     /**
-     * Determines if the sqlquery has been initialized.
+     * Determines if the stid has been initialized.
      * <br>
      * It is useful to determine if a field is null on purpose or just because it has not been initialized.
      *
      * @return true if the field has been initialized, false otherwise
      */
-    public boolean isSqlqueryInitialized() {
-        return sqlquery_is_initialized; 
+    public boolean isStidInitialized() {
+        return stid_is_initialized; 
     }
 
     /**
@@ -305,9 +332,8 @@ public class ReportBean
      * <br>
      * Meta Data Information (in progress):
      * <ul>
-     * <li>full name: report.regbyid
+     * <li>full name: message.regbyid
      * <li> foreign key: personnel.personnelid
-     * <li>comments: ??????
      * <li>column size: 10
      * <li>jdbc type returned by the driver: Types.INTEGER
      * </ul>
@@ -374,8 +400,7 @@ public class ReportBean
      * <br>
      * Meta Data Information (in progress):
      * <ul>
-     * <li>full name: report.regdate
-     * <li>comments: ???. ??????
+     * <li>full name: message.regdate
      * <li>default value: now()
      * <li>column size: 29
      * <li>jdbc type returned by the driver: Types.TIMESTAMP
@@ -439,71 +464,204 @@ public class ReportBean
     }
 
     /**
-     * Getter method for repcatid.
+     * Getter method for active.
      * <br>
      * Meta Data Information (in progress):
      * <ul>
-     * <li>full name: report.repcatid
-     * <li>default value: 1
-     * <li>column size: 10
-     * <li>jdbc type returned by the driver: Types.INTEGER
+     * <li>full name: message.active
+     * <li>default value: true
+     * <li>column size: 1
+     * <li>jdbc type returned by the driver: Types.BIT
      * </ul>
      *
-     * @return the value of repcatid
+     * @return the value of active
      */
-    public Integer getRepcatid()
+    public Boolean getActive()
     {
-        return repcatid; 
+        return active; 
     }
 
     /**
-     * Setter method for repcatid.
+     * Setter method for active.
      * <br>
-     * The new value is set only if compareTo() says it is different,
-     * or if one of either the new value or the current value is null.
-     * In case the new value is different, it is set and the field is marked as 'modified'.
+     * Attention, there will be no comparison with current value which
+     * means calling this method will mark the field as 'modified' in all cases.
      *
-     * @param newVal the new value to be assigned to repcatid
+     * @param newVal the new value to be assigned to active
      */
-    public void setRepcatid(Integer newVal) {
-        if ((newVal != null && this.repcatid != null && (newVal.compareTo(this.repcatid) == 0)) || 
-            (newVal == null && this.repcatid == null && repcatid_is_initialized)) {
+    public void setActive(Boolean newVal) {
+        if ((newVal != null && this.active != null && newVal.equals(this.active)) || 
+            (newVal == null && this.active == null && active_is_initialized)) {
             return; 
         } 
-        this.repcatid = newVal; 
-        repcatid_is_modified = true; 
-        repcatid_is_initialized = true; 
+        this.active = newVal; 
+        active_is_modified = true; 
+        active_is_initialized = true; 
     }
 
     /**
-     * Setter method for repcatid.
+     * Setter method for active.
      * <br>
      * Convenient for those who do not want to deal with Objects for primary types.
      *
-     * @param newVal the new value to be assigned to repcatid
+     * @param newVal the new value to be assigned to active
      */
-    public void setRepcatid(int newVal) {
-        setRepcatid(new Integer(newVal));
+    public void setActive(boolean newVal) {
+        setActive(new Boolean(newVal));
     }
 
     /**
-     * Determines if the repcatid has been modified.
+     * Determines if the active has been modified.
      *
      * @return true if the field has been modified, false if the field has not been modified
      */
-    public boolean isRepcatidModified() {
-        return repcatid_is_modified; 
+    public boolean isActiveModified() {
+        return active_is_modified; 
     }
 
     /**
-     * Determines if the repcatid has been initialized.
+     * Determines if the active has been initialized.
      * <br>
      * It is useful to determine if a field is null on purpose or just because it has not been initialized.
      *
      * @return true if the field has been initialized, false otherwise
      */
-    public boolean isRepcatidInitialized() {
-        return repcatid_is_initialized; 
+    public boolean isActiveInitialized() {
+        return active_is_initialized; 
+    }
+
+    /**
+     * Getter method for deleted.
+     * <br>
+     * Meta Data Information (in progress):
+     * <ul>
+     * <li>full name: message.deleted
+     * <li>default value: false
+     * <li>column size: 1
+     * <li>jdbc type returned by the driver: Types.BIT
+     * </ul>
+     *
+     * @return the value of deleted
+     */
+    public Boolean getDeleted()
+    {
+        return deleted; 
+    }
+
+    /**
+     * Setter method for deleted.
+     * <br>
+     * Attention, there will be no comparison with current value which
+     * means calling this method will mark the field as 'modified' in all cases.
+     *
+     * @param newVal the new value to be assigned to deleted
+     */
+    public void setDeleted(Boolean newVal) {
+        if ((newVal != null && this.deleted != null && newVal.equals(this.deleted)) || 
+            (newVal == null && this.deleted == null && deleted_is_initialized)) {
+            return; 
+        } 
+        this.deleted = newVal; 
+        deleted_is_modified = true; 
+        deleted_is_initialized = true; 
+    }
+
+    /**
+     * Setter method for deleted.
+     * <br>
+     * Convenient for those who do not want to deal with Objects for primary types.
+     *
+     * @param newVal the new value to be assigned to deleted
+     */
+    public void setDeleted(boolean newVal) {
+        setDeleted(new Boolean(newVal));
+    }
+
+    /**
+     * Determines if the deleted has been modified.
+     *
+     * @return true if the field has been modified, false if the field has not been modified
+     */
+    public boolean isDeletedModified() {
+        return deleted_is_modified; 
+    }
+
+    /**
+     * Determines if the deleted has been initialized.
+     * <br>
+     * It is useful to determine if a field is null on purpose or just because it has not been initialized.
+     *
+     * @return true if the field has been initialized, false otherwise
+     */
+    public boolean isDeletedInitialized() {
+        return deleted_is_initialized; 
+    }
+
+    /**
+     * Getter method for reservationid.
+     * <br>
+     * Meta Data Information (in progress):
+     * <ul>
+     * <li>full name: message.reservationid
+     * <li>column size: 10
+     * <li>jdbc type returned by the driver: Types.INTEGER
+     * </ul>
+     *
+     * @return the value of reservationid
+     */
+    public Integer getReservationid()
+    {
+        return reservationid; 
+    }
+
+    /**
+     * Setter method for reservationid.
+     * <br>
+     * The new value is set only if compareTo() says it is different,
+     * or if one of either the new value or the current value is null.
+     * In case the new value is different, it is set and the field is marked as 'modified'.
+     *
+     * @param newVal the new value to be assigned to reservationid
+     */
+    public void setReservationid(Integer newVal) {
+        if ((newVal != null && this.reservationid != null && (newVal.compareTo(this.reservationid) == 0)) || 
+            (newVal == null && this.reservationid == null && reservationid_is_initialized)) {
+            return; 
+        } 
+        this.reservationid = newVal; 
+        reservationid_is_modified = true; 
+        reservationid_is_initialized = true; 
+    }
+
+    /**
+     * Setter method for reservationid.
+     * <br>
+     * Convenient for those who do not want to deal with Objects for primary types.
+     *
+     * @param newVal the new value to be assigned to reservationid
+     */
+    public void setReservationid(int newVal) {
+        setReservationid(new Integer(newVal));
+    }
+
+    /**
+     * Determines if the reservationid has been modified.
+     *
+     * @return true if the field has been modified, false if the field has not been modified
+     */
+    public boolean isReservationidModified() {
+        return reservationid_is_modified; 
+    }
+
+    /**
+     * Determines if the reservationid has been initialized.
+     * <br>
+     * It is useful to determine if a field is null on purpose or just because it has not been initialized.
+     *
+     * @return true if the field has been initialized, false otherwise
+     */
+    public boolean isReservationidInitialized() {
+        return reservationid_is_initialized; 
     }
 
     /**
@@ -532,26 +690,30 @@ public class ReportBean
      * @return true if the object has been modified, false if the object has not been modified
      */
     public boolean isModified() {
-        return reportid_is_modified || 
+        return messageid_is_modified || 
 		name_is_modified || 
-		displayname_is_modified || 
-		sqlquery_is_modified || 
+		guestid_is_modified || 
+		stid_is_modified || 
 		regbyid_is_modified || 
 		regdate_is_modified || 
-		repcatid_is_modified;
+		active_is_modified || 
+		deleted_is_modified || 
+		reservationid_is_modified;
     }
 
     /**
      * Resets the object modification status to 'not modified'.
      */
     public void resetIsModified() {
-        reportid_is_modified = false;
+        messageid_is_modified = false;
         name_is_modified = false;
-        displayname_is_modified = false;
-        sqlquery_is_modified = false;
+        guestid_is_modified = false;
+        stid_is_modified = false;
         regbyid_is_modified = false;
         regdate_is_modified = false;
-        repcatid_is_modified = false;
+        active_is_modified = false;
+        deleted_is_modified = false;
+        reservationid_is_modified = false;
     }
 
     /**
@@ -559,14 +721,16 @@ public class ReportBean
      *
      * @param bean the bean to copy into the current bean
      */
-    public void copy(ReportBean bean) {
-        setReportid(bean.getReportid());
+    public void copy(MessageBean bean) {
+        setMessageid(bean.getMessageid());
         setName(bean.getName());
-        setDisplayname(bean.getDisplayname());
-        setSqlquery(bean.getSqlquery());
+        setGuestid(bean.getGuestid());
+        setStid(bean.getStid());
         setRegbyid(bean.getRegbyid());
         setRegdate(bean.getRegdate());
-        setRepcatid(bean.getRepcatid());
+        setActive(bean.getActive());
+        setDeleted(bean.getDeleted());
+        setReservationid(bean.getReservationid());
     }
 
     /**
@@ -575,14 +739,16 @@ public class ReportBean
      * @return the object as a string
      */
     public String toString() {
-        return   "\n[report] "
-                 + "\n - report.reportid = " + (reportid_is_initialized ? ("[" + (reportid == null ? null : reportid.toString()) + "]") : "not initialized") + ""
-                 + "\n - report.name = " + (name_is_initialized ? ("[" + (name == null ? null : name.toString()) + "]") : "not initialized") + ""
-                 + "\n - report.displayname = " + (displayname_is_initialized ? ("[" + (displayname == null ? null : displayname.toString()) + "]") : "not initialized") + ""
-                 + "\n - report.sqlquery = " + (sqlquery_is_initialized ? ("[" + (sqlquery == null ? null : sqlquery.toString()) + "]") : "not initialized") + ""
-                 + "\n - report.regbyid = " + (regbyid_is_initialized ? ("[" + (regbyid == null ? null : regbyid.toString()) + "]") : "not initialized") + ""
-                 + "\n - report.regdate = " + (regdate_is_initialized ? ("[" + (regdate == null ? null : regdate.toString()) + "]") : "not initialized") + ""
-                 + "\n - report.repcatid = " + (repcatid_is_initialized ? ("[" + (repcatid == null ? null : repcatid.toString()) + "]") : "not initialized") + ""
+        return   "\n[message] "
+                 + "\n - message.messageid = " + (messageid_is_initialized ? ("[" + (messageid == null ? null : messageid.toString()) + "]") : "not initialized") + ""
+                 + "\n - message.name = " + (name_is_initialized ? ("[" + (name == null ? null : name.toString()) + "]") : "not initialized") + ""
+                 + "\n - message.guestid = " + (guestid_is_initialized ? ("[" + (guestid == null ? null : guestid.toString()) + "]") : "not initialized") + ""
+                 + "\n - message.stid = " + (stid_is_initialized ? ("[" + (stid == null ? null : stid.toString()) + "]") : "not initialized") + ""
+                 + "\n - message.regbyid = " + (regbyid_is_initialized ? ("[" + (regbyid == null ? null : regbyid.toString()) + "]") : "not initialized") + ""
+                 + "\n - message.regdate = " + (regdate_is_initialized ? ("[" + (regdate == null ? null : regdate.toString()) + "]") : "not initialized") + ""
+                 + "\n - message.active = " + (active_is_initialized ? ("[" + (active == null ? null : active.toString()) + "]") : "not initialized") + ""
+                 + "\n - message.deleted = " + (deleted_is_initialized ? ("[" + (deleted == null ? null : deleted.toString()) + "]") : "not initialized") + ""
+                 + "\n - message.reservationid = " + (reservationid_is_initialized ? ("[" + (reservationid == null ? null : reservationid.toString()) + "]") : "not initialized") + ""
             ;
     }
 

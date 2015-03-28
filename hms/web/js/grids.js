@@ -819,6 +819,39 @@ taskGrid = {
     }
 };
 
+var messageGridModel = [];
+messageGridModel.push(
+    colModelGenerator(130, 'message', 0),
+    colModelGenerator(120, 'guest', 0),
+    colModelGenerator(120, 'room', 0),
+    colModelGenerator(120, 'alert', 0),
+    colModelGenerator(120, 'action', 0));
+messageGrid = {
+    id: 'list_messages',
+    url: 'content/getmessages.jsp',
+    type: 'xml',
+    cols: ['შეტყობინება', 'სტუმარი', 'ოთახი', 'სტატუსი', 'ქმედება'],
+    model: messageGridModel,
+    order: 'asc',
+    altRows: true,
+    altclass: 'altrow',
+    isPopup: false,
+    gridComplete: function () {
+        ReDrawTable(messageGrid);
+        var width = $(".modal-custom-body").width();
+        $("#gbox_list_preferences").width(width-3);
+        $("#list_preferences").width(width-10);
+        $(".modal-custom-body .ui-jqgrid-view").width(width);
+        $(".modal-custom-body .ui-jqgrid-sdiv").width(width);
+        $(".modal-custom-body .ui-jqgrid-ftable").width(width);
+        $(".footrow td").css("border-right","0");
+        $(".modal-custom-body .ui-jqgrid-bdiv").css("height","244px");
+    },
+    beforeRequest: function () {
+        $(".modal-custom-body .ui-jqgrid-bdiv").css("height","120","!important");
+    }
+};
+
 
 var workOrderGridModel = [];
 workOrderGridModel.push(

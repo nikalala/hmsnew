@@ -144,7 +144,7 @@ public class RoomstBean
      * <ul>
      * <li>full name: roomst.roomid
      * <li> foreign key: room.roomid
-     * <li>comments: ოთახი
+     * <li>comments: ?????
      * <li>column size: 10
      * <li>jdbc type returned by the driver: Types.INTEGER
      * </ul>
@@ -212,7 +212,7 @@ public class RoomstBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: roomst.statusdate
-     * <li>comments: თარიღი
+     * <li>comments: ??????
      * <li>column size: 29
      * <li>jdbc type returned by the driver: Types.TIMESTAMP
      * </ul>
@@ -280,7 +280,7 @@ public class RoomstBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: roomst.st
-     * <li>comments: სტატუსი
+     * <li>comments: ???????
      * <li>column size: 10
      * <li>jdbc type returned by the driver: Types.INTEGER
      * </ul>
@@ -349,7 +349,7 @@ public class RoomstBean
      * <ul>
      * <li>full name: roomst.regbyid
      * <li> foreign key: personnel.personnelid
-     * <li>comments: ავტორი
+     * <li>comments: ??????
      * <li>column size: 10
      * <li>jdbc type returned by the driver: Types.INTEGER
      * </ul>
@@ -417,7 +417,7 @@ public class RoomstBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: roomst.regdate
-     * <li>comments: რეგისტრაციის თარიღი
+     * <li>comments: ???????????? ??????
      * <li>default value: now()
      * <li>column size: 29
      * <li>jdbc type returned by the driver: Types.TIMESTAMP
