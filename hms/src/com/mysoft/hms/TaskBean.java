@@ -16,10 +16,12 @@ package com.mysoft.hms;
 
 // imports- 
 
+
 public class TaskBean
 // extends+ 
 
 // extends- 
+
 {
     private Integer taskid;
     private boolean taskid_is_modified = false;
@@ -903,4 +905,5 @@ public class TaskBean
 // class+ 
 
 // class- 
+
 }

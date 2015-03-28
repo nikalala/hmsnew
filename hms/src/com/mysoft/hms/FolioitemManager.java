@@ -168,6 +168,27 @@ public class FolioitemManager
     public static final int TYPE_RESERVATIONROOMID = Types.BIGINT;
     public static final String NAME_RESERVATIONROOMID = "reservationroomid";
 
+    /**
+     * Column adult of type Types.INTEGER mapped to Integer.
+     */
+    public static final int ID_ADULT = 20;
+    public static final int TYPE_ADULT = Types.INTEGER;
+    public static final String NAME_ADULT = "adult";
+
+    /**
+     * Column child of type Types.INTEGER mapped to Integer.
+     */
+    public static final int ID_CHILD = 21;
+    public static final int TYPE_CHILD = Types.INTEGER;
+    public static final String NAME_CHILD = "child";
+
+    /**
+     * Column ratetypeid of type Types.INTEGER mapped to Integer.
+     */
+    public static final int ID_RATETYPEID = 22;
+    public static final int TYPE_RATETYPEID = Types.INTEGER;
+    public static final String NAME_RATETYPEID = "ratetypeid";
+
 
     private static final String TABLE_NAME = "folioitem";
 
@@ -196,6 +217,9 @@ public class FolioitemManager
         ,"folioitem.manual"
         ,"folioitem.roomoper"
         ,"folioitem.reservationroomid"
+        ,"folioitem.adult"
+        ,"folioitem.child"
+        ,"folioitem.ratetypeid"
     };
 
     /**
@@ -220,7 +244,10 @@ public class FolioitemManager
                             + ",folioitem.note"
                             + ",folioitem.manual"
                             + ",folioitem.roomoper"
-                            + ",folioitem.reservationroomid";
+                            + ",folioitem.reservationroomid"
+                            + ",folioitem.adult"
+                            + ",folioitem.child"
+                            + ",folioitem.ratetypeid";
 
     private static FolioitemManager singleton = new FolioitemManager();
 
@@ -1296,6 +1323,30 @@ public class FolioitemManager
                     _dirtyCount++;
                 }
 
+                if (pObject.isAdultModified()) {
+                    if (_dirtyCount>0) {
+                        _sql.append(",");
+                    }
+                    _sql.append("adult");
+                    _dirtyCount++;
+                }
+
+                if (pObject.isChildModified()) {
+                    if (_dirtyCount>0) {
+                        _sql.append(",");
+                    }
+                    _sql.append("child");
+                    _dirtyCount++;
+                }
+
+                if (pObject.isRatetypeidModified()) {
+                    if (_dirtyCount>0) {
+                        _sql.append(",");
+                    }
+                    _sql.append("ratetypeid");
+                    _dirtyCount++;
+                }
+
                 _sql.append(") values (");
                 if(_dirtyCount > 0) {
                     _sql.append("?");
@@ -1386,6 +1437,18 @@ public class FolioitemManager
     
                 if (pObject.isReservationroomidModified()) {
                     Manager.setLong(ps, ++_dirtyCount, pObject.getReservationroomid());
+                }
+    
+                if (pObject.isAdultModified()) {
+                    Manager.setInteger(ps, ++_dirtyCount, pObject.getAdult());
+                }
+    
+                if (pObject.isChildModified()) {
+                    Manager.setInteger(ps, ++_dirtyCount, pObject.getChild());
+                }
+    
+                if (pObject.isRatetypeidModified()) {
+                    Manager.setInteger(ps, ++_dirtyCount, pObject.getRatetypeid());
                 }
     
                 ps.executeUpdate();
@@ -1579,6 +1642,33 @@ public class FolioitemManager
                     }
                     _sql.append("reservationroomid").append("=?");
                 }
+
+                if (pObject.isAdultModified()) {
+                    if (useComma) {
+                        _sql.append(",");
+                    } else {
+                        useComma=true;
+                    }
+                    _sql.append("adult").append("=?");
+                }
+
+                if (pObject.isChildModified()) {
+                    if (useComma) {
+                        _sql.append(",");
+                    } else {
+                        useComma=true;
+                    }
+                    _sql.append("child").append("=?");
+                }
+
+                if (pObject.isRatetypeidModified()) {
+                    if (useComma) {
+                        _sql.append(",");
+                    } else {
+                        useComma=true;
+                    }
+                    _sql.append("ratetypeid").append("=?");
+                }
                 _sql.append(" WHERE ");
                 _sql.append("folioitem.folioitemid=?");
                 ps = c.prepareStatement(_sql.toString(),ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
@@ -1662,6 +1752,18 @@ public class FolioitemManager
 
                 if (pObject.isReservationroomidModified()) {
                       Manager.setLong(ps, ++_dirtyCount, pObject.getReservationroomid());
+                }
+
+                if (pObject.isAdultModified()) {
+                      Manager.setInteger(ps, ++_dirtyCount, pObject.getAdult());
+                }
+
+                if (pObject.isChildModified()) {
+                      Manager.setInteger(ps, ++_dirtyCount, pObject.getChild());
+                }
+
+                if (pObject.isRatetypeidModified()) {
+                      Manager.setInteger(ps, ++_dirtyCount, pObject.getRatetypeid());
                 }
     
                 if (_dirtyCount == 0) {
@@ -1840,6 +1942,21 @@ public class FolioitemManager
                  _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("reservationroomid= ?");
              }
     
+             if (pObject.isAdultModified()) {
+                 _dirtyCount ++; 
+                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("adult= ?");
+             }
+    
+             if (pObject.isChildModified()) {
+                 _dirtyCount ++; 
+                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("child= ?");
+             }
+    
+             if (pObject.isRatetypeidModified()) {
+                 _dirtyCount ++; 
+                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("ratetypeid= ?");
+             }
+    
              if (_dirtyCount == 0) {
                  throw new SQLException ("The pObject to look for is invalid : not initialized !");
              }
@@ -1926,6 +2043,18 @@ public class FolioitemManager
     
              if (pObject.isReservationroomidModified()) {
                  Manager.setLong(ps, ++_dirtyCount, pObject.getReservationroomid());
+             }
+    
+             if (pObject.isAdultModified()) {
+                 Manager.setInteger(ps, ++_dirtyCount, pObject.getAdult());
+             }
+    
+             if (pObject.isChildModified()) {
+                 Manager.setInteger(ps, ++_dirtyCount, pObject.getChild());
+             }
+    
+             if (pObject.isRatetypeidModified()) {
+                 Manager.setInteger(ps, ++_dirtyCount, pObject.getRatetypeid());
              }
     
              ps.executeQuery();
@@ -2097,6 +2226,27 @@ public class FolioitemManager
                 _dirtyAnd ++;
             }
     
+            if (pObject.isAdultInitialized()) {
+                if (_dirtyAnd > 0)
+                    sql.append(" AND ");
+                sql.append("adult").append("=?");
+                _dirtyAnd ++;
+            }
+    
+            if (pObject.isChildInitialized()) {
+                if (_dirtyAnd > 0)
+                    sql.append(" AND ");
+                sql.append("child").append("=?");
+                _dirtyAnd ++;
+            }
+    
+            if (pObject.isRatetypeidInitialized()) {
+                if (_dirtyAnd > 0)
+                    sql.append(" AND ");
+                sql.append("ratetypeid").append("=?");
+                _dirtyAnd ++;
+            }
+    
             c = getConnection();
             ps = c.prepareStatement(sql.toString(),ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             int _dirtyCount = 0;
@@ -2179,6 +2329,18 @@ public class FolioitemManager
     
             if (pObject.isReservationroomidInitialized()) {
                 Manager.setLong(ps, ++_dirtyCount, pObject.getReservationroomid());
+            }
+    
+            if (pObject.isAdultInitialized()) {
+                Manager.setInteger(ps, ++_dirtyCount, pObject.getAdult());
+            }
+    
+            if (pObject.isChildInitialized()) {
+                Manager.setInteger(ps, ++_dirtyCount, pObject.getChild());
+            }
+    
+            if (pObject.isRatetypeidInitialized()) {
+                Manager.setInteger(ps, ++_dirtyCount, pObject.getRatetypeid());
             }
     
             int _rows = ps.executeUpdate();
@@ -2428,6 +2590,21 @@ public class FolioitemManager
                     _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("reservationroomid= ?");
                 }
     
+                if (pObject.isAdultModified()) {
+                    _dirtyCount++; 
+                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("adult= ?");
+                }
+    
+                if (pObject.isChildModified()) {
+                    _dirtyCount++; 
+                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("child= ?");
+                }
+    
+                if (pObject.isRatetypeidModified()) {
+                    _dirtyCount++; 
+                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("ratetypeid= ?");
+                }
+    
                 if (_dirtyCount == 0)
                    throw new SQLException ("The pObject to look is unvalid : not initialized !");
     
@@ -2517,6 +2694,18 @@ public class FolioitemManager
                     Manager.setLong(ps, ++_dirtyCount, pObject.getReservationroomid());
                 }
     
+                if (pObject.isAdultModified()) {
+                    Manager.setInteger(ps, ++_dirtyCount, pObject.getAdult());
+                }
+    
+                if (pObject.isChildModified()) {
+                    Manager.setInteger(ps, ++_dirtyCount, pObject.getChild());
+                }
+    
+                if (pObject.isRatetypeidModified()) {
+                    Manager.setInteger(ps, ++_dirtyCount, pObject.getRatetypeid());
+                }
+    
                 return countByPreparedStatement(ps);
         }
         finally
@@ -2561,6 +2750,9 @@ public class FolioitemManager
         pObject.setManual(Manager.getBoolean(rs, 18));
         pObject.setRoomoper(Manager.getInteger(rs, 19));
         pObject.setReservationroomid(Manager.getLong(rs, 20));
+        pObject.setAdult(Manager.getInteger(rs, 21));
+        pObject.setChild(Manager.getInteger(rs, 22));
+        pObject.setRatetypeid(Manager.getInteger(rs, 23));
 
         pObject.isNew(false);
         pObject.resetIsModified();
@@ -2662,6 +2854,18 @@ public class FolioitemManager
                 case ID_RESERVATIONROOMID:
                     ++pos;
                     pObject.setReservationroomid(Manager.getLong(rs, pos));
+                    break;
+                case ID_ADULT:
+                    ++pos;
+                    pObject.setAdult(Manager.getInteger(rs, pos));
+                    break;
+                case ID_CHILD:
+                    ++pos;
+                    pObject.setChild(Manager.getInteger(rs, pos));
+                    break;
+                case ID_RATETYPEID:
+                    ++pos;
+                    pObject.setRatetypeid(Manager.getInteger(rs, pos));
                     break;
             }
         }

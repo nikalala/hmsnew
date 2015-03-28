@@ -17,6 +17,7 @@ import java.sql.*;
 
 // imports- 
 
+
 /**
  * Handles database calls for the vs_arrivallist table.
  */
@@ -24,6 +25,7 @@ public class VsArrivallistManager
 // extends+ 
 
 // extends- 
+
 {
 
     /**
@@ -1367,4 +1369,5 @@ public class VsArrivallistManager
 // class+ 
 
 // class- 
+
 }

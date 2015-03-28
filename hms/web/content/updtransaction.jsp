@@ -8,6 +8,7 @@ ReservationroomBean rroom = ReservationroomManager.getInstance().loadByPrimaryKe
 ReservationBean reserv = ReservationManager.getInstance().loadByPrimaryKey(rroom.getReservationid());
 String msg = "";
 
+String[] sels = request.getParameter("sels").split(",");
 Date roomdate = dt.parse(request.getParameter("roomdate"));
 int ratetypeid = Integer.parseInt(request.getParameter("ratetypeid"));
 Boolean updtariff = new Boolean(request.getParameter("updtariff"));
@@ -29,11 +30,18 @@ if(incl){
 
 Manager.getInstance().beginTransaction();
 try{
-    
+    rroom.setRatetypeid(ratetypeid);
     rroom.setAdult(adult);
     rroom.setChild(child);
     rroom = ReservationroomManager.getInstance().save(rroom);
     
+    
+    if(updtariff){
+        folio fl = new folio();
+        for(int i=0;i<sels.length;i++)
+            fl.reSetFolio1(reserv, user,Integer.parseInt(sels[i]));
+    }
+    /*
     String foliosql = "where folioid in (select folioid from folio where reservationroomid = "+rroom.getReservationroomid()+" and guestid = "+rroom.getGuestid()+")";   // and "
 //            + "roomid = "+rroom.getRoomid();
     if(onlydate.booleanValue())
@@ -64,6 +72,7 @@ try{
         }
         items[i] = FolioitemManager.getInstance().save(items[i]);
     }
+    */
     Manager.getInstance().endTransaction(true);
     msg = "{\"result\":1}";
 }catch(Exception e){
