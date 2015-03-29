@@ -3,7 +3,7 @@
 <%@include file="../includes/init.jsp" %>
 <%
   
-    String[] hdrs = {"რეზერვაციების ანგარიშგება","წინა მხარის რეპორტი","ბექ ოფისის რეპორტი","აუდიტის რეპორტები","სტატისტიკური რეპორტები","გრაფები და დიაგრამები"};
+    //String[] hdrs = {"რეზერვაციების ანგარიშგება","წინა მხარის რეპორტი","ბექ ოფისის რეპორტი","აუდიტის რეპორტები","სტატისტიკური რეპორტები","გრაფები და დიაგრამები"};
     RepcatBean[] cats = RepcatManager.getInstance().loadByWhere("order by repcatid");
 %>
 <script>
@@ -124,7 +124,7 @@
         <div class="panel-group accordion-group accordion-caret" id="accordion" role="tablist" aria-multiselectable="true">
             <%
             for(int i=0;i<cats.length;i++){
-                ReportBean[] reps = ReportManager.getInstance().loadByWhere("where repcatid = "+cats[i].getRepcatid()+" order by displayname");
+                ReportBean[] reps = ReportManager.getInstance().loadByWhere("where repcatid = "+cats[i].getRepcatid()+" order by ord");
             
             %>
             <div class="panel panel-default">

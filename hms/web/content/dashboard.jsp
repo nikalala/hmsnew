@@ -259,9 +259,9 @@
   </div>
   <div class="col-md-5">
     <div class="panel panel-primary" id='otherinfo'>
-        <%-- jsp:include page="otherinfo.jsp">
+        <jsp:include page="otherinfo.jsp">
             <jsp:param name="reservationroomid" value="<%=rromid%>"/>
-        </jsp:include --%>
+        </jsp:include>
     </div>
   </div>
 </div>

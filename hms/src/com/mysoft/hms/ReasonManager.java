@@ -1006,6 +1006,38 @@ public class ReasonManager
     }
 
     /**
+     * Retrieves an array of PersonnelBean using the relation table Reservationreason given a ReasonBean object.
+     *
+     * @param pObject the ReasonBean pObject to be used
+     * @return an array of PersonnelBean 
+     */
+    // MANY TO MANY
+    public PersonnelBean[] loadPersonnelViaReservationreason(ReasonBean pObject) throws SQLException
+    {
+         Connection c = null;
+         PreparedStatement ps = null;
+         String strSQL =      " SELECT "
+                         + "        *"
+                         + " FROM  "
+                         + "        personnel,reservationreason"
+                         + " WHERE "    
+                         + "     reservationreason.reasonid = ?"
+                         + " AND reservationreason.regbyid = personnel.personnelid";
+         try
+         {
+             c = getConnection();
+             ps = c.prepareStatement(strSQL,ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+             Manager.setInteger(ps, 1, pObject.getReasonid());
+             return PersonnelManager.getInstance().loadByPreparedStatement(ps);
+         }
+         finally
+         {
+            getManager().close(ps);
+            freeConnection(c);
+         }
+    }
+
+    /**
      * Retrieves an array of ReservationBean using the relation table Reservationreason given a ReasonBean object.
      *
      * @param pObject the ReasonBean pObject to be used

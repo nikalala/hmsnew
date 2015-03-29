@@ -139,7 +139,7 @@ public class AmenityBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: amenity.name
-     * <li>comments: ??????????
+     * <li>comments: დასახელება
      * <li>column size: 2147483647
      * <li>jdbc type returned by the driver: Types.VARCHAR
      * </ul>
@@ -196,7 +196,7 @@ public class AmenityBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: amenity.type
-     * <li>comments: ????CODEamenitytype
+     * <li>comments: ტიპიCODEamenitytype
      * <li>column size: 10
      * <li>jdbc type returned by the driver: Types.INTEGER
      * </ul>
@@ -264,7 +264,7 @@ public class AmenityBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: amenity.ord
-     * <li>comments: ?????????
+     * <li>comments: სორტირება
      * <li>default value: 0
      * <li>column size: 10
      * <li>jdbc type returned by the driver: Types.INTEGER
@@ -334,7 +334,7 @@ public class AmenityBean
      * <ul>
      * <li>full name: amenity.regbyid
      * <li> foreign key: personnel.personnelid
-     * <li>comments: ??????
+     * <li>comments: ავტორი
      * <li>column size: 10
      * <li>jdbc type returned by the driver: Types.INTEGER
      * </ul>
@@ -402,7 +402,7 @@ public class AmenityBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: amenity.regdate
-     * <li>comments: ???????????? ??????
+     * <li>comments: რეგისტრაციის თარიღი
      * <li>default value: now()
      * <li>column size: 29
      * <li>jdbc type returned by the driver: Types.TIMESTAMP
@@ -471,7 +471,7 @@ public class AmenityBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: amenity.active
-     * <li>comments: ???????
+     * <li>comments: აქტიური
      * <li>default value: true
      * <li>column size: 1
      * <li>jdbc type returned by the driver: Types.BIT
@@ -539,7 +539,7 @@ public class AmenityBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: amenity.deleted
-     * <li>comments: ???????
+     * <li>comments: წაშლილი
      * <li>default value: false
      * <li>column size: 1
      * <li>jdbc type returned by the driver: Types.BIT

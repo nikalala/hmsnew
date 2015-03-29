@@ -1357,4 +1357,41 @@ System.out.println(rid+" = "+statusid);
             "    prevLinkText: 'წინა'," +
             "    doneButtonText: 'არჩევა'," +
             "    datepickerOptions: " + pickerformat1;
+    
+    Map<String, String[]> globalvars = new HashMap<String, String[]>();
+    globalvars.put("months",months);
+    globalvars.put("pickUpDropOffType",pickUpDropOffType);
+    globalvars.put("workOrderCategory",workOrderCategory);
+    globalvars.put("workOrderStatus",workOrderStatus);
+    globalvars.put("workOrderPriority",workOrderPriority);
+    globalvars.put("amenitytype",amenitytype);
+    globalvars.put("contragenttype",contragenttype);
+    globalvars.put("commissionplan",commissionplan);
+    globalvars.put("rate",rate);
+    globalvars.put("roominventory",roominventory);
+    globalvars.put("documentnumbering",documentnumbering);
+    globalvars.put("chargeapplieson",chargeapplieson);
+    globalvars.put("extrachargepostingtype",extrachargepostingtype);
+    globalvars.put("foliostatus",foliostatus);
+    globalvars.put("pax",pax);
+    globalvars.put("gender",gender);
+    globalvars.put("paymentmode",paymentmode);
+    globalvars.put("paymentmethod0",paymentmethod0);
+    globalvars.put("ratetype",ratetype);
+    globalvars.put("billto",billto);
+    globalvars.put("reservationpostingtype",reservationpostingtype);
+    globalvars.put("taxpostingtype",taxpostingtype);
+    globalvars.put("discountplan",discountplan);
+    globalvars.put("hotelstar",hotelstar);
+    globalvars.put("accounts",accounts);
+    globalvars.put("taxaccountnames",taxaccountnames);
+    globalvars.put("reservationstatus",reservationstatus);
+    globalvars.put("roundtype",roundtype);
+    globalvars.put("departments",departments);
+    globalvars.put("alerts",alerts);
+    globalvars.put("taskStatuses",taskStatuses);
+    globalvars.put("messageStatuses",messageStatuses);
+    globalvars.put("roomstatus",roomstatus);
+    globalvars.put("reasoncategory",reasoncategory);
+    globalvars.put("folioactiontype",folioactiontype);
 %>

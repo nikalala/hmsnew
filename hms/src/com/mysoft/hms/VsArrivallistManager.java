@@ -50,11 +50,11 @@ public class VsArrivallistManager
     public static final String NAME_NAME = "name";
 
     /**
-     * Column float8 of type Types.DOUBLE mapped to Double.
+     * Column tariff of type Types.DOUBLE mapped to Double.
      */
-    public static final int ID_FLOAT8 = 3;
-    public static final int TYPE_FLOAT8 = Types.DOUBLE;
-    public static final String NAME_FLOAT8 = "float8";
+    public static final int ID_TARIFF = 3;
+    public static final int TYPE_TARIFF = Types.DOUBLE;
+    public static final String NAME_TARIFF = "tariff";
 
     /**
      * Column arraivaldate of type Types.TIMESTAMP mapped to java.sql.Timestamp.
@@ -98,6 +98,62 @@ public class VsArrivallistManager
     public static final int TYPE_USER = Types.VARCHAR;
     public static final String NAME_USER = "user";
 
+    /**
+     * Column reservationtypeid of type Types.INTEGER mapped to Integer.
+     */
+    public static final int ID_RESERVATIONTYPEID = 10;
+    public static final int TYPE_RESERVATIONTYPEID = Types.INTEGER;
+    public static final String NAME_RESERVATIONTYPEID = "reservationtypeid";
+
+    /**
+     * Column regbyid of type Types.INTEGER mapped to Integer.
+     */
+    public static final int ID_REGBYID = 11;
+    public static final int TYPE_REGBYID = Types.INTEGER;
+    public static final String NAME_REGBYID = "regbyid";
+
+    /**
+     * Column roomtypeid of type Types.INTEGER mapped to Integer.
+     */
+    public static final int ID_ROOMTYPEID = 12;
+    public static final int TYPE_ROOMTYPEID = Types.INTEGER;
+    public static final String NAME_ROOMTYPEID = "roomtypeid";
+
+    /**
+     * Column contragentid of type Types.BIGINT mapped to Long.
+     */
+    public static final int ID_CONTRAGENTID = 13;
+    public static final int TYPE_CONTRAGENTID = Types.BIGINT;
+    public static final String NAME_CONTRAGENTID = "contragentid";
+
+    /**
+     * Column companyid of type Types.BIGINT mapped to Long.
+     */
+    public static final int ID_COMPANYID = 14;
+    public static final int TYPE_COMPANYID = Types.BIGINT;
+    public static final String NAME_COMPANYID = "companyid";
+
+    /**
+     * Column personnelid of type Types.INTEGER mapped to Integer.
+     */
+    public static final int ID_PERSONNELID = 15;
+    public static final int TYPE_PERSONNELID = Types.INTEGER;
+    public static final String NAME_PERSONNELID = "personnelid";
+
+    /**
+     * Column ratetypeid of type Types.INTEGER mapped to Integer.
+     */
+    public static final int ID_RATETYPEID = 16;
+    public static final int TYPE_RATETYPEID = Types.INTEGER;
+    public static final String NAME_RATETYPEID = "ratetypeid";
+
+    /**
+     * Column marketid of type Types.INTEGER mapped to Integer.
+     */
+    public static final int ID_MARKETID = 17;
+    public static final int TYPE_MARKETID = Types.INTEGER;
+    public static final String NAME_MARKETID = "marketid";
+
 
     private static final String TABLE_NAME = "vs_arrivallist";
 
@@ -109,13 +165,21 @@ public class VsArrivallistManager
         "vs_arrivallist.reservationid"
         ,"vs_arrivallist.guestname"
         ,"vs_arrivallist.name"
-        ,"vs_arrivallist.float8"
+        ,"vs_arrivallist.tariff"
         ,"vs_arrivallist.arraivaldate"
         ,"vs_arrivallist.departuredate"
         ,"vs_arrivallist.pax"
         ,"vs_arrivallist.rtype"
         ,"vs_arrivallist.company"
         ,"vs_arrivallist.user"
+        ,"vs_arrivallist.reservationtypeid"
+        ,"vs_arrivallist.regbyid"
+        ,"vs_arrivallist.roomtypeid"
+        ,"vs_arrivallist.contragentid"
+        ,"vs_arrivallist.companyid"
+        ,"vs_arrivallist.personnelid"
+        ,"vs_arrivallist.ratetypeid"
+        ,"vs_arrivallist.marketid"
     };
 
     /**
@@ -124,13 +188,21 @@ public class VsArrivallistManager
     private static final String ALL_FIELDS = "vs_arrivallist.reservationid"
                             + ",vs_arrivallist.guestname"
                             + ",vs_arrivallist.name"
-                            + ",vs_arrivallist.float8"
+                            + ",vs_arrivallist.tariff"
                             + ",vs_arrivallist.arraivaldate"
                             + ",vs_arrivallist.departuredate"
                             + ",vs_arrivallist.pax"
                             + ",vs_arrivallist.rtype"
                             + ",vs_arrivallist.company"
-                            + ",vs_arrivallist.user";
+                            + ",vs_arrivallist.user"
+                            + ",vs_arrivallist.reservationtypeid"
+                            + ",vs_arrivallist.regbyid"
+                            + ",vs_arrivallist.roomtypeid"
+                            + ",vs_arrivallist.contragentid"
+                            + ",vs_arrivallist.companyid"
+                            + ",vs_arrivallist.personnelid"
+                            + ",vs_arrivallist.ratetypeid"
+                            + ",vs_arrivallist.marketid";
 
     private static VsArrivallistManager singleton = new VsArrivallistManager();
 
@@ -354,11 +426,11 @@ public class VsArrivallistManager
                     _dirtyCount++;
                 }
 
-                if (pObject.isFloat8Modified()) {
+                if (pObject.isTariffModified()) {
                     if (_dirtyCount>0) {
                         _sql.append(",");
                     }
-                    _sql.append("float8");
+                    _sql.append("tariff");
                     _dirtyCount++;
                 }
 
@@ -410,6 +482,70 @@ public class VsArrivallistManager
                     _dirtyCount++;
                 }
 
+                if (pObject.isReservationtypeidModified()) {
+                    if (_dirtyCount>0) {
+                        _sql.append(",");
+                    }
+                    _sql.append("reservationtypeid");
+                    _dirtyCount++;
+                }
+
+                if (pObject.isRegbyidModified()) {
+                    if (_dirtyCount>0) {
+                        _sql.append(",");
+                    }
+                    _sql.append("regbyid");
+                    _dirtyCount++;
+                }
+
+                if (pObject.isRoomtypeidModified()) {
+                    if (_dirtyCount>0) {
+                        _sql.append(",");
+                    }
+                    _sql.append("roomtypeid");
+                    _dirtyCount++;
+                }
+
+                if (pObject.isContragentidModified()) {
+                    if (_dirtyCount>0) {
+                        _sql.append(",");
+                    }
+                    _sql.append("contragentid");
+                    _dirtyCount++;
+                }
+
+                if (pObject.isCompanyidModified()) {
+                    if (_dirtyCount>0) {
+                        _sql.append(",");
+                    }
+                    _sql.append("companyid");
+                    _dirtyCount++;
+                }
+
+                if (pObject.isPersonnelidModified()) {
+                    if (_dirtyCount>0) {
+                        _sql.append(",");
+                    }
+                    _sql.append("personnelid");
+                    _dirtyCount++;
+                }
+
+                if (pObject.isRatetypeidModified()) {
+                    if (_dirtyCount>0) {
+                        _sql.append(",");
+                    }
+                    _sql.append("ratetypeid");
+                    _dirtyCount++;
+                }
+
+                if (pObject.isMarketidModified()) {
+                    if (_dirtyCount>0) {
+                        _sql.append(",");
+                    }
+                    _sql.append("marketid");
+                    _dirtyCount++;
+                }
+
                 _sql.append(") values (");
                 if(_dirtyCount > 0) {
                     _sql.append("?");
@@ -434,8 +570,8 @@ public class VsArrivallistManager
                     ps.setString(++_dirtyCount, pObject.getName());
                 }
     
-                if (pObject.isFloat8Modified()) {
-                    Manager.setDouble(ps, ++_dirtyCount, pObject.getFloat8());
+                if (pObject.isTariffModified()) {
+                    Manager.setDouble(ps, ++_dirtyCount, pObject.getTariff());
                 }
     
                 if (pObject.isArraivaldateModified()) {
@@ -460,6 +596,38 @@ public class VsArrivallistManager
     
                 if (pObject.isUserModified()) {
                     ps.setString(++_dirtyCount, pObject.getUser());
+                }
+    
+                if (pObject.isReservationtypeidModified()) {
+                    Manager.setInteger(ps, ++_dirtyCount, pObject.getReservationtypeid());
+                }
+    
+                if (pObject.isRegbyidModified()) {
+                    Manager.setInteger(ps, ++_dirtyCount, pObject.getRegbyid());
+                }
+    
+                if (pObject.isRoomtypeidModified()) {
+                    Manager.setInteger(ps, ++_dirtyCount, pObject.getRoomtypeid());
+                }
+    
+                if (pObject.isContragentidModified()) {
+                    Manager.setLong(ps, ++_dirtyCount, pObject.getContragentid());
+                }
+    
+                if (pObject.isCompanyidModified()) {
+                    Manager.setLong(ps, ++_dirtyCount, pObject.getCompanyid());
+                }
+    
+                if (pObject.isPersonnelidModified()) {
+                    Manager.setInteger(ps, ++_dirtyCount, pObject.getPersonnelid());
+                }
+    
+                if (pObject.isRatetypeidModified()) {
+                    Manager.setInteger(ps, ++_dirtyCount, pObject.getRatetypeid());
+                }
+    
+                if (pObject.isMarketidModified()) {
+                    Manager.setInteger(ps, ++_dirtyCount, pObject.getMarketid());
                 }
     
                 ps.executeUpdate();
@@ -501,13 +669,13 @@ public class VsArrivallistManager
                     _sql.append("name").append("=?");
                 }
 
-                if (pObject.isFloat8Modified()) {
+                if (pObject.isTariffModified()) {
                     if (useComma) {
                         _sql.append(",");
                     } else {
                         useComma=true;
                     }
-                    _sql.append("float8").append("=?");
+                    _sql.append("tariff").append("=?");
                 }
 
                 if (pObject.isArraivaldateModified()) {
@@ -563,6 +731,78 @@ public class VsArrivallistManager
                     }
                     _sql.append("user").append("=?");
                 }
+
+                if (pObject.isReservationtypeidModified()) {
+                    if (useComma) {
+                        _sql.append(",");
+                    } else {
+                        useComma=true;
+                    }
+                    _sql.append("reservationtypeid").append("=?");
+                }
+
+                if (pObject.isRegbyidModified()) {
+                    if (useComma) {
+                        _sql.append(",");
+                    } else {
+                        useComma=true;
+                    }
+                    _sql.append("regbyid").append("=?");
+                }
+
+                if (pObject.isRoomtypeidModified()) {
+                    if (useComma) {
+                        _sql.append(",");
+                    } else {
+                        useComma=true;
+                    }
+                    _sql.append("roomtypeid").append("=?");
+                }
+
+                if (pObject.isContragentidModified()) {
+                    if (useComma) {
+                        _sql.append(",");
+                    } else {
+                        useComma=true;
+                    }
+                    _sql.append("contragentid").append("=?");
+                }
+
+                if (pObject.isCompanyidModified()) {
+                    if (useComma) {
+                        _sql.append(",");
+                    } else {
+                        useComma=true;
+                    }
+                    _sql.append("companyid").append("=?");
+                }
+
+                if (pObject.isPersonnelidModified()) {
+                    if (useComma) {
+                        _sql.append(",");
+                    } else {
+                        useComma=true;
+                    }
+                    _sql.append("personnelid").append("=?");
+                }
+
+                if (pObject.isRatetypeidModified()) {
+                    if (useComma) {
+                        _sql.append(",");
+                    } else {
+                        useComma=true;
+                    }
+                    _sql.append("ratetypeid").append("=?");
+                }
+
+                if (pObject.isMarketidModified()) {
+                    if (useComma) {
+                        _sql.append(",");
+                    } else {
+                        useComma=true;
+                    }
+                    _sql.append("marketid").append("=?");
+                }
                 _sql.append("");
                 ps = c.prepareStatement(_sql.toString(),ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
                 int _dirtyCount = 0;
@@ -579,8 +819,8 @@ public class VsArrivallistManager
                       ps.setString(++_dirtyCount, pObject.getName());
                 }
 
-                if (pObject.isFloat8Modified()) {
-                      Manager.setDouble(ps, ++_dirtyCount, pObject.getFloat8());
+                if (pObject.isTariffModified()) {
+                      Manager.setDouble(ps, ++_dirtyCount, pObject.getTariff());
                 }
 
                 if (pObject.isArraivaldateModified()) {
@@ -605,6 +845,38 @@ public class VsArrivallistManager
 
                 if (pObject.isUserModified()) {
                       ps.setString(++_dirtyCount, pObject.getUser());
+                }
+
+                if (pObject.isReservationtypeidModified()) {
+                      Manager.setInteger(ps, ++_dirtyCount, pObject.getReservationtypeid());
+                }
+
+                if (pObject.isRegbyidModified()) {
+                      Manager.setInteger(ps, ++_dirtyCount, pObject.getRegbyid());
+                }
+
+                if (pObject.isRoomtypeidModified()) {
+                      Manager.setInteger(ps, ++_dirtyCount, pObject.getRoomtypeid());
+                }
+
+                if (pObject.isContragentidModified()) {
+                      Manager.setLong(ps, ++_dirtyCount, pObject.getContragentid());
+                }
+
+                if (pObject.isCompanyidModified()) {
+                      Manager.setLong(ps, ++_dirtyCount, pObject.getCompanyid());
+                }
+
+                if (pObject.isPersonnelidModified()) {
+                      Manager.setInteger(ps, ++_dirtyCount, pObject.getPersonnelid());
+                }
+
+                if (pObject.isRatetypeidModified()) {
+                      Manager.setInteger(ps, ++_dirtyCount, pObject.getRatetypeid());
+                }
+
+                if (pObject.isMarketidModified()) {
+                      Manager.setInteger(ps, ++_dirtyCount, pObject.getMarketid());
                 }
     
                 if (_dirtyCount == 0) {
@@ -697,9 +969,9 @@ public class VsArrivallistManager
                  _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("name= ?");
              }
     
-             if (pObject.isFloat8Modified()) {
+             if (pObject.isTariffModified()) {
                  _dirtyCount ++; 
-                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("float8= ?");
+                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("tariff= ?");
              }
     
              if (pObject.isArraivaldateModified()) {
@@ -732,6 +1004,46 @@ public class VsArrivallistManager
                  _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("user= ?");
              }
     
+             if (pObject.isReservationtypeidModified()) {
+                 _dirtyCount ++; 
+                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("reservationtypeid= ?");
+             }
+    
+             if (pObject.isRegbyidModified()) {
+                 _dirtyCount ++; 
+                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("regbyid= ?");
+             }
+    
+             if (pObject.isRoomtypeidModified()) {
+                 _dirtyCount ++; 
+                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("roomtypeid= ?");
+             }
+    
+             if (pObject.isContragentidModified()) {
+                 _dirtyCount ++; 
+                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("contragentid= ?");
+             }
+    
+             if (pObject.isCompanyidModified()) {
+                 _dirtyCount ++; 
+                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("companyid= ?");
+             }
+    
+             if (pObject.isPersonnelidModified()) {
+                 _dirtyCount ++; 
+                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("personnelid= ?");
+             }
+    
+             if (pObject.isRatetypeidModified()) {
+                 _dirtyCount ++; 
+                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("ratetypeid= ?");
+             }
+    
+             if (pObject.isMarketidModified()) {
+                 _dirtyCount ++; 
+                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("marketid= ?");
+             }
+    
              if (_dirtyCount == 0) {
                  throw new SQLException ("The pObject to look for is invalid : not initialized !");
              }
@@ -752,8 +1064,8 @@ public class VsArrivallistManager
                  ps.setString(++_dirtyCount, pObject.getName());
              }
     
-             if (pObject.isFloat8Modified()) {
-                 Manager.setDouble(ps, ++_dirtyCount, pObject.getFloat8());
+             if (pObject.isTariffModified()) {
+                 Manager.setDouble(ps, ++_dirtyCount, pObject.getTariff());
              }
     
              if (pObject.isArraivaldateModified()) {
@@ -778,6 +1090,38 @@ public class VsArrivallistManager
     
              if (pObject.isUserModified()) {
                  ps.setString(++_dirtyCount, pObject.getUser());
+             }
+    
+             if (pObject.isReservationtypeidModified()) {
+                 Manager.setInteger(ps, ++_dirtyCount, pObject.getReservationtypeid());
+             }
+    
+             if (pObject.isRegbyidModified()) {
+                 Manager.setInteger(ps, ++_dirtyCount, pObject.getRegbyid());
+             }
+    
+             if (pObject.isRoomtypeidModified()) {
+                 Manager.setInteger(ps, ++_dirtyCount, pObject.getRoomtypeid());
+             }
+    
+             if (pObject.isContragentidModified()) {
+                 Manager.setLong(ps, ++_dirtyCount, pObject.getContragentid());
+             }
+    
+             if (pObject.isCompanyidModified()) {
+                 Manager.setLong(ps, ++_dirtyCount, pObject.getCompanyid());
+             }
+    
+             if (pObject.isPersonnelidModified()) {
+                 Manager.setInteger(ps, ++_dirtyCount, pObject.getPersonnelid());
+             }
+    
+             if (pObject.isRatetypeidModified()) {
+                 Manager.setInteger(ps, ++_dirtyCount, pObject.getRatetypeid());
+             }
+    
+             if (pObject.isMarketidModified()) {
+                 Manager.setInteger(ps, ++_dirtyCount, pObject.getMarketid());
              }
     
              ps.executeQuery();
@@ -827,10 +1171,10 @@ public class VsArrivallistManager
                 _dirtyAnd ++;
             }
     
-            if (pObject.isFloat8Initialized()) {
+            if (pObject.isTariffInitialized()) {
                 if (_dirtyAnd > 0)
                     sql.append(" AND ");
-                sql.append("float8").append("=?");
+                sql.append("tariff").append("=?");
                 _dirtyAnd ++;
             }
     
@@ -876,6 +1220,62 @@ public class VsArrivallistManager
                 _dirtyAnd ++;
             }
     
+            if (pObject.isReservationtypeidInitialized()) {
+                if (_dirtyAnd > 0)
+                    sql.append(" AND ");
+                sql.append("reservationtypeid").append("=?");
+                _dirtyAnd ++;
+            }
+    
+            if (pObject.isRegbyidInitialized()) {
+                if (_dirtyAnd > 0)
+                    sql.append(" AND ");
+                sql.append("regbyid").append("=?");
+                _dirtyAnd ++;
+            }
+    
+            if (pObject.isRoomtypeidInitialized()) {
+                if (_dirtyAnd > 0)
+                    sql.append(" AND ");
+                sql.append("roomtypeid").append("=?");
+                _dirtyAnd ++;
+            }
+    
+            if (pObject.isContragentidInitialized()) {
+                if (_dirtyAnd > 0)
+                    sql.append(" AND ");
+                sql.append("contragentid").append("=?");
+                _dirtyAnd ++;
+            }
+    
+            if (pObject.isCompanyidInitialized()) {
+                if (_dirtyAnd > 0)
+                    sql.append(" AND ");
+                sql.append("companyid").append("=?");
+                _dirtyAnd ++;
+            }
+    
+            if (pObject.isPersonnelidInitialized()) {
+                if (_dirtyAnd > 0)
+                    sql.append(" AND ");
+                sql.append("personnelid").append("=?");
+                _dirtyAnd ++;
+            }
+    
+            if (pObject.isRatetypeidInitialized()) {
+                if (_dirtyAnd > 0)
+                    sql.append(" AND ");
+                sql.append("ratetypeid").append("=?");
+                _dirtyAnd ++;
+            }
+    
+            if (pObject.isMarketidInitialized()) {
+                if (_dirtyAnd > 0)
+                    sql.append(" AND ");
+                sql.append("marketid").append("=?");
+                _dirtyAnd ++;
+            }
+    
             c = getConnection();
             ps = c.prepareStatement(sql.toString(),ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             int _dirtyCount = 0;
@@ -892,8 +1292,8 @@ public class VsArrivallistManager
                 ps.setString(++_dirtyCount, pObject.getName());
             }
     
-            if (pObject.isFloat8Initialized()) {
-                Manager.setDouble(ps, ++_dirtyCount, pObject.getFloat8());
+            if (pObject.isTariffInitialized()) {
+                Manager.setDouble(ps, ++_dirtyCount, pObject.getTariff());
             }
     
             if (pObject.isArraivaldateInitialized()) {
@@ -918,6 +1318,38 @@ public class VsArrivallistManager
     
             if (pObject.isUserInitialized()) {
                 ps.setString(++_dirtyCount, pObject.getUser());
+            }
+    
+            if (pObject.isReservationtypeidInitialized()) {
+                Manager.setInteger(ps, ++_dirtyCount, pObject.getReservationtypeid());
+            }
+    
+            if (pObject.isRegbyidInitialized()) {
+                Manager.setInteger(ps, ++_dirtyCount, pObject.getRegbyid());
+            }
+    
+            if (pObject.isRoomtypeidInitialized()) {
+                Manager.setInteger(ps, ++_dirtyCount, pObject.getRoomtypeid());
+            }
+    
+            if (pObject.isContragentidInitialized()) {
+                Manager.setLong(ps, ++_dirtyCount, pObject.getContragentid());
+            }
+    
+            if (pObject.isCompanyidInitialized()) {
+                Manager.setLong(ps, ++_dirtyCount, pObject.getCompanyid());
+            }
+    
+            if (pObject.isPersonnelidInitialized()) {
+                Manager.setInteger(ps, ++_dirtyCount, pObject.getPersonnelid());
+            }
+    
+            if (pObject.isRatetypeidInitialized()) {
+                Manager.setInteger(ps, ++_dirtyCount, pObject.getRatetypeid());
+            }
+    
+            if (pObject.isMarketidInitialized()) {
+                Manager.setInteger(ps, ++_dirtyCount, pObject.getMarketid());
             }
     
             int _rows = ps.executeUpdate();
@@ -1045,9 +1477,9 @@ public class VsArrivallistManager
                     _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("name= ?");
                 }
     
-                if (pObject.isFloat8Modified()) {
+                if (pObject.isTariffModified()) {
                     _dirtyCount++; 
-                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("float8= ?");
+                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("tariff= ?");
                 }
     
                 if (pObject.isArraivaldateModified()) {
@@ -1080,6 +1512,46 @@ public class VsArrivallistManager
                     _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("user= ?");
                 }
     
+                if (pObject.isReservationtypeidModified()) {
+                    _dirtyCount++; 
+                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("reservationtypeid= ?");
+                }
+    
+                if (pObject.isRegbyidModified()) {
+                    _dirtyCount++; 
+                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("regbyid= ?");
+                }
+    
+                if (pObject.isRoomtypeidModified()) {
+                    _dirtyCount++; 
+                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("roomtypeid= ?");
+                }
+    
+                if (pObject.isContragentidModified()) {
+                    _dirtyCount++; 
+                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("contragentid= ?");
+                }
+    
+                if (pObject.isCompanyidModified()) {
+                    _dirtyCount++; 
+                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("companyid= ?");
+                }
+    
+                if (pObject.isPersonnelidModified()) {
+                    _dirtyCount++; 
+                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("personnelid= ?");
+                }
+    
+                if (pObject.isRatetypeidModified()) {
+                    _dirtyCount++; 
+                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("ratetypeid= ?");
+                }
+    
+                if (pObject.isMarketidModified()) {
+                    _dirtyCount++; 
+                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("marketid= ?");
+                }
+    
                 if (_dirtyCount == 0)
                    throw new SQLException ("The pObject to look is unvalid : not initialized !");
     
@@ -1101,8 +1573,8 @@ public class VsArrivallistManager
                     ps.setString(++_dirtyCount, pObject.getName());
                 }
     
-                if (pObject.isFloat8Modified()) {
-                    Manager.setDouble(ps, ++_dirtyCount, pObject.getFloat8());
+                if (pObject.isTariffModified()) {
+                    Manager.setDouble(ps, ++_dirtyCount, pObject.getTariff());
                 }
     
                 if (pObject.isArraivaldateModified()) {
@@ -1127,6 +1599,38 @@ public class VsArrivallistManager
     
                 if (pObject.isUserModified()) {
                     ps.setString(++_dirtyCount, pObject.getUser());
+                }
+    
+                if (pObject.isReservationtypeidModified()) {
+                    Manager.setInteger(ps, ++_dirtyCount, pObject.getReservationtypeid());
+                }
+    
+                if (pObject.isRegbyidModified()) {
+                    Manager.setInteger(ps, ++_dirtyCount, pObject.getRegbyid());
+                }
+    
+                if (pObject.isRoomtypeidModified()) {
+                    Manager.setInteger(ps, ++_dirtyCount, pObject.getRoomtypeid());
+                }
+    
+                if (pObject.isContragentidModified()) {
+                    Manager.setLong(ps, ++_dirtyCount, pObject.getContragentid());
+                }
+    
+                if (pObject.isCompanyidModified()) {
+                    Manager.setLong(ps, ++_dirtyCount, pObject.getCompanyid());
+                }
+    
+                if (pObject.isPersonnelidModified()) {
+                    Manager.setInteger(ps, ++_dirtyCount, pObject.getPersonnelid());
+                }
+    
+                if (pObject.isRatetypeidModified()) {
+                    Manager.setInteger(ps, ++_dirtyCount, pObject.getRatetypeid());
+                }
+    
+                if (pObject.isMarketidModified()) {
+                    Manager.setInteger(ps, ++_dirtyCount, pObject.getMarketid());
                 }
     
                 return countByPreparedStatement(ps);
@@ -1156,13 +1660,21 @@ public class VsArrivallistManager
         pObject.setReservationid(Manager.getLong(rs, 1));
         pObject.setGuestname(rs.getString(2));
         pObject.setName(rs.getString(3));
-        pObject.setFloat8(Manager.getDouble(rs, 4));
+        pObject.setTariff(Manager.getDouble(rs, 4));
         pObject.setArraivaldate(rs.getTimestamp(5));
         pObject.setDeparturedate(rs.getTimestamp(6));
         pObject.setPax(rs.getString(7));
         pObject.setRtype(rs.getString(8));
         pObject.setCompany(rs.getString(9));
         pObject.setUser(rs.getString(10));
+        pObject.setReservationtypeid(Manager.getInteger(rs, 11));
+        pObject.setRegbyid(Manager.getInteger(rs, 12));
+        pObject.setRoomtypeid(Manager.getInteger(rs, 13));
+        pObject.setContragentid(Manager.getLong(rs, 14));
+        pObject.setCompanyid(Manager.getLong(rs, 15));
+        pObject.setPersonnelid(Manager.getInteger(rs, 16));
+        pObject.setRatetypeid(Manager.getInteger(rs, 17));
+        pObject.setMarketid(Manager.getInteger(rs, 18));
 
         pObject.isNew(false);
         pObject.resetIsModified();
@@ -1197,9 +1709,9 @@ public class VsArrivallistManager
                     ++pos;
                     pObject.setName(rs.getString(pos));
                     break;
-                case ID_FLOAT8:
+                case ID_TARIFF:
                     ++pos;
-                    pObject.setFloat8(Manager.getDouble(rs, pos));
+                    pObject.setTariff(Manager.getDouble(rs, pos));
                     break;
                 case ID_ARRAIVALDATE:
                     ++pos;
@@ -1224,6 +1736,38 @@ public class VsArrivallistManager
                 case ID_USER:
                     ++pos;
                     pObject.setUser(rs.getString(pos));
+                    break;
+                case ID_RESERVATIONTYPEID:
+                    ++pos;
+                    pObject.setReservationtypeid(Manager.getInteger(rs, pos));
+                    break;
+                case ID_REGBYID:
+                    ++pos;
+                    pObject.setRegbyid(Manager.getInteger(rs, pos));
+                    break;
+                case ID_ROOMTYPEID:
+                    ++pos;
+                    pObject.setRoomtypeid(Manager.getInteger(rs, pos));
+                    break;
+                case ID_CONTRAGENTID:
+                    ++pos;
+                    pObject.setContragentid(Manager.getLong(rs, pos));
+                    break;
+                case ID_COMPANYID:
+                    ++pos;
+                    pObject.setCompanyid(Manager.getLong(rs, pos));
+                    break;
+                case ID_PERSONNELID:
+                    ++pos;
+                    pObject.setPersonnelid(Manager.getInteger(rs, pos));
+                    break;
+                case ID_RATETYPEID:
+                    ++pos;
+                    pObject.setRatetypeid(Manager.getInteger(rs, pos));
+                    break;
+                case ID_MARKETID:
+                    ++pos;
+                    pObject.setMarketid(Manager.getInteger(rs, pos));
                     break;
             }
         }

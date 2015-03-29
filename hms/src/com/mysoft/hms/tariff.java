@@ -214,8 +214,8 @@ public class tariff {
             String sqlseason = "where seasonid > 0 and active = true and deleted = false"
                     + " and startdate <= to_date('"+dt.format(calstart.getTime())+"','DD/MM/YYYY')"
                     + " and enddate >= to_date('"+dt.format(calstart.getTime())+"','DD/MM/YYYY')"
-                    + " and to_date('2000-' || fmonth::text || '-' || fday::text,'YYYY-MM-DD') <= to_date('2000-"+mon+"-"+day+"','YYYY-MM-DD')"
-                    + " and to_date('2000-' || tmonth::text || '-' || tday::text,'YYYY-MM-DD') >= to_date('2000-"+mon+"-"+day+"','YYYY-MM-DD')";
+                    + " and to_date('2000-' || (fmonth+1)::text || '-' || fday::text,'YYYY-MM-DD') <= to_date('2000-"+mon+"-"+day+"','YYYY-MM-DD')"
+                    + " and to_date('2000-' || (tmonth+1)::text || '-' || tday::text,'YYYY-MM-DD') >= to_date('2000-"+mon+"-"+day+"','YYYY-MM-DD')";
             SeasonBean[] ses = SeasonManager.getInstance().loadByWhere(sqlseason);
             int seasonid = 0;
             if(ses.length > 0)

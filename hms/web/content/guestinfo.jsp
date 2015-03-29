@@ -7,19 +7,23 @@ ReservationroomBean rroom = null;
 GuestBean guest = null;
 String guestname = "";
 String guestaddress = "";
+
 if(!rid.equals("null")){
-    ReservationroomManager.getInstance().loadByPrimaryKey(new Long(request.getParameter("reservationroomid")));
-    guest = GuestManager.getInstance().loadByPrimaryKey(rroom.getGuestid());
-    SalutationBean salutation = SalutationManager.getInstance().loadByPrimaryKey(guest.getSalutationid());
-    guestname += salutation.getName()+" ";
-    guestname += guest.getFname() + " " + guest.getLname();
-    if(guest.getCountryid() != null){
-        CountryBean country = CountryManager.getInstance().loadByPrimaryKey(guest.getCountryid());
-        guestaddress = country.getName()+" ";
+    rroom = ReservationroomManager.getInstance().loadByPrimaryKey(new Long(request.getParameter("reservationroomid")));
+    if(rroom.getGuestid() != null){
+        guest = GuestManager.getInstance().loadByPrimaryKey(rroom.getGuestid());
+        SalutationBean salutation = SalutationManager.getInstance().loadByPrimaryKey(guest.getSalutationid());
+        guestname += salutation.getName()+" ";
+        guestname += guest.getFname() + " " + guest.getLname();
+        if(guest.getCountryid() != null){
+            CountryBean country = CountryManager.getInstance().loadByPrimaryKey(guest.getCountryid());
+            guestaddress = country.getName()+" ";
+        }
+        if(guest.getCity() != null) guestaddress += guest.getCity()+" ";
+        if(guest.getZip() != null)  guestaddress += guest.getZip();
     }
-    if(guest.getCity() != null) guestaddress += guest.getCity()+" ";
-    if(guest.getZip() != null)  guestaddress += guest.getZip();
 }
+
 %>
 <div class="panel-heading">
     <h3 class="panel-title">

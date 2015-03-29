@@ -42,6 +42,20 @@ public class ReservationreasonManager
     public static final int TYPE_REASONID = Types.INTEGER;
     public static final String NAME_REASONID = "reasonid";
 
+    /**
+     * Column regbyid of type Types.INTEGER mapped to Integer.
+     */
+    public static final int ID_REGBYID = 2;
+    public static final int TYPE_REGBYID = Types.INTEGER;
+    public static final String NAME_REGBYID = "regbyid";
+
+    /**
+     * Column regdate of type Types.TIMESTAMP mapped to java.sql.Timestamp.
+     */
+    public static final int ID_REGDATE = 3;
+    public static final int TYPE_REGDATE = Types.TIMESTAMP;
+    public static final String NAME_REGDATE = "regdate";
+
 
     private static final String TABLE_NAME = "reservationreason";
 
@@ -52,13 +66,17 @@ public class ReservationreasonManager
     {
         "reservationreason.reservationid"
         ,"reservationreason.reasonid"
+        ,"reservationreason.regbyid"
+        ,"reservationreason.regdate"
     };
 
     /**
      * Field that contains the comma separated fields of the reservationreason table.
      */
     private static final String ALL_FIELDS = "reservationreason.reservationid"
-                            + ",reservationreason.reasonid";
+                            + ",reservationreason.reasonid"
+                            + ",reservationreason.regbyid"
+                            + ",reservationreason.regdate";
 
     private static ReservationreasonManager singleton = new ReservationreasonManager();
 
@@ -156,6 +174,57 @@ public class ReservationreasonManager
     //////////////////////////////////////
     // FOREIGN KEY METHODS 
     //////////////////////////////////////
+
+    /**
+     * Loads ReservationreasonBean array from the reservationreason table using its regbyid field.
+     *
+     * @return an array of ReservationreasonBean 
+     */
+    // LOAD BY IMPORTED KEY
+    public ReservationreasonBean[] loadByRegbyid(Integer value) throws SQLException 
+    {
+        Connection c = null;
+        PreparedStatement ps = null;
+        try 
+        {
+            c = getConnection();
+            ps = c.prepareStatement("SELECT " + ALL_FIELDS + " FROM reservationreason WHERE regbyid=?",ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            Manager.setInteger(ps, 1, value);
+            return loadByPreparedStatement(ps);
+        }
+        finally
+        {
+            getManager().close(ps);
+            freeConnection(c);
+        }
+    }
+
+
+    /**
+     * Deletes from the reservationreason table by regbyid field.
+     *
+     * @param value the key value to seek
+     * @return the number of rows deleted
+     */
+    // DELETE BY IMPORTED KEY
+    public int deleteByRegbyid(Integer value) throws SQLException 
+    {
+        Connection c = null;
+        PreparedStatement ps = null;
+        try 
+        {
+            c = getConnection();
+            ps = c.prepareStatement("DELETE FROM reservationreason WHERE regbyid=?");
+            Manager.setInteger(ps, 1, value);
+            return ps.executeUpdate();
+        }
+        finally
+        {
+            getManager().close(ps);
+            freeConnection(c);
+        }
+    }
+
 
     /**
      * Loads ReservationreasonBean array from the reservationreason table using its reasonid field.
@@ -263,6 +332,34 @@ public class ReservationreasonManager
     //////////////////////////////////////
     // GET/SET FOREIGN KEY BEAN METHOD
     //////////////////////////////////////
+    /**
+     * Retrieves the PersonnelBean object from the reservationreason.personnelid field.
+     *
+     * @param pObject the ReservationreasonBean 
+     * @return the associated PersonnelBean pObject
+     */
+    // GET IMPORTED
+    public PersonnelBean getPersonnelBean(ReservationreasonBean pObject) throws SQLException
+    {
+        PersonnelBean other = PersonnelManager.getInstance().createPersonnelBean();
+        other.setPersonnelid(pObject.getRegbyid());
+        return PersonnelManager.getInstance().loadUniqueUsingTemplate(other);
+    }
+
+    /**
+     * Associates the ReservationreasonBean object to the PersonnelBean object.
+     *
+     * @param pObject the ReservationreasonBean object to use
+     * @param pObjectToBeSet the PersonnelBean object to associate to the ReservationreasonBean 
+     * @return the associated PersonnelBean pObject
+     */
+    // SET IMPORTED
+    public ReservationreasonBean setPersonnelBean(ReservationreasonBean pObject,PersonnelBean pObjectToBeSet)
+    {
+        pObject.setRegbyid(pObjectToBeSet.getPersonnelid());
+        return pObject;
+    }
+
     /**
      * Retrieves the ReasonBean object from the reservationreason.reasonid field.
      *
@@ -500,6 +597,22 @@ public class ReservationreasonManager
                     _dirtyCount++;
                 }
 
+                if (pObject.isRegbyidModified()) {
+                    if (_dirtyCount>0) {
+                        _sql.append(",");
+                    }
+                    _sql.append("regbyid");
+                    _dirtyCount++;
+                }
+
+                if (pObject.isRegdateModified()) {
+                    if (_dirtyCount>0) {
+                        _sql.append(",");
+                    }
+                    _sql.append("regdate");
+                    _dirtyCount++;
+                }
+
                 _sql.append(") values (");
                 if(_dirtyCount > 0) {
                     _sql.append("?");
@@ -518,6 +631,14 @@ public class ReservationreasonManager
     
                 if (pObject.isReasonidModified()) {
                     Manager.setInteger(ps, ++_dirtyCount, pObject.getReasonid());
+                }
+    
+                if (pObject.isRegbyidModified()) {
+                    Manager.setInteger(ps, ++_dirtyCount, pObject.getRegbyid());
+                }
+    
+                if (pObject.isRegdateModified()) {
+                    ps.setTimestamp(++_dirtyCount, pObject.getRegdate());
                 }
     
                 ps.executeUpdate();
@@ -549,6 +670,24 @@ public class ReservationreasonManager
                     }
                     _sql.append("reasonid").append("=?");
                 }
+
+                if (pObject.isRegbyidModified()) {
+                    if (useComma) {
+                        _sql.append(",");
+                    } else {
+                        useComma=true;
+                    }
+                    _sql.append("regbyid").append("=?");
+                }
+
+                if (pObject.isRegdateModified()) {
+                    if (useComma) {
+                        _sql.append(",");
+                    } else {
+                        useComma=true;
+                    }
+                    _sql.append("regdate").append("=?");
+                }
                 _sql.append(" WHERE ");
                 _sql.append("reservationreason.reservationid=? AND reservationreason.reasonid=?");
                 ps = c.prepareStatement(_sql.toString(),ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
@@ -560,6 +699,14 @@ public class ReservationreasonManager
 
                 if (pObject.isReasonidModified()) {
                       Manager.setInteger(ps, ++_dirtyCount, pObject.getReasonid());
+                }
+
+                if (pObject.isRegbyidModified()) {
+                      Manager.setInteger(ps, ++_dirtyCount, pObject.getRegbyid());
+                }
+
+                if (pObject.isRegdateModified()) {
+                      ps.setTimestamp(++_dirtyCount, pObject.getRegdate());
                 }
     
                 if (_dirtyCount == 0) {
@@ -649,6 +796,16 @@ public class ReservationreasonManager
                  _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("reasonid= ?");
              }
     
+             if (pObject.isRegbyidModified()) {
+                 _dirtyCount ++; 
+                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("regbyid= ?");
+             }
+    
+             if (pObject.isRegdateModified()) {
+                 _dirtyCount ++; 
+                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("regdate= ?");
+             }
+    
              if (_dirtyCount == 0) {
                  throw new SQLException ("The pObject to look for is invalid : not initialized !");
              }
@@ -663,6 +820,14 @@ public class ReservationreasonManager
     
              if (pObject.isReasonidModified()) {
                  Manager.setInteger(ps, ++_dirtyCount, pObject.getReasonid());
+             }
+    
+             if (pObject.isRegbyidModified()) {
+                 Manager.setInteger(ps, ++_dirtyCount, pObject.getRegbyid());
+             }
+    
+             if (pObject.isRegdateModified()) {
+                 ps.setTimestamp(++_dirtyCount, pObject.getRegdate());
              }
     
              ps.executeQuery();
@@ -705,6 +870,20 @@ public class ReservationreasonManager
                 _dirtyAnd ++;
             }
     
+            if (pObject.isRegbyidInitialized()) {
+                if (_dirtyAnd > 0)
+                    sql.append(" AND ");
+                sql.append("regbyid").append("=?");
+                _dirtyAnd ++;
+            }
+    
+            if (pObject.isRegdateInitialized()) {
+                if (_dirtyAnd > 0)
+                    sql.append(" AND ");
+                sql.append("regdate").append("=?");
+                _dirtyAnd ++;
+            }
+    
             c = getConnection();
             ps = c.prepareStatement(sql.toString(),ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             int _dirtyCount = 0;
@@ -715,6 +894,14 @@ public class ReservationreasonManager
     
             if (pObject.isReasonidInitialized()) {
                 Manager.setInteger(ps, ++_dirtyCount, pObject.getReasonid());
+            }
+    
+            if (pObject.isRegbyidInitialized()) {
+                Manager.setInteger(ps, ++_dirtyCount, pObject.getRegbyid());
+            }
+    
+            if (pObject.isRegdateInitialized()) {
+                ps.setTimestamp(++_dirtyCount, pObject.getRegdate());
             }
     
             int _rows = ps.executeUpdate();
@@ -837,6 +1024,16 @@ public class ReservationreasonManager
                     _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("reasonid= ?");
                 }
     
+                if (pObject.isRegbyidModified()) {
+                    _dirtyCount++; 
+                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("regbyid= ?");
+                }
+    
+                if (pObject.isRegdateModified()) {
+                    _dirtyCount++; 
+                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("regdate= ?");
+                }
+    
                 if (_dirtyCount == 0)
                    throw new SQLException ("The pObject to look is unvalid : not initialized !");
     
@@ -852,6 +1049,14 @@ public class ReservationreasonManager
     
                 if (pObject.isReasonidModified()) {
                     Manager.setInteger(ps, ++_dirtyCount, pObject.getReasonid());
+                }
+    
+                if (pObject.isRegbyidModified()) {
+                    Manager.setInteger(ps, ++_dirtyCount, pObject.getRegbyid());
+                }
+    
+                if (pObject.isRegdateModified()) {
+                    ps.setTimestamp(++_dirtyCount, pObject.getRegdate());
                 }
     
                 return countByPreparedStatement(ps);
@@ -880,6 +1085,8 @@ public class ReservationreasonManager
         ReservationreasonBean pObject = createReservationreasonBean();
         pObject.setReservationid(Manager.getLong(rs, 1));
         pObject.setReasonid(Manager.getInteger(rs, 2));
+        pObject.setRegbyid(Manager.getInteger(rs, 3));
+        pObject.setRegdate(rs.getTimestamp(4));
 
         pObject.isNew(false);
         pObject.resetIsModified();
@@ -909,6 +1116,14 @@ public class ReservationreasonManager
                 case ID_REASONID:
                     ++pos;
                     pObject.setReasonid(Manager.getInteger(rs, pos));
+                    break;
+                case ID_REGBYID:
+                    ++pos;
+                    pObject.setRegbyid(Manager.getInteger(rs, pos));
+                    break;
+                case ID_REGDATE:
+                    ++pos;
+                    pObject.setRegdate(rs.getTimestamp(pos));
                     break;
             }
         }
