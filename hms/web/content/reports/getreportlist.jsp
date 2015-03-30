@@ -15,20 +15,20 @@ if(request.getParameter("afilter_cnt") != null)
     acnt = Integer.parseInt(request.getParameter("afilter_cnt"));
 
 String sql = report.getSqlquery();
-
 Hashtable h = new Hashtable();
 Connection c = Manager.getInstance().getConnection();
 ResultSet rs0 = c.createStatement().executeQuery(sql+" limit 1");
 ResultSetMetaData ms0 = rs0.getMetaData();
-for(int i=0;i<ms0.getColumnCount();i++)
+for(int i=0;i<items.length;i++){
     h.put((Integer)items[i].getIdx(),(String)ms0.getColumnName(i+1));
+}
 rs0.close();
 String sql0 = "";
 for(Enumeration e = request.getParameterNames();e.hasMoreElements();){
     String name = (String)e.nextElement();
     String val = request.getParameter(name);
     String[] names = name.split("_");
-    if(names.length > 1 && !name.equalsIgnoreCase("filter_cnt") && !name.equalsIgnoreCase("afilter_cnt")){
+    if(names.length > 1 && !name.equalsIgnoreCase("filter_cnt") && !name.equalsIgnoreCase("afilter_cnt") && val.trim().length() >0){
         if(names[0].equalsIgnoreCase("filter")){
             int idx = Integer.parseInt(names[1]);
             ReportitemBean[] items0 = ReportitemManager.getInstance().loadByWhere("where reportid = "+report.getReportid()+" and idx = "+idx);
@@ -56,14 +56,23 @@ for(Enumeration e = request.getParameterNames();e.hasMoreElements();){
                             sql0 += " and "+(String)h.get((Integer)idx)+" < to_date('"+df.format(dt.parse(val)) +"','DD/MM/YYYY') ";
                         break;
                     case 4:
+                    case 5:
+                    case 6:
                         if(names[2].equals("1"))
                             sql0 += " and "+(String)h.get((Integer)idx)+" >= to_timestamp('"+dflong.format(dtlong.parse(val)) +"','DD/MM/YYYY HH24:MI') ";
                         else
                             sql0 += " and "+(String)h.get((Integer)idx)+" < to_timestamp('"+dflong.format(dtlong.parse(val)) +"','DD/MM/YYYY HH24:MI') ";
                         break;
-                    case 5:
+                    case 7:
+                        if(!val.equals("0")){
+                            String[] ss = items0[0].getParam().split(" ");
+                            sql0 += " and "+ss[1].replaceAll(",", "")+" = "+val;
+                        }
                         break;
-                    case 6:
+                    case 8:
+                        if(!val.equals("-1")){
+                            sql0 += " and "+items0[0].getParam().trim()+" = "+val;
+                        }
                         break;
                     default:
                 }
@@ -73,7 +82,13 @@ for(Enumeration e = request.getParameterNames();e.hasMoreElements();){
             int idx = Integer.parseInt(names[1]);
             ReportsearchBean item = ReportsearchManager.getInstance().loadByPrimaryKey(idx);
             if(item != null){
-                sql0 += item.getSql().replaceAll("FVALUE", val);
+                if(item.getType().intValue() == 7){
+                    String[] ss = item.getSql().split(" ");
+                    if(!val.equals("0"))    sql0 += " and "+ss[1].replaceAll(",", "")+" = "+val;
+                } else if(item.getType().intValue() == 8 && !val.equals("-1")){
+                    if(!val.equals("-1"))   sql0 += " and "+item.getSql().trim()+" = "+val;
+                } else
+                    sql0 += item.getSql().replaceAll("FVALUE", val);
             }
         }
     }
@@ -101,9 +116,11 @@ int start = ilmt*ipg - ilmt;
 if(start < 0)   start = 0;
 String limit = "limit "+ilmt+" offset "+start;
 //String order = "order by "+sidx+" "+sord;
-if(sql.toUpperCase().indexOf("where") < 0){
+if(sql.indexOf("where") < 0){
     sql += sql0.replaceFirst("and", "where");
 } else sql += sql0;
+
+System.out.println(sql);
 
 try{
     ResultSet rs = null;
@@ -121,10 +138,13 @@ try{
         rs.close();
         sql = sql+" order by "+sidx+" "+sord+" "+limit;
     }
+    
+    //System.out.println(sql);
+    
     rs = c.createStatement().executeQuery(sql);
     
-    System.out.println(sql);
     
+    double[] tots = new double[items.length];
 %>
 <rows>
 	<page><%=ipg%></page>
@@ -143,10 +163,14 @@ try{
                                 val = rs.getString(j+1);
                                 break;
                             case 1:
-                                val = dcint.format(rs.getInt(j+1));
+                                int vl1 = rs.getInt(j+1);
+                                val = dcint.format(vl1);
+                                tots[j] += vl1;
                                 break;
                             case 2:
-                                val = dc.format(rs.getDouble(j+1));
+                                double vl2 = rs.getDouble(j+1);
+                                val = dc.format(vl2);
+                                tots[j] += vl2;
                                 break;
                             case 3:
                                 val = dt.format(rs.getDate(j+1));
@@ -175,7 +199,10 @@ try{
             }
         for(int i=0;i<items.length;i++){
             if(items[i].getHassum().booleanValue()){
-                %><userdata name="<%="report_"+report.getReportid()+"_"+i%>"><%=dc.format(0)%></userdata><%
+                String sv = "";
+                if(items[i].getFieldtype().intValue() == 1) sv = dcint.format(tots[i]);
+                if(items[i].getFieldtype().intValue() == 2) sv = dc.format(tots[i]);
+                %><userdata name="<%="report_"+report.getReportid()+"_"+i%>"><%=sv%></userdata><%
             }
         }
 	%>

@@ -52,6 +52,7 @@ System.out.println("reasonid = "+reasonid);
                 rb = ReservationreasonManager.getInstance().createReservationreasonBean();
                 rb.setReasonid(reasonid);
                 rb.setReservationid(reserv.getReservationid());
+                rb.setRegbyid(user.getPersonnelid());
                 rb = ReservationreasonManager.getInstance().save(rb);
             }
         }

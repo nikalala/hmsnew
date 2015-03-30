@@ -51,6 +51,10 @@ public class ReportBean
     private boolean repcatid_is_modified = false;
     private boolean repcatid_is_initialized = false;
     
+    private Integer ord;
+    private boolean ord_is_modified = false;
+    private boolean ord_is_initialized = false;
+    
     private boolean _isNew = true;
     
     /**
@@ -135,7 +139,7 @@ public class ReportBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: report.name
-     * <li>comments: ??????????
+     * <li>comments: დასახელება
      * <li>column size: 2147483647
      * <li>jdbc type returned by the driver: Types.VARCHAR
      * </ul>
@@ -192,7 +196,7 @@ public class ReportBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: report.displayname
-     * <li>comments: ???????
+     * <li>comments: სათაური
      * <li>column size: 2147483647
      * <li>jdbc type returned by the driver: Types.VARCHAR
      * </ul>
@@ -249,7 +253,7 @@ public class ReportBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: report.sqlquery
-     * <li>comments: SQL ????
+     * <li>comments: SQL კოდი
      * <li>column size: 2147483647
      * <li>jdbc type returned by the driver: Types.VARCHAR
      * </ul>
@@ -307,7 +311,7 @@ public class ReportBean
      * <ul>
      * <li>full name: report.regbyid
      * <li> foreign key: personnel.personnelid
-     * <li>comments: ??????
+     * <li>comments: ავტორი
      * <li>column size: 10
      * <li>jdbc type returned by the driver: Types.INTEGER
      * </ul>
@@ -375,7 +379,7 @@ public class ReportBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: report.regdate
-     * <li>comments: ???. ??????
+     * <li>comments: რეგ. თარიღი
      * <li>default value: now()
      * <li>column size: 29
      * <li>jdbc type returned by the driver: Types.TIMESTAMP
@@ -507,6 +511,74 @@ public class ReportBean
     }
 
     /**
+     * Getter method for ord.
+     * <br>
+     * Meta Data Information (in progress):
+     * <ul>
+     * <li>full name: report.ord
+     * <li>default value: 0
+     * <li>column size: 10
+     * <li>jdbc type returned by the driver: Types.INTEGER
+     * </ul>
+     *
+     * @return the value of ord
+     */
+    public Integer getOrd()
+    {
+        return ord; 
+    }
+
+    /**
+     * Setter method for ord.
+     * <br>
+     * The new value is set only if compareTo() says it is different,
+     * or if one of either the new value or the current value is null.
+     * In case the new value is different, it is set and the field is marked as 'modified'.
+     *
+     * @param newVal the new value to be assigned to ord
+     */
+    public void setOrd(Integer newVal) {
+        if ((newVal != null && this.ord != null && (newVal.compareTo(this.ord) == 0)) || 
+            (newVal == null && this.ord == null && ord_is_initialized)) {
+            return; 
+        } 
+        this.ord = newVal; 
+        ord_is_modified = true; 
+        ord_is_initialized = true; 
+    }
+
+    /**
+     * Setter method for ord.
+     * <br>
+     * Convenient for those who do not want to deal with Objects for primary types.
+     *
+     * @param newVal the new value to be assigned to ord
+     */
+    public void setOrd(int newVal) {
+        setOrd(new Integer(newVal));
+    }
+
+    /**
+     * Determines if the ord has been modified.
+     *
+     * @return true if the field has been modified, false if the field has not been modified
+     */
+    public boolean isOrdModified() {
+        return ord_is_modified; 
+    }
+
+    /**
+     * Determines if the ord has been initialized.
+     * <br>
+     * It is useful to determine if a field is null on purpose or just because it has not been initialized.
+     *
+     * @return true if the field has been initialized, false otherwise
+     */
+    public boolean isOrdInitialized() {
+        return ord_is_initialized; 
+    }
+
+    /**
      * Determines if the current object is new.
      *
      * @return true if the current object is new, false if the object is not new
@@ -538,7 +610,8 @@ public class ReportBean
 		sqlquery_is_modified || 
 		regbyid_is_modified || 
 		regdate_is_modified || 
-		repcatid_is_modified;
+		repcatid_is_modified || 
+		ord_is_modified;
     }
 
     /**
@@ -552,6 +625,7 @@ public class ReportBean
         regbyid_is_modified = false;
         regdate_is_modified = false;
         repcatid_is_modified = false;
+        ord_is_modified = false;
     }
 
     /**
@@ -567,6 +641,7 @@ public class ReportBean
         setRegbyid(bean.getRegbyid());
         setRegdate(bean.getRegdate());
         setRepcatid(bean.getRepcatid());
+        setOrd(bean.getOrd());
     }
 
     /**
@@ -583,6 +658,7 @@ public class ReportBean
                  + "\n - report.regbyid = " + (regbyid_is_initialized ? ("[" + (regbyid == null ? null : regbyid.toString()) + "]") : "not initialized") + ""
                  + "\n - report.regdate = " + (regdate_is_initialized ? ("[" + (regdate == null ? null : regdate.toString()) + "]") : "not initialized") + ""
                  + "\n - report.repcatid = " + (repcatid_is_initialized ? ("[" + (repcatid == null ? null : repcatid.toString()) + "]") : "not initialized") + ""
+                 + "\n - report.ord = " + (ord_is_initialized ? ("[" + (ord == null ? null : ord.toString()) + "]") : "not initialized") + ""
             ;
     }
 

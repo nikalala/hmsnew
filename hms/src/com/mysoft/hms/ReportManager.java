@@ -77,6 +77,13 @@ public class ReportManager
     public static final int TYPE_REPCATID = Types.INTEGER;
     public static final String NAME_REPCATID = "repcatid";
 
+    /**
+     * Column ord of type Types.INTEGER mapped to Integer.
+     */
+    public static final int ID_ORD = 7;
+    public static final int TYPE_ORD = Types.INTEGER;
+    public static final String NAME_ORD = "ord";
+
 
     private static final String TABLE_NAME = "report";
 
@@ -92,6 +99,7 @@ public class ReportManager
         ,"report.regbyid"
         ,"report.regdate"
         ,"report.repcatid"
+        ,"report.ord"
     };
 
     /**
@@ -103,7 +111,8 @@ public class ReportManager
                             + ",report.sqlquery"
                             + ",report.regbyid"
                             + ",report.regdate"
-                            + ",report.repcatid";
+                            + ",report.repcatid"
+                            + ",report.ord";
 
     private static ReportManager singleton = new ReportManager();
 
@@ -522,6 +531,14 @@ public class ReportManager
                     _dirtyCount++;
                 }
 
+                if (pObject.isOrdModified()) {
+                    if (_dirtyCount>0) {
+                        _sql.append(",");
+                    }
+                    _sql.append("ord");
+                    _dirtyCount++;
+                }
+
                 _sql.append(") values (");
                 if(_dirtyCount > 0) {
                     _sql.append("?");
@@ -560,6 +577,10 @@ public class ReportManager
     
                 if (pObject.isRepcatidModified()) {
                     Manager.setInteger(ps, ++_dirtyCount, pObject.getRepcatid());
+                }
+    
+                if (pObject.isOrdModified()) {
+                    Manager.setInteger(ps, ++_dirtyCount, pObject.getOrd());
                 }
     
                 ps.executeUpdate();
@@ -636,6 +657,15 @@ public class ReportManager
                     }
                     _sql.append("repcatid").append("=?");
                 }
+
+                if (pObject.isOrdModified()) {
+                    if (useComma) {
+                        _sql.append(",");
+                    } else {
+                        useComma=true;
+                    }
+                    _sql.append("ord").append("=?");
+                }
                 _sql.append(" WHERE ");
                 _sql.append("report.reportid=?");
                 ps = c.prepareStatement(_sql.toString(),ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
@@ -667,6 +697,10 @@ public class ReportManager
 
                 if (pObject.isRepcatidModified()) {
                       Manager.setInteger(ps, ++_dirtyCount, pObject.getRepcatid());
+                }
+
+                if (pObject.isOrdModified()) {
+                      Manager.setInteger(ps, ++_dirtyCount, pObject.getOrd());
                 }
     
                 if (_dirtyCount == 0) {
@@ -780,6 +814,11 @@ public class ReportManager
                  _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("repcatid= ?");
              }
     
+             if (pObject.isOrdModified()) {
+                 _dirtyCount ++; 
+                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("ord= ?");
+             }
+    
              if (_dirtyCount == 0) {
                  throw new SQLException ("The pObject to look for is invalid : not initialized !");
              }
@@ -814,6 +853,10 @@ public class ReportManager
     
              if (pObject.isRepcatidModified()) {
                  Manager.setInteger(ps, ++_dirtyCount, pObject.getRepcatid());
+             }
+    
+             if (pObject.isOrdModified()) {
+                 Manager.setInteger(ps, ++_dirtyCount, pObject.getOrd());
              }
     
              ps.executeQuery();
@@ -894,6 +937,13 @@ public class ReportManager
                 _dirtyAnd ++;
             }
     
+            if (pObject.isOrdInitialized()) {
+                if (_dirtyAnd > 0)
+                    sql.append(" AND ");
+                sql.append("ord").append("=?");
+                _dirtyAnd ++;
+            }
+    
             c = getConnection();
             ps = c.prepareStatement(sql.toString(),ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             int _dirtyCount = 0;
@@ -924,6 +974,10 @@ public class ReportManager
     
             if (pObject.isRepcatidInitialized()) {
                 Manager.setInteger(ps, ++_dirtyCount, pObject.getRepcatid());
+            }
+    
+            if (pObject.isOrdInitialized()) {
+                Manager.setInteger(ps, ++_dirtyCount, pObject.getOrd());
             }
     
             int _rows = ps.executeUpdate();
@@ -1071,6 +1125,11 @@ public class ReportManager
                     _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("repcatid= ?");
                 }
     
+                if (pObject.isOrdModified()) {
+                    _dirtyCount++; 
+                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("ord= ?");
+                }
+    
                 if (_dirtyCount == 0)
                    throw new SQLException ("The pObject to look is unvalid : not initialized !");
     
@@ -1108,6 +1167,10 @@ public class ReportManager
                     Manager.setInteger(ps, ++_dirtyCount, pObject.getRepcatid());
                 }
     
+                if (pObject.isOrdModified()) {
+                    Manager.setInteger(ps, ++_dirtyCount, pObject.getOrd());
+                }
+    
                 return countByPreparedStatement(ps);
         }
         finally
@@ -1139,6 +1202,7 @@ public class ReportManager
         pObject.setRegbyid(Manager.getInteger(rs, 5));
         pObject.setRegdate(rs.getTimestamp(6));
         pObject.setRepcatid(Manager.getInteger(rs, 7));
+        pObject.setOrd(Manager.getInteger(rs, 8));
 
         pObject.isNew(false);
         pObject.resetIsModified();
@@ -1188,6 +1252,10 @@ public class ReportManager
                 case ID_REPCATID:
                     ++pos;
                     pObject.setRepcatid(Manager.getInteger(rs, pos));
+                    break;
+                case ID_ORD:
+                    ++pos;
+                    pObject.setOrd(Manager.getInteger(rs, pos));
                     break;
             }
         }

@@ -35,9 +35,9 @@ public class VsArrivallistBean
     private boolean name_is_modified = false;
     private boolean name_is_initialized = false;
     
-    private Double float8;
-    private boolean float8_is_modified = false;
-    private boolean float8_is_initialized = false;
+    private Double tariff;
+    private boolean tariff_is_modified = false;
+    private boolean tariff_is_initialized = false;
     
     private java.sql.Timestamp arraivaldate;
     private boolean arraivaldate_is_modified = false;
@@ -62,6 +62,38 @@ public class VsArrivallistBean
     private String user;
     private boolean user_is_modified = false;
     private boolean user_is_initialized = false;
+    
+    private Integer reservationtypeid;
+    private boolean reservationtypeid_is_modified = false;
+    private boolean reservationtypeid_is_initialized = false;
+    
+    private Integer regbyid;
+    private boolean regbyid_is_modified = false;
+    private boolean regbyid_is_initialized = false;
+    
+    private Integer roomtypeid;
+    private boolean roomtypeid_is_modified = false;
+    private boolean roomtypeid_is_initialized = false;
+    
+    private Long contragentid;
+    private boolean contragentid_is_modified = false;
+    private boolean contragentid_is_initialized = false;
+    
+    private Long companyid;
+    private boolean companyid_is_modified = false;
+    private boolean companyid_is_initialized = false;
+    
+    private Integer personnelid;
+    private boolean personnelid_is_modified = false;
+    private boolean personnelid_is_initialized = false;
+    
+    private Integer ratetypeid;
+    private boolean ratetypeid_is_modified = false;
+    private boolean ratetypeid_is_initialized = false;
+    
+    private Integer marketid;
+    private boolean marketid_is_modified = false;
+    private boolean marketid_is_initialized = false;
     
     private boolean _isNew = true;
     
@@ -253,70 +285,70 @@ public class VsArrivallistBean
     }
 
     /**
-     * Getter method for float8.
+     * Getter method for tariff.
      * <br>
      * Meta Data Information (in progress):
      * <ul>
-     * <li>full name: vs_arrivallist.float8
+     * <li>full name: vs_arrivallist.tariff
      * <li>column size: 17
      * <li>jdbc type returned by the driver: Types.DOUBLE
      * </ul>
      *
-     * @return the value of float8
+     * @return the value of tariff
      */
-    public Double getFloat8()
+    public Double getTariff()
     {
-        return float8; 
+        return tariff; 
     }
 
     /**
-     * Setter method for float8.
+     * Setter method for tariff.
      * <br>
      * The new value is set only if compareTo() says it is different,
      * or if one of either the new value or the current value is null.
      * In case the new value is different, it is set and the field is marked as 'modified'.
      *
-     * @param newVal the new value to be assigned to float8
+     * @param newVal the new value to be assigned to tariff
      */
-    public void setFloat8(Double newVal) {
-        if ((newVal != null && this.float8 != null && (newVal.compareTo(this.float8) == 0)) || 
-            (newVal == null && this.float8 == null && float8_is_initialized)) {
+    public void setTariff(Double newVal) {
+        if ((newVal != null && this.tariff != null && (newVal.compareTo(this.tariff) == 0)) || 
+            (newVal == null && this.tariff == null && tariff_is_initialized)) {
             return; 
         } 
-        this.float8 = newVal; 
-        float8_is_modified = true; 
-        float8_is_initialized = true; 
+        this.tariff = newVal; 
+        tariff_is_modified = true; 
+        tariff_is_initialized = true; 
     }
 
     /**
-     * Setter method for float8.
+     * Setter method for tariff.
      * <br>
      * Convenient for those who do not want to deal with Objects for primary types.
      *
-     * @param newVal the new value to be assigned to float8
+     * @param newVal the new value to be assigned to tariff
      */
-    public void setFloat8(double newVal) {
-        setFloat8(new Double(newVal));
+    public void setTariff(double newVal) {
+        setTariff(new Double(newVal));
     }
 
     /**
-     * Determines if the float8 has been modified.
+     * Determines if the tariff has been modified.
      *
      * @return true if the field has been modified, false if the field has not been modified
      */
-    public boolean isFloat8Modified() {
-        return float8_is_modified; 
+    public boolean isTariffModified() {
+        return tariff_is_modified; 
     }
 
     /**
-     * Determines if the float8 has been initialized.
+     * Determines if the tariff has been initialized.
      * <br>
      * It is useful to determine if a field is null on purpose or just because it has not been initialized.
      *
      * @return true if the field has been initialized, false otherwise
      */
-    public boolean isFloat8Initialized() {
-        return float8_is_initialized; 
+    public boolean isTariffInitialized() {
+        return tariff_is_initialized; 
     }
 
     /**
@@ -678,6 +710,542 @@ public class VsArrivallistBean
     }
 
     /**
+     * Getter method for reservationtypeid.
+     * <br>
+     * Meta Data Information (in progress):
+     * <ul>
+     * <li>full name: vs_arrivallist.reservationtypeid
+     * <li>column size: 10
+     * <li>jdbc type returned by the driver: Types.INTEGER
+     * </ul>
+     *
+     * @return the value of reservationtypeid
+     */
+    public Integer getReservationtypeid()
+    {
+        return reservationtypeid; 
+    }
+
+    /**
+     * Setter method for reservationtypeid.
+     * <br>
+     * The new value is set only if compareTo() says it is different,
+     * or if one of either the new value or the current value is null.
+     * In case the new value is different, it is set and the field is marked as 'modified'.
+     *
+     * @param newVal the new value to be assigned to reservationtypeid
+     */
+    public void setReservationtypeid(Integer newVal) {
+        if ((newVal != null && this.reservationtypeid != null && (newVal.compareTo(this.reservationtypeid) == 0)) || 
+            (newVal == null && this.reservationtypeid == null && reservationtypeid_is_initialized)) {
+            return; 
+        } 
+        this.reservationtypeid = newVal; 
+        reservationtypeid_is_modified = true; 
+        reservationtypeid_is_initialized = true; 
+    }
+
+    /**
+     * Setter method for reservationtypeid.
+     * <br>
+     * Convenient for those who do not want to deal with Objects for primary types.
+     *
+     * @param newVal the new value to be assigned to reservationtypeid
+     */
+    public void setReservationtypeid(int newVal) {
+        setReservationtypeid(new Integer(newVal));
+    }
+
+    /**
+     * Determines if the reservationtypeid has been modified.
+     *
+     * @return true if the field has been modified, false if the field has not been modified
+     */
+    public boolean isReservationtypeidModified() {
+        return reservationtypeid_is_modified; 
+    }
+
+    /**
+     * Determines if the reservationtypeid has been initialized.
+     * <br>
+     * It is useful to determine if a field is null on purpose or just because it has not been initialized.
+     *
+     * @return true if the field has been initialized, false otherwise
+     */
+    public boolean isReservationtypeidInitialized() {
+        return reservationtypeid_is_initialized; 
+    }
+
+    /**
+     * Getter method for regbyid.
+     * <br>
+     * Meta Data Information (in progress):
+     * <ul>
+     * <li>full name: vs_arrivallist.regbyid
+     * <li>column size: 10
+     * <li>jdbc type returned by the driver: Types.INTEGER
+     * </ul>
+     *
+     * @return the value of regbyid
+     */
+    public Integer getRegbyid()
+    {
+        return regbyid; 
+    }
+
+    /**
+     * Setter method for regbyid.
+     * <br>
+     * The new value is set only if compareTo() says it is different,
+     * or if one of either the new value or the current value is null.
+     * In case the new value is different, it is set and the field is marked as 'modified'.
+     *
+     * @param newVal the new value to be assigned to regbyid
+     */
+    public void setRegbyid(Integer newVal) {
+        if ((newVal != null && this.regbyid != null && (newVal.compareTo(this.regbyid) == 0)) || 
+            (newVal == null && this.regbyid == null && regbyid_is_initialized)) {
+            return; 
+        } 
+        this.regbyid = newVal; 
+        regbyid_is_modified = true; 
+        regbyid_is_initialized = true; 
+    }
+
+    /**
+     * Setter method for regbyid.
+     * <br>
+     * Convenient for those who do not want to deal with Objects for primary types.
+     *
+     * @param newVal the new value to be assigned to regbyid
+     */
+    public void setRegbyid(int newVal) {
+        setRegbyid(new Integer(newVal));
+    }
+
+    /**
+     * Determines if the regbyid has been modified.
+     *
+     * @return true if the field has been modified, false if the field has not been modified
+     */
+    public boolean isRegbyidModified() {
+        return regbyid_is_modified; 
+    }
+
+    /**
+     * Determines if the regbyid has been initialized.
+     * <br>
+     * It is useful to determine if a field is null on purpose or just because it has not been initialized.
+     *
+     * @return true if the field has been initialized, false otherwise
+     */
+    public boolean isRegbyidInitialized() {
+        return regbyid_is_initialized; 
+    }
+
+    /**
+     * Getter method for roomtypeid.
+     * <br>
+     * Meta Data Information (in progress):
+     * <ul>
+     * <li>full name: vs_arrivallist.roomtypeid
+     * <li>column size: 10
+     * <li>jdbc type returned by the driver: Types.INTEGER
+     * </ul>
+     *
+     * @return the value of roomtypeid
+     */
+    public Integer getRoomtypeid()
+    {
+        return roomtypeid; 
+    }
+
+    /**
+     * Setter method for roomtypeid.
+     * <br>
+     * The new value is set only if compareTo() says it is different,
+     * or if one of either the new value or the current value is null.
+     * In case the new value is different, it is set and the field is marked as 'modified'.
+     *
+     * @param newVal the new value to be assigned to roomtypeid
+     */
+    public void setRoomtypeid(Integer newVal) {
+        if ((newVal != null && this.roomtypeid != null && (newVal.compareTo(this.roomtypeid) == 0)) || 
+            (newVal == null && this.roomtypeid == null && roomtypeid_is_initialized)) {
+            return; 
+        } 
+        this.roomtypeid = newVal; 
+        roomtypeid_is_modified = true; 
+        roomtypeid_is_initialized = true; 
+    }
+
+    /**
+     * Setter method for roomtypeid.
+     * <br>
+     * Convenient for those who do not want to deal with Objects for primary types.
+     *
+     * @param newVal the new value to be assigned to roomtypeid
+     */
+    public void setRoomtypeid(int newVal) {
+        setRoomtypeid(new Integer(newVal));
+    }
+
+    /**
+     * Determines if the roomtypeid has been modified.
+     *
+     * @return true if the field has been modified, false if the field has not been modified
+     */
+    public boolean isRoomtypeidModified() {
+        return roomtypeid_is_modified; 
+    }
+
+    /**
+     * Determines if the roomtypeid has been initialized.
+     * <br>
+     * It is useful to determine if a field is null on purpose or just because it has not been initialized.
+     *
+     * @return true if the field has been initialized, false otherwise
+     */
+    public boolean isRoomtypeidInitialized() {
+        return roomtypeid_is_initialized; 
+    }
+
+    /**
+     * Getter method for contragentid.
+     * <br>
+     * Meta Data Information (in progress):
+     * <ul>
+     * <li>full name: vs_arrivallist.contragentid
+     * <li>column size: 19
+     * <li>jdbc type returned by the driver: Types.BIGINT
+     * </ul>
+     *
+     * @return the value of contragentid
+     */
+    public Long getContragentid()
+    {
+        return contragentid; 
+    }
+
+    /**
+     * Setter method for contragentid.
+     * <br>
+     * The new value is set only if compareTo() says it is different,
+     * or if one of either the new value or the current value is null.
+     * In case the new value is different, it is set and the field is marked as 'modified'.
+     *
+     * @param newVal the new value to be assigned to contragentid
+     */
+    public void setContragentid(Long newVal) {
+        if ((newVal != null && this.contragentid != null && (newVal.compareTo(this.contragentid) == 0)) || 
+            (newVal == null && this.contragentid == null && contragentid_is_initialized)) {
+            return; 
+        } 
+        this.contragentid = newVal; 
+        contragentid_is_modified = true; 
+        contragentid_is_initialized = true; 
+    }
+
+    /**
+     * Setter method for contragentid.
+     * <br>
+     * Convenient for those who do not want to deal with Objects for primary types.
+     *
+     * @param newVal the new value to be assigned to contragentid
+     */
+    public void setContragentid(long newVal) {
+        setContragentid(new Long(newVal));
+    }
+
+    /**
+     * Determines if the contragentid has been modified.
+     *
+     * @return true if the field has been modified, false if the field has not been modified
+     */
+    public boolean isContragentidModified() {
+        return contragentid_is_modified; 
+    }
+
+    /**
+     * Determines if the contragentid has been initialized.
+     * <br>
+     * It is useful to determine if a field is null on purpose or just because it has not been initialized.
+     *
+     * @return true if the field has been initialized, false otherwise
+     */
+    public boolean isContragentidInitialized() {
+        return contragentid_is_initialized; 
+    }
+
+    /**
+     * Getter method for companyid.
+     * <br>
+     * Meta Data Information (in progress):
+     * <ul>
+     * <li>full name: vs_arrivallist.companyid
+     * <li>column size: 19
+     * <li>jdbc type returned by the driver: Types.BIGINT
+     * </ul>
+     *
+     * @return the value of companyid
+     */
+    public Long getCompanyid()
+    {
+        return companyid; 
+    }
+
+    /**
+     * Setter method for companyid.
+     * <br>
+     * The new value is set only if compareTo() says it is different,
+     * or if one of either the new value or the current value is null.
+     * In case the new value is different, it is set and the field is marked as 'modified'.
+     *
+     * @param newVal the new value to be assigned to companyid
+     */
+    public void setCompanyid(Long newVal) {
+        if ((newVal != null && this.companyid != null && (newVal.compareTo(this.companyid) == 0)) || 
+            (newVal == null && this.companyid == null && companyid_is_initialized)) {
+            return; 
+        } 
+        this.companyid = newVal; 
+        companyid_is_modified = true; 
+        companyid_is_initialized = true; 
+    }
+
+    /**
+     * Setter method for companyid.
+     * <br>
+     * Convenient for those who do not want to deal with Objects for primary types.
+     *
+     * @param newVal the new value to be assigned to companyid
+     */
+    public void setCompanyid(long newVal) {
+        setCompanyid(new Long(newVal));
+    }
+
+    /**
+     * Determines if the companyid has been modified.
+     *
+     * @return true if the field has been modified, false if the field has not been modified
+     */
+    public boolean isCompanyidModified() {
+        return companyid_is_modified; 
+    }
+
+    /**
+     * Determines if the companyid has been initialized.
+     * <br>
+     * It is useful to determine if a field is null on purpose or just because it has not been initialized.
+     *
+     * @return true if the field has been initialized, false otherwise
+     */
+    public boolean isCompanyidInitialized() {
+        return companyid_is_initialized; 
+    }
+
+    /**
+     * Getter method for personnelid.
+     * <br>
+     * Meta Data Information (in progress):
+     * <ul>
+     * <li>full name: vs_arrivallist.personnelid
+     * <li>column size: 10
+     * <li>jdbc type returned by the driver: Types.INTEGER
+     * </ul>
+     *
+     * @return the value of personnelid
+     */
+    public Integer getPersonnelid()
+    {
+        return personnelid; 
+    }
+
+    /**
+     * Setter method for personnelid.
+     * <br>
+     * The new value is set only if compareTo() says it is different,
+     * or if one of either the new value or the current value is null.
+     * In case the new value is different, it is set and the field is marked as 'modified'.
+     *
+     * @param newVal the new value to be assigned to personnelid
+     */
+    public void setPersonnelid(Integer newVal) {
+        if ((newVal != null && this.personnelid != null && (newVal.compareTo(this.personnelid) == 0)) || 
+            (newVal == null && this.personnelid == null && personnelid_is_initialized)) {
+            return; 
+        } 
+        this.personnelid = newVal; 
+        personnelid_is_modified = true; 
+        personnelid_is_initialized = true; 
+    }
+
+    /**
+     * Setter method for personnelid.
+     * <br>
+     * Convenient for those who do not want to deal with Objects for primary types.
+     *
+     * @param newVal the new value to be assigned to personnelid
+     */
+    public void setPersonnelid(int newVal) {
+        setPersonnelid(new Integer(newVal));
+    }
+
+    /**
+     * Determines if the personnelid has been modified.
+     *
+     * @return true if the field has been modified, false if the field has not been modified
+     */
+    public boolean isPersonnelidModified() {
+        return personnelid_is_modified; 
+    }
+
+    /**
+     * Determines if the personnelid has been initialized.
+     * <br>
+     * It is useful to determine if a field is null on purpose or just because it has not been initialized.
+     *
+     * @return true if the field has been initialized, false otherwise
+     */
+    public boolean isPersonnelidInitialized() {
+        return personnelid_is_initialized; 
+    }
+
+    /**
+     * Getter method for ratetypeid.
+     * <br>
+     * Meta Data Information (in progress):
+     * <ul>
+     * <li>full name: vs_arrivallist.ratetypeid
+     * <li>column size: 10
+     * <li>jdbc type returned by the driver: Types.INTEGER
+     * </ul>
+     *
+     * @return the value of ratetypeid
+     */
+    public Integer getRatetypeid()
+    {
+        return ratetypeid; 
+    }
+
+    /**
+     * Setter method for ratetypeid.
+     * <br>
+     * The new value is set only if compareTo() says it is different,
+     * or if one of either the new value or the current value is null.
+     * In case the new value is different, it is set and the field is marked as 'modified'.
+     *
+     * @param newVal the new value to be assigned to ratetypeid
+     */
+    public void setRatetypeid(Integer newVal) {
+        if ((newVal != null && this.ratetypeid != null && (newVal.compareTo(this.ratetypeid) == 0)) || 
+            (newVal == null && this.ratetypeid == null && ratetypeid_is_initialized)) {
+            return; 
+        } 
+        this.ratetypeid = newVal; 
+        ratetypeid_is_modified = true; 
+        ratetypeid_is_initialized = true; 
+    }
+
+    /**
+     * Setter method for ratetypeid.
+     * <br>
+     * Convenient for those who do not want to deal with Objects for primary types.
+     *
+     * @param newVal the new value to be assigned to ratetypeid
+     */
+    public void setRatetypeid(int newVal) {
+        setRatetypeid(new Integer(newVal));
+    }
+
+    /**
+     * Determines if the ratetypeid has been modified.
+     *
+     * @return true if the field has been modified, false if the field has not been modified
+     */
+    public boolean isRatetypeidModified() {
+        return ratetypeid_is_modified; 
+    }
+
+    /**
+     * Determines if the ratetypeid has been initialized.
+     * <br>
+     * It is useful to determine if a field is null on purpose or just because it has not been initialized.
+     *
+     * @return true if the field has been initialized, false otherwise
+     */
+    public boolean isRatetypeidInitialized() {
+        return ratetypeid_is_initialized; 
+    }
+
+    /**
+     * Getter method for marketid.
+     * <br>
+     * Meta Data Information (in progress):
+     * <ul>
+     * <li>full name: vs_arrivallist.marketid
+     * <li>column size: 10
+     * <li>jdbc type returned by the driver: Types.INTEGER
+     * </ul>
+     *
+     * @return the value of marketid
+     */
+    public Integer getMarketid()
+    {
+        return marketid; 
+    }
+
+    /**
+     * Setter method for marketid.
+     * <br>
+     * The new value is set only if compareTo() says it is different,
+     * or if one of either the new value or the current value is null.
+     * In case the new value is different, it is set and the field is marked as 'modified'.
+     *
+     * @param newVal the new value to be assigned to marketid
+     */
+    public void setMarketid(Integer newVal) {
+        if ((newVal != null && this.marketid != null && (newVal.compareTo(this.marketid) == 0)) || 
+            (newVal == null && this.marketid == null && marketid_is_initialized)) {
+            return; 
+        } 
+        this.marketid = newVal; 
+        marketid_is_modified = true; 
+        marketid_is_initialized = true; 
+    }
+
+    /**
+     * Setter method for marketid.
+     * <br>
+     * Convenient for those who do not want to deal with Objects for primary types.
+     *
+     * @param newVal the new value to be assigned to marketid
+     */
+    public void setMarketid(int newVal) {
+        setMarketid(new Integer(newVal));
+    }
+
+    /**
+     * Determines if the marketid has been modified.
+     *
+     * @return true if the field has been modified, false if the field has not been modified
+     */
+    public boolean isMarketidModified() {
+        return marketid_is_modified; 
+    }
+
+    /**
+     * Determines if the marketid has been initialized.
+     * <br>
+     * It is useful to determine if a field is null on purpose or just because it has not been initialized.
+     *
+     * @return true if the field has been initialized, false otherwise
+     */
+    public boolean isMarketidInitialized() {
+        return marketid_is_initialized; 
+    }
+
+    /**
      * Determines if the current object is new.
      *
      * @return true if the current object is new, false if the object is not new
@@ -706,13 +1274,21 @@ public class VsArrivallistBean
         return reservationid_is_modified || 
 		guestname_is_modified || 
 		name_is_modified || 
-		float8_is_modified || 
+		tariff_is_modified || 
 		arraivaldate_is_modified || 
 		departuredate_is_modified || 
 		pax_is_modified || 
 		rtype_is_modified || 
 		company_is_modified || 
-		user_is_modified;
+		user_is_modified || 
+		reservationtypeid_is_modified || 
+		regbyid_is_modified || 
+		roomtypeid_is_modified || 
+		contragentid_is_modified || 
+		companyid_is_modified || 
+		personnelid_is_modified || 
+		ratetypeid_is_modified || 
+		marketid_is_modified;
     }
 
     /**
@@ -722,13 +1298,21 @@ public class VsArrivallistBean
         reservationid_is_modified = false;
         guestname_is_modified = false;
         name_is_modified = false;
-        float8_is_modified = false;
+        tariff_is_modified = false;
         arraivaldate_is_modified = false;
         departuredate_is_modified = false;
         pax_is_modified = false;
         rtype_is_modified = false;
         company_is_modified = false;
         user_is_modified = false;
+        reservationtypeid_is_modified = false;
+        regbyid_is_modified = false;
+        roomtypeid_is_modified = false;
+        contragentid_is_modified = false;
+        companyid_is_modified = false;
+        personnelid_is_modified = false;
+        ratetypeid_is_modified = false;
+        marketid_is_modified = false;
     }
 
     /**
@@ -740,13 +1324,21 @@ public class VsArrivallistBean
         setReservationid(bean.getReservationid());
         setGuestname(bean.getGuestname());
         setName(bean.getName());
-        setFloat8(bean.getFloat8());
+        setTariff(bean.getTariff());
         setArraivaldate(bean.getArraivaldate());
         setDeparturedate(bean.getDeparturedate());
         setPax(bean.getPax());
         setRtype(bean.getRtype());
         setCompany(bean.getCompany());
         setUser(bean.getUser());
+        setReservationtypeid(bean.getReservationtypeid());
+        setRegbyid(bean.getRegbyid());
+        setRoomtypeid(bean.getRoomtypeid());
+        setContragentid(bean.getContragentid());
+        setCompanyid(bean.getCompanyid());
+        setPersonnelid(bean.getPersonnelid());
+        setRatetypeid(bean.getRatetypeid());
+        setMarketid(bean.getMarketid());
     }
 
     /**
@@ -759,13 +1351,21 @@ public class VsArrivallistBean
                  + "\n - vs_arrivallist.reservationid = " + (reservationid_is_initialized ? ("[" + (reservationid == null ? null : reservationid.toString()) + "]") : "not initialized") + ""
                  + "\n - vs_arrivallist.guestname = " + (guestname_is_initialized ? ("[" + (guestname == null ? null : guestname.toString()) + "]") : "not initialized") + ""
                  + "\n - vs_arrivallist.name = " + (name_is_initialized ? ("[" + (name == null ? null : name.toString()) + "]") : "not initialized") + ""
-                 + "\n - vs_arrivallist.float8 = " + (float8_is_initialized ? ("[" + (float8 == null ? null : float8.toString()) + "]") : "not initialized") + ""
+                 + "\n - vs_arrivallist.tariff = " + (tariff_is_initialized ? ("[" + (tariff == null ? null : tariff.toString()) + "]") : "not initialized") + ""
                  + "\n - vs_arrivallist.arraivaldate = " + (arraivaldate_is_initialized ? ("[" + (arraivaldate == null ? null : arraivaldate.toString()) + "]") : "not initialized") + ""
                  + "\n - vs_arrivallist.departuredate = " + (departuredate_is_initialized ? ("[" + (departuredate == null ? null : departuredate.toString()) + "]") : "not initialized") + ""
                  + "\n - vs_arrivallist.pax = " + (pax_is_initialized ? ("[" + (pax == null ? null : pax.toString()) + "]") : "not initialized") + ""
                  + "\n - vs_arrivallist.rtype = " + (rtype_is_initialized ? ("[" + (rtype == null ? null : rtype.toString()) + "]") : "not initialized") + ""
                  + "\n - vs_arrivallist.company = " + (company_is_initialized ? ("[" + (company == null ? null : company.toString()) + "]") : "not initialized") + ""
                  + "\n - vs_arrivallist.user = " + (user_is_initialized ? ("[" + (user == null ? null : user.toString()) + "]") : "not initialized") + ""
+                 + "\n - vs_arrivallist.reservationtypeid = " + (reservationtypeid_is_initialized ? ("[" + (reservationtypeid == null ? null : reservationtypeid.toString()) + "]") : "not initialized") + ""
+                 + "\n - vs_arrivallist.regbyid = " + (regbyid_is_initialized ? ("[" + (regbyid == null ? null : regbyid.toString()) + "]") : "not initialized") + ""
+                 + "\n - vs_arrivallist.roomtypeid = " + (roomtypeid_is_initialized ? ("[" + (roomtypeid == null ? null : roomtypeid.toString()) + "]") : "not initialized") + ""
+                 + "\n - vs_arrivallist.contragentid = " + (contragentid_is_initialized ? ("[" + (contragentid == null ? null : contragentid.toString()) + "]") : "not initialized") + ""
+                 + "\n - vs_arrivallist.companyid = " + (companyid_is_initialized ? ("[" + (companyid == null ? null : companyid.toString()) + "]") : "not initialized") + ""
+                 + "\n - vs_arrivallist.personnelid = " + (personnelid_is_initialized ? ("[" + (personnelid == null ? null : personnelid.toString()) + "]") : "not initialized") + ""
+                 + "\n - vs_arrivallist.ratetypeid = " + (ratetypeid_is_initialized ? ("[" + (ratetypeid == null ? null : ratetypeid.toString()) + "]") : "not initialized") + ""
+                 + "\n - vs_arrivallist.marketid = " + (marketid_is_initialized ? ("[" + (marketid == null ? null : marketid.toString()) + "]") : "not initialized") + ""
             ;
     }
 

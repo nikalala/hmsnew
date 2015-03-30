@@ -54,6 +54,9 @@ public class ReportitemComparator implements Comparator
      *   <li>ReportitemManager.ID_FIELDTYPE
      *   <li>ReportitemManager.ID_ALIGN
      *   <li>ReportitemManager.ID_WD
+     *   <li>ReportitemManager.ID_PARAM
+     *   <li>ReportitemManager.ID_DEFVAL1
+     *   <li>ReportitemManager.ID_DEFVAL2
      * </ul>
      */
     public ReportitemComparator(int iType)
@@ -82,6 +85,10 @@ public class ReportitemComparator implements Comparator
      *   <li>ReportitemManager.ID_HASSUM
      *   <li>ReportitemManager.ID_ORDERED
      *   <li>ReportitemManager.ID_SEARCH
+     *   <li>ReportitemManager.ID_PARAM
+     *   <li>ReportitemManager.ID_MANDATORY
+     *   <li>ReportitemManager.ID_DEFVAL1
+     *   <li>ReportitemManager.ID_DEFVAL2
      * </ul>
      *
      * @param bReverse set this value to true, if you want to reverse the sorting results
@@ -177,6 +184,39 @@ public class ReportitemComparator implements Comparator
                     iReturn = 1;
                 } else { 
                     iReturn = b1.getWd().compareTo(b2.getWd());
+                }
+                break;
+            case ReportitemManager.ID_PARAM:
+                if (b1.getParam() == null && b2.getParam() != null) {
+                    iReturn = -1;
+                } else if (b1.getParam() == null && b2.getParam() == null) {
+                    iReturn = 0;
+                } else if (b1.getParam() != null && b2.getParam() == null) {
+                    iReturn = 1;
+                } else { 
+                    iReturn = b1.getParam().compareTo(b2.getParam());
+                }
+                break;
+            case ReportitemManager.ID_DEFVAL1:
+                if (b1.getDefval1() == null && b2.getDefval1() != null) {
+                    iReturn = -1;
+                } else if (b1.getDefval1() == null && b2.getDefval1() == null) {
+                    iReturn = 0;
+                } else if (b1.getDefval1() != null && b2.getDefval1() == null) {
+                    iReturn = 1;
+                } else { 
+                    iReturn = b1.getDefval1().compareTo(b2.getDefval1());
+                }
+                break;
+            case ReportitemManager.ID_DEFVAL2:
+                if (b1.getDefval2() == null && b2.getDefval2() != null) {
+                    iReturn = -1;
+                } else if (b1.getDefval2() == null && b2.getDefval2() == null) {
+                    iReturn = 0;
+                } else if (b1.getDefval2() != null && b2.getDefval2() == null) {
+                    iReturn = 1;
+                } else { 
+                    iReturn = b1.getDefval2().compareTo(b2.getDefval2());
                 }
                 break;
             default: 

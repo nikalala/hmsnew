@@ -54,6 +54,7 @@ public class ReportComparator implements Comparator
      *   <li>ReportManager.ID_REGBYID
      *   <li>ReportManager.ID_REGDATE
      *   <li>ReportManager.ID_REPCATID
+     *   <li>ReportManager.ID_ORD
      * </ul>
      */
     public ReportComparator(int iType)
@@ -79,6 +80,7 @@ public class ReportComparator implements Comparator
      *   <li>ReportManager.ID_REGBYID
      *   <li>ReportManager.ID_REGDATE
      *   <li>ReportManager.ID_REPCATID
+     *   <li>ReportManager.ID_ORD
      * </ul>
      *
      * @param bReverse set this value to true, if you want to reverse the sorting results
@@ -174,6 +176,17 @@ public class ReportComparator implements Comparator
                     iReturn = 1;
                 } else { 
                     iReturn = b1.getRepcatid().compareTo(b2.getRepcatid());
+                }
+                break;
+            case ReportManager.ID_ORD:
+                if (b1.getOrd() == null && b2.getOrd() != null) {
+                    iReturn = -1;
+                } else if (b1.getOrd() == null && b2.getOrd() == null) {
+                    iReturn = 0;
+                } else if (b1.getOrd() != null && b2.getOrd() == null) {
+                    iReturn = 1;
+                } else { 
+                    iReturn = b1.getOrd().compareTo(b2.getOrd());
                 }
                 break;
             default: 

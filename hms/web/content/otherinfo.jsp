@@ -2,53 +2,61 @@
 <%@page pageEncoding="UTF-8"%>
 <%@include file="../includes/init.jsp"%>
 <%
-ReservationroomBean rroom = ReservationroomManager.getInstance().loadByPrimaryKey(new Long(request.getParameter("reservationroomid")));
-ReservationBean reserv = ReservationManager.getInstance().loadByPrimaryKey(rroom.getReservationid());
+String rid  = request.getParameter("reservationroomid");
+ReservationroomBean rroom = null;
+ReservationBean reserv = null;
 String restp = "";
 String bsrc = "";
 String marketname = "";
 String agentname = "";
 String companyname = "";
-if(reserv.getReservationtypeid() != null){
-    ReservationtypeBean restype = ReservationtypeManager.getInstance().loadByPrimaryKey(reserv.getReservationtypeid());
-    restp = "<span style=\"color: "+restype.getColor()+"\">"+restype.getName()+"</span>";
-}
-/*
-if(rroom.getRoomid() != null){
-    int sts = getRoomStatus(new Date(), rroom.getRoomid().intValue());
-    StcolorBean[] stcolor = StcolorManager.getInstance().loadByWhere("where active = true and deleted = false and roomstatus = "+sts);
-    String statuscolor = "#FFFFFF";
-    if(stcolor.length > 0)
-        statuscolor = stcolor[0].getColor();
-    restp = "<span style=\"color: "+statuscolor+"\">"+roomstatus[sts]+"</span>";
-}
-*/
 
-if(reserv.getBsourceid()!= null){
-    BsourceBean bs = BsourceManager.getInstance().loadByPrimaryKey(reserv.getBsourceid());
-    bsrc = bs.getName();
-}
-if(reserv.getMarketid() != null){
-    MarketBean bs = MarketManager.getInstance().loadByPrimaryKey(reserv.getMarketid());
-    marketname = bs.getName();
-}
-if(reserv.getTaid() != null){
-    ContragentBean bs = ContragentManager.getInstance().loadByPrimaryKey(reserv.getTaid());
-    agentname = bs.getFname()+" "+bs.getLname();
-}
-if(reserv.getCompanyid()!= null){
-    ContragentBean bs = ContragentManager.getInstance().loadByPrimaryKey(reserv.getCompanyid());
-    companyname = bs.getName();
-    if(companyname == null) companyname = "";
-}
+if(!rid.equals("null")){
+    rroom = ReservationroomManager.getInstance().loadByPrimaryKey(new Long(request.getParameter("reservationroomid")));
+    reserv = ReservationManager.getInstance().loadByPrimaryKey(rroom.getReservationid());
 
+    if(reserv != null && reserv.getReservationtypeid() != null){
+        ReservationtypeBean restype = ReservationtypeManager.getInstance().loadByPrimaryKey(reserv.getReservationtypeid());
+        restp = "<span style=\"color: "+restype.getColor()+"\">"+restype.getName()+"</span>";
+    }
+    /*
+    if(rroom.getRoomid() != null){
+        int sts = getRoomStatus(new Date(), rroom.getRoomid().intValue());
+        StcolorBean[] stcolor = StcolorManager.getInstance().loadByWhere("where active = true and deleted = false and roomstatus = "+sts);
+        String statuscolor = "#FFFFFF";
+        if(stcolor.length > 0)
+            statuscolor = stcolor[0].getColor();
+        restp = "<span style=\"color: "+statuscolor+"\">"+roomstatus[sts]+"</span>";
+    }
+    */
+
+    if(reserv != null && reserv.getBsourceid()!= null){
+        BsourceBean bs = BsourceManager.getInstance().loadByPrimaryKey(reserv.getBsourceid());
+        bsrc = bs.getName();
+    }
+    if(reserv != null && reserv.getMarketid() != null){
+        MarketBean bs = MarketManager.getInstance().loadByPrimaryKey(reserv.getMarketid());
+        marketname = bs.getName();
+    }
+    if(reserv != null && reserv.getTaid() != null){
+        ContragentBean bs = ContragentManager.getInstance().loadByPrimaryKey(reserv.getTaid());
+        agentname = bs.getFname()+" "+bs.getLname();
+    }
+    if(reserv != null && reserv.getCompanyid()!= null){
+        ContragentBean bs = ContragentManager.getInstance().loadByPrimaryKey(reserv.getCompanyid());
+        companyname = bs.getName();
+        if(companyname == null) companyname = "";
+    }
+}
 %>
 <div class="panel-heading">
     <h3 class="panel-title">
         სხვა ინფორმაცია
+        <%if(rroom != null){%>
         <div class="btn-group pull-right">
             <a href="javascript:newsWindow1('editotherinfo','სხვა ინფორმაციის რედაქტირება','reservationroomid=<%=rroom.getReservationroomid()%>');" class="glyphicon glyphicon-pencil iconblack" style="text-decoration: none;" data-toggle="tooltip" title="სხვა ინფორმაციის რედაქტირება"></a>
         </div>
+        <%}%>
     </h3>
 </div>
 <div class="panel-body" style="height:110px;">

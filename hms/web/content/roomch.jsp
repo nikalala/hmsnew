@@ -121,10 +121,12 @@ table.scroll tr {
 <script>
 var ratesid = 0;
 var height = 230;
+var selavl = 0;
 
 function selunsel(val){
     jQuery("#roomtable1").jqGrid('resetSelection');
     jQuery("#roomtable1").jqGrid('setSelection',"roomch"+val);
+    selavl = val;
 }
 
 function setDiscount(rid){
@@ -187,6 +189,7 @@ function roomchAction(n,rid){
             $("#roomch_update_tariff").prop('disabled', false);
             $("#roomch_tariff_rate").prop('disabled', false);
         } else if(n == 3) {
+            $("#roomch_update_tariff").prop('disabled', false);
             $("#roomch_adult").prop('disabled', false);
             $("#roomch_child").prop('disabled', false);
         }
@@ -207,6 +210,7 @@ function roomchAction(n,rid){
 }
 
 function changeRoomchData(){
+    var sels = jQuery('#roomtable1').jqGrid('getGridParam','selarrrow').join(",");
     $.post(
         "content/updtransaction.jsp",
         {
@@ -219,6 +223,7 @@ function changeRoomchData(){
             child: $("#roomch_child").val(),
             onlydate: $("#roomch_only_selected0").prop("checked"),
             wholeperiod: $("#roomch_only_selected1").prop("checked"),
+            sels: sels,
             reservationroomid: <%=rroom.getReservationroomid()%>
         },
         function(data){
@@ -227,6 +232,17 @@ function changeRoomchData(){
             } else {
                 //var current_index = $("#specialTab").tabs("option","active");
                 //$("#specialTab").tabs('load',current_index);
+                /*
+                if(maincontentheight > 654){
+                    var diff = maincontentheight - 654;
+                    height = height+diff;
+                }
+                $("#roomch_leftul").width($("#roomchfunc").width()-400);
+
+                $("#roomchfunc").hide();
+                roomch_opened = 0;
+                */
+                roomchAction(0);
                 $("#roomtable1").trigger("reloadGrid");
             }
         },
@@ -247,6 +263,21 @@ $(document).ready(function(){
     }
     */
     //$("#roomch0").height(edittransactionheight*0.5);
+    
+    $("#roomch_only_selected0").on("click",function(data){
+        jQuery("#roomtable1").jqGrid('resetSelection');
+        if(selavl > 0)
+            jQuery("#roomtable1").jqGrid('setSelection',"roomch"+selavl);
+    });
+    
+    $("#roomch_only_selected1").on("click",function(data){
+        jQuery("#roomtable1").jqGrid('resetSelection');
+        //$('.cbox').trigger('click');
+        $("#cb_roomtable1").attr("checked", true);
+        $("#cb_roomtable1").trigger('click');
+        $("#cb_roomtable1").attr("checked", true);
+        //jQuery("#roomtable1").jqGrid('setSelection',"roomch"+val);
+    });
     
     if(maincontentheight > 654){
         var diff = maincontentheight - 654;
@@ -305,7 +336,18 @@ $(document).ready(function(){
         footerrow : true,
         userDataOnFooter:true,
         multiselect: true,
-        multikey: "ctrlKey"
+        multikey: "ctrlKey",
+        onSelectAll: function(aRowids, status) {
+            var sels = (status === false ? 0 : aRowids.length);
+            if(sels == 0){
+                $("#roomch_only_selected0").prop("checked",true);
+                $("#roomch_only_selected1").prop("checked",false);
+                roomchAction(0);
+            } else {
+                $("#roomch_only_selected0").prop("checked",false);
+                $("#roomch_only_selected1").prop("checked",true);
+            }
+        }
         })
         .jqGrid('bindKeys')
 	//.navButtonAdd('#pager1',{caption:'',buttonicon:'ui-icon-circle-plus',onClickButton: function(){ setInsurance(jQuery('#listcurrency').jqGrid('getGridParam','selrow')); },position:'last'})

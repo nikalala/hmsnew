@@ -52,6 +52,8 @@ public class ReportsearchComparator implements Comparator
      *   <li>ReportsearchManager.ID_NAME
      *   <li>ReportsearchManager.ID_TYPE
      *   <li>ReportsearchManager.ID_SQL
+     *   <li>ReportsearchManager.ID_DEFVAL1
+     *   <li>ReportsearchManager.ID_DEFVAL2
      * </ul>
      */
     public ReportsearchComparator(int iType)
@@ -75,6 +77,9 @@ public class ReportsearchComparator implements Comparator
      *   <li>ReportsearchManager.ID_NAME
      *   <li>ReportsearchManager.ID_TYPE
      *   <li>ReportsearchManager.ID_SQL
+     *   <li>ReportsearchManager.ID_MANDATORY
+     *   <li>ReportsearchManager.ID_DEFVAL1
+     *   <li>ReportsearchManager.ID_DEFVAL2
      * </ul>
      *
      * @param bReverse set this value to true, if you want to reverse the sorting results
@@ -148,6 +153,28 @@ public class ReportsearchComparator implements Comparator
                     iReturn = 1;
                 } else { 
                     iReturn = b1.getSql().compareTo(b2.getSql());
+                }
+                break;
+            case ReportsearchManager.ID_DEFVAL1:
+                if (b1.getDefval1() == null && b2.getDefval1() != null) {
+                    iReturn = -1;
+                } else if (b1.getDefval1() == null && b2.getDefval1() == null) {
+                    iReturn = 0;
+                } else if (b1.getDefval1() != null && b2.getDefval1() == null) {
+                    iReturn = 1;
+                } else { 
+                    iReturn = b1.getDefval1().compareTo(b2.getDefval1());
+                }
+                break;
+            case ReportsearchManager.ID_DEFVAL2:
+                if (b1.getDefval2() == null && b2.getDefval2() != null) {
+                    iReturn = -1;
+                } else if (b1.getDefval2() == null && b2.getDefval2() == null) {
+                    iReturn = 0;
+                } else if (b1.getDefval2() != null && b2.getDefval2() == null) {
+                    iReturn = 1;
+                } else { 
+                    iReturn = b1.getDefval2().compareTo(b2.getDefval2());
                 }
                 break;
             default: 

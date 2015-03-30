@@ -63,6 +63,27 @@ public class ReportsearchManager
     public static final int TYPE_SQL = Types.VARCHAR;
     public static final String NAME_SQL = "sql";
 
+    /**
+     * Column mandatory of type Types.BIT mapped to Boolean.
+     */
+    public static final int ID_MANDATORY = 5;
+    public static final int TYPE_MANDATORY = Types.BIT;
+    public static final String NAME_MANDATORY = "mandatory";
+
+    /**
+     * Column defval1 of type Types.VARCHAR mapped to String.
+     */
+    public static final int ID_DEFVAL1 = 6;
+    public static final int TYPE_DEFVAL1 = Types.VARCHAR;
+    public static final String NAME_DEFVAL1 = "defval1";
+
+    /**
+     * Column defval2 of type Types.VARCHAR mapped to String.
+     */
+    public static final int ID_DEFVAL2 = 7;
+    public static final int TYPE_DEFVAL2 = Types.VARCHAR;
+    public static final String NAME_DEFVAL2 = "defval2";
+
 
     private static final String TABLE_NAME = "reportsearch";
 
@@ -76,6 +97,9 @@ public class ReportsearchManager
         ,"reportsearch.name"
         ,"reportsearch.type"
         ,"reportsearch.sql"
+        ,"reportsearch.mandatory"
+        ,"reportsearch.defval1"
+        ,"reportsearch.defval2"
     };
 
     /**
@@ -85,7 +109,10 @@ public class ReportsearchManager
                             + ",reportsearch.reportid"
                             + ",reportsearch.name"
                             + ",reportsearch.type"
-                            + ",reportsearch.sql";
+                            + ",reportsearch.sql"
+                            + ",reportsearch.mandatory"
+                            + ",reportsearch.defval1"
+                            + ",reportsearch.defval2";
 
     private static ReportsearchManager singleton = new ReportsearchManager();
 
@@ -488,6 +515,30 @@ public class ReportsearchManager
                     _dirtyCount++;
                 }
 
+                if (pObject.isMandatoryModified()) {
+                    if (_dirtyCount>0) {
+                        _sql.append(",");
+                    }
+                    _sql.append("mandatory");
+                    _dirtyCount++;
+                }
+
+                if (pObject.isDefval1Modified()) {
+                    if (_dirtyCount>0) {
+                        _sql.append(",");
+                    }
+                    _sql.append("defval1");
+                    _dirtyCount++;
+                }
+
+                if (pObject.isDefval2Modified()) {
+                    if (_dirtyCount>0) {
+                        _sql.append(",");
+                    }
+                    _sql.append("defval2");
+                    _dirtyCount++;
+                }
+
                 _sql.append(") values (");
                 if(_dirtyCount > 0) {
                     _sql.append("?");
@@ -518,6 +569,18 @@ public class ReportsearchManager
     
                 if (pObject.isSqlModified()) {
                     ps.setString(++_dirtyCount, pObject.getSql());
+                }
+    
+                if (pObject.isMandatoryModified()) {
+                    Manager.setBoolean(ps, ++_dirtyCount, pObject.getMandatory());
+                }
+    
+                if (pObject.isDefval1Modified()) {
+                    ps.setString(++_dirtyCount, pObject.getDefval1());
+                }
+    
+                if (pObject.isDefval2Modified()) {
+                    ps.setString(++_dirtyCount, pObject.getDefval2());
                 }
     
                 ps.executeUpdate();
@@ -576,6 +639,33 @@ public class ReportsearchManager
                     }
                     _sql.append("sql").append("=?");
                 }
+
+                if (pObject.isMandatoryModified()) {
+                    if (useComma) {
+                        _sql.append(",");
+                    } else {
+                        useComma=true;
+                    }
+                    _sql.append("mandatory").append("=?");
+                }
+
+                if (pObject.isDefval1Modified()) {
+                    if (useComma) {
+                        _sql.append(",");
+                    } else {
+                        useComma=true;
+                    }
+                    _sql.append("defval1").append("=?");
+                }
+
+                if (pObject.isDefval2Modified()) {
+                    if (useComma) {
+                        _sql.append(",");
+                    } else {
+                        useComma=true;
+                    }
+                    _sql.append("defval2").append("=?");
+                }
                 _sql.append(" WHERE ");
                 _sql.append("reportsearch.reportsearchid=?");
                 ps = c.prepareStatement(_sql.toString(),ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
@@ -599,6 +689,18 @@ public class ReportsearchManager
 
                 if (pObject.isSqlModified()) {
                       ps.setString(++_dirtyCount, pObject.getSql());
+                }
+
+                if (pObject.isMandatoryModified()) {
+                      Manager.setBoolean(ps, ++_dirtyCount, pObject.getMandatory());
+                }
+
+                if (pObject.isDefval1Modified()) {
+                      ps.setString(++_dirtyCount, pObject.getDefval1());
+                }
+
+                if (pObject.isDefval2Modified()) {
+                      ps.setString(++_dirtyCount, pObject.getDefval2());
                 }
     
                 if (_dirtyCount == 0) {
@@ -702,6 +804,21 @@ public class ReportsearchManager
                  _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("sql= ?");
              }
     
+             if (pObject.isMandatoryModified()) {
+                 _dirtyCount ++; 
+                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("mandatory= ?");
+             }
+    
+             if (pObject.isDefval1Modified()) {
+                 _dirtyCount ++; 
+                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("defval1= ?");
+             }
+    
+             if (pObject.isDefval2Modified()) {
+                 _dirtyCount ++; 
+                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("defval2= ?");
+             }
+    
              if (_dirtyCount == 0) {
                  throw new SQLException ("The pObject to look for is invalid : not initialized !");
              }
@@ -728,6 +845,18 @@ public class ReportsearchManager
     
              if (pObject.isSqlModified()) {
                  ps.setString(++_dirtyCount, pObject.getSql());
+             }
+    
+             if (pObject.isMandatoryModified()) {
+                 Manager.setBoolean(ps, ++_dirtyCount, pObject.getMandatory());
+             }
+    
+             if (pObject.isDefval1Modified()) {
+                 ps.setString(++_dirtyCount, pObject.getDefval1());
+             }
+    
+             if (pObject.isDefval2Modified()) {
+                 ps.setString(++_dirtyCount, pObject.getDefval2());
              }
     
              ps.executeQuery();
@@ -794,6 +923,27 @@ public class ReportsearchManager
                 _dirtyAnd ++;
             }
     
+            if (pObject.isMandatoryInitialized()) {
+                if (_dirtyAnd > 0)
+                    sql.append(" AND ");
+                sql.append("mandatory").append("=?");
+                _dirtyAnd ++;
+            }
+    
+            if (pObject.isDefval1Initialized()) {
+                if (_dirtyAnd > 0)
+                    sql.append(" AND ");
+                sql.append("defval1").append("=?");
+                _dirtyAnd ++;
+            }
+    
+            if (pObject.isDefval2Initialized()) {
+                if (_dirtyAnd > 0)
+                    sql.append(" AND ");
+                sql.append("defval2").append("=?");
+                _dirtyAnd ++;
+            }
+    
             c = getConnection();
             ps = c.prepareStatement(sql.toString(),ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             int _dirtyCount = 0;
@@ -816,6 +966,18 @@ public class ReportsearchManager
     
             if (pObject.isSqlInitialized()) {
                 ps.setString(++_dirtyCount, pObject.getSql());
+            }
+    
+            if (pObject.isMandatoryInitialized()) {
+                Manager.setBoolean(ps, ++_dirtyCount, pObject.getMandatory());
+            }
+    
+            if (pObject.isDefval1Initialized()) {
+                ps.setString(++_dirtyCount, pObject.getDefval1());
+            }
+    
+            if (pObject.isDefval2Initialized()) {
+                ps.setString(++_dirtyCount, pObject.getDefval2());
             }
     
             int _rows = ps.executeUpdate();
@@ -953,6 +1115,21 @@ public class ReportsearchManager
                     _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("sql= ?");
                 }
     
+                if (pObject.isMandatoryModified()) {
+                    _dirtyCount++; 
+                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("mandatory= ?");
+                }
+    
+                if (pObject.isDefval1Modified()) {
+                    _dirtyCount++; 
+                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("defval1= ?");
+                }
+    
+                if (pObject.isDefval2Modified()) {
+                    _dirtyCount++; 
+                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("defval2= ?");
+                }
+    
                 if (_dirtyCount == 0)
                    throw new SQLException ("The pObject to look is unvalid : not initialized !");
     
@@ -980,6 +1157,18 @@ public class ReportsearchManager
     
                 if (pObject.isSqlModified()) {
                     ps.setString(++_dirtyCount, pObject.getSql());
+                }
+    
+                if (pObject.isMandatoryModified()) {
+                    Manager.setBoolean(ps, ++_dirtyCount, pObject.getMandatory());
+                }
+    
+                if (pObject.isDefval1Modified()) {
+                    ps.setString(++_dirtyCount, pObject.getDefval1());
+                }
+    
+                if (pObject.isDefval2Modified()) {
+                    ps.setString(++_dirtyCount, pObject.getDefval2());
                 }
     
                 return countByPreparedStatement(ps);
@@ -1011,6 +1200,9 @@ public class ReportsearchManager
         pObject.setName(rs.getString(3));
         pObject.setType(Manager.getInteger(rs, 4));
         pObject.setSql(rs.getString(5));
+        pObject.setMandatory(Manager.getBoolean(rs, 6));
+        pObject.setDefval1(rs.getString(7));
+        pObject.setDefval2(rs.getString(8));
 
         pObject.isNew(false);
         pObject.resetIsModified();
@@ -1052,6 +1244,18 @@ public class ReportsearchManager
                 case ID_SQL:
                     ++pos;
                     pObject.setSql(rs.getString(pos));
+                    break;
+                case ID_MANDATORY:
+                    ++pos;
+                    pObject.setMandatory(Manager.getBoolean(rs, pos));
+                    break;
+                case ID_DEFVAL1:
+                    ++pos;
+                    pObject.setDefval1(rs.getString(pos));
+                    break;
+                case ID_DEFVAL2:
+                    ++pos;
+                    pObject.setDefval2(rs.getString(pos));
                     break;
             }
         }

@@ -244,123 +244,24 @@
 </div>
 <div class="q-main-div">
   <div class="col-md-7">
-    <div id="status_bar" class="first-status-bar" align='center'>
-      <div class="q-statusbar-div">
-        <span class="q-statusbar-span">
-          <div>სტუმრის ინფორმაცია</div>
-        </span>
-        <div class="btn-group pull-right" style="width: auto !important; float: right !important;  margin: 6px 9px 0px 0;">
-          <a href="javascript:printRegCard(<% //rroom.getReservationroomid()%>)" class="glyphicon glyphicon-credit-card iconblack" style="text-decoration: none;" data-toggle="tooltip" title="ბარათის გატარება"></a>
-          <a href="javascript:newmWindow1('editguestinfo','სტუმრის პროფილის რედაქტირება','reservationroomid=<% //rroom.getReservationroomid()%>&mode=edit');" class="glyphicon glyphicon-pencil iconblack" style="text-decoration: none; padding-left: 10px; padding-right: 10px;" data-toggle="tooltip" title="სტუმრის პროფილის რედაქტირება"></a>
-          <a href="javascript:newmWindow1('editguestinfo','სტუმრის პროფილის დამატება','reservationroomid=<% //rroom.getReservationroomid()%>&mode=add');" class="glyphicon glyphicon-plus iconblack" style="text-decoration: none;" data-toggle="tooltip" title="სტუმრის პროფილის დამატება"></a>
-        </div>
-      </div>
-      <div class="q-table-div" style="height: 157px;">
-        <table width="100%" class="table table-borderless">
-          <tbody>
-          <tr>
-            <td style="width: 50%"><b><span style="color: #598904"><%//guestname%></span></b></td>
-            <td><b>მობილური</b></td>
-            <td><%//(guest.getMobile() != null) ? guest.getMobile():""%></td>
-          </tr>
-          <tr>
-            <td></td>
-            <td><b>ტელეფონი</b></td>
-            <td><%//(guest.getPhone() != null) ? guest.getPhone():""%></td>
-          </tr>
-          <tr>
-            <td></td>
-            <td><b>ელფოსტა</b></td>
-            <td><%//(guest.getEmail()!= null) ? guest.getEmail():""%></td>
-          </tr>
-          <tr>
-            <td colspan="3">
-              <%//guestaddress%>
-            </td>
-          </tr>
-          </tbody>
-        </table>
-      </div>
+    <div class="panel panel-primary" id='guestinfo'>
+        <jsp:include page="guestinfo.jsp">
+            <jsp:param name="reservationroomid" value="<%=rromid%>"/>
+        </jsp:include>
     </div>
   </div>
   <div class="col-md-4">
-    <div id="status_bar" class="first-status-bar" align='center'>
-      <div class="q-statusbar-div">
-        <span class="q-statusbar-span">
-          <div>დარჩენის ინფორმაცია</div>
-        </span>
-        <div class="btn-group pull-right" style="width: auto !important; float: right !important;  margin: 6px 9px 0px 0;">
-           <a href="javascript:newsWindow1('editarrivalinfo','დროის რედაქტირება','reservationroomid=<%//=rroom.getReservationroomid()%>');" class="glyphicon glyphicon-pencil iconblack" style="text-decoration: none;" data-toggle="tooltip" title="ჩამოსვლა/წასვლის დროების რედაქტირება"></a>
-        </div>
-      </div>
-    </div>
-    <div class="q-table-div" style="height: 157px;">
-      <table width="100%" class="table table-borderless">
-        <tbody>
-        <tr>
-          <td style="width: 50%"><b>ჩამოსვლა</b></td>
-          <td><%//=dt.format(reserv.getArraivaldate())%></td>
-          <td><%//=dtime.format(reserv.getArraivaldate())%></td>
-        </tr>
-        <tr>
-          <td><b>წასვლა</b></td>
-          <td><%//=dt.format(reserv.getDeparturedate())%></td>
-          <td><%//=dtime.format(reserv.getDeparturedate())%></td>
-        </tr>
-        <tr>
-          <td><b>ღამე(ებ)ი</b></td>
-          <td><%//=days%></td>
-          <td></td>
-        </tr>
-        <tr>
-          <td><b>ტარიფი</b></td>
-          <td><%//=rtp.getName()%></td>
-          <td></td>
-        </tr>
-        <tr>
-          <td><b>Pax</b></td>
-          <td><%//=rroom.getAdult()%> / <%//=rroom.getChild()%></td>
-          <td>(უ / ბ)</td>
-        </tr>
-        </tbody>
-      </table>
+    <div class="panel panel-primary" id='stayinfo'>
+        <jsp:include page="stayinfodates.jsp">
+            <jsp:param name="reservationroomid" value="<%=rromid%>"/>
+        </jsp:include>
     </div>
   </div>
   <div class="col-md-5">
-    <div id="status_bar" class="first-status-bar" align='center'>
-      <div class="q-statusbar-div">
-        <span class="q-statusbar-span">სხვა ინფორმაცია</span>
-      <div class="btn-group pull-right" style="width: auto !important; float: right !important;  margin: 6px 9px 0px 0;">
-        <a href="javascript:newsWindow1('editotherinfo','სხვა ინფორმაციის რედაქტირება','reservationroomid=<%//=rroom.getReservationroomid()%>');" class="glyphicon glyphicon-pencil iconblack" style="text-decoration: none;" data-toggle="tooltip" title="სხვა ინფორმაციის რედაქტირება"></a>
-
-      </div>
-      </div>
-    </div>
-    <div class="q-table-div" style="height: 157px;">
-      <table width="100%" class="table table-borderless">
-        <tbody>
-        <tr>
-          <td style="width: 50%"><b>რეზერვაციის ტიპი</b></td>
-          <td><%//=restp%></td>
-        </tr>
-        <tr>
-          <td><b>ბიზნეს წყარო</b></td>
-          <td><%//=bsrc%></td>
-        </tr>
-        <tr>
-          <td><b>ბაზრის კოდი</b></td>
-          <td><%//=marketname%></td>
-        </tr>
-        <tr>
-          <td><b>ტურ. აგენტი</b></td>
-          <td><%//=agentname%></td>
-        </tr>
-        <tr>
-          <td><b>კომპანია</b></td>
-          <td><%//=companyname%></td>
-        </tr>
-        </tbody>
-      </table>
+    <div class="panel panel-primary" id='otherinfo'>
+        <jsp:include page="otherinfo.jsp">
+            <jsp:param name="reservationroomid" value="<%=rromid%>"/>
+        </jsp:include>
     </div>
   </div>
 </div>

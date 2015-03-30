@@ -98,6 +98,34 @@ public class ReportitemManager
     public static final int TYPE_SEARCH = Types.BIT;
     public static final String NAME_SEARCH = "search";
 
+    /**
+     * Column param of type Types.VARCHAR mapped to String.
+     */
+    public static final int ID_PARAM = 10;
+    public static final int TYPE_PARAM = Types.VARCHAR;
+    public static final String NAME_PARAM = "param";
+
+    /**
+     * Column mandatory of type Types.BIT mapped to Boolean.
+     */
+    public static final int ID_MANDATORY = 11;
+    public static final int TYPE_MANDATORY = Types.BIT;
+    public static final String NAME_MANDATORY = "mandatory";
+
+    /**
+     * Column defval1 of type Types.VARCHAR mapped to String.
+     */
+    public static final int ID_DEFVAL1 = 12;
+    public static final int TYPE_DEFVAL1 = Types.VARCHAR;
+    public static final String NAME_DEFVAL1 = "defval1";
+
+    /**
+     * Column defval2 of type Types.VARCHAR mapped to String.
+     */
+    public static final int ID_DEFVAL2 = 13;
+    public static final int TYPE_DEFVAL2 = Types.VARCHAR;
+    public static final String NAME_DEFVAL2 = "defval2";
+
 
     private static final String TABLE_NAME = "reportitem";
 
@@ -116,6 +144,10 @@ public class ReportitemManager
         ,"reportitem.hassum"
         ,"reportitem.ordered"
         ,"reportitem.search"
+        ,"reportitem.param"
+        ,"reportitem.mandatory"
+        ,"reportitem.defval1"
+        ,"reportitem.defval2"
     };
 
     /**
@@ -130,7 +162,11 @@ public class ReportitemManager
                             + ",reportitem.wd"
                             + ",reportitem.hassum"
                             + ",reportitem.ordered"
-                            + ",reportitem.search";
+                            + ",reportitem.search"
+                            + ",reportitem.param"
+                            + ",reportitem.mandatory"
+                            + ",reportitem.defval1"
+                            + ",reportitem.defval2";
 
     private static ReportitemManager singleton = new ReportitemManager();
 
@@ -573,6 +609,38 @@ public class ReportitemManager
                     _dirtyCount++;
                 }
 
+                if (pObject.isParamModified()) {
+                    if (_dirtyCount>0) {
+                        _sql.append(",");
+                    }
+                    _sql.append("param");
+                    _dirtyCount++;
+                }
+
+                if (pObject.isMandatoryModified()) {
+                    if (_dirtyCount>0) {
+                        _sql.append(",");
+                    }
+                    _sql.append("mandatory");
+                    _dirtyCount++;
+                }
+
+                if (pObject.isDefval1Modified()) {
+                    if (_dirtyCount>0) {
+                        _sql.append(",");
+                    }
+                    _sql.append("defval1");
+                    _dirtyCount++;
+                }
+
+                if (pObject.isDefval2Modified()) {
+                    if (_dirtyCount>0) {
+                        _sql.append(",");
+                    }
+                    _sql.append("defval2");
+                    _dirtyCount++;
+                }
+
                 _sql.append(") values (");
                 if(_dirtyCount > 0) {
                     _sql.append("?");
@@ -623,6 +691,22 @@ public class ReportitemManager
     
                 if (pObject.isSearchModified()) {
                     Manager.setBoolean(ps, ++_dirtyCount, pObject.getSearch());
+                }
+    
+                if (pObject.isParamModified()) {
+                    ps.setString(++_dirtyCount, pObject.getParam());
+                }
+    
+                if (pObject.isMandatoryModified()) {
+                    Manager.setBoolean(ps, ++_dirtyCount, pObject.getMandatory());
+                }
+    
+                if (pObject.isDefval1Modified()) {
+                    ps.setString(++_dirtyCount, pObject.getDefval1());
+                }
+    
+                if (pObject.isDefval2Modified()) {
+                    ps.setString(++_dirtyCount, pObject.getDefval2());
                 }
     
                 ps.executeUpdate();
@@ -726,6 +810,42 @@ public class ReportitemManager
                     }
                     _sql.append("search").append("=?");
                 }
+
+                if (pObject.isParamModified()) {
+                    if (useComma) {
+                        _sql.append(",");
+                    } else {
+                        useComma=true;
+                    }
+                    _sql.append("param").append("=?");
+                }
+
+                if (pObject.isMandatoryModified()) {
+                    if (useComma) {
+                        _sql.append(",");
+                    } else {
+                        useComma=true;
+                    }
+                    _sql.append("mandatory").append("=?");
+                }
+
+                if (pObject.isDefval1Modified()) {
+                    if (useComma) {
+                        _sql.append(",");
+                    } else {
+                        useComma=true;
+                    }
+                    _sql.append("defval1").append("=?");
+                }
+
+                if (pObject.isDefval2Modified()) {
+                    if (useComma) {
+                        _sql.append(",");
+                    } else {
+                        useComma=true;
+                    }
+                    _sql.append("defval2").append("=?");
+                }
                 _sql.append(" WHERE ");
                 _sql.append("reportitem.reportitemid=?");
                 ps = c.prepareStatement(_sql.toString(),ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
@@ -769,6 +889,22 @@ public class ReportitemManager
 
                 if (pObject.isSearchModified()) {
                       Manager.setBoolean(ps, ++_dirtyCount, pObject.getSearch());
+                }
+
+                if (pObject.isParamModified()) {
+                      ps.setString(++_dirtyCount, pObject.getParam());
+                }
+
+                if (pObject.isMandatoryModified()) {
+                      Manager.setBoolean(ps, ++_dirtyCount, pObject.getMandatory());
+                }
+
+                if (pObject.isDefval1Modified()) {
+                      ps.setString(++_dirtyCount, pObject.getDefval1());
+                }
+
+                if (pObject.isDefval2Modified()) {
+                      ps.setString(++_dirtyCount, pObject.getDefval2());
                 }
     
                 if (_dirtyCount == 0) {
@@ -897,6 +1033,26 @@ public class ReportitemManager
                  _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("search= ?");
              }
     
+             if (pObject.isParamModified()) {
+                 _dirtyCount ++; 
+                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("param= ?");
+             }
+    
+             if (pObject.isMandatoryModified()) {
+                 _dirtyCount ++; 
+                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("mandatory= ?");
+             }
+    
+             if (pObject.isDefval1Modified()) {
+                 _dirtyCount ++; 
+                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("defval1= ?");
+             }
+    
+             if (pObject.isDefval2Modified()) {
+                 _dirtyCount ++; 
+                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("defval2= ?");
+             }
+    
              if (_dirtyCount == 0) {
                  throw new SQLException ("The pObject to look for is invalid : not initialized !");
              }
@@ -943,6 +1099,22 @@ public class ReportitemManager
     
              if (pObject.isSearchModified()) {
                  Manager.setBoolean(ps, ++_dirtyCount, pObject.getSearch());
+             }
+    
+             if (pObject.isParamModified()) {
+                 ps.setString(++_dirtyCount, pObject.getParam());
+             }
+    
+             if (pObject.isMandatoryModified()) {
+                 Manager.setBoolean(ps, ++_dirtyCount, pObject.getMandatory());
+             }
+    
+             if (pObject.isDefval1Modified()) {
+                 ps.setString(++_dirtyCount, pObject.getDefval1());
+             }
+    
+             if (pObject.isDefval2Modified()) {
+                 ps.setString(++_dirtyCount, pObject.getDefval2());
              }
     
              ps.executeQuery();
@@ -1044,6 +1216,34 @@ public class ReportitemManager
                 _dirtyAnd ++;
             }
     
+            if (pObject.isParamInitialized()) {
+                if (_dirtyAnd > 0)
+                    sql.append(" AND ");
+                sql.append("param").append("=?");
+                _dirtyAnd ++;
+            }
+    
+            if (pObject.isMandatoryInitialized()) {
+                if (_dirtyAnd > 0)
+                    sql.append(" AND ");
+                sql.append("mandatory").append("=?");
+                _dirtyAnd ++;
+            }
+    
+            if (pObject.isDefval1Initialized()) {
+                if (_dirtyAnd > 0)
+                    sql.append(" AND ");
+                sql.append("defval1").append("=?");
+                _dirtyAnd ++;
+            }
+    
+            if (pObject.isDefval2Initialized()) {
+                if (_dirtyAnd > 0)
+                    sql.append(" AND ");
+                sql.append("defval2").append("=?");
+                _dirtyAnd ++;
+            }
+    
             c = getConnection();
             ps = c.prepareStatement(sql.toString(),ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             int _dirtyCount = 0;
@@ -1086,6 +1286,22 @@ public class ReportitemManager
     
             if (pObject.isSearchInitialized()) {
                 Manager.setBoolean(ps, ++_dirtyCount, pObject.getSearch());
+            }
+    
+            if (pObject.isParamInitialized()) {
+                ps.setString(++_dirtyCount, pObject.getParam());
+            }
+    
+            if (pObject.isMandatoryInitialized()) {
+                Manager.setBoolean(ps, ++_dirtyCount, pObject.getMandatory());
+            }
+    
+            if (pObject.isDefval1Initialized()) {
+                ps.setString(++_dirtyCount, pObject.getDefval1());
+            }
+    
+            if (pObject.isDefval2Initialized()) {
+                ps.setString(++_dirtyCount, pObject.getDefval2());
             }
     
             int _rows = ps.executeUpdate();
@@ -1248,6 +1464,26 @@ public class ReportitemManager
                     _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("search= ?");
                 }
     
+                if (pObject.isParamModified()) {
+                    _dirtyCount++; 
+                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("param= ?");
+                }
+    
+                if (pObject.isMandatoryModified()) {
+                    _dirtyCount++; 
+                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("mandatory= ?");
+                }
+    
+                if (pObject.isDefval1Modified()) {
+                    _dirtyCount++; 
+                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("defval1= ?");
+                }
+    
+                if (pObject.isDefval2Modified()) {
+                    _dirtyCount++; 
+                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("defval2= ?");
+                }
+    
                 if (_dirtyCount == 0)
                    throw new SQLException ("The pObject to look is unvalid : not initialized !");
     
@@ -1297,6 +1533,22 @@ public class ReportitemManager
                     Manager.setBoolean(ps, ++_dirtyCount, pObject.getSearch());
                 }
     
+                if (pObject.isParamModified()) {
+                    ps.setString(++_dirtyCount, pObject.getParam());
+                }
+    
+                if (pObject.isMandatoryModified()) {
+                    Manager.setBoolean(ps, ++_dirtyCount, pObject.getMandatory());
+                }
+    
+                if (pObject.isDefval1Modified()) {
+                    ps.setString(++_dirtyCount, pObject.getDefval1());
+                }
+    
+                if (pObject.isDefval2Modified()) {
+                    ps.setString(++_dirtyCount, pObject.getDefval2());
+                }
+    
                 return countByPreparedStatement(ps);
         }
         finally
@@ -1331,6 +1583,10 @@ public class ReportitemManager
         pObject.setHassum(Manager.getBoolean(rs, 8));
         pObject.setOrdered(Manager.getBoolean(rs, 9));
         pObject.setSearch(Manager.getBoolean(rs, 10));
+        pObject.setParam(rs.getString(11));
+        pObject.setMandatory(Manager.getBoolean(rs, 12));
+        pObject.setDefval1(rs.getString(13));
+        pObject.setDefval2(rs.getString(14));
 
         pObject.isNew(false);
         pObject.resetIsModified();
@@ -1392,6 +1648,22 @@ public class ReportitemManager
                 case ID_SEARCH:
                     ++pos;
                     pObject.setSearch(Manager.getBoolean(rs, pos));
+                    break;
+                case ID_PARAM:
+                    ++pos;
+                    pObject.setParam(rs.getString(pos));
+                    break;
+                case ID_MANDATORY:
+                    ++pos;
+                    pObject.setMandatory(Manager.getBoolean(rs, pos));
+                    break;
+                case ID_DEFVAL1:
+                    ++pos;
+                    pObject.setDefval1(rs.getString(pos));
+                    break;
+                case ID_DEFVAL2:
+                    ++pos;
+                    pObject.setDefval2(rs.getString(pos));
                     break;
             }
         }

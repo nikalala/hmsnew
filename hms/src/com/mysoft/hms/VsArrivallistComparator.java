@@ -50,13 +50,21 @@ public class VsArrivallistComparator implements Comparator
      *   <li>VsArrivallistManager.ID_RESERVATIONID
      *   <li>VsArrivallistManager.ID_GUESTNAME
      *   <li>VsArrivallistManager.ID_NAME
-     *   <li>VsArrivallistManager.ID_FLOAT8
+     *   <li>VsArrivallistManager.ID_TARIFF
      *   <li>VsArrivallistManager.ID_ARRAIVALDATE
      *   <li>VsArrivallistManager.ID_DEPARTUREDATE
      *   <li>VsArrivallistManager.ID_PAX
      *   <li>VsArrivallistManager.ID_RTYPE
      *   <li>VsArrivallistManager.ID_COMPANY
      *   <li>VsArrivallistManager.ID_USER
+     *   <li>VsArrivallistManager.ID_RESERVATIONTYPEID
+     *   <li>VsArrivallistManager.ID_REGBYID
+     *   <li>VsArrivallistManager.ID_ROOMTYPEID
+     *   <li>VsArrivallistManager.ID_CONTRAGENTID
+     *   <li>VsArrivallistManager.ID_COMPANYID
+     *   <li>VsArrivallistManager.ID_PERSONNELID
+     *   <li>VsArrivallistManager.ID_RATETYPEID
+     *   <li>VsArrivallistManager.ID_MARKETID
      * </ul>
      */
     public VsArrivallistComparator(int iType)
@@ -78,13 +86,21 @@ public class VsArrivallistComparator implements Comparator
      *   <li>VsArrivallistManager.ID_RESERVATIONID
      *   <li>VsArrivallistManager.ID_GUESTNAME
      *   <li>VsArrivallistManager.ID_NAME
-     *   <li>VsArrivallistManager.ID_FLOAT8
+     *   <li>VsArrivallistManager.ID_TARIFF
      *   <li>VsArrivallistManager.ID_ARRAIVALDATE
      *   <li>VsArrivallistManager.ID_DEPARTUREDATE
      *   <li>VsArrivallistManager.ID_PAX
      *   <li>VsArrivallistManager.ID_RTYPE
      *   <li>VsArrivallistManager.ID_COMPANY
      *   <li>VsArrivallistManager.ID_USER
+     *   <li>VsArrivallistManager.ID_RESERVATIONTYPEID
+     *   <li>VsArrivallistManager.ID_REGBYID
+     *   <li>VsArrivallistManager.ID_ROOMTYPEID
+     *   <li>VsArrivallistManager.ID_CONTRAGENTID
+     *   <li>VsArrivallistManager.ID_COMPANYID
+     *   <li>VsArrivallistManager.ID_PERSONNELID
+     *   <li>VsArrivallistManager.ID_RATETYPEID
+     *   <li>VsArrivallistManager.ID_MARKETID
      * </ul>
      *
      * @param bReverse set this value to true, if you want to reverse the sorting results
@@ -138,15 +154,15 @@ public class VsArrivallistComparator implements Comparator
                     iReturn = b1.getName().compareTo(b2.getName());
                 }
                 break;
-            case VsArrivallistManager.ID_FLOAT8:
-                if (b1.getFloat8() == null && b2.getFloat8() != null) {
+            case VsArrivallistManager.ID_TARIFF:
+                if (b1.getTariff() == null && b2.getTariff() != null) {
                     iReturn = -1;
-                } else if (b1.getFloat8() == null && b2.getFloat8() == null) {
+                } else if (b1.getTariff() == null && b2.getTariff() == null) {
                     iReturn = 0;
-                } else if (b1.getFloat8() != null && b2.getFloat8() == null) {
+                } else if (b1.getTariff() != null && b2.getTariff() == null) {
                     iReturn = 1;
                 } else { 
-                    iReturn = b1.getFloat8().compareTo(b2.getFloat8());
+                    iReturn = b1.getTariff().compareTo(b2.getTariff());
                 }
                 break;
             case VsArrivallistManager.ID_ARRAIVALDATE:
@@ -213,6 +229,94 @@ public class VsArrivallistComparator implements Comparator
                     iReturn = 1;
                 } else { 
                     iReturn = b1.getUser().compareTo(b2.getUser());
+                }
+                break;
+            case VsArrivallistManager.ID_RESERVATIONTYPEID:
+                if (b1.getReservationtypeid() == null && b2.getReservationtypeid() != null) {
+                    iReturn = -1;
+                } else if (b1.getReservationtypeid() == null && b2.getReservationtypeid() == null) {
+                    iReturn = 0;
+                } else if (b1.getReservationtypeid() != null && b2.getReservationtypeid() == null) {
+                    iReturn = 1;
+                } else { 
+                    iReturn = b1.getReservationtypeid().compareTo(b2.getReservationtypeid());
+                }
+                break;
+            case VsArrivallistManager.ID_REGBYID:
+                if (b1.getRegbyid() == null && b2.getRegbyid() != null) {
+                    iReturn = -1;
+                } else if (b1.getRegbyid() == null && b2.getRegbyid() == null) {
+                    iReturn = 0;
+                } else if (b1.getRegbyid() != null && b2.getRegbyid() == null) {
+                    iReturn = 1;
+                } else { 
+                    iReturn = b1.getRegbyid().compareTo(b2.getRegbyid());
+                }
+                break;
+            case VsArrivallistManager.ID_ROOMTYPEID:
+                if (b1.getRoomtypeid() == null && b2.getRoomtypeid() != null) {
+                    iReturn = -1;
+                } else if (b1.getRoomtypeid() == null && b2.getRoomtypeid() == null) {
+                    iReturn = 0;
+                } else if (b1.getRoomtypeid() != null && b2.getRoomtypeid() == null) {
+                    iReturn = 1;
+                } else { 
+                    iReturn = b1.getRoomtypeid().compareTo(b2.getRoomtypeid());
+                }
+                break;
+            case VsArrivallistManager.ID_CONTRAGENTID:
+                if (b1.getContragentid() == null && b2.getContragentid() != null) {
+                    iReturn = -1;
+                } else if (b1.getContragentid() == null && b2.getContragentid() == null) {
+                    iReturn = 0;
+                } else if (b1.getContragentid() != null && b2.getContragentid() == null) {
+                    iReturn = 1;
+                } else { 
+                    iReturn = b1.getContragentid().compareTo(b2.getContragentid());
+                }
+                break;
+            case VsArrivallistManager.ID_COMPANYID:
+                if (b1.getCompanyid() == null && b2.getCompanyid() != null) {
+                    iReturn = -1;
+                } else if (b1.getCompanyid() == null && b2.getCompanyid() == null) {
+                    iReturn = 0;
+                } else if (b1.getCompanyid() != null && b2.getCompanyid() == null) {
+                    iReturn = 1;
+                } else { 
+                    iReturn = b1.getCompanyid().compareTo(b2.getCompanyid());
+                }
+                break;
+            case VsArrivallistManager.ID_PERSONNELID:
+                if (b1.getPersonnelid() == null && b2.getPersonnelid() != null) {
+                    iReturn = -1;
+                } else if (b1.getPersonnelid() == null && b2.getPersonnelid() == null) {
+                    iReturn = 0;
+                } else if (b1.getPersonnelid() != null && b2.getPersonnelid() == null) {
+                    iReturn = 1;
+                } else { 
+                    iReturn = b1.getPersonnelid().compareTo(b2.getPersonnelid());
+                }
+                break;
+            case VsArrivallistManager.ID_RATETYPEID:
+                if (b1.getRatetypeid() == null && b2.getRatetypeid() != null) {
+                    iReturn = -1;
+                } else if (b1.getRatetypeid() == null && b2.getRatetypeid() == null) {
+                    iReturn = 0;
+                } else if (b1.getRatetypeid() != null && b2.getRatetypeid() == null) {
+                    iReturn = 1;
+                } else { 
+                    iReturn = b1.getRatetypeid().compareTo(b2.getRatetypeid());
+                }
+                break;
+            case VsArrivallistManager.ID_MARKETID:
+                if (b1.getMarketid() == null && b2.getMarketid() != null) {
+                    iReturn = -1;
+                } else if (b1.getMarketid() == null && b2.getMarketid() == null) {
+                    iReturn = 0;
+                } else if (b1.getMarketid() != null && b2.getMarketid() == null) {
+                    iReturn = 1;
+                } else { 
+                    iReturn = b1.getMarketid().compareTo(b2.getMarketid());
                 }
                 break;
             default: 

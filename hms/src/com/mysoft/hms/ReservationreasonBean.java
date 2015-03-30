@@ -31,6 +31,14 @@ public class ReservationreasonBean
     private boolean reasonid_is_modified = false;
     private boolean reasonid_is_initialized = false;
     
+    private Integer regbyid;
+    private boolean regbyid_is_modified = false;
+    private boolean regbyid_is_initialized = false;
+    
+    private java.sql.Timestamp regdate;
+    private boolean regdate_is_modified = false;
+    private boolean regdate_is_initialized = false;
+    
     private boolean _isNew = true;
     
     /**
@@ -180,6 +188,142 @@ public class ReservationreasonBean
     }
 
     /**
+     * Getter method for regbyid.
+     * <br>
+     * Meta Data Information (in progress):
+     * <ul>
+     * <li>full name: reservationreason.regbyid
+     * <li> foreign key: personnel.personnelid
+     * <li>column size: 10
+     * <li>jdbc type returned by the driver: Types.INTEGER
+     * </ul>
+     *
+     * @return the value of regbyid
+     */
+    public Integer getRegbyid()
+    {
+        return regbyid; 
+    }
+
+    /**
+     * Setter method for regbyid.
+     * <br>
+     * The new value is set only if compareTo() says it is different,
+     * or if one of either the new value or the current value is null.
+     * In case the new value is different, it is set and the field is marked as 'modified'.
+     *
+     * @param newVal the new value to be assigned to regbyid
+     */
+    public void setRegbyid(Integer newVal) {
+        if ((newVal != null && this.regbyid != null && (newVal.compareTo(this.regbyid) == 0)) || 
+            (newVal == null && this.regbyid == null && regbyid_is_initialized)) {
+            return; 
+        } 
+        this.regbyid = newVal; 
+        regbyid_is_modified = true; 
+        regbyid_is_initialized = true; 
+    }
+
+    /**
+     * Setter method for regbyid.
+     * <br>
+     * Convenient for those who do not want to deal with Objects for primary types.
+     *
+     * @param newVal the new value to be assigned to regbyid
+     */
+    public void setRegbyid(int newVal) {
+        setRegbyid(new Integer(newVal));
+    }
+
+    /**
+     * Determines if the regbyid has been modified.
+     *
+     * @return true if the field has been modified, false if the field has not been modified
+     */
+    public boolean isRegbyidModified() {
+        return regbyid_is_modified; 
+    }
+
+    /**
+     * Determines if the regbyid has been initialized.
+     * <br>
+     * It is useful to determine if a field is null on purpose or just because it has not been initialized.
+     *
+     * @return true if the field has been initialized, false otherwise
+     */
+    public boolean isRegbyidInitialized() {
+        return regbyid_is_initialized; 
+    }
+
+    /**
+     * Getter method for regdate.
+     * <br>
+     * Meta Data Information (in progress):
+     * <ul>
+     * <li>full name: reservationreason.regdate
+     * <li>default value: now()
+     * <li>column size: 29
+     * <li>jdbc type returned by the driver: Types.TIMESTAMP
+     * </ul>
+     *
+     * @return the value of regdate
+     */
+    public java.sql.Timestamp getRegdate()
+    {
+        return regdate; 
+    }
+
+    /**
+     * Setter method for regdate.
+     * <br>
+     * The new value is set only if compareTo() says it is different,
+     * or if one of either the new value or the current value is null.
+     * In case the new value is different, it is set and the field is marked as 'modified'.
+     *
+     * @param newVal the new value to be assigned to regdate
+     */
+    public void setRegdate(java.sql.Timestamp newVal) {
+        if ((newVal != null && this.regdate != null && (newVal.compareTo(this.regdate) == 0)) || 
+            (newVal == null && this.regdate == null && regdate_is_initialized)) {
+            return; 
+        } 
+        this.regdate = newVal; 
+        regdate_is_modified = true; 
+        regdate_is_initialized = true; 
+    }
+
+    /**
+     * Setter method for regdate.
+     * <br>
+     * Convenient for those who do not want to deal with Objects for primary types.
+     *
+     * @param newVal the new value to be assigned to regdate
+     */
+    public void setRegdate(long newVal) {
+        setRegdate(new java.sql.Timestamp(newVal));
+    }
+
+    /**
+     * Determines if the regdate has been modified.
+     *
+     * @return true if the field has been modified, false if the field has not been modified
+     */
+    public boolean isRegdateModified() {
+        return regdate_is_modified; 
+    }
+
+    /**
+     * Determines if the regdate has been initialized.
+     * <br>
+     * It is useful to determine if a field is null on purpose or just because it has not been initialized.
+     *
+     * @return true if the field has been initialized, false otherwise
+     */
+    public boolean isRegdateInitialized() {
+        return regdate_is_initialized; 
+    }
+
+    /**
      * Determines if the current object is new.
      *
      * @return true if the current object is new, false if the object is not new
@@ -206,7 +350,9 @@ public class ReservationreasonBean
      */
     public boolean isModified() {
         return reservationid_is_modified || 
-		reasonid_is_modified;
+		reasonid_is_modified || 
+		regbyid_is_modified || 
+		regdate_is_modified;
     }
 
     /**
@@ -215,6 +361,8 @@ public class ReservationreasonBean
     public void resetIsModified() {
         reservationid_is_modified = false;
         reasonid_is_modified = false;
+        regbyid_is_modified = false;
+        regdate_is_modified = false;
     }
 
     /**
@@ -225,6 +373,8 @@ public class ReservationreasonBean
     public void copy(ReservationreasonBean bean) {
         setReservationid(bean.getReservationid());
         setReasonid(bean.getReasonid());
+        setRegbyid(bean.getRegbyid());
+        setRegdate(bean.getRegdate());
     }
 
     /**
@@ -236,6 +386,8 @@ public class ReservationreasonBean
         return   "\n[reservationreason] "
                  + "\n - reservationreason.reservationid = " + (reservationid_is_initialized ? ("[" + (reservationid == null ? null : reservationid.toString()) + "]") : "not initialized") + ""
                  + "\n - reservationreason.reasonid = " + (reasonid_is_initialized ? ("[" + (reasonid == null ? null : reasonid.toString()) + "]") : "not initialized") + ""
+                 + "\n - reservationreason.regbyid = " + (regbyid_is_initialized ? ("[" + (regbyid == null ? null : regbyid.toString()) + "]") : "not initialized") + ""
+                 + "\n - reservationreason.regdate = " + (regdate_is_initialized ? ("[" + (regdate == null ? null : regdate.toString()) + "]") : "not initialized") + ""
             ;
     }
 

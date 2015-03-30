@@ -135,7 +135,7 @@ public class StcolorBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: stcolor.roomstatus
-     * <li>comments: ???????CODEroomstatus
+     * <li>comments: სტატუსიCODEroomstatus
      * <li>column size: 10
      * <li>jdbc type returned by the driver: Types.INTEGER
      * </ul>
@@ -203,7 +203,7 @@ public class StcolorBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: stcolor.color
-     * <li>comments: ????
+     * <li>comments: ფერი
      * <li>default value: '#FFFFFF'::character varying
      * <li>column size: 2147483647
      * <li>jdbc type returned by the driver: Types.VARCHAR
@@ -262,7 +262,7 @@ public class StcolorBean
      * <ul>
      * <li>full name: stcolor.regbyid
      * <li> foreign key: personnel.personnelid
-     * <li>comments: ??????
+     * <li>comments: ავტორი
      * <li>column size: 10
      * <li>jdbc type returned by the driver: Types.INTEGER
      * </ul>
@@ -330,7 +330,7 @@ public class StcolorBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: stcolor.regdate
-     * <li>comments: ???????????? ??????
+     * <li>comments: რეგისტრაციის თარიღი
      * <li>default value: now()
      * <li>column size: 29
      * <li>jdbc type returned by the driver: Types.TIMESTAMP
@@ -399,7 +399,7 @@ public class StcolorBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: stcolor.active
-     * <li>comments: ???????
+     * <li>comments: აქტიური
      * <li>default value: true
      * <li>column size: 1
      * <li>jdbc type returned by the driver: Types.BIT
@@ -467,7 +467,7 @@ public class StcolorBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: stcolor.deleted
-     * <li>comments: ???????
+     * <li>comments: წაშლილი
      * <li>default value: false
      * <li>column size: 1
      * <li>jdbc type returned by the driver: Types.BIT

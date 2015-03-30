@@ -45,6 +45,7 @@ try{
         res = ReservationManager.getInstance().save(res);
         ReservationreasonBean rs = ReservationreasonManager.getInstance().createReservationreasonBean();
         rs.setReasonid(reasonid);
+        rs.setRegbyid(user.getPersonnelid());
         rs.setReservationid(res.getReservationid());
         rs = ReservationreasonManager.getInstance().save(rs);
 /*

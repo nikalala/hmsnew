@@ -43,6 +43,18 @@ public class ReportsearchBean
     private boolean sql_is_modified = false;
     private boolean sql_is_initialized = false;
     
+    private Boolean mandatory;
+    private boolean mandatory_is_modified = false;
+    private boolean mandatory_is_initialized = false;
+    
+    private String defval1;
+    private boolean defval1_is_modified = false;
+    private boolean defval1_is_initialized = false;
+    
+    private String defval2;
+    private boolean defval2_is_modified = false;
+    private boolean defval2_is_initialized = false;
+    
     private boolean _isNew = true;
     
     /**
@@ -369,6 +381,187 @@ public class ReportsearchBean
     }
 
     /**
+     * Getter method for mandatory.
+     * <br>
+     * Meta Data Information (in progress):
+     * <ul>
+     * <li>full name: reportsearch.mandatory
+     * <li>default value: false
+     * <li>column size: 1
+     * <li>jdbc type returned by the driver: Types.BIT
+     * </ul>
+     *
+     * @return the value of mandatory
+     */
+    public Boolean getMandatory()
+    {
+        return mandatory; 
+    }
+
+    /**
+     * Setter method for mandatory.
+     * <br>
+     * Attention, there will be no comparison with current value which
+     * means calling this method will mark the field as 'modified' in all cases.
+     *
+     * @param newVal the new value to be assigned to mandatory
+     */
+    public void setMandatory(Boolean newVal) {
+        if ((newVal != null && this.mandatory != null && newVal.equals(this.mandatory)) || 
+            (newVal == null && this.mandatory == null && mandatory_is_initialized)) {
+            return; 
+        } 
+        this.mandatory = newVal; 
+        mandatory_is_modified = true; 
+        mandatory_is_initialized = true; 
+    }
+
+    /**
+     * Setter method for mandatory.
+     * <br>
+     * Convenient for those who do not want to deal with Objects for primary types.
+     *
+     * @param newVal the new value to be assigned to mandatory
+     */
+    public void setMandatory(boolean newVal) {
+        setMandatory(new Boolean(newVal));
+    }
+
+    /**
+     * Determines if the mandatory has been modified.
+     *
+     * @return true if the field has been modified, false if the field has not been modified
+     */
+    public boolean isMandatoryModified() {
+        return mandatory_is_modified; 
+    }
+
+    /**
+     * Determines if the mandatory has been initialized.
+     * <br>
+     * It is useful to determine if a field is null on purpose or just because it has not been initialized.
+     *
+     * @return true if the field has been initialized, false otherwise
+     */
+    public boolean isMandatoryInitialized() {
+        return mandatory_is_initialized; 
+    }
+
+    /**
+     * Getter method for defval1.
+     * <br>
+     * Meta Data Information (in progress):
+     * <ul>
+     * <li>full name: reportsearch.defval1
+     * <li>default value: ''::text
+     * <li>column size: 2147483647
+     * <li>jdbc type returned by the driver: Types.VARCHAR
+     * </ul>
+     *
+     * @return the value of defval1
+     */
+    public String getDefval1()
+    {
+        return defval1; 
+    }
+
+    /**
+     * Setter method for defval1.
+     * <br>
+     * The new value is set only if compareTo() says it is different,
+     * or if one of either the new value or the current value is null.
+     * In case the new value is different, it is set and the field is marked as 'modified'.
+     *
+     * @param newVal the new value to be assigned to defval1
+     */
+    public void setDefval1(String newVal) {
+        if ((newVal != null && this.defval1 != null && (newVal.compareTo(this.defval1) == 0)) || 
+            (newVal == null && this.defval1 == null && defval1_is_initialized)) {
+            return; 
+        } 
+        this.defval1 = newVal; 
+        defval1_is_modified = true; 
+        defval1_is_initialized = true; 
+    }
+
+    /**
+     * Determines if the defval1 has been modified.
+     *
+     * @return true if the field has been modified, false if the field has not been modified
+     */
+    public boolean isDefval1Modified() {
+        return defval1_is_modified; 
+    }
+
+    /**
+     * Determines if the defval1 has been initialized.
+     * <br>
+     * It is useful to determine if a field is null on purpose or just because it has not been initialized.
+     *
+     * @return true if the field has been initialized, false otherwise
+     */
+    public boolean isDefval1Initialized() {
+        return defval1_is_initialized; 
+    }
+
+    /**
+     * Getter method for defval2.
+     * <br>
+     * Meta Data Information (in progress):
+     * <ul>
+     * <li>full name: reportsearch.defval2
+     * <li>default value: ''::text
+     * <li>column size: 2147483647
+     * <li>jdbc type returned by the driver: Types.VARCHAR
+     * </ul>
+     *
+     * @return the value of defval2
+     */
+    public String getDefval2()
+    {
+        return defval2; 
+    }
+
+    /**
+     * Setter method for defval2.
+     * <br>
+     * The new value is set only if compareTo() says it is different,
+     * or if one of either the new value or the current value is null.
+     * In case the new value is different, it is set and the field is marked as 'modified'.
+     *
+     * @param newVal the new value to be assigned to defval2
+     */
+    public void setDefval2(String newVal) {
+        if ((newVal != null && this.defval2 != null && (newVal.compareTo(this.defval2) == 0)) || 
+            (newVal == null && this.defval2 == null && defval2_is_initialized)) {
+            return; 
+        } 
+        this.defval2 = newVal; 
+        defval2_is_modified = true; 
+        defval2_is_initialized = true; 
+    }
+
+    /**
+     * Determines if the defval2 has been modified.
+     *
+     * @return true if the field has been modified, false if the field has not been modified
+     */
+    public boolean isDefval2Modified() {
+        return defval2_is_modified; 
+    }
+
+    /**
+     * Determines if the defval2 has been initialized.
+     * <br>
+     * It is useful to determine if a field is null on purpose or just because it has not been initialized.
+     *
+     * @return true if the field has been initialized, false otherwise
+     */
+    public boolean isDefval2Initialized() {
+        return defval2_is_initialized; 
+    }
+
+    /**
      * Determines if the current object is new.
      *
      * @return true if the current object is new, false if the object is not new
@@ -398,7 +591,10 @@ public class ReportsearchBean
 		reportid_is_modified || 
 		name_is_modified || 
 		type_is_modified || 
-		sql_is_modified;
+		sql_is_modified || 
+		mandatory_is_modified || 
+		defval1_is_modified || 
+		defval2_is_modified;
     }
 
     /**
@@ -410,6 +606,9 @@ public class ReportsearchBean
         name_is_modified = false;
         type_is_modified = false;
         sql_is_modified = false;
+        mandatory_is_modified = false;
+        defval1_is_modified = false;
+        defval2_is_modified = false;
     }
 
     /**
@@ -423,6 +622,9 @@ public class ReportsearchBean
         setName(bean.getName());
         setType(bean.getType());
         setSql(bean.getSql());
+        setMandatory(bean.getMandatory());
+        setDefval1(bean.getDefval1());
+        setDefval2(bean.getDefval2());
     }
 
     /**
@@ -437,6 +639,9 @@ public class ReportsearchBean
                  + "\n - reportsearch.name = " + (name_is_initialized ? ("[" + (name == null ? null : name.toString()) + "]") : "not initialized") + ""
                  + "\n - reportsearch.type = " + (type_is_initialized ? ("[" + (type == null ? null : type.toString()) + "]") : "not initialized") + ""
                  + "\n - reportsearch.sql = " + (sql_is_initialized ? ("[" + (sql == null ? null : sql.toString()) + "]") : "not initialized") + ""
+                 + "\n - reportsearch.mandatory = " + (mandatory_is_initialized ? ("[" + (mandatory == null ? null : mandatory.toString()) + "]") : "not initialized") + ""
+                 + "\n - reportsearch.defval1 = " + (defval1_is_initialized ? ("[" + (defval1 == null ? null : defval1.toString()) + "]") : "not initialized") + ""
+                 + "\n - reportsearch.defval2 = " + (defval2_is_initialized ? ("[" + (defval2 == null ? null : defval2.toString()) + "]") : "not initialized") + ""
             ;
     }
 

@@ -63,6 +63,22 @@ public class ReportitemBean
     private boolean search_is_modified = false;
     private boolean search_is_initialized = false;
     
+    private String param;
+    private boolean param_is_modified = false;
+    private boolean param_is_initialized = false;
+    
+    private Boolean mandatory;
+    private boolean mandatory_is_modified = false;
+    private boolean mandatory_is_initialized = false;
+    
+    private String defval1;
+    private boolean defval1_is_modified = false;
+    private boolean defval1_is_initialized = false;
+    
+    private String defval2;
+    private boolean defval2_is_modified = false;
+    private boolean defval2_is_initialized = false;
+    
     private boolean _isNew = true;
     
     /**
@@ -148,7 +164,7 @@ public class ReportitemBean
      * <ul>
      * <li>full name: reportitem.reportid
      * <li> foreign key: report.reportid
-     * <li>comments: ???????
+     * <li>comments: რეპორტი
      * <li>column size: 10
      * <li>jdbc type returned by the driver: Types.INTEGER
      * </ul>
@@ -216,7 +232,7 @@ public class ReportitemBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: reportitem.name
-     * <li>comments: ??????????
+     * <li>comments: დასახელება
      * <li>column size: 2147483647
      * <li>jdbc type returned by the driver: Types.VARCHAR
      * </ul>
@@ -273,7 +289,7 @@ public class ReportitemBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: reportitem.idx
-     * <li>comments: ???????
+     * <li>comments: ინდექსი
      * <li>column size: 10
      * <li>jdbc type returned by the driver: Types.INTEGER
      * </ul>
@@ -341,7 +357,7 @@ public class ReportitemBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: reportitem.fieldtype
-     * <li>comments: ????
+     * <li>comments: ტიპი
      * <li>column size: 10
      * <li>jdbc type returned by the driver: Types.INTEGER
      * </ul>
@@ -409,7 +425,7 @@ public class ReportitemBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: reportitem.align
-     * <li>comments: ???????
+     * <li>comments: პოზიცია
      * <li>column size: 2147483647
      * <li>jdbc type returned by the driver: Types.VARCHAR
      * </ul>
@@ -466,7 +482,7 @@ public class ReportitemBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: reportitem.wd
-     * <li>comments: ??????
+     * <li>comments: სიგანე
      * <li>column size: 10
      * <li>jdbc type returned by the driver: Types.INTEGER
      * </ul>
@@ -534,7 +550,7 @@ public class ReportitemBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: reportitem.hassum
-     * <li>comments: ???? ????
+     * <li>comments: აქვს ჯამი
      * <li>default value: false
      * <li>column size: 1
      * <li>jdbc type returned by the driver: Types.BIT
@@ -731,6 +747,244 @@ public class ReportitemBean
     }
 
     /**
+     * Getter method for param.
+     * <br>
+     * Meta Data Information (in progress):
+     * <ul>
+     * <li>full name: reportitem.param
+     * <li>default value: ''::text
+     * <li>column size: 2147483647
+     * <li>jdbc type returned by the driver: Types.VARCHAR
+     * </ul>
+     *
+     * @return the value of param
+     */
+    public String getParam()
+    {
+        return param; 
+    }
+
+    /**
+     * Setter method for param.
+     * <br>
+     * The new value is set only if compareTo() says it is different,
+     * or if one of either the new value or the current value is null.
+     * In case the new value is different, it is set and the field is marked as 'modified'.
+     *
+     * @param newVal the new value to be assigned to param
+     */
+    public void setParam(String newVal) {
+        if ((newVal != null && this.param != null && (newVal.compareTo(this.param) == 0)) || 
+            (newVal == null && this.param == null && param_is_initialized)) {
+            return; 
+        } 
+        this.param = newVal; 
+        param_is_modified = true; 
+        param_is_initialized = true; 
+    }
+
+    /**
+     * Determines if the param has been modified.
+     *
+     * @return true if the field has been modified, false if the field has not been modified
+     */
+    public boolean isParamModified() {
+        return param_is_modified; 
+    }
+
+    /**
+     * Determines if the param has been initialized.
+     * <br>
+     * It is useful to determine if a field is null on purpose or just because it has not been initialized.
+     *
+     * @return true if the field has been initialized, false otherwise
+     */
+    public boolean isParamInitialized() {
+        return param_is_initialized; 
+    }
+
+    /**
+     * Getter method for mandatory.
+     * <br>
+     * Meta Data Information (in progress):
+     * <ul>
+     * <li>full name: reportitem.mandatory
+     * <li>default value: false
+     * <li>column size: 1
+     * <li>jdbc type returned by the driver: Types.BIT
+     * </ul>
+     *
+     * @return the value of mandatory
+     */
+    public Boolean getMandatory()
+    {
+        return mandatory; 
+    }
+
+    /**
+     * Setter method for mandatory.
+     * <br>
+     * Attention, there will be no comparison with current value which
+     * means calling this method will mark the field as 'modified' in all cases.
+     *
+     * @param newVal the new value to be assigned to mandatory
+     */
+    public void setMandatory(Boolean newVal) {
+        if ((newVal != null && this.mandatory != null && newVal.equals(this.mandatory)) || 
+            (newVal == null && this.mandatory == null && mandatory_is_initialized)) {
+            return; 
+        } 
+        this.mandatory = newVal; 
+        mandatory_is_modified = true; 
+        mandatory_is_initialized = true; 
+    }
+
+    /**
+     * Setter method for mandatory.
+     * <br>
+     * Convenient for those who do not want to deal with Objects for primary types.
+     *
+     * @param newVal the new value to be assigned to mandatory
+     */
+    public void setMandatory(boolean newVal) {
+        setMandatory(new Boolean(newVal));
+    }
+
+    /**
+     * Determines if the mandatory has been modified.
+     *
+     * @return true if the field has been modified, false if the field has not been modified
+     */
+    public boolean isMandatoryModified() {
+        return mandatory_is_modified; 
+    }
+
+    /**
+     * Determines if the mandatory has been initialized.
+     * <br>
+     * It is useful to determine if a field is null on purpose or just because it has not been initialized.
+     *
+     * @return true if the field has been initialized, false otherwise
+     */
+    public boolean isMandatoryInitialized() {
+        return mandatory_is_initialized; 
+    }
+
+    /**
+     * Getter method for defval1.
+     * <br>
+     * Meta Data Information (in progress):
+     * <ul>
+     * <li>full name: reportitem.defval1
+     * <li>default value: ''::text
+     * <li>column size: 2147483647
+     * <li>jdbc type returned by the driver: Types.VARCHAR
+     * </ul>
+     *
+     * @return the value of defval1
+     */
+    public String getDefval1()
+    {
+        return defval1; 
+    }
+
+    /**
+     * Setter method for defval1.
+     * <br>
+     * The new value is set only if compareTo() says it is different,
+     * or if one of either the new value or the current value is null.
+     * In case the new value is different, it is set and the field is marked as 'modified'.
+     *
+     * @param newVal the new value to be assigned to defval1
+     */
+    public void setDefval1(String newVal) {
+        if ((newVal != null && this.defval1 != null && (newVal.compareTo(this.defval1) == 0)) || 
+            (newVal == null && this.defval1 == null && defval1_is_initialized)) {
+            return; 
+        } 
+        this.defval1 = newVal; 
+        defval1_is_modified = true; 
+        defval1_is_initialized = true; 
+    }
+
+    /**
+     * Determines if the defval1 has been modified.
+     *
+     * @return true if the field has been modified, false if the field has not been modified
+     */
+    public boolean isDefval1Modified() {
+        return defval1_is_modified; 
+    }
+
+    /**
+     * Determines if the defval1 has been initialized.
+     * <br>
+     * It is useful to determine if a field is null on purpose or just because it has not been initialized.
+     *
+     * @return true if the field has been initialized, false otherwise
+     */
+    public boolean isDefval1Initialized() {
+        return defval1_is_initialized; 
+    }
+
+    /**
+     * Getter method for defval2.
+     * <br>
+     * Meta Data Information (in progress):
+     * <ul>
+     * <li>full name: reportitem.defval2
+     * <li>default value: ''::text
+     * <li>column size: 2147483647
+     * <li>jdbc type returned by the driver: Types.VARCHAR
+     * </ul>
+     *
+     * @return the value of defval2
+     */
+    public String getDefval2()
+    {
+        return defval2; 
+    }
+
+    /**
+     * Setter method for defval2.
+     * <br>
+     * The new value is set only if compareTo() says it is different,
+     * or if one of either the new value or the current value is null.
+     * In case the new value is different, it is set and the field is marked as 'modified'.
+     *
+     * @param newVal the new value to be assigned to defval2
+     */
+    public void setDefval2(String newVal) {
+        if ((newVal != null && this.defval2 != null && (newVal.compareTo(this.defval2) == 0)) || 
+            (newVal == null && this.defval2 == null && defval2_is_initialized)) {
+            return; 
+        } 
+        this.defval2 = newVal; 
+        defval2_is_modified = true; 
+        defval2_is_initialized = true; 
+    }
+
+    /**
+     * Determines if the defval2 has been modified.
+     *
+     * @return true if the field has been modified, false if the field has not been modified
+     */
+    public boolean isDefval2Modified() {
+        return defval2_is_modified; 
+    }
+
+    /**
+     * Determines if the defval2 has been initialized.
+     * <br>
+     * It is useful to determine if a field is null on purpose or just because it has not been initialized.
+     *
+     * @return true if the field has been initialized, false otherwise
+     */
+    public boolean isDefval2Initialized() {
+        return defval2_is_initialized; 
+    }
+
+    /**
      * Determines if the current object is new.
      *
      * @return true if the current object is new, false if the object is not new
@@ -765,7 +1019,11 @@ public class ReportitemBean
 		wd_is_modified || 
 		hassum_is_modified || 
 		ordered_is_modified || 
-		search_is_modified;
+		search_is_modified || 
+		param_is_modified || 
+		mandatory_is_modified || 
+		defval1_is_modified || 
+		defval2_is_modified;
     }
 
     /**
@@ -782,6 +1040,10 @@ public class ReportitemBean
         hassum_is_modified = false;
         ordered_is_modified = false;
         search_is_modified = false;
+        param_is_modified = false;
+        mandatory_is_modified = false;
+        defval1_is_modified = false;
+        defval2_is_modified = false;
     }
 
     /**
@@ -800,6 +1062,10 @@ public class ReportitemBean
         setHassum(bean.getHassum());
         setOrdered(bean.getOrdered());
         setSearch(bean.getSearch());
+        setParam(bean.getParam());
+        setMandatory(bean.getMandatory());
+        setDefval1(bean.getDefval1());
+        setDefval2(bean.getDefval2());
     }
 
     /**
@@ -819,6 +1085,10 @@ public class ReportitemBean
                  + "\n - reportitem.hassum = " + (hassum_is_initialized ? ("[" + (hassum == null ? null : hassum.toString()) + "]") : "not initialized") + ""
                  + "\n - reportitem.ordered = " + (ordered_is_initialized ? ("[" + (ordered == null ? null : ordered.toString()) + "]") : "not initialized") + ""
                  + "\n - reportitem.search = " + (search_is_initialized ? ("[" + (search == null ? null : search.toString()) + "]") : "not initialized") + ""
+                 + "\n - reportitem.param = " + (param_is_initialized ? ("[" + (param == null ? null : param.toString()) + "]") : "not initialized") + ""
+                 + "\n - reportitem.mandatory = " + (mandatory_is_initialized ? ("[" + (mandatory == null ? null : mandatory.toString()) + "]") : "not initialized") + ""
+                 + "\n - reportitem.defval1 = " + (defval1_is_initialized ? ("[" + (defval1 == null ? null : defval1.toString()) + "]") : "not initialized") + ""
+                 + "\n - reportitem.defval2 = " + (defval2_is_initialized ? ("[" + (defval2 == null ? null : defval2.toString()) + "]") : "not initialized") + ""
             ;
     }
 

@@ -49,6 +49,8 @@ public class ReservationreasonComparator implements Comparator
      * <ul>
      *   <li>ReservationreasonManager.ID_RESERVATIONID
      *   <li>ReservationreasonManager.ID_REASONID
+     *   <li>ReservationreasonManager.ID_REGBYID
+     *   <li>ReservationreasonManager.ID_REGDATE
      * </ul>
      */
     public ReservationreasonComparator(int iType)
@@ -69,6 +71,8 @@ public class ReservationreasonComparator implements Comparator
      * <ul>
      *   <li>ReservationreasonManager.ID_RESERVATIONID
      *   <li>ReservationreasonManager.ID_REASONID
+     *   <li>ReservationreasonManager.ID_REGBYID
+     *   <li>ReservationreasonManager.ID_REGDATE
      * </ul>
      *
      * @param bReverse set this value to true, if you want to reverse the sorting results
@@ -109,6 +113,28 @@ public class ReservationreasonComparator implements Comparator
                     iReturn = 1;
                 } else { 
                     iReturn = b1.getReasonid().compareTo(b2.getReasonid());
+                }
+                break;
+            case ReservationreasonManager.ID_REGBYID:
+                if (b1.getRegbyid() == null && b2.getRegbyid() != null) {
+                    iReturn = -1;
+                } else if (b1.getRegbyid() == null && b2.getRegbyid() == null) {
+                    iReturn = 0;
+                } else if (b1.getRegbyid() != null && b2.getRegbyid() == null) {
+                    iReturn = 1;
+                } else { 
+                    iReturn = b1.getRegbyid().compareTo(b2.getRegbyid());
+                }
+                break;
+            case ReservationreasonManager.ID_REGDATE:
+                if (b1.getRegdate() == null && b2.getRegdate() != null) {
+                    iReturn = -1;
+                } else if (b1.getRegdate() == null && b2.getRegdate() == null) {
+                    iReturn = 0;
+                } else if (b1.getRegdate() != null && b2.getRegdate() == null) {
+                    iReturn = 1;
+                } else { 
+                    iReturn = b1.getRegdate().compareTo(b2.getRegdate());
                 }
                 break;
             default: 

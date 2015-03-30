@@ -2983,6 +2983,38 @@ public class ReservationManager
     }
 
     /**
+     * Retrieves an array of PersonnelBean using the relation table Reservationreason given a ReservationBean object.
+     *
+     * @param pObject the ReservationBean pObject to be used
+     * @return an array of PersonnelBean 
+     */
+    // MANY TO MANY
+    public PersonnelBean[] loadPersonnelViaReservationreason(ReservationBean pObject) throws SQLException
+    {
+         Connection c = null;
+         PreparedStatement ps = null;
+         String strSQL =      " SELECT "
+                         + "        *"
+                         + " FROM  "
+                         + "        personnel,reservationreason"
+                         + " WHERE "    
+                         + "     reservationreason.reservationid = ?"
+                         + " AND reservationreason.regbyid = personnel.personnelid";
+         try
+         {
+             c = getConnection();
+             ps = c.prepareStatement(strSQL,ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+             Manager.setLong(ps, 1, pObject.getReservationid());
+             return PersonnelManager.getInstance().loadByPreparedStatement(ps);
+         }
+         finally
+         {
+            getManager().close(ps);
+            freeConnection(c);
+         }
+    }
+
+    /**
      * Retrieves an array of ReasonBean using the relation table Reservationreason given a ReservationBean object.
      *
      * @param pObject the ReservationBean pObject to be used
