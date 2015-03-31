@@ -198,6 +198,16 @@ System.out.println(rid+" = "+statusid);
         return n;
     }
     
+    int getRoomStatus2(Date dt, int rid) throws Exception {
+        int n = -1;
+        SimpleDateFormat dtlong = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+        String sql = "select getroomstatus2(" + rid + ",";
+        if (dt == null) dt = new Date();
+        sql += "'" + dtlong.format(dt) + "')";
+        n = (int) getSum(sql);
+        return n;
+    }
+    
     int getRoomStatus1(Date dt, long rid) throws Exception {
         int n = -1;
         SimpleDateFormat dtlong = new SimpleDateFormat("dd/MM/yyyy HH:mm");
@@ -852,7 +862,7 @@ System.out.println(rid+" = "+statusid);
                     cal.set(Calendar.SECOND, 59);
                     cal.set(Calendar.MILLISECOND, 999);
                 }
-                int st = getRoomStatus(cal.getTime(), roomid);
+                int st = getRoomStatus2(cal.getTime(), roomid);
                 if (j == 0) {
                     if (st == 0 || st == 1 || st == 2 || st == 5 || st == 6 || st == 9) {
                         bret = false;
@@ -866,7 +876,7 @@ System.out.println(rid+" = "+statusid);
                 }
                 cal1.add(Calendar.DATE, 1);
             }
-            int st = getRoomStatus(dt2, roomid);
+            int st = getRoomStatus2(dt2, roomid);
             if (st == 0 || st == 1 || st == 2 || st == 5 || st == 6 || st == 9) {
                 bret = false;
             }
@@ -895,7 +905,7 @@ System.out.println(rid+" = "+statusid);
                     cal.set(Calendar.SECOND, 59);
                     cal.set(Calendar.MILLISECOND, 999);
                 }
-                int st = getRoomStatus(cal.getTime(), rooms[i].getRoomid());
+                int st = getRoomStatus2(cal.getTime(), rooms[i].getRoomid());
                 if (j == 0) {
                     if (st == 0 || st == 1 || st == 2 || st == 5 || st == 6 || st == 9) {
                         if (ids.length() > 0) ids += ",";
@@ -911,7 +921,7 @@ System.out.println(rid+" = "+statusid);
                 }
                 cal1.add(Calendar.DATE, 1);
             }
-            int st = getRoomStatus(dt2, rooms[i].getRoomid());
+            int st = getRoomStatus2(dt2, rooms[i].getRoomid());
             if (st == 0 || st == 1 || st == 2 || st == 5 || st == 6 || st == 9) {
                 if (ids.length() > 0) ids += ",";
                 ids += rooms[i].getRoomid();
@@ -930,11 +940,13 @@ System.out.println(rid+" = "+statusid);
                 + "arraivaldate::date >= to_date('" + df.format(dt1) + "','DD/MM/YYYY') and "
                 + "status in (-1,0) and reservationid in (select reservationid from reservationroom where roomtypeid = " + rtp + ")";
         //int cnt1 = RoomManager.getInstance().countWhere("where deleted = false and active = true and roomtypeid = " + rtp);
-        int cnt2 = ReservationManager.getInstance().countWhere(sql);
+
+        //int cnt2 = ReservationManager.getInstance().countWhere(sql);
         RoomBean[] rooms = getAvailableRooms(dt1,dt2,rtp);
 
         boolean bret = true;
-        if (rooms.length < cnt2) bret = false;
+        //if (rooms.length < cnt2) bret = false;
+        if(rooms.length == 0) bret = false;
         return bret;
     }
 

@@ -44,13 +44,14 @@ cal2.add(Calendar.DATE,31);
 String sql = "where roomid is not null and reservationid in ("
         + "select reservationid from reservation where"
         + " departuredate::date >= to_date('"+df.format(cal1.getTime())+"','DD/MM/YYYY')"
-        + " and arraivaldate::date < to_date('"+df.format(cal2.getTime())+"','DD/MM/YYYY') and status in (-1,0)"
-        + " and (status = -1 or reservationtypeid in (select reservationtypeid from reservationtype where confirmed = true))"
+        + " and arraivaldate::date < to_date('"+df.format(cal2.getTime())+"','DD/MM/YYYY') and status in (-1,0,4)"
+        + " and (status in (-1,4) or reservationtypeid in (select reservationtypeid from reservationtype where confirmed = true))"
         + ") order by reservationroomid";
 System.out.println("select * from reservationroom "+sql);
 String nroom = "";
 ReservationroomBean[] resrooms = ReservationroomManager.getInstance().loadByWhere(sql);
 SimpleDateFormat ssdd = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+SimpleDateFormat ssdd1 = new SimpleDateFormat("yyyy-MM-dd");
 JSONArray js = new JSONArray();
 for(int i=0;i<resrooms.length;i++){
     RoomBean room = RoomManager.getInstance().loadByPrimaryKey(resrooms[i].getRoomid());
@@ -60,7 +61,12 @@ for(int i=0;i<resrooms.length;i++){
     SalutationBean slt = SalutationManager.getInstance().loadByPrimaryKey(guest.getSalutationid());
     String statuscolor = "#A9A9A9";
     String color = "#FFFFFF";
-    int istatus = getRoomStatus(res.getArraivaldate(),room.getRoomid().intValue());
+    Calendar cl = Calendar.getInstance();
+    if(dclosedate.after(res.getArraivaldate()) && dclosedate.before(res.getDeparturedate()))   cl.setTimeInMillis(cclosedate.getTimeInMillis());
+    else if(df.format(dclosedate).equals(df.format(res.getDeparturedate()))) cl.setTime(res.getDeparturedate());
+    else cl.setTime(res.getArraivaldate());
+    int istatus = getRoomStatus1(cl.getTime(),resrooms[i].getReservationroomid().longValue());
+    
     if(istatus >= 0){
         StcolorBean[] stcolor = StcolorManager.getInstance().loadByWhere("where active = true and deleted = false and roomstatus = "+istatus);
         if(stcolor.length > 0){
@@ -92,8 +98,7 @@ for(int i=0;i<resrooms.length;i++){
 }
 
 sql = "where blockstart::date < to_date('"+df.format(cal2.getTime())+"','DD/MM/YYYY') and blockend::date >= to_date('"+df.format(cal1.getTime())+"','DD/MM/YYYY')";
-if(nroom.length() > 0)  sql += " and roomid not in ("+nroom+")";
-
+//if(nroom.length() > 0)  sql += " and roomid not in ("+nroom+")";
 BlockroomBean[] rooms = BlockroomManager.getInstance().loadByWhere(sql);
 for(int i=0;i<rooms.length;i++){
     RoomBean room = RoomManager.getInstance().loadByPrimaryKey(rooms[i].getRoomid());
@@ -113,11 +118,11 @@ for(int i=0;i<rooms.length;i++){
         color = "#FFFFFF";
     }
     JSONObject obj = new JSONObject();
-    obj.put("Id", "0");
+    obj.put("Id", "-"+rooms[i].getBlockroomid().toString());
     obj.put("ResourceId", roomtype.getRoomtypeid().toString()+"_"+room.getRoomid().toString());
     obj.put("Name", "<b>ბლოკირებული<b>");
     obj.put("StartDate",ssdd.format(rooms[i].getBlockstart()));
-    obj.put("EndDate",ssdd.format(rooms[i].getBlockend()));
+    obj.put("EndDate",ssdd1.format(rooms[i].getBlockend())+" 23:59");
     obj.put("Description",roomtype.getName());
     obj.put("ReservedTo","");
     obj.put("Bgcolor",statuscolor);
@@ -125,6 +130,6 @@ for(int i=0;i<rooms.length;i++){
     obj.put("Status",5);
     js.add((JSONObject)obj);
 }
-System.out.println(js.toString());
+
 %>
 <%=js.toString()%>

@@ -18,7 +18,11 @@ if(guest.getCountryid() != null){
 if(guest.getCity() != null) guestaddress += guest.getCity()+" ";
 if(guest.getZip() != null)  guestaddress += guest.getZip();
 
-int sts = getRoomStatus1(dclosedate,rroom.getReservationroomid());
+Calendar cl = Calendar.getInstance();
+if(dclosedate.after(reserv.getArraivaldate()) && dclosedate.before(reserv.getDeparturedate()))   cl.setTimeInMillis(cclosedate.getTimeInMillis());
+else if(df.format(dclosedate).equals(df.format(reserv.getDeparturedate()))) cl.setTime(reserv.getDeparturedate());
+else cl.setTime(reserv.getArraivaldate());
+int sts = getRoomStatus1(cl.getTime(),rroom.getReservationroomid());
 String rname = "ნომრის გარეშე";
 if(rroom.getRoomid() != null){
     RoomBean room = RoomManager.getInstance().loadByPrimaryKey(rroom.getRoomid());

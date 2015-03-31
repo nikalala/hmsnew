@@ -428,10 +428,11 @@ try{
     if(resroom.getRoomtypeid().intValue() == 0)
         throw new Exception("აირჩიეთ ოთახის ტიპი");
     
+    ReservationtypeBean rtp = ReservationtypeManager.getInstance().loadByPrimaryKey(res.getReservationtypeid());
     if(resroom.getRoomid() != null && !isRoomAvailable(res.getArraivaldate(),res.getDeparturedate(),resroom.getRoomid().intValue())){
             throw new Exception("ოთახი ამ პერიოდში დაკავებულია");
     } else {
-        if(!getAvailableRoomtypes(res.getArraivaldate(),res.getDeparturedate(),resroom.getRoomtypeid().intValue()))
+        if(rtp.getConfirmed().booleanValue() && !getAvailableRoomtypes(res.getArraivaldate(),res.getDeparturedate(),resroom.getRoomtypeid().intValue()))
             throw new Exception("ოთახის ტიპი ამ პერიოდში დაკავებულია");
     }
     res.setRegbyid(user.getPersonnelid());

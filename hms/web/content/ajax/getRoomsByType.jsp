@@ -33,7 +33,7 @@ if(roomtype != null){
             + "and roomid not in (select roomid from roomst where roomid is not null and statusdate >= to_timestamp('"+ddt+"','DD/MM/YYYY HH24:MI') and st in (0,1,2,5,6) order by statusdate desc, regdate desc limit 1) "
             + " order by name";
 
-System.out.println(sqlrooms);
+//System.out.println(sqlrooms);
     RoomBean[] rooms = getAvailableRooms(dflong.parse(adt), dflong.parse(ddt), roomtype.getRoomtypeid().intValue());   //RoomManager.getInstance().loadByWhere("where roomtypeid = "+roomtype.getRoomtypeid());
     if(rtp.getConfirmed().booleanValue())
             rooms = getAvailableRooms(dflong.parse(adt),dflong.parse(ddt),roomtype.getRoomtypeid().intValue()); // RoomManager.getInstance().loadByWhere(sqlrooms);

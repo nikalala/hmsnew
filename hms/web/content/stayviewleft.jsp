@@ -2,10 +2,33 @@
 <%@page pageEncoding="UTF-8"%>
 <%@include file="../includes/init.jsp"%>
 <%
-//System.out.println("select * from reservation where reservationid in (select reservationid from reservation where status <= 0 and arraivaldate::date <= N'"+dclosedate+"'::date and departuredate::date >= N'"+dclosedate+"'::date) and leader = true order by guestid");
+int isortby = 0;
+String sesisortby = (String)session.getAttribute("sesisortby");
+if(sesisortby != null)  isortby = Integer.parseInt(sesisortby);
+    
+String sortby = request.getParameter("sortby");
+if(sortby != null)    isortby = Integer.parseInt(sortby);
+
+session.setAttribute("sesisortby", String.valueOf(isortby));
+
+switch(isortby){
+    case 0:
+        sortby = "guestname(guestid)";
+        break;
+    case 1:
+        sortby = "(select p.name from roomtype p where p.roomtypeid = reservationroom.roomtypeid)";
+        break;
+    case 2:
+        sortby = "(select r.name from room r where r.roomid = reservationroom.roomid)";
+        break;
+    case 3:
+        sortby = "getroomstatus1(reservationroomid,'"+dflong.format(dclosedate)+"')";
+        break;
+}
+
 String sqlst = "where getroomstatus1(reservationroomid,'"+dflong.format(dclosedate)+"') in (0,1,2,3,6,7,9) and reservationid in "
         + "(select reservationid from reservation where status in (-1,0))"
-        + " order by reservationid";
+        + " order by "+sortby;
 //"where reservationid in (select reservationid from reservation where status <= 0 and arraivaldate::date <= N'"+dclosedate+"'::date and departuredate::date >= N'"+dclosedate+"'::date) and leader = true order by guestid"
 System.out.println(sqlst);
 ReservationroomBean[] reservs = ReservationroomManager.getInstance().loadByWhere(sqlst);
@@ -67,6 +90,17 @@ table.lscroll tr {
 
         $('#sortby ,#filterby').selectpicker();
 
+        $('#sortby').on('change',function(data){ 
+            $.ajax({
+                type: "POST",
+                url: "content/stayviewleft.jsp",
+                data: { sortby: $('#sortby').val() },
+                success: function (data) {
+                    $('#leftcontent').html(data);
+                },
+                async: false
+            });
+        });
     } );
 </script>
     <div class="panel panel-default" id='leftpanel' style="margin-top: 0px; height: 654px; font-family: bgmtavr;">
@@ -80,10 +114,10 @@ table.lscroll tr {
                 </div>
                 <div class="col-sm-10">
                     <select id="sortby" class="dropdown form-control" style="width: 156px;">
-                        <option value="">სტუმრის სახელი</option>
-                        <option value="">ოთახის ტიპი</option>
-                        <option value="">ოთახი</option>
-                        <option value="">სტატუსი</option>
+                        <option value="0" <%=(isortby == 0) ? "selected":""%>>სტუმრის სახელი</option>
+                        <option value="1" <%=(isortby == 1) ? "selected":""%>>ოთახის ტიპი</option>
+                        <option value="2" <%=(isortby == 2) ? "selected":""%>>ოთახი</option>
+                        <option value="3" <%=(isortby == 3) ? "selected":""%>>სტატუსი</option>
                     </select>
                 </div>
             </div><br>
