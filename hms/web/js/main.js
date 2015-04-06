@@ -428,10 +428,9 @@ function modalWindow(fname, title, qr, callback, callbackparam) {
     loadModalDefs();
     $.post("content/" + fname + ".jsp?" + qr, {}, function (data) {
         callback(callbackparam);
-        BootstrapDialog.alert(data.trim());
+        BootstrapDialog.alert(data.trim()); 
     });
 }
-
 
 function newmWindow(fname, title) {
     loadModalDefs();
@@ -1078,3 +1077,12 @@ function checkOut1(rid, reloadid) {
     }, "json");
 }
 
+function checkIn(rid, reloadid) {
+    $.post("content/checkin.jsp?"+rid, {}, function (data) {
+        if (data.result == 0)    BootstrapDialog.alert(data.error);
+        else {
+            reloadGrid(reloadid);
+            BootstrapDialog.info("ოპერაცია წარმატებით შესრულდა");
+        }
+    }, "json");
+}

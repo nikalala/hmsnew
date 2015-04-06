@@ -89,8 +89,8 @@
                     if (reservs[i].getRoomid() == null)
                         actions += "<a href=\"javascript:newmWindow1('assignroom','ოთახის მინიჭება','rid=" + reservs[i].getReservationroomid() + "')\" title=\"ASSIGN ROOM\" class=\"btn btn-xs btn-default\"><i class=\"fa fa-bell\"></i></a>";
                     else {
-                        String params = "&resid=" + reservs[i].getReservationid();
-                        actions += "<a href=\"javascript:modalWindow('checkin','CheckIn','rid=" + reservs[i].getRoomid() + params + "',reloadGrid,'list_pendingreservations');\" title=\"CHECKIN\" class=\"btn btn-xs btn-default\"><i class=\"fa fa-check\"></i></a>";
+                        String params = "rid=" + reservs[i].getRoomid() + "&resid=" + reservs[i].getReservationid()+"&format=json";
+                        actions += "<a href=\"javascript:checkIn('" + params + "','list_pendingreservations');\" title=\"CHECKIN\" class=\"btn btn-xs btn-default\"><i class=\"fa fa-check\"></i></a>";
                     }
     %>
     <row id='<%=reservs[i].getReservationroomid()%>'>

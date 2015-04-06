@@ -41,27 +41,28 @@ for(Enumeration e = request.getParameterNames();e.hasMoreElements();){
                         if(names[2].equals("1"))
                             sql0 += " and "+(String)h.get((Integer)idx)+" >= "+val +" ";
                         else
-                            sql0 += " and "+(String)h.get((Integer)idx)+" < "+val +" ";
+                            sql0 += " and "+(String)h.get((Integer)idx)+" <= "+val +" ";
                         break;
                     case 2:
                         if(names[2].equals("1"))
                             sql0 += " and "+(String)h.get((Integer)idx)+" >= "+val +" ";
                         else
-                            sql0 += " and "+(String)h.get((Integer)idx)+" < "+val +" ";
+                            sql0 += " and "+(String)h.get((Integer)idx)+" <= "+val +" ";
                         break;
                     case 3:
                         if(names[2].equals("1"))
-                            sql0 += " and "+(String)h.get((Integer)idx)+" >= to_date('"+df.format(dt.parse(val)) +"','DD/MM/YYYY') ";
+                            sql0 += " and "+(String)h.get((Integer)idx)+"::date >= to_date('"+df.format(dt.parse(val)) +"','DD/MM/YYYY') ";
                         else
-                            sql0 += " and "+(String)h.get((Integer)idx)+" < to_date('"+df.format(dt.parse(val)) +"','DD/MM/YYYY') ";
+                            sql0 += " and "+(String)h.get((Integer)idx)+"::date <= to_date('"+df.format(dt.parse(val)) +"','DD/MM/YYYY') ";
                         break;
                     case 4:
                     case 5:
                     case 6:
+                        if(val.length() <= 10)  val += " 00:00";
                         if(names[2].equals("1"))
-                            sql0 += " and "+(String)h.get((Integer)idx)+" >= to_timestamp('"+dflong.format(dtlong.parse(val)) +"','DD/MM/YYYY HH24:MI') ";
+                            sql0 += " and "+(String)h.get((Integer)idx)+"::date >= to_timestamp('"+dflong.format(dtlong.parse(val)) +"','DD/MM/YYYY HH24:MI') ";
                         else
-                            sql0 += " and "+(String)h.get((Integer)idx)+" < to_timestamp('"+dflong.format(dtlong.parse(val)) +"','DD/MM/YYYY HH24:MI') ";
+                            sql0 += " and "+(String)h.get((Integer)idx)+"::date <= to_timestamp('"+dflong.format(dtlong.parse(val)) +"','DD/MM/YYYY HH24:MI') ";
                         break;
                     case 7:
                         if(!val.equals("0")){
@@ -145,6 +146,7 @@ try{
     
     
     double[] tots = new double[items.length];
+    int[] cnts = new int[items.length];
 %>
 <rows>
 	<page><%=ipg%></page>
@@ -161,6 +163,7 @@ try{
                         switch(items[j].getFieldtype().intValue()){
                             case 0:
                                 val = rs.getString(j+1);
+                                cnts[j]++;
                                 break;
                             case 1:
                                 int vl1 = rs.getInt(j+1);
@@ -174,20 +177,25 @@ try{
                                 break;
                             case 3:
                                 val = dt.format(rs.getDate(j+1));
+                                cnts[j]++;
                                 break;
                             case 4:
                                 val = dtlong.format(rs.getTimestamp(j+1).getTime());
+                                cnts[j]++;
                                 break;
                             case 5:
                                 tmpfmt = new SimpleDateFormat(arrdepdateformats[dff]);
                                 val = tmpfmt.format(rs.getTimestamp(j+1).getTime());
+                                cnts[j]++;
                                 break;
                             case 6:
                                 tmpfmt = new SimpleDateFormat(yaermonthdateformats[dff]);
                                 val = tmpfmt.format(rs.getTimestamp(j+1).getTime());
+                                cnts[j]++;
                                 break;
                             default:
                                 val = rs.getString(j+1);
+                                cnts[j]++;
                         }
                         %>
                         <cell><![CDATA[<%=val%>]]></cell>
@@ -201,7 +209,8 @@ try{
             if(items[i].getHassum().booleanValue()){
                 String sv = "";
                 if(items[i].getFieldtype().intValue() == 1) sv = dcint.format(tots[i]);
-                if(items[i].getFieldtype().intValue() == 2) sv = dc.format(tots[i]);
+                else if(items[i].getFieldtype().intValue() == 2) sv = dc.format(tots[i]);
+                else sv = "სულ "+dcint.format(cnts[i])+" "+items[i].getName();
                 %><userdata name="<%="report_"+report.getReportid()+"_"+i%>"><%=sv%></userdata><%
             }
         }

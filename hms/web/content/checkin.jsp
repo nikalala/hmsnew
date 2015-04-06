@@ -1,10 +1,11 @@
 <%@page contentType="text/html; charset=UTF-8" %>
 <%@page pageEncoding="UTF-8" %>
 <%@include file="../includes/init.jsp" %>
-
 <%
-
+    String format = request.getParameter("format");
+    if(format == null)  format = "html";
     String errorContrName = "";
+    JSONObject js = new JSONObject();
     Manager.getInstance().beginTransaction();
     try {
         
@@ -38,17 +39,26 @@
         
         Manager.getInstance().endTransaction(true);
         errorContrName = "ოპერაცია შესრულდა წარმატებით";
+        js.put("result",1);
+        js.put("msg",errorContrName);
     } catch (Exception e) {
         e.printStackTrace();
         errorContrName = e.getMessage();
         Manager.getInstance().endTransaction(false);
+        js.put("result",0);
+        js.put("errot",errorContrName);
     }
+    
+if(format.equalsIgnoreCase("html")){
 %>
 <script>
     $("#myModalSave").remove();
     $("#myModalCheckin").remove();
 </script>
 <%=errorContrName%>
+<%} else if(format.equalsIgnoreCase("json")){%>
+<%=js.toString()%>
+<%}%>
 
 
 
