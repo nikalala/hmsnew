@@ -27,9 +27,9 @@ public class VsNoshowBean
     private boolean reservationid_is_modified = false;
     private boolean reservationid_is_initialized = false;
     
-    private String guest;
-    private boolean guest_is_modified = false;
-    private boolean guest_is_initialized = false;
+    private String guestname;
+    private boolean guestname_is_modified = false;
+    private boolean guestname_is_initialized = false;
     
     private java.sql.Timestamp arraivaldate;
     private boolean arraivaldate_is_modified = false;
@@ -39,19 +39,19 @@ public class VsNoshowBean
     private boolean departuredate_is_modified = false;
     private boolean departuredate_is_initialized = false;
     
-    private String num;
-    private boolean num_is_modified = false;
-    private boolean num_is_initialized = false;
+    private Long folioid;
+    private boolean folioid_is_modified = false;
+    private boolean folioid_is_initialized = false;
     
-    private String charges;
+    private Double charges;
     private boolean charges_is_modified = false;
     private boolean charges_is_initialized = false;
     
-    private String paid;
+    private Double paid;
     private boolean paid_is_modified = false;
     private boolean paid_is_initialized = false;
     
-    private String balance;
+    private Double balance;
     private boolean balance_is_modified = false;
     private boolean balance_is_initialized = false;
     
@@ -59,9 +59,9 @@ public class VsNoshowBean
     private boolean source_is_modified = false;
     private boolean source_is_initialized = false;
     
-    private String noshowby;
-    private boolean noshowby_is_modified = false;
-    private boolean noshowby_is_initialized = false;
+    private String puser;
+    private boolean puser_is_modified = false;
+    private boolean puser_is_initialized = false;
     
     private java.sql.Timestamp regdate;
     private boolean regdate_is_modified = false;
@@ -71,13 +71,9 @@ public class VsNoshowBean
     private boolean remark_is_modified = false;
     private boolean remark_is_initialized = false;
     
-    private Integer regbyid;
-    private boolean regbyid_is_modified = false;
-    private boolean regbyid_is_initialized = false;
-    
-    private Integer bsourceid;
-    private boolean bsourceid_is_modified = false;
-    private boolean bsourceid_is_initialized = false;
+    private Integer personnelid;
+    private boolean personnelid_is_modified = false;
+    private boolean personnelid_is_initialized = false;
     
     private Integer roomtypeid;
     private boolean roomtypeid_is_modified = false;
@@ -86,6 +82,10 @@ public class VsNoshowBean
     private Integer ratetypeid;
     private boolean ratetypeid_is_modified = false;
     private boolean ratetypeid_is_initialized = false;
+    
+    private Integer bsourceid;
+    private boolean bsourceid_is_modified = false;
+    private boolean bsourceid_is_initialized = false;
     
     private boolean _isNew = true;
     
@@ -165,59 +165,59 @@ public class VsNoshowBean
     }
 
     /**
-     * Getter method for guest.
+     * Getter method for guestname.
      * <br>
      * Meta Data Information (in progress):
      * <ul>
-     * <li>full name: vs_noshow.guest
+     * <li>full name: vs_noshow.guestname
      * <li>column size: 2147483647
      * <li>jdbc type returned by the driver: Types.VARCHAR
      * </ul>
      *
-     * @return the value of guest
+     * @return the value of guestname
      */
-    public String getGuest()
+    public String getGuestname()
     {
-        return guest; 
+        return guestname; 
     }
 
     /**
-     * Setter method for guest.
+     * Setter method for guestname.
      * <br>
      * The new value is set only if compareTo() says it is different,
      * or if one of either the new value or the current value is null.
      * In case the new value is different, it is set and the field is marked as 'modified'.
      *
-     * @param newVal the new value to be assigned to guest
+     * @param newVal the new value to be assigned to guestname
      */
-    public void setGuest(String newVal) {
-        if ((newVal != null && this.guest != null && (newVal.compareTo(this.guest) == 0)) || 
-            (newVal == null && this.guest == null && guest_is_initialized)) {
+    public void setGuestname(String newVal) {
+        if ((newVal != null && this.guestname != null && (newVal.compareTo(this.guestname) == 0)) || 
+            (newVal == null && this.guestname == null && guestname_is_initialized)) {
             return; 
         } 
-        this.guest = newVal; 
-        guest_is_modified = true; 
-        guest_is_initialized = true; 
+        this.guestname = newVal; 
+        guestname_is_modified = true; 
+        guestname_is_initialized = true; 
     }
 
     /**
-     * Determines if the guest has been modified.
+     * Determines if the guestname has been modified.
      *
      * @return true if the field has been modified, false if the field has not been modified
      */
-    public boolean isGuestModified() {
-        return guest_is_modified; 
+    public boolean isGuestnameModified() {
+        return guestname_is_modified; 
     }
 
     /**
-     * Determines if the guest has been initialized.
+     * Determines if the guestname has been initialized.
      * <br>
      * It is useful to determine if a field is null on purpose or just because it has not been initialized.
      *
      * @return true if the field has been initialized, false otherwise
      */
-    public boolean isGuestInitialized() {
-        return guest_is_initialized; 
+    public boolean isGuestnameInitialized() {
+        return guestname_is_initialized; 
     }
 
     /**
@@ -355,59 +355,70 @@ public class VsNoshowBean
     }
 
     /**
-     * Getter method for num.
+     * Getter method for folioid.
      * <br>
      * Meta Data Information (in progress):
      * <ul>
-     * <li>full name: vs_noshow.num
-     * <li>column size: 2147483647
-     * <li>jdbc type returned by the driver: Types.VARCHAR
+     * <li>full name: vs_noshow.folioid
+     * <li>column size: 19
+     * <li>jdbc type returned by the driver: Types.BIGINT
      * </ul>
      *
-     * @return the value of num
+     * @return the value of folioid
      */
-    public String getNum()
+    public Long getFolioid()
     {
-        return num; 
+        return folioid; 
     }
 
     /**
-     * Setter method for num.
+     * Setter method for folioid.
      * <br>
      * The new value is set only if compareTo() says it is different,
      * or if one of either the new value or the current value is null.
      * In case the new value is different, it is set and the field is marked as 'modified'.
      *
-     * @param newVal the new value to be assigned to num
+     * @param newVal the new value to be assigned to folioid
      */
-    public void setNum(String newVal) {
-        if ((newVal != null && this.num != null && (newVal.compareTo(this.num) == 0)) || 
-            (newVal == null && this.num == null && num_is_initialized)) {
+    public void setFolioid(Long newVal) {
+        if ((newVal != null && this.folioid != null && (newVal.compareTo(this.folioid) == 0)) || 
+            (newVal == null && this.folioid == null && folioid_is_initialized)) {
             return; 
         } 
-        this.num = newVal; 
-        num_is_modified = true; 
-        num_is_initialized = true; 
+        this.folioid = newVal; 
+        folioid_is_modified = true; 
+        folioid_is_initialized = true; 
     }
 
     /**
-     * Determines if the num has been modified.
+     * Setter method for folioid.
+     * <br>
+     * Convenient for those who do not want to deal with Objects for primary types.
+     *
+     * @param newVal the new value to be assigned to folioid
+     */
+    public void setFolioid(long newVal) {
+        setFolioid(new Long(newVal));
+    }
+
+    /**
+     * Determines if the folioid has been modified.
      *
      * @return true if the field has been modified, false if the field has not been modified
      */
-    public boolean isNumModified() {
-        return num_is_modified; 
+    public boolean isFolioidModified() {
+        return folioid_is_modified; 
     }
 
     /**
-     * Determines if the num has been initialized.
+     * Determines if the folioid has been initialized.
      * <br>
      * It is useful to determine if a field is null on purpose or just because it has not been initialized.
      *
      * @return true if the field has been initialized, false otherwise
      */
-    public boolean isNumInitialized() {
-        return num_is_initialized; 
+    public boolean isFolioidInitialized() {
+        return folioid_is_initialized; 
     }
 
     /**
@@ -416,13 +427,13 @@ public class VsNoshowBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: vs_noshow.charges
-     * <li>column size: 2147483647
-     * <li>jdbc type returned by the driver: Types.VARCHAR
+     * <li>column size: 17
+     * <li>jdbc type returned by the driver: Types.DOUBLE
      * </ul>
      *
      * @return the value of charges
      */
-    public String getCharges()
+    public Double getCharges()
     {
         return charges; 
     }
@@ -436,7 +447,7 @@ public class VsNoshowBean
      *
      * @param newVal the new value to be assigned to charges
      */
-    public void setCharges(String newVal) {
+    public void setCharges(Double newVal) {
         if ((newVal != null && this.charges != null && (newVal.compareTo(this.charges) == 0)) || 
             (newVal == null && this.charges == null && charges_is_initialized)) {
             return; 
@@ -444,6 +455,17 @@ public class VsNoshowBean
         this.charges = newVal; 
         charges_is_modified = true; 
         charges_is_initialized = true; 
+    }
+
+    /**
+     * Setter method for charges.
+     * <br>
+     * Convenient for those who do not want to deal with Objects for primary types.
+     *
+     * @param newVal the new value to be assigned to charges
+     */
+    public void setCharges(double newVal) {
+        setCharges(new Double(newVal));
     }
 
     /**
@@ -472,13 +494,13 @@ public class VsNoshowBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: vs_noshow.paid
-     * <li>column size: 2147483647
-     * <li>jdbc type returned by the driver: Types.VARCHAR
+     * <li>column size: 17
+     * <li>jdbc type returned by the driver: Types.DOUBLE
      * </ul>
      *
      * @return the value of paid
      */
-    public String getPaid()
+    public Double getPaid()
     {
         return paid; 
     }
@@ -492,7 +514,7 @@ public class VsNoshowBean
      *
      * @param newVal the new value to be assigned to paid
      */
-    public void setPaid(String newVal) {
+    public void setPaid(Double newVal) {
         if ((newVal != null && this.paid != null && (newVal.compareTo(this.paid) == 0)) || 
             (newVal == null && this.paid == null && paid_is_initialized)) {
             return; 
@@ -500,6 +522,17 @@ public class VsNoshowBean
         this.paid = newVal; 
         paid_is_modified = true; 
         paid_is_initialized = true; 
+    }
+
+    /**
+     * Setter method for paid.
+     * <br>
+     * Convenient for those who do not want to deal with Objects for primary types.
+     *
+     * @param newVal the new value to be assigned to paid
+     */
+    public void setPaid(double newVal) {
+        setPaid(new Double(newVal));
     }
 
     /**
@@ -528,13 +561,13 @@ public class VsNoshowBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: vs_noshow.balance
-     * <li>column size: 2147483647
-     * <li>jdbc type returned by the driver: Types.VARCHAR
+     * <li>column size: 17
+     * <li>jdbc type returned by the driver: Types.DOUBLE
      * </ul>
      *
      * @return the value of balance
      */
-    public String getBalance()
+    public Double getBalance()
     {
         return balance; 
     }
@@ -548,7 +581,7 @@ public class VsNoshowBean
      *
      * @param newVal the new value to be assigned to balance
      */
-    public void setBalance(String newVal) {
+    public void setBalance(Double newVal) {
         if ((newVal != null && this.balance != null && (newVal.compareTo(this.balance) == 0)) || 
             (newVal == null && this.balance == null && balance_is_initialized)) {
             return; 
@@ -556,6 +589,17 @@ public class VsNoshowBean
         this.balance = newVal; 
         balance_is_modified = true; 
         balance_is_initialized = true; 
+    }
+
+    /**
+     * Setter method for balance.
+     * <br>
+     * Convenient for those who do not want to deal with Objects for primary types.
+     *
+     * @param newVal the new value to be assigned to balance
+     */
+    public void setBalance(double newVal) {
+        setBalance(new Double(newVal));
     }
 
     /**
@@ -635,59 +679,59 @@ public class VsNoshowBean
     }
 
     /**
-     * Getter method for noshowby.
+     * Getter method for puser.
      * <br>
      * Meta Data Information (in progress):
      * <ul>
-     * <li>full name: vs_noshow.noshowby
+     * <li>full name: vs_noshow.puser
      * <li>column size: 2147483647
      * <li>jdbc type returned by the driver: Types.VARCHAR
      * </ul>
      *
-     * @return the value of noshowby
+     * @return the value of puser
      */
-    public String getNoshowby()
+    public String getPuser()
     {
-        return noshowby; 
+        return puser; 
     }
 
     /**
-     * Setter method for noshowby.
+     * Setter method for puser.
      * <br>
      * The new value is set only if compareTo() says it is different,
      * or if one of either the new value or the current value is null.
      * In case the new value is different, it is set and the field is marked as 'modified'.
      *
-     * @param newVal the new value to be assigned to noshowby
+     * @param newVal the new value to be assigned to puser
      */
-    public void setNoshowby(String newVal) {
-        if ((newVal != null && this.noshowby != null && (newVal.compareTo(this.noshowby) == 0)) || 
-            (newVal == null && this.noshowby == null && noshowby_is_initialized)) {
+    public void setPuser(String newVal) {
+        if ((newVal != null && this.puser != null && (newVal.compareTo(this.puser) == 0)) || 
+            (newVal == null && this.puser == null && puser_is_initialized)) {
             return; 
         } 
-        this.noshowby = newVal; 
-        noshowby_is_modified = true; 
-        noshowby_is_initialized = true; 
+        this.puser = newVal; 
+        puser_is_modified = true; 
+        puser_is_initialized = true; 
     }
 
     /**
-     * Determines if the noshowby has been modified.
+     * Determines if the puser has been modified.
      *
      * @return true if the field has been modified, false if the field has not been modified
      */
-    public boolean isNoshowbyModified() {
-        return noshowby_is_modified; 
+    public boolean isPuserModified() {
+        return puser_is_modified; 
     }
 
     /**
-     * Determines if the noshowby has been initialized.
+     * Determines if the puser has been initialized.
      * <br>
      * It is useful to determine if a field is null on purpose or just because it has not been initialized.
      *
      * @return true if the field has been initialized, false otherwise
      */
-    public boolean isNoshowbyInitialized() {
-        return noshowby_is_initialized; 
+    public boolean isPuserInitialized() {
+        return puser_is_initialized; 
     }
 
     /**
@@ -814,137 +858,70 @@ public class VsNoshowBean
     }
 
     /**
-     * Getter method for regbyid.
+     * Getter method for personnelid.
      * <br>
      * Meta Data Information (in progress):
      * <ul>
-     * <li>full name: vs_noshow.regbyid
+     * <li>full name: vs_noshow.personnelid
      * <li>column size: 10
      * <li>jdbc type returned by the driver: Types.INTEGER
      * </ul>
      *
-     * @return the value of regbyid
+     * @return the value of personnelid
      */
-    public Integer getRegbyid()
+    public Integer getPersonnelid()
     {
-        return regbyid; 
+        return personnelid; 
     }
 
     /**
-     * Setter method for regbyid.
+     * Setter method for personnelid.
      * <br>
      * The new value is set only if compareTo() says it is different,
      * or if one of either the new value or the current value is null.
      * In case the new value is different, it is set and the field is marked as 'modified'.
      *
-     * @param newVal the new value to be assigned to regbyid
+     * @param newVal the new value to be assigned to personnelid
      */
-    public void setRegbyid(Integer newVal) {
-        if ((newVal != null && this.regbyid != null && (newVal.compareTo(this.regbyid) == 0)) || 
-            (newVal == null && this.regbyid == null && regbyid_is_initialized)) {
+    public void setPersonnelid(Integer newVal) {
+        if ((newVal != null && this.personnelid != null && (newVal.compareTo(this.personnelid) == 0)) || 
+            (newVal == null && this.personnelid == null && personnelid_is_initialized)) {
             return; 
         } 
-        this.regbyid = newVal; 
-        regbyid_is_modified = true; 
-        regbyid_is_initialized = true; 
+        this.personnelid = newVal; 
+        personnelid_is_modified = true; 
+        personnelid_is_initialized = true; 
     }
 
     /**
-     * Setter method for regbyid.
+     * Setter method for personnelid.
      * <br>
      * Convenient for those who do not want to deal with Objects for primary types.
      *
-     * @param newVal the new value to be assigned to regbyid
+     * @param newVal the new value to be assigned to personnelid
      */
-    public void setRegbyid(int newVal) {
-        setRegbyid(new Integer(newVal));
+    public void setPersonnelid(int newVal) {
+        setPersonnelid(new Integer(newVal));
     }
 
     /**
-     * Determines if the regbyid has been modified.
+     * Determines if the personnelid has been modified.
      *
      * @return true if the field has been modified, false if the field has not been modified
      */
-    public boolean isRegbyidModified() {
-        return regbyid_is_modified; 
+    public boolean isPersonnelidModified() {
+        return personnelid_is_modified; 
     }
 
     /**
-     * Determines if the regbyid has been initialized.
+     * Determines if the personnelid has been initialized.
      * <br>
      * It is useful to determine if a field is null on purpose or just because it has not been initialized.
      *
      * @return true if the field has been initialized, false otherwise
      */
-    public boolean isRegbyidInitialized() {
-        return regbyid_is_initialized; 
-    }
-
-    /**
-     * Getter method for bsourceid.
-     * <br>
-     * Meta Data Information (in progress):
-     * <ul>
-     * <li>full name: vs_noshow.bsourceid
-     * <li>column size: 10
-     * <li>jdbc type returned by the driver: Types.INTEGER
-     * </ul>
-     *
-     * @return the value of bsourceid
-     */
-    public Integer getBsourceid()
-    {
-        return bsourceid; 
-    }
-
-    /**
-     * Setter method for bsourceid.
-     * <br>
-     * The new value is set only if compareTo() says it is different,
-     * or if one of either the new value or the current value is null.
-     * In case the new value is different, it is set and the field is marked as 'modified'.
-     *
-     * @param newVal the new value to be assigned to bsourceid
-     */
-    public void setBsourceid(Integer newVal) {
-        if ((newVal != null && this.bsourceid != null && (newVal.compareTo(this.bsourceid) == 0)) || 
-            (newVal == null && this.bsourceid == null && bsourceid_is_initialized)) {
-            return; 
-        } 
-        this.bsourceid = newVal; 
-        bsourceid_is_modified = true; 
-        bsourceid_is_initialized = true; 
-    }
-
-    /**
-     * Setter method for bsourceid.
-     * <br>
-     * Convenient for those who do not want to deal with Objects for primary types.
-     *
-     * @param newVal the new value to be assigned to bsourceid
-     */
-    public void setBsourceid(int newVal) {
-        setBsourceid(new Integer(newVal));
-    }
-
-    /**
-     * Determines if the bsourceid has been modified.
-     *
-     * @return true if the field has been modified, false if the field has not been modified
-     */
-    public boolean isBsourceidModified() {
-        return bsourceid_is_modified; 
-    }
-
-    /**
-     * Determines if the bsourceid has been initialized.
-     * <br>
-     * It is useful to determine if a field is null on purpose or just because it has not been initialized.
-     *
-     * @return true if the field has been initialized, false otherwise
-     */
-    public boolean isBsourceidInitialized() {
-        return bsourceid_is_initialized; 
+    public boolean isPersonnelidInitialized() {
+        return personnelid_is_initialized; 
     }
 
     /**
@@ -1082,6 +1059,73 @@ public class VsNoshowBean
     }
 
     /**
+     * Getter method for bsourceid.
+     * <br>
+     * Meta Data Information (in progress):
+     * <ul>
+     * <li>full name: vs_noshow.bsourceid
+     * <li>column size: 10
+     * <li>jdbc type returned by the driver: Types.INTEGER
+     * </ul>
+     *
+     * @return the value of bsourceid
+     */
+    public Integer getBsourceid()
+    {
+        return bsourceid; 
+    }
+
+    /**
+     * Setter method for bsourceid.
+     * <br>
+     * The new value is set only if compareTo() says it is different,
+     * or if one of either the new value or the current value is null.
+     * In case the new value is different, it is set and the field is marked as 'modified'.
+     *
+     * @param newVal the new value to be assigned to bsourceid
+     */
+    public void setBsourceid(Integer newVal) {
+        if ((newVal != null && this.bsourceid != null && (newVal.compareTo(this.bsourceid) == 0)) || 
+            (newVal == null && this.bsourceid == null && bsourceid_is_initialized)) {
+            return; 
+        } 
+        this.bsourceid = newVal; 
+        bsourceid_is_modified = true; 
+        bsourceid_is_initialized = true; 
+    }
+
+    /**
+     * Setter method for bsourceid.
+     * <br>
+     * Convenient for those who do not want to deal with Objects for primary types.
+     *
+     * @param newVal the new value to be assigned to bsourceid
+     */
+    public void setBsourceid(int newVal) {
+        setBsourceid(new Integer(newVal));
+    }
+
+    /**
+     * Determines if the bsourceid has been modified.
+     *
+     * @return true if the field has been modified, false if the field has not been modified
+     */
+    public boolean isBsourceidModified() {
+        return bsourceid_is_modified; 
+    }
+
+    /**
+     * Determines if the bsourceid has been initialized.
+     * <br>
+     * It is useful to determine if a field is null on purpose or just because it has not been initialized.
+     *
+     * @return true if the field has been initialized, false otherwise
+     */
+    public boolean isBsourceidInitialized() {
+        return bsourceid_is_initialized; 
+    }
+
+    /**
      * Determines if the current object is new.
      *
      * @return true if the current object is new, false if the object is not new
@@ -1108,21 +1152,21 @@ public class VsNoshowBean
      */
     public boolean isModified() {
         return reservationid_is_modified || 
-		guest_is_modified || 
+		guestname_is_modified || 
 		arraivaldate_is_modified || 
 		departuredate_is_modified || 
-		num_is_modified || 
+		folioid_is_modified || 
 		charges_is_modified || 
 		paid_is_modified || 
 		balance_is_modified || 
 		source_is_modified || 
-		noshowby_is_modified || 
+		puser_is_modified || 
 		regdate_is_modified || 
 		remark_is_modified || 
-		regbyid_is_modified || 
-		bsourceid_is_modified || 
+		personnelid_is_modified || 
 		roomtypeid_is_modified || 
-		ratetypeid_is_modified;
+		ratetypeid_is_modified || 
+		bsourceid_is_modified;
     }
 
     /**
@@ -1130,21 +1174,21 @@ public class VsNoshowBean
      */
     public void resetIsModified() {
         reservationid_is_modified = false;
-        guest_is_modified = false;
+        guestname_is_modified = false;
         arraivaldate_is_modified = false;
         departuredate_is_modified = false;
-        num_is_modified = false;
+        folioid_is_modified = false;
         charges_is_modified = false;
         paid_is_modified = false;
         balance_is_modified = false;
         source_is_modified = false;
-        noshowby_is_modified = false;
+        puser_is_modified = false;
         regdate_is_modified = false;
         remark_is_modified = false;
-        regbyid_is_modified = false;
-        bsourceid_is_modified = false;
+        personnelid_is_modified = false;
         roomtypeid_is_modified = false;
         ratetypeid_is_modified = false;
+        bsourceid_is_modified = false;
     }
 
     /**
@@ -1154,21 +1198,21 @@ public class VsNoshowBean
      */
     public void copy(VsNoshowBean bean) {
         setReservationid(bean.getReservationid());
-        setGuest(bean.getGuest());
+        setGuestname(bean.getGuestname());
         setArraivaldate(bean.getArraivaldate());
         setDeparturedate(bean.getDeparturedate());
-        setNum(bean.getNum());
+        setFolioid(bean.getFolioid());
         setCharges(bean.getCharges());
         setPaid(bean.getPaid());
         setBalance(bean.getBalance());
         setSource(bean.getSource());
-        setNoshowby(bean.getNoshowby());
+        setPuser(bean.getPuser());
         setRegdate(bean.getRegdate());
         setRemark(bean.getRemark());
-        setRegbyid(bean.getRegbyid());
-        setBsourceid(bean.getBsourceid());
+        setPersonnelid(bean.getPersonnelid());
         setRoomtypeid(bean.getRoomtypeid());
         setRatetypeid(bean.getRatetypeid());
+        setBsourceid(bean.getBsourceid());
     }
 
     /**
@@ -1179,21 +1223,21 @@ public class VsNoshowBean
     public String toString() {
         return   "\n[vs_noshow] "
                  + "\n - vs_noshow.reservationid = " + (reservationid_is_initialized ? ("[" + (reservationid == null ? null : reservationid.toString()) + "]") : "not initialized") + ""
-                 + "\n - vs_noshow.guest = " + (guest_is_initialized ? ("[" + (guest == null ? null : guest.toString()) + "]") : "not initialized") + ""
+                 + "\n - vs_noshow.guestname = " + (guestname_is_initialized ? ("[" + (guestname == null ? null : guestname.toString()) + "]") : "not initialized") + ""
                  + "\n - vs_noshow.arraivaldate = " + (arraivaldate_is_initialized ? ("[" + (arraivaldate == null ? null : arraivaldate.toString()) + "]") : "not initialized") + ""
                  + "\n - vs_noshow.departuredate = " + (departuredate_is_initialized ? ("[" + (departuredate == null ? null : departuredate.toString()) + "]") : "not initialized") + ""
-                 + "\n - vs_noshow.num = " + (num_is_initialized ? ("[" + (num == null ? null : num.toString()) + "]") : "not initialized") + ""
+                 + "\n - vs_noshow.folioid = " + (folioid_is_initialized ? ("[" + (folioid == null ? null : folioid.toString()) + "]") : "not initialized") + ""
                  + "\n - vs_noshow.charges = " + (charges_is_initialized ? ("[" + (charges == null ? null : charges.toString()) + "]") : "not initialized") + ""
                  + "\n - vs_noshow.paid = " + (paid_is_initialized ? ("[" + (paid == null ? null : paid.toString()) + "]") : "not initialized") + ""
                  + "\n - vs_noshow.balance = " + (balance_is_initialized ? ("[" + (balance == null ? null : balance.toString()) + "]") : "not initialized") + ""
                  + "\n - vs_noshow.source = " + (source_is_initialized ? ("[" + (source == null ? null : source.toString()) + "]") : "not initialized") + ""
-                 + "\n - vs_noshow.noshowby = " + (noshowby_is_initialized ? ("[" + (noshowby == null ? null : noshowby.toString()) + "]") : "not initialized") + ""
+                 + "\n - vs_noshow.puser = " + (puser_is_initialized ? ("[" + (puser == null ? null : puser.toString()) + "]") : "not initialized") + ""
                  + "\n - vs_noshow.regdate = " + (regdate_is_initialized ? ("[" + (regdate == null ? null : regdate.toString()) + "]") : "not initialized") + ""
                  + "\n - vs_noshow.remark = " + (remark_is_initialized ? ("[" + (remark == null ? null : remark.toString()) + "]") : "not initialized") + ""
-                 + "\n - vs_noshow.regbyid = " + (regbyid_is_initialized ? ("[" + (regbyid == null ? null : regbyid.toString()) + "]") : "not initialized") + ""
-                 + "\n - vs_noshow.bsourceid = " + (bsourceid_is_initialized ? ("[" + (bsourceid == null ? null : bsourceid.toString()) + "]") : "not initialized") + ""
+                 + "\n - vs_noshow.personnelid = " + (personnelid_is_initialized ? ("[" + (personnelid == null ? null : personnelid.toString()) + "]") : "not initialized") + ""
                  + "\n - vs_noshow.roomtypeid = " + (roomtypeid_is_initialized ? ("[" + (roomtypeid == null ? null : roomtypeid.toString()) + "]") : "not initialized") + ""
                  + "\n - vs_noshow.ratetypeid = " + (ratetypeid_is_initialized ? ("[" + (ratetypeid == null ? null : ratetypeid.toString()) + "]") : "not initialized") + ""
+                 + "\n - vs_noshow.bsourceid = " + (bsourceid_is_initialized ? ("[" + (bsourceid == null ? null : bsourceid.toString()) + "]") : "not initialized") + ""
             ;
     }
 

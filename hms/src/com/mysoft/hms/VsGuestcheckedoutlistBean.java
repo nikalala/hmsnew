@@ -23,17 +23,17 @@ public class VsGuestcheckedoutlistBean
 // extends- 
 
 {
-    private String room;
-    private boolean room_is_modified = false;
-    private boolean room_is_initialized = false;
+    private String roomname;
+    private boolean roomname_is_modified = false;
+    private boolean roomname_is_initialized = false;
     
-    private String num;
-    private boolean num_is_modified = false;
-    private boolean num_is_initialized = false;
+    private String invoicenum;
+    private boolean invoicenum_is_modified = false;
+    private boolean invoicenum_is_initialized = false;
     
-    private String guest;
-    private boolean guest_is_modified = false;
-    private boolean guest_is_initialized = false;
+    private String guestname;
+    private boolean guestname_is_modified = false;
+    private boolean guestname_is_initialized = false;
     
     private java.sql.Timestamp arraivaldate;
     private boolean arraivaldate_is_modified = false;
@@ -43,11 +43,11 @@ public class VsGuestcheckedoutlistBean
     private boolean departuredate_is_modified = false;
     private boolean departuredate_is_initialized = false;
     
-    private Integer total;
-    private boolean total_is_modified = false;
-    private boolean total_is_initialized = false;
+    private Double totalcharges;
+    private boolean totalcharges_is_modified = false;
+    private boolean totalcharges_is_initialized = false;
     
-    private Integer balance;
+    private Double balance;
     private boolean balance_is_modified = false;
     private boolean balance_is_initialized = false;
     
@@ -55,13 +55,9 @@ public class VsGuestcheckedoutlistBean
     private boolean company_is_modified = false;
     private boolean company_is_initialized = false;
     
-    private String loginid;
-    private boolean loginid_is_modified = false;
-    private boolean loginid_is_initialized = false;
-    
-    private Long reservationid;
-    private boolean reservationid_is_modified = false;
-    private boolean reservationid_is_initialized = false;
+    private String author;
+    private boolean author_is_modified = false;
+    private boolean author_is_initialized = false;
     
     private boolean _isNew = true;
     
@@ -74,171 +70,171 @@ public class VsGuestcheckedoutlistBean
     }
     
     /**
-     * Getter method for room.
+     * Getter method for roomname.
      * <br>
      * Meta Data Information (in progress):
      * <ul>
-     * <li>full name: vs_guestcheckedoutlist.Room
+     * <li>full name: vs_guestcheckedoutlist.roomname
      * <li>column size: 2147483647
      * <li>jdbc type returned by the driver: Types.VARCHAR
      * </ul>
      *
-     * @return the value of room
+     * @return the value of roomname
      */
-    public String getRoom()
+    public String getRoomname()
     {
-        return room; 
+        return roomname; 
     }
 
     /**
-     * Setter method for room.
+     * Setter method for roomname.
      * <br>
      * The new value is set only if compareTo() says it is different,
      * or if one of either the new value or the current value is null.
      * In case the new value is different, it is set and the field is marked as 'modified'.
      *
-     * @param newVal the new value to be assigned to room
+     * @param newVal the new value to be assigned to roomname
      */
-    public void setRoom(String newVal) {
-        if ((newVal != null && this.room != null && (newVal.compareTo(this.room) == 0)) || 
-            (newVal == null && this.room == null && room_is_initialized)) {
+    public void setRoomname(String newVal) {
+        if ((newVal != null && this.roomname != null && (newVal.compareTo(this.roomname) == 0)) || 
+            (newVal == null && this.roomname == null && roomname_is_initialized)) {
             return; 
         } 
-        this.room = newVal; 
-        room_is_modified = true; 
-        room_is_initialized = true; 
+        this.roomname = newVal; 
+        roomname_is_modified = true; 
+        roomname_is_initialized = true; 
     }
 
     /**
-     * Determines if the room has been modified.
+     * Determines if the roomname has been modified.
      *
      * @return true if the field has been modified, false if the field has not been modified
      */
-    public boolean isRoomModified() {
-        return room_is_modified; 
+    public boolean isRoomnameModified() {
+        return roomname_is_modified; 
     }
 
     /**
-     * Determines if the room has been initialized.
+     * Determines if the roomname has been initialized.
      * <br>
      * It is useful to determine if a field is null on purpose or just because it has not been initialized.
      *
      * @return true if the field has been initialized, false otherwise
      */
-    public boolean isRoomInitialized() {
-        return room_is_initialized; 
+    public boolean isRoomnameInitialized() {
+        return roomname_is_initialized; 
     }
 
     /**
-     * Getter method for num.
+     * Getter method for invoicenum.
      * <br>
      * Meta Data Information (in progress):
      * <ul>
-     * <li>full name: vs_guestcheckedoutlist.num
+     * <li>full name: vs_guestcheckedoutlist.invoicenum
      * <li>column size: 2147483647
      * <li>jdbc type returned by the driver: Types.VARCHAR
      * </ul>
      *
-     * @return the value of num
+     * @return the value of invoicenum
      */
-    public String getNum()
+    public String getInvoicenum()
     {
-        return num; 
+        return invoicenum; 
     }
 
     /**
-     * Setter method for num.
+     * Setter method for invoicenum.
      * <br>
      * The new value is set only if compareTo() says it is different,
      * or if one of either the new value or the current value is null.
      * In case the new value is different, it is set and the field is marked as 'modified'.
      *
-     * @param newVal the new value to be assigned to num
+     * @param newVal the new value to be assigned to invoicenum
      */
-    public void setNum(String newVal) {
-        if ((newVal != null && this.num != null && (newVal.compareTo(this.num) == 0)) || 
-            (newVal == null && this.num == null && num_is_initialized)) {
+    public void setInvoicenum(String newVal) {
+        if ((newVal != null && this.invoicenum != null && (newVal.compareTo(this.invoicenum) == 0)) || 
+            (newVal == null && this.invoicenum == null && invoicenum_is_initialized)) {
             return; 
         } 
-        this.num = newVal; 
-        num_is_modified = true; 
-        num_is_initialized = true; 
+        this.invoicenum = newVal; 
+        invoicenum_is_modified = true; 
+        invoicenum_is_initialized = true; 
     }
 
     /**
-     * Determines if the num has been modified.
+     * Determines if the invoicenum has been modified.
      *
      * @return true if the field has been modified, false if the field has not been modified
      */
-    public boolean isNumModified() {
-        return num_is_modified; 
+    public boolean isInvoicenumModified() {
+        return invoicenum_is_modified; 
     }
 
     /**
-     * Determines if the num has been initialized.
+     * Determines if the invoicenum has been initialized.
      * <br>
      * It is useful to determine if a field is null on purpose or just because it has not been initialized.
      *
      * @return true if the field has been initialized, false otherwise
      */
-    public boolean isNumInitialized() {
-        return num_is_initialized; 
+    public boolean isInvoicenumInitialized() {
+        return invoicenum_is_initialized; 
     }
 
     /**
-     * Getter method for guest.
+     * Getter method for guestname.
      * <br>
      * Meta Data Information (in progress):
      * <ul>
-     * <li>full name: vs_guestcheckedoutlist.guest
+     * <li>full name: vs_guestcheckedoutlist.guestname
      * <li>column size: 2147483647
      * <li>jdbc type returned by the driver: Types.VARCHAR
      * </ul>
      *
-     * @return the value of guest
+     * @return the value of guestname
      */
-    public String getGuest()
+    public String getGuestname()
     {
-        return guest; 
+        return guestname; 
     }
 
     /**
-     * Setter method for guest.
+     * Setter method for guestname.
      * <br>
      * The new value is set only if compareTo() says it is different,
      * or if one of either the new value or the current value is null.
      * In case the new value is different, it is set and the field is marked as 'modified'.
      *
-     * @param newVal the new value to be assigned to guest
+     * @param newVal the new value to be assigned to guestname
      */
-    public void setGuest(String newVal) {
-        if ((newVal != null && this.guest != null && (newVal.compareTo(this.guest) == 0)) || 
-            (newVal == null && this.guest == null && guest_is_initialized)) {
+    public void setGuestname(String newVal) {
+        if ((newVal != null && this.guestname != null && (newVal.compareTo(this.guestname) == 0)) || 
+            (newVal == null && this.guestname == null && guestname_is_initialized)) {
             return; 
         } 
-        this.guest = newVal; 
-        guest_is_modified = true; 
-        guest_is_initialized = true; 
+        this.guestname = newVal; 
+        guestname_is_modified = true; 
+        guestname_is_initialized = true; 
     }
 
     /**
-     * Determines if the guest has been modified.
+     * Determines if the guestname has been modified.
      *
      * @return true if the field has been modified, false if the field has not been modified
      */
-    public boolean isGuestModified() {
-        return guest_is_modified; 
+    public boolean isGuestnameModified() {
+        return guestname_is_modified; 
     }
 
     /**
-     * Determines if the guest has been initialized.
+     * Determines if the guestname has been initialized.
      * <br>
      * It is useful to determine if a field is null on purpose or just because it has not been initialized.
      *
      * @return true if the field has been initialized, false otherwise
      */
-    public boolean isGuestInitialized() {
-        return guest_is_initialized; 
+    public boolean isGuestnameInitialized() {
+        return guestname_is_initialized; 
     }
 
     /**
@@ -376,70 +372,70 @@ public class VsGuestcheckedoutlistBean
     }
 
     /**
-     * Getter method for total.
+     * Getter method for totalcharges.
      * <br>
      * Meta Data Information (in progress):
      * <ul>
-     * <li>full name: vs_guestcheckedoutlist.Total
-     * <li>column size: 10
-     * <li>jdbc type returned by the driver: Types.INTEGER
+     * <li>full name: vs_guestcheckedoutlist.totalcharges
+     * <li>column size: 17
+     * <li>jdbc type returned by the driver: Types.DOUBLE
      * </ul>
      *
-     * @return the value of total
+     * @return the value of totalcharges
      */
-    public Integer getTotal()
+    public Double getTotalcharges()
     {
-        return total; 
+        return totalcharges; 
     }
 
     /**
-     * Setter method for total.
+     * Setter method for totalcharges.
      * <br>
      * The new value is set only if compareTo() says it is different,
      * or if one of either the new value or the current value is null.
      * In case the new value is different, it is set and the field is marked as 'modified'.
      *
-     * @param newVal the new value to be assigned to total
+     * @param newVal the new value to be assigned to totalcharges
      */
-    public void setTotal(Integer newVal) {
-        if ((newVal != null && this.total != null && (newVal.compareTo(this.total) == 0)) || 
-            (newVal == null && this.total == null && total_is_initialized)) {
+    public void setTotalcharges(Double newVal) {
+        if ((newVal != null && this.totalcharges != null && (newVal.compareTo(this.totalcharges) == 0)) || 
+            (newVal == null && this.totalcharges == null && totalcharges_is_initialized)) {
             return; 
         } 
-        this.total = newVal; 
-        total_is_modified = true; 
-        total_is_initialized = true; 
+        this.totalcharges = newVal; 
+        totalcharges_is_modified = true; 
+        totalcharges_is_initialized = true; 
     }
 
     /**
-     * Setter method for total.
+     * Setter method for totalcharges.
      * <br>
      * Convenient for those who do not want to deal with Objects for primary types.
      *
-     * @param newVal the new value to be assigned to total
+     * @param newVal the new value to be assigned to totalcharges
      */
-    public void setTotal(int newVal) {
-        setTotal(new Integer(newVal));
+    public void setTotalcharges(double newVal) {
+        setTotalcharges(new Double(newVal));
     }
 
     /**
-     * Determines if the total has been modified.
+     * Determines if the totalcharges has been modified.
      *
      * @return true if the field has been modified, false if the field has not been modified
      */
-    public boolean isTotalModified() {
-        return total_is_modified; 
+    public boolean isTotalchargesModified() {
+        return totalcharges_is_modified; 
     }
 
     /**
-     * Determines if the total has been initialized.
+     * Determines if the totalcharges has been initialized.
      * <br>
      * It is useful to determine if a field is null on purpose or just because it has not been initialized.
      *
      * @return true if the field has been initialized, false otherwise
      */
-    public boolean isTotalInitialized() {
-        return total_is_initialized; 
+    public boolean isTotalchargesInitialized() {
+        return totalcharges_is_initialized; 
     }
 
     /**
@@ -447,14 +443,14 @@ public class VsGuestcheckedoutlistBean
      * <br>
      * Meta Data Information (in progress):
      * <ul>
-     * <li>full name: vs_guestcheckedoutlist.Balance
-     * <li>column size: 10
-     * <li>jdbc type returned by the driver: Types.INTEGER
+     * <li>full name: vs_guestcheckedoutlist.balance
+     * <li>column size: 17
+     * <li>jdbc type returned by the driver: Types.DOUBLE
      * </ul>
      *
      * @return the value of balance
      */
-    public Integer getBalance()
+    public Double getBalance()
     {
         return balance; 
     }
@@ -468,7 +464,7 @@ public class VsGuestcheckedoutlistBean
      *
      * @param newVal the new value to be assigned to balance
      */
-    public void setBalance(Integer newVal) {
+    public void setBalance(Double newVal) {
         if ((newVal != null && this.balance != null && (newVal.compareTo(this.balance) == 0)) || 
             (newVal == null && this.balance == null && balance_is_initialized)) {
             return; 
@@ -485,8 +481,8 @@ public class VsGuestcheckedoutlistBean
      *
      * @param newVal the new value to be assigned to balance
      */
-    public void setBalance(int newVal) {
-        setBalance(new Integer(newVal));
+    public void setBalance(double newVal) {
+        setBalance(new Double(newVal));
     }
 
     /**
@@ -514,7 +510,7 @@ public class VsGuestcheckedoutlistBean
      * <br>
      * Meta Data Information (in progress):
      * <ul>
-     * <li>full name: vs_guestcheckedoutlist.Company
+     * <li>full name: vs_guestcheckedoutlist.company
      * <li>column size: 2147483647
      * <li>jdbc type returned by the driver: Types.VARCHAR
      * </ul>
@@ -566,126 +562,59 @@ public class VsGuestcheckedoutlistBean
     }
 
     /**
-     * Getter method for loginid.
+     * Getter method for author.
      * <br>
      * Meta Data Information (in progress):
      * <ul>
-     * <li>full name: vs_guestcheckedoutlist.loginid
-     * <li>column size: 15
+     * <li>full name: vs_guestcheckedoutlist.author
+     * <li>column size: 2147483647
      * <li>jdbc type returned by the driver: Types.VARCHAR
      * </ul>
      *
-     * @return the value of loginid
+     * @return the value of author
      */
-    public String getLoginid()
+    public String getAuthor()
     {
-        return loginid; 
+        return author; 
     }
 
     /**
-     * Setter method for loginid.
+     * Setter method for author.
      * <br>
      * The new value is set only if compareTo() says it is different,
      * or if one of either the new value or the current value is null.
      * In case the new value is different, it is set and the field is marked as 'modified'.
      *
-     * @param newVal the new value to be assigned to loginid
+     * @param newVal the new value to be assigned to author
      */
-    public void setLoginid(String newVal) {
-        if ((newVal != null && this.loginid != null && (newVal.compareTo(this.loginid) == 0)) || 
-            (newVal == null && this.loginid == null && loginid_is_initialized)) {
+    public void setAuthor(String newVal) {
+        if ((newVal != null && this.author != null && (newVal.compareTo(this.author) == 0)) || 
+            (newVal == null && this.author == null && author_is_initialized)) {
             return; 
         } 
-        this.loginid = newVal; 
-        loginid_is_modified = true; 
-        loginid_is_initialized = true; 
+        this.author = newVal; 
+        author_is_modified = true; 
+        author_is_initialized = true; 
     }
 
     /**
-     * Determines if the loginid has been modified.
+     * Determines if the author has been modified.
      *
      * @return true if the field has been modified, false if the field has not been modified
      */
-    public boolean isLoginidModified() {
-        return loginid_is_modified; 
+    public boolean isAuthorModified() {
+        return author_is_modified; 
     }
 
     /**
-     * Determines if the loginid has been initialized.
+     * Determines if the author has been initialized.
      * <br>
      * It is useful to determine if a field is null on purpose or just because it has not been initialized.
      *
      * @return true if the field has been initialized, false otherwise
      */
-    public boolean isLoginidInitialized() {
-        return loginid_is_initialized; 
-    }
-
-    /**
-     * Getter method for reservationid.
-     * <br>
-     * Meta Data Information (in progress):
-     * <ul>
-     * <li>full name: vs_guestcheckedoutlist.reservationid
-     * <li>column size: 19
-     * <li>jdbc type returned by the driver: Types.BIGINT
-     * </ul>
-     *
-     * @return the value of reservationid
-     */
-    public Long getReservationid()
-    {
-        return reservationid; 
-    }
-
-    /**
-     * Setter method for reservationid.
-     * <br>
-     * The new value is set only if compareTo() says it is different,
-     * or if one of either the new value or the current value is null.
-     * In case the new value is different, it is set and the field is marked as 'modified'.
-     *
-     * @param newVal the new value to be assigned to reservationid
-     */
-    public void setReservationid(Long newVal) {
-        if ((newVal != null && this.reservationid != null && (newVal.compareTo(this.reservationid) == 0)) || 
-            (newVal == null && this.reservationid == null && reservationid_is_initialized)) {
-            return; 
-        } 
-        this.reservationid = newVal; 
-        reservationid_is_modified = true; 
-        reservationid_is_initialized = true; 
-    }
-
-    /**
-     * Setter method for reservationid.
-     * <br>
-     * Convenient for those who do not want to deal with Objects for primary types.
-     *
-     * @param newVal the new value to be assigned to reservationid
-     */
-    public void setReservationid(long newVal) {
-        setReservationid(new Long(newVal));
-    }
-
-    /**
-     * Determines if the reservationid has been modified.
-     *
-     * @return true if the field has been modified, false if the field has not been modified
-     */
-    public boolean isReservationidModified() {
-        return reservationid_is_modified; 
-    }
-
-    /**
-     * Determines if the reservationid has been initialized.
-     * <br>
-     * It is useful to determine if a field is null on purpose or just because it has not been initialized.
-     *
-     * @return true if the field has been initialized, false otherwise
-     */
-    public boolean isReservationidInitialized() {
-        return reservationid_is_initialized; 
+    public boolean isAuthorInitialized() {
+        return author_is_initialized; 
     }
 
     /**
@@ -714,32 +643,30 @@ public class VsGuestcheckedoutlistBean
      * @return true if the object has been modified, false if the object has not been modified
      */
     public boolean isModified() {
-        return room_is_modified || 
-		num_is_modified || 
-		guest_is_modified || 
+        return roomname_is_modified || 
+		invoicenum_is_modified || 
+		guestname_is_modified || 
 		arraivaldate_is_modified || 
 		departuredate_is_modified || 
-		total_is_modified || 
+		totalcharges_is_modified || 
 		balance_is_modified || 
 		company_is_modified || 
-		loginid_is_modified || 
-		reservationid_is_modified;
+		author_is_modified;
     }
 
     /**
      * Resets the object modification status to 'not modified'.
      */
     public void resetIsModified() {
-        room_is_modified = false;
-        num_is_modified = false;
-        guest_is_modified = false;
+        roomname_is_modified = false;
+        invoicenum_is_modified = false;
+        guestname_is_modified = false;
         arraivaldate_is_modified = false;
         departuredate_is_modified = false;
-        total_is_modified = false;
+        totalcharges_is_modified = false;
         balance_is_modified = false;
         company_is_modified = false;
-        loginid_is_modified = false;
-        reservationid_is_modified = false;
+        author_is_modified = false;
     }
 
     /**
@@ -748,16 +675,15 @@ public class VsGuestcheckedoutlistBean
      * @param bean the bean to copy into the current bean
      */
     public void copy(VsGuestcheckedoutlistBean bean) {
-        setRoom(bean.getRoom());
-        setNum(bean.getNum());
-        setGuest(bean.getGuest());
+        setRoomname(bean.getRoomname());
+        setInvoicenum(bean.getInvoicenum());
+        setGuestname(bean.getGuestname());
         setArraivaldate(bean.getArraivaldate());
         setDeparturedate(bean.getDeparturedate());
-        setTotal(bean.getTotal());
+        setTotalcharges(bean.getTotalcharges());
         setBalance(bean.getBalance());
         setCompany(bean.getCompany());
-        setLoginid(bean.getLoginid());
-        setReservationid(bean.getReservationid());
+        setAuthor(bean.getAuthor());
     }
 
     /**
@@ -767,16 +693,15 @@ public class VsGuestcheckedoutlistBean
      */
     public String toString() {
         return   "\n[vs_guestcheckedoutlist] "
-                 + "\n - vs_guestcheckedoutlist.Room = " + (room_is_initialized ? ("[" + (room == null ? null : room.toString()) + "]") : "not initialized") + ""
-                 + "\n - vs_guestcheckedoutlist.num = " + (num_is_initialized ? ("[" + (num == null ? null : num.toString()) + "]") : "not initialized") + ""
-                 + "\n - vs_guestcheckedoutlist.guest = " + (guest_is_initialized ? ("[" + (guest == null ? null : guest.toString()) + "]") : "not initialized") + ""
+                 + "\n - vs_guestcheckedoutlist.roomname = " + (roomname_is_initialized ? ("[" + (roomname == null ? null : roomname.toString()) + "]") : "not initialized") + ""
+                 + "\n - vs_guestcheckedoutlist.invoicenum = " + (invoicenum_is_initialized ? ("[" + (invoicenum == null ? null : invoicenum.toString()) + "]") : "not initialized") + ""
+                 + "\n - vs_guestcheckedoutlist.guestname = " + (guestname_is_initialized ? ("[" + (guestname == null ? null : guestname.toString()) + "]") : "not initialized") + ""
                  + "\n - vs_guestcheckedoutlist.arraivaldate = " + (arraivaldate_is_initialized ? ("[" + (arraivaldate == null ? null : arraivaldate.toString()) + "]") : "not initialized") + ""
                  + "\n - vs_guestcheckedoutlist.departuredate = " + (departuredate_is_initialized ? ("[" + (departuredate == null ? null : departuredate.toString()) + "]") : "not initialized") + ""
-                 + "\n - vs_guestcheckedoutlist.Total = " + (total_is_initialized ? ("[" + (total == null ? null : total.toString()) + "]") : "not initialized") + ""
-                 + "\n - vs_guestcheckedoutlist.Balance = " + (balance_is_initialized ? ("[" + (balance == null ? null : balance.toString()) + "]") : "not initialized") + ""
-                 + "\n - vs_guestcheckedoutlist.Company = " + (company_is_initialized ? ("[" + (company == null ? null : company.toString()) + "]") : "not initialized") + ""
-                 + "\n - vs_guestcheckedoutlist.loginid = " + (loginid_is_initialized ? ("[" + (loginid == null ? null : loginid.toString()) + "]") : "not initialized") + ""
-                 + "\n - vs_guestcheckedoutlist.reservationid = " + (reservationid_is_initialized ? ("[" + (reservationid == null ? null : reservationid.toString()) + "]") : "not initialized") + ""
+                 + "\n - vs_guestcheckedoutlist.totalcharges = " + (totalcharges_is_initialized ? ("[" + (totalcharges == null ? null : totalcharges.toString()) + "]") : "not initialized") + ""
+                 + "\n - vs_guestcheckedoutlist.balance = " + (balance_is_initialized ? ("[" + (balance == null ? null : balance.toString()) + "]") : "not initialized") + ""
+                 + "\n - vs_guestcheckedoutlist.company = " + (company_is_initialized ? ("[" + (company == null ? null : company.toString()) + "]") : "not initialized") + ""
+                 + "\n - vs_guestcheckedoutlist.author = " + (author_is_initialized ? ("[" + (author == null ? null : author.toString()) + "]") : "not initialized") + ""
             ;
     }
 

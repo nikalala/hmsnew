@@ -29,25 +29,25 @@ public class VsGuestcheckedoutlistManager
 {
 
     /**
-     * Column Room of type Types.VARCHAR mapped to String.
+     * Column roomname of type Types.VARCHAR mapped to String.
      */
-    public static final int ID_ROOM = 0;
-    public static final int TYPE_ROOM = Types.VARCHAR;
-    public static final String NAME_ROOM = "Room";
+    public static final int ID_ROOMNAME = 0;
+    public static final int TYPE_ROOMNAME = Types.VARCHAR;
+    public static final String NAME_ROOMNAME = "roomname";
 
     /**
-     * Column num of type Types.VARCHAR mapped to String.
+     * Column invoicenum of type Types.VARCHAR mapped to String.
      */
-    public static final int ID_NUM = 1;
-    public static final int TYPE_NUM = Types.VARCHAR;
-    public static final String NAME_NUM = "num";
+    public static final int ID_INVOICENUM = 1;
+    public static final int TYPE_INVOICENUM = Types.VARCHAR;
+    public static final String NAME_INVOICENUM = "invoicenum";
 
     /**
-     * Column guest of type Types.VARCHAR mapped to String.
+     * Column guestname of type Types.VARCHAR mapped to String.
      */
-    public static final int ID_GUEST = 2;
-    public static final int TYPE_GUEST = Types.VARCHAR;
-    public static final String NAME_GUEST = "guest";
+    public static final int ID_GUESTNAME = 2;
+    public static final int TYPE_GUESTNAME = Types.VARCHAR;
+    public static final String NAME_GUESTNAME = "guestname";
 
     /**
      * Column arraivaldate of type Types.TIMESTAMP mapped to java.sql.Timestamp.
@@ -64,39 +64,32 @@ public class VsGuestcheckedoutlistManager
     public static final String NAME_DEPARTUREDATE = "departuredate";
 
     /**
-     * Column Total of type Types.INTEGER mapped to Integer.
+     * Column totalcharges of type Types.DOUBLE mapped to Double.
      */
-    public static final int ID_TOTAL = 5;
-    public static final int TYPE_TOTAL = Types.INTEGER;
-    public static final String NAME_TOTAL = "Total";
+    public static final int ID_TOTALCHARGES = 5;
+    public static final int TYPE_TOTALCHARGES = Types.DOUBLE;
+    public static final String NAME_TOTALCHARGES = "totalcharges";
 
     /**
-     * Column Balance of type Types.INTEGER mapped to Integer.
+     * Column balance of type Types.DOUBLE mapped to Double.
      */
     public static final int ID_BALANCE = 6;
-    public static final int TYPE_BALANCE = Types.INTEGER;
-    public static final String NAME_BALANCE = "Balance";
+    public static final int TYPE_BALANCE = Types.DOUBLE;
+    public static final String NAME_BALANCE = "balance";
 
     /**
-     * Column Company of type Types.VARCHAR mapped to String.
+     * Column company of type Types.VARCHAR mapped to String.
      */
     public static final int ID_COMPANY = 7;
     public static final int TYPE_COMPANY = Types.VARCHAR;
-    public static final String NAME_COMPANY = "Company";
+    public static final String NAME_COMPANY = "company";
 
     /**
-     * Column loginid of type Types.VARCHAR mapped to String.
+     * Column author of type Types.VARCHAR mapped to String.
      */
-    public static final int ID_LOGINID = 8;
-    public static final int TYPE_LOGINID = Types.VARCHAR;
-    public static final String NAME_LOGINID = "loginid";
-
-    /**
-     * Column reservationid of type Types.BIGINT mapped to Long.
-     */
-    public static final int ID_RESERVATIONID = 9;
-    public static final int TYPE_RESERVATIONID = Types.BIGINT;
-    public static final String NAME_RESERVATIONID = "reservationid";
+    public static final int ID_AUTHOR = 8;
+    public static final int TYPE_AUTHOR = Types.VARCHAR;
+    public static final String NAME_AUTHOR = "author";
 
 
     private static final String TABLE_NAME = "vs_guestcheckedoutlist";
@@ -106,31 +99,29 @@ public class VsGuestcheckedoutlistManager
      */
     private static final String[] FIELD_NAMES = 
     {
-        "vs_guestcheckedoutlist.Room"
-        ,"vs_guestcheckedoutlist.num"
-        ,"vs_guestcheckedoutlist.guest"
+        "vs_guestcheckedoutlist.roomname"
+        ,"vs_guestcheckedoutlist.invoicenum"
+        ,"vs_guestcheckedoutlist.guestname"
         ,"vs_guestcheckedoutlist.arraivaldate"
         ,"vs_guestcheckedoutlist.departuredate"
-        ,"vs_guestcheckedoutlist.Total"
-        ,"vs_guestcheckedoutlist.Balance"
-        ,"vs_guestcheckedoutlist.Company"
-        ,"vs_guestcheckedoutlist.loginid"
-        ,"vs_guestcheckedoutlist.reservationid"
+        ,"vs_guestcheckedoutlist.totalcharges"
+        ,"vs_guestcheckedoutlist.balance"
+        ,"vs_guestcheckedoutlist.company"
+        ,"vs_guestcheckedoutlist.author"
     };
 
     /**
      * Field that contains the comma separated fields of the vs_guestcheckedoutlist table.
      */
-    private static final String ALL_FIELDS = "vs_guestcheckedoutlist.Room"
-                            + ",vs_guestcheckedoutlist.num"
-                            + ",vs_guestcheckedoutlist.guest"
+    private static final String ALL_FIELDS = "vs_guestcheckedoutlist.roomname"
+                            + ",vs_guestcheckedoutlist.invoicenum"
+                            + ",vs_guestcheckedoutlist.guestname"
                             + ",vs_guestcheckedoutlist.arraivaldate"
                             + ",vs_guestcheckedoutlist.departuredate"
-                            + ",vs_guestcheckedoutlist.Total"
-                            + ",vs_guestcheckedoutlist.Balance"
-                            + ",vs_guestcheckedoutlist.Company"
-                            + ",vs_guestcheckedoutlist.loginid"
-                            + ",vs_guestcheckedoutlist.reservationid";
+                            + ",vs_guestcheckedoutlist.totalcharges"
+                            + ",vs_guestcheckedoutlist.balance"
+                            + ",vs_guestcheckedoutlist.company"
+                            + ",vs_guestcheckedoutlist.author";
 
     private static VsGuestcheckedoutlistManager singleton = new VsGuestcheckedoutlistManager();
 
@@ -330,27 +321,27 @@ public class VsGuestcheckedoutlistManager
                 int _dirtyCount = 0;
                 _sql = new StringBuffer("INSERT into vs_guestcheckedoutlist (");
     
-                if (pObject.isRoomModified()) {
+                if (pObject.isRoomnameModified()) {
                     if (_dirtyCount>0) {
                         _sql.append(",");
                     }
-                    _sql.append("Room");
+                    _sql.append("roomname");
                     _dirtyCount++;
                 }
 
-                if (pObject.isNumModified()) {
+                if (pObject.isInvoicenumModified()) {
                     if (_dirtyCount>0) {
                         _sql.append(",");
                     }
-                    _sql.append("num");
+                    _sql.append("invoicenum");
                     _dirtyCount++;
                 }
 
-                if (pObject.isGuestModified()) {
+                if (pObject.isGuestnameModified()) {
                     if (_dirtyCount>0) {
                         _sql.append(",");
                     }
-                    _sql.append("guest");
+                    _sql.append("guestname");
                     _dirtyCount++;
                 }
 
@@ -370,11 +361,11 @@ public class VsGuestcheckedoutlistManager
                     _dirtyCount++;
                 }
 
-                if (pObject.isTotalModified()) {
+                if (pObject.isTotalchargesModified()) {
                     if (_dirtyCount>0) {
                         _sql.append(",");
                     }
-                    _sql.append("Total");
+                    _sql.append("totalcharges");
                     _dirtyCount++;
                 }
 
@@ -382,7 +373,7 @@ public class VsGuestcheckedoutlistManager
                     if (_dirtyCount>0) {
                         _sql.append(",");
                     }
-                    _sql.append("Balance");
+                    _sql.append("balance");
                     _dirtyCount++;
                 }
 
@@ -390,23 +381,15 @@ public class VsGuestcheckedoutlistManager
                     if (_dirtyCount>0) {
                         _sql.append(",");
                     }
-                    _sql.append("Company");
+                    _sql.append("company");
                     _dirtyCount++;
                 }
 
-                if (pObject.isLoginidModified()) {
+                if (pObject.isAuthorModified()) {
                     if (_dirtyCount>0) {
                         _sql.append(",");
                     }
-                    _sql.append("loginid");
-                    _dirtyCount++;
-                }
-
-                if (pObject.isReservationidModified()) {
-                    if (_dirtyCount>0) {
-                        _sql.append(",");
-                    }
-                    _sql.append("reservationid");
+                    _sql.append("author");
                     _dirtyCount++;
                 }
 
@@ -422,16 +405,16 @@ public class VsGuestcheckedoutlistManager
                 ps = c.prepareStatement(_sql.toString(), ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
                 _dirtyCount = 0;
 
-                if (pObject.isRoomModified()) {
-                    ps.setString(++_dirtyCount, pObject.getRoom());
+                if (pObject.isRoomnameModified()) {
+                    ps.setString(++_dirtyCount, pObject.getRoomname());
                 }
     
-                if (pObject.isNumModified()) {
-                    ps.setString(++_dirtyCount, pObject.getNum());
+                if (pObject.isInvoicenumModified()) {
+                    ps.setString(++_dirtyCount, pObject.getInvoicenum());
                 }
     
-                if (pObject.isGuestModified()) {
-                    ps.setString(++_dirtyCount, pObject.getGuest());
+                if (pObject.isGuestnameModified()) {
+                    ps.setString(++_dirtyCount, pObject.getGuestname());
                 }
     
                 if (pObject.isArraivaldateModified()) {
@@ -442,24 +425,20 @@ public class VsGuestcheckedoutlistManager
                     ps.setTimestamp(++_dirtyCount, pObject.getDeparturedate());
                 }
     
-                if (pObject.isTotalModified()) {
-                    Manager.setInteger(ps, ++_dirtyCount, pObject.getTotal());
+                if (pObject.isTotalchargesModified()) {
+                    Manager.setDouble(ps, ++_dirtyCount, pObject.getTotalcharges());
                 }
     
                 if (pObject.isBalanceModified()) {
-                    Manager.setInteger(ps, ++_dirtyCount, pObject.getBalance());
+                    Manager.setDouble(ps, ++_dirtyCount, pObject.getBalance());
                 }
     
                 if (pObject.isCompanyModified()) {
                     ps.setString(++_dirtyCount, pObject.getCompany());
                 }
     
-                if (pObject.isLoginidModified()) {
-                    ps.setString(++_dirtyCount, pObject.getLoginid());
-                }
-    
-                if (pObject.isReservationidModified()) {
-                    Manager.setLong(ps, ++_dirtyCount, pObject.getReservationid());
+                if (pObject.isAuthorModified()) {
+                    ps.setString(++_dirtyCount, pObject.getAuthor());
                 }
     
                 ps.executeUpdate();
@@ -474,31 +453,31 @@ public class VsGuestcheckedoutlistManager
                 _sql = new StringBuffer("UPDATE vs_guestcheckedoutlist SET ");
                 boolean useComma=false;
 
-                if (pObject.isRoomModified()) {
+                if (pObject.isRoomnameModified()) {
                     if (useComma) {
                         _sql.append(",");
                     } else {
                         useComma=true;
                     }
-                    _sql.append("Room").append("=?");
+                    _sql.append("roomname").append("=?");
                 }
 
-                if (pObject.isNumModified()) {
+                if (pObject.isInvoicenumModified()) {
                     if (useComma) {
                         _sql.append(",");
                     } else {
                         useComma=true;
                     }
-                    _sql.append("num").append("=?");
+                    _sql.append("invoicenum").append("=?");
                 }
 
-                if (pObject.isGuestModified()) {
+                if (pObject.isGuestnameModified()) {
                     if (useComma) {
                         _sql.append(",");
                     } else {
                         useComma=true;
                     }
-                    _sql.append("guest").append("=?");
+                    _sql.append("guestname").append("=?");
                 }
 
                 if (pObject.isArraivaldateModified()) {
@@ -519,13 +498,13 @@ public class VsGuestcheckedoutlistManager
                     _sql.append("departuredate").append("=?");
                 }
 
-                if (pObject.isTotalModified()) {
+                if (pObject.isTotalchargesModified()) {
                     if (useComma) {
                         _sql.append(",");
                     } else {
                         useComma=true;
                     }
-                    _sql.append("Total").append("=?");
+                    _sql.append("totalcharges").append("=?");
                 }
 
                 if (pObject.isBalanceModified()) {
@@ -534,7 +513,7 @@ public class VsGuestcheckedoutlistManager
                     } else {
                         useComma=true;
                     }
-                    _sql.append("Balance").append("=?");
+                    _sql.append("balance").append("=?");
                 }
 
                 if (pObject.isCompanyModified()) {
@@ -543,40 +522,31 @@ public class VsGuestcheckedoutlistManager
                     } else {
                         useComma=true;
                     }
-                    _sql.append("Company").append("=?");
+                    _sql.append("company").append("=?");
                 }
 
-                if (pObject.isLoginidModified()) {
+                if (pObject.isAuthorModified()) {
                     if (useComma) {
                         _sql.append(",");
                     } else {
                         useComma=true;
                     }
-                    _sql.append("loginid").append("=?");
-                }
-
-                if (pObject.isReservationidModified()) {
-                    if (useComma) {
-                        _sql.append(",");
-                    } else {
-                        useComma=true;
-                    }
-                    _sql.append("reservationid").append("=?");
+                    _sql.append("author").append("=?");
                 }
                 _sql.append("");
                 ps = c.prepareStatement(_sql.toString(),ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
                 int _dirtyCount = 0;
 
-                if (pObject.isRoomModified()) {
-                      ps.setString(++_dirtyCount, pObject.getRoom());
+                if (pObject.isRoomnameModified()) {
+                      ps.setString(++_dirtyCount, pObject.getRoomname());
                 }
 
-                if (pObject.isNumModified()) {
-                      ps.setString(++_dirtyCount, pObject.getNum());
+                if (pObject.isInvoicenumModified()) {
+                      ps.setString(++_dirtyCount, pObject.getInvoicenum());
                 }
 
-                if (pObject.isGuestModified()) {
-                      ps.setString(++_dirtyCount, pObject.getGuest());
+                if (pObject.isGuestnameModified()) {
+                      ps.setString(++_dirtyCount, pObject.getGuestname());
                 }
 
                 if (pObject.isArraivaldateModified()) {
@@ -587,24 +557,20 @@ public class VsGuestcheckedoutlistManager
                       ps.setTimestamp(++_dirtyCount, pObject.getDeparturedate());
                 }
 
-                if (pObject.isTotalModified()) {
-                      Manager.setInteger(ps, ++_dirtyCount, pObject.getTotal());
+                if (pObject.isTotalchargesModified()) {
+                      Manager.setDouble(ps, ++_dirtyCount, pObject.getTotalcharges());
                 }
 
                 if (pObject.isBalanceModified()) {
-                      Manager.setInteger(ps, ++_dirtyCount, pObject.getBalance());
+                      Manager.setDouble(ps, ++_dirtyCount, pObject.getBalance());
                 }
 
                 if (pObject.isCompanyModified()) {
                       ps.setString(++_dirtyCount, pObject.getCompany());
                 }
 
-                if (pObject.isLoginidModified()) {
-                      ps.setString(++_dirtyCount, pObject.getLoginid());
-                }
-
-                if (pObject.isReservationidModified()) {
-                      Manager.setLong(ps, ++_dirtyCount, pObject.getReservationid());
+                if (pObject.isAuthorModified()) {
+                      ps.setString(++_dirtyCount, pObject.getAuthor());
                 }
     
                 if (_dirtyCount == 0) {
@@ -682,19 +648,19 @@ public class VsGuestcheckedoutlistManager
         {
             int _dirtyCount = 0;
     
-             if (pObject.isRoomModified()) {
+             if (pObject.isRoomnameModified()) {
                  _dirtyCount ++; 
-                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("Room= ?");
+                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("roomname= ?");
              }
     
-             if (pObject.isNumModified()) {
+             if (pObject.isInvoicenumModified()) {
                  _dirtyCount ++; 
-                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("num= ?");
+                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("invoicenum= ?");
              }
     
-             if (pObject.isGuestModified()) {
+             if (pObject.isGuestnameModified()) {
                  _dirtyCount ++; 
-                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("guest= ?");
+                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("guestname= ?");
              }
     
              if (pObject.isArraivaldateModified()) {
@@ -707,29 +673,24 @@ public class VsGuestcheckedoutlistManager
                  _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("departuredate= ?");
              }
     
-             if (pObject.isTotalModified()) {
+             if (pObject.isTotalchargesModified()) {
                  _dirtyCount ++; 
-                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("Total= ?");
+                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("totalcharges= ?");
              }
     
              if (pObject.isBalanceModified()) {
                  _dirtyCount ++; 
-                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("Balance= ?");
+                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("balance= ?");
              }
     
              if (pObject.isCompanyModified()) {
                  _dirtyCount ++; 
-                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("Company= ?");
+                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("company= ?");
              }
     
-             if (pObject.isLoginidModified()) {
+             if (pObject.isAuthorModified()) {
                  _dirtyCount ++; 
-                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("loginid= ?");
-             }
-    
-             if (pObject.isReservationidModified()) {
-                 _dirtyCount ++; 
-                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("reservationid= ?");
+                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("author= ?");
              }
     
              if (_dirtyCount == 0) {
@@ -740,16 +701,16 @@ public class VsGuestcheckedoutlistManager
              ps = c.prepareStatement(_sql.toString(),ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
              _dirtyCount = 0;
     
-             if (pObject.isRoomModified()) {
-                 ps.setString(++_dirtyCount, pObject.getRoom());
+             if (pObject.isRoomnameModified()) {
+                 ps.setString(++_dirtyCount, pObject.getRoomname());
              }
     
-             if (pObject.isNumModified()) {
-                 ps.setString(++_dirtyCount, pObject.getNum());
+             if (pObject.isInvoicenumModified()) {
+                 ps.setString(++_dirtyCount, pObject.getInvoicenum());
              }
     
-             if (pObject.isGuestModified()) {
-                 ps.setString(++_dirtyCount, pObject.getGuest());
+             if (pObject.isGuestnameModified()) {
+                 ps.setString(++_dirtyCount, pObject.getGuestname());
              }
     
              if (pObject.isArraivaldateModified()) {
@@ -760,24 +721,20 @@ public class VsGuestcheckedoutlistManager
                  ps.setTimestamp(++_dirtyCount, pObject.getDeparturedate());
              }
     
-             if (pObject.isTotalModified()) {
-                 Manager.setInteger(ps, ++_dirtyCount, pObject.getTotal());
+             if (pObject.isTotalchargesModified()) {
+                 Manager.setDouble(ps, ++_dirtyCount, pObject.getTotalcharges());
              }
     
              if (pObject.isBalanceModified()) {
-                 Manager.setInteger(ps, ++_dirtyCount, pObject.getBalance());
+                 Manager.setDouble(ps, ++_dirtyCount, pObject.getBalance());
              }
     
              if (pObject.isCompanyModified()) {
                  ps.setString(++_dirtyCount, pObject.getCompany());
              }
     
-             if (pObject.isLoginidModified()) {
-                 ps.setString(++_dirtyCount, pObject.getLoginid());
-             }
-    
-             if (pObject.isReservationidModified()) {
-                 Manager.setLong(ps, ++_dirtyCount, pObject.getReservationid());
+             if (pObject.isAuthorModified()) {
+                 ps.setString(++_dirtyCount, pObject.getAuthor());
              }
     
              ps.executeQuery();
@@ -806,24 +763,24 @@ public class VsGuestcheckedoutlistManager
         {
             sql = new StringBuffer("DELETE FROM vs_guestcheckedoutlist WHERE ");
             int _dirtyAnd = 0;
-            if (pObject.isRoomInitialized()) {
+            if (pObject.isRoomnameInitialized()) {
                 if (_dirtyAnd > 0)
                     sql.append(" AND ");
-                sql.append("Room").append("=?");
+                sql.append("roomname").append("=?");
                 _dirtyAnd ++;
             }
     
-            if (pObject.isNumInitialized()) {
+            if (pObject.isInvoicenumInitialized()) {
                 if (_dirtyAnd > 0)
                     sql.append(" AND ");
-                sql.append("num").append("=?");
+                sql.append("invoicenum").append("=?");
                 _dirtyAnd ++;
             }
     
-            if (pObject.isGuestInitialized()) {
+            if (pObject.isGuestnameInitialized()) {
                 if (_dirtyAnd > 0)
                     sql.append(" AND ");
-                sql.append("guest").append("=?");
+                sql.append("guestname").append("=?");
                 _dirtyAnd ++;
             }
     
@@ -841,38 +798,31 @@ public class VsGuestcheckedoutlistManager
                 _dirtyAnd ++;
             }
     
-            if (pObject.isTotalInitialized()) {
+            if (pObject.isTotalchargesInitialized()) {
                 if (_dirtyAnd > 0)
                     sql.append(" AND ");
-                sql.append("Total").append("=?");
+                sql.append("totalcharges").append("=?");
                 _dirtyAnd ++;
             }
     
             if (pObject.isBalanceInitialized()) {
                 if (_dirtyAnd > 0)
                     sql.append(" AND ");
-                sql.append("Balance").append("=?");
+                sql.append("balance").append("=?");
                 _dirtyAnd ++;
             }
     
             if (pObject.isCompanyInitialized()) {
                 if (_dirtyAnd > 0)
                     sql.append(" AND ");
-                sql.append("Company").append("=?");
+                sql.append("company").append("=?");
                 _dirtyAnd ++;
             }
     
-            if (pObject.isLoginidInitialized()) {
+            if (pObject.isAuthorInitialized()) {
                 if (_dirtyAnd > 0)
                     sql.append(" AND ");
-                sql.append("loginid").append("=?");
-                _dirtyAnd ++;
-            }
-    
-            if (pObject.isReservationidInitialized()) {
-                if (_dirtyAnd > 0)
-                    sql.append(" AND ");
-                sql.append("reservationid").append("=?");
+                sql.append("author").append("=?");
                 _dirtyAnd ++;
             }
     
@@ -880,16 +830,16 @@ public class VsGuestcheckedoutlistManager
             ps = c.prepareStatement(sql.toString(),ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             int _dirtyCount = 0;
     
-            if (pObject.isRoomInitialized()) {
-                ps.setString(++_dirtyCount, pObject.getRoom());
+            if (pObject.isRoomnameInitialized()) {
+                ps.setString(++_dirtyCount, pObject.getRoomname());
             }
     
-            if (pObject.isNumInitialized()) {
-                ps.setString(++_dirtyCount, pObject.getNum());
+            if (pObject.isInvoicenumInitialized()) {
+                ps.setString(++_dirtyCount, pObject.getInvoicenum());
             }
     
-            if (pObject.isGuestInitialized()) {
-                ps.setString(++_dirtyCount, pObject.getGuest());
+            if (pObject.isGuestnameInitialized()) {
+                ps.setString(++_dirtyCount, pObject.getGuestname());
             }
     
             if (pObject.isArraivaldateInitialized()) {
@@ -900,24 +850,20 @@ public class VsGuestcheckedoutlistManager
                 ps.setTimestamp(++_dirtyCount, pObject.getDeparturedate());
             }
     
-            if (pObject.isTotalInitialized()) {
-                Manager.setInteger(ps, ++_dirtyCount, pObject.getTotal());
+            if (pObject.isTotalchargesInitialized()) {
+                Manager.setDouble(ps, ++_dirtyCount, pObject.getTotalcharges());
             }
     
             if (pObject.isBalanceInitialized()) {
-                Manager.setInteger(ps, ++_dirtyCount, pObject.getBalance());
+                Manager.setDouble(ps, ++_dirtyCount, pObject.getBalance());
             }
     
             if (pObject.isCompanyInitialized()) {
                 ps.setString(++_dirtyCount, pObject.getCompany());
             }
     
-            if (pObject.isLoginidInitialized()) {
-                ps.setString(++_dirtyCount, pObject.getLoginid());
-            }
-    
-            if (pObject.isReservationidInitialized()) {
-                Manager.setLong(ps, ++_dirtyCount, pObject.getReservationid());
+            if (pObject.isAuthorInitialized()) {
+                ps.setString(++_dirtyCount, pObject.getAuthor());
             }
     
             int _rows = ps.executeUpdate();
@@ -1030,19 +976,19 @@ public class VsGuestcheckedoutlistManager
                 _sqlWhere = new StringBuffer("");
                 int _dirtyCount = 0;
     
-                if (pObject.isRoomModified()) {
+                if (pObject.isRoomnameModified()) {
                     _dirtyCount++; 
-                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("Room= ?");
+                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("roomname= ?");
                 }
     
-                if (pObject.isNumModified()) {
+                if (pObject.isInvoicenumModified()) {
                     _dirtyCount++; 
-                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("num= ?");
+                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("invoicenum= ?");
                 }
     
-                if (pObject.isGuestModified()) {
+                if (pObject.isGuestnameModified()) {
                     _dirtyCount++; 
-                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("guest= ?");
+                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("guestname= ?");
                 }
     
                 if (pObject.isArraivaldateModified()) {
@@ -1055,29 +1001,24 @@ public class VsGuestcheckedoutlistManager
                     _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("departuredate= ?");
                 }
     
-                if (pObject.isTotalModified()) {
+                if (pObject.isTotalchargesModified()) {
                     _dirtyCount++; 
-                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("Total= ?");
+                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("totalcharges= ?");
                 }
     
                 if (pObject.isBalanceModified()) {
                     _dirtyCount++; 
-                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("Balance= ?");
+                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("balance= ?");
                 }
     
                 if (pObject.isCompanyModified()) {
                     _dirtyCount++; 
-                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("Company= ?");
+                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("company= ?");
                 }
     
-                if (pObject.isLoginidModified()) {
+                if (pObject.isAuthorModified()) {
                     _dirtyCount++; 
-                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("loginid= ?");
-                }
-    
-                if (pObject.isReservationidModified()) {
-                    _dirtyCount++; 
-                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("reservationid= ?");
+                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("author= ?");
                 }
     
                 if (_dirtyCount == 0)
@@ -1089,16 +1030,16 @@ public class VsGuestcheckedoutlistManager
     
                 _dirtyCount = 0;
     
-                if (pObject.isRoomModified()) {
-                    ps.setString(++_dirtyCount, pObject.getRoom());
+                if (pObject.isRoomnameModified()) {
+                    ps.setString(++_dirtyCount, pObject.getRoomname());
                 }
     
-                if (pObject.isNumModified()) {
-                    ps.setString(++_dirtyCount, pObject.getNum());
+                if (pObject.isInvoicenumModified()) {
+                    ps.setString(++_dirtyCount, pObject.getInvoicenum());
                 }
     
-                if (pObject.isGuestModified()) {
-                    ps.setString(++_dirtyCount, pObject.getGuest());
+                if (pObject.isGuestnameModified()) {
+                    ps.setString(++_dirtyCount, pObject.getGuestname());
                 }
     
                 if (pObject.isArraivaldateModified()) {
@@ -1109,24 +1050,20 @@ public class VsGuestcheckedoutlistManager
                     ps.setTimestamp(++_dirtyCount, pObject.getDeparturedate());
                 }
     
-                if (pObject.isTotalModified()) {
-                    Manager.setInteger(ps, ++_dirtyCount, pObject.getTotal());
+                if (pObject.isTotalchargesModified()) {
+                    Manager.setDouble(ps, ++_dirtyCount, pObject.getTotalcharges());
                 }
     
                 if (pObject.isBalanceModified()) {
-                    Manager.setInteger(ps, ++_dirtyCount, pObject.getBalance());
+                    Manager.setDouble(ps, ++_dirtyCount, pObject.getBalance());
                 }
     
                 if (pObject.isCompanyModified()) {
                     ps.setString(++_dirtyCount, pObject.getCompany());
                 }
     
-                if (pObject.isLoginidModified()) {
-                    ps.setString(++_dirtyCount, pObject.getLoginid());
-                }
-    
-                if (pObject.isReservationidModified()) {
-                    Manager.setLong(ps, ++_dirtyCount, pObject.getReservationid());
+                if (pObject.isAuthorModified()) {
+                    ps.setString(++_dirtyCount, pObject.getAuthor());
                 }
     
                 return countByPreparedStatement(ps);
@@ -1153,16 +1090,15 @@ public class VsGuestcheckedoutlistManager
     public VsGuestcheckedoutlistBean decodeRow(ResultSet rs) throws SQLException
     {
         VsGuestcheckedoutlistBean pObject = createVsGuestcheckedoutlistBean();
-        pObject.setRoom(rs.getString(1));
-        pObject.setNum(rs.getString(2));
-        pObject.setGuest(rs.getString(3));
+        pObject.setRoomname(rs.getString(1));
+        pObject.setInvoicenum(rs.getString(2));
+        pObject.setGuestname(rs.getString(3));
         pObject.setArraivaldate(rs.getTimestamp(4));
         pObject.setDeparturedate(rs.getTimestamp(5));
-        pObject.setTotal(Manager.getInteger(rs, 6));
-        pObject.setBalance(Manager.getInteger(rs, 7));
+        pObject.setTotalcharges(Manager.getDouble(rs, 6));
+        pObject.setBalance(Manager.getDouble(rs, 7));
         pObject.setCompany(rs.getString(8));
-        pObject.setLoginid(rs.getString(9));
-        pObject.setReservationid(Manager.getLong(rs, 10));
+        pObject.setAuthor(rs.getString(9));
 
         pObject.isNew(false);
         pObject.resetIsModified();
@@ -1185,17 +1121,17 @@ public class VsGuestcheckedoutlistManager
         for(int i = 0; i < fieldList.length; i++)
         {
             switch(fieldList[i]) {
-                case ID_ROOM:
+                case ID_ROOMNAME:
                     ++pos;
-                    pObject.setRoom(rs.getString(pos));
+                    pObject.setRoomname(rs.getString(pos));
                     break;
-                case ID_NUM:
+                case ID_INVOICENUM:
                     ++pos;
-                    pObject.setNum(rs.getString(pos));
+                    pObject.setInvoicenum(rs.getString(pos));
                     break;
-                case ID_GUEST:
+                case ID_GUESTNAME:
                     ++pos;
-                    pObject.setGuest(rs.getString(pos));
+                    pObject.setGuestname(rs.getString(pos));
                     break;
                 case ID_ARRAIVALDATE:
                     ++pos;
@@ -1205,25 +1141,21 @@ public class VsGuestcheckedoutlistManager
                     ++pos;
                     pObject.setDeparturedate(rs.getTimestamp(pos));
                     break;
-                case ID_TOTAL:
+                case ID_TOTALCHARGES:
                     ++pos;
-                    pObject.setTotal(Manager.getInteger(rs, pos));
+                    pObject.setTotalcharges(Manager.getDouble(rs, pos));
                     break;
                 case ID_BALANCE:
                     ++pos;
-                    pObject.setBalance(Manager.getInteger(rs, pos));
+                    pObject.setBalance(Manager.getDouble(rs, pos));
                     break;
                 case ID_COMPANY:
                     ++pos;
                     pObject.setCompany(rs.getString(pos));
                     break;
-                case ID_LOGINID:
+                case ID_AUTHOR:
                     ++pos;
-                    pObject.setLoginid(rs.getString(pos));
-                    break;
-                case ID_RESERVATIONID:
-                    ++pos;
-                    pObject.setReservationid(Manager.getLong(rs, pos));
+                    pObject.setAuthor(rs.getString(pos));
                     break;
             }
         }

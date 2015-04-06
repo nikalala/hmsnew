@@ -85,6 +85,11 @@
     }
 </style>
 <script>
+
+    $(document).ready(function(){
+        $('.gridfooter').remove();
+    });
+
     var totalDays;
     lastChosenD = "";
     lastChosenS = "";

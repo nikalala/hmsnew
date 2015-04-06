@@ -41,22 +41,21 @@ public class VsGuestcheckedoutlistComparator implements Comparator
      * <br>
      * Example:
      * <br>
-     * <code>Arrays.sort(pArray, new VsGuestcheckedoutlistComparator(VsGuestcheckedoutlistManager.ROOM, bReverse));<code>
+     * <code>Arrays.sort(pArray, new VsGuestcheckedoutlistComparator(VsGuestcheckedoutlistManager.ROOMNAME, bReverse));<code>
      *
      * @param iType the field from which you want to sort
      * <br>
      * Possible values are:
      * <ul>
-     *   <li>VsGuestcheckedoutlistManager.ID_ROOM
-     *   <li>VsGuestcheckedoutlistManager.ID_NUM
-     *   <li>VsGuestcheckedoutlistManager.ID_GUEST
+     *   <li>VsGuestcheckedoutlistManager.ID_ROOMNAME
+     *   <li>VsGuestcheckedoutlistManager.ID_INVOICENUM
+     *   <li>VsGuestcheckedoutlistManager.ID_GUESTNAME
      *   <li>VsGuestcheckedoutlistManager.ID_ARRAIVALDATE
      *   <li>VsGuestcheckedoutlistManager.ID_DEPARTUREDATE
-     *   <li>VsGuestcheckedoutlistManager.ID_TOTAL
+     *   <li>VsGuestcheckedoutlistManager.ID_TOTALCHARGES
      *   <li>VsGuestcheckedoutlistManager.ID_BALANCE
      *   <li>VsGuestcheckedoutlistManager.ID_COMPANY
-     *   <li>VsGuestcheckedoutlistManager.ID_LOGINID
-     *   <li>VsGuestcheckedoutlistManager.ID_RESERVATIONID
+     *   <li>VsGuestcheckedoutlistManager.ID_AUTHOR
      * </ul>
      */
     public VsGuestcheckedoutlistComparator(int iType)
@@ -69,22 +68,21 @@ public class VsGuestcheckedoutlistComparator implements Comparator
      * <br>
      * Example:
      * <br>
-     * <code>Arrays.sort(pArray, new VsGuestcheckedoutlistComparator(VsGuestcheckedoutlistManager.ROOM, bReverse));<code>
+     * <code>Arrays.sort(pArray, new VsGuestcheckedoutlistComparator(VsGuestcheckedoutlistManager.ROOMNAME, bReverse));<code>
      *
      * @param iType the field from which you want to sort.
      * <br>
      * Possible values are:
      * <ul>
-     *   <li>VsGuestcheckedoutlistManager.ID_ROOM
-     *   <li>VsGuestcheckedoutlistManager.ID_NUM
-     *   <li>VsGuestcheckedoutlistManager.ID_GUEST
+     *   <li>VsGuestcheckedoutlistManager.ID_ROOMNAME
+     *   <li>VsGuestcheckedoutlistManager.ID_INVOICENUM
+     *   <li>VsGuestcheckedoutlistManager.ID_GUESTNAME
      *   <li>VsGuestcheckedoutlistManager.ID_ARRAIVALDATE
      *   <li>VsGuestcheckedoutlistManager.ID_DEPARTUREDATE
-     *   <li>VsGuestcheckedoutlistManager.ID_TOTAL
+     *   <li>VsGuestcheckedoutlistManager.ID_TOTALCHARGES
      *   <li>VsGuestcheckedoutlistManager.ID_BALANCE
      *   <li>VsGuestcheckedoutlistManager.ID_COMPANY
-     *   <li>VsGuestcheckedoutlistManager.ID_LOGINID
-     *   <li>VsGuestcheckedoutlistManager.ID_RESERVATIONID
+     *   <li>VsGuestcheckedoutlistManager.ID_AUTHOR
      * </ul>
      *
      * @param bReverse set this value to true, if you want to reverse the sorting results
@@ -105,37 +103,37 @@ public class VsGuestcheckedoutlistComparator implements Comparator
         int iReturn = 0;
         switch(iType)
         {
-            case VsGuestcheckedoutlistManager.ID_ROOM:
-                if (b1.getRoom() == null && b2.getRoom() != null) {
+            case VsGuestcheckedoutlistManager.ID_ROOMNAME:
+                if (b1.getRoomname() == null && b2.getRoomname() != null) {
                     iReturn = -1;
-                } else if (b1.getRoom() == null && b2.getRoom() == null) {
+                } else if (b1.getRoomname() == null && b2.getRoomname() == null) {
                     iReturn = 0;
-                } else if (b1.getRoom() != null && b2.getRoom() == null) {
+                } else if (b1.getRoomname() != null && b2.getRoomname() == null) {
                     iReturn = 1;
                 } else { 
-                    iReturn = b1.getRoom().compareTo(b2.getRoom());
+                    iReturn = b1.getRoomname().compareTo(b2.getRoomname());
                 }
                 break;
-            case VsGuestcheckedoutlistManager.ID_NUM:
-                if (b1.getNum() == null && b2.getNum() != null) {
+            case VsGuestcheckedoutlistManager.ID_INVOICENUM:
+                if (b1.getInvoicenum() == null && b2.getInvoicenum() != null) {
                     iReturn = -1;
-                } else if (b1.getNum() == null && b2.getNum() == null) {
+                } else if (b1.getInvoicenum() == null && b2.getInvoicenum() == null) {
                     iReturn = 0;
-                } else if (b1.getNum() != null && b2.getNum() == null) {
+                } else if (b1.getInvoicenum() != null && b2.getInvoicenum() == null) {
                     iReturn = 1;
                 } else { 
-                    iReturn = b1.getNum().compareTo(b2.getNum());
+                    iReturn = b1.getInvoicenum().compareTo(b2.getInvoicenum());
                 }
                 break;
-            case VsGuestcheckedoutlistManager.ID_GUEST:
-                if (b1.getGuest() == null && b2.getGuest() != null) {
+            case VsGuestcheckedoutlistManager.ID_GUESTNAME:
+                if (b1.getGuestname() == null && b2.getGuestname() != null) {
                     iReturn = -1;
-                } else if (b1.getGuest() == null && b2.getGuest() == null) {
+                } else if (b1.getGuestname() == null && b2.getGuestname() == null) {
                     iReturn = 0;
-                } else if (b1.getGuest() != null && b2.getGuest() == null) {
+                } else if (b1.getGuestname() != null && b2.getGuestname() == null) {
                     iReturn = 1;
                 } else { 
-                    iReturn = b1.getGuest().compareTo(b2.getGuest());
+                    iReturn = b1.getGuestname().compareTo(b2.getGuestname());
                 }
                 break;
             case VsGuestcheckedoutlistManager.ID_ARRAIVALDATE:
@@ -160,15 +158,15 @@ public class VsGuestcheckedoutlistComparator implements Comparator
                     iReturn = b1.getDeparturedate().compareTo(b2.getDeparturedate());
                 }
                 break;
-            case VsGuestcheckedoutlistManager.ID_TOTAL:
-                if (b1.getTotal() == null && b2.getTotal() != null) {
+            case VsGuestcheckedoutlistManager.ID_TOTALCHARGES:
+                if (b1.getTotalcharges() == null && b2.getTotalcharges() != null) {
                     iReturn = -1;
-                } else if (b1.getTotal() == null && b2.getTotal() == null) {
+                } else if (b1.getTotalcharges() == null && b2.getTotalcharges() == null) {
                     iReturn = 0;
-                } else if (b1.getTotal() != null && b2.getTotal() == null) {
+                } else if (b1.getTotalcharges() != null && b2.getTotalcharges() == null) {
                     iReturn = 1;
                 } else { 
-                    iReturn = b1.getTotal().compareTo(b2.getTotal());
+                    iReturn = b1.getTotalcharges().compareTo(b2.getTotalcharges());
                 }
                 break;
             case VsGuestcheckedoutlistManager.ID_BALANCE:
@@ -193,26 +191,15 @@ public class VsGuestcheckedoutlistComparator implements Comparator
                     iReturn = b1.getCompany().compareTo(b2.getCompany());
                 }
                 break;
-            case VsGuestcheckedoutlistManager.ID_LOGINID:
-                if (b1.getLoginid() == null && b2.getLoginid() != null) {
+            case VsGuestcheckedoutlistManager.ID_AUTHOR:
+                if (b1.getAuthor() == null && b2.getAuthor() != null) {
                     iReturn = -1;
-                } else if (b1.getLoginid() == null && b2.getLoginid() == null) {
+                } else if (b1.getAuthor() == null && b2.getAuthor() == null) {
                     iReturn = 0;
-                } else if (b1.getLoginid() != null && b2.getLoginid() == null) {
+                } else if (b1.getAuthor() != null && b2.getAuthor() == null) {
                     iReturn = 1;
                 } else { 
-                    iReturn = b1.getLoginid().compareTo(b2.getLoginid());
-                }
-                break;
-            case VsGuestcheckedoutlistManager.ID_RESERVATIONID:
-                if (b1.getReservationid() == null && b2.getReservationid() != null) {
-                    iReturn = -1;
-                } else if (b1.getReservationid() == null && b2.getReservationid() == null) {
-                    iReturn = 0;
-                } else if (b1.getReservationid() != null && b2.getReservationid() == null) {
-                    iReturn = 1;
-                } else { 
-                    iReturn = b1.getReservationid().compareTo(b2.getReservationid());
+                    iReturn = b1.getAuthor().compareTo(b2.getAuthor());
                 }
                 break;
             default: 

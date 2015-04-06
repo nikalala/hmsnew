@@ -37,7 +37,8 @@
     $(document).ready(function () {
 
         loadDefaults();
-        drawTwoDimFooterForGuestDbList();
+        drawFooter();
+        secondFooter();
         $('#grid-table .dropdown, #changestatus, #changekeeper, #assigntohk, #viewby').selectpicker();
         $("#changestatus,#assigntohk").next().css("margin-top", "8px");
         $("#viewby").next().css("margin-top", "1px");
@@ -63,11 +64,12 @@
         $("#filter-form input[type='text']").css("width", "100%", "!important");
     }
 
-    function drawTwoDimFooterForGuestDbList() {
-        $("#list_hsgrid").closest('.ui-jqgrid-bdiv').height($("#list_hsgrid").closest(".ui-jqgrid-bdiv").height() - 100);
+    function secondFooter() {
+        var height = $(".gridfooter").css("height");
+        var width = $(".gridfooter").css("width");
+        $(".ui-jqgrid-bdiv").height($(".ui-jqgrid-bdiv").height() - 100);
         var html =
-                '<div class="panel-footer" style="height: 50px !important; display:table; width: 100%; padding-bottom: 1px; background-color: #FFF;">' +
-                '<div>' +
+                '<div class="gridfooter footer2" style="border-bottom: 0; "><div>' +
                 '<span style="margin: 15px 10px 0 10px; float: left;">მონიშნულის: </span>' +
                 '<div class="footercont" style="border-right: 0;">' +
                 '<span style="margin: 15px 10px 0 10px; float: left;">სტატუსის შეცვლა: </span>' +
@@ -91,25 +93,11 @@
                 '<button type="button" class="btn btn-primary" onclick="saveMultKeeper()" id="btnAssignToHK" style="font-weight: bold; margin: 9px 10px 0 5px;">' +
                 'მიბმა</button>' +
                 '<button type="button" class="btn btn-danger" id="btnRemoveStatus" onclick="removeAllKeeper()" style="font-weight: bold; float: right; margin: 9px 10px 0 0;">X</button>'+
-                '</div>' +
-
-                '</div></div>' +
-                '<div class="panel-footer" style="height: 50px !important; display:table; width: 100%; padding-bottom: 1px; background-color: #FFF;">' +
-                '<div>' +
-                '<span style="margin: 15px 10px 0 10px; float: left;">ჩანაწერების რაოდენობა გვერდზე</span>' +
-                '<select id="limitselectbox" style="float: left; margin: 15px 10px 0 10px;">' +
-                '<option value="5">5</option>' +
-                '<option value="15">15</option>' +
-                '<option value="25">25</option>' +
-                '<option value="50">50</option>' +
-                '</select>' +
-                '<button type="button" class="btn btn-default" id="btnNext" style="font-weight: bold; float: right; margin: 9px 10px 0 0;">' +
-                'შემდეგი</button>' +
-                '<button type="button" class="btn btn-danger" id="btnPrev" style="font-weight: bold; float: right; margin: 9px 10px 0 0;">' +
-                'წინა</button>' +
                 '</div></div>';
-        $("#list_hsgrid").closest(".ui-jqgrid-view").find(".panel-footer").remove();
-        $("#list_hsgrid").closest(".ui-jqgrid-view").append(html);
+        $(".footer2").remove();
+        $(html).insertBefore(".gridfooter");
+        $(".footer2").css("bottom",height);
+        $(".footer2").css("width",width,"!important");
     }
 
     function updateselectedhs(id, _this) {

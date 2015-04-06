@@ -36,11 +36,11 @@ public class VsNoshowManager
     public static final String NAME_RESERVATIONID = "reservationid";
 
     /**
-     * Column guest of type Types.VARCHAR mapped to String.
+     * Column guestname of type Types.VARCHAR mapped to String.
      */
-    public static final int ID_GUEST = 1;
-    public static final int TYPE_GUEST = Types.VARCHAR;
-    public static final String NAME_GUEST = "guest";
+    public static final int ID_GUESTNAME = 1;
+    public static final int TYPE_GUESTNAME = Types.VARCHAR;
+    public static final String NAME_GUESTNAME = "guestname";
 
     /**
      * Column arraivaldate of type Types.TIMESTAMP mapped to java.sql.Timestamp.
@@ -57,31 +57,31 @@ public class VsNoshowManager
     public static final String NAME_DEPARTUREDATE = "departuredate";
 
     /**
-     * Column num of type Types.VARCHAR mapped to String.
+     * Column folioid of type Types.BIGINT mapped to Long.
      */
-    public static final int ID_NUM = 4;
-    public static final int TYPE_NUM = Types.VARCHAR;
-    public static final String NAME_NUM = "num";
+    public static final int ID_FOLIOID = 4;
+    public static final int TYPE_FOLIOID = Types.BIGINT;
+    public static final String NAME_FOLIOID = "folioid";
 
     /**
-     * Column charges of type Types.VARCHAR mapped to String.
+     * Column charges of type Types.DOUBLE mapped to Double.
      */
     public static final int ID_CHARGES = 5;
-    public static final int TYPE_CHARGES = Types.VARCHAR;
+    public static final int TYPE_CHARGES = Types.DOUBLE;
     public static final String NAME_CHARGES = "charges";
 
     /**
-     * Column paid of type Types.VARCHAR mapped to String.
+     * Column paid of type Types.DOUBLE mapped to Double.
      */
     public static final int ID_PAID = 6;
-    public static final int TYPE_PAID = Types.VARCHAR;
+    public static final int TYPE_PAID = Types.DOUBLE;
     public static final String NAME_PAID = "paid";
 
     /**
-     * Column balance of type Types.VARCHAR mapped to String.
+     * Column balance of type Types.DOUBLE mapped to Double.
      */
     public static final int ID_BALANCE = 7;
-    public static final int TYPE_BALANCE = Types.VARCHAR;
+    public static final int TYPE_BALANCE = Types.DOUBLE;
     public static final String NAME_BALANCE = "balance";
 
     /**
@@ -92,11 +92,11 @@ public class VsNoshowManager
     public static final String NAME_SOURCE = "source";
 
     /**
-     * Column noshowby of type Types.VARCHAR mapped to String.
+     * Column puser of type Types.VARCHAR mapped to String.
      */
-    public static final int ID_NOSHOWBY = 9;
-    public static final int TYPE_NOSHOWBY = Types.VARCHAR;
-    public static final String NAME_NOSHOWBY = "noshowby";
+    public static final int ID_PUSER = 9;
+    public static final int TYPE_PUSER = Types.VARCHAR;
+    public static final String NAME_PUSER = "puser";
 
     /**
      * Column regdate of type Types.TIMESTAMP mapped to java.sql.Timestamp.
@@ -113,32 +113,32 @@ public class VsNoshowManager
     public static final String NAME_REMARK = "remark";
 
     /**
-     * Column regbyid of type Types.INTEGER mapped to Integer.
+     * Column personnelid of type Types.INTEGER mapped to Integer.
      */
-    public static final int ID_REGBYID = 12;
-    public static final int TYPE_REGBYID = Types.INTEGER;
-    public static final String NAME_REGBYID = "regbyid";
-
-    /**
-     * Column bsourceid of type Types.INTEGER mapped to Integer.
-     */
-    public static final int ID_BSOURCEID = 13;
-    public static final int TYPE_BSOURCEID = Types.INTEGER;
-    public static final String NAME_BSOURCEID = "bsourceid";
+    public static final int ID_PERSONNELID = 12;
+    public static final int TYPE_PERSONNELID = Types.INTEGER;
+    public static final String NAME_PERSONNELID = "personnelid";
 
     /**
      * Column roomtypeid of type Types.INTEGER mapped to Integer.
      */
-    public static final int ID_ROOMTYPEID = 14;
+    public static final int ID_ROOMTYPEID = 13;
     public static final int TYPE_ROOMTYPEID = Types.INTEGER;
     public static final String NAME_ROOMTYPEID = "roomtypeid";
 
     /**
      * Column ratetypeid of type Types.INTEGER mapped to Integer.
      */
-    public static final int ID_RATETYPEID = 15;
+    public static final int ID_RATETYPEID = 14;
     public static final int TYPE_RATETYPEID = Types.INTEGER;
     public static final String NAME_RATETYPEID = "ratetypeid";
+
+    /**
+     * Column bsourceid of type Types.INTEGER mapped to Integer.
+     */
+    public static final int ID_BSOURCEID = 15;
+    public static final int TYPE_BSOURCEID = Types.INTEGER;
+    public static final String NAME_BSOURCEID = "bsourceid";
 
 
     private static final String TABLE_NAME = "vs_noshow";
@@ -149,42 +149,42 @@ public class VsNoshowManager
     private static final String[] FIELD_NAMES = 
     {
         "vs_noshow.reservationid"
-        ,"vs_noshow.guest"
+        ,"vs_noshow.guestname"
         ,"vs_noshow.arraivaldate"
         ,"vs_noshow.departuredate"
-        ,"vs_noshow.num"
+        ,"vs_noshow.folioid"
         ,"vs_noshow.charges"
         ,"vs_noshow.paid"
         ,"vs_noshow.balance"
         ,"vs_noshow.source"
-        ,"vs_noshow.noshowby"
+        ,"vs_noshow.puser"
         ,"vs_noshow.regdate"
         ,"vs_noshow.remark"
-        ,"vs_noshow.regbyid"
-        ,"vs_noshow.bsourceid"
+        ,"vs_noshow.personnelid"
         ,"vs_noshow.roomtypeid"
         ,"vs_noshow.ratetypeid"
+        ,"vs_noshow.bsourceid"
     };
 
     /**
      * Field that contains the comma separated fields of the vs_noshow table.
      */
     private static final String ALL_FIELDS = "vs_noshow.reservationid"
-                            + ",vs_noshow.guest"
+                            + ",vs_noshow.guestname"
                             + ",vs_noshow.arraivaldate"
                             + ",vs_noshow.departuredate"
-                            + ",vs_noshow.num"
+                            + ",vs_noshow.folioid"
                             + ",vs_noshow.charges"
                             + ",vs_noshow.paid"
                             + ",vs_noshow.balance"
                             + ",vs_noshow.source"
-                            + ",vs_noshow.noshowby"
+                            + ",vs_noshow.puser"
                             + ",vs_noshow.regdate"
                             + ",vs_noshow.remark"
-                            + ",vs_noshow.regbyid"
-                            + ",vs_noshow.bsourceid"
+                            + ",vs_noshow.personnelid"
                             + ",vs_noshow.roomtypeid"
-                            + ",vs_noshow.ratetypeid";
+                            + ",vs_noshow.ratetypeid"
+                            + ",vs_noshow.bsourceid";
 
     private static VsNoshowManager singleton = new VsNoshowManager();
 
@@ -392,11 +392,11 @@ public class VsNoshowManager
                     _dirtyCount++;
                 }
 
-                if (pObject.isGuestModified()) {
+                if (pObject.isGuestnameModified()) {
                     if (_dirtyCount>0) {
                         _sql.append(",");
                     }
-                    _sql.append("guest");
+                    _sql.append("guestname");
                     _dirtyCount++;
                 }
 
@@ -416,11 +416,11 @@ public class VsNoshowManager
                     _dirtyCount++;
                 }
 
-                if (pObject.isNumModified()) {
+                if (pObject.isFolioidModified()) {
                     if (_dirtyCount>0) {
                         _sql.append(",");
                     }
-                    _sql.append("num");
+                    _sql.append("folioid");
                     _dirtyCount++;
                 }
 
@@ -456,11 +456,11 @@ public class VsNoshowManager
                     _dirtyCount++;
                 }
 
-                if (pObject.isNoshowbyModified()) {
+                if (pObject.isPuserModified()) {
                     if (_dirtyCount>0) {
                         _sql.append(",");
                     }
-                    _sql.append("noshowby");
+                    _sql.append("puser");
                     _dirtyCount++;
                 }
 
@@ -480,19 +480,11 @@ public class VsNoshowManager
                     _dirtyCount++;
                 }
 
-                if (pObject.isRegbyidModified()) {
+                if (pObject.isPersonnelidModified()) {
                     if (_dirtyCount>0) {
                         _sql.append(",");
                     }
-                    _sql.append("regbyid");
-                    _dirtyCount++;
-                }
-
-                if (pObject.isBsourceidModified()) {
-                    if (_dirtyCount>0) {
-                        _sql.append(",");
-                    }
-                    _sql.append("bsourceid");
+                    _sql.append("personnelid");
                     _dirtyCount++;
                 }
 
@@ -512,6 +504,14 @@ public class VsNoshowManager
                     _dirtyCount++;
                 }
 
+                if (pObject.isBsourceidModified()) {
+                    if (_dirtyCount>0) {
+                        _sql.append(",");
+                    }
+                    _sql.append("bsourceid");
+                    _dirtyCount++;
+                }
+
                 _sql.append(") values (");
                 if(_dirtyCount > 0) {
                     _sql.append("?");
@@ -528,8 +528,8 @@ public class VsNoshowManager
                     Manager.setLong(ps, ++_dirtyCount, pObject.getReservationid());
                 }
     
-                if (pObject.isGuestModified()) {
-                    ps.setString(++_dirtyCount, pObject.getGuest());
+                if (pObject.isGuestnameModified()) {
+                    ps.setString(++_dirtyCount, pObject.getGuestname());
                 }
     
                 if (pObject.isArraivaldateModified()) {
@@ -540,28 +540,28 @@ public class VsNoshowManager
                     ps.setTimestamp(++_dirtyCount, pObject.getDeparturedate());
                 }
     
-                if (pObject.isNumModified()) {
-                    ps.setString(++_dirtyCount, pObject.getNum());
+                if (pObject.isFolioidModified()) {
+                    Manager.setLong(ps, ++_dirtyCount, pObject.getFolioid());
                 }
     
                 if (pObject.isChargesModified()) {
-                    ps.setString(++_dirtyCount, pObject.getCharges());
+                    Manager.setDouble(ps, ++_dirtyCount, pObject.getCharges());
                 }
     
                 if (pObject.isPaidModified()) {
-                    ps.setString(++_dirtyCount, pObject.getPaid());
+                    Manager.setDouble(ps, ++_dirtyCount, pObject.getPaid());
                 }
     
                 if (pObject.isBalanceModified()) {
-                    ps.setString(++_dirtyCount, pObject.getBalance());
+                    Manager.setDouble(ps, ++_dirtyCount, pObject.getBalance());
                 }
     
                 if (pObject.isSourceModified()) {
                     ps.setString(++_dirtyCount, pObject.getSource());
                 }
     
-                if (pObject.isNoshowbyModified()) {
-                    ps.setString(++_dirtyCount, pObject.getNoshowby());
+                if (pObject.isPuserModified()) {
+                    ps.setString(++_dirtyCount, pObject.getPuser());
                 }
     
                 if (pObject.isRegdateModified()) {
@@ -572,12 +572,8 @@ public class VsNoshowManager
                     ps.setString(++_dirtyCount, pObject.getRemark());
                 }
     
-                if (pObject.isRegbyidModified()) {
-                    Manager.setInteger(ps, ++_dirtyCount, pObject.getRegbyid());
-                }
-    
-                if (pObject.isBsourceidModified()) {
-                    Manager.setInteger(ps, ++_dirtyCount, pObject.getBsourceid());
+                if (pObject.isPersonnelidModified()) {
+                    Manager.setInteger(ps, ++_dirtyCount, pObject.getPersonnelid());
                 }
     
                 if (pObject.isRoomtypeidModified()) {
@@ -586,6 +582,10 @@ public class VsNoshowManager
     
                 if (pObject.isRatetypeidModified()) {
                     Manager.setInteger(ps, ++_dirtyCount, pObject.getRatetypeid());
+                }
+    
+                if (pObject.isBsourceidModified()) {
+                    Manager.setInteger(ps, ++_dirtyCount, pObject.getBsourceid());
                 }
     
                 ps.executeUpdate();
@@ -609,13 +609,13 @@ public class VsNoshowManager
                     _sql.append("reservationid").append("=?");
                 }
 
-                if (pObject.isGuestModified()) {
+                if (pObject.isGuestnameModified()) {
                     if (useComma) {
                         _sql.append(",");
                     } else {
                         useComma=true;
                     }
-                    _sql.append("guest").append("=?");
+                    _sql.append("guestname").append("=?");
                 }
 
                 if (pObject.isArraivaldateModified()) {
@@ -636,13 +636,13 @@ public class VsNoshowManager
                     _sql.append("departuredate").append("=?");
                 }
 
-                if (pObject.isNumModified()) {
+                if (pObject.isFolioidModified()) {
                     if (useComma) {
                         _sql.append(",");
                     } else {
                         useComma=true;
                     }
-                    _sql.append("num").append("=?");
+                    _sql.append("folioid").append("=?");
                 }
 
                 if (pObject.isChargesModified()) {
@@ -681,13 +681,13 @@ public class VsNoshowManager
                     _sql.append("source").append("=?");
                 }
 
-                if (pObject.isNoshowbyModified()) {
+                if (pObject.isPuserModified()) {
                     if (useComma) {
                         _sql.append(",");
                     } else {
                         useComma=true;
                     }
-                    _sql.append("noshowby").append("=?");
+                    _sql.append("puser").append("=?");
                 }
 
                 if (pObject.isRegdateModified()) {
@@ -708,22 +708,13 @@ public class VsNoshowManager
                     _sql.append("remark").append("=?");
                 }
 
-                if (pObject.isRegbyidModified()) {
+                if (pObject.isPersonnelidModified()) {
                     if (useComma) {
                         _sql.append(",");
                     } else {
                         useComma=true;
                     }
-                    _sql.append("regbyid").append("=?");
-                }
-
-                if (pObject.isBsourceidModified()) {
-                    if (useComma) {
-                        _sql.append(",");
-                    } else {
-                        useComma=true;
-                    }
-                    _sql.append("bsourceid").append("=?");
+                    _sql.append("personnelid").append("=?");
                 }
 
                 if (pObject.isRoomtypeidModified()) {
@@ -743,6 +734,15 @@ public class VsNoshowManager
                     }
                     _sql.append("ratetypeid").append("=?");
                 }
+
+                if (pObject.isBsourceidModified()) {
+                    if (useComma) {
+                        _sql.append(",");
+                    } else {
+                        useComma=true;
+                    }
+                    _sql.append("bsourceid").append("=?");
+                }
                 _sql.append("");
                 ps = c.prepareStatement(_sql.toString(),ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
                 int _dirtyCount = 0;
@@ -751,8 +751,8 @@ public class VsNoshowManager
                       Manager.setLong(ps, ++_dirtyCount, pObject.getReservationid());
                 }
 
-                if (pObject.isGuestModified()) {
-                      ps.setString(++_dirtyCount, pObject.getGuest());
+                if (pObject.isGuestnameModified()) {
+                      ps.setString(++_dirtyCount, pObject.getGuestname());
                 }
 
                 if (pObject.isArraivaldateModified()) {
@@ -763,28 +763,28 @@ public class VsNoshowManager
                       ps.setTimestamp(++_dirtyCount, pObject.getDeparturedate());
                 }
 
-                if (pObject.isNumModified()) {
-                      ps.setString(++_dirtyCount, pObject.getNum());
+                if (pObject.isFolioidModified()) {
+                      Manager.setLong(ps, ++_dirtyCount, pObject.getFolioid());
                 }
 
                 if (pObject.isChargesModified()) {
-                      ps.setString(++_dirtyCount, pObject.getCharges());
+                      Manager.setDouble(ps, ++_dirtyCount, pObject.getCharges());
                 }
 
                 if (pObject.isPaidModified()) {
-                      ps.setString(++_dirtyCount, pObject.getPaid());
+                      Manager.setDouble(ps, ++_dirtyCount, pObject.getPaid());
                 }
 
                 if (pObject.isBalanceModified()) {
-                      ps.setString(++_dirtyCount, pObject.getBalance());
+                      Manager.setDouble(ps, ++_dirtyCount, pObject.getBalance());
                 }
 
                 if (pObject.isSourceModified()) {
                       ps.setString(++_dirtyCount, pObject.getSource());
                 }
 
-                if (pObject.isNoshowbyModified()) {
-                      ps.setString(++_dirtyCount, pObject.getNoshowby());
+                if (pObject.isPuserModified()) {
+                      ps.setString(++_dirtyCount, pObject.getPuser());
                 }
 
                 if (pObject.isRegdateModified()) {
@@ -795,12 +795,8 @@ public class VsNoshowManager
                       ps.setString(++_dirtyCount, pObject.getRemark());
                 }
 
-                if (pObject.isRegbyidModified()) {
-                      Manager.setInteger(ps, ++_dirtyCount, pObject.getRegbyid());
-                }
-
-                if (pObject.isBsourceidModified()) {
-                      Manager.setInteger(ps, ++_dirtyCount, pObject.getBsourceid());
+                if (pObject.isPersonnelidModified()) {
+                      Manager.setInteger(ps, ++_dirtyCount, pObject.getPersonnelid());
                 }
 
                 if (pObject.isRoomtypeidModified()) {
@@ -809,6 +805,10 @@ public class VsNoshowManager
 
                 if (pObject.isRatetypeidModified()) {
                       Manager.setInteger(ps, ++_dirtyCount, pObject.getRatetypeid());
+                }
+
+                if (pObject.isBsourceidModified()) {
+                      Manager.setInteger(ps, ++_dirtyCount, pObject.getBsourceid());
                 }
     
                 if (_dirtyCount == 0) {
@@ -891,9 +891,9 @@ public class VsNoshowManager
                  _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("reservationid= ?");
              }
     
-             if (pObject.isGuestModified()) {
+             if (pObject.isGuestnameModified()) {
                  _dirtyCount ++; 
-                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("guest= ?");
+                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("guestname= ?");
              }
     
              if (pObject.isArraivaldateModified()) {
@@ -906,9 +906,9 @@ public class VsNoshowManager
                  _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("departuredate= ?");
              }
     
-             if (pObject.isNumModified()) {
+             if (pObject.isFolioidModified()) {
                  _dirtyCount ++; 
-                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("num= ?");
+                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("folioid= ?");
              }
     
              if (pObject.isChargesModified()) {
@@ -931,9 +931,9 @@ public class VsNoshowManager
                  _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("source= ?");
              }
     
-             if (pObject.isNoshowbyModified()) {
+             if (pObject.isPuserModified()) {
                  _dirtyCount ++; 
-                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("noshowby= ?");
+                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("puser= ?");
              }
     
              if (pObject.isRegdateModified()) {
@@ -946,14 +946,9 @@ public class VsNoshowManager
                  _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("remark= ?");
              }
     
-             if (pObject.isRegbyidModified()) {
+             if (pObject.isPersonnelidModified()) {
                  _dirtyCount ++; 
-                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("regbyid= ?");
-             }
-    
-             if (pObject.isBsourceidModified()) {
-                 _dirtyCount ++; 
-                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("bsourceid= ?");
+                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("personnelid= ?");
              }
     
              if (pObject.isRoomtypeidModified()) {
@@ -964,6 +959,11 @@ public class VsNoshowManager
              if (pObject.isRatetypeidModified()) {
                  _dirtyCount ++; 
                  _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("ratetypeid= ?");
+             }
+    
+             if (pObject.isBsourceidModified()) {
+                 _dirtyCount ++; 
+                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("bsourceid= ?");
              }
     
              if (_dirtyCount == 0) {
@@ -978,8 +978,8 @@ public class VsNoshowManager
                  Manager.setLong(ps, ++_dirtyCount, pObject.getReservationid());
              }
     
-             if (pObject.isGuestModified()) {
-                 ps.setString(++_dirtyCount, pObject.getGuest());
+             if (pObject.isGuestnameModified()) {
+                 ps.setString(++_dirtyCount, pObject.getGuestname());
              }
     
              if (pObject.isArraivaldateModified()) {
@@ -990,28 +990,28 @@ public class VsNoshowManager
                  ps.setTimestamp(++_dirtyCount, pObject.getDeparturedate());
              }
     
-             if (pObject.isNumModified()) {
-                 ps.setString(++_dirtyCount, pObject.getNum());
+             if (pObject.isFolioidModified()) {
+                 Manager.setLong(ps, ++_dirtyCount, pObject.getFolioid());
              }
     
              if (pObject.isChargesModified()) {
-                 ps.setString(++_dirtyCount, pObject.getCharges());
+                 Manager.setDouble(ps, ++_dirtyCount, pObject.getCharges());
              }
     
              if (pObject.isPaidModified()) {
-                 ps.setString(++_dirtyCount, pObject.getPaid());
+                 Manager.setDouble(ps, ++_dirtyCount, pObject.getPaid());
              }
     
              if (pObject.isBalanceModified()) {
-                 ps.setString(++_dirtyCount, pObject.getBalance());
+                 Manager.setDouble(ps, ++_dirtyCount, pObject.getBalance());
              }
     
              if (pObject.isSourceModified()) {
                  ps.setString(++_dirtyCount, pObject.getSource());
              }
     
-             if (pObject.isNoshowbyModified()) {
-                 ps.setString(++_dirtyCount, pObject.getNoshowby());
+             if (pObject.isPuserModified()) {
+                 ps.setString(++_dirtyCount, pObject.getPuser());
              }
     
              if (pObject.isRegdateModified()) {
@@ -1022,12 +1022,8 @@ public class VsNoshowManager
                  ps.setString(++_dirtyCount, pObject.getRemark());
              }
     
-             if (pObject.isRegbyidModified()) {
-                 Manager.setInteger(ps, ++_dirtyCount, pObject.getRegbyid());
-             }
-    
-             if (pObject.isBsourceidModified()) {
-                 Manager.setInteger(ps, ++_dirtyCount, pObject.getBsourceid());
+             if (pObject.isPersonnelidModified()) {
+                 Manager.setInteger(ps, ++_dirtyCount, pObject.getPersonnelid());
              }
     
              if (pObject.isRoomtypeidModified()) {
@@ -1036,6 +1032,10 @@ public class VsNoshowManager
     
              if (pObject.isRatetypeidModified()) {
                  Manager.setInteger(ps, ++_dirtyCount, pObject.getRatetypeid());
+             }
+    
+             if (pObject.isBsourceidModified()) {
+                 Manager.setInteger(ps, ++_dirtyCount, pObject.getBsourceid());
              }
     
              ps.executeQuery();
@@ -1071,10 +1071,10 @@ public class VsNoshowManager
                 _dirtyAnd ++;
             }
     
-            if (pObject.isGuestInitialized()) {
+            if (pObject.isGuestnameInitialized()) {
                 if (_dirtyAnd > 0)
                     sql.append(" AND ");
-                sql.append("guest").append("=?");
+                sql.append("guestname").append("=?");
                 _dirtyAnd ++;
             }
     
@@ -1092,10 +1092,10 @@ public class VsNoshowManager
                 _dirtyAnd ++;
             }
     
-            if (pObject.isNumInitialized()) {
+            if (pObject.isFolioidInitialized()) {
                 if (_dirtyAnd > 0)
                     sql.append(" AND ");
-                sql.append("num").append("=?");
+                sql.append("folioid").append("=?");
                 _dirtyAnd ++;
             }
     
@@ -1127,10 +1127,10 @@ public class VsNoshowManager
                 _dirtyAnd ++;
             }
     
-            if (pObject.isNoshowbyInitialized()) {
+            if (pObject.isPuserInitialized()) {
                 if (_dirtyAnd > 0)
                     sql.append(" AND ");
-                sql.append("noshowby").append("=?");
+                sql.append("puser").append("=?");
                 _dirtyAnd ++;
             }
     
@@ -1148,17 +1148,10 @@ public class VsNoshowManager
                 _dirtyAnd ++;
             }
     
-            if (pObject.isRegbyidInitialized()) {
+            if (pObject.isPersonnelidInitialized()) {
                 if (_dirtyAnd > 0)
                     sql.append(" AND ");
-                sql.append("regbyid").append("=?");
-                _dirtyAnd ++;
-            }
-    
-            if (pObject.isBsourceidInitialized()) {
-                if (_dirtyAnd > 0)
-                    sql.append(" AND ");
-                sql.append("bsourceid").append("=?");
+                sql.append("personnelid").append("=?");
                 _dirtyAnd ++;
             }
     
@@ -1176,6 +1169,13 @@ public class VsNoshowManager
                 _dirtyAnd ++;
             }
     
+            if (pObject.isBsourceidInitialized()) {
+                if (_dirtyAnd > 0)
+                    sql.append(" AND ");
+                sql.append("bsourceid").append("=?");
+                _dirtyAnd ++;
+            }
+    
             c = getConnection();
             ps = c.prepareStatement(sql.toString(),ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             int _dirtyCount = 0;
@@ -1184,8 +1184,8 @@ public class VsNoshowManager
                 Manager.setLong(ps, ++_dirtyCount, pObject.getReservationid());
             }
     
-            if (pObject.isGuestInitialized()) {
-                ps.setString(++_dirtyCount, pObject.getGuest());
+            if (pObject.isGuestnameInitialized()) {
+                ps.setString(++_dirtyCount, pObject.getGuestname());
             }
     
             if (pObject.isArraivaldateInitialized()) {
@@ -1196,28 +1196,28 @@ public class VsNoshowManager
                 ps.setTimestamp(++_dirtyCount, pObject.getDeparturedate());
             }
     
-            if (pObject.isNumInitialized()) {
-                ps.setString(++_dirtyCount, pObject.getNum());
+            if (pObject.isFolioidInitialized()) {
+                Manager.setLong(ps, ++_dirtyCount, pObject.getFolioid());
             }
     
             if (pObject.isChargesInitialized()) {
-                ps.setString(++_dirtyCount, pObject.getCharges());
+                Manager.setDouble(ps, ++_dirtyCount, pObject.getCharges());
             }
     
             if (pObject.isPaidInitialized()) {
-                ps.setString(++_dirtyCount, pObject.getPaid());
+                Manager.setDouble(ps, ++_dirtyCount, pObject.getPaid());
             }
     
             if (pObject.isBalanceInitialized()) {
-                ps.setString(++_dirtyCount, pObject.getBalance());
+                Manager.setDouble(ps, ++_dirtyCount, pObject.getBalance());
             }
     
             if (pObject.isSourceInitialized()) {
                 ps.setString(++_dirtyCount, pObject.getSource());
             }
     
-            if (pObject.isNoshowbyInitialized()) {
-                ps.setString(++_dirtyCount, pObject.getNoshowby());
+            if (pObject.isPuserInitialized()) {
+                ps.setString(++_dirtyCount, pObject.getPuser());
             }
     
             if (pObject.isRegdateInitialized()) {
@@ -1228,12 +1228,8 @@ public class VsNoshowManager
                 ps.setString(++_dirtyCount, pObject.getRemark());
             }
     
-            if (pObject.isRegbyidInitialized()) {
-                Manager.setInteger(ps, ++_dirtyCount, pObject.getRegbyid());
-            }
-    
-            if (pObject.isBsourceidInitialized()) {
-                Manager.setInteger(ps, ++_dirtyCount, pObject.getBsourceid());
+            if (pObject.isPersonnelidInitialized()) {
+                Manager.setInteger(ps, ++_dirtyCount, pObject.getPersonnelid());
             }
     
             if (pObject.isRoomtypeidInitialized()) {
@@ -1242,6 +1238,10 @@ public class VsNoshowManager
     
             if (pObject.isRatetypeidInitialized()) {
                 Manager.setInteger(ps, ++_dirtyCount, pObject.getRatetypeid());
+            }
+    
+            if (pObject.isBsourceidInitialized()) {
+                Manager.setInteger(ps, ++_dirtyCount, pObject.getBsourceid());
             }
     
             int _rows = ps.executeUpdate();
@@ -1359,9 +1359,9 @@ public class VsNoshowManager
                     _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("reservationid= ?");
                 }
     
-                if (pObject.isGuestModified()) {
+                if (pObject.isGuestnameModified()) {
                     _dirtyCount++; 
-                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("guest= ?");
+                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("guestname= ?");
                 }
     
                 if (pObject.isArraivaldateModified()) {
@@ -1374,9 +1374,9 @@ public class VsNoshowManager
                     _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("departuredate= ?");
                 }
     
-                if (pObject.isNumModified()) {
+                if (pObject.isFolioidModified()) {
                     _dirtyCount++; 
-                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("num= ?");
+                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("folioid= ?");
                 }
     
                 if (pObject.isChargesModified()) {
@@ -1399,9 +1399,9 @@ public class VsNoshowManager
                     _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("source= ?");
                 }
     
-                if (pObject.isNoshowbyModified()) {
+                if (pObject.isPuserModified()) {
                     _dirtyCount++; 
-                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("noshowby= ?");
+                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("puser= ?");
                 }
     
                 if (pObject.isRegdateModified()) {
@@ -1414,14 +1414,9 @@ public class VsNoshowManager
                     _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("remark= ?");
                 }
     
-                if (pObject.isRegbyidModified()) {
+                if (pObject.isPersonnelidModified()) {
                     _dirtyCount++; 
-                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("regbyid= ?");
-                }
-    
-                if (pObject.isBsourceidModified()) {
-                    _dirtyCount++; 
-                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("bsourceid= ?");
+                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("personnelid= ?");
                 }
     
                 if (pObject.isRoomtypeidModified()) {
@@ -1432,6 +1427,11 @@ public class VsNoshowManager
                 if (pObject.isRatetypeidModified()) {
                     _dirtyCount++; 
                     _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("ratetypeid= ?");
+                }
+    
+                if (pObject.isBsourceidModified()) {
+                    _dirtyCount++; 
+                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("bsourceid= ?");
                 }
     
                 if (_dirtyCount == 0)
@@ -1447,8 +1447,8 @@ public class VsNoshowManager
                     Manager.setLong(ps, ++_dirtyCount, pObject.getReservationid());
                 }
     
-                if (pObject.isGuestModified()) {
-                    ps.setString(++_dirtyCount, pObject.getGuest());
+                if (pObject.isGuestnameModified()) {
+                    ps.setString(++_dirtyCount, pObject.getGuestname());
                 }
     
                 if (pObject.isArraivaldateModified()) {
@@ -1459,28 +1459,28 @@ public class VsNoshowManager
                     ps.setTimestamp(++_dirtyCount, pObject.getDeparturedate());
                 }
     
-                if (pObject.isNumModified()) {
-                    ps.setString(++_dirtyCount, pObject.getNum());
+                if (pObject.isFolioidModified()) {
+                    Manager.setLong(ps, ++_dirtyCount, pObject.getFolioid());
                 }
     
                 if (pObject.isChargesModified()) {
-                    ps.setString(++_dirtyCount, pObject.getCharges());
+                    Manager.setDouble(ps, ++_dirtyCount, pObject.getCharges());
                 }
     
                 if (pObject.isPaidModified()) {
-                    ps.setString(++_dirtyCount, pObject.getPaid());
+                    Manager.setDouble(ps, ++_dirtyCount, pObject.getPaid());
                 }
     
                 if (pObject.isBalanceModified()) {
-                    ps.setString(++_dirtyCount, pObject.getBalance());
+                    Manager.setDouble(ps, ++_dirtyCount, pObject.getBalance());
                 }
     
                 if (pObject.isSourceModified()) {
                     ps.setString(++_dirtyCount, pObject.getSource());
                 }
     
-                if (pObject.isNoshowbyModified()) {
-                    ps.setString(++_dirtyCount, pObject.getNoshowby());
+                if (pObject.isPuserModified()) {
+                    ps.setString(++_dirtyCount, pObject.getPuser());
                 }
     
                 if (pObject.isRegdateModified()) {
@@ -1491,12 +1491,8 @@ public class VsNoshowManager
                     ps.setString(++_dirtyCount, pObject.getRemark());
                 }
     
-                if (pObject.isRegbyidModified()) {
-                    Manager.setInteger(ps, ++_dirtyCount, pObject.getRegbyid());
-                }
-    
-                if (pObject.isBsourceidModified()) {
-                    Manager.setInteger(ps, ++_dirtyCount, pObject.getBsourceid());
+                if (pObject.isPersonnelidModified()) {
+                    Manager.setInteger(ps, ++_dirtyCount, pObject.getPersonnelid());
                 }
     
                 if (pObject.isRoomtypeidModified()) {
@@ -1505,6 +1501,10 @@ public class VsNoshowManager
     
                 if (pObject.isRatetypeidModified()) {
                     Manager.setInteger(ps, ++_dirtyCount, pObject.getRatetypeid());
+                }
+    
+                if (pObject.isBsourceidModified()) {
+                    Manager.setInteger(ps, ++_dirtyCount, pObject.getBsourceid());
                 }
     
                 return countByPreparedStatement(ps);
@@ -1532,21 +1532,21 @@ public class VsNoshowManager
     {
         VsNoshowBean pObject = createVsNoshowBean();
         pObject.setReservationid(Manager.getLong(rs, 1));
-        pObject.setGuest(rs.getString(2));
+        pObject.setGuestname(rs.getString(2));
         pObject.setArraivaldate(rs.getTimestamp(3));
         pObject.setDeparturedate(rs.getTimestamp(4));
-        pObject.setNum(rs.getString(5));
-        pObject.setCharges(rs.getString(6));
-        pObject.setPaid(rs.getString(7));
-        pObject.setBalance(rs.getString(8));
+        pObject.setFolioid(Manager.getLong(rs, 5));
+        pObject.setCharges(Manager.getDouble(rs, 6));
+        pObject.setPaid(Manager.getDouble(rs, 7));
+        pObject.setBalance(Manager.getDouble(rs, 8));
         pObject.setSource(rs.getString(9));
-        pObject.setNoshowby(rs.getString(10));
+        pObject.setPuser(rs.getString(10));
         pObject.setRegdate(rs.getTimestamp(11));
         pObject.setRemark(rs.getString(12));
-        pObject.setRegbyid(Manager.getInteger(rs, 13));
-        pObject.setBsourceid(Manager.getInteger(rs, 14));
-        pObject.setRoomtypeid(Manager.getInteger(rs, 15));
-        pObject.setRatetypeid(Manager.getInteger(rs, 16));
+        pObject.setPersonnelid(Manager.getInteger(rs, 13));
+        pObject.setRoomtypeid(Manager.getInteger(rs, 14));
+        pObject.setRatetypeid(Manager.getInteger(rs, 15));
+        pObject.setBsourceid(Manager.getInteger(rs, 16));
 
         pObject.isNew(false);
         pObject.resetIsModified();
@@ -1573,9 +1573,9 @@ public class VsNoshowManager
                     ++pos;
                     pObject.setReservationid(Manager.getLong(rs, pos));
                     break;
-                case ID_GUEST:
+                case ID_GUESTNAME:
                     ++pos;
-                    pObject.setGuest(rs.getString(pos));
+                    pObject.setGuestname(rs.getString(pos));
                     break;
                 case ID_ARRAIVALDATE:
                     ++pos;
@@ -1585,29 +1585,29 @@ public class VsNoshowManager
                     ++pos;
                     pObject.setDeparturedate(rs.getTimestamp(pos));
                     break;
-                case ID_NUM:
+                case ID_FOLIOID:
                     ++pos;
-                    pObject.setNum(rs.getString(pos));
+                    pObject.setFolioid(Manager.getLong(rs, pos));
                     break;
                 case ID_CHARGES:
                     ++pos;
-                    pObject.setCharges(rs.getString(pos));
+                    pObject.setCharges(Manager.getDouble(rs, pos));
                     break;
                 case ID_PAID:
                     ++pos;
-                    pObject.setPaid(rs.getString(pos));
+                    pObject.setPaid(Manager.getDouble(rs, pos));
                     break;
                 case ID_BALANCE:
                     ++pos;
-                    pObject.setBalance(rs.getString(pos));
+                    pObject.setBalance(Manager.getDouble(rs, pos));
                     break;
                 case ID_SOURCE:
                     ++pos;
                     pObject.setSource(rs.getString(pos));
                     break;
-                case ID_NOSHOWBY:
+                case ID_PUSER:
                     ++pos;
-                    pObject.setNoshowby(rs.getString(pos));
+                    pObject.setPuser(rs.getString(pos));
                     break;
                 case ID_REGDATE:
                     ++pos;
@@ -1617,13 +1617,9 @@ public class VsNoshowManager
                     ++pos;
                     pObject.setRemark(rs.getString(pos));
                     break;
-                case ID_REGBYID:
+                case ID_PERSONNELID:
                     ++pos;
-                    pObject.setRegbyid(Manager.getInteger(rs, pos));
-                    break;
-                case ID_BSOURCEID:
-                    ++pos;
-                    pObject.setBsourceid(Manager.getInteger(rs, pos));
+                    pObject.setPersonnelid(Manager.getInteger(rs, pos));
                     break;
                 case ID_ROOMTYPEID:
                     ++pos;
@@ -1632,6 +1628,10 @@ public class VsNoshowManager
                 case ID_RATETYPEID:
                     ++pos;
                     pObject.setRatetypeid(Manager.getInteger(rs, pos));
+                    break;
+                case ID_BSOURCEID:
+                    ++pos;
+                    pObject.setBsourceid(Manager.getInteger(rs, pos));
                     break;
             }
         }

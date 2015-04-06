@@ -86,6 +86,12 @@
 
                 firstdiv.css('height',thisdivwidth+'px');
                 $("#"+thislink).css('display','block');
+                var firstChild = $("#centerTabContent").children().first();
+                if($(firstChild).is(":visible")){
+                    $("#centerTabContent").find('.gridfooter').show();
+                }else{
+                    $("#centerTabContent").find('.gridfooter').hide();
+                }
             });
 
         },

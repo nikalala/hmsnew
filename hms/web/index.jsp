@@ -177,6 +177,8 @@
 
     <script src="js/tabulous.js" type="text/javascript"></script>
 
+    <script type="text/javascript" src="js/redips-drag-min.js"></script>
+
     <script>
 
         var dateglobalformat = "<%=dateformats2[dff]%>";
@@ -360,7 +362,7 @@
                             </div>
                         </span>
                 </div>
-                <div class="tab-content" id="centerTabContent" style="height: 95%; background-color: <%=bgcol%>;"></div>
+                <div class="tab-content" id="centerTabContent" style="background-color: <%=bgcol%>;"></div>
             </div>
         </div>
     </div>

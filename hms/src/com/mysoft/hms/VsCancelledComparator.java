@@ -48,10 +48,10 @@ public class VsCancelledComparator implements Comparator
      * Possible values are:
      * <ul>
      *   <li>VsCancelledManager.ID_RESERVATIONID
-     *   <li>VsCancelledManager.ID_GUEST
+     *   <li>VsCancelledManager.ID_GUESTNAME
      *   <li>VsCancelledManager.ID_ARRAIVALDATE
      *   <li>VsCancelledManager.ID_DEPARTUREDATE
-     *   <li>VsCancelledManager.ID_NUM
+     *   <li>VsCancelledManager.ID_FOLIOID
      *   <li>VsCancelledManager.ID_CHARGES
      *   <li>VsCancelledManager.ID_PAID
      *   <li>VsCancelledManager.ID_BALANCE
@@ -59,10 +59,10 @@ public class VsCancelledComparator implements Comparator
      *   <li>VsCancelledManager.ID_PUSER
      *   <li>VsCancelledManager.ID_REGDATE
      *   <li>VsCancelledManager.ID_REMARK
-     *   <li>VsCancelledManager.ID_REGBYID
-     *   <li>VsCancelledManager.ID_BSOURCEID
+     *   <li>VsCancelledManager.ID_PERSONNELID
      *   <li>VsCancelledManager.ID_ROOMTYPEID
      *   <li>VsCancelledManager.ID_RATETYPEID
+     *   <li>VsCancelledManager.ID_BSOURCEID
      * </ul>
      */
     public VsCancelledComparator(int iType)
@@ -82,10 +82,10 @@ public class VsCancelledComparator implements Comparator
      * Possible values are:
      * <ul>
      *   <li>VsCancelledManager.ID_RESERVATIONID
-     *   <li>VsCancelledManager.ID_GUEST
+     *   <li>VsCancelledManager.ID_GUESTNAME
      *   <li>VsCancelledManager.ID_ARRAIVALDATE
      *   <li>VsCancelledManager.ID_DEPARTUREDATE
-     *   <li>VsCancelledManager.ID_NUM
+     *   <li>VsCancelledManager.ID_FOLIOID
      *   <li>VsCancelledManager.ID_CHARGES
      *   <li>VsCancelledManager.ID_PAID
      *   <li>VsCancelledManager.ID_BALANCE
@@ -93,10 +93,10 @@ public class VsCancelledComparator implements Comparator
      *   <li>VsCancelledManager.ID_PUSER
      *   <li>VsCancelledManager.ID_REGDATE
      *   <li>VsCancelledManager.ID_REMARK
-     *   <li>VsCancelledManager.ID_REGBYID
-     *   <li>VsCancelledManager.ID_BSOURCEID
+     *   <li>VsCancelledManager.ID_PERSONNELID
      *   <li>VsCancelledManager.ID_ROOMTYPEID
      *   <li>VsCancelledManager.ID_RATETYPEID
+     *   <li>VsCancelledManager.ID_BSOURCEID
      * </ul>
      *
      * @param bReverse set this value to true, if you want to reverse the sorting results
@@ -128,15 +128,15 @@ public class VsCancelledComparator implements Comparator
                     iReturn = b1.getReservationid().compareTo(b2.getReservationid());
                 }
                 break;
-            case VsCancelledManager.ID_GUEST:
-                if (b1.getGuest() == null && b2.getGuest() != null) {
+            case VsCancelledManager.ID_GUESTNAME:
+                if (b1.getGuestname() == null && b2.getGuestname() != null) {
                     iReturn = -1;
-                } else if (b1.getGuest() == null && b2.getGuest() == null) {
+                } else if (b1.getGuestname() == null && b2.getGuestname() == null) {
                     iReturn = 0;
-                } else if (b1.getGuest() != null && b2.getGuest() == null) {
+                } else if (b1.getGuestname() != null && b2.getGuestname() == null) {
                     iReturn = 1;
                 } else { 
-                    iReturn = b1.getGuest().compareTo(b2.getGuest());
+                    iReturn = b1.getGuestname().compareTo(b2.getGuestname());
                 }
                 break;
             case VsCancelledManager.ID_ARRAIVALDATE:
@@ -161,15 +161,15 @@ public class VsCancelledComparator implements Comparator
                     iReturn = b1.getDeparturedate().compareTo(b2.getDeparturedate());
                 }
                 break;
-            case VsCancelledManager.ID_NUM:
-                if (b1.getNum() == null && b2.getNum() != null) {
+            case VsCancelledManager.ID_FOLIOID:
+                if (b1.getFolioid() == null && b2.getFolioid() != null) {
                     iReturn = -1;
-                } else if (b1.getNum() == null && b2.getNum() == null) {
+                } else if (b1.getFolioid() == null && b2.getFolioid() == null) {
                     iReturn = 0;
-                } else if (b1.getNum() != null && b2.getNum() == null) {
+                } else if (b1.getFolioid() != null && b2.getFolioid() == null) {
                     iReturn = 1;
                 } else { 
-                    iReturn = b1.getNum().compareTo(b2.getNum());
+                    iReturn = b1.getFolioid().compareTo(b2.getFolioid());
                 }
                 break;
             case VsCancelledManager.ID_CHARGES:
@@ -249,26 +249,15 @@ public class VsCancelledComparator implements Comparator
                     iReturn = b1.getRemark().compareTo(b2.getRemark());
                 }
                 break;
-            case VsCancelledManager.ID_REGBYID:
-                if (b1.getRegbyid() == null && b2.getRegbyid() != null) {
+            case VsCancelledManager.ID_PERSONNELID:
+                if (b1.getPersonnelid() == null && b2.getPersonnelid() != null) {
                     iReturn = -1;
-                } else if (b1.getRegbyid() == null && b2.getRegbyid() == null) {
+                } else if (b1.getPersonnelid() == null && b2.getPersonnelid() == null) {
                     iReturn = 0;
-                } else if (b1.getRegbyid() != null && b2.getRegbyid() == null) {
+                } else if (b1.getPersonnelid() != null && b2.getPersonnelid() == null) {
                     iReturn = 1;
                 } else { 
-                    iReturn = b1.getRegbyid().compareTo(b2.getRegbyid());
-                }
-                break;
-            case VsCancelledManager.ID_BSOURCEID:
-                if (b1.getBsourceid() == null && b2.getBsourceid() != null) {
-                    iReturn = -1;
-                } else if (b1.getBsourceid() == null && b2.getBsourceid() == null) {
-                    iReturn = 0;
-                } else if (b1.getBsourceid() != null && b2.getBsourceid() == null) {
-                    iReturn = 1;
-                } else { 
-                    iReturn = b1.getBsourceid().compareTo(b2.getBsourceid());
+                    iReturn = b1.getPersonnelid().compareTo(b2.getPersonnelid());
                 }
                 break;
             case VsCancelledManager.ID_ROOMTYPEID:
@@ -291,6 +280,17 @@ public class VsCancelledComparator implements Comparator
                     iReturn = 1;
                 } else { 
                     iReturn = b1.getRatetypeid().compareTo(b2.getRatetypeid());
+                }
+                break;
+            case VsCancelledManager.ID_BSOURCEID:
+                if (b1.getBsourceid() == null && b2.getBsourceid() != null) {
+                    iReturn = -1;
+                } else if (b1.getBsourceid() == null && b2.getBsourceid() == null) {
+                    iReturn = 0;
+                } else if (b1.getBsourceid() != null && b2.getBsourceid() == null) {
+                    iReturn = 1;
+                } else { 
+                    iReturn = b1.getBsourceid().compareTo(b2.getBsourceid());
                 }
                 break;
             default: 
