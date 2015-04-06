@@ -41,25 +41,24 @@ public class VsGuestcheckedinlistComparator implements Comparator
      * <br>
      * Example:
      * <br>
-     * <code>Arrays.sort(pArray, new VsGuestcheckedinlistComparator(VsGuestcheckedinlistManager.NUM, bReverse));<code>
+     * <code>Arrays.sort(pArray, new VsGuestcheckedinlistComparator(VsGuestcheckedinlistManager.FOLIOID, bReverse));<code>
      *
      * @param iType the field from which you want to sort
      * <br>
      * Possible values are:
      * <ul>
-     *   <li>VsGuestcheckedinlistManager.ID_NUM
-     *   <li>VsGuestcheckedinlistManager.ID_ROOM
+     *   <li>VsGuestcheckedinlistManager.ID_FOLIOID
+     *   <li>VsGuestcheckedinlistManager.ID_NAME
      *   <li>VsGuestcheckedinlistManager.ID_RATE
      *   <li>VsGuestcheckedinlistManager.ID_RATETYPE
-     *   <li>VsGuestcheckedinlistManager.ID_GUEST
+     *   <li>VsGuestcheckedinlistManager.ID_GUESTNAME
      *   <li>VsGuestcheckedinlistManager.ID_PAX
      *   <li>VsGuestcheckedinlistManager.ID_ARRAIVALDATE
      *   <li>VsGuestcheckedinlistManager.ID_DEPARTUREDATE
      *   <li>VsGuestcheckedinlistManager.ID_COMPANY
-     *   <li>VsGuestcheckedinlistManager.ID_LOGINID
-     *   <li>VsGuestcheckedinlistManager.ID_RESERVATIONID
-     *   <li>VsGuestcheckedinlistManager.ID_RATETYPEID
+     *   <li>VsGuestcheckedinlistManager.ID_AUTHOR
      *   <li>VsGuestcheckedinlistManager.ID_ROOMTYPEID
+     *   <li>VsGuestcheckedinlistManager.ID_RATETYPEID
      * </ul>
      */
     public VsGuestcheckedinlistComparator(int iType)
@@ -72,25 +71,24 @@ public class VsGuestcheckedinlistComparator implements Comparator
      * <br>
      * Example:
      * <br>
-     * <code>Arrays.sort(pArray, new VsGuestcheckedinlistComparator(VsGuestcheckedinlistManager.NUM, bReverse));<code>
+     * <code>Arrays.sort(pArray, new VsGuestcheckedinlistComparator(VsGuestcheckedinlistManager.FOLIOID, bReverse));<code>
      *
      * @param iType the field from which you want to sort.
      * <br>
      * Possible values are:
      * <ul>
-     *   <li>VsGuestcheckedinlistManager.ID_NUM
-     *   <li>VsGuestcheckedinlistManager.ID_ROOM
+     *   <li>VsGuestcheckedinlistManager.ID_FOLIOID
+     *   <li>VsGuestcheckedinlistManager.ID_NAME
      *   <li>VsGuestcheckedinlistManager.ID_RATE
      *   <li>VsGuestcheckedinlistManager.ID_RATETYPE
-     *   <li>VsGuestcheckedinlistManager.ID_GUEST
+     *   <li>VsGuestcheckedinlistManager.ID_GUESTNAME
      *   <li>VsGuestcheckedinlistManager.ID_PAX
      *   <li>VsGuestcheckedinlistManager.ID_ARRAIVALDATE
      *   <li>VsGuestcheckedinlistManager.ID_DEPARTUREDATE
      *   <li>VsGuestcheckedinlistManager.ID_COMPANY
-     *   <li>VsGuestcheckedinlistManager.ID_LOGINID
-     *   <li>VsGuestcheckedinlistManager.ID_RESERVATIONID
-     *   <li>VsGuestcheckedinlistManager.ID_RATETYPEID
+     *   <li>VsGuestcheckedinlistManager.ID_AUTHOR
      *   <li>VsGuestcheckedinlistManager.ID_ROOMTYPEID
+     *   <li>VsGuestcheckedinlistManager.ID_RATETYPEID
      * </ul>
      *
      * @param bReverse set this value to true, if you want to reverse the sorting results
@@ -111,26 +109,26 @@ public class VsGuestcheckedinlistComparator implements Comparator
         int iReturn = 0;
         switch(iType)
         {
-            case VsGuestcheckedinlistManager.ID_NUM:
-                if (b1.getNum() == null && b2.getNum() != null) {
+            case VsGuestcheckedinlistManager.ID_FOLIOID:
+                if (b1.getFolioid() == null && b2.getFolioid() != null) {
                     iReturn = -1;
-                } else if (b1.getNum() == null && b2.getNum() == null) {
+                } else if (b1.getFolioid() == null && b2.getFolioid() == null) {
                     iReturn = 0;
-                } else if (b1.getNum() != null && b2.getNum() == null) {
+                } else if (b1.getFolioid() != null && b2.getFolioid() == null) {
                     iReturn = 1;
                 } else { 
-                    iReturn = b1.getNum().compareTo(b2.getNum());
+                    iReturn = b1.getFolioid().compareTo(b2.getFolioid());
                 }
                 break;
-            case VsGuestcheckedinlistManager.ID_ROOM:
-                if (b1.getRoom() == null && b2.getRoom() != null) {
+            case VsGuestcheckedinlistManager.ID_NAME:
+                if (b1.getName() == null && b2.getName() != null) {
                     iReturn = -1;
-                } else if (b1.getRoom() == null && b2.getRoom() == null) {
+                } else if (b1.getName() == null && b2.getName() == null) {
                     iReturn = 0;
-                } else if (b1.getRoom() != null && b2.getRoom() == null) {
+                } else if (b1.getName() != null && b2.getName() == null) {
                     iReturn = 1;
                 } else { 
-                    iReturn = b1.getRoom().compareTo(b2.getRoom());
+                    iReturn = b1.getName().compareTo(b2.getName());
                 }
                 break;
             case VsGuestcheckedinlistManager.ID_RATE:
@@ -155,15 +153,15 @@ public class VsGuestcheckedinlistComparator implements Comparator
                     iReturn = b1.getRatetype().compareTo(b2.getRatetype());
                 }
                 break;
-            case VsGuestcheckedinlistManager.ID_GUEST:
-                if (b1.getGuest() == null && b2.getGuest() != null) {
+            case VsGuestcheckedinlistManager.ID_GUESTNAME:
+                if (b1.getGuestname() == null && b2.getGuestname() != null) {
                     iReturn = -1;
-                } else if (b1.getGuest() == null && b2.getGuest() == null) {
+                } else if (b1.getGuestname() == null && b2.getGuestname() == null) {
                     iReturn = 0;
-                } else if (b1.getGuest() != null && b2.getGuest() == null) {
+                } else if (b1.getGuestname() != null && b2.getGuestname() == null) {
                     iReturn = 1;
                 } else { 
-                    iReturn = b1.getGuest().compareTo(b2.getGuest());
+                    iReturn = b1.getGuestname().compareTo(b2.getGuestname());
                 }
                 break;
             case VsGuestcheckedinlistManager.ID_PAX:
@@ -210,37 +208,15 @@ public class VsGuestcheckedinlistComparator implements Comparator
                     iReturn = b1.getCompany().compareTo(b2.getCompany());
                 }
                 break;
-            case VsGuestcheckedinlistManager.ID_LOGINID:
-                if (b1.getLoginid() == null && b2.getLoginid() != null) {
+            case VsGuestcheckedinlistManager.ID_AUTHOR:
+                if (b1.getAuthor() == null && b2.getAuthor() != null) {
                     iReturn = -1;
-                } else if (b1.getLoginid() == null && b2.getLoginid() == null) {
+                } else if (b1.getAuthor() == null && b2.getAuthor() == null) {
                     iReturn = 0;
-                } else if (b1.getLoginid() != null && b2.getLoginid() == null) {
+                } else if (b1.getAuthor() != null && b2.getAuthor() == null) {
                     iReturn = 1;
                 } else { 
-                    iReturn = b1.getLoginid().compareTo(b2.getLoginid());
-                }
-                break;
-            case VsGuestcheckedinlistManager.ID_RESERVATIONID:
-                if (b1.getReservationid() == null && b2.getReservationid() != null) {
-                    iReturn = -1;
-                } else if (b1.getReservationid() == null && b2.getReservationid() == null) {
-                    iReturn = 0;
-                } else if (b1.getReservationid() != null && b2.getReservationid() == null) {
-                    iReturn = 1;
-                } else { 
-                    iReturn = b1.getReservationid().compareTo(b2.getReservationid());
-                }
-                break;
-            case VsGuestcheckedinlistManager.ID_RATETYPEID:
-                if (b1.getRatetypeid() == null && b2.getRatetypeid() != null) {
-                    iReturn = -1;
-                } else if (b1.getRatetypeid() == null && b2.getRatetypeid() == null) {
-                    iReturn = 0;
-                } else if (b1.getRatetypeid() != null && b2.getRatetypeid() == null) {
-                    iReturn = 1;
-                } else { 
-                    iReturn = b1.getRatetypeid().compareTo(b2.getRatetypeid());
+                    iReturn = b1.getAuthor().compareTo(b2.getAuthor());
                 }
                 break;
             case VsGuestcheckedinlistManager.ID_ROOMTYPEID:
@@ -252,6 +228,17 @@ public class VsGuestcheckedinlistComparator implements Comparator
                     iReturn = 1;
                 } else { 
                     iReturn = b1.getRoomtypeid().compareTo(b2.getRoomtypeid());
+                }
+                break;
+            case VsGuestcheckedinlistManager.ID_RATETYPEID:
+                if (b1.getRatetypeid() == null && b2.getRatetypeid() != null) {
+                    iReturn = -1;
+                } else if (b1.getRatetypeid() == null && b2.getRatetypeid() == null) {
+                    iReturn = 0;
+                } else if (b1.getRatetypeid() != null && b2.getRatetypeid() == null) {
+                    iReturn = 1;
+                } else { 
+                    iReturn = b1.getRatetypeid().compareTo(b2.getRatetypeid());
                 }
                 break;
             default: 

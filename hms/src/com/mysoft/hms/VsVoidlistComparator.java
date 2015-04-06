@@ -48,14 +48,18 @@ public class VsVoidlistComparator implements Comparator
      * Possible values are:
      * <ul>
      *   <li>VsVoidlistManager.ID_RESERVATIONID
-     *   <li>VsVoidlistManager.ID_GUEST
+     *   <li>VsVoidlistManager.ID_GUESTNAME
      *   <li>VsVoidlistManager.ID_ARRAIVALDATE
      *   <li>VsVoidlistManager.ID_DEPARTUREDATE
-     *   <li>VsVoidlistManager.ID_NUM
-     *   <li>VsVoidlistManager.ID_NAME
-     *   <li>VsVoidlistManager.ID_LOGINID
+     *   <li>VsVoidlistManager.ID_FOLIOID
+     *   <li>VsVoidlistManager.ID_SOURCE
+     *   <li>VsVoidlistManager.ID_PUSER
      *   <li>VsVoidlistManager.ID_REGDATE
      *   <li>VsVoidlistManager.ID_REMARK
+     *   <li>VsVoidlistManager.ID_PERSONNELID
+     *   <li>VsVoidlistManager.ID_ROOMTYPEID
+     *   <li>VsVoidlistManager.ID_RATETYPEID
+     *   <li>VsVoidlistManager.ID_BSOURCEID
      * </ul>
      */
     public VsVoidlistComparator(int iType)
@@ -75,14 +79,18 @@ public class VsVoidlistComparator implements Comparator
      * Possible values are:
      * <ul>
      *   <li>VsVoidlistManager.ID_RESERVATIONID
-     *   <li>VsVoidlistManager.ID_GUEST
+     *   <li>VsVoidlistManager.ID_GUESTNAME
      *   <li>VsVoidlistManager.ID_ARRAIVALDATE
      *   <li>VsVoidlistManager.ID_DEPARTUREDATE
-     *   <li>VsVoidlistManager.ID_NUM
-     *   <li>VsVoidlistManager.ID_NAME
-     *   <li>VsVoidlistManager.ID_LOGINID
+     *   <li>VsVoidlistManager.ID_FOLIOID
+     *   <li>VsVoidlistManager.ID_SOURCE
+     *   <li>VsVoidlistManager.ID_PUSER
      *   <li>VsVoidlistManager.ID_REGDATE
      *   <li>VsVoidlistManager.ID_REMARK
+     *   <li>VsVoidlistManager.ID_PERSONNELID
+     *   <li>VsVoidlistManager.ID_ROOMTYPEID
+     *   <li>VsVoidlistManager.ID_RATETYPEID
+     *   <li>VsVoidlistManager.ID_BSOURCEID
      * </ul>
      *
      * @param bReverse set this value to true, if you want to reverse the sorting results
@@ -114,15 +122,15 @@ public class VsVoidlistComparator implements Comparator
                     iReturn = b1.getReservationid().compareTo(b2.getReservationid());
                 }
                 break;
-            case VsVoidlistManager.ID_GUEST:
-                if (b1.getGuest() == null && b2.getGuest() != null) {
+            case VsVoidlistManager.ID_GUESTNAME:
+                if (b1.getGuestname() == null && b2.getGuestname() != null) {
                     iReturn = -1;
-                } else if (b1.getGuest() == null && b2.getGuest() == null) {
+                } else if (b1.getGuestname() == null && b2.getGuestname() == null) {
                     iReturn = 0;
-                } else if (b1.getGuest() != null && b2.getGuest() == null) {
+                } else if (b1.getGuestname() != null && b2.getGuestname() == null) {
                     iReturn = 1;
                 } else { 
-                    iReturn = b1.getGuest().compareTo(b2.getGuest());
+                    iReturn = b1.getGuestname().compareTo(b2.getGuestname());
                 }
                 break;
             case VsVoidlistManager.ID_ARRAIVALDATE:
@@ -147,37 +155,37 @@ public class VsVoidlistComparator implements Comparator
                     iReturn = b1.getDeparturedate().compareTo(b2.getDeparturedate());
                 }
                 break;
-            case VsVoidlistManager.ID_NUM:
-                if (b1.getNum() == null && b2.getNum() != null) {
+            case VsVoidlistManager.ID_FOLIOID:
+                if (b1.getFolioid() == null && b2.getFolioid() != null) {
                     iReturn = -1;
-                } else if (b1.getNum() == null && b2.getNum() == null) {
+                } else if (b1.getFolioid() == null && b2.getFolioid() == null) {
                     iReturn = 0;
-                } else if (b1.getNum() != null && b2.getNum() == null) {
+                } else if (b1.getFolioid() != null && b2.getFolioid() == null) {
                     iReturn = 1;
                 } else { 
-                    iReturn = b1.getNum().compareTo(b2.getNum());
+                    iReturn = b1.getFolioid().compareTo(b2.getFolioid());
                 }
                 break;
-            case VsVoidlistManager.ID_NAME:
-                if (b1.getName() == null && b2.getName() != null) {
+            case VsVoidlistManager.ID_SOURCE:
+                if (b1.getSource() == null && b2.getSource() != null) {
                     iReturn = -1;
-                } else if (b1.getName() == null && b2.getName() == null) {
+                } else if (b1.getSource() == null && b2.getSource() == null) {
                     iReturn = 0;
-                } else if (b1.getName() != null && b2.getName() == null) {
+                } else if (b1.getSource() != null && b2.getSource() == null) {
                     iReturn = 1;
                 } else { 
-                    iReturn = b1.getName().compareTo(b2.getName());
+                    iReturn = b1.getSource().compareTo(b2.getSource());
                 }
                 break;
-            case VsVoidlistManager.ID_LOGINID:
-                if (b1.getLoginid() == null && b2.getLoginid() != null) {
+            case VsVoidlistManager.ID_PUSER:
+                if (b1.getPuser() == null && b2.getPuser() != null) {
                     iReturn = -1;
-                } else if (b1.getLoginid() == null && b2.getLoginid() == null) {
+                } else if (b1.getPuser() == null && b2.getPuser() == null) {
                     iReturn = 0;
-                } else if (b1.getLoginid() != null && b2.getLoginid() == null) {
+                } else if (b1.getPuser() != null && b2.getPuser() == null) {
                     iReturn = 1;
                 } else { 
-                    iReturn = b1.getLoginid().compareTo(b2.getLoginid());
+                    iReturn = b1.getPuser().compareTo(b2.getPuser());
                 }
                 break;
             case VsVoidlistManager.ID_REGDATE:
@@ -200,6 +208,50 @@ public class VsVoidlistComparator implements Comparator
                     iReturn = 1;
                 } else { 
                     iReturn = b1.getRemark().compareTo(b2.getRemark());
+                }
+                break;
+            case VsVoidlistManager.ID_PERSONNELID:
+                if (b1.getPersonnelid() == null && b2.getPersonnelid() != null) {
+                    iReturn = -1;
+                } else if (b1.getPersonnelid() == null && b2.getPersonnelid() == null) {
+                    iReturn = 0;
+                } else if (b1.getPersonnelid() != null && b2.getPersonnelid() == null) {
+                    iReturn = 1;
+                } else { 
+                    iReturn = b1.getPersonnelid().compareTo(b2.getPersonnelid());
+                }
+                break;
+            case VsVoidlistManager.ID_ROOMTYPEID:
+                if (b1.getRoomtypeid() == null && b2.getRoomtypeid() != null) {
+                    iReturn = -1;
+                } else if (b1.getRoomtypeid() == null && b2.getRoomtypeid() == null) {
+                    iReturn = 0;
+                } else if (b1.getRoomtypeid() != null && b2.getRoomtypeid() == null) {
+                    iReturn = 1;
+                } else { 
+                    iReturn = b1.getRoomtypeid().compareTo(b2.getRoomtypeid());
+                }
+                break;
+            case VsVoidlistManager.ID_RATETYPEID:
+                if (b1.getRatetypeid() == null && b2.getRatetypeid() != null) {
+                    iReturn = -1;
+                } else if (b1.getRatetypeid() == null && b2.getRatetypeid() == null) {
+                    iReturn = 0;
+                } else if (b1.getRatetypeid() != null && b2.getRatetypeid() == null) {
+                    iReturn = 1;
+                } else { 
+                    iReturn = b1.getRatetypeid().compareTo(b2.getRatetypeid());
+                }
+                break;
+            case VsVoidlistManager.ID_BSOURCEID:
+                if (b1.getBsourceid() == null && b2.getBsourceid() != null) {
+                    iReturn = -1;
+                } else if (b1.getBsourceid() == null && b2.getBsourceid() == null) {
+                    iReturn = 0;
+                } else if (b1.getBsourceid() != null && b2.getBsourceid() == null) {
+                    iReturn = 1;
+                } else { 
+                    iReturn = b1.getBsourceid().compareTo(b2.getBsourceid());
                 }
                 break;
             default: 

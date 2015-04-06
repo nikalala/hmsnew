@@ -19,9 +19,9 @@ import java.sql.*;
 
 
 /**
- * Handles database calls for the vs_guestcheckedoutlist table.
+ * Handles database calls for the vs_breakdown table.
  */
-public class VsGuestcheckedoutlistManager
+public class VsBreakdownManager
 // extends+ 
 
 // extends- 
@@ -29,131 +29,131 @@ public class VsGuestcheckedoutlistManager
 {
 
     /**
-     * Column roomname of type Types.VARCHAR mapped to String.
+     * Column resno of type Types.VARCHAR mapped to String.
      */
-    public static final int ID_ROOMNAME = 0;
-    public static final int TYPE_ROOMNAME = Types.VARCHAR;
-    public static final String NAME_ROOMNAME = "roomname";
-
-    /**
-     * Column invoicenum of type Types.VARCHAR mapped to String.
-     */
-    public static final int ID_INVOICENUM = 1;
-    public static final int TYPE_INVOICENUM = Types.VARCHAR;
-    public static final String NAME_INVOICENUM = "invoicenum";
-
-    /**
-     * Column guestname of type Types.VARCHAR mapped to String.
-     */
-    public static final int ID_GUESTNAME = 2;
-    public static final int TYPE_GUESTNAME = Types.VARCHAR;
-    public static final String NAME_GUESTNAME = "guestname";
+    public static final int ID_RESNO = 0;
+    public static final int TYPE_RESNO = Types.VARCHAR;
+    public static final String NAME_RESNO = "resno";
 
     /**
      * Column arraivaldate of type Types.TIMESTAMP mapped to java.sql.Timestamp.
      */
-    public static final int ID_ARRAIVALDATE = 3;
+    public static final int ID_ARRAIVALDATE = 1;
     public static final int TYPE_ARRAIVALDATE = Types.TIMESTAMP;
     public static final String NAME_ARRAIVALDATE = "arraivaldate";
 
     /**
      * Column departuredate of type Types.TIMESTAMP mapped to java.sql.Timestamp.
      */
-    public static final int ID_DEPARTUREDATE = 4;
+    public static final int ID_DEPARTUREDATE = 2;
     public static final int TYPE_DEPARTUREDATE = Types.TIMESTAMP;
     public static final String NAME_DEPARTUREDATE = "departuredate";
 
     /**
-     * Column totalcharges of type Types.DOUBLE mapped to Double.
+     * Column guestname of type Types.VARCHAR mapped to String.
      */
-    public static final int ID_TOTALCHARGES = 5;
-    public static final int TYPE_TOTALCHARGES = Types.DOUBLE;
-    public static final String NAME_TOTALCHARGES = "totalcharges";
+    public static final int ID_GUESTNAME = 3;
+    public static final int TYPE_GUESTNAME = Types.VARCHAR;
+    public static final String NAME_GUESTNAME = "guestname";
 
     /**
-     * Column balance of type Types.DOUBLE mapped to Double.
+     * Column roomname of type Types.VARCHAR mapped to String.
      */
-    public static final int ID_BALANCE = 6;
-    public static final int TYPE_BALANCE = Types.DOUBLE;
-    public static final String NAME_BALANCE = "balance";
+    public static final int ID_ROOMNAME = 4;
+    public static final int TYPE_ROOMNAME = Types.VARCHAR;
+    public static final String NAME_ROOMNAME = "roomname";
 
     /**
-     * Column company of type Types.VARCHAR mapped to String.
+     * Column bookingstatus of type Types.VARCHAR mapped to String.
      */
-    public static final int ID_COMPANY = 7;
-    public static final int TYPE_COMPANY = Types.VARCHAR;
-    public static final String NAME_COMPANY = "company";
+    public static final int ID_BOOKINGSTATUS = 5;
+    public static final int TYPE_BOOKINGSTATUS = Types.VARCHAR;
+    public static final String NAME_BOOKINGSTATUS = "bookingstatus";
 
     /**
-     * Column author of type Types.VARCHAR mapped to String.
+     * Column bsource of type Types.VARCHAR mapped to String.
      */
-    public static final int ID_AUTHOR = 8;
-    public static final int TYPE_AUTHOR = Types.VARCHAR;
-    public static final String NAME_AUTHOR = "author";
-
-
-    private static final String TABLE_NAME = "vs_guestcheckedoutlist";
+    public static final int ID_BSOURCE = 6;
+    public static final int TYPE_BSOURCE = Types.VARCHAR;
+    public static final String NAME_BSOURCE = "bsource";
 
     /**
-     * Create an array of type string containing all the fields of the vs_guestcheckedoutlist table.
+     * Column voucher of type Types.VARCHAR mapped to String.
+     */
+    public static final int ID_VOUCHER = 7;
+    public static final int TYPE_VOUCHER = Types.VARCHAR;
+    public static final String NAME_VOUCHER = "voucher";
+
+    /**
+     * Column totalchage of type Types.DOUBLE mapped to Double.
+     */
+    public static final int ID_TOTALCHAGE = 8;
+    public static final int TYPE_TOTALCHAGE = Types.DOUBLE;
+    public static final String NAME_TOTALCHAGE = "totalchage";
+
+
+    private static final String TABLE_NAME = "vs_breakdown";
+
+    /**
+     * Create an array of type string containing all the fields of the vs_breakdown table.
      */
     private static final String[] FIELD_NAMES = 
     {
-        "vs_guestcheckedoutlist.roomname"
-        ,"vs_guestcheckedoutlist.invoicenum"
-        ,"vs_guestcheckedoutlist.guestname"
-        ,"vs_guestcheckedoutlist.arraivaldate"
-        ,"vs_guestcheckedoutlist.departuredate"
-        ,"vs_guestcheckedoutlist.totalcharges"
-        ,"vs_guestcheckedoutlist.balance"
-        ,"vs_guestcheckedoutlist.company"
-        ,"vs_guestcheckedoutlist.author"
+        "vs_breakdown.resno"
+        ,"vs_breakdown.arraivaldate"
+        ,"vs_breakdown.departuredate"
+        ,"vs_breakdown.guestname"
+        ,"vs_breakdown.roomname"
+        ,"vs_breakdown.bookingstatus"
+        ,"vs_breakdown.bsource"
+        ,"vs_breakdown.voucher"
+        ,"vs_breakdown.totalchage"
     };
 
     /**
-     * Field that contains the comma separated fields of the vs_guestcheckedoutlist table.
+     * Field that contains the comma separated fields of the vs_breakdown table.
      */
-    private static final String ALL_FIELDS = "vs_guestcheckedoutlist.roomname"
-                            + ",vs_guestcheckedoutlist.invoicenum"
-                            + ",vs_guestcheckedoutlist.guestname"
-                            + ",vs_guestcheckedoutlist.arraivaldate"
-                            + ",vs_guestcheckedoutlist.departuredate"
-                            + ",vs_guestcheckedoutlist.totalcharges"
-                            + ",vs_guestcheckedoutlist.balance"
-                            + ",vs_guestcheckedoutlist.company"
-                            + ",vs_guestcheckedoutlist.author";
+    private static final String ALL_FIELDS = "vs_breakdown.resno"
+                            + ",vs_breakdown.arraivaldate"
+                            + ",vs_breakdown.departuredate"
+                            + ",vs_breakdown.guestname"
+                            + ",vs_breakdown.roomname"
+                            + ",vs_breakdown.bookingstatus"
+                            + ",vs_breakdown.bsource"
+                            + ",vs_breakdown.voucher"
+                            + ",vs_breakdown.totalchage";
 
-    private static VsGuestcheckedoutlistManager singleton = new VsGuestcheckedoutlistManager();
+    private static VsBreakdownManager singleton = new VsBreakdownManager();
 
     /**
-     * Get the VsGuestcheckedoutlistManager singleton.
+     * Get the VsBreakdownManager singleton.
      *
-     * @return VsGuestcheckedoutlistManager 
+     * @return VsBreakdownManager 
      */
-    synchronized public static VsGuestcheckedoutlistManager getInstance()
+    synchronized public static VsBreakdownManager getInstance()
     {
         return singleton;
     }
 
     /**
-     * Sets your own VsGuestcheckedoutlistManager instance.
+     * Sets your own VsBreakdownManager instance.
      <br>
      * This is optional, by default we provide it for you.
      */
-    synchronized public static void setInstance(VsGuestcheckedoutlistManager instance)
+    synchronized public static void setInstance(VsBreakdownManager instance)
     {
         singleton = instance;
     }
 
 
     /**
-     * Creates a new VsGuestcheckedoutlistBean instance.
+     * Creates a new VsBreakdownBean instance.
      *
-     * @return the new VsGuestcheckedoutlistBean 
+     * @return the new VsBreakdownBean 
      */
-    public VsGuestcheckedoutlistBean createVsGuestcheckedoutlistBean()
+    public VsBreakdownBean createVsBreakdownBean()
     {
-        return new VsGuestcheckedoutlistBean();
+        return new VsBreakdownBean();
     }
 
 
@@ -163,19 +163,19 @@ public class VsGuestcheckedoutlistManager
     //////////////////////////////////////
 
     /**
-     * Loads all the rows from vs_guestcheckedoutlist.
+     * Loads all the rows from vs_breakdown.
      *
-     * @return an array of VsGuestcheckedoutlistManager pObject
+     * @return an array of VsBreakdownManager pObject
      */
     //38
-    public VsGuestcheckedoutlistBean[] loadAll() throws SQLException 
+    public VsBreakdownBean[] loadAll() throws SQLException 
     {
         Connection c = null;
         PreparedStatement ps = null;
         try 
         {
             c = getConnection();
-            ps = c.prepareStatement("SELECT " + ALL_FIELDS + " FROM vs_guestcheckedoutlist",ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            ps = c.prepareStatement("SELECT " + ALL_FIELDS + " FROM vs_breakdown",ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             return loadByPreparedStatement(ps);
         }
         finally
@@ -189,31 +189,31 @@ public class VsGuestcheckedoutlistManager
     // SQL 'WHERE' METHOD
     //////////////////////////////////////
     /**
-     * Retrieves an array of VsGuestcheckedoutlistBean given a sql 'where' clause.
+     * Retrieves an array of VsBreakdownBean given a sql 'where' clause.
      *
      * @param where the sql 'where' clause
-     * @return the resulting VsGuestcheckedoutlistBean table 
+     * @return the resulting VsBreakdownBean table 
      */
     //49
-    public VsGuestcheckedoutlistBean[] loadByWhere(String where) throws SQLException
+    public VsBreakdownBean[] loadByWhere(String where) throws SQLException
     {
         return loadByWhere(where, null);
     }
 
     /**
-     * Retrieves an array of VsGuestcheckedoutlistBean given a sql where clause, and a list of fields.
+     * Retrieves an array of VsBreakdownBean given a sql where clause, and a list of fields.
      * It is up to you to pass the 'WHERE' in your where clausis.
      *
      * @param where the sql 'where' clause
      * @param fieldList table of the field's associated constants
-     * @return the resulting VsGuestcheckedoutlistBean table 
+     * @return the resulting VsBreakdownBean table 
      */
     //51
-    public VsGuestcheckedoutlistBean[] loadByWhere(String where, int[] fieldList) throws SQLException
+    public VsBreakdownBean[] loadByWhere(String where, int[] fieldList) throws SQLException
     {
         String sql = null;
         if(fieldList == null)
-            sql = "select " + ALL_FIELDS + " from vs_guestcheckedoutlist " + where;
+            sql = "select " + ALL_FIELDS + " from vs_breakdown " + where;
         else
         {
             StringBuffer buff = new StringBuffer(128);
@@ -224,7 +224,7 @@ public class VsGuestcheckedoutlistManager
                     buff.append(",");
                 buff.append(FIELD_NAMES[fieldList[i]]);
             }
-            buff.append(" from vs_guestcheckedoutlist ");
+            buff.append(" from vs_breakdown ");
             buff.append(where);
             sql = buff.toString();
             buff = null;
@@ -247,7 +247,7 @@ public class VsGuestcheckedoutlistManager
                     v.add(decodeRow(rs, fieldList));
             }
 
-            return (VsGuestcheckedoutlistBean[])v.toArray(new VsGuestcheckedoutlistBean[0]);
+            return (VsBreakdownBean[])v.toArray(new VsBreakdownBean[0]);
         }
         finally
         {
@@ -259,7 +259,7 @@ public class VsGuestcheckedoutlistManager
 
 
     /**
-     * Deletes all rows from vs_guestcheckedoutlist table.
+     * Deletes all rows from vs_breakdown table.
      * @return the number of deleted rows.
      */
     public int deleteAll() throws SQLException
@@ -269,7 +269,7 @@ public class VsGuestcheckedoutlistManager
 
 
     /**
-     * Deletes rows from the vs_guestcheckedoutlist table using a 'where' clause.
+     * Deletes rows from the vs_breakdown table using a 'where' clause.
      * It is up to you to pass the 'WHERE' in your where clausis.
      * <br>Attention, if 'WHERE' is omitted it will delete all records. 
      *
@@ -284,7 +284,7 @@ public class VsGuestcheckedoutlistManager
         try
         {
             c = getConnection();
-            String delByWhereSQL = "DELETE FROM vs_guestcheckedoutlist " + where;
+            String delByWhereSQL = "DELETE FROM vs_breakdown " + where;
             ps = c.prepareStatement(delByWhereSQL);
             return ps.executeUpdate();
         }
@@ -301,12 +301,12 @@ public class VsGuestcheckedoutlistManager
     // SAVE 
     ///////////////////////////////////////////////////////////////////////
     /**
-     * Saves the VsGuestcheckedoutlistBean pObject into the database.
+     * Saves the VsBreakdownBean pObject into the database.
      *
-     * @param pObject the VsGuestcheckedoutlistBean pObject to be saved
+     * @param pObject the VsBreakdownBean pObject to be saved
      */
     //100
-    public VsGuestcheckedoutlistBean save(VsGuestcheckedoutlistBean pObject) throws SQLException
+    public VsBreakdownBean save(VsBreakdownBean pObject) throws SQLException
     {
         Connection c = null;
         PreparedStatement ps = null;
@@ -319,29 +319,13 @@ public class VsGuestcheckedoutlistManager
             { // SAVE 
                 beforeInsert(pObject); // listener callback
                 int _dirtyCount = 0;
-                _sql = new StringBuffer("INSERT into vs_guestcheckedoutlist (");
+                _sql = new StringBuffer("INSERT into vs_breakdown (");
     
-                if (pObject.isRoomnameModified()) {
+                if (pObject.isResnoModified()) {
                     if (_dirtyCount>0) {
                         _sql.append(",");
                     }
-                    _sql.append("roomname");
-                    _dirtyCount++;
-                }
-
-                if (pObject.isInvoicenumModified()) {
-                    if (_dirtyCount>0) {
-                        _sql.append(",");
-                    }
-                    _sql.append("invoicenum");
-                    _dirtyCount++;
-                }
-
-                if (pObject.isGuestnameModified()) {
-                    if (_dirtyCount>0) {
-                        _sql.append(",");
-                    }
-                    _sql.append("guestname");
+                    _sql.append("resno");
                     _dirtyCount++;
                 }
 
@@ -361,35 +345,51 @@ public class VsGuestcheckedoutlistManager
                     _dirtyCount++;
                 }
 
-                if (pObject.isTotalchargesModified()) {
+                if (pObject.isGuestnameModified()) {
                     if (_dirtyCount>0) {
                         _sql.append(",");
                     }
-                    _sql.append("totalcharges");
+                    _sql.append("guestname");
                     _dirtyCount++;
                 }
 
-                if (pObject.isBalanceModified()) {
+                if (pObject.isRoomnameModified()) {
                     if (_dirtyCount>0) {
                         _sql.append(",");
                     }
-                    _sql.append("balance");
+                    _sql.append("roomname");
                     _dirtyCount++;
                 }
 
-                if (pObject.isCompanyModified()) {
+                if (pObject.isBookingstatusModified()) {
                     if (_dirtyCount>0) {
                         _sql.append(",");
                     }
-                    _sql.append("company");
+                    _sql.append("bookingstatus");
                     _dirtyCount++;
                 }
 
-                if (pObject.isAuthorModified()) {
+                if (pObject.isBsourceModified()) {
                     if (_dirtyCount>0) {
                         _sql.append(",");
                     }
-                    _sql.append("author");
+                    _sql.append("bsource");
+                    _dirtyCount++;
+                }
+
+                if (pObject.isVoucherModified()) {
+                    if (_dirtyCount>0) {
+                        _sql.append(",");
+                    }
+                    _sql.append("voucher");
+                    _dirtyCount++;
+                }
+
+                if (pObject.isTotalchageModified()) {
+                    if (_dirtyCount>0) {
+                        _sql.append(",");
+                    }
+                    _sql.append("totalchage");
                     _dirtyCount++;
                 }
 
@@ -405,16 +405,8 @@ public class VsGuestcheckedoutlistManager
                 ps = c.prepareStatement(_sql.toString(), ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
                 _dirtyCount = 0;
 
-                if (pObject.isRoomnameModified()) {
-                    ps.setString(++_dirtyCount, pObject.getRoomname());
-                }
-    
-                if (pObject.isInvoicenumModified()) {
-                    ps.setString(++_dirtyCount, pObject.getInvoicenum());
-                }
-    
-                if (pObject.isGuestnameModified()) {
-                    ps.setString(++_dirtyCount, pObject.getGuestname());
+                if (pObject.isResnoModified()) {
+                    ps.setString(++_dirtyCount, pObject.getResno());
                 }
     
                 if (pObject.isArraivaldateModified()) {
@@ -425,20 +417,28 @@ public class VsGuestcheckedoutlistManager
                     ps.setTimestamp(++_dirtyCount, pObject.getDeparturedate());
                 }
     
-                if (pObject.isTotalchargesModified()) {
-                    Manager.setDouble(ps, ++_dirtyCount, pObject.getTotalcharges());
+                if (pObject.isGuestnameModified()) {
+                    ps.setString(++_dirtyCount, pObject.getGuestname());
                 }
     
-                if (pObject.isBalanceModified()) {
-                    Manager.setDouble(ps, ++_dirtyCount, pObject.getBalance());
+                if (pObject.isRoomnameModified()) {
+                    ps.setString(++_dirtyCount, pObject.getRoomname());
                 }
     
-                if (pObject.isCompanyModified()) {
-                    ps.setString(++_dirtyCount, pObject.getCompany());
+                if (pObject.isBookingstatusModified()) {
+                    ps.setString(++_dirtyCount, pObject.getBookingstatus());
                 }
     
-                if (pObject.isAuthorModified()) {
-                    ps.setString(++_dirtyCount, pObject.getAuthor());
+                if (pObject.isBsourceModified()) {
+                    ps.setString(++_dirtyCount, pObject.getBsource());
+                }
+    
+                if (pObject.isVoucherModified()) {
+                    ps.setString(++_dirtyCount, pObject.getVoucher());
+                }
+    
+                if (pObject.isTotalchageModified()) {
+                    Manager.setDouble(ps, ++_dirtyCount, pObject.getTotalchage());
                 }
     
                 ps.executeUpdate();
@@ -450,34 +450,16 @@ public class VsGuestcheckedoutlistManager
             else 
             { // UPDATE 
                 beforeUpdate(pObject); // listener callback
-                _sql = new StringBuffer("UPDATE vs_guestcheckedoutlist SET ");
+                _sql = new StringBuffer("UPDATE vs_breakdown SET ");
                 boolean useComma=false;
 
-                if (pObject.isRoomnameModified()) {
+                if (pObject.isResnoModified()) {
                     if (useComma) {
                         _sql.append(",");
                     } else {
                         useComma=true;
                     }
-                    _sql.append("roomname").append("=?");
-                }
-
-                if (pObject.isInvoicenumModified()) {
-                    if (useComma) {
-                        _sql.append(",");
-                    } else {
-                        useComma=true;
-                    }
-                    _sql.append("invoicenum").append("=?");
-                }
-
-                if (pObject.isGuestnameModified()) {
-                    if (useComma) {
-                        _sql.append(",");
-                    } else {
-                        useComma=true;
-                    }
-                    _sql.append("guestname").append("=?");
+                    _sql.append("resno").append("=?");
                 }
 
                 if (pObject.isArraivaldateModified()) {
@@ -498,55 +480,65 @@ public class VsGuestcheckedoutlistManager
                     _sql.append("departuredate").append("=?");
                 }
 
-                if (pObject.isTotalchargesModified()) {
+                if (pObject.isGuestnameModified()) {
                     if (useComma) {
                         _sql.append(",");
                     } else {
                         useComma=true;
                     }
-                    _sql.append("totalcharges").append("=?");
+                    _sql.append("guestname").append("=?");
                 }
 
-                if (pObject.isBalanceModified()) {
+                if (pObject.isRoomnameModified()) {
                     if (useComma) {
                         _sql.append(",");
                     } else {
                         useComma=true;
                     }
-                    _sql.append("balance").append("=?");
+                    _sql.append("roomname").append("=?");
                 }
 
-                if (pObject.isCompanyModified()) {
+                if (pObject.isBookingstatusModified()) {
                     if (useComma) {
                         _sql.append(",");
                     } else {
                         useComma=true;
                     }
-                    _sql.append("company").append("=?");
+                    _sql.append("bookingstatus").append("=?");
                 }
 
-                if (pObject.isAuthorModified()) {
+                if (pObject.isBsourceModified()) {
                     if (useComma) {
                         _sql.append(",");
                     } else {
                         useComma=true;
                     }
-                    _sql.append("author").append("=?");
+                    _sql.append("bsource").append("=?");
+                }
+
+                if (pObject.isVoucherModified()) {
+                    if (useComma) {
+                        _sql.append(",");
+                    } else {
+                        useComma=true;
+                    }
+                    _sql.append("voucher").append("=?");
+                }
+
+                if (pObject.isTotalchageModified()) {
+                    if (useComma) {
+                        _sql.append(",");
+                    } else {
+                        useComma=true;
+                    }
+                    _sql.append("totalchage").append("=?");
                 }
                 _sql.append("");
                 ps = c.prepareStatement(_sql.toString(),ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
                 int _dirtyCount = 0;
 
-                if (pObject.isRoomnameModified()) {
-                      ps.setString(++_dirtyCount, pObject.getRoomname());
-                }
-
-                if (pObject.isInvoicenumModified()) {
-                      ps.setString(++_dirtyCount, pObject.getInvoicenum());
-                }
-
-                if (pObject.isGuestnameModified()) {
-                      ps.setString(++_dirtyCount, pObject.getGuestname());
+                if (pObject.isResnoModified()) {
+                      ps.setString(++_dirtyCount, pObject.getResno());
                 }
 
                 if (pObject.isArraivaldateModified()) {
@@ -557,20 +549,28 @@ public class VsGuestcheckedoutlistManager
                       ps.setTimestamp(++_dirtyCount, pObject.getDeparturedate());
                 }
 
-                if (pObject.isTotalchargesModified()) {
-                      Manager.setDouble(ps, ++_dirtyCount, pObject.getTotalcharges());
+                if (pObject.isGuestnameModified()) {
+                      ps.setString(++_dirtyCount, pObject.getGuestname());
                 }
 
-                if (pObject.isBalanceModified()) {
-                      Manager.setDouble(ps, ++_dirtyCount, pObject.getBalance());
+                if (pObject.isRoomnameModified()) {
+                      ps.setString(++_dirtyCount, pObject.getRoomname());
                 }
 
-                if (pObject.isCompanyModified()) {
-                      ps.setString(++_dirtyCount, pObject.getCompany());
+                if (pObject.isBookingstatusModified()) {
+                      ps.setString(++_dirtyCount, pObject.getBookingstatus());
                 }
 
-                if (pObject.isAuthorModified()) {
-                      ps.setString(++_dirtyCount, pObject.getAuthor());
+                if (pObject.isBsourceModified()) {
+                      ps.setString(++_dirtyCount, pObject.getBsource());
+                }
+
+                if (pObject.isVoucherModified()) {
+                      ps.setString(++_dirtyCount, pObject.getVoucher());
+                }
+
+                if (pObject.isTotalchageModified()) {
+                      Manager.setDouble(ps, ++_dirtyCount, pObject.getTotalchage());
                 }
     
                 if (_dirtyCount == 0) {
@@ -594,13 +594,13 @@ public class VsGuestcheckedoutlistManager
 
 
     /**
-     * Saves an array of VsGuestcheckedoutlistBean pObjects into the database.
+     * Saves an array of VsBreakdownBean pObjects into the database.
      *
-     * @param pObjects the VsGuestcheckedoutlistBean pObject table to be saved
-     * @return the saved VsGuestcheckedoutlistBean array.
+     * @param pObjects the VsBreakdownBean pObject table to be saved
+     * @return the saved VsBreakdownBean array.
      */
     //65
-    public VsGuestcheckedoutlistBean[] save(VsGuestcheckedoutlistBean[] pObjects) throws SQLException 
+    public VsBreakdownBean[] save(VsBreakdownBean[] pObjects) throws SQLException 
     {
         for (int iIndex = 0; iIndex < pObjects.length; iIndex ++){
             save(pObjects[iIndex]);
@@ -614,15 +614,15 @@ public class VsGuestcheckedoutlistManager
     // USING TEMPLATE 
     ///////////////////////////////////////////////////////////////////////
     /**
-     * Loads a unique VsGuestcheckedoutlistBean pObject from a template one giving a c
+     * Loads a unique VsBreakdownBean pObject from a template one giving a c
      *
-     * @param pObject the VsGuestcheckedoutlistBean pObject to look for
+     * @param pObject the VsBreakdownBean pObject to look for
      * @return the pObject matching the template
      */
     //85
-    public VsGuestcheckedoutlistBean loadUniqueUsingTemplate(VsGuestcheckedoutlistBean pObject) throws SQLException
+    public VsBreakdownBean loadUniqueUsingTemplate(VsBreakdownBean pObject) throws SQLException
     {
-         VsGuestcheckedoutlistBean[] pReturn = loadUsingTemplate(pObject);
+         VsBreakdownBean[] pReturn = loadUsingTemplate(pObject);
          if (pReturn.length == 0)
              return null;
          if (pReturn.length > 1)
@@ -631,36 +631,26 @@ public class VsGuestcheckedoutlistManager
      }
 
     /**
-     * Loads an array of VsGuestcheckedoutlistBean from a template one.
+     * Loads an array of VsBreakdownBean from a template one.
      *
-     * @param pObject the VsGuestcheckedoutlistBean template to look for
-     * @return all the VsGuestcheckedoutlistBean matching the template
+     * @param pObject the VsBreakdownBean template to look for
+     * @return all the VsBreakdownBean matching the template
      */
     //88
-    public VsGuestcheckedoutlistBean[] loadUsingTemplate(VsGuestcheckedoutlistBean pObject) throws SQLException
+    public VsBreakdownBean[] loadUsingTemplate(VsBreakdownBean pObject) throws SQLException
     {
         Connection c = null;
         PreparedStatement ps = null;
         StringBuffer where = new StringBuffer("");
-        StringBuffer _sql = new StringBuffer("SELECT " + ALL_FIELDS + " from vs_guestcheckedoutlist WHERE ");
+        StringBuffer _sql = new StringBuffer("SELECT " + ALL_FIELDS + " from vs_breakdown WHERE ");
         StringBuffer _sqlWhere = new StringBuffer("");
         try
         {
             int _dirtyCount = 0;
     
-             if (pObject.isRoomnameModified()) {
+             if (pObject.isResnoModified()) {
                  _dirtyCount ++; 
-                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("roomname= ?");
-             }
-    
-             if (pObject.isInvoicenumModified()) {
-                 _dirtyCount ++; 
-                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("invoicenum= ?");
-             }
-    
-             if (pObject.isGuestnameModified()) {
-                 _dirtyCount ++; 
-                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("guestname= ?");
+                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("resno= ?");
              }
     
              if (pObject.isArraivaldateModified()) {
@@ -673,24 +663,34 @@ public class VsGuestcheckedoutlistManager
                  _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("departuredate= ?");
              }
     
-             if (pObject.isTotalchargesModified()) {
+             if (pObject.isGuestnameModified()) {
                  _dirtyCount ++; 
-                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("totalcharges= ?");
+                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("guestname= ?");
              }
     
-             if (pObject.isBalanceModified()) {
+             if (pObject.isRoomnameModified()) {
                  _dirtyCount ++; 
-                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("balance= ?");
+                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("roomname= ?");
              }
     
-             if (pObject.isCompanyModified()) {
+             if (pObject.isBookingstatusModified()) {
                  _dirtyCount ++; 
-                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("company= ?");
+                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("bookingstatus= ?");
              }
     
-             if (pObject.isAuthorModified()) {
+             if (pObject.isBsourceModified()) {
                  _dirtyCount ++; 
-                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("author= ?");
+                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("bsource= ?");
+             }
+    
+             if (pObject.isVoucherModified()) {
+                 _dirtyCount ++; 
+                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("voucher= ?");
+             }
+    
+             if (pObject.isTotalchageModified()) {
+                 _dirtyCount ++; 
+                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("totalchage= ?");
              }
     
              if (_dirtyCount == 0) {
@@ -701,16 +701,8 @@ public class VsGuestcheckedoutlistManager
              ps = c.prepareStatement(_sql.toString(),ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
              _dirtyCount = 0;
     
-             if (pObject.isRoomnameModified()) {
-                 ps.setString(++_dirtyCount, pObject.getRoomname());
-             }
-    
-             if (pObject.isInvoicenumModified()) {
-                 ps.setString(++_dirtyCount, pObject.getInvoicenum());
-             }
-    
-             if (pObject.isGuestnameModified()) {
-                 ps.setString(++_dirtyCount, pObject.getGuestname());
+             if (pObject.isResnoModified()) {
+                 ps.setString(++_dirtyCount, pObject.getResno());
              }
     
              if (pObject.isArraivaldateModified()) {
@@ -721,20 +713,28 @@ public class VsGuestcheckedoutlistManager
                  ps.setTimestamp(++_dirtyCount, pObject.getDeparturedate());
              }
     
-             if (pObject.isTotalchargesModified()) {
-                 Manager.setDouble(ps, ++_dirtyCount, pObject.getTotalcharges());
+             if (pObject.isGuestnameModified()) {
+                 ps.setString(++_dirtyCount, pObject.getGuestname());
              }
     
-             if (pObject.isBalanceModified()) {
-                 Manager.setDouble(ps, ++_dirtyCount, pObject.getBalance());
+             if (pObject.isRoomnameModified()) {
+                 ps.setString(++_dirtyCount, pObject.getRoomname());
              }
     
-             if (pObject.isCompanyModified()) {
-                 ps.setString(++_dirtyCount, pObject.getCompany());
+             if (pObject.isBookingstatusModified()) {
+                 ps.setString(++_dirtyCount, pObject.getBookingstatus());
              }
     
-             if (pObject.isAuthorModified()) {
-                 ps.setString(++_dirtyCount, pObject.getAuthor());
+             if (pObject.isBsourceModified()) {
+                 ps.setString(++_dirtyCount, pObject.getBsource());
+             }
+    
+             if (pObject.isVoucherModified()) {
+                 ps.setString(++_dirtyCount, pObject.getVoucher());
+             }
+    
+             if (pObject.isTotalchageModified()) {
+                 Manager.setDouble(ps, ++_dirtyCount, pObject.getTotalchage());
              }
     
              ps.executeQuery();
@@ -747,13 +747,13 @@ public class VsGuestcheckedoutlistManager
         }
     }
     /**
-     * Deletes rows using a VsGuestcheckedoutlistBean template.
+     * Deletes rows using a VsBreakdownBean template.
      *
-     * @param pObject the VsGuestcheckedoutlistBean object(s) to be deleted
+     * @param pObject the VsBreakdownBean object(s) to be deleted
      * @return the number of deleted objects
      */
     //63
-    public int deleteUsingTemplate(VsGuestcheckedoutlistBean pObject) throws SQLException
+    public int deleteUsingTemplate(VsBreakdownBean pObject) throws SQLException
     {
         Connection c = null;
         PreparedStatement ps = null;
@@ -761,26 +761,12 @@ public class VsGuestcheckedoutlistManager
     
         try 
         {
-            sql = new StringBuffer("DELETE FROM vs_guestcheckedoutlist WHERE ");
+            sql = new StringBuffer("DELETE FROM vs_breakdown WHERE ");
             int _dirtyAnd = 0;
-            if (pObject.isRoomnameInitialized()) {
+            if (pObject.isResnoInitialized()) {
                 if (_dirtyAnd > 0)
                     sql.append(" AND ");
-                sql.append("roomname").append("=?");
-                _dirtyAnd ++;
-            }
-    
-            if (pObject.isInvoicenumInitialized()) {
-                if (_dirtyAnd > 0)
-                    sql.append(" AND ");
-                sql.append("invoicenum").append("=?");
-                _dirtyAnd ++;
-            }
-    
-            if (pObject.isGuestnameInitialized()) {
-                if (_dirtyAnd > 0)
-                    sql.append(" AND ");
-                sql.append("guestname").append("=?");
+                sql.append("resno").append("=?");
                 _dirtyAnd ++;
             }
     
@@ -798,31 +784,45 @@ public class VsGuestcheckedoutlistManager
                 _dirtyAnd ++;
             }
     
-            if (pObject.isTotalchargesInitialized()) {
+            if (pObject.isGuestnameInitialized()) {
                 if (_dirtyAnd > 0)
                     sql.append(" AND ");
-                sql.append("totalcharges").append("=?");
+                sql.append("guestname").append("=?");
                 _dirtyAnd ++;
             }
     
-            if (pObject.isBalanceInitialized()) {
+            if (pObject.isRoomnameInitialized()) {
                 if (_dirtyAnd > 0)
                     sql.append(" AND ");
-                sql.append("balance").append("=?");
+                sql.append("roomname").append("=?");
                 _dirtyAnd ++;
             }
     
-            if (pObject.isCompanyInitialized()) {
+            if (pObject.isBookingstatusInitialized()) {
                 if (_dirtyAnd > 0)
                     sql.append(" AND ");
-                sql.append("company").append("=?");
+                sql.append("bookingstatus").append("=?");
                 _dirtyAnd ++;
             }
     
-            if (pObject.isAuthorInitialized()) {
+            if (pObject.isBsourceInitialized()) {
                 if (_dirtyAnd > 0)
                     sql.append(" AND ");
-                sql.append("author").append("=?");
+                sql.append("bsource").append("=?");
+                _dirtyAnd ++;
+            }
+    
+            if (pObject.isVoucherInitialized()) {
+                if (_dirtyAnd > 0)
+                    sql.append(" AND ");
+                sql.append("voucher").append("=?");
+                _dirtyAnd ++;
+            }
+    
+            if (pObject.isTotalchageInitialized()) {
+                if (_dirtyAnd > 0)
+                    sql.append(" AND ");
+                sql.append("totalchage").append("=?");
                 _dirtyAnd ++;
             }
     
@@ -830,16 +830,8 @@ public class VsGuestcheckedoutlistManager
             ps = c.prepareStatement(sql.toString(),ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             int _dirtyCount = 0;
     
-            if (pObject.isRoomnameInitialized()) {
-                ps.setString(++_dirtyCount, pObject.getRoomname());
-            }
-    
-            if (pObject.isInvoicenumInitialized()) {
-                ps.setString(++_dirtyCount, pObject.getInvoicenum());
-            }
-    
-            if (pObject.isGuestnameInitialized()) {
-                ps.setString(++_dirtyCount, pObject.getGuestname());
+            if (pObject.isResnoInitialized()) {
+                ps.setString(++_dirtyCount, pObject.getResno());
             }
     
             if (pObject.isArraivaldateInitialized()) {
@@ -850,20 +842,28 @@ public class VsGuestcheckedoutlistManager
                 ps.setTimestamp(++_dirtyCount, pObject.getDeparturedate());
             }
     
-            if (pObject.isTotalchargesInitialized()) {
-                Manager.setDouble(ps, ++_dirtyCount, pObject.getTotalcharges());
+            if (pObject.isGuestnameInitialized()) {
+                ps.setString(++_dirtyCount, pObject.getGuestname());
             }
     
-            if (pObject.isBalanceInitialized()) {
-                Manager.setDouble(ps, ++_dirtyCount, pObject.getBalance());
+            if (pObject.isRoomnameInitialized()) {
+                ps.setString(++_dirtyCount, pObject.getRoomname());
             }
     
-            if (pObject.isCompanyInitialized()) {
-                ps.setString(++_dirtyCount, pObject.getCompany());
+            if (pObject.isBookingstatusInitialized()) {
+                ps.setString(++_dirtyCount, pObject.getBookingstatus());
             }
     
-            if (pObject.isAuthorInitialized()) {
-                ps.setString(++_dirtyCount, pObject.getAuthor());
+            if (pObject.isBsourceInitialized()) {
+                ps.setString(++_dirtyCount, pObject.getBsource());
+            }
+    
+            if (pObject.isVoucherInitialized()) {
+                ps.setString(++_dirtyCount, pObject.getVoucher());
+            }
+    
+            if (pObject.isTotalchageInitialized()) {
+                Manager.setDouble(ps, ++_dirtyCount, pObject.getTotalchage());
             }
     
             int _rows = ps.executeUpdate();
@@ -883,7 +883,7 @@ public class VsGuestcheckedoutlistManager
     ///////////////////////////////////////////////////////////////////////
 
     /**
-     * Retrieves the number of rows of the table vs_guestcheckedoutlist.
+     * Retrieves the number of rows of the table vs_breakdown.
      *
      * @return the number of rows returned
      */
@@ -896,7 +896,7 @@ public class VsGuestcheckedoutlistManager
 
 
     /**
-     * Retrieves the number of rows of the table vs_guestcheckedoutlist with a 'where' clause.
+     * Retrieves the number of rows of the table vs_breakdown with a 'where' clause.
      * It is up to you to pass the 'WHERE' in your where clausis.
      *
      * @param where the restriction clause
@@ -904,7 +904,7 @@ public class VsGuestcheckedoutlistManager
      */
     public int countWhere(String where) throws SQLException
     {
-        String sql = "select count(*) as MCOUNT from vs_guestcheckedoutlist " + where;
+        String sql = "select count(*) as MCOUNT from vs_breakdown " + where;
         Connection c = null;
         Statement pStatement = null;
         ResultSet rs =  null;
@@ -930,7 +930,7 @@ public class VsGuestcheckedoutlistManager
     }
 
     /**
-     * Retrieves the number of rows of the table vs_guestcheckedoutlist with a prepared statement.
+     * Retrieves the number of rows of the table vs_breakdown with a prepared statement.
      *
      * @param ps the PreparedStatement to be used
      * @return the number of rows returned
@@ -956,13 +956,13 @@ public class VsGuestcheckedoutlistManager
     }
 
     /**
-     * Looks for the number of elements of a specific VsGuestcheckedoutlistBean pObject given a c
+     * Looks for the number of elements of a specific VsBreakdownBean pObject given a c
      *
-     * @param pObject the VsGuestcheckedoutlistBean pObject to look for
+     * @param pObject the VsBreakdownBean pObject to look for
      * @return the number of rows returned
      */
     //83
-    public int countUsingTemplate(VsGuestcheckedoutlistBean pObject) throws SQLException
+    public int countUsingTemplate(VsBreakdownBean pObject) throws SQLException
     {
         StringBuffer where = new StringBuffer("");
         Connection c = null;
@@ -972,23 +972,13 @@ public class VsGuestcheckedoutlistManager
     
         try
         {
-                _sql = new StringBuffer("SELECT count(*) as MCOUNT  from vs_guestcheckedoutlist WHERE ");
+                _sql = new StringBuffer("SELECT count(*) as MCOUNT  from vs_breakdown WHERE ");
                 _sqlWhere = new StringBuffer("");
                 int _dirtyCount = 0;
     
-                if (pObject.isRoomnameModified()) {
+                if (pObject.isResnoModified()) {
                     _dirtyCount++; 
-                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("roomname= ?");
-                }
-    
-                if (pObject.isInvoicenumModified()) {
-                    _dirtyCount++; 
-                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("invoicenum= ?");
-                }
-    
-                if (pObject.isGuestnameModified()) {
-                    _dirtyCount++; 
-                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("guestname= ?");
+                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("resno= ?");
                 }
     
                 if (pObject.isArraivaldateModified()) {
@@ -1001,24 +991,34 @@ public class VsGuestcheckedoutlistManager
                     _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("departuredate= ?");
                 }
     
-                if (pObject.isTotalchargesModified()) {
+                if (pObject.isGuestnameModified()) {
                     _dirtyCount++; 
-                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("totalcharges= ?");
+                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("guestname= ?");
                 }
     
-                if (pObject.isBalanceModified()) {
+                if (pObject.isRoomnameModified()) {
                     _dirtyCount++; 
-                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("balance= ?");
+                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("roomname= ?");
                 }
     
-                if (pObject.isCompanyModified()) {
+                if (pObject.isBookingstatusModified()) {
                     _dirtyCount++; 
-                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("company= ?");
+                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("bookingstatus= ?");
                 }
     
-                if (pObject.isAuthorModified()) {
+                if (pObject.isBsourceModified()) {
                     _dirtyCount++; 
-                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("author= ?");
+                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("bsource= ?");
+                }
+    
+                if (pObject.isVoucherModified()) {
+                    _dirtyCount++; 
+                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("voucher= ?");
+                }
+    
+                if (pObject.isTotalchageModified()) {
+                    _dirtyCount++; 
+                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("totalchage= ?");
                 }
     
                 if (_dirtyCount == 0)
@@ -1030,16 +1030,8 @@ public class VsGuestcheckedoutlistManager
     
                 _dirtyCount = 0;
     
-                if (pObject.isRoomnameModified()) {
-                    ps.setString(++_dirtyCount, pObject.getRoomname());
-                }
-    
-                if (pObject.isInvoicenumModified()) {
-                    ps.setString(++_dirtyCount, pObject.getInvoicenum());
-                }
-    
-                if (pObject.isGuestnameModified()) {
-                    ps.setString(++_dirtyCount, pObject.getGuestname());
+                if (pObject.isResnoModified()) {
+                    ps.setString(++_dirtyCount, pObject.getResno());
                 }
     
                 if (pObject.isArraivaldateModified()) {
@@ -1050,20 +1042,28 @@ public class VsGuestcheckedoutlistManager
                     ps.setTimestamp(++_dirtyCount, pObject.getDeparturedate());
                 }
     
-                if (pObject.isTotalchargesModified()) {
-                    Manager.setDouble(ps, ++_dirtyCount, pObject.getTotalcharges());
+                if (pObject.isGuestnameModified()) {
+                    ps.setString(++_dirtyCount, pObject.getGuestname());
                 }
     
-                if (pObject.isBalanceModified()) {
-                    Manager.setDouble(ps, ++_dirtyCount, pObject.getBalance());
+                if (pObject.isRoomnameModified()) {
+                    ps.setString(++_dirtyCount, pObject.getRoomname());
                 }
     
-                if (pObject.isCompanyModified()) {
-                    ps.setString(++_dirtyCount, pObject.getCompany());
+                if (pObject.isBookingstatusModified()) {
+                    ps.setString(++_dirtyCount, pObject.getBookingstatus());
                 }
     
-                if (pObject.isAuthorModified()) {
-                    ps.setString(++_dirtyCount, pObject.getAuthor());
+                if (pObject.isBsourceModified()) {
+                    ps.setString(++_dirtyCount, pObject.getBsource());
+                }
+    
+                if (pObject.isVoucherModified()) {
+                    ps.setString(++_dirtyCount, pObject.getVoucher());
+                }
+    
+                if (pObject.isTotalchageModified()) {
+                    Manager.setDouble(ps, ++_dirtyCount, pObject.getTotalchage());
                 }
     
                 return countByPreparedStatement(ps);
@@ -1081,24 +1081,24 @@ public class VsGuestcheckedoutlistManager
     // DECODE RESULT SET 
     ///////////////////////////////////////////////////////////////////////
     /**
-     * Transforms a ResultSet iterating on the vs_guestcheckedoutlist on a VsGuestcheckedoutlistBean pObject.
+     * Transforms a ResultSet iterating on the vs_breakdown on a VsBreakdownBean pObject.
      *
      * @param rs the ResultSet to be transformed
-     * @return pObject resulting VsGuestcheckedoutlistBean pObject
+     * @return pObject resulting VsBreakdownBean pObject
      */
     //72
-    public VsGuestcheckedoutlistBean decodeRow(ResultSet rs) throws SQLException
+    public VsBreakdownBean decodeRow(ResultSet rs) throws SQLException
     {
-        VsGuestcheckedoutlistBean pObject = createVsGuestcheckedoutlistBean();
-        pObject.setRoomname(rs.getString(1));
-        pObject.setInvoicenum(rs.getString(2));
-        pObject.setGuestname(rs.getString(3));
-        pObject.setArraivaldate(rs.getTimestamp(4));
-        pObject.setDeparturedate(rs.getTimestamp(5));
-        pObject.setTotalcharges(Manager.getDouble(rs, 6));
-        pObject.setBalance(Manager.getDouble(rs, 7));
-        pObject.setCompany(rs.getString(8));
-        pObject.setAuthor(rs.getString(9));
+        VsBreakdownBean pObject = createVsBreakdownBean();
+        pObject.setResno(rs.getString(1));
+        pObject.setArraivaldate(rs.getTimestamp(2));
+        pObject.setDeparturedate(rs.getTimestamp(3));
+        pObject.setGuestname(rs.getString(4));
+        pObject.setRoomname(rs.getString(5));
+        pObject.setBookingstatus(rs.getString(6));
+        pObject.setBsource(rs.getString(7));
+        pObject.setVoucher(rs.getString(8));
+        pObject.setTotalchage(Manager.getDouble(rs, 9));
 
         pObject.isNew(false);
         pObject.resetIsModified();
@@ -1107,31 +1107,23 @@ public class VsGuestcheckedoutlistManager
     }
 
     /**
-     * Transforms a ResultSet iterating on the vs_guestcheckedoutlist table on a VsGuestcheckedoutlistBean pObject according to a list of fields.
+     * Transforms a ResultSet iterating on the vs_breakdown table on a VsBreakdownBean pObject according to a list of fields.
      *
      * @param rs the ResultSet to be transformed
      * @param fieldList table of the field's associated constants
-     * @return pObject resulting VsGuestcheckedoutlistBean pObject
+     * @return pObject resulting VsBreakdownBean pObject
      */
     //73
-    public VsGuestcheckedoutlistBean decodeRow(ResultSet rs, int[] fieldList) throws SQLException
+    public VsBreakdownBean decodeRow(ResultSet rs, int[] fieldList) throws SQLException
     {
-        VsGuestcheckedoutlistBean pObject = createVsGuestcheckedoutlistBean();
+        VsBreakdownBean pObject = createVsBreakdownBean();
         int pos = 0;
         for(int i = 0; i < fieldList.length; i++)
         {
             switch(fieldList[i]) {
-                case ID_ROOMNAME:
+                case ID_RESNO:
                     ++pos;
-                    pObject.setRoomname(rs.getString(pos));
-                    break;
-                case ID_INVOICENUM:
-                    ++pos;
-                    pObject.setInvoicenum(rs.getString(pos));
-                    break;
-                case ID_GUESTNAME:
-                    ++pos;
-                    pObject.setGuestname(rs.getString(pos));
+                    pObject.setResno(rs.getString(pos));
                     break;
                 case ID_ARRAIVALDATE:
                     ++pos;
@@ -1141,21 +1133,29 @@ public class VsGuestcheckedoutlistManager
                     ++pos;
                     pObject.setDeparturedate(rs.getTimestamp(pos));
                     break;
-                case ID_TOTALCHARGES:
+                case ID_GUESTNAME:
                     ++pos;
-                    pObject.setTotalcharges(Manager.getDouble(rs, pos));
+                    pObject.setGuestname(rs.getString(pos));
                     break;
-                case ID_BALANCE:
+                case ID_ROOMNAME:
                     ++pos;
-                    pObject.setBalance(Manager.getDouble(rs, pos));
+                    pObject.setRoomname(rs.getString(pos));
                     break;
-                case ID_COMPANY:
+                case ID_BOOKINGSTATUS:
                     ++pos;
-                    pObject.setCompany(rs.getString(pos));
+                    pObject.setBookingstatus(rs.getString(pos));
                     break;
-                case ID_AUTHOR:
+                case ID_BSOURCE:
                     ++pos;
-                    pObject.setAuthor(rs.getString(pos));
+                    pObject.setBsource(rs.getString(pos));
+                    break;
+                case ID_VOUCHER:
+                    ++pos;
+                    pObject.setVoucher(rs.getString(pos));
+                    break;
+                case ID_TOTALCHAGE:
+                    ++pos;
+                    pObject.setTotalchage(Manager.getDouble(rs, pos));
                     break;
             }
         }
@@ -1173,10 +1173,10 @@ public class VsGuestcheckedoutlistManager
      * Loads all the elements using a prepared statement.
      *
      * @param ps the PreparedStatement to be used
-     * @return an array of VsGuestcheckedoutlistBean 
+     * @return an array of VsBreakdownBean 
      */
     //41
-    public VsGuestcheckedoutlistBean[] loadByPreparedStatement(PreparedStatement ps) throws SQLException
+    public VsBreakdownBean[] loadByPreparedStatement(PreparedStatement ps) throws SQLException
     {
         return loadByPreparedStatement(ps, null);
     }
@@ -1186,9 +1186,9 @@ public class VsGuestcheckedoutlistManager
      *
      * @param ps the PreparedStatement to be used
      * @param fieldList table of the field's associated constants
-     * @return an array of VsGuestcheckedoutlistBean 
+     * @return an array of VsBreakdownBean 
      */
-    public VsGuestcheckedoutlistBean[] loadByPreparedStatement(PreparedStatement ps, int[] fieldList) throws SQLException
+    public VsBreakdownBean[] loadByPreparedStatement(PreparedStatement ps, int[] fieldList) throws SQLException
     {
         ResultSet rs =  null;
         java.util.ArrayList v =  null;
@@ -1203,7 +1203,7 @@ public class VsGuestcheckedoutlistManager
                 else 
                     v.add(decodeRow(rs, fieldList));
             }
-            return (VsGuestcheckedoutlistBean[])v.toArray(new VsGuestcheckedoutlistBean[0]);
+            return (VsBreakdownBean[])v.toArray(new VsBreakdownBean[0]);
         }
         finally
         {
@@ -1215,56 +1215,56 @@ public class VsGuestcheckedoutlistManager
     ///////////////////////////////////////////////////////////////////////
     // LISTENER 
     ///////////////////////////////////////////////////////////////////////
-    private VsGuestcheckedoutlistListener listener = null;
+    private VsBreakdownListener listener = null;
 
     /**
-     * Registers a unique VsGuestcheckedoutlistListener listener.
+     * Registers a unique VsBreakdownListener listener.
      */
     //66.5
-    public void registerListener(VsGuestcheckedoutlistListener listener) {
+    public void registerListener(VsBreakdownListener listener) {
         this.listener = listener;
     }
 
     /**
-     * Before the save of the VsGuestcheckedoutlistBean pObject.
+     * Before the save of the VsBreakdownBean pObject.
      *
-     * @param pObject the VsGuestcheckedoutlistBean pObject to be saved
+     * @param pObject the VsBreakdownBean pObject to be saved
      */
     //67
-    void beforeInsert(VsGuestcheckedoutlistBean pObject) throws SQLException {
+    void beforeInsert(VsBreakdownBean pObject) throws SQLException {
         if (listener != null)
             listener.beforeInsert(pObject);
     }
 
     /**
-     * After the save of the VsGuestcheckedoutlistBean pObject.
+     * After the save of the VsBreakdownBean pObject.
      *
-     * @param pObject the VsGuestcheckedoutlistBean pObject to be saved
+     * @param pObject the VsBreakdownBean pObject to be saved
      */
     //68
-    void afterInsert(VsGuestcheckedoutlistBean pObject) throws SQLException {
+    void afterInsert(VsBreakdownBean pObject) throws SQLException {
         if (listener != null)
             listener.afterInsert(pObject);
     }
 
     /**
-     * Before the update of the VsGuestcheckedoutlistBean pObject.
+     * Before the update of the VsBreakdownBean pObject.
      *
-     * @param pObject the VsGuestcheckedoutlistBean pObject to be updated
+     * @param pObject the VsBreakdownBean pObject to be updated
      */
     //69
-    void beforeUpdate(VsGuestcheckedoutlistBean pObject) throws SQLException {
+    void beforeUpdate(VsBreakdownBean pObject) throws SQLException {
         if (listener != null)
             listener.beforeUpdate(pObject);
     }
 
     /**
-     * After the update of the VsGuestcheckedoutlistBean pObject.
+     * After the update of the VsBreakdownBean pObject.
      *
-     * @param pObject the VsGuestcheckedoutlistBean pObject to be updated
+     * @param pObject the VsBreakdownBean pObject to be updated
      */
     //70
-    void afterUpdate(VsGuestcheckedoutlistBean pObject) throws SQLException {
+    void afterUpdate(VsBreakdownBean pObject) throws SQLException {
         if (listener != null)
             listener.afterUpdate(pObject);
     }

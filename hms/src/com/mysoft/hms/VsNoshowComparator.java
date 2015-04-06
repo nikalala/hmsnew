@@ -48,21 +48,21 @@ public class VsNoshowComparator implements Comparator
      * Possible values are:
      * <ul>
      *   <li>VsNoshowManager.ID_RESERVATIONID
-     *   <li>VsNoshowManager.ID_GUEST
+     *   <li>VsNoshowManager.ID_GUESTNAME
      *   <li>VsNoshowManager.ID_ARRAIVALDATE
      *   <li>VsNoshowManager.ID_DEPARTUREDATE
-     *   <li>VsNoshowManager.ID_NUM
+     *   <li>VsNoshowManager.ID_FOLIOID
      *   <li>VsNoshowManager.ID_CHARGES
      *   <li>VsNoshowManager.ID_PAID
      *   <li>VsNoshowManager.ID_BALANCE
      *   <li>VsNoshowManager.ID_SOURCE
-     *   <li>VsNoshowManager.ID_NOSHOWBY
+     *   <li>VsNoshowManager.ID_PUSER
      *   <li>VsNoshowManager.ID_REGDATE
      *   <li>VsNoshowManager.ID_REMARK
-     *   <li>VsNoshowManager.ID_REGBYID
-     *   <li>VsNoshowManager.ID_BSOURCEID
+     *   <li>VsNoshowManager.ID_PERSONNELID
      *   <li>VsNoshowManager.ID_ROOMTYPEID
      *   <li>VsNoshowManager.ID_RATETYPEID
+     *   <li>VsNoshowManager.ID_BSOURCEID
      * </ul>
      */
     public VsNoshowComparator(int iType)
@@ -82,21 +82,21 @@ public class VsNoshowComparator implements Comparator
      * Possible values are:
      * <ul>
      *   <li>VsNoshowManager.ID_RESERVATIONID
-     *   <li>VsNoshowManager.ID_GUEST
+     *   <li>VsNoshowManager.ID_GUESTNAME
      *   <li>VsNoshowManager.ID_ARRAIVALDATE
      *   <li>VsNoshowManager.ID_DEPARTUREDATE
-     *   <li>VsNoshowManager.ID_NUM
+     *   <li>VsNoshowManager.ID_FOLIOID
      *   <li>VsNoshowManager.ID_CHARGES
      *   <li>VsNoshowManager.ID_PAID
      *   <li>VsNoshowManager.ID_BALANCE
      *   <li>VsNoshowManager.ID_SOURCE
-     *   <li>VsNoshowManager.ID_NOSHOWBY
+     *   <li>VsNoshowManager.ID_PUSER
      *   <li>VsNoshowManager.ID_REGDATE
      *   <li>VsNoshowManager.ID_REMARK
-     *   <li>VsNoshowManager.ID_REGBYID
-     *   <li>VsNoshowManager.ID_BSOURCEID
+     *   <li>VsNoshowManager.ID_PERSONNELID
      *   <li>VsNoshowManager.ID_ROOMTYPEID
      *   <li>VsNoshowManager.ID_RATETYPEID
+     *   <li>VsNoshowManager.ID_BSOURCEID
      * </ul>
      *
      * @param bReverse set this value to true, if you want to reverse the sorting results
@@ -128,15 +128,15 @@ public class VsNoshowComparator implements Comparator
                     iReturn = b1.getReservationid().compareTo(b2.getReservationid());
                 }
                 break;
-            case VsNoshowManager.ID_GUEST:
-                if (b1.getGuest() == null && b2.getGuest() != null) {
+            case VsNoshowManager.ID_GUESTNAME:
+                if (b1.getGuestname() == null && b2.getGuestname() != null) {
                     iReturn = -1;
-                } else if (b1.getGuest() == null && b2.getGuest() == null) {
+                } else if (b1.getGuestname() == null && b2.getGuestname() == null) {
                     iReturn = 0;
-                } else if (b1.getGuest() != null && b2.getGuest() == null) {
+                } else if (b1.getGuestname() != null && b2.getGuestname() == null) {
                     iReturn = 1;
                 } else { 
-                    iReturn = b1.getGuest().compareTo(b2.getGuest());
+                    iReturn = b1.getGuestname().compareTo(b2.getGuestname());
                 }
                 break;
             case VsNoshowManager.ID_ARRAIVALDATE:
@@ -161,15 +161,15 @@ public class VsNoshowComparator implements Comparator
                     iReturn = b1.getDeparturedate().compareTo(b2.getDeparturedate());
                 }
                 break;
-            case VsNoshowManager.ID_NUM:
-                if (b1.getNum() == null && b2.getNum() != null) {
+            case VsNoshowManager.ID_FOLIOID:
+                if (b1.getFolioid() == null && b2.getFolioid() != null) {
                     iReturn = -1;
-                } else if (b1.getNum() == null && b2.getNum() == null) {
+                } else if (b1.getFolioid() == null && b2.getFolioid() == null) {
                     iReturn = 0;
-                } else if (b1.getNum() != null && b2.getNum() == null) {
+                } else if (b1.getFolioid() != null && b2.getFolioid() == null) {
                     iReturn = 1;
                 } else { 
-                    iReturn = b1.getNum().compareTo(b2.getNum());
+                    iReturn = b1.getFolioid().compareTo(b2.getFolioid());
                 }
                 break;
             case VsNoshowManager.ID_CHARGES:
@@ -216,15 +216,15 @@ public class VsNoshowComparator implements Comparator
                     iReturn = b1.getSource().compareTo(b2.getSource());
                 }
                 break;
-            case VsNoshowManager.ID_NOSHOWBY:
-                if (b1.getNoshowby() == null && b2.getNoshowby() != null) {
+            case VsNoshowManager.ID_PUSER:
+                if (b1.getPuser() == null && b2.getPuser() != null) {
                     iReturn = -1;
-                } else if (b1.getNoshowby() == null && b2.getNoshowby() == null) {
+                } else if (b1.getPuser() == null && b2.getPuser() == null) {
                     iReturn = 0;
-                } else if (b1.getNoshowby() != null && b2.getNoshowby() == null) {
+                } else if (b1.getPuser() != null && b2.getPuser() == null) {
                     iReturn = 1;
                 } else { 
-                    iReturn = b1.getNoshowby().compareTo(b2.getNoshowby());
+                    iReturn = b1.getPuser().compareTo(b2.getPuser());
                 }
                 break;
             case VsNoshowManager.ID_REGDATE:
@@ -249,26 +249,15 @@ public class VsNoshowComparator implements Comparator
                     iReturn = b1.getRemark().compareTo(b2.getRemark());
                 }
                 break;
-            case VsNoshowManager.ID_REGBYID:
-                if (b1.getRegbyid() == null && b2.getRegbyid() != null) {
+            case VsNoshowManager.ID_PERSONNELID:
+                if (b1.getPersonnelid() == null && b2.getPersonnelid() != null) {
                     iReturn = -1;
-                } else if (b1.getRegbyid() == null && b2.getRegbyid() == null) {
+                } else if (b1.getPersonnelid() == null && b2.getPersonnelid() == null) {
                     iReturn = 0;
-                } else if (b1.getRegbyid() != null && b2.getRegbyid() == null) {
+                } else if (b1.getPersonnelid() != null && b2.getPersonnelid() == null) {
                     iReturn = 1;
                 } else { 
-                    iReturn = b1.getRegbyid().compareTo(b2.getRegbyid());
-                }
-                break;
-            case VsNoshowManager.ID_BSOURCEID:
-                if (b1.getBsourceid() == null && b2.getBsourceid() != null) {
-                    iReturn = -1;
-                } else if (b1.getBsourceid() == null && b2.getBsourceid() == null) {
-                    iReturn = 0;
-                } else if (b1.getBsourceid() != null && b2.getBsourceid() == null) {
-                    iReturn = 1;
-                } else { 
-                    iReturn = b1.getBsourceid().compareTo(b2.getBsourceid());
+                    iReturn = b1.getPersonnelid().compareTo(b2.getPersonnelid());
                 }
                 break;
             case VsNoshowManager.ID_ROOMTYPEID:
@@ -291,6 +280,17 @@ public class VsNoshowComparator implements Comparator
                     iReturn = 1;
                 } else { 
                     iReturn = b1.getRatetypeid().compareTo(b2.getRatetypeid());
+                }
+                break;
+            case VsNoshowManager.ID_BSOURCEID:
+                if (b1.getBsourceid() == null && b2.getBsourceid() != null) {
+                    iReturn = -1;
+                } else if (b1.getBsourceid() == null && b2.getBsourceid() == null) {
+                    iReturn = 0;
+                } else if (b1.getBsourceid() != null && b2.getBsourceid() == null) {
+                    iReturn = 1;
+                } else { 
+                    iReturn = b1.getBsourceid().compareTo(b2.getBsourceid());
                 }
                 break;
             default: 

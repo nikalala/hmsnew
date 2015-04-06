@@ -27,9 +27,9 @@ public class VsVoidlistBean
     private boolean reservationid_is_modified = false;
     private boolean reservationid_is_initialized = false;
     
-    private String guest;
-    private boolean guest_is_modified = false;
-    private boolean guest_is_initialized = false;
+    private String guestname;
+    private boolean guestname_is_modified = false;
+    private boolean guestname_is_initialized = false;
     
     private java.sql.Timestamp arraivaldate;
     private boolean arraivaldate_is_modified = false;
@@ -39,17 +39,17 @@ public class VsVoidlistBean
     private boolean departuredate_is_modified = false;
     private boolean departuredate_is_initialized = false;
     
-    private String num;
-    private boolean num_is_modified = false;
-    private boolean num_is_initialized = false;
+    private Long folioid;
+    private boolean folioid_is_modified = false;
+    private boolean folioid_is_initialized = false;
     
-    private String name;
-    private boolean name_is_modified = false;
-    private boolean name_is_initialized = false;
+    private String source;
+    private boolean source_is_modified = false;
+    private boolean source_is_initialized = false;
     
-    private String loginid;
-    private boolean loginid_is_modified = false;
-    private boolean loginid_is_initialized = false;
+    private String puser;
+    private boolean puser_is_modified = false;
+    private boolean puser_is_initialized = false;
     
     private java.sql.Timestamp regdate;
     private boolean regdate_is_modified = false;
@@ -58,6 +58,22 @@ public class VsVoidlistBean
     private String remark;
     private boolean remark_is_modified = false;
     private boolean remark_is_initialized = false;
+    
+    private Integer personnelid;
+    private boolean personnelid_is_modified = false;
+    private boolean personnelid_is_initialized = false;
+    
+    private Integer roomtypeid;
+    private boolean roomtypeid_is_modified = false;
+    private boolean roomtypeid_is_initialized = false;
+    
+    private Integer ratetypeid;
+    private boolean ratetypeid_is_modified = false;
+    private boolean ratetypeid_is_initialized = false;
+    
+    private Integer bsourceid;
+    private boolean bsourceid_is_modified = false;
+    private boolean bsourceid_is_initialized = false;
     
     private boolean _isNew = true;
     
@@ -137,59 +153,59 @@ public class VsVoidlistBean
     }
 
     /**
-     * Getter method for guest.
+     * Getter method for guestname.
      * <br>
      * Meta Data Information (in progress):
      * <ul>
-     * <li>full name: vs_voidlist.guest
+     * <li>full name: vs_voidlist.guestname
      * <li>column size: 2147483647
      * <li>jdbc type returned by the driver: Types.VARCHAR
      * </ul>
      *
-     * @return the value of guest
+     * @return the value of guestname
      */
-    public String getGuest()
+    public String getGuestname()
     {
-        return guest; 
+        return guestname; 
     }
 
     /**
-     * Setter method for guest.
+     * Setter method for guestname.
      * <br>
      * The new value is set only if compareTo() says it is different,
      * or if one of either the new value or the current value is null.
      * In case the new value is different, it is set and the field is marked as 'modified'.
      *
-     * @param newVal the new value to be assigned to guest
+     * @param newVal the new value to be assigned to guestname
      */
-    public void setGuest(String newVal) {
-        if ((newVal != null && this.guest != null && (newVal.compareTo(this.guest) == 0)) || 
-            (newVal == null && this.guest == null && guest_is_initialized)) {
+    public void setGuestname(String newVal) {
+        if ((newVal != null && this.guestname != null && (newVal.compareTo(this.guestname) == 0)) || 
+            (newVal == null && this.guestname == null && guestname_is_initialized)) {
             return; 
         } 
-        this.guest = newVal; 
-        guest_is_modified = true; 
-        guest_is_initialized = true; 
+        this.guestname = newVal; 
+        guestname_is_modified = true; 
+        guestname_is_initialized = true; 
     }
 
     /**
-     * Determines if the guest has been modified.
+     * Determines if the guestname has been modified.
      *
      * @return true if the field has been modified, false if the field has not been modified
      */
-    public boolean isGuestModified() {
-        return guest_is_modified; 
+    public boolean isGuestnameModified() {
+        return guestname_is_modified; 
     }
 
     /**
-     * Determines if the guest has been initialized.
+     * Determines if the guestname has been initialized.
      * <br>
      * It is useful to determine if a field is null on purpose or just because it has not been initialized.
      *
      * @return true if the field has been initialized, false otherwise
      */
-    public boolean isGuestInitialized() {
-        return guest_is_initialized; 
+    public boolean isGuestnameInitialized() {
+        return guestname_is_initialized; 
     }
 
     /**
@@ -327,171 +343,182 @@ public class VsVoidlistBean
     }
 
     /**
-     * Getter method for num.
+     * Getter method for folioid.
      * <br>
      * Meta Data Information (in progress):
      * <ul>
-     * <li>full name: vs_voidlist.num
+     * <li>full name: vs_voidlist.folioid
+     * <li>column size: 19
+     * <li>jdbc type returned by the driver: Types.BIGINT
+     * </ul>
+     *
+     * @return the value of folioid
+     */
+    public Long getFolioid()
+    {
+        return folioid; 
+    }
+
+    /**
+     * Setter method for folioid.
+     * <br>
+     * The new value is set only if compareTo() says it is different,
+     * or if one of either the new value or the current value is null.
+     * In case the new value is different, it is set and the field is marked as 'modified'.
+     *
+     * @param newVal the new value to be assigned to folioid
+     */
+    public void setFolioid(Long newVal) {
+        if ((newVal != null && this.folioid != null && (newVal.compareTo(this.folioid) == 0)) || 
+            (newVal == null && this.folioid == null && folioid_is_initialized)) {
+            return; 
+        } 
+        this.folioid = newVal; 
+        folioid_is_modified = true; 
+        folioid_is_initialized = true; 
+    }
+
+    /**
+     * Setter method for folioid.
+     * <br>
+     * Convenient for those who do not want to deal with Objects for primary types.
+     *
+     * @param newVal the new value to be assigned to folioid
+     */
+    public void setFolioid(long newVal) {
+        setFolioid(new Long(newVal));
+    }
+
+    /**
+     * Determines if the folioid has been modified.
+     *
+     * @return true if the field has been modified, false if the field has not been modified
+     */
+    public boolean isFolioidModified() {
+        return folioid_is_modified; 
+    }
+
+    /**
+     * Determines if the folioid has been initialized.
+     * <br>
+     * It is useful to determine if a field is null on purpose or just because it has not been initialized.
+     *
+     * @return true if the field has been initialized, false otherwise
+     */
+    public boolean isFolioidInitialized() {
+        return folioid_is_initialized; 
+    }
+
+    /**
+     * Getter method for source.
+     * <br>
+     * Meta Data Information (in progress):
+     * <ul>
+     * <li>full name: vs_voidlist.source
      * <li>column size: 2147483647
      * <li>jdbc type returned by the driver: Types.VARCHAR
      * </ul>
      *
-     * @return the value of num
+     * @return the value of source
      */
-    public String getNum()
+    public String getSource()
     {
-        return num; 
+        return source; 
     }
 
     /**
-     * Setter method for num.
+     * Setter method for source.
      * <br>
      * The new value is set only if compareTo() says it is different,
      * or if one of either the new value or the current value is null.
      * In case the new value is different, it is set and the field is marked as 'modified'.
      *
-     * @param newVal the new value to be assigned to num
+     * @param newVal the new value to be assigned to source
      */
-    public void setNum(String newVal) {
-        if ((newVal != null && this.num != null && (newVal.compareTo(this.num) == 0)) || 
-            (newVal == null && this.num == null && num_is_initialized)) {
+    public void setSource(String newVal) {
+        if ((newVal != null && this.source != null && (newVal.compareTo(this.source) == 0)) || 
+            (newVal == null && this.source == null && source_is_initialized)) {
             return; 
         } 
-        this.num = newVal; 
-        num_is_modified = true; 
-        num_is_initialized = true; 
+        this.source = newVal; 
+        source_is_modified = true; 
+        source_is_initialized = true; 
     }
 
     /**
-     * Determines if the num has been modified.
+     * Determines if the source has been modified.
      *
      * @return true if the field has been modified, false if the field has not been modified
      */
-    public boolean isNumModified() {
-        return num_is_modified; 
+    public boolean isSourceModified() {
+        return source_is_modified; 
     }
 
     /**
-     * Determines if the num has been initialized.
+     * Determines if the source has been initialized.
      * <br>
      * It is useful to determine if a field is null on purpose or just because it has not been initialized.
      *
      * @return true if the field has been initialized, false otherwise
      */
-    public boolean isNumInitialized() {
-        return num_is_initialized; 
+    public boolean isSourceInitialized() {
+        return source_is_initialized; 
     }
 
     /**
-     * Getter method for name.
+     * Getter method for puser.
      * <br>
      * Meta Data Information (in progress):
      * <ul>
-     * <li>full name: vs_voidlist.name
+     * <li>full name: vs_voidlist.puser
      * <li>column size: 2147483647
      * <li>jdbc type returned by the driver: Types.VARCHAR
      * </ul>
      *
-     * @return the value of name
+     * @return the value of puser
      */
-    public String getName()
+    public String getPuser()
     {
-        return name; 
+        return puser; 
     }
 
     /**
-     * Setter method for name.
+     * Setter method for puser.
      * <br>
      * The new value is set only if compareTo() says it is different,
      * or if one of either the new value or the current value is null.
      * In case the new value is different, it is set and the field is marked as 'modified'.
      *
-     * @param newVal the new value to be assigned to name
+     * @param newVal the new value to be assigned to puser
      */
-    public void setName(String newVal) {
-        if ((newVal != null && this.name != null && (newVal.compareTo(this.name) == 0)) || 
-            (newVal == null && this.name == null && name_is_initialized)) {
+    public void setPuser(String newVal) {
+        if ((newVal != null && this.puser != null && (newVal.compareTo(this.puser) == 0)) || 
+            (newVal == null && this.puser == null && puser_is_initialized)) {
             return; 
         } 
-        this.name = newVal; 
-        name_is_modified = true; 
-        name_is_initialized = true; 
+        this.puser = newVal; 
+        puser_is_modified = true; 
+        puser_is_initialized = true; 
     }
 
     /**
-     * Determines if the name has been modified.
+     * Determines if the puser has been modified.
      *
      * @return true if the field has been modified, false if the field has not been modified
      */
-    public boolean isNameModified() {
-        return name_is_modified; 
+    public boolean isPuserModified() {
+        return puser_is_modified; 
     }
 
     /**
-     * Determines if the name has been initialized.
+     * Determines if the puser has been initialized.
      * <br>
      * It is useful to determine if a field is null on purpose or just because it has not been initialized.
      *
      * @return true if the field has been initialized, false otherwise
      */
-    public boolean isNameInitialized() {
-        return name_is_initialized; 
-    }
-
-    /**
-     * Getter method for loginid.
-     * <br>
-     * Meta Data Information (in progress):
-     * <ul>
-     * <li>full name: vs_voidlist.loginid
-     * <li>column size: 15
-     * <li>jdbc type returned by the driver: Types.VARCHAR
-     * </ul>
-     *
-     * @return the value of loginid
-     */
-    public String getLoginid()
-    {
-        return loginid; 
-    }
-
-    /**
-     * Setter method for loginid.
-     * <br>
-     * The new value is set only if compareTo() says it is different,
-     * or if one of either the new value or the current value is null.
-     * In case the new value is different, it is set and the field is marked as 'modified'.
-     *
-     * @param newVal the new value to be assigned to loginid
-     */
-    public void setLoginid(String newVal) {
-        if ((newVal != null && this.loginid != null && (newVal.compareTo(this.loginid) == 0)) || 
-            (newVal == null && this.loginid == null && loginid_is_initialized)) {
-            return; 
-        } 
-        this.loginid = newVal; 
-        loginid_is_modified = true; 
-        loginid_is_initialized = true; 
-    }
-
-    /**
-     * Determines if the loginid has been modified.
-     *
-     * @return true if the field has been modified, false if the field has not been modified
-     */
-    public boolean isLoginidModified() {
-        return loginid_is_modified; 
-    }
-
-    /**
-     * Determines if the loginid has been initialized.
-     * <br>
-     * It is useful to determine if a field is null on purpose or just because it has not been initialized.
-     *
-     * @return true if the field has been initialized, false otherwise
-     */
-    public boolean isLoginidInitialized() {
-        return loginid_is_initialized; 
+    public boolean isPuserInitialized() {
+        return puser_is_initialized; 
     }
 
     /**
@@ -618,6 +645,274 @@ public class VsVoidlistBean
     }
 
     /**
+     * Getter method for personnelid.
+     * <br>
+     * Meta Data Information (in progress):
+     * <ul>
+     * <li>full name: vs_voidlist.personnelid
+     * <li>column size: 10
+     * <li>jdbc type returned by the driver: Types.INTEGER
+     * </ul>
+     *
+     * @return the value of personnelid
+     */
+    public Integer getPersonnelid()
+    {
+        return personnelid; 
+    }
+
+    /**
+     * Setter method for personnelid.
+     * <br>
+     * The new value is set only if compareTo() says it is different,
+     * or if one of either the new value or the current value is null.
+     * In case the new value is different, it is set and the field is marked as 'modified'.
+     *
+     * @param newVal the new value to be assigned to personnelid
+     */
+    public void setPersonnelid(Integer newVal) {
+        if ((newVal != null && this.personnelid != null && (newVal.compareTo(this.personnelid) == 0)) || 
+            (newVal == null && this.personnelid == null && personnelid_is_initialized)) {
+            return; 
+        } 
+        this.personnelid = newVal; 
+        personnelid_is_modified = true; 
+        personnelid_is_initialized = true; 
+    }
+
+    /**
+     * Setter method for personnelid.
+     * <br>
+     * Convenient for those who do not want to deal with Objects for primary types.
+     *
+     * @param newVal the new value to be assigned to personnelid
+     */
+    public void setPersonnelid(int newVal) {
+        setPersonnelid(new Integer(newVal));
+    }
+
+    /**
+     * Determines if the personnelid has been modified.
+     *
+     * @return true if the field has been modified, false if the field has not been modified
+     */
+    public boolean isPersonnelidModified() {
+        return personnelid_is_modified; 
+    }
+
+    /**
+     * Determines if the personnelid has been initialized.
+     * <br>
+     * It is useful to determine if a field is null on purpose or just because it has not been initialized.
+     *
+     * @return true if the field has been initialized, false otherwise
+     */
+    public boolean isPersonnelidInitialized() {
+        return personnelid_is_initialized; 
+    }
+
+    /**
+     * Getter method for roomtypeid.
+     * <br>
+     * Meta Data Information (in progress):
+     * <ul>
+     * <li>full name: vs_voidlist.roomtypeid
+     * <li>column size: 10
+     * <li>jdbc type returned by the driver: Types.INTEGER
+     * </ul>
+     *
+     * @return the value of roomtypeid
+     */
+    public Integer getRoomtypeid()
+    {
+        return roomtypeid; 
+    }
+
+    /**
+     * Setter method for roomtypeid.
+     * <br>
+     * The new value is set only if compareTo() says it is different,
+     * or if one of either the new value or the current value is null.
+     * In case the new value is different, it is set and the field is marked as 'modified'.
+     *
+     * @param newVal the new value to be assigned to roomtypeid
+     */
+    public void setRoomtypeid(Integer newVal) {
+        if ((newVal != null && this.roomtypeid != null && (newVal.compareTo(this.roomtypeid) == 0)) || 
+            (newVal == null && this.roomtypeid == null && roomtypeid_is_initialized)) {
+            return; 
+        } 
+        this.roomtypeid = newVal; 
+        roomtypeid_is_modified = true; 
+        roomtypeid_is_initialized = true; 
+    }
+
+    /**
+     * Setter method for roomtypeid.
+     * <br>
+     * Convenient for those who do not want to deal with Objects for primary types.
+     *
+     * @param newVal the new value to be assigned to roomtypeid
+     */
+    public void setRoomtypeid(int newVal) {
+        setRoomtypeid(new Integer(newVal));
+    }
+
+    /**
+     * Determines if the roomtypeid has been modified.
+     *
+     * @return true if the field has been modified, false if the field has not been modified
+     */
+    public boolean isRoomtypeidModified() {
+        return roomtypeid_is_modified; 
+    }
+
+    /**
+     * Determines if the roomtypeid has been initialized.
+     * <br>
+     * It is useful to determine if a field is null on purpose or just because it has not been initialized.
+     *
+     * @return true if the field has been initialized, false otherwise
+     */
+    public boolean isRoomtypeidInitialized() {
+        return roomtypeid_is_initialized; 
+    }
+
+    /**
+     * Getter method for ratetypeid.
+     * <br>
+     * Meta Data Information (in progress):
+     * <ul>
+     * <li>full name: vs_voidlist.ratetypeid
+     * <li>column size: 10
+     * <li>jdbc type returned by the driver: Types.INTEGER
+     * </ul>
+     *
+     * @return the value of ratetypeid
+     */
+    public Integer getRatetypeid()
+    {
+        return ratetypeid; 
+    }
+
+    /**
+     * Setter method for ratetypeid.
+     * <br>
+     * The new value is set only if compareTo() says it is different,
+     * or if one of either the new value or the current value is null.
+     * In case the new value is different, it is set and the field is marked as 'modified'.
+     *
+     * @param newVal the new value to be assigned to ratetypeid
+     */
+    public void setRatetypeid(Integer newVal) {
+        if ((newVal != null && this.ratetypeid != null && (newVal.compareTo(this.ratetypeid) == 0)) || 
+            (newVal == null && this.ratetypeid == null && ratetypeid_is_initialized)) {
+            return; 
+        } 
+        this.ratetypeid = newVal; 
+        ratetypeid_is_modified = true; 
+        ratetypeid_is_initialized = true; 
+    }
+
+    /**
+     * Setter method for ratetypeid.
+     * <br>
+     * Convenient for those who do not want to deal with Objects for primary types.
+     *
+     * @param newVal the new value to be assigned to ratetypeid
+     */
+    public void setRatetypeid(int newVal) {
+        setRatetypeid(new Integer(newVal));
+    }
+
+    /**
+     * Determines if the ratetypeid has been modified.
+     *
+     * @return true if the field has been modified, false if the field has not been modified
+     */
+    public boolean isRatetypeidModified() {
+        return ratetypeid_is_modified; 
+    }
+
+    /**
+     * Determines if the ratetypeid has been initialized.
+     * <br>
+     * It is useful to determine if a field is null on purpose or just because it has not been initialized.
+     *
+     * @return true if the field has been initialized, false otherwise
+     */
+    public boolean isRatetypeidInitialized() {
+        return ratetypeid_is_initialized; 
+    }
+
+    /**
+     * Getter method for bsourceid.
+     * <br>
+     * Meta Data Information (in progress):
+     * <ul>
+     * <li>full name: vs_voidlist.bsourceid
+     * <li>column size: 10
+     * <li>jdbc type returned by the driver: Types.INTEGER
+     * </ul>
+     *
+     * @return the value of bsourceid
+     */
+    public Integer getBsourceid()
+    {
+        return bsourceid; 
+    }
+
+    /**
+     * Setter method for bsourceid.
+     * <br>
+     * The new value is set only if compareTo() says it is different,
+     * or if one of either the new value or the current value is null.
+     * In case the new value is different, it is set and the field is marked as 'modified'.
+     *
+     * @param newVal the new value to be assigned to bsourceid
+     */
+    public void setBsourceid(Integer newVal) {
+        if ((newVal != null && this.bsourceid != null && (newVal.compareTo(this.bsourceid) == 0)) || 
+            (newVal == null && this.bsourceid == null && bsourceid_is_initialized)) {
+            return; 
+        } 
+        this.bsourceid = newVal; 
+        bsourceid_is_modified = true; 
+        bsourceid_is_initialized = true; 
+    }
+
+    /**
+     * Setter method for bsourceid.
+     * <br>
+     * Convenient for those who do not want to deal with Objects for primary types.
+     *
+     * @param newVal the new value to be assigned to bsourceid
+     */
+    public void setBsourceid(int newVal) {
+        setBsourceid(new Integer(newVal));
+    }
+
+    /**
+     * Determines if the bsourceid has been modified.
+     *
+     * @return true if the field has been modified, false if the field has not been modified
+     */
+    public boolean isBsourceidModified() {
+        return bsourceid_is_modified; 
+    }
+
+    /**
+     * Determines if the bsourceid has been initialized.
+     * <br>
+     * It is useful to determine if a field is null on purpose or just because it has not been initialized.
+     *
+     * @return true if the field has been initialized, false otherwise
+     */
+    public boolean isBsourceidInitialized() {
+        return bsourceid_is_initialized; 
+    }
+
+    /**
      * Determines if the current object is new.
      *
      * @return true if the current object is new, false if the object is not new
@@ -644,14 +939,18 @@ public class VsVoidlistBean
      */
     public boolean isModified() {
         return reservationid_is_modified || 
-		guest_is_modified || 
+		guestname_is_modified || 
 		arraivaldate_is_modified || 
 		departuredate_is_modified || 
-		num_is_modified || 
-		name_is_modified || 
-		loginid_is_modified || 
+		folioid_is_modified || 
+		source_is_modified || 
+		puser_is_modified || 
 		regdate_is_modified || 
-		remark_is_modified;
+		remark_is_modified || 
+		personnelid_is_modified || 
+		roomtypeid_is_modified || 
+		ratetypeid_is_modified || 
+		bsourceid_is_modified;
     }
 
     /**
@@ -659,14 +958,18 @@ public class VsVoidlistBean
      */
     public void resetIsModified() {
         reservationid_is_modified = false;
-        guest_is_modified = false;
+        guestname_is_modified = false;
         arraivaldate_is_modified = false;
         departuredate_is_modified = false;
-        num_is_modified = false;
-        name_is_modified = false;
-        loginid_is_modified = false;
+        folioid_is_modified = false;
+        source_is_modified = false;
+        puser_is_modified = false;
         regdate_is_modified = false;
         remark_is_modified = false;
+        personnelid_is_modified = false;
+        roomtypeid_is_modified = false;
+        ratetypeid_is_modified = false;
+        bsourceid_is_modified = false;
     }
 
     /**
@@ -676,14 +979,18 @@ public class VsVoidlistBean
      */
     public void copy(VsVoidlistBean bean) {
         setReservationid(bean.getReservationid());
-        setGuest(bean.getGuest());
+        setGuestname(bean.getGuestname());
         setArraivaldate(bean.getArraivaldate());
         setDeparturedate(bean.getDeparturedate());
-        setNum(bean.getNum());
-        setName(bean.getName());
-        setLoginid(bean.getLoginid());
+        setFolioid(bean.getFolioid());
+        setSource(bean.getSource());
+        setPuser(bean.getPuser());
         setRegdate(bean.getRegdate());
         setRemark(bean.getRemark());
+        setPersonnelid(bean.getPersonnelid());
+        setRoomtypeid(bean.getRoomtypeid());
+        setRatetypeid(bean.getRatetypeid());
+        setBsourceid(bean.getBsourceid());
     }
 
     /**
@@ -694,14 +1001,18 @@ public class VsVoidlistBean
     public String toString() {
         return   "\n[vs_voidlist] "
                  + "\n - vs_voidlist.reservationid = " + (reservationid_is_initialized ? ("[" + (reservationid == null ? null : reservationid.toString()) + "]") : "not initialized") + ""
-                 + "\n - vs_voidlist.guest = " + (guest_is_initialized ? ("[" + (guest == null ? null : guest.toString()) + "]") : "not initialized") + ""
+                 + "\n - vs_voidlist.guestname = " + (guestname_is_initialized ? ("[" + (guestname == null ? null : guestname.toString()) + "]") : "not initialized") + ""
                  + "\n - vs_voidlist.arraivaldate = " + (arraivaldate_is_initialized ? ("[" + (arraivaldate == null ? null : arraivaldate.toString()) + "]") : "not initialized") + ""
                  + "\n - vs_voidlist.departuredate = " + (departuredate_is_initialized ? ("[" + (departuredate == null ? null : departuredate.toString()) + "]") : "not initialized") + ""
-                 + "\n - vs_voidlist.num = " + (num_is_initialized ? ("[" + (num == null ? null : num.toString()) + "]") : "not initialized") + ""
-                 + "\n - vs_voidlist.name = " + (name_is_initialized ? ("[" + (name == null ? null : name.toString()) + "]") : "not initialized") + ""
-                 + "\n - vs_voidlist.loginid = " + (loginid_is_initialized ? ("[" + (loginid == null ? null : loginid.toString()) + "]") : "not initialized") + ""
+                 + "\n - vs_voidlist.folioid = " + (folioid_is_initialized ? ("[" + (folioid == null ? null : folioid.toString()) + "]") : "not initialized") + ""
+                 + "\n - vs_voidlist.source = " + (source_is_initialized ? ("[" + (source == null ? null : source.toString()) + "]") : "not initialized") + ""
+                 + "\n - vs_voidlist.puser = " + (puser_is_initialized ? ("[" + (puser == null ? null : puser.toString()) + "]") : "not initialized") + ""
                  + "\n - vs_voidlist.regdate = " + (regdate_is_initialized ? ("[" + (regdate == null ? null : regdate.toString()) + "]") : "not initialized") + ""
                  + "\n - vs_voidlist.remark = " + (remark_is_initialized ? ("[" + (remark == null ? null : remark.toString()) + "]") : "not initialized") + ""
+                 + "\n - vs_voidlist.personnelid = " + (personnelid_is_initialized ? ("[" + (personnelid == null ? null : personnelid.toString()) + "]") : "not initialized") + ""
+                 + "\n - vs_voidlist.roomtypeid = " + (roomtypeid_is_initialized ? ("[" + (roomtypeid == null ? null : roomtypeid.toString()) + "]") : "not initialized") + ""
+                 + "\n - vs_voidlist.ratetypeid = " + (ratetypeid_is_initialized ? ("[" + (ratetypeid == null ? null : ratetypeid.toString()) + "]") : "not initialized") + ""
+                 + "\n - vs_voidlist.bsourceid = " + (bsourceid_is_initialized ? ("[" + (bsourceid == null ? null : bsourceid.toString()) + "]") : "not initialized") + ""
             ;
     }
 

@@ -81,6 +81,7 @@ public class FolioComparator implements Comparator
      *   <li>FolioManager.ID_STATUS
      *   <li>FolioManager.ID_REGBYID
      *   <li>FolioManager.ID_REGDATE
+     *   <li>FolioManager.ID_INCIDENTAL
      * </ul>
      *
      * @param bReverse set this value to true, if you want to reverse the sorting results

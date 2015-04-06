@@ -84,6 +84,13 @@ public class FolioManager
     public static final int TYPE_REGDATE = Types.TIMESTAMP;
     public static final String NAME_REGDATE = "regdate";
 
+    /**
+     * Column incidental of type Types.BIT mapped to Boolean.
+     */
+    public static final int ID_INCIDENTAL = 8;
+    public static final int TYPE_INCIDENTAL = Types.BIT;
+    public static final String NAME_INCIDENTAL = "incidental";
+
 
     private static final String TABLE_NAME = "folio";
 
@@ -100,6 +107,7 @@ public class FolioManager
         ,"folio.status"
         ,"folio.regbyid"
         ,"folio.regdate"
+        ,"folio.incidental"
     };
 
     /**
@@ -112,7 +120,8 @@ public class FolioManager
                             + ",folio.reservationroomid"
                             + ",folio.status"
                             + ",folio.regbyid"
-                            + ",folio.regdate";
+                            + ",folio.regdate"
+                            + ",folio.incidental";
 
     private static FolioManager singleton = new FolioManager();
 
@@ -776,6 +785,14 @@ public class FolioManager
                     _dirtyCount++;
                 }
 
+                if (pObject.isIncidentalModified()) {
+                    if (_dirtyCount>0) {
+                        _sql.append(",");
+                    }
+                    _sql.append("incidental");
+                    _dirtyCount++;
+                }
+
                 _sql.append(") values (");
                 if(_dirtyCount > 0) {
                     _sql.append("?");
@@ -818,6 +835,10 @@ public class FolioManager
     
                 if (pObject.isRegdateModified()) {
                     ps.setTimestamp(++_dirtyCount, pObject.getRegdate());
+                }
+    
+                if (pObject.isIncidentalModified()) {
+                    Manager.setBoolean(ps, ++_dirtyCount, pObject.getIncidental());
                 }
     
                 ps.executeUpdate();
@@ -903,6 +924,15 @@ public class FolioManager
                     }
                     _sql.append("regdate").append("=?");
                 }
+
+                if (pObject.isIncidentalModified()) {
+                    if (useComma) {
+                        _sql.append(",");
+                    } else {
+                        useComma=true;
+                    }
+                    _sql.append("incidental").append("=?");
+                }
                 _sql.append(" WHERE ");
                 _sql.append("folio.folioid=?");
                 ps = c.prepareStatement(_sql.toString(),ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
@@ -938,6 +968,10 @@ public class FolioManager
 
                 if (pObject.isRegdateModified()) {
                       ps.setTimestamp(++_dirtyCount, pObject.getRegdate());
+                }
+
+                if (pObject.isIncidentalModified()) {
+                      Manager.setBoolean(ps, ++_dirtyCount, pObject.getIncidental());
                 }
     
                 if (_dirtyCount == 0) {
@@ -1056,6 +1090,11 @@ public class FolioManager
                  _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("regdate= ?");
              }
     
+             if (pObject.isIncidentalModified()) {
+                 _dirtyCount ++; 
+                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("incidental= ?");
+             }
+    
              if (_dirtyCount == 0) {
                  throw new SQLException ("The pObject to look for is invalid : not initialized !");
              }
@@ -1094,6 +1133,10 @@ public class FolioManager
     
              if (pObject.isRegdateModified()) {
                  ps.setTimestamp(++_dirtyCount, pObject.getRegdate());
+             }
+    
+             if (pObject.isIncidentalModified()) {
+                 Manager.setBoolean(ps, ++_dirtyCount, pObject.getIncidental());
              }
     
              ps.executeQuery();
@@ -1181,6 +1224,13 @@ public class FolioManager
                 _dirtyAnd ++;
             }
     
+            if (pObject.isIncidentalInitialized()) {
+                if (_dirtyAnd > 0)
+                    sql.append(" AND ");
+                sql.append("incidental").append("=?");
+                _dirtyAnd ++;
+            }
+    
             c = getConnection();
             ps = c.prepareStatement(sql.toString(),ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             int _dirtyCount = 0;
@@ -1215,6 +1265,10 @@ public class FolioManager
     
             if (pObject.isRegdateInitialized()) {
                 ps.setTimestamp(++_dirtyCount, pObject.getRegdate());
+            }
+    
+            if (pObject.isIncidentalInitialized()) {
+                Manager.setBoolean(ps, ++_dirtyCount, pObject.getIncidental());
             }
     
             int _rows = ps.executeUpdate();
@@ -1724,6 +1778,11 @@ public class FolioManager
                     _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("regdate= ?");
                 }
     
+                if (pObject.isIncidentalModified()) {
+                    _dirtyCount++; 
+                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("incidental= ?");
+                }
+    
                 if (_dirtyCount == 0)
                    throw new SQLException ("The pObject to look is unvalid : not initialized !");
     
@@ -1765,6 +1824,10 @@ public class FolioManager
                     ps.setTimestamp(++_dirtyCount, pObject.getRegdate());
                 }
     
+                if (pObject.isIncidentalModified()) {
+                    Manager.setBoolean(ps, ++_dirtyCount, pObject.getIncidental());
+                }
+    
                 return countByPreparedStatement(ps);
         }
         finally
@@ -1797,6 +1860,7 @@ public class FolioManager
         pObject.setStatus(Manager.getInteger(rs, 6));
         pObject.setRegbyid(Manager.getInteger(rs, 7));
         pObject.setRegdate(rs.getTimestamp(8));
+        pObject.setIncidental(Manager.getBoolean(rs, 9));
 
         pObject.isNew(false);
         pObject.resetIsModified();
@@ -1850,6 +1914,10 @@ public class FolioManager
                 case ID_REGDATE:
                     ++pos;
                     pObject.setRegdate(rs.getTimestamp(pos));
+                    break;
+                case ID_INCIDENTAL:
+                    ++pos;
+                    pObject.setIncidental(Manager.getBoolean(rs, pos));
                     break;
             }
         }

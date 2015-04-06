@@ -36,11 +36,11 @@ public class VsVoidlistManager
     public static final String NAME_RESERVATIONID = "reservationid";
 
     /**
-     * Column guest of type Types.VARCHAR mapped to String.
+     * Column guestname of type Types.VARCHAR mapped to String.
      */
-    public static final int ID_GUEST = 1;
-    public static final int TYPE_GUEST = Types.VARCHAR;
-    public static final String NAME_GUEST = "guest";
+    public static final int ID_GUESTNAME = 1;
+    public static final int TYPE_GUESTNAME = Types.VARCHAR;
+    public static final String NAME_GUESTNAME = "guestname";
 
     /**
      * Column arraivaldate of type Types.TIMESTAMP mapped to java.sql.Timestamp.
@@ -57,25 +57,25 @@ public class VsVoidlistManager
     public static final String NAME_DEPARTUREDATE = "departuredate";
 
     /**
-     * Column num of type Types.VARCHAR mapped to String.
+     * Column folioid of type Types.BIGINT mapped to Long.
      */
-    public static final int ID_NUM = 4;
-    public static final int TYPE_NUM = Types.VARCHAR;
-    public static final String NAME_NUM = "num";
+    public static final int ID_FOLIOID = 4;
+    public static final int TYPE_FOLIOID = Types.BIGINT;
+    public static final String NAME_FOLIOID = "folioid";
 
     /**
-     * Column name of type Types.VARCHAR mapped to String.
+     * Column source of type Types.VARCHAR mapped to String.
      */
-    public static final int ID_NAME = 5;
-    public static final int TYPE_NAME = Types.VARCHAR;
-    public static final String NAME_NAME = "name";
+    public static final int ID_SOURCE = 5;
+    public static final int TYPE_SOURCE = Types.VARCHAR;
+    public static final String NAME_SOURCE = "source";
 
     /**
-     * Column loginid of type Types.VARCHAR mapped to String.
+     * Column puser of type Types.VARCHAR mapped to String.
      */
-    public static final int ID_LOGINID = 6;
-    public static final int TYPE_LOGINID = Types.VARCHAR;
-    public static final String NAME_LOGINID = "loginid";
+    public static final int ID_PUSER = 6;
+    public static final int TYPE_PUSER = Types.VARCHAR;
+    public static final String NAME_PUSER = "puser";
 
     /**
      * Column regdate of type Types.TIMESTAMP mapped to java.sql.Timestamp.
@@ -91,6 +91,34 @@ public class VsVoidlistManager
     public static final int TYPE_REMARK = Types.VARCHAR;
     public static final String NAME_REMARK = "remark";
 
+    /**
+     * Column personnelid of type Types.INTEGER mapped to Integer.
+     */
+    public static final int ID_PERSONNELID = 9;
+    public static final int TYPE_PERSONNELID = Types.INTEGER;
+    public static final String NAME_PERSONNELID = "personnelid";
+
+    /**
+     * Column roomtypeid of type Types.INTEGER mapped to Integer.
+     */
+    public static final int ID_ROOMTYPEID = 10;
+    public static final int TYPE_ROOMTYPEID = Types.INTEGER;
+    public static final String NAME_ROOMTYPEID = "roomtypeid";
+
+    /**
+     * Column ratetypeid of type Types.INTEGER mapped to Integer.
+     */
+    public static final int ID_RATETYPEID = 11;
+    public static final int TYPE_RATETYPEID = Types.INTEGER;
+    public static final String NAME_RATETYPEID = "ratetypeid";
+
+    /**
+     * Column bsourceid of type Types.INTEGER mapped to Integer.
+     */
+    public static final int ID_BSOURCEID = 12;
+    public static final int TYPE_BSOURCEID = Types.INTEGER;
+    public static final String NAME_BSOURCEID = "bsourceid";
+
 
     private static final String TABLE_NAME = "vs_voidlist";
 
@@ -100,28 +128,36 @@ public class VsVoidlistManager
     private static final String[] FIELD_NAMES = 
     {
         "vs_voidlist.reservationid"
-        ,"vs_voidlist.guest"
+        ,"vs_voidlist.guestname"
         ,"vs_voidlist.arraivaldate"
         ,"vs_voidlist.departuredate"
-        ,"vs_voidlist.num"
-        ,"vs_voidlist.name"
-        ,"vs_voidlist.loginid"
+        ,"vs_voidlist.folioid"
+        ,"vs_voidlist.source"
+        ,"vs_voidlist.puser"
         ,"vs_voidlist.regdate"
         ,"vs_voidlist.remark"
+        ,"vs_voidlist.personnelid"
+        ,"vs_voidlist.roomtypeid"
+        ,"vs_voidlist.ratetypeid"
+        ,"vs_voidlist.bsourceid"
     };
 
     /**
      * Field that contains the comma separated fields of the vs_voidlist table.
      */
     private static final String ALL_FIELDS = "vs_voidlist.reservationid"
-                            + ",vs_voidlist.guest"
+                            + ",vs_voidlist.guestname"
                             + ",vs_voidlist.arraivaldate"
                             + ",vs_voidlist.departuredate"
-                            + ",vs_voidlist.num"
-                            + ",vs_voidlist.name"
-                            + ",vs_voidlist.loginid"
+                            + ",vs_voidlist.folioid"
+                            + ",vs_voidlist.source"
+                            + ",vs_voidlist.puser"
                             + ",vs_voidlist.regdate"
-                            + ",vs_voidlist.remark";
+                            + ",vs_voidlist.remark"
+                            + ",vs_voidlist.personnelid"
+                            + ",vs_voidlist.roomtypeid"
+                            + ",vs_voidlist.ratetypeid"
+                            + ",vs_voidlist.bsourceid";
 
     private static VsVoidlistManager singleton = new VsVoidlistManager();
 
@@ -329,11 +365,11 @@ public class VsVoidlistManager
                     _dirtyCount++;
                 }
 
-                if (pObject.isGuestModified()) {
+                if (pObject.isGuestnameModified()) {
                     if (_dirtyCount>0) {
                         _sql.append(",");
                     }
-                    _sql.append("guest");
+                    _sql.append("guestname");
                     _dirtyCount++;
                 }
 
@@ -353,27 +389,27 @@ public class VsVoidlistManager
                     _dirtyCount++;
                 }
 
-                if (pObject.isNumModified()) {
+                if (pObject.isFolioidModified()) {
                     if (_dirtyCount>0) {
                         _sql.append(",");
                     }
-                    _sql.append("num");
+                    _sql.append("folioid");
                     _dirtyCount++;
                 }
 
-                if (pObject.isNameModified()) {
+                if (pObject.isSourceModified()) {
                     if (_dirtyCount>0) {
                         _sql.append(",");
                     }
-                    _sql.append("name");
+                    _sql.append("source");
                     _dirtyCount++;
                 }
 
-                if (pObject.isLoginidModified()) {
+                if (pObject.isPuserModified()) {
                     if (_dirtyCount>0) {
                         _sql.append(",");
                     }
-                    _sql.append("loginid");
+                    _sql.append("puser");
                     _dirtyCount++;
                 }
 
@@ -393,6 +429,38 @@ public class VsVoidlistManager
                     _dirtyCount++;
                 }
 
+                if (pObject.isPersonnelidModified()) {
+                    if (_dirtyCount>0) {
+                        _sql.append(",");
+                    }
+                    _sql.append("personnelid");
+                    _dirtyCount++;
+                }
+
+                if (pObject.isRoomtypeidModified()) {
+                    if (_dirtyCount>0) {
+                        _sql.append(",");
+                    }
+                    _sql.append("roomtypeid");
+                    _dirtyCount++;
+                }
+
+                if (pObject.isRatetypeidModified()) {
+                    if (_dirtyCount>0) {
+                        _sql.append(",");
+                    }
+                    _sql.append("ratetypeid");
+                    _dirtyCount++;
+                }
+
+                if (pObject.isBsourceidModified()) {
+                    if (_dirtyCount>0) {
+                        _sql.append(",");
+                    }
+                    _sql.append("bsourceid");
+                    _dirtyCount++;
+                }
+
                 _sql.append(") values (");
                 if(_dirtyCount > 0) {
                     _sql.append("?");
@@ -409,8 +477,8 @@ public class VsVoidlistManager
                     Manager.setLong(ps, ++_dirtyCount, pObject.getReservationid());
                 }
     
-                if (pObject.isGuestModified()) {
-                    ps.setString(++_dirtyCount, pObject.getGuest());
+                if (pObject.isGuestnameModified()) {
+                    ps.setString(++_dirtyCount, pObject.getGuestname());
                 }
     
                 if (pObject.isArraivaldateModified()) {
@@ -421,16 +489,16 @@ public class VsVoidlistManager
                     ps.setTimestamp(++_dirtyCount, pObject.getDeparturedate());
                 }
     
-                if (pObject.isNumModified()) {
-                    ps.setString(++_dirtyCount, pObject.getNum());
+                if (pObject.isFolioidModified()) {
+                    Manager.setLong(ps, ++_dirtyCount, pObject.getFolioid());
                 }
     
-                if (pObject.isNameModified()) {
-                    ps.setString(++_dirtyCount, pObject.getName());
+                if (pObject.isSourceModified()) {
+                    ps.setString(++_dirtyCount, pObject.getSource());
                 }
     
-                if (pObject.isLoginidModified()) {
-                    ps.setString(++_dirtyCount, pObject.getLoginid());
+                if (pObject.isPuserModified()) {
+                    ps.setString(++_dirtyCount, pObject.getPuser());
                 }
     
                 if (pObject.isRegdateModified()) {
@@ -439,6 +507,22 @@ public class VsVoidlistManager
     
                 if (pObject.isRemarkModified()) {
                     ps.setString(++_dirtyCount, pObject.getRemark());
+                }
+    
+                if (pObject.isPersonnelidModified()) {
+                    Manager.setInteger(ps, ++_dirtyCount, pObject.getPersonnelid());
+                }
+    
+                if (pObject.isRoomtypeidModified()) {
+                    Manager.setInteger(ps, ++_dirtyCount, pObject.getRoomtypeid());
+                }
+    
+                if (pObject.isRatetypeidModified()) {
+                    Manager.setInteger(ps, ++_dirtyCount, pObject.getRatetypeid());
+                }
+    
+                if (pObject.isBsourceidModified()) {
+                    Manager.setInteger(ps, ++_dirtyCount, pObject.getBsourceid());
                 }
     
                 ps.executeUpdate();
@@ -462,13 +546,13 @@ public class VsVoidlistManager
                     _sql.append("reservationid").append("=?");
                 }
 
-                if (pObject.isGuestModified()) {
+                if (pObject.isGuestnameModified()) {
                     if (useComma) {
                         _sql.append(",");
                     } else {
                         useComma=true;
                     }
-                    _sql.append("guest").append("=?");
+                    _sql.append("guestname").append("=?");
                 }
 
                 if (pObject.isArraivaldateModified()) {
@@ -489,31 +573,31 @@ public class VsVoidlistManager
                     _sql.append("departuredate").append("=?");
                 }
 
-                if (pObject.isNumModified()) {
+                if (pObject.isFolioidModified()) {
                     if (useComma) {
                         _sql.append(",");
                     } else {
                         useComma=true;
                     }
-                    _sql.append("num").append("=?");
+                    _sql.append("folioid").append("=?");
                 }
 
-                if (pObject.isNameModified()) {
+                if (pObject.isSourceModified()) {
                     if (useComma) {
                         _sql.append(",");
                     } else {
                         useComma=true;
                     }
-                    _sql.append("name").append("=?");
+                    _sql.append("source").append("=?");
                 }
 
-                if (pObject.isLoginidModified()) {
+                if (pObject.isPuserModified()) {
                     if (useComma) {
                         _sql.append(",");
                     } else {
                         useComma=true;
                     }
-                    _sql.append("loginid").append("=?");
+                    _sql.append("puser").append("=?");
                 }
 
                 if (pObject.isRegdateModified()) {
@@ -533,6 +617,42 @@ public class VsVoidlistManager
                     }
                     _sql.append("remark").append("=?");
                 }
+
+                if (pObject.isPersonnelidModified()) {
+                    if (useComma) {
+                        _sql.append(",");
+                    } else {
+                        useComma=true;
+                    }
+                    _sql.append("personnelid").append("=?");
+                }
+
+                if (pObject.isRoomtypeidModified()) {
+                    if (useComma) {
+                        _sql.append(",");
+                    } else {
+                        useComma=true;
+                    }
+                    _sql.append("roomtypeid").append("=?");
+                }
+
+                if (pObject.isRatetypeidModified()) {
+                    if (useComma) {
+                        _sql.append(",");
+                    } else {
+                        useComma=true;
+                    }
+                    _sql.append("ratetypeid").append("=?");
+                }
+
+                if (pObject.isBsourceidModified()) {
+                    if (useComma) {
+                        _sql.append(",");
+                    } else {
+                        useComma=true;
+                    }
+                    _sql.append("bsourceid").append("=?");
+                }
                 _sql.append("");
                 ps = c.prepareStatement(_sql.toString(),ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
                 int _dirtyCount = 0;
@@ -541,8 +661,8 @@ public class VsVoidlistManager
                       Manager.setLong(ps, ++_dirtyCount, pObject.getReservationid());
                 }
 
-                if (pObject.isGuestModified()) {
-                      ps.setString(++_dirtyCount, pObject.getGuest());
+                if (pObject.isGuestnameModified()) {
+                      ps.setString(++_dirtyCount, pObject.getGuestname());
                 }
 
                 if (pObject.isArraivaldateModified()) {
@@ -553,16 +673,16 @@ public class VsVoidlistManager
                       ps.setTimestamp(++_dirtyCount, pObject.getDeparturedate());
                 }
 
-                if (pObject.isNumModified()) {
-                      ps.setString(++_dirtyCount, pObject.getNum());
+                if (pObject.isFolioidModified()) {
+                      Manager.setLong(ps, ++_dirtyCount, pObject.getFolioid());
                 }
 
-                if (pObject.isNameModified()) {
-                      ps.setString(++_dirtyCount, pObject.getName());
+                if (pObject.isSourceModified()) {
+                      ps.setString(++_dirtyCount, pObject.getSource());
                 }
 
-                if (pObject.isLoginidModified()) {
-                      ps.setString(++_dirtyCount, pObject.getLoginid());
+                if (pObject.isPuserModified()) {
+                      ps.setString(++_dirtyCount, pObject.getPuser());
                 }
 
                 if (pObject.isRegdateModified()) {
@@ -571,6 +691,22 @@ public class VsVoidlistManager
 
                 if (pObject.isRemarkModified()) {
                       ps.setString(++_dirtyCount, pObject.getRemark());
+                }
+
+                if (pObject.isPersonnelidModified()) {
+                      Manager.setInteger(ps, ++_dirtyCount, pObject.getPersonnelid());
+                }
+
+                if (pObject.isRoomtypeidModified()) {
+                      Manager.setInteger(ps, ++_dirtyCount, pObject.getRoomtypeid());
+                }
+
+                if (pObject.isRatetypeidModified()) {
+                      Manager.setInteger(ps, ++_dirtyCount, pObject.getRatetypeid());
+                }
+
+                if (pObject.isBsourceidModified()) {
+                      Manager.setInteger(ps, ++_dirtyCount, pObject.getBsourceid());
                 }
     
                 if (_dirtyCount == 0) {
@@ -653,9 +789,9 @@ public class VsVoidlistManager
                  _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("reservationid= ?");
              }
     
-             if (pObject.isGuestModified()) {
+             if (pObject.isGuestnameModified()) {
                  _dirtyCount ++; 
-                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("guest= ?");
+                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("guestname= ?");
              }
     
              if (pObject.isArraivaldateModified()) {
@@ -668,19 +804,19 @@ public class VsVoidlistManager
                  _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("departuredate= ?");
              }
     
-             if (pObject.isNumModified()) {
+             if (pObject.isFolioidModified()) {
                  _dirtyCount ++; 
-                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("num= ?");
+                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("folioid= ?");
              }
     
-             if (pObject.isNameModified()) {
+             if (pObject.isSourceModified()) {
                  _dirtyCount ++; 
-                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("name= ?");
+                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("source= ?");
              }
     
-             if (pObject.isLoginidModified()) {
+             if (pObject.isPuserModified()) {
                  _dirtyCount ++; 
-                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("loginid= ?");
+                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("puser= ?");
              }
     
              if (pObject.isRegdateModified()) {
@@ -691,6 +827,26 @@ public class VsVoidlistManager
              if (pObject.isRemarkModified()) {
                  _dirtyCount ++; 
                  _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("remark= ?");
+             }
+    
+             if (pObject.isPersonnelidModified()) {
+                 _dirtyCount ++; 
+                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("personnelid= ?");
+             }
+    
+             if (pObject.isRoomtypeidModified()) {
+                 _dirtyCount ++; 
+                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("roomtypeid= ?");
+             }
+    
+             if (pObject.isRatetypeidModified()) {
+                 _dirtyCount ++; 
+                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("ratetypeid= ?");
+             }
+    
+             if (pObject.isBsourceidModified()) {
+                 _dirtyCount ++; 
+                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("bsourceid= ?");
              }
     
              if (_dirtyCount == 0) {
@@ -705,8 +861,8 @@ public class VsVoidlistManager
                  Manager.setLong(ps, ++_dirtyCount, pObject.getReservationid());
              }
     
-             if (pObject.isGuestModified()) {
-                 ps.setString(++_dirtyCount, pObject.getGuest());
+             if (pObject.isGuestnameModified()) {
+                 ps.setString(++_dirtyCount, pObject.getGuestname());
              }
     
              if (pObject.isArraivaldateModified()) {
@@ -717,16 +873,16 @@ public class VsVoidlistManager
                  ps.setTimestamp(++_dirtyCount, pObject.getDeparturedate());
              }
     
-             if (pObject.isNumModified()) {
-                 ps.setString(++_dirtyCount, pObject.getNum());
+             if (pObject.isFolioidModified()) {
+                 Manager.setLong(ps, ++_dirtyCount, pObject.getFolioid());
              }
     
-             if (pObject.isNameModified()) {
-                 ps.setString(++_dirtyCount, pObject.getName());
+             if (pObject.isSourceModified()) {
+                 ps.setString(++_dirtyCount, pObject.getSource());
              }
     
-             if (pObject.isLoginidModified()) {
-                 ps.setString(++_dirtyCount, pObject.getLoginid());
+             if (pObject.isPuserModified()) {
+                 ps.setString(++_dirtyCount, pObject.getPuser());
              }
     
              if (pObject.isRegdateModified()) {
@@ -735,6 +891,22 @@ public class VsVoidlistManager
     
              if (pObject.isRemarkModified()) {
                  ps.setString(++_dirtyCount, pObject.getRemark());
+             }
+    
+             if (pObject.isPersonnelidModified()) {
+                 Manager.setInteger(ps, ++_dirtyCount, pObject.getPersonnelid());
+             }
+    
+             if (pObject.isRoomtypeidModified()) {
+                 Manager.setInteger(ps, ++_dirtyCount, pObject.getRoomtypeid());
+             }
+    
+             if (pObject.isRatetypeidModified()) {
+                 Manager.setInteger(ps, ++_dirtyCount, pObject.getRatetypeid());
+             }
+    
+             if (pObject.isBsourceidModified()) {
+                 Manager.setInteger(ps, ++_dirtyCount, pObject.getBsourceid());
              }
     
              ps.executeQuery();
@@ -770,10 +942,10 @@ public class VsVoidlistManager
                 _dirtyAnd ++;
             }
     
-            if (pObject.isGuestInitialized()) {
+            if (pObject.isGuestnameInitialized()) {
                 if (_dirtyAnd > 0)
                     sql.append(" AND ");
-                sql.append("guest").append("=?");
+                sql.append("guestname").append("=?");
                 _dirtyAnd ++;
             }
     
@@ -791,24 +963,24 @@ public class VsVoidlistManager
                 _dirtyAnd ++;
             }
     
-            if (pObject.isNumInitialized()) {
+            if (pObject.isFolioidInitialized()) {
                 if (_dirtyAnd > 0)
                     sql.append(" AND ");
-                sql.append("num").append("=?");
+                sql.append("folioid").append("=?");
                 _dirtyAnd ++;
             }
     
-            if (pObject.isNameInitialized()) {
+            if (pObject.isSourceInitialized()) {
                 if (_dirtyAnd > 0)
                     sql.append(" AND ");
-                sql.append("name").append("=?");
+                sql.append("source").append("=?");
                 _dirtyAnd ++;
             }
     
-            if (pObject.isLoginidInitialized()) {
+            if (pObject.isPuserInitialized()) {
                 if (_dirtyAnd > 0)
                     sql.append(" AND ");
-                sql.append("loginid").append("=?");
+                sql.append("puser").append("=?");
                 _dirtyAnd ++;
             }
     
@@ -826,6 +998,34 @@ public class VsVoidlistManager
                 _dirtyAnd ++;
             }
     
+            if (pObject.isPersonnelidInitialized()) {
+                if (_dirtyAnd > 0)
+                    sql.append(" AND ");
+                sql.append("personnelid").append("=?");
+                _dirtyAnd ++;
+            }
+    
+            if (pObject.isRoomtypeidInitialized()) {
+                if (_dirtyAnd > 0)
+                    sql.append(" AND ");
+                sql.append("roomtypeid").append("=?");
+                _dirtyAnd ++;
+            }
+    
+            if (pObject.isRatetypeidInitialized()) {
+                if (_dirtyAnd > 0)
+                    sql.append(" AND ");
+                sql.append("ratetypeid").append("=?");
+                _dirtyAnd ++;
+            }
+    
+            if (pObject.isBsourceidInitialized()) {
+                if (_dirtyAnd > 0)
+                    sql.append(" AND ");
+                sql.append("bsourceid").append("=?");
+                _dirtyAnd ++;
+            }
+    
             c = getConnection();
             ps = c.prepareStatement(sql.toString(),ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             int _dirtyCount = 0;
@@ -834,8 +1034,8 @@ public class VsVoidlistManager
                 Manager.setLong(ps, ++_dirtyCount, pObject.getReservationid());
             }
     
-            if (pObject.isGuestInitialized()) {
-                ps.setString(++_dirtyCount, pObject.getGuest());
+            if (pObject.isGuestnameInitialized()) {
+                ps.setString(++_dirtyCount, pObject.getGuestname());
             }
     
             if (pObject.isArraivaldateInitialized()) {
@@ -846,16 +1046,16 @@ public class VsVoidlistManager
                 ps.setTimestamp(++_dirtyCount, pObject.getDeparturedate());
             }
     
-            if (pObject.isNumInitialized()) {
-                ps.setString(++_dirtyCount, pObject.getNum());
+            if (pObject.isFolioidInitialized()) {
+                Manager.setLong(ps, ++_dirtyCount, pObject.getFolioid());
             }
     
-            if (pObject.isNameInitialized()) {
-                ps.setString(++_dirtyCount, pObject.getName());
+            if (pObject.isSourceInitialized()) {
+                ps.setString(++_dirtyCount, pObject.getSource());
             }
     
-            if (pObject.isLoginidInitialized()) {
-                ps.setString(++_dirtyCount, pObject.getLoginid());
+            if (pObject.isPuserInitialized()) {
+                ps.setString(++_dirtyCount, pObject.getPuser());
             }
     
             if (pObject.isRegdateInitialized()) {
@@ -864,6 +1064,22 @@ public class VsVoidlistManager
     
             if (pObject.isRemarkInitialized()) {
                 ps.setString(++_dirtyCount, pObject.getRemark());
+            }
+    
+            if (pObject.isPersonnelidInitialized()) {
+                Manager.setInteger(ps, ++_dirtyCount, pObject.getPersonnelid());
+            }
+    
+            if (pObject.isRoomtypeidInitialized()) {
+                Manager.setInteger(ps, ++_dirtyCount, pObject.getRoomtypeid());
+            }
+    
+            if (pObject.isRatetypeidInitialized()) {
+                Manager.setInteger(ps, ++_dirtyCount, pObject.getRatetypeid());
+            }
+    
+            if (pObject.isBsourceidInitialized()) {
+                Manager.setInteger(ps, ++_dirtyCount, pObject.getBsourceid());
             }
     
             int _rows = ps.executeUpdate();
@@ -981,9 +1197,9 @@ public class VsVoidlistManager
                     _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("reservationid= ?");
                 }
     
-                if (pObject.isGuestModified()) {
+                if (pObject.isGuestnameModified()) {
                     _dirtyCount++; 
-                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("guest= ?");
+                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("guestname= ?");
                 }
     
                 if (pObject.isArraivaldateModified()) {
@@ -996,19 +1212,19 @@ public class VsVoidlistManager
                     _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("departuredate= ?");
                 }
     
-                if (pObject.isNumModified()) {
+                if (pObject.isFolioidModified()) {
                     _dirtyCount++; 
-                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("num= ?");
+                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("folioid= ?");
                 }
     
-                if (pObject.isNameModified()) {
+                if (pObject.isSourceModified()) {
                     _dirtyCount++; 
-                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("name= ?");
+                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("source= ?");
                 }
     
-                if (pObject.isLoginidModified()) {
+                if (pObject.isPuserModified()) {
                     _dirtyCount++; 
-                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("loginid= ?");
+                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("puser= ?");
                 }
     
                 if (pObject.isRegdateModified()) {
@@ -1019,6 +1235,26 @@ public class VsVoidlistManager
                 if (pObject.isRemarkModified()) {
                     _dirtyCount++; 
                     _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("remark= ?");
+                }
+    
+                if (pObject.isPersonnelidModified()) {
+                    _dirtyCount++; 
+                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("personnelid= ?");
+                }
+    
+                if (pObject.isRoomtypeidModified()) {
+                    _dirtyCount++; 
+                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("roomtypeid= ?");
+                }
+    
+                if (pObject.isRatetypeidModified()) {
+                    _dirtyCount++; 
+                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("ratetypeid= ?");
+                }
+    
+                if (pObject.isBsourceidModified()) {
+                    _dirtyCount++; 
+                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("bsourceid= ?");
                 }
     
                 if (_dirtyCount == 0)
@@ -1034,8 +1270,8 @@ public class VsVoidlistManager
                     Manager.setLong(ps, ++_dirtyCount, pObject.getReservationid());
                 }
     
-                if (pObject.isGuestModified()) {
-                    ps.setString(++_dirtyCount, pObject.getGuest());
+                if (pObject.isGuestnameModified()) {
+                    ps.setString(++_dirtyCount, pObject.getGuestname());
                 }
     
                 if (pObject.isArraivaldateModified()) {
@@ -1046,16 +1282,16 @@ public class VsVoidlistManager
                     ps.setTimestamp(++_dirtyCount, pObject.getDeparturedate());
                 }
     
-                if (pObject.isNumModified()) {
-                    ps.setString(++_dirtyCount, pObject.getNum());
+                if (pObject.isFolioidModified()) {
+                    Manager.setLong(ps, ++_dirtyCount, pObject.getFolioid());
                 }
     
-                if (pObject.isNameModified()) {
-                    ps.setString(++_dirtyCount, pObject.getName());
+                if (pObject.isSourceModified()) {
+                    ps.setString(++_dirtyCount, pObject.getSource());
                 }
     
-                if (pObject.isLoginidModified()) {
-                    ps.setString(++_dirtyCount, pObject.getLoginid());
+                if (pObject.isPuserModified()) {
+                    ps.setString(++_dirtyCount, pObject.getPuser());
                 }
     
                 if (pObject.isRegdateModified()) {
@@ -1064,6 +1300,22 @@ public class VsVoidlistManager
     
                 if (pObject.isRemarkModified()) {
                     ps.setString(++_dirtyCount, pObject.getRemark());
+                }
+    
+                if (pObject.isPersonnelidModified()) {
+                    Manager.setInteger(ps, ++_dirtyCount, pObject.getPersonnelid());
+                }
+    
+                if (pObject.isRoomtypeidModified()) {
+                    Manager.setInteger(ps, ++_dirtyCount, pObject.getRoomtypeid());
+                }
+    
+                if (pObject.isRatetypeidModified()) {
+                    Manager.setInteger(ps, ++_dirtyCount, pObject.getRatetypeid());
+                }
+    
+                if (pObject.isBsourceidModified()) {
+                    Manager.setInteger(ps, ++_dirtyCount, pObject.getBsourceid());
                 }
     
                 return countByPreparedStatement(ps);
@@ -1091,14 +1343,18 @@ public class VsVoidlistManager
     {
         VsVoidlistBean pObject = createVsVoidlistBean();
         pObject.setReservationid(Manager.getLong(rs, 1));
-        pObject.setGuest(rs.getString(2));
+        pObject.setGuestname(rs.getString(2));
         pObject.setArraivaldate(rs.getTimestamp(3));
         pObject.setDeparturedate(rs.getTimestamp(4));
-        pObject.setNum(rs.getString(5));
-        pObject.setName(rs.getString(6));
-        pObject.setLoginid(rs.getString(7));
+        pObject.setFolioid(Manager.getLong(rs, 5));
+        pObject.setSource(rs.getString(6));
+        pObject.setPuser(rs.getString(7));
         pObject.setRegdate(rs.getTimestamp(8));
         pObject.setRemark(rs.getString(9));
+        pObject.setPersonnelid(Manager.getInteger(rs, 10));
+        pObject.setRoomtypeid(Manager.getInteger(rs, 11));
+        pObject.setRatetypeid(Manager.getInteger(rs, 12));
+        pObject.setBsourceid(Manager.getInteger(rs, 13));
 
         pObject.isNew(false);
         pObject.resetIsModified();
@@ -1125,9 +1381,9 @@ public class VsVoidlistManager
                     ++pos;
                     pObject.setReservationid(Manager.getLong(rs, pos));
                     break;
-                case ID_GUEST:
+                case ID_GUESTNAME:
                     ++pos;
-                    pObject.setGuest(rs.getString(pos));
+                    pObject.setGuestname(rs.getString(pos));
                     break;
                 case ID_ARRAIVALDATE:
                     ++pos;
@@ -1137,17 +1393,17 @@ public class VsVoidlistManager
                     ++pos;
                     pObject.setDeparturedate(rs.getTimestamp(pos));
                     break;
-                case ID_NUM:
+                case ID_FOLIOID:
                     ++pos;
-                    pObject.setNum(rs.getString(pos));
+                    pObject.setFolioid(Manager.getLong(rs, pos));
                     break;
-                case ID_NAME:
+                case ID_SOURCE:
                     ++pos;
-                    pObject.setName(rs.getString(pos));
+                    pObject.setSource(rs.getString(pos));
                     break;
-                case ID_LOGINID:
+                case ID_PUSER:
                     ++pos;
-                    pObject.setLoginid(rs.getString(pos));
+                    pObject.setPuser(rs.getString(pos));
                     break;
                 case ID_REGDATE:
                     ++pos;
@@ -1156,6 +1412,22 @@ public class VsVoidlistManager
                 case ID_REMARK:
                     ++pos;
                     pObject.setRemark(rs.getString(pos));
+                    break;
+                case ID_PERSONNELID:
+                    ++pos;
+                    pObject.setPersonnelid(Manager.getInteger(rs, pos));
+                    break;
+                case ID_ROOMTYPEID:
+                    ++pos;
+                    pObject.setRoomtypeid(Manager.getInteger(rs, pos));
+                    break;
+                case ID_RATETYPEID:
+                    ++pos;
+                    pObject.setRatetypeid(Manager.getInteger(rs, pos));
+                    break;
+                case ID_BSOURCEID:
+                    ++pos;
+                    pObject.setBsourceid(Manager.getInteger(rs, pos));
                     break;
             }
         }

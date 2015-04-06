@@ -55,6 +55,10 @@ public class FolioBean
     private boolean regdate_is_modified = false;
     private boolean regdate_is_initialized = false;
     
+    private Boolean incidental;
+    private boolean incidental_is_modified = false;
+    private boolean incidental_is_initialized = false;
+    
     private boolean _isNew = true;
     
     /**
@@ -598,6 +602,73 @@ public class FolioBean
     }
 
     /**
+     * Getter method for incidental.
+     * <br>
+     * Meta Data Information (in progress):
+     * <ul>
+     * <li>full name: folio.incidental
+     * <li>default value: false
+     * <li>column size: 1
+     * <li>jdbc type returned by the driver: Types.BIT
+     * </ul>
+     *
+     * @return the value of incidental
+     */
+    public Boolean getIncidental()
+    {
+        return incidental; 
+    }
+
+    /**
+     * Setter method for incidental.
+     * <br>
+     * Attention, there will be no comparison with current value which
+     * means calling this method will mark the field as 'modified' in all cases.
+     *
+     * @param newVal the new value to be assigned to incidental
+     */
+    public void setIncidental(Boolean newVal) {
+        if ((newVal != null && this.incidental != null && newVal.equals(this.incidental)) || 
+            (newVal == null && this.incidental == null && incidental_is_initialized)) {
+            return; 
+        } 
+        this.incidental = newVal; 
+        incidental_is_modified = true; 
+        incidental_is_initialized = true; 
+    }
+
+    /**
+     * Setter method for incidental.
+     * <br>
+     * Convenient for those who do not want to deal with Objects for primary types.
+     *
+     * @param newVal the new value to be assigned to incidental
+     */
+    public void setIncidental(boolean newVal) {
+        setIncidental(new Boolean(newVal));
+    }
+
+    /**
+     * Determines if the incidental has been modified.
+     *
+     * @return true if the field has been modified, false if the field has not been modified
+     */
+    public boolean isIncidentalModified() {
+        return incidental_is_modified; 
+    }
+
+    /**
+     * Determines if the incidental has been initialized.
+     * <br>
+     * It is useful to determine if a field is null on purpose or just because it has not been initialized.
+     *
+     * @return true if the field has been initialized, false otherwise
+     */
+    public boolean isIncidentalInitialized() {
+        return incidental_is_initialized; 
+    }
+
+    /**
      * Determines if the current object is new.
      *
      * @return true if the current object is new, false if the object is not new
@@ -630,7 +701,8 @@ public class FolioBean
 		reservationroomid_is_modified || 
 		status_is_modified || 
 		regbyid_is_modified || 
-		regdate_is_modified;
+		regdate_is_modified || 
+		incidental_is_modified;
     }
 
     /**
@@ -645,6 +717,7 @@ public class FolioBean
         status_is_modified = false;
         regbyid_is_modified = false;
         regdate_is_modified = false;
+        incidental_is_modified = false;
     }
 
     /**
@@ -661,6 +734,7 @@ public class FolioBean
         setStatus(bean.getStatus());
         setRegbyid(bean.getRegbyid());
         setRegdate(bean.getRegdate());
+        setIncidental(bean.getIncidental());
     }
 
     /**
@@ -678,6 +752,7 @@ public class FolioBean
                  + "\n - folio.status = " + (status_is_initialized ? ("[" + (status == null ? null : status.toString()) + "]") : "not initialized") + ""
                  + "\n - folio.regbyid = " + (regbyid_is_initialized ? ("[" + (regbyid == null ? null : regbyid.toString()) + "]") : "not initialized") + ""
                  + "\n - folio.regdate = " + (regdate_is_initialized ? ("[" + (regdate == null ? null : regdate.toString()) + "]") : "not initialized") + ""
+                 + "\n - folio.incidental = " + (incidental_is_initialized ? ("[" + (incidental == null ? null : incidental.toString()) + "]") : "not initialized") + ""
             ;
     }
 
