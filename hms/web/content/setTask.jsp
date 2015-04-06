@@ -5,6 +5,7 @@
 <%
     String rid = (String) request.getParameter("reservationid");
     String roomid = "";
+    String isHotelStatus = request.getParameter("ishotelstatus");
     ReservationroomBean reservationroomBean = ReservationroomManager.getInstance().loadByPrimaryKey(Long.valueOf(rid));
     RoomtypeBean roomtypeBean = RoomtypeManager.getInstance().loadByPrimaryKey(reservationroomBean.getRoomtypeid());
     if(reservationroomBean.getRoomid() == null || reservationroomBean.getRoomid() < 1)
@@ -150,6 +151,9 @@
         $('#grid-table .date').datepicker(<%=pickerFormatForDatePickers%>);
         reloadGrid(taskGrid.id, originalUrl + "?rid=<%=reservationId%>&roomid=<%=roomid%>");
         $('#timepicker2').timepicker();
+        <% if (!CodeHelpers.isNullOrEmpty(isHotelStatus)){ %>
+        getBody('stayviewleft','hotelstatus','სასტუმროს სტატუსი','res1','',true);
+        <% } %>
     }
 
     function removePref(id){
@@ -157,9 +161,6 @@
         var sql = "DELETE FROM task WHERE taskid = "+id;
         $.post("content/execute.jsp?query=" + encodeURIComponent(sql), {}, function () {
             loader.hide();
-            if($("#list_tasks")[0].rows.length == 2){
-                getBody('stayviewleft','hotelstatus','სასტუმროს სტატუსი','res1','',true);
-            }
             resetAll();
         });
     }

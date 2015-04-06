@@ -4,6 +4,7 @@
 
 <%
     String rid = (String) request.getParameter("reservationid");
+    String isHotelStatus = request.getParameter("ishotelstatus");
     VSharerBean[] vshares = VSharerManager.getInstance().loadByWhere("where reservationroomid = " + rid);
     VSharer2Bean[] vSharer2Beans = VSharer2Manager.getInstance().loadByWhere("where reservationroomid = " + rid);
     String roomid = "";
@@ -93,7 +94,9 @@
         idToBeUpdated = 0;
         $('#grid-table .date').datepicker(<%=pickerFormatForDatePickers%>);
         reloadGrid(messageGrid.id, originalUrl + "?rid=<%=reservationId%>&roomid=<%=roomid%>");
+        <% if (!CodeHelpers.isNullOrEmpty(isHotelStatus)){ %>
         getBody('stayviewleft','hotelstatus','სასტუმროს სტატუსი','res1','',true);
+        <% } %>
     }
 
     function removePref(id){
@@ -102,7 +105,9 @@
         $.post("content/execute.jsp?query=" + encodeURIComponent(sql), {}, function () {
             loader.hide();
             if($("#list_messages")[0].rows.length == 2){
+                <% if (!CodeHelpers.isNullOrEmpty(isHotelStatus)){ %>
                 getBody('stayviewleft','hotelstatus','სასტუმროს სტატუსი','res1','',true);
+                <% } %>
             }
         });
     }

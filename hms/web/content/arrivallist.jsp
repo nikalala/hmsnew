@@ -15,8 +15,26 @@
         $('#reserv_dateTo').datepicker(<%=pickerFormatForDatePickers%>);
         $('#reserv_dateFrom').datepicker(<%=pickerFormatForDatePickers%>);
         loadDefaults();
-        drawTwoDimFooter();
+        drawFooter();
+        secondFooter();
     });
+
+    function secondFooter() {
+        var height = $(".gridfooter").css("height");
+        var width = $(".gridfooter").css("width");
+        $(".ui-jqgrid-bdiv").height($(".ui-jqgrid-bdiv").height() - 100);
+        var html =
+                '<div class="gridfooter footer2" style="border-bottom: 0; "><div>' +
+                '<span style="margin: 15px 10px 0 10px; float: left;">მონიშნულის: </span>' +
+                '<button type="button" class="btn btn-default" id="btnPrintRegCard" style="font-weight: bold; float: left; margin: 9px 10px 0 0;">' +
+                'სარეგისტრაციო ბარათის ბეჭდვა <i class="fa fa-print"></i></button>' +
+                '</div></div>';
+        $(".footer2").remove();
+        $(html).insertBefore(".gridfooter");
+        $(".footer2").css("bottom",height);
+        $(".footer2").css("width",width,"!important");
+    }
+
 
     $("#roomType").on('change', function () {
         var element = $("option:selected", this);

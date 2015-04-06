@@ -125,8 +125,8 @@
                     <a href="javascript:getBody('stayviewleft','dashboard','სამუშაო მაგიდა', 'res1','',true);" data-toggle="tooltip" title="სამუშაო მაგიდა"><span class="glyphicon glyphicon-dashboard"></span></a>
                 </li>
                 <li>
-                    <a href="javascript:getBody('stayviewleft','construction');" data-toggle="tooltip" title="ოთახები"><span class="glyphicon glyphicon-th"></span></a>
-                </li>                
+                    <a href="javascript:getBody('stayviewleft','roomview','ოთახები', 'res1','?width='+$('#centerTabContent .active').width()+'&height='+$('#centerTabContent .active').height(),true)" data-toggle="tooltip" title="ოთახები"><span class="glyphicon glyphicon-th"></span></a>
+                </li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span></a>
                     <ul class="dropdown-menu">

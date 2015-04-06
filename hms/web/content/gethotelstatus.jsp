@@ -36,17 +36,17 @@
                     <i style="font-size: 15px; margin-left:10px;" class="fa fa-lock"></i>
                 </a>
                 <% if(rs.getInt("task") > 0){%>
-                <a style="cursor:pointer;" onclick="newWindowWithParams('setTask','დავალებები','?reservationid=<%=rs.getInt("task")%>')">
+                <a style="cursor:pointer;" onclick="newWindowWithParams('setTask','დავალებები','?reservationid=<%=rs.getInt("task")%>&ishotelstatus=true')">
                     <i style="font-size: 15px; margin-left:10px;" class="fa fa-wrench"></i>
                 </a>
                 <% } %>
                 <% if(rs.getInt("message") > 0){%>
-                <a style="cursor:pointer;" onclick="newWindowWithParams('setMessages','დავალებები','?reservationid=<%=rs.getInt("message")%>')">
+                <a style="cursor:pointer;" onclick="newWindowWithParams('setMessages','დავალებები','?reservationid=<%=rs.getInt("message")%>&ishotelstatus=true')">
                     <i style="font-size: 15px; margin-left:10px;" class="fa fa-envelope-o"></i>
                 </a>
                 <% } %>
                 <% if(rs.getInt("reservationid") > 0){%>
-                <a style="cursor:pointer;" onclick="newWindowWithParams('setPreference','უპირატესობის მინიჭება','?reservationid=<%=rs.getInt("reservationid")%>')">
+                <a style="cursor:pointer;" onclick="newWindowWithParams('setPreference','უპირატესობის მინიჭება','?reservationid=<%=rs.getInt("reservationid")%>&ishotelstatus=true')">
                     <i style="font-size: 15px; margin-left:10px;" class="fa fa-sun-o"></i>
                 </a>
                 <% } %>

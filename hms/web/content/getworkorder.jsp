@@ -3,19 +3,19 @@
 <%@include file="../includes/initxml.jsp" %>
 <%
     VWorkorderBean[] workorderBeans = null;
-    String orderstatus = (String) request.getParameter("orderstatus");
-    String wCategory = (String) request.getParameter("workOrderCategory");
+    String orderstatus =  request.getParameter("orderstatus");
+    String wCategory = request.getParameter("workOrderCategory");
     if (!CodeHelpers.isNullOrEmpty(orderstatus) && orderstatus.equals("1")) {
         workorderBeans = VWorkorderManager.getInstance().loadByWhere("where orderstatus = 1");
     } else if (!CodeHelpers.isNullOrEmpty(wCategory)) {
         String where = "where (" + wCategory + " = -1 OR category = " + wCategory + ") ";
-        String wunits = (String) request.getParameter("units");
-        String wprio = (String) request.getParameter("workOrderPriority");
-        String num = (String) request.getParameter("ordernum");
-        String st = (String) request.getParameter("workOrderStatus");
-        String personnel = (String) request.getParameter("personnel");
-        String compl_work_orders = (String) request.getParameter("compl_work_orders");
-        String isroom = (String) request.getParameter("isroom");
+        String wunits =  request.getParameter("units");
+        String wprio = request.getParameter("workOrderPriority");
+        String num = request.getParameter("ordernum");
+        String st = request.getParameter("workOrderStatus");
+        String personnel = request.getParameter("personnel");
+        String compl_work_orders = request.getParameter("compl_work_orders");
+        String isroom = request.getParameter("isroom");
         if (!wunits.equals("-1")) {
             where += !CodeHelpers.isNullOrEmpty(isroom) ? " AND roomid = " + wunits : " AND houseunitid = " + wunits;
         }
@@ -46,7 +46,9 @@
         System.out.println(where);
         workorderBeans = VWorkorderManager.getInstance().loadByWhere(where + " ORDER BY workorderid ASC");
     } else {
-        workorderBeans = VWorkorderManager.getInstance().loadByWhere("where orderstatus != 1 ORDER BY workorderid ASC");
+        String tmp = "where orderstatus != 1 ORDER BY workorderid ASC";
+        System.out.println(tmp);
+        workorderBeans = VWorkorderManager.getInstance().loadByWhere(tmp);
     }
 
 %>
