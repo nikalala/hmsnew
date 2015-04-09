@@ -14,9 +14,9 @@
     });
 
     function loadDefaults() {
-        $('.date').datepicker(<%=pickerformat1%>);
+//        $('.date').datepicker(<%=pickerformat1%>);
         $('.dropdown').selectpicker();
-        $(".btn-group").css("width", "100%", "!important");
+        $(".btn-group").css("width", "auto", "!important");
         $("#grid-table label").each(function () {
             $(this).css("float", "right", "!important");
             $(this).css("line-height", "27px", "!important");
@@ -30,21 +30,22 @@
 </script>
 
 <form name="filter-form" id="filter-form">
-    <table id="grid-table" class="first-table">
-        <tr>
-            <td>
-                <div id="status_bar" class="first-status-bar" align='center'>
-                    <div style="width: 100%; float: left;">
-                        <span style="float: left; margin: 7px 0 0 10px;color: #67A338;">რეჟიმი:</span>
-                        <button type="button" class="btn btn-default" id="addnewexps"
-                                style="border: 0; font-weight: bold; float: right; margin: 3px 5px 0 0; font-family: BGMtavr; color: #0F83D7; font-weight: bold;">
+    <div class="row" style="margin-bottom: 0px; padding-left: 5px;  padding-right: 5px;">
+        <div class="col-md-16" style="height: 15px;">
+            <table class="table table-condensed table-bordered" width="100%" cellspacing="0" id="transaction-title" style="background-color: #FFFFFF; margin-top: 2px; margin-bottom: 2px;">
+                <tbody>
+                    <tr>
+                        <td align="left" style="font-size: 12px; border: none;"><b style="padding-left: 10px; color: #598904"> რეჟიმი: <span style="color: #598904">...</span></b></td>
+                        <td align="center" style="font-size: 12px; border: none;"><button type="button" class="btn btn-default" id="addnewexps"
+                                style="border: 0; font-weight: bold; float: right; color: black; font-weight: bold; padding: 1px 10px;">
                             ახლის დამატება
-                        </button>
-                    </div>
-                </div>
-            </td>
-        </tr>
-    </table>
+                        </button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
     <div class="row" style="margin-top: 10px; margin-bottom: 0px; padding-left: 5px;  padding-right: 5px;">
         <div class="col-md-7" style="height: 145px;">
             <div class="panel panel-primary" id='contactinfo'>

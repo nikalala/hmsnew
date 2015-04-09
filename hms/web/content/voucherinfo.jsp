@@ -8,27 +8,31 @@
         var today = new Date(<%=lclosedate%>);
         $("#dateFrom").datepicker("setDate", today);
 
-        $("#voucher-panel-body input").css("margin", "0");
     });
 
 </script>
-<div class="panel-heading" style="height: 34px;">
+<style>
+    .bootstrap-select {
+        width: 100% !important;
+    }
+</style>
+<div class="panel-heading" style="height: 26px;">
     <h3 class="panel-title">
-        <div class="span-header">ქვითრის ინფორმაცია</div>
+        <div class="span-header" style="margin: 0;">ქვითრის ინფორმაცია</div>
     </h3>
 </div>
 <div class="panel-body" id="voucher-panel-body" style="height:110px;">
     <table width="100%" class="table table-borderless" style="text-align: right;">
         <tbody>
         <tr>
-            <td><b><span style="color: #598904">ქვითრის ნომერი</span></b></td>
-            <td><input type="text" id="voucherTxtField"/></td>
-            <td><label>შექმნილია:</label></td>
-            <td><input type="text" id="userTxtField" value="<%=user.getLoginid()%>" disabled="disabled"/></td>
+            <td style="text-align: left; width: 124px; padding: 0;"><b><span>საბუთის ნომერი</span></b></td>
+            <td style="width: 136px; padding: 0;"><input type="text" id="voucherTxtField"/></td>
+            <td style="padding: 0; padding-left: 15px; width: 150px;"><label class="pull-left">შექმნილია:</label></td>
+            <td style="padding: 0;"><input type="text" id="userTxtField" value="<%=user.getLoginid()%>" disabled="disabled"/></td>
         </tr>
         <tr>
-            <td><b><span style="color: #598904">ქვითრის თარიღი</span></b></td>
-            <td style="position: relative;">
+            <td style="text-align: left; padding: 0;"><b><span>ქვითრის თარიღი</span></b></td>
+            <td style="position: relative; padding: 0;">
                 <div class="input-append date" id="dateFrom">
                     <input type="text" class="span2 " id="arrival_dateFrom" disabled="disabled"
                            style="">
@@ -37,11 +41,11 @@
                         <i class="glyphicon glyphicon-calendar"></i></span>
                 </div>
             </td>
-            <td>
-                <label>გადახდის მეთოდი</label>
+            <td style="padding: 0; padding-left: 15px;">
+                <label class="pull-left">გადახდის მეთოდი</label>
             </td>
-            <td>
-                <select class="dropdown" name="paymentmethod" style="width: 100%;">
+            <td style="padding: 0;">
+                <select class="dropdown" name="paymentmethod">
                     <option value="">--აირჩიეთ--</option>
                     <%
                         PaymentmethodBean[] paymentmethodBean = PaymentmethodManager.getInstance().loadByWhere("where paymentmode = 0");
@@ -56,15 +60,12 @@
             </td>
         </tr>
         <tr>
-            <td><b><span style="color: #598904">ტიპი</span></b></td>
-            <td><input type="radio" id="cache" checked="checked"></td>
-            <td>ნაღდი</td>
-            <td>2 124 755</td>
-        </tr>
-        <tr>
-            <td colspan="4">
-                ვაჟა ფშაველას 55
+            <td style="text-align: left; padding: 0;"><b><span>გადახდის ტიპი</span></b></td>
+            <td style="padding: 0;">
+                <input class="pull-left" checked=""  name="optradio" type="radio" style="padding-left: 5px; padding-right: 5px; margin-top: -1px;"><span class="pull-left" style="padding-left: 5px; padding-right: 5px;">ნაღდი</span>
             </td>
+            <td style="padding: 0;"></td>
+            <td style="padding: 0;"></td>
         </tr>
         </tbody>
     </table>

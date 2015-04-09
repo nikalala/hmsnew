@@ -4,25 +4,31 @@
 
 <%
 
+    int roomCount = RoomManager.getInstance().countAll();
+
     RoomviewBean[] roomviewBean = RoomviewManager.getInstance().loadByWhere("where roomviewid = 1");
     RoomBean[] rooms = RoomManager.getInstance().loadByWhere("order by roomid ASC");
 
     int margin = 40;
     int block_width = 87;
+    int block_height = 87;
+    int tdmargin = 3;
     int contentWidth = Integer.valueOf(request.getParameter("width")) - margin;
     int mainHeight = Integer.valueOf(request.getParameter("height"));
     int countOfRowsPerLine = Math.round(contentWidth / block_width);
     String html = "";
 
     html += "<tr>";
+    int roomCounter = 0;
     int rowCounter = 0;
-    for (int r = 0; r < rooms.length; r++) {
+    for (int r = 0; r < roomCount; r++) {
         if (rowCounter == countOfRowsPerLine) {
             html += "</tr><tr>";
             rowCounter = 0;
         }
-        String div = "<div class='drag' id='r_"+ rooms[r].getRoomid() +"'>" + rooms[r].getRoomid() + " - " + rooms[r].getName() + "</div>";
+        String div = "<div class='drag' id="+ rooms[r].getRoomid() +">" + rooms[r].getRoomid() + " - " + rooms[r].getName() + "</div>";
         html += "<td class='tdclass'>" + div + "</td>";
+        roomCounter++;
         rowCounter++;
     }
     if (countOfRowsPerLine > rowCounter) {
@@ -50,18 +56,6 @@
         text-overflow: ellipsis !important;
     }
 </style>
-<div id="drag" style="height: <%=mainHeight%>px; max-height: <%=mainHeight%>px; overflow-y: auto;">
-    <table style="float: right;  margin-top: 0;  margin-bottom: 0;  margin-right: 0;">
-        <tr>
-            <td style="height: 30px;width: 20px;  border: 0 !important;"><i class="fa fa-save" onclick="tblToJson()"></i></td>
-            <td style="height: 30px;  border: 0 !important;"><input type="text" id="dt" class="datepicker"></td>
-        </tr>
-    </table>
-    <br/>
-    <table id="table1" class="drag-table">
-        <%=html%>
-    </table>
-</div>
 <script>
 
     function tblToJson (){
@@ -92,38 +86,23 @@
     $(document).ready(function () {
 
         $(".gridfooter, .footer2").remove();
-
         $(".datepicker").datepicker();
 
         function reDrawTable(){
             var json = '<%=roomviewBean[0].getJson()%>';
+            var jsonObj;
             if(!isNullOrEmpty(json)){
-                var j = $.parseJSON(json);
-                var obj = {};
-                var rem = [];
-                for(var i = 0; i < j.length; i++){
-                    if(j[i].roomid != "null"){
-
-                        var div = $("#"+j[i].roomid).parent().html();
-                        obj[j[i].nestid] = div;
-                        rem.push($("#"+j[i].roomid));
-                        /*
-                        $("#"+j[i].roomid).remove();
-                        $( ".drag-table td:eq( "+ j[i].nestid +" )").html(div2)
-                        $("#"+j[i].roomid).hide();
-                        $($("#table1 td")[j[i].nestid]).html(div);
-                         */
-
+                console.log("Starting...");
+                jsonObj = JSON.parse(json);
+                $.each(jsonObj, function (boxindex, object) {
+                    if(object.roomid != "null"){
+                        var div = $("#"+object.roomid).parent().html();
+                        $("#"+object.roomid).remove();
+                        $($("#table1 td")[object.nestid]).html(div);
                     }
-                }
-                $.each(rem,function(){
-                   $(this).remove();
                 });
-                for (var key in obj) {
-                    $( ".drag-table td:eq( "+ key +" )").html(obj[key])
-                }
-                addIcons();
                 drawTable();
+                addIcons();
             }
         }
 
@@ -134,11 +113,11 @@
                     var obj = $(this);
                     var id = obj.attr('id').replace("room_", "");
                     var color = obj.attr('color');
-                    $("#r_"+id).append($(this).context.innerHTML);
+                    $("#"+id).append($(this).context.innerHTML);
                     if(!isNullOrEmpty(color)){
-                        $("#r_"+id).css("background-color",color,"!important");
-                        $("#r_"+id).css("color","#FFF","!important");
-                        $("#r_"+id).find('i').css("color","#FFF","!important");
+                        $("#"+id).css("background-color",color,"!important");
+                        $("#"+id).css("color","#FFF","!important");
+                        $("#"+id).find('i').css("color","#FFF","!important");
                     }
                 });
                 loader.hide();
@@ -169,11 +148,26 @@
         }
 
         <% if(CodeHelpers.isNullOrEmpty(roomviewBean[0].getJson())){ %>
-        drawTable();
+            drawTable();
         <% }else{ %>
-        reDrawTable();
+            reDrawTable();
         <% } %>
 
     });
 
+
+
+
 </script>
+<div id="drag" style="height: <%=mainHeight%>px; max-height: <%=mainHeight%>px; overflow-y: auto;">
+    <table style="float: right;  margin-top: 0;  margin-bottom: 0;  margin-right: 0;">
+        <tr>
+            <td style="height: 30px;width: 20px;  border: 0 !important;"><i class="fa fa-save" onclick="tblToJson()"></i></td>
+            <td style="height: 30px;  border: 0 !important;"><input type="text" id="dt" class="datepicker"></td>
+        </tr>
+    </table>
+    <br/>
+    <table id="table1" class="drag-table">
+        <%=html%>
+    </table>
+</div>
