@@ -17,7 +17,7 @@
         }
 
         $("#currnumber, #vouchernum, #valuenumbe").ForceNumericOnly();
-        $(".btn-group").css("width", "auto", "!important");
+        $(".btn-group").css("width", "100%", "!important");
         $("#voucher-panel-body label").each(function () {
             $(this).css("float", "right", "!important");
             $(this).css("line-height", "27px", "!important");
@@ -96,15 +96,15 @@
 
     });
 </script>
-<div class="panel-heading" style="height: 26px;">
+<div class="panel-heading" style="height: 34px;">
     <h3 class="panel-title">
-        <div class="span-header" style="margin: 0;">დაკისრებული გადასახადი</div>
+        <div class="span-header">დაკისრებული გადასახადი</div>
     </h3>
 </div>
 <div class="panel-body" id="voucher-panel-body" style="height:130px;">
     <div style="width:100%; float: left;">
         <div class="col-md-1">
-            <label class="pull-left">ტიპი</label>
+            <label>ტიპი</label>
         </div>
         <div class="col-md-3">
             <select name="payout" class="dropdown">
@@ -115,10 +115,10 @@
                 <% } %>
             </select>
         </div>
-        <div class="col-md-1" style="padding-left: 15px;">
-            <label class="pull-left">თანხა</label>
-        </div>
         <div class="col-md-1">
+            <label>თანხა</label>
+        </div>
+        <div class="col-md-2">
             <select name="currency" class="dropdown">
                 <% for (CurrencyBean item : currencyBeans) { %>
                 <option value="<%=item.getCurrencyid()%>" <% if (item.getBasic()) { %>
@@ -127,17 +127,17 @@
                 <% } %>
             </select>
         </div>
-        <div class="col-md-2">
+        <div class="col-md-1">
             <input type="text" id="currnumber" name="currnumber"/>
         </div>
-        <div class="col-md-1">
-            <label class="pull-left" style="padding-left: 15px;">Rec/Vou#</label>
-        </div>
         <div class="col-md-2">
+            <label>Rec/Vou#</label>
+        </div>
+        <div class="col-md-1">
             <input type="text" id="vouchernum" name="vouchernum"/>
         </div>
         <div class="col-md-2">
-            <label class="pull-left" style="padding-left: 15px;">კომენტარი</label>
+            <label>კომენტარი</label>
         </div>
         <div class="col-md-3">
             <input type="text" id="comment" name="comment"/>
@@ -145,7 +145,7 @@
     </div>
     <div style="width:100%; float: left;">
         <div class="col-md-1">
-            <label class="pull-left">ფასდაკლება</label>
+            <label>ფასდაკლება</label>
         </div>
         <div class="col-md-3">
             <select name="discount" id="discount" class="dropdown">
@@ -157,15 +157,15 @@
                 <% } %>
             </select>
         </div>
-        <div class="col-md-1" id="disc-first" style="display: none; padding-left: 15px;">
-            <label class="pull-left">ოდენობა</label>
+        <div class="col-md-1" id="disc-first" style="display: none;">
+            <label>value</label>
         </div>
         <div class="col-md-2" id="disc-second" style="display: none;">
             <input type="text" id="valuenumbe" name="valuenumbe"/>
         </div>
-        <div class="col-md-1" style="padding-left: 15px;">
+        <div class="col-md-2">
             <button type="button" class="btn btn-default" id="btnExport"
-                    style="border: 0; color: #0F83D7; color:#FFF; font-weight: bold; float: left; margin: 3px 5px 0 0; background-color: #0F83D7 !important;">
+                    style="border: 0; font-family: BGMtavr; color: #0F83D7; color:#FFF; font-weight: bold; float: left; margin: 3px 5px 0 0; background-color: #0F83D7 !important;">
                 დამატება
             </button>
         </div>

@@ -50,7 +50,7 @@ if(!rid.equals("null")){
 }
 %>
 <div class="panel-heading">
-    <h3 class="panel-title span-header" style="float: none; margin: 0;">
+    <h3 class="panel-title">
         სხვა ინფორმაცია
         <%if(rroom != null){%>
         <div class="btn-group pull-right">

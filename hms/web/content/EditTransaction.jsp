@@ -136,11 +136,6 @@ function updateTransaction(id){
     },"json");
 }
 </script>
-<script>
-    $(document).ready(function(){
-$('select').selectpicker();
-    });
-</script>
 <div class="container-fluid" id="edittransaction0" style="padding-top: 4px; height: calc(100vh - 150px);">
     <div class="row" style="margin-bottom: 0px; padding-left: 5px;  padding-right: 5px;">
         <div class="col-md-16" style="height: 24px;">

@@ -433,7 +433,7 @@
                 <div class="panel-heading">
                     <h3 class="panel-title">სხვა ინფორმაცია</h3>
                 </div>
-                <div class="panel-body" style="height: 140px;">
+                <div class="panel-body" style="height: 125px;">
                     <jsp:include page="panels/otherinfo.jsp">
                         <jsp:param name="type" value=""/>
                     </jsp:include>
@@ -445,7 +445,7 @@
                 <div class="panel-heading">
                     <h3 class="panel-title">გადახდის ინფორმაცია</h3>
                 </div>
-                <div class="panel-body" style="height: 140px;">
+                <div class="panel-body" style="height: 125px;">
                     <jsp:include page="panels/payinfo.jsp">
                         <jsp:param name="type" value=""/>
                     </jsp:include>
@@ -469,7 +469,7 @@
                                               data-target="#walkin_payment" data-toggle="tab">გადახდა</a></li>
                 </ul>
                 <div class="tab-content panel-body" id="edittransactionbody"
-                     style="height: 140px; padding-bottom: 0px;">
+                     style="height: 123px; padding-bottom: 0px;">
                     <div class="tab-pane active" id="walkin_other" style="height: 100%;">
                         <jsp:include page="panels/walkin_other.jsp">
                             <jsp:param name="type" value=""/>

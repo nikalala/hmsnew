@@ -33,7 +33,7 @@ if(request.getParameter("gid") != null)
                         }
                         %>
                     </select>
-                    <input class="form-control" type="text" id="<%=type%>guestinfo_idn" style="width: 77px;" placeholder="ნომერი" value="<%= (guest == null) ? "":guest.getIdn()%>">
+                    <input class="form-control" type="text" id="<%=type%>guestinfo_idn" style="width: 80px;" placeholder="ნომერი" value="<%= (guest == null) ? "":guest.getIdn()%>">
                 </div>
             </div>
             </form>
