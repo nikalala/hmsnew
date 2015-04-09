@@ -4,11 +4,19 @@
 <script type="text/javascript">
     $(document).ready(function(){
         $("#contrbean").next().css("min-width","170px");
+        $("#contrbean").next().css("top","-4px");
     });
 </script>
-<div class="panel-heading" style="height: 34px;">
+<style>
+    .ellipsis {
+    white-space: nowrap; 
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+</style>
+<div class="panel-heading" style="height: 26px;">
     <h3 class="panel-title">
-        <div class="span-header">კონტაქტი</div>
+        <div class="span-header" style="margin: 0;">კონტაქტი</div>
         <div style="float: right; margin: -2px 0 0 10px;">
             <table>
                 <tr>
@@ -29,12 +37,12 @@
                         </select>
                     </td>
                     <td>
-                        <a href="#" class="glyphicon glyphicon-plus iconblack" style="text-decoration: none;"
+                        <a href="#" class="glyphicon glyphicon-plus iconblack" style="text-decoration: none; top: -4px;"
                            data-toggle="tooltip"></a>
                     </td>
                     <td>
                         <a href="#" class="glyphicon glyphicon-search iconblack"
-                           style="text-decoration: none; padding-left: 10px; padding-right: 10px;" data-toggle="tooltip"></a>
+                           style="text-decoration: none; padding-left: 10px; padding-right: 10px; top: -3px;" data-toggle="tooltip"></a>
                     </td>
                 </tr>
             </table>
@@ -42,28 +50,15 @@
     </h3>
 </div>
 <div class="panel-body" style="height:110px;">
-    <table width="100%" class="table table-borderless" style="text-align: right;">
-        <tbody>
-        <tr>
-            <td><b><span style="color: #598904">guestname</span></b></td>
-            <td><b><i class="fa fa-mobile"></i></b></td>
-            <td>577 65 11 00</td>
-        </tr>
-        <tr>
-            <td></td>
-            <td><b><i class="fa fa-phone"></i></b></td>
-            <td>2 124 755</td>
-        </tr>
-        <tr>
-            <td></td>
-            <td><b><i class="fa fa-envelope-o"></i></b></td>
-            <td>giorgi.vashakidze@amindsolutions.com</td>
-        </tr>
-        <tr>
-            <td colspan="3">
-                ვაჟა ფშაველას 55
-            </td>
-        </tr>
-        </tbody>
-    </table>
+    <div class="col-md-8">
+        <div class="col-md-16" style="text-align: left; padding: 3px;"><b><span style="color: #598904">guestname</span></b></div>
+        <div class="col-md-16" style="text-align: left; padding: 3px;"><span>address</span></div>
+        <div class="col-md-16" style="text-align: left; padding: 3px;"><span>city - zip</span></div>
+        <div class="col-md-16" style="text-align: left; padding: 3px;"><span>country</span></div>
+    </div>
+    <div class="col-md-8">
+    <div class="col-md-16" style="text-align: left; padding: 3px; padding-top: 20px;"><b><i class="fa fa-mobile" style="width: 15px;"></i></b> 577 65 11 00</div>
+    <div class="col-md-16" style="text-align: left; padding: 3px;"><b><i class="fa fa-phone" style="width: 15px;"></i></b> 2 124 755</div> 
+    <div class="col-md-16" style="text-align: left; padding: 3px;"><b><i class="fa fa-envelope-o pull-left" style="width: 15px;"></i></b> <span class="ellipsis col-md-14" style="padding: 0;">giorgi.vashakidze@amindsolutions.com</span></div>
+    </div>
 </div>

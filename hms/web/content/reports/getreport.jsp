@@ -65,12 +65,13 @@
 }
 .sidebar-nav > li > a:after {
   font-family: 'FontAwesome';
-  content: "\f107";
+  content: "\f0b0";
   font-size: 1.2em;
-  float: right;
+  float: left;
 }
 .sidebar-nav > li > a.collapsed:after {
-  content: "\f105";
+  content: "\f0b0";
+  color: #1955A8;
 }
 .sidebar-nav li a.collapsed {
   background-color: transparent;
@@ -93,6 +94,9 @@
 }
 .menu-submenu li:last-child a {
   border-bottom: solid 1px #eee;
+}
+.bootstrap-select li a {
+    border: none;
 }
 </style>
 <script>
@@ -174,22 +178,14 @@ $(document).ready(function(){
 <table width='100%'>
     <thead>
     <tr>
-        <td style="border-bottom: 1px solid #000;">
-            <b style="font-size: 20px;">Laerton Tbilisi</b>
-        </td>
-        <td style="border-bottom: 1px solid #000;">
-            <b style="float: right; font-size: 22px;">&nbsp;</b>
-        </td>
-    </tr>
-    <tr>
-        <td style="border-bottom: 1px solid #000;" colspan="2">
-            <ul class="sidebar-nav">
+        <td style="border-bottom: 1px solid #000; background: white;" colspan="2">
+            <ul class="sidebar-nav" style="margin-bottom: 0;">
                 <li>
-                    <a id="collcss" data-toggle="collapse" href="#coll-css" class=""><i class="fa fa-filter fa-2x"></i> <%=reportname%></a>
-                    <ul id="coll-css" class="menu-submenu list-unstyled">
+                    <a id="collcss" data-toggle="collapse" href="#coll-css" class=""><i class="fa fa-filter fa-2x" style="visibility: hidden;"></i><b style="color: red; font-size: 13px; font-family: BGMtavr;"> <%=reportname%></b></a>
+                    <ul id="coll-css" class="menu-submenu list-unstyled collapse in">
                         <jsp:include page="getfilters.jsp">
                             <jsp:param name="rid" value="<%=report.getReportid()%>"/>
-                        </jsp:include>
+                        </jsp:include> 
                     </ul>
                 </li>
             </ul>

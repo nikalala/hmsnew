@@ -258,6 +258,9 @@ $(document).ready(function(){
 
 });
 </script>
+<script>
+    $('select').selectpicker();
+</script>
 <div id="foliotab">
     <table width="100%" style="border-color: #BEBEBE; border-style: solid; border-width: 1px;">
         <tr>

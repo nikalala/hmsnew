@@ -1,6 +1,14 @@
 <%@page contentType="text/html; charset=UTF-8"%>
 <%@page pageEncoding="UTF-8"%>
 <%@include file="../../includes/init.jsp"%>
+<style>
+.bootstrap-select:not([class*="col-"]):not([class*="form-control"]):not(.input-group-btn) {
+    width: calc(100% - 120px);
+}
+input {
+    width: calc(50% - 65px);
+}
+</style>
 <%
     ReportBean report = ReportManager.getInstance().loadByPrimaryKey(new Integer(request.getParameter("rid")));
     ReportitemBean[] items = ReportitemManager.getInstance().loadByWhere("where reportid = "+report.getReportid()+" and search = true order by idx");
@@ -99,10 +107,10 @@
             }
         
         %>
-        <li>
-            <b><%=items[i].getName()%></b>
-                <%=control%>
-        </li>
+        <div class="col-md-4" style="padding: 5px;">
+                <b class="pull-left" style="width: 100px;"><%=items[i].getName()%></b>
+                    <%=control%>
+        </div>
         <%
     }
     for(int i=0;i<filters.length;i++){
@@ -172,10 +180,10 @@
                     control = "<input type='text' name='afilter_"+filters[i].getReportsearchid()+"' id='afilter_"+filters[i].getReportsearchid()+"' value='' size='20'/>";
             }
         %>
-        <li>
-            <b><%=filters[i].getName()%></b>
+        <div class="col-md-4" style="padding: 5px;">
+                <b class="pull-left" style="width: 100px;"><%=filters[i].getName()%></b>
                 <%=control%>
-        </li>
+        </div>
         <%
     }
     if(items.length+filters.length > 0){
@@ -197,4 +205,7 @@
        $("#coll-css").collapse("toggle");
        jQuery("#report_<%=report.getReportid()%>").jqGrid().setGridParam({url: "content/reports/getreportlist.jsp?rid=<%=report.getReportid()%><%=params%>"}).trigger("reloadGrid");
    }
+</script>
+<script>
+    $('select').selectpicker();
 </script>

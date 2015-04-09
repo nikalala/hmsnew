@@ -62,7 +62,7 @@ System.out.println("select * from v_reservationlist "+where+" "+order);
                               data-toggle="dropdown" id="actionBtn">
                              <i class="glyphicon glyphicon-chevron-right"></i>
                            </button>
-                           <ul class="dropdown-menu" role="menu" style="margin-left: -220px;">
+                           <ul class="dropdown-menu updown" role="menu" style="margin-left: -220px;">
                                 <li>
                                     <a href="#"><img src="images/grid/edit.png"> რედაქირება </a>
 								</li>
