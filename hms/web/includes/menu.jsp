@@ -12,16 +12,22 @@
     #head .dropdown-menu  li  a:hover {
         background-color: rgba(185, 185, 185, 0.57);
     }
+    .head-link:hover {
+        border-bottom: 2px solid #006dcc;
+    }
+    .head-link {
+        border-bottom: 2px solid transparent;
+    }
 </style>
 <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container-fluid">
         <div class="navbar-header col-md-3" style="text-align: center;">
-            <a href="index.jsp"><img src="img/logo-hms.png" alt=""/></a>  
+            <a href="index.jsp"><img src="img/logo-hms.png" alt=""/></a>
         </div>
         <div id="head" class="navbar-collapse collapse"> 
             <ul class="nav navbar-nav">
                 <li class="dropdown">
-                    <a href="#mb59" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-briefcase" style="padding-right: 10px;"></span>მიმღები <b class="caret"></b></a>
+                    <a href="#mb59" class="dropdown-toggle  head-link" data-toggle="dropdown"><span class="glyphicon glyphicon-briefcase" style="padding-right: 10px;"></span>მიმღები <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li>
                             <a href="javascript:newWindow('walkin','მოსული სტუმარი');">სტუმრის მიღება</a>
@@ -54,7 +60,7 @@
                 </li>
                 
                 <li class="dropdown">
-                    <a href="#mb59" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-asterisk" style="padding-right: 10px;"></span> ჯგუფები <b class="caret"></b></a>
+                    <a href="#mb59" class="dropdown-toggle head-link" data-toggle="dropdown"><span class="glyphicon glyphicon-asterisk" style="padding-right: 10px;"></span> ჯგუფები <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li>
                             <a href="javascript:getBody('stayviewleft','construction');">ჯგუფური რეზერვაცია</a>
@@ -69,7 +75,7 @@
                 </li>
 
                 <li class="dropdown">
-                    <a href="#mb59" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-usd" style="padding-right: 10px;"></span> სალარო <b class="caret"></b></a>
+                    <a href="#mb59" class=" dropdown-toggle head-link" data-toggle="dropdown"><span class="glyphicon glyphicon-usd" style="padding-right: 10px;"></span> სალარო <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li>
                             <a href="javascript:getBody('stayviewleft','tagents','ტურისტული აგენტები','res1','?type=2',true);">ტურისტული აგენტები</a>
@@ -90,7 +96,7 @@
                 </li>
                 
                 <li class="dropdown">
-                    <a href="#mb59" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-home" style="padding-right: 10px;"></span> დალაგება <b class="caret"></b></a>
+                    <a href="#mb59" class=" dropdown-toggle head-link" data-toggle="dropdown"><span class="glyphicon glyphicon-home" style="padding-right: 10px;"></span> დალაგება <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li>
                             <a href="javascript:getBody('stayviewleft','hotelstatus','სასტუმროს სტატუსი','res1','',true);">სასტუმროს სტატუსი</a>
@@ -128,7 +134,7 @@
                     <a href="javascript:getBody('stayviewleft','roomview','ოთახები', 'res1','?width='+$('#centerTabContent .active').width()+'&height='+$('#centerTabContent .active').height(),true)" data-toggle="tooltip" title="ოთახები"><span class="glyphicon glyphicon-th"></span></a>
                 </li>
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span></a>
+                    <a href="#" class=" dropdown-toggle head-link" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="javascript:getBody('construction')">პაროლის შეცვლა</a></li>
                         <li class="divider"></li>
