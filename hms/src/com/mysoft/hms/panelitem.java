@@ -15,20 +15,24 @@ import java.sql.ResultSet;
  */
 public class panelitem {
     
-    private String label;
-    private int type; // 0: text, 1: textarea; 2: select; 3: radio; 4: checkbox; 5: date; 6: time
-    private int size1;
-    private int size2;
-    private String sql;
-    private String[] values;
-    private int x;
-    private int y;
-    private String id;
-    private String val;
+    private String label = "";
+    private int type = 0; // 0: text, 1: textarea; 2: select; 3: radio; 4: checkbox; 5: date; 6: time; 7: button
+    private int size1 = 0;
+    private int size2 = 0;
+    private String sql = "";
+    private String[] values = new String[0];
+    private int x = 0;
+    private int y = 0;
+    private String id = "";
+    private String val = "";
+    private String placeholder = "";
+    private int colmd = 16;
+    private String onclick = "";
+    private String classname = "";
     
     public void panelitem(){}
     
-    public void init(String label, String id, int type, int size1, int size2, String sql, String[] values, int x, int y, String val){
+    public void init(String label, String id, int type, int size1, int size2, String sql, String[] values, int x, int y, String val, String placeholder, int colmd, String onclick, String classname){
         this.label = label;
         this.type = type;
         this.id = id;
@@ -38,10 +42,47 @@ public class panelitem {
         this.val = val;
         this.x = x;
         this.y = y;
+        this.placeholder = placeholder;
+        this.colmd = colmd;
+        this.onclick = onclick;
+        this.classname = classname;
         this.values = new String[values.length];
         for(int i=0;i<values.length;i++){
             this.values[i] = values[i];
         }
+    }
+
+    public String getOnclick() {
+        return onclick;
+    }
+
+    public void setOnclick(String onclick) {
+        this.onclick = onclick;
+    }
+
+    public String getClassname() {
+        return classname;
+    }
+
+    public void setClassname(String classname) {
+        this.classname = classname;
+    }
+
+    
+    public int getColmd() {
+        return colmd;
+    }
+
+    public void setColmd(int colmd) {
+        this.colmd = colmd;
+    }
+
+    public String getPlaceholder() {
+        return placeholder;
+    }
+
+    public void setPlaceholder(String placeholder) {
+        this.placeholder = placeholder;
     }
 
     public String getVal() {
@@ -124,26 +165,30 @@ public class panelitem {
         this.y = y;
     }
     
-    public String drawitem(String classname,int colmd) throws Exception {
+    public String drawitem() throws Exception {
         String s = "";
-        String mclass = "form-inline";
+        String mclass = "form-control";
         switch(type){
             case 0:
-                s = "<div class=\""+mclass+" col-md-"+colmd+"\">"
-                        + "<span>"+label+"</span>"
-                        + "<input type=\"text\" class=\"form-control "+classname+"\" size=\""+size1+"\" name=\""+id+"\" id=\""+id+"\" value=\""+val+"\"/>"
-                        + "</div>";
+                s += "<div class=\"col-md-"+colmd+"\">";
+                //if(label.length() > 0)  s += "<span>"+label+"</span>";
+                s += "<input type=\"text\" class=\"form-control pull-right "+classname+"\" size=\""+size1+"\" name=\""+id+"\" id=\""+id+"\" value=\""+val+"\"";
+                if(placeholder.length() > 0)    s += " placeholder=\""+placeholder+"\"";
+                s += "/></div>";
                 break;
             case 1:
-                s = "<div class=\""+mclass+" col-md-"+colmd+"\">"
-                        + "<span>"+label+"</span>"
-                        + "<textarea class=\"form-control "+classname+"\" cols=\""+size1+"\" rows=\""+size2+"\" name=\""+id+"\" id=\""+id+"\">"+val+"</textarea>"
-                        + "</div>";
+                s += "<div class=\"col-md-"+colmd+"\">";
+                //if(label.length() > 0)  s += "<span>"+label+"</span>";
+                s += "<textarea class=\"form-control pull-right "+classname+"\" cols=\""+size1+"\" rows=\""+size2+"\" name=\""+id+"\" id=\""+id+"\"";
+                if(placeholder.length() > 0)    s += " placeholder=\""+placeholder+"\"";
+                s += ">"+val+"</textarea>";
+                s += "</div>";
                 break;
             case 2:
-                s = "<div class=\""+mclass+" col-md-"+colmd+"\">"
-                        + "<span>"+label+"</span>"
-                        + "<select class=\"form-control "+classname+"\" name=\""+id+"\" id=\""+id+"\">\n";
+                s += "<div class=\"col-md-"+colmd+"\">";
+                //if(label.length() > 0)  s += "<span>"+label+"</span>";
+                s += "<select class=\"form-control "+classname+"\" name=\""+id+"\" id=\""+id+"\">";
+                if(placeholder.length() > 0)    s += "<option value=\"\">"+ placeholder+"</option>";
                 if(sql.length() > 0){
                     Connection con = Manager.getInstance().getConnection();
                     ResultSet rs = con.createStatement().executeQuery(sql);
@@ -153,7 +198,7 @@ public class panelitem {
                         s += "<option value=\""+vl+"\"";
                         if(val.equalsIgnoreCase(vl) || val.equalsIgnoreCase(nm))
                             s += " selected";
-                        s += ">"+nm+"</option>\n";
+                        s += ">"+nm+"</option>";
                     }
                     rs.close();
                     Manager.getInstance().releaseConnection(con);
@@ -162,42 +207,43 @@ public class panelitem {
                         s += "<option value=\""+i+"\"";
                         if(val.equalsIgnoreCase(String.valueOf(i)) || val.equalsIgnoreCase(values[i]))
                             s += " selected";
-                        s += ">"+values[i]+"</option>\n";
+                        s += ">"+values[i]+"</option>";
                     }
                 }
                 s += "</select>"
                         + "</div>";
                 break;
             case 3:
-                s = "<div class=\""+mclass+" col-md-"+colmd+"\">"
-                        + "<span>"+label+"</span>";
+                s += "<div class=\"col-md-"+colmd+"\">";
+                //if(label.length() > 0)  s += "<span>"+label+"</span>";
                 if(sql.length() > 0){
                     Connection con = Manager.getInstance().getConnection();
                     ResultSet rs = con.createStatement().executeQuery(sql);
                     for(int i=0;rs.next();i++){
                         String vl = rs.getString(1);
                         String nm = rs.getString(2);
-                        s += "<input type=\"radio\" class=\"form-control "+classname+"\" name=\""+id+"\" id=\""+id+i+"\" value=\""+vl+"\"";
+                        s += "<input type=\"radio\" class=\"css-checkbox\" name=\""+id+"\" id=\""+id+i+"\" value=\""+vl+"\"";
                         if(val.equalsIgnoreCase(vl) || val.equalsIgnoreCase(nm))
                             s += " checked";
-                        s += ">"+nm+"\n";
+                        s += ">";
+                        s += "<label for=\""+id+"\" class=\"css-label radGroup1\" style=\"padding-right: 10px;\">"+nm+"</label>";
                     }
                     rs.close();
                     Manager.getInstance().releaseConnection(con);
                 } else {
                     for(int i=0;i<values.length;i++){
-                        s += "<input type=\"radio\" class=\"form-control "+classname+"\" name=\""+id+"\" id=\""+id+i+"\" value=\""+i+"\"";
+                        s += "<input type=\"radio\" class=\"css-checkbox\" name=\""+id+"\" id=\""+id+i+"\" value=\""+i+"\"";
                         if(val.equalsIgnoreCase(String.valueOf(i)) || val.equalsIgnoreCase(values[i]))
                             s += " checked";
-                        s += ">"+values[i]+"\n";
+                        s += ">";
+                        s += "<label for=\""+id+"\" class=\"css-label radGroup1\" style=\"padding-right: 10px;\">"+values[i]+"</label>";
                     }
                 }
-                s += "</select>"
-                        + "</div>";
+                s += "</div>";
                 break;
             case 4:
-                s = "<div class=\""+mclass+" col-md-"+colmd+"\">"
-                        + "<span>"+label+"</span>";
+                s += "<div class=\""+mclass+" col-md-"+colmd+"\">";
+                //if(label.length() > 0)  s += "<span>"+label+"</span>";
                 if(sql.length() > 0){
                     Connection con = Manager.getInstance().getConnection();
                     ResultSet rs = con.createStatement().executeQuery(sql);
@@ -207,7 +253,7 @@ public class panelitem {
                         s += "<input type=\"checkbox\" class=\"form-control "+classname+"\" name=\""+id+"\" id=\""+id+i+"\" value=\""+vl+"\"";
                         if(val.equalsIgnoreCase(vl) || val.equalsIgnoreCase(nm))
                             s += " checked";
-                        s += ">"+nm+"\n";
+                        s += ">"+nm+"";
                     }
                     rs.close();
                     Manager.getInstance().releaseConnection(con);
@@ -216,29 +262,34 @@ public class panelitem {
                         s += "<input type=\"radio\" class=\"form-control "+classname+"\" name=\""+id+"\" id=\""+id+i+"\" value=\""+i+"\"";
                         if(val.equalsIgnoreCase(String.valueOf(i)) || val.equalsIgnoreCase(values[i]))
                             s += " checked";
-                        s += ">"+values[i]+"\n";
+                        s += ">"+values[i]+"";
                     }
                 }
-                s += "</select>"
-                        + "</div>";
+                s += "</div>";
                 break;
             case 5:
-                s = "<div class=\""+mclass+" col-md-"+colmd+"\">"
-                        + "<span>"+label+"</span>"
-                        + "<input type=\"text\" class=\"form-control "+classname+"\" size=\""+size1+"\" name=\""+id+"\" id=\""+id+"\" value=\""+val+"\"/>"
-                        + "</div>";
+                s += "<div class=\"col-md-"+colmd+"\">";
+                //if(label.length() > 0)  s += "<span>"+label+"</span>";
+                s += "<input type=\"text\" class=\"form-control pull-right "+classname+"\" size=\""+size1+"\" name=\""+id+"\" id=\""+id+"\" value=\""+val+"\"";
+                if(placeholder.length() > 0)    s += " placeholder=\""+placeholder+"\"";
+                s += "/></div>";
                 break;
             case 6:
-                s = "<div class=\""+mclass+" col-md-"+colmd+"\">"
-                        + "<span>"+label+"</span>"
-                        + "<input type=\"text\" class=\"form-control "+classname+"\" size=\""+size1+"\" name=\""+id+"\" id=\""+id+"\" value=\""+val+"\"/>"
-                        + "</div>";
+                s += "<div class=\"col-md-"+colmd+"\">";
+                //if(label.length() > 0)  s += "<span>"+label+"</span>";
+                s += "<input type=\"text\" class=\"form-control pull-right "+classname+"\" size=\""+size1+"\" name=\""+id+"\" id=\""+id+"\" value=\""+val+"\"";
+                if(placeholder.length() > 0)    s += " placeholder=\""+placeholder+"\"";
+                s += "/></div>";
                 break;
+            case 7:
+                s += "<div class=\"col-md-"+colmd+"\" style=\"text-align: left;\"><a class=\"btn btn-primary\" style=\"background-color: #EEE; color: gray; border-color: #ccc;\"";
+                if(onclick.length() > 0)    s += " onclick=\""+onclick.replaceAll("'", "\\\\'")+"\"";
+                s += "><i class=\"fa fa-"+classname+"\"></i></a></div>";
+                break;
+            case 8:
+                s += "<span class=\"pull-left col-md-"+colmd+"\" style=\"line-height: 2.5;\"><b>"+label+"</b></span>";
             default:
-                
-            
         }
-        
         return s;
     }
 }

@@ -18,14 +18,25 @@ import java.util.Vector;
  */
 public class panel {
     
-    private String title;
-    private String id;
-    private String classnames;
-    private String height;
-    private Vector panelitems;
+    private String title = "";
+    private String id = "";
+    private String classnames = "";
+    private String height = "100%";
+    private Vector panelitems = new Vector();
+    private int colmd = 16;
     
     public void panel(){}
 
+    public int getColmd() {
+        return colmd;
+    }
+
+    public void setColmd(int colmd) {
+        this.colmd = colmd;
+    }
+
+    
+    
     public String getId() {
         return id;
     }
@@ -88,32 +99,33 @@ public class panel {
             hy.put((Integer)y,(Vector)v);
         }
         
-        String s = "<div class=\"panel panel-default\" id=\""+id+"\" style=\"margin-top: 0px; height: "+height+"px; font-family: bgmtavr;\">\n" +
-                "<div class=\"panel-heading  panel-title\">\n" +
-                "<b style='vertical-align: middle; color: #FFFFFF; font-family: bgmtavr;'>"+title+"</b>\n" +
-                "</div>\n" +
-                "<div class=\"panel-body\" style=\"background-color: #FFFFFF;\">\n" +
-                "<div class=\"input-group\" style=\"width: 98%;\">\n";
+        String s = "<div style=\"border: 5px solid transparent;\" class=\"col-md-"+colmd+"\"><div class=\"panel panel-default col-md-16\" id=\""+id+"\" style=\"margin-top: 0px; padding: 0px; border-radius: 5px; height: "+height+"px;\">" +
+                "<div class=\"panel-heading  panel-title\">" +
+                "<b style=\"vertical-align: middle; color: #5AB2E3; font-family: bgmtavr;\">"+title+"</b>" +
+                "</div>" +
+                "<div class=\"panel-body\" style=\"background-color: #FFFFFF;\">" +
+                "<div class=\"input-group col-md-16\">";
         
                 List<Integer> tmp = Collections.list(hy.keys());
                 Collections.sort(tmp);
                 Iterator<Integer> it = tmp.iterator();
-                int cols = 16;
+                //int cols = 16;
                 while(it.hasNext()){
                     Integer n = (Integer)it.next();
                     Vector v = (Vector)hy.get(n);
-                    int colmd = cols/v.size();
+                    //int colmd = cols/v.size();
+                    s += "<div class=\"input-group col-md-16\">";
                     for(int i=0;i<v.size();i++){
-                        panelitem pi = (panelitem)panelitems.elementAt(i);
-                        if(i == v.size()-1) colmd = cols-colmd*(v.size()-1);
-                        s += pi.drawitem(classnames,colmd);
+                        panelitem pi = (panelitem)v.elementAt(i);
+                        //if(i == v.size()-1) colmd = cols-colmd*(v.size()-1);
+                        s += pi.drawitem();
                     }
-                    //here you can get ordered things: 'your_hashtable'.get(element);
+                    s += "</div>";
                 }
         
-                s += "</div>\n" +
-                "</div>\n" +
-                "</div>";
+                s += "</div>" +
+                "</div>" +
+                "</div></div>";
         return s;
     }
     

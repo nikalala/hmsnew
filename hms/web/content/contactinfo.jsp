@@ -1,10 +1,192 @@
 <%@page contentType="text/html; charset=UTF-8" %>
 <%@page pageEncoding="UTF-8" %>
 <%@include file="../includes/init.jsp" %>
+<%
+  Vector v = new Vector();
+
+panelitem pi = new panelitem();
+pi.setId("editcontactinfo_label1");
+pi.setLabel("სახელი");
+pi.setSql("");
+pi.setType(8);
+pi.setVal("");
+pi.setX(0);
+pi.setY(0);
+pi.setColmd(2);
+v.addElement((panelitem)pi);
+
+pi = new panelitem();
+pi.setId("editcontactinfo_salutationid");
+pi.setLabel("");
+pi.setSize1(20);
+pi.setSql("select salutationid, name from salutation order by name");
+pi.setType(2);
+pi.setVal("");
+pi.setX(1);
+pi.setY(0);
+pi.setColmd(2);
+v.addElement((panelitem)pi);
+
+pi = new panelitem();
+pi.setId("editcontactinfo_fname");
+pi.setPlaceholder("სახელი");
+pi.setSize1(20);
+pi.setSql("");
+pi.setType(0);
+pi.setVal("");
+pi.setX(2);
+pi.setY(0);
+pi.setColmd(5);
+v.addElement((panelitem)pi);
+
+pi = new panelitem();
+pi.setId("editcontactinfo_lname");
+pi.setPlaceholder("გვარი");
+pi.setSize1(20);
+pi.setSql("");
+pi.setType(0);
+pi.setVal("");
+pi.setX(3);
+pi.setY(0);
+pi.setColmd(5);
+v.addElement((panelitem)pi);
+
+pi = new panelitem();
+pi.setId("editcontactinfo_search");
+pi.setClassname("search");
+pi.setSql("");
+pi.setType(7);
+pi.setVal("");
+pi.setOnclick("");
+pi.setX(4);
+pi.setY(0);
+pi.setColmd(2);
+v.addElement((panelitem)pi);
+
+pi = new panelitem();
+pi.setId("editcontactinfo_adultchild");
+pi.setLabel("უფროსი/ბავშვი");
+pi.setSql("");
+pi.setType(8);
+pi.setVal("");
+pi.setX(0);
+pi.setY(1);
+pi.setColmd(5);
+v.addElement((panelitem)pi);
+
+pi = new panelitem();
+pi.setId("editcontactinfo_adultchild");
+pi.setLabel("");
+pi.setSql("");
+pi.setValues(pax);
+pi.setType(3);
+pi.setVal("");
+pi.setX(1);
+pi.setY(1);
+pi.setColmd(11);
+v.addElement((panelitem)pi);
+
+pi = new panelitem();
+pi.setId("editcontactinfo_gender");
+pi.setLabel("სქესი");
+pi.setSql("");
+pi.setType(8);
+pi.setVal("");
+pi.setX(0);
+pi.setY(2);
+pi.setColmd(5);
+v.addElement((panelitem)pi);
+
+pi = new panelitem();
+pi.setId("editcontactinfo_gender");
+pi.setLabel("");
+pi.setSql("");
+pi.setValues(gender);
+pi.setType(3);
+pi.setVal("");
+pi.setX(1);
+pi.setY(2);
+pi.setColmd(11);
+v.addElement((panelitem)pi);
+
+pi = new panelitem();
+pi.setId("editcontactinfo_nationality");
+pi.setLabel("ეროვნება");
+pi.setSql("");
+pi.setType(8);
+pi.setVal("");
+pi.setX(0);
+pi.setY(3);
+pi.setColmd(5);
+v.addElement((panelitem)pi);
+
+pi = new panelitem();
+pi.setId("editcontactinfo_nationality");
+pi.setLabel("");
+pi.setSql("select nationalityid, name from nationality order by name");
+pi.setType(2);
+pi.setVal("");
+pi.setX(1);
+pi.setY(3);
+pi.setColmd(6);
+v.addElement((panelitem)pi);
+
+pi = new panelitem();
+pi.setId("editcontactinfo_idnum");
+pi.setLabel("");
+pi.setPlaceholder("რეგისტრაციის ნომერი");
+pi.setSize1(20);
+pi.setSql("");
+pi.setType(0);
+pi.setVal("");
+pi.setX(2);
+pi.setY(3);
+pi.setColmd(5);
+v.addElement((panelitem)pi);
+
+panel[] pl = new panel[2];
+pl[0] = new panel();
+pl[0].setClassnames("");
+pl[0].setHeight("350");
+pl[0].setId("geninfo");
+pl[0].setTitle("ზოგადი ინფორმაცია");
+pl[0].setColmd(8);
+pl[0].setPanelitems(v);
+
+pl[1] = new panel();
+pl[1].setClassnames("");
+pl[1].setHeight("350");
+pl[1].setId("geninfo");
+pl[1].setTitle("ზოგადი ინფორმაცია");
+pl[1].setColmd(8);
+pl[1].setPanelitems(v);
+  
+  button[] btns = new button[2];
+  btns[0] = new button();
+  btns[0].setAction("alert('aaaa');");
+  btns[0].setClassname("btn-primary");
+  btns[0].setClose(false);
+  btns[0].setValue("შენახვა");
+  
+  btns[1] = new button();
+  btns[1].setAction("dialogItself.close();");
+  btns[1].setClassname("btn-danger");
+  btns[1].setClose(true);
+  btns[1].setValue("დახურვა");
+  
+  dialog dl = new dialog();
+  dl.setTitle("სტუმრის პროფილის რედაქტირება");
+  dl.setType("WIDE");
+  dl.setButtons(btns);
+  dl.setPanels(pl);
+ 
+  //System.out.println(dl.draw());
+%>
+
 <script type="text/javascript">
     
     function addContact(){
-        newmWindow1('editcontactinfo','სტუმრის პროფილის რედაქტირება','');
+        <%=dl.draw()%>
     }
     
     function searchContact(){

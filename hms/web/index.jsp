@@ -395,8 +395,7 @@
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
             <div class="modal-header" style="background-color: gray; color: white; height: 30px;">
-                <button type="button" id="smallmodalbtn" class="close" data-dismiss="modal" aria-hidden="true"
-                        style='margin-top: -6px;'>&times;</button>
+                <button type="button" id="smallmodalbtn" class="close" data-dismiss="modal" aria-hidden="true" style='margin-top: -6px;'>&times;</button>
                 <h4 id="smheader" style='margin-top: -4px;'></h4>
             </div>
             <div class="modal-body" id="smbody"></div>
@@ -429,8 +428,7 @@
     </div>
 </div>
 
-<div class="modal fade modal-vertical-centered" id="infomodal" tabindex="-1" role="dialog" aria-labelledby=""
-     aria-hidden="true">
+<div class="modal fade modal-vertical-centered" id="infomodal" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
             <div class="modal-header" style="background-color: gray; color: white; height: 30px;">
@@ -472,6 +470,8 @@
     </ul>
 </div>
 <div class="loading-panel"></div>
+
+<div id="dddialog"></div>
 <%--link rel="stylesheet" href="css/smartadmin-production.min.css">
 <script type="text/javascript" src="js/SmartNotification.min.js"></script--%>
 <script>
