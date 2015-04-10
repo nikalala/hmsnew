@@ -22,6 +22,91 @@ String gends = "";
 for(int i=0;i<gender.length;i++){
     gends = "editcontactinfo_gender"+i+",";
 }
+
+Vector v = new Vector();
+
+panelitem pi = new panelitem();
+pi.setId("editcontactinfo_salutationid");
+pi.setLabel("");
+pi.setSize1(20);
+pi.setSql("select salutationid, name from salutation order by name");
+pi.setType(2);
+pi.setVal("");
+pi.setX(0);
+pi.setY(0);
+v.addElement((panelitem)pi);
+
+pi = new panelitem();
+pi.setId("editcontactinfo_fname");
+pi.setLabel("სახელი");
+pi.setSize1(20);
+pi.setSql("");
+pi.setType(0);
+pi.setVal("");
+pi.setX(1);
+pi.setY(0);
+v.addElement((panelitem)pi);
+
+pi = new panelitem();
+pi.setId("editcontactinfo_lname");
+pi.setLabel("გვარი");
+pi.setSize1(20);
+pi.setSql("");
+pi.setType(0);
+pi.setVal("");
+pi.setX(2);
+pi.setY(0);
+v.addElement((panelitem)pi);
+
+pi = new panelitem();
+pi.setId("editcontactinfo_adultchild");
+pi.setLabel("უფროსი/ბავშვი");
+pi.setSql("");
+pi.setValues(pax);
+pi.setType(3);
+pi.setVal("");
+pi.setX(0);
+pi.setY(1);
+v.addElement((panelitem)pi);
+
+pi = new panelitem();
+pi.setId("editcontactinfo_gender");
+pi.setLabel("სქესი");
+pi.setSql("");
+pi.setValues(gender);
+pi.setType(3);
+pi.setVal("");
+pi.setX(0);
+pi.setY(2);
+v.addElement((panelitem)pi);
+
+pi = new panelitem();
+pi.setId("editcontactinfo_nationality");
+pi.setLabel("ეროვნება");
+pi.setSql("select nationalityid, name from nationality order by name");
+pi.setType(3);
+pi.setVal("");
+pi.setX(0);
+pi.setY(3);
+v.addElement((panelitem)pi);
+
+pi = new panelitem();
+pi.setId("editcontactinfo_idnum");
+pi.setLabel("ეროვნება");
+pi.setSize1(20);
+pi.setSql("");
+pi.setType(0);
+pi.setVal("");
+pi.setX(1);
+pi.setY(3);
+v.addElement((panelitem)pi);
+
+panel pl = new panel();
+pl.setClassnames("");
+pl.setHeight("350");
+pl.setId("geninfo");
+pl.setTitle("ზოგადი ინფორმაცია");
+pl.setPanelitems(v);
 %>
 <script>
     function remEditGuestName(){
@@ -54,6 +139,9 @@ for(int i=0;i<gender.length;i++){
 <input type="hidden" id="editcontactinfo_controls" value="<%=gends%>editcontactinfo_vipstatusid,editcontactinfo_nationalityid,editcontactinfo_idn,editcontactinfo_idtypeid,editcontactinfo_fax,editcontactinfo_mobile,editcontactinfo_phone,editcontactinfo_email,editcontactinfo_fname,editcontactinfo_lname,editcontactinfo_guestid,editcontactinfo_salutationid,editcontactinfo_address,editcontactinfo_city,editcontactinfo_zip,editcontactinfo_countryid"/>
 <input type="hidden" id="editcontactinfo_callbackurl" value="content/contactinfo.jsp"/>
 <input type="hidden" id="editcontactinfo_callbackdata" value="contactinfo"/>
+
+<%=pl.drawpanel()%>
+<%--
 <table width="100%" align=" center">
     <tr>
         <td align="center" valign="top">
@@ -292,7 +380,7 @@ for(int i=0;i<gender.length;i++){
         </td>
     </tr>
 </table>
-
+--%>
                     
 
 
