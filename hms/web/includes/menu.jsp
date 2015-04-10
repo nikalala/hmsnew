@@ -91,7 +91,7 @@
                             <a href="javascript:getBody('stayviewleft','tagents','კომპანიები','res1','?type=1',true);">კომპანიები</a>
                         </li>
                         <li>
-                            <a href="javascript:getBody('construction','expenses','ხარჯები','res1','',true);">ხარჯები</a>
+                            <a href="javascript:getBody('expencesleft','expenses','ხარჯები','res1','',true);">ხარჯები</a>
                         </li>
                         <li>
                             <a href="javascript:newWindow('construction','მოლარე');">მოლარე</a>
