@@ -2,6 +2,15 @@
 <%@page pageEncoding="UTF-8" %>
 <%@include file="../includes/init.jsp" %>
 <script type="text/javascript">
+    
+    function addContact(){
+        newmWindow1('editcontactinfo','სტუმრის პროფილის რედაქტირება','');
+    }
+    
+    function searchContact(){
+        
+    }
+    
     $(document).ready(function(){
         $("#contrbean").next().css("min-width","170px");
         $("#contrbean").next().css("top","-4px");
@@ -37,12 +46,10 @@
                         </select>
                     </td>
                     <td>
-                        <a href="#" class="glyphicon glyphicon-plus iconblack" style="text-decoration: none; top: -4px;"
-                           data-toggle="tooltip"></a>
+                        <a href="#" onclick="addContact()" class="glyphicon glyphicon-plus iconblack" style="text-decoration: none; top: -4px;" data-toggle="დამატება"></a>
                     </td>
                     <td>
-                        <a href="#" class="glyphicon glyphicon-search iconblack"
-                           style="text-decoration: none; padding-left: 10px; padding-right: 10px; top: -3px;" data-toggle="tooltip"></a>
+                        <a href="#" class="glyphicon glyphicon-search iconblack" onclick="searchContact()" style="text-decoration: none; padding-left: 10px; padding-right: 10px; top: -3px;" data-toggle="ძებნა"></a>
                     </td>
                 </tr>
             </table>
