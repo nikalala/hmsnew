@@ -237,16 +237,13 @@ int messageCount = MessageManager.getInstance().countWhere("where reservationid 
     
     });
 </script>
-<script>
-    $('select').selectpicker();
-</script>
 <table class="" width="100%" style="height: 100%;">
     <tbody>
         <tr id='geninfotr'>
             <td class="transactiongeninfotd col-md-6" style="width: 420px; padding-left: 5px; padding-right: 2px; padding-bottom: 0px; padding-top: 5px;">
                 <div class="panel panel-primary" id="transactiongeninfopanel1" style='height: 260px;'>
                     <div class="panel-heading">
-                        <h3 class="panel-title span-header" style="float: none; margin: 0;">გადახდის ინფორმაცია</h3>
+                        <h3 class="panel-title">გადახდის ინფორმაცია</h3>
                     </div>
                     <div class="panel-body">
                         <table width="100%" class="table table-borderless table-condensed">
@@ -344,7 +341,7 @@ int messageCount = MessageManager.getInstance().countWhere("where reservationid 
                             <td>
                                 <div class="panel panel-primary" id="transactiongeninfopanel2" style='height: 150px;'>
                                     <div class="panel-heading">
-                                        <h3 class="panel-title span-header" style="float: none; margin: 0;">
+                                        <h3 class="panel-title">
                                             მეზობლის ინფორმაცია
                                             <div class="btn-group pull-right">
                                                 <a href="#" onclick="newSharer(<%=rroom.getReservationroomid()%>)" class="glyphicon glyphicon-plus iconblack" style="text-decoration: none;" data-toggle="tooltip" title=""></a>
@@ -367,7 +364,7 @@ int messageCount = MessageManager.getInstance().countWhere("where reservationid 
                             <td>
                                 <div class="panel panel-primary" id="transactiongeninfopanel3" style="height: 98px;">
                                     <div class="panel-heading">
-                                        <h3 class="panel-title span-header" style="float: none; margin: 0;">
+                                        <h3 class="panel-title">
                                             დამატებითი სერვისები
                                             <div class="btn-group pull-right">
                                                 <a href="javascript:newmWindow1('additionalservices','დამატებითი სერვისები','reservationroomid=<%=rroom.getReservationroomid()%>')" class="glyphicon glyphicon-plus iconblack" style="text-decoration: none;" data-toggle="tooltip" title=""></a>
@@ -396,7 +393,7 @@ int messageCount = MessageManager.getInstance().countWhere("where reservationid 
                             <td>
                                 <div class="panel panel-primary" id="transactiongeninfopanel4" style='height: 150px;'>
                                     <div class="panel-heading">
-                                        <h3 class="panel-title span-header" style="float: none; margin: 0;">
+                                        <h3 class="panel-title">
                                             შენიშვნები
                                             <div class="btn-group pull-right">
                                                 <a href="javascript:newmWindow1('remarks','შენიშვნები','script=getReasonList1(<%=rroom.getReservationid()%>)&rid=<%=rroom.getReservationroomid()%>')" class="glyphicon glyphicon-plus iconblack" style="text-decoration: none;" data-toggle="tooltip" title=""></a>
@@ -419,7 +416,7 @@ int messageCount = MessageManager.getInstance().countWhere("where reservationid 
                             <td>
                                 <div class="panel panel-primary" id="transactiongeninfopanel5" style="height: 98px;">
                                     <div class="panel-heading">
-                                        <h3 class="panel-title span-header" style="float: none; margin: 0;">
+                                        <h3 class="panel-title">
                                             ჯამი
                                             <div class="btn-group pull-right">
                                                 <a href="javascript:infopage('reateinfo','ტარიფის ინფორმაცია','reservationroomid=<%=rroom.getReservationroomid()%>');" class="glyphicon glyphicon-usd iconblack" style="text-decoration: none;" data-toggle="tooltip" title=""></a>

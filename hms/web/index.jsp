@@ -144,7 +144,6 @@
     <link rel="stylesheet" type="text/css" href="css/ui.jqgrid.css">
     <link rel="stylesheet" type="text/css" href="css/bootstrap-select.min.css">
     <link rel="stylesheet" type="text/css" href="css/font-awesome.css">
-    <link href="css/input.css" rel="stylesheet" type="text/css"/> 
     <script type="text/javascript" src="js/jquery.min.js"></script>
     <script type="text/javascript" src="js/bootstrap3.min.js"></script>
     <script type="text/javascript" src="js/daterangepicker.jQuery.compressed.js"></script>
@@ -163,7 +162,6 @@
     <script type="text/javascript" src="js/bootstrap-select.js"></script>
     <script src="js/plugins/jquery.bootstrap.wizard.min.js" type="text/javascript"></script>
     <script src="js/bootstrap-combobox.js" type="text/javascript"></script>
-    <script src="js/updown.js" type="text/javascript"></script>
 
 
     <%--link href="js/ext/ext-theme-classic-all.css" rel="stylesheet" type="text/css" />
@@ -178,6 +176,8 @@
     <script src="js/ext/1/sch-all.js" type="text/javascript"></script>
 
     <script src="js/tabulous.js" type="text/javascript"></script>
+
+    <script type="text/javascript" src="js/redips-drag-min.js"></script>
 
     <script>
 
@@ -333,34 +333,6 @@
 
 
     </script>
-<script>
-        jQuery(function($) {
-  $(document).on("shown.bs.dropdown.position-calculator", function(event, data) {
-    var $item = $('.updown', event.target);
-    var target = data.relatedTarget;
-
-    // reset position
-    $item.css({top:0, left:0});
-    
-    // calculate new position
-    var calculator = new $.PositionCalculator({
-      item    : $item,
-      target  : target,
-      itemAt  : "top left",
-      itemOffset: { y:3, x:0, mirror:true },
-      targetAt: "bottom left",
-      flip    : "both"
-    });
-    var posResult = calculator.calculate();
-
-    // set new position
-    $item.css({
-      top: posResult.moveBy.y + "px",
-      left: posResult.moveBy.x + "px"
-    });
-  });  
-});
-</script>
     <style>
         .nav-tabs > li > a {
             border-radius: 2px 2px 0 0 !important;
@@ -390,7 +362,7 @@
                             </div>
                         </span>
                 </div>
-                <div class="tab-content" id="centerTabContent" style="height: 95%; background-color: <%=bgcol%>;"></div>
+                <div class="tab-content" id="centerTabContent" style="background-color: <%=bgcol%>;"></div>
             </div>
         </div>
     </div>

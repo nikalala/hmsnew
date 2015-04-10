@@ -100,7 +100,7 @@
                               data-toggle="dropdown" id="actionBtn">
                              <i class="glyphicon glyphicon-chevron-right"></i>
                            </button>
-                           <ul class="dropdown-menu updown" role="menu" style="margin-left: -220px;">
+                           <ul class="dropdown-menu" role="menu" style="margin-left: -220px;">
                                 <li>
                                     <a onclick="addTab('content/EditTransaction.jsp?reservationroomid=<%=ReservationBeanList[i].getReservationroomid()%>','<span class=\'glyphicon glyphicon-saved\'></span>&nbsp;&nbsp;<%=ReservationBeanList[i].getReservationroomid()%> - DXR','TAB_EditTransaction_<%=ReservationBeanList[i].getReservationroomid()%>');"><img src="images/grid/edit.png"> რედაქირება </a>
                                 </li>

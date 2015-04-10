@@ -25,28 +25,17 @@ if(!rid.equals("null")){
 }
 
 %>
-<script>
-    $('select').selectpicker();
-</script>
-<style>
-    .bootstrap-select:not([class*="col-"]):not([class*="form-control"]):not(.input-group-btn) {
-    width: auto !important;
-}
-.bootstrap-select.form-control:not([class*="col-"]) {
-    width: auto !important;
-}
-</style>
 <div class="panel-heading">
-    <div class="panel-title span-header" style="float: none; margin: 0;">
+    <h3 class="panel-title">
         სტუმრის ინფორმაცია 
         <%if(rroom != null){%>
-        <div class="btn-group pull-right" style="width: auto !important;">
+        <div class="btn-group pull-right">
             <a href="javascript:printRegCard(<%=rroom.getReservationroomid()%>)" class="glyphicon glyphicon-credit-card iconblack" style="text-decoration: none;" data-toggle="tooltip" title="ბარათის გატარება"></a>
             <a href="javascript:newmWindow1('editguestinfo','სტუმრის პროფილის რედაქტირება','reservationroomid=<%=rroom.getReservationroomid()%>&mode=edit');" class="glyphicon glyphicon-pencil iconblack" style="text-decoration: none; padding-left: 10px; padding-right: 10px;" data-toggle="tooltip" title="სტუმრის პროფილის რედაქტირება"></a>
             <a href="javascript:newmWindow1('editguestinfo','სტუმრის პროფილის დამატება','reservationroomid=<%=rroom.getReservationroomid()%>&mode=add');" class="glyphicon glyphicon-plus iconblack" style="text-decoration: none;" data-toggle="tooltip" title="სტუმრის პროფილის დამატება"></a>
         </div>
         <%}%>
-    </div>
+    </h3>
 </div>
 <div class="panel-body" style="height:110px;">
     <table width="100%" class="table table-borderless">

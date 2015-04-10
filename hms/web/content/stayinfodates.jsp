@@ -19,7 +19,7 @@ if(!rid.equals("null")){
 int days = DayDiff(c1,c2)+1;
 %>
 <div class="panel-heading">
-    <h3 class="panel-title span-header" style="float: none; margin: 0;">
+    <h3 class="panel-title">
         დარჩენის ინფორმაცია
         <%if(rroom != null){%>
         <div class="btn-group pull-right">
