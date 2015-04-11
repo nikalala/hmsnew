@@ -4,7 +4,7 @@
     "panels": [{
             "colmd": 10,
             "title": "ზოგადი ინფორმაცია",
-            "height": "172",
+            "height": "180",
             "id": "geninfo",
             "classnames": "",
             "panelitems": [{
@@ -13,7 +13,7 @@
                     "size2": 0,
                     "x": 0,
                     "y": 0,
-                    "colmd": 3,
+                    "colmd": 2,
                     "sql": "",
                     "label": "სახელი",
                     "id": "editcontactinfo_label1",
@@ -43,7 +43,7 @@
                     "size2": 0,
                     "x": 2,
                     "y": 0,
-                    "colmd": 4,
+                    "colmd": 5,
                     "sql": "",
                     "label": "",
                     "id": "editcontactinfo_fname",
@@ -191,7 +191,7 @@
         }, {
             "colmd": 6,
             "title": "საკონტაქტო ინფორმაცია",
-            "height": "172",
+            "height": "180",
             "id": "contactinfo",
             "classnames": "",
             "panelitems": [{
@@ -318,7 +318,7 @@
         }, {
             "colmd": 16,
             "title": "მისამართი",
-            "height": "106",
+            "height": "110",
             "id": "address",
             "classnames": "",
             "panelitems": [{
@@ -381,6 +381,21 @@
                     "onclick": "",
                     "classname": "",
                     "values": []
+                }, {
+                    "type": 8,
+                    "size1": 0,
+                    "size2": 0,
+                    "x": 2,
+                    "y": 1,
+                    "colmd": 1,
+                    "sql": "",
+                    "label": "",
+                    "id": "",
+                    "val": "",
+                    "placeholder": "",
+                    "onclick": "",
+                    "classname": "",
+                    "values": []
                 },{
                     "type": 8,
                     "size1": 0,
@@ -415,11 +430,26 @@
                     "type": 8,
                     "size1": 0,
                     "size2": 0,
+                    "x": 5,
+                    "y": 1,
+                    "colmd": 1,
+                    "sql": "",
+                    "label": "",
+                    "id": "",
+                    "val": "",
+                    "placeholder": "",
+                    "onclick": "",
+                    "classname": "",
+                    "values": []
+                }, {
+                    "type": 8,
+                    "size1": 0,
+                    "size2": 0,
                     "x": 6,
                     "y": 1,
-                    "colmd": 4,
+                    "colmd": 2,
                     "sql": "",
-                    "label": "საფოსტო ინდექსი",
+                    "label": "ინდექსი",
                     "id": "editcontactinfo_zip",
                     "val": "",
                     "placeholder": "",
@@ -445,7 +475,7 @@
         },{
             "colmd": 16,
             "title": "სხვა ინფორმაცია",
-            "height": "172",
+            "height": "180",
             "id": "otherinfo",
             "classnames": "",
             "panelitems": [{
