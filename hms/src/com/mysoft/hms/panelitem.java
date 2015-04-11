@@ -8,6 +8,8 @@ package com.mysoft.hms;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 
 /**
  *
@@ -16,7 +18,7 @@ import java.sql.ResultSet;
 public class panelitem {
     
     private String label = "";
-    private int type = 0; // 0: text, 1: textarea; 2: select; 3: radio; 4: checkbox; 5: date; 6: time; 7: button
+    private int type = 0; // 0: text, 1: textarea; 2: select; 3: radio; 4: checkbox; 5: date; 6: time; 7: button; 8: label
     private int size1 = 0;
     private int size2 = 0;
     private String sql = "";
@@ -165,6 +167,53 @@ public class panelitem {
         this.y = y;
     }
     
+    public JSONObject getJson(){
+        JSONObject obj = new JSONObject();
+        
+        obj.put("type",(Integer)type);
+        obj.put("size1",(Integer)size1);
+        obj.put("size2",(Integer)size2);
+        obj.put("x",(Integer)x);
+        obj.put("y",(Integer)y);
+        obj.put("colmd",(Integer)colmd);
+        obj.put("sql",sql);
+        obj.put("label",label);
+        obj.put("id",id);
+        obj.put("val",val);
+        obj.put("placeholder",placeholder);
+        obj.put("onclick",onclick);
+        obj.put("classname",classname);
+        JSONArray ar = new JSONArray();
+        for(int i=0;i<values.length;i++){
+            ar.add(values[i]);
+        }
+        obj.put("values",(JSONArray)ar);
+        return obj;
+    }
+    
+    public void readJson(JSONObject obj){
+        
+        type = (Integer)obj.get("type");
+        size1 = (Integer)obj.get("size1");
+        size2 = (Integer)obj.get("size2");
+        x = (Integer)obj.get("x");
+        y = (Integer)obj.get("y");
+        colmd = (Integer)obj.get("colmd");
+        
+        sql = (String)obj.get("sql");
+        label = (String)obj.get("label");
+        id = (String)obj.get("id");
+        val = (String)obj.get("val");
+        placeholder = (String)obj.get("placeholder");
+        onclick = (String)obj.get("onclick");
+        classname = (String)obj.get("classname");
+        JSONArray ar = (JSONArray)obj.get("values");
+        values = new String[ar.size()];
+        for(int i=0;i<ar.size();i++){
+            values[i] = (String)ar.getString(i);
+        }
+    }
+    
     public String drawitem() throws Exception {
         String s = "";
         String mclass = "form-control";
@@ -226,7 +275,7 @@ public class panelitem {
                         if(val.equalsIgnoreCase(vl) || val.equalsIgnoreCase(nm))
                             s += " checked";
                         s += ">";
-                        s += "<label for=\""+id+"\" class=\"css-label radGroup1\" style=\"padding-right: 10px;\">"+nm+"</label>";
+                        s += "<label for=\""+id+i+"\" class=\"css-label radGroup1\" style=\"padding-right: 10px;\">"+nm+"</label>";
                     }
                     rs.close();
                     Manager.getInstance().releaseConnection(con);
@@ -236,7 +285,7 @@ public class panelitem {
                         if(val.equalsIgnoreCase(String.valueOf(i)) || val.equalsIgnoreCase(values[i]))
                             s += " checked";
                         s += ">";
-                        s += "<label for=\""+id+"\" class=\"css-label radGroup1\" style=\"padding-right: 10px;\">"+values[i]+"</label>";
+                        s += "<label for=\""+id+i+"\" class=\"css-label radGroup1\" style=\"padding-right: 10px;\">"+values[i]+"</label>";
                     }
                 }
                 s += "</div>";

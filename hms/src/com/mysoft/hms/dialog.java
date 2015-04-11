@@ -6,7 +6,12 @@
 
 package com.mysoft.hms;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.util.Date;
+import java.util.Vector;
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 
 /**
  *
@@ -19,6 +24,66 @@ public class dialog {
     private panel[] panels = new panel[0];
     private button[] buttons = new button[0];
 
+    public JSONObject getJson(){
+        JSONObject obj = new JSONObject();
+        
+        obj.put("title",title);
+        obj.put("type",type);
+        JSONArray ar = new JSONArray();
+        for(int i=0;i<panels.length;i++){
+            JSONObject obj1 = panels[i].getJson();
+            ar.add((JSONObject)obj1);
+        }
+        obj.put("panels",(JSONArray)ar);
+        ar = new JSONArray();
+        for(int i=0;i<buttons.length;i++){
+            JSONObject obj1 = buttons[i].getJson();
+            ar.add((JSONObject)obj1);
+        }
+        obj.put("buttons",(JSONArray)ar);
+        return obj;
+    }
+    
+    public void readJson(JSONObject obj){
+        
+        title = (String)obj.get("title");
+        type = (String)obj.get("type");
+        JSONArray ar = (JSONArray)obj.get("panels");
+        panels = new panel[ar.size()];
+        for(int i=0;i<ar.size();i++){
+            JSONObject obj1 = (JSONObject)ar.get(i);
+            panels[i] = new panel();
+            panels[i].readJson(obj1);
+        }
+        ar = (JSONArray)obj.get("buttons");
+        buttons = new button[ar.size()];
+        for(int i=0;i<ar.size();i++){
+            JSONObject obj1 = (JSONObject)ar.get(i);
+            buttons[i] = new button();
+            buttons[i].readJson(obj1);
+        }
+    }
+    
+    public void saveJson(String fl) throws Exception {
+        String js = getJson().toString();
+        FileOutputStream fo = new FileOutputStream(fl);
+        fo.write(js.getBytes("UTF-8"));
+        fo.close();
+    }
+    
+    public void readFromFile(String fl) throws Exception {
+        
+        FileInputStream fi = new FileInputStream(fl);
+        byte[] bt = new byte[fi.available()];
+        fi.read(bt);
+        fi.close();
+        String json = new String(bt, "UTF-8");
+        JSONObject obj = JSONObject.fromObject((String)json);
+        readJson(obj);
+    }
+    
+    
+    
     public dialog() {
     }
 

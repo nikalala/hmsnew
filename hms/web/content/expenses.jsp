@@ -64,7 +64,7 @@
     </div>
 
     <div class="row" style="margin-top: 10px; margin-bottom: 0px; padding-left: 5px;  padding-right: 5px;">
-        <div class="col-md-16" style="height: 165px;">
+        <div class="col-md-16">
             <div class="panel panel-primary" id='chargerinfo'>
                 <jsp:include page="chargerinfo.jsp">
                     <jsp:param name="none" value="none"/>
@@ -72,5 +72,11 @@
             </div>
         </div>
     </div>
-
+    <div class="col-md-16" style="padding: 7px;">
+    <div class="col-md-16" style="height: 30px; background: #E9E9E9; border: 1px solid #C8C8C8;"><span class="pull-right" style="margin: 7px;"><b style="color: red;">ბალანსი</b></span></div>
+    <div class="gridfooter col-md-16" style="position: relative;">
+        <a class="pull-right btn btn-default" style="margin: 7px;">გაუქმება</a>
+        <a class="pull-right btn btn-danger" style="margin: 7px;">შენახვა</a>
+    </div>
+    </div>
 </form>

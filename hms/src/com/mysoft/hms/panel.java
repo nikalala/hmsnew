@@ -6,11 +6,14 @@
 
 package com.mysoft.hms;
 
+import java.io.FileOutputStream;
 import java.util.Collections;
 import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Vector;
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 
 /**
  *
@@ -24,6 +27,49 @@ public class panel {
     private String height = "100%";
     private Vector panelitems = new Vector();
     private int colmd = 16;
+    
+    public JSONObject getJson(){
+        JSONObject obj = new JSONObject();
+        
+        obj.put("colmd",(Integer)colmd);
+        obj.put("title",title);
+        obj.put("height",height);
+        obj.put("id",id);
+        obj.put("classnames",classnames);
+        JSONArray ar = new JSONArray();
+        for(int i=0;i<panelitems.size();i++){
+            panelitem pl = (panelitem)panelitems.elementAt(i);
+            JSONObject obj1 = pl.getJson();
+            ar.add((JSONObject)obj1);
+        }
+        obj.put("panelitems",(JSONArray)ar);
+        return obj;
+    }
+    
+    public void readJson(JSONObject obj){
+        
+        colmd = (Integer)obj.get("colmd");
+        
+        title = (String)obj.get("title");
+        height = (String)obj.get("height");
+        id = (String)obj.get("id");
+        classnames = (String)obj.get("classnames");
+        JSONArray ar = (JSONArray)obj.get("panelitems");
+        panelitems = new Vector();
+        for(int i=0;i<ar.size();i++){
+            JSONObject obj1 = (JSONObject)ar.get(i);
+            panelitem pl = new panelitem();
+            pl.readJson(obj1);
+            panelitems.addElement((panelitem)pl);
+        }
+    }
+    
+    public void saveJson(String fl) throws Exception {
+        String js = getJson().toString();
+        FileOutputStream fo = new FileOutputStream(fl);
+        fo.write(js.getBytes("UTF-8"));
+        fo.close();
+    }
     
     public void panel(){}
 

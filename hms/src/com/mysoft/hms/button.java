@@ -6,6 +6,10 @@
 
 package com.mysoft.hms;
 
+import java.util.Vector;
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
+
 /**
  *
  * @author djorj
@@ -17,6 +21,25 @@ public class button {
     private String action = "";
     private boolean close = false;
 
+    
+    public JSONObject getJson(){
+        JSONObject obj = new JSONObject();
+        
+        obj.put("value",value);
+        obj.put("action",action);
+        obj.put("close",(Boolean)close);
+        obj.put("classname",classname);
+        return obj;
+    }
+    
+    public void readJson(JSONObject obj){
+        
+        value = (String)obj.get("value");
+        action = (String)obj.get("action");
+        close = (Boolean)obj.get("close");
+        classname = (String)obj.get("classname");
+    }
+    
     public button() {
     }
 
