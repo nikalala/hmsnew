@@ -1,6 +1,6 @@
 {
     "title": "სტუმრის პროფილის რედაქტირება",
-    "type": "WIDE",
+    "type": "ELDAR",
     "panels": [{
             "colmd": 8,
             "title": "ზოგადი ინფორმაცია",
@@ -318,7 +318,7 @@
         }, {
             "colmd": 16,
             "title": "მისამართი",
-            "height": "90",
+            "height": "190",
             "id": "address",
             "classnames": "",
             "panelitems": [{
