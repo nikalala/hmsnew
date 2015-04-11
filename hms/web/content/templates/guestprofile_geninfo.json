@@ -318,7 +318,7 @@
         }, {
             "colmd": 16,
             "title": "მისამართი",
-            "height": "90",
+            "height": "190",
             "id": "address",
             "classnames": "",
             "panelitems": [{

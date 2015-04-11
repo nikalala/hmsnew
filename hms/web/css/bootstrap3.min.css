@@ -6154,6 +6154,10 @@ button.close {
     .modal-ex {
         width: 800px
     }
+    
+    .modal-eldar {
+        width: 1000px
+    }
 }
 
 .tooltip {
