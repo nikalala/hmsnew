@@ -381,11 +381,7 @@ public class panelitem {
                 s += "><i class=\"fa fa-"+classname+"\"></i></a></div>";
                 break;
             case 8:
-<<<<<<< HEAD
                 s += "<span class=\"pull-left col-md-"+colmd+" "+classname+"\" style=\"line-height: 1.6; font-size: 13px; padding-left: 20px;\"><b>"+label+"</b></span>";
-=======
-                s += "<span class=\"pull-left col-md-"+colmd+"\" style=\"line-height: 1.6; font-size: 13px; padding-left: 20px;\"><b>"+label+"</b></span>";
->>>>>>> origin/master
             default:
         }
         return s;

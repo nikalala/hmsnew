@@ -73,17 +73,19 @@
         </div>
 </div>
 <script>
-<<<<<<< HEAD
+    
     $('#search-from, #search-to').datepicker({
         autoclose: true
     });
-=======
+    
     function initDates(){
         $('.date').datepicker(<%=pickerFormatForDatePickers3%>);
     }
+    
     function resetLeftPanel(){
         $("#leftpanel .form-control").val('');
     }
     initDates();
->>>>>>> origin/master
+    
 </script>
+
