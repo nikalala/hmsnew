@@ -1,10 +1,74 @@
 <%@page contentType="text/html; charset=UTF-8" %>
 <%@page pageEncoding="UTF-8" %>
 <%@include file="../includes/init.jsp" %>
+<style>
+    .header_select{
+        width: 200px !important;
+        float: right;
+        margin-top: -6px;
+        margin-right: 10px;
+    }
+</style>
+<%
 
+panel dl0 = new panel();
+dl0.readFromFile(basedir+"/content/templates/expenses_contact.json");
+
+dialog dl1 = new dialog();
+dl1.readFromFile(basedir+"/content/templates/guestprofile_geninfo_guest.json");
+dialog dl2 = new dialog();
+dl2.readFromFile(basedir+"/content/templates/guestprofile_geninfo.json");
+
+String selectbox = "<a href=\"#\" class=\"glyphicon glyphicon-search iconblack\" onclick=\"searchContact()\" style=\"text-decoration: none; padding-left: 10px; padding-right: 10px; top: 1px; float:right;\" data-toggle=\"ძებნა\"></a>"
+        + "<a href=\"#\" onclick=\"addContact()\" class=\"glyphicon glyphicon-plus iconblack\" style=\"text-decoration: none; top: 1px; float:right;\" data-toggle=\"დამატება\"></a>"
+        + "<div class=\"header_select\"><select class=\"dropdown\" id=\"contragenttype\">";
+for (int i = 0; i < contragenttype.length - 1; i++) {
+    if(i == 1)  continue;
+    String selected = "";
+    if (i == 4) {
+        selected = "selected='selected'";
+    } else {
+        selected = "";
+    }
+selectbox += "<option value=\""+i+"\" "+selected+">"+contragenttype[i]+"</option>";
+}
+selectbox += "</select></div>";
+dl0.setTitle(dl0.getTitle()+selectbox);
+%>
 <link rel="stylesheet" type="text/css" href="css/grid-filter.css">
 
 <script type="text/javascript">
+    
+    function saveGuestprofileGeninfo(){
+        var contragenttype = $("#contragenttype").val();
+        var params = {<%=dl2.getParams().replaceAll("\n","")%>,contragenttype: contragenttype};
+        if(contragenttype == 4) params = {<%=dl1.getParams().replaceAll("\n","")%>,contragenttype: contragenttype};
+        
+        $.post(
+            "content/saveGuestprofileGeninfo.jsp",
+            params,
+            function(data){
+                if(data.result == 0)    BootstrapDialog.alert(data.error);
+                else {
+                    $currentmodal.close();
+                }
+            },
+            "json");
+    }
+    
+    function addContact(){
+        var contragenttype = $("#contragenttype").val();
+        if(contragenttype == 4){
+        <%=dl1.draw()%>
+        }else{
+        <%=dl2.draw()%>
+        }
+    }
+    
+    function searchContact(){
+        
+    }
+    
 
     $(document).ready(function () {
         loadDefaults();
@@ -67,12 +131,8 @@
     </div>
     
     <div class="row" style="margin-top: 10px; margin-bottom: 0px; padding-left: 5px;  padding-right: 5px;">
-        <div class="col-md-7" style="height: 145px;">
-            <div class="panel panel-primary" id='contactinfo'>
-                <jsp:include page="contactinfo.jsp">
-                    <jsp:param name="none" value="none"/>
-                </jsp:include>
-            </div>
+        <div class="col-md-7" style="height: 145px;" id="expenses_contactinfo">
+            <%=dl0.drawpanel()%>
         </div>
         <div class="col-md-9" style="height: 145px;">
             <div class="panel panel-primary" id='voucherinfo'>

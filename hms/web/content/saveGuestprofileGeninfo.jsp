@@ -100,8 +100,8 @@ try{
         }
 
         guest.setRegbyid(user.getPersonnelid());
-        //guest = GuestManager.getInstance().save(guest);
-        //obj.put("id",guest.getGuestid());
+        guest = GuestManager.getInstance().save(guest);
+        obj.put("id",guest.getGuestid());
     } else {
         int     salutationid                    =	 Integer.parseInt(request.getParameter("editcontactinfo_salutationid"));
         String	business                        =	 request.getParameter("editcontactinfo_business");
@@ -130,7 +130,7 @@ try{
         if(names.length > 1)    contragent.setLname(names[1]);
         contragent = ContragentManager.getInstance().save(contragent);
         
-        obj.put("id",0);
+        obj.put("id",contragent.getContragentid());
     }
     Manager.getInstance().endTransaction(true);
     obj.put("result",1);

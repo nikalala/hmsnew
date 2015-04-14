@@ -329,6 +329,8 @@
                 $("#action").remove();
                 $("#controls").remove();
             });
+            
+            $("select").selectpicker();
 
         });
 

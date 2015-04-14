@@ -34,6 +34,7 @@ public class panelitem {
     private String script = "";
     private String pkfmt = "{autoclose: true, format: dateglobalformat1, maxDate : dateglobalmaxdate, language: \"ka\", todayHighlight: true, allowEmpty: false}";
     private int checkboxes = 0;
+    private String style = "";
     
     public void panelitem(){}
     
@@ -81,6 +82,30 @@ public class panelitem {
             default:
         }
         return s;
+    }
+
+    public String getPkfmt() {
+        return pkfmt;
+    }
+
+    public void setPkfmt(String pkfmt) {
+        this.pkfmt = pkfmt;
+    }
+
+    public int getCheckboxes() {
+        return checkboxes;
+    }
+
+    public void setCheckboxes(int checkboxes) {
+        this.checkboxes = checkboxes;
+    }
+
+    public String getStyle() {
+        return style;
+    }
+
+    public void setStyle(String style) {
+        this.style = style;
     }
     
     public String getScript() {
@@ -221,6 +246,7 @@ public class panelitem {
         obj.put("onclick",onclick);
         obj.put("classname",classname);
         obj.put("script",script);
+        obj.put("style",style);
         JSONArray ar = new JSONArray();
         for(int i=0;i<values.length;i++){
             ar.add(values[i]);
@@ -247,6 +273,8 @@ public class panelitem {
         classname = (String)obj.get("classname");
         script = (String)obj.get("script");
         if(script == null)  script = "";
+        style = (String)obj.get("style");
+        if(style == null)  style = "";
         JSONArray ar = (JSONArray)obj.get("values");
         values = new String[ar.size()];
         for(int i=0;i<ar.size();i++){
@@ -259,14 +287,14 @@ public class panelitem {
         String mclass = "form-control";
         switch(type){
             case 0:
-                s += "<div class=\"col-md-"+colmd+"\">";
+                s += "<div class=\"col-md-"+colmd+"\" style=\"padding-bottom: 7px; "+style+"\">";
                 //if(label.length() > 0)  s += "<span>"+label+"</span>";
                 s += "<input type=\"text\" class=\"form-control pull-right "+classname+"\" size=\""+size1+"\" name=\""+id+"\" id=\""+id+"\" value=\""+val+"\"";
                 if(placeholder.length() > 0)    s += " placeholder=\""+placeholder+"\"";
                 s += "/></div>";
                 break;
             case 1:
-                s += "<div class=\"col-md-"+colmd+"\">";
+                s += "<div class=\"col-md-"+colmd+"\" style=\"padding-bottom: 7px; "+style+"\">";
                 //if(label.length() > 0)  s += "<span>"+label+"</span>";
                 s += "<textarea class=\"form-control pull-right "+classname+"\" cols=\""+size1+"\" rows=\""+size2+"\" name=\""+id+"\" id=\""+id+"\"";
                 if(placeholder.length() > 0)    s += " placeholder=\""+placeholder+"\"";
@@ -274,7 +302,7 @@ public class panelitem {
                 s += "</div>";
                 break;
             case 2:
-                s += "<div class=\"col-md-"+colmd+"\">";
+                s += "<div class=\"col-md-"+colmd+"\" style=\"padding-bottom: 7px; "+style+"\">";
                 //if(label.length() > 0)  s += "<span>"+label+"</span>";
                 s += "<select class=\"form-control "+classname+"\" name=\""+id+"\" id=\""+id+"\">";
                 if(placeholder.length() > 0)    s += "<option value=\"\">"+ placeholder+"</option>";
@@ -303,7 +331,7 @@ public class panelitem {
                         + "</div>";
                 break;
             case 3:
-                s += "<div class=\"col-md-"+colmd+"\">";
+                s += "<div class=\"col-md-"+colmd+"\" style=\"padding-bottom: 7px; "+style+"\">";
                 //if(label.length() > 0)  s += "<span>"+label+"</span>";
                 if(sql.length() > 0){
                     Connection con = Manager.getInstance().getConnection();
@@ -331,7 +359,7 @@ public class panelitem {
                 s += "</div>";
                 break;
             case 4:
-                s += "<div class=\""+mclass+" col-md-"+colmd+"\">";
+                s += "<div class=\""+mclass+" col-md-"+colmd+"\" style=\"padding-bottom: 7px; "+style+"\">";
                 //if(label.length() > 0)  s += "<span>"+label+"</span>";
                 if(sql.length() > 0){
                     Connection con = Manager.getInstance().getConnection();
@@ -359,7 +387,7 @@ public class panelitem {
                 s += "</div>";
                 break;
             case 5:
-                s += "<div class=\"col-md-"+colmd+"\">";
+                s += "<div class=\"col-md-"+colmd+"\" style=\"padding-bottom: 7px; "+style+"\">";
                 //if(label.length() > 0)  s += "<span>"+label+"</span>";
                 s += "<input type=\"text\" class=\"form-control pull-right "+classname+"\" size=\""+size1+"\" name=\""+id+"\" id=\""+id+"\" value=\""+val+"\"";
                 if(placeholder.length() > 0)    s += " placeholder=\""+placeholder+"\"";
@@ -369,21 +397,22 @@ public class panelitem {
                 else                        script += ";";
                 break;
             case 6:
-                s += "<div class=\"col-md-"+colmd+"\">";
+                s += "<div class=\"col-md-"+colmd+"\" style=\"padding-bottom: 7px; "+style+"\">";
                 //if(label.length() > 0)  s += "<span>"+label+"</span>";
                 s += "<input type=\"text\" class=\"form-control pull-right "+classname+"\" size=\""+size1+"\" name=\""+id+"\" id=\""+id+"\" value=\""+val+"\"";
                 if(placeholder.length() > 0)    s += " placeholder=\""+placeholder+"\"";
                 s += "/></div>";
                 break;
             case 7:
-                s += "<div class=\"col-md-"+colmd+"\" style=\"text-align: right;\"><a class=\"btn btn-primary\" style=\"background-color: #EEE; color: gray; border-color: #ccc;\"";
+                s += "<div class=\"col-md-"+colmd+"\" style=\"text-align: right; padding-bottom: 7px; "+style+"\"><a class=\"btn btn-primary\" style=\"background-color: #EEE; color: gray; border-color: #ccc;\"";
                 if(onclick.length() > 0)    s += " onclick=\""+onclick.replaceAll("'", "\\\\'")+"\"";
                 s += "><i class=\"fa fa-"+classname+"\"></i></a></div>";
                 break;
             case 8:
-                s += "<span class=\"pull-left col-md-"+colmd+" "+classname+"\" style=\"line-height: 1.6; font-size: 13px; padding-left: 20px;\"><b>"+label+"</b></span>";
+                s += "<span class=\"pull-left col-md-"+colmd+" "+classname+"\" style=\"padding-bottom: 7px; line-height: 1.6; font-size: 13px; padding-left: 20px; "+style+"\"><b>"+label+"</b></span>";
             default:
         }
+        //s = "<div class=\"col-md-16\">"+s+"</div>";
         return s;
     }
 }

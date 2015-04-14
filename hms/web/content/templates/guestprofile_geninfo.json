@@ -357,12 +357,12 @@
             "value": "შენახვა",
             "action": "saveGuestprofileGeninfo();",
             "close": false,
-            "classname": "btn_primary"
+            "classname": "btn-primary"
         }, {
             "value": "დახურვა",
             "action": "dialogItself.close();",
             "close": true,
-            "classname": "btn_danger"
+            "classname": "btn-danger"
         }]
 }
 

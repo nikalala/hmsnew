@@ -6,6 +6,7 @@
 
 package com.mysoft.hms;
 
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.util.Collections;
 import java.util.Hashtable;
@@ -63,6 +64,17 @@ public class panel {
             pl.readJson(obj1);
             panelitems.addElement((panelitem)pl);
         }
+    }
+    
+    public void readFromFile(String fl) throws Exception {
+        
+        FileInputStream fi = new FileInputStream(fl);
+        byte[] bt = new byte[fi.available()];
+        fi.read(bt);
+        fi.close();
+        String json = new String(bt, "UTF-8");
+        JSONObject obj = JSONObject.fromObject((String)json);
+        readJson(obj);
     }
     
     public void saveJson(String fl) throws Exception {
@@ -169,7 +181,7 @@ public class panel {
                     Integer n = (Integer)it.next();
                     Vector v = (Vector)hy.get(n);
                     //int colmd = cols/v.size();
-                    s += "<div style=\"padding-bottom: 7px;\" class=\"input-group col-md-16\">";
+                    //s += "<div style=\"padding-bottom: 7px;\" class=\"input-group col-md-16\">";
                     for(int i=0;i<v.size();i++){
                         panelitem pi = (panelitem)v.elementAt(i);
                         //if(i == v.size()-1) colmd = cols-colmd*(v.size()-1);
@@ -177,7 +189,7 @@ public class panel {
                         if(pi.getScript() != null && pi.getScript().trim().length() > 0)
                             script += " "+pi.getScript();
                     }
-                    s += "</div>";
+                    //s += "</div>";
                 }
         
                 s += "</div>" +
