@@ -2,16 +2,36 @@
 <%@page pageEncoding="UTF-8" %>
 <%@include file="../includes/init.jsp" %>
 
-<% RoomBean[] roomBeans = RoomManager.getInstance().loadByWhere("ORDER BY ord"); %>
-<% RoomtypeBean[] roomTypes = RoomtypeManager.getInstance().loadByWhere("ORDER BY ord"); %>
-<% ReservationtypeBean[] reservTypes = ReservationtypeManager.getInstance().loadByWhere(""); %>
 <link rel="stylesheet" type="text/css" href="css/grid-filter.css">
 
 <script type="text/javascript">
 
     $(document).ready(function () {
         loadDefaults();
+        drawFooterExp();
     });
+
+    function drawFooterExp(){
+        var html =
+        '<div class="gridfooter expfooter" style="height: 80px !important;">' +
+        '<div class="col-md-16" style="height: 30px; background: #E9E9E9; border: 1px solid #C8C8C8;">'+
+        '<span class="pull-right" style="margin: 7px;"><b style="color: red;">ბალანსი</b></span>'+
+        '</div>' +
+        '<div>' +
+        '<a class="pull-right btn btn-default" style="font-weight: bold; float: right; margin: 9px 10px 0 0;">გაუქმება</a>'+
+        '<a class="pull-right btn btn-danger" style="font-weight: bold; float: right; margin: 9px 10px 0 0;">შენახვა</a>' +
+        '</div></div>';
+
+
+        var panel = $("#centercontent .panel")[0];
+        var pwidth = $(panel).width();
+        $(".gridfooter").remove();
+        var panelheading = $(panel).find(".panel-heading")[0];
+        $("#centerTabContent").css("height",$(panel).height()-panelheading);
+        $("#centerTabContent").append(html);
+        $(".expfooter").css("width",pwidth+"px","!important");
+
+    }
 
     function loadDefaults() {
 //        $('.date').datepicker(<%=pickerformat1%>);
@@ -71,12 +91,5 @@
                 </jsp:include>
             </div>
         </div>
-    </div>
-    <div class="col-md-16" style="padding: 7px;">
-    <div class="col-md-16" style="height: 30px; background: #E9E9E9; border: 1px solid #C8C8C8;"><span class="pull-right" style="margin: 7px;"><b style="color: red;">ბალანსი</b></span></div>
-    <div class="gridfooter col-md-16" style="position: relative;">
-        <a class="pull-right btn btn-default" style="margin: 7px;">გაუქმება</a>
-        <a class="pull-right btn btn-danger" style="margin: 7px;">შენახვა</a>
-    </div>
     </div>
 </form>

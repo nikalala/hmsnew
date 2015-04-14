@@ -834,7 +834,7 @@ function drawFooter() {
     //$(".ui-jqgrid-view").find(".gridfooter").remove();
     var panel = $("#centercontent .panel")[0];
     var pwidth = $(panel).width();
-    $(panel).find(".gridfooter").remove();
+    $(".gridfooter").remove();
     var panelheading = $(panel).find(".panel-heading")[0];
     $("#centerTabContent").css("height",$(panel).height()-panelheading);
     $("#centerTabContent").append(html);
