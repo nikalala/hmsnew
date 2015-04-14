@@ -8,11 +8,23 @@
         margin-top: -6px;
         margin-right: 10px;
     }
+    .bootstrap-select:not([class*="col-"]):not([class*="form-control"]):not(.input-group-btn) {
+    width: 100% !important;
+}
 </style>
 <%
 
 panel dl0 = new panel();
 dl0.readFromFile(basedir+"/content/templates/expenses_contact.json");
+
+panel pl1 = new panel();
+pl1.readFromFile(basedir+"/content/templates/expenses_voucher.json");
+
+panel pl2 = new panel();
+pl2.readFromFile(basedir+"/content/templates/expenses_charges.json");
+
+panel pl3 = new panel();
+pl3.readFromFile(basedir+"/content/templates/expenses_payments.json");
 
 dialog dl1 = new dialog();
 dl1.readFromFile(basedir+"/content/templates/guestprofile_geninfo_guest.json");
@@ -99,8 +111,7 @@ dl0.setTitle(dl0.getTitle()+selectbox);
 
     function loadDefaults() {
 //        $('.date').datepicker(<%=pickerformat1%>);
-        $('.dropdown').selectpicker();
-        $(".btn-group").css("width", "auto", "!important");
+        $('select').selectpicker();
         $("#grid-table label").each(function () {
             $(this).css("float", "right", "!important");
             $(this).css("line-height", "27px", "!important");
@@ -135,21 +146,19 @@ dl0.setTitle(dl0.getTitle()+selectbox);
             <%=dl0.drawpanel()%>
         </div>
         <div class="col-md-9" style="height: 145px;">
-            <div class="panel panel-primary" id='voucherinfo'>
-                <jsp:include page="voucherinfo.jsp">
-                    <jsp:param name="none" value="none"/>
-                </jsp:include>
-            </div>
+            <%=pl1.drawpanel()%>
         </div>
     </div>
 
     <div class="row" style="margin-top: 10px; margin-bottom: 0px; padding-left: 5px;  padding-right: 5px;">
         <div class="col-md-16">
-            <div class="panel panel-primary" id='chargerinfo'>
-                <jsp:include page="chargerinfo.jsp">
-                    <jsp:param name="none" value="none"/>
-                </jsp:include>
-            </div>
+            <%=pl2.drawpanel()%>
         </div>
     </div>
+        
+    <div class="row" style="margin-top: 0px; margin-bottom: 0px; padding-left: 5px;  padding-right: 5px;">
+        <div class="col-md-16">
+            <%=pl3.drawpanel()%>
+        </div>
+    </div>    
 </form>

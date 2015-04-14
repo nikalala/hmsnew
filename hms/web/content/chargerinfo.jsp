@@ -17,7 +17,7 @@
         }
 
         $("#currnumber, #vouchernum, #valuenumbe").ForceNumericOnly();
-        $(".btn-group").css("width", "auto", "!important");
+        $(".btn-group").css("width", "100%", "!important");
         $("#voucher-panel-body label").each(function () {
             $(this).css("float", "right", "!important");
             $(this).css("line-height", "27px", "!important");

@@ -4,7 +4,7 @@
     "panels": [{
             "colmd": 16,
             "title": "ძიება",
-            "height": "180",
+            "height": "180px",
             "id": "ctg",
             "classnames": "",
             "panelitems": [{

@@ -166,9 +166,9 @@ public class panel {
             hy.put((Integer)y,(Vector)v);
         }
         
-        String s = "<div style=\"border: 5px solid transparent;\" class=\"col-md-"+colmd+"\"><div class=\"panel panel-default col-md-16\" id=\""+id+"\" style=\"margin-top: 0px; padding: 0px; border-radius: 5px; height: "+height+"px;\">" +
+        String s = "<div class=\"col-md-"+colmd+"\"><div class=\"panel panel-default col-md-16\" id=\""+id+"\" style=\"margin-top: 0px; padding: 0px; border-radius: 5px; height: "+height+";\">" +
                 "<div class=\"panel-heading  panel-title\">" +
-                "<b style=\"vertical-align: middle; color: #5AB2E3; font-family: bgmtavr;\">"+title+"</b>" +
+                "<span style=\"vertical-align: middle; color: #5AB2E3; font-family: bgmtavr;\">"+title+"</span>" +
                 "</div>" +
                 "<div class=\"panel-body\" style=\"background-color: #FFFFFF;\">" +
                 "<div class=\"input-group col-md-16\">";
