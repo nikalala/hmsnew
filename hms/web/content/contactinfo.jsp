@@ -11,7 +11,6 @@ dl2.readFromFile(basedir+"/content/templates/guestprofile_geninfo.json");
 //System.out.println(dl1.draw());
 System.out.println(dl2.getParams());
 %>
-
 <script type="text/javascript">
     
     function saveGuestprofileGeninfo(){
@@ -65,8 +64,8 @@ System.out.println(dl2.getParams());
         <div style="float: right; margin: -2px 0 0 10px;">
             <table>
                 <tr>
-                    <td style="padding-right: 10px;">
-                        <select class="dropdown col-md-2" id="contragenttype">
+                    <td style="padding-right: 10px; width: 170px;">
+                        <select class="dropdown col-md-2 class" id="contragenttype">
                             <%
                                 for (int i = 0; i < contragenttype.length - 1; i++) {
                                     if(i == 1)  continue;
@@ -83,10 +82,10 @@ System.out.println(dl2.getParams());
                         </select>
                     </td>
                     <td>
-                        <a href="#" onclick="addContact()" class="glyphicon glyphicon-plus iconblack" style="text-decoration: none; top: -4px;" data-toggle="დამატება"></a>
+                        <a href="#" onclick="addContact()" class="glyphicon glyphicon-plus iconblack" style="text-decoration: none; top: -2px;" data-toggle="დამატება"></a>
                     </td>
                     <td>
-                        <a href="#" class="glyphicon glyphicon-search iconblack" onclick="searchContact()" style="text-decoration: none; padding-left: 10px; padding-right: 10px; top: -3px;" data-toggle="ძებნა"></a>
+                        <a href="#" class="glyphicon glyphicon-search iconblack" onclick="searchContact()" style="text-decoration: none; padding-left: 10px; padding-right: 10px; top: -1px;" data-toggle="ძებნა"></a>
                     </td>
                 </tr>
             </table>
