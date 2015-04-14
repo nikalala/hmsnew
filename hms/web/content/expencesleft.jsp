@@ -9,11 +9,21 @@
         <div class="panel-body" style="background-color: #FFFFFF;">
                 <div class="col-md-16">
                     <label class="col-md-7" style="line-height: 2.4;">თარიღიდან</label>
-                    <div class="col-md-9"><input class="form-control" id="search-from"/></div>
+                    <div class="col-md-9">
+                        <input class="form-control" id="search-from"/>
+                        <span class="add-on" style="position:absolute !important; right: 10px  !important;background : none  !important;border: none !important;top: 5px;">
+                            <i class="glyphicon glyphicon-calendar"></i>
+                        </span>
+                    </div>
                 </div>
                 <div class="col-md-16">
                     <label class="col-md-7" style="line-height: 2.4;">თარიღამდე</label>
-                    <div class="col-md-9"><input class="form-control" id="search-to"/></div>
+                    <div class="col-md-9">
+                        <input class="form-control" id="search-to"/>
+                        <span class="add-on" style="position:absolute !important; right: 10px  !important;background : none  !important;border: none !important;top: 5px;">
+                            <i class="glyphicon glyphicon-calendar"></i>
+                        </span>
+                    </div>
                 </div>
                 <div class="col-md-16">
                     <label class="col-md-7" style="line-height: 2.4;">სახელი</label>
@@ -63,7 +73,5 @@
         </div>
 </div>
 <script>
-    $('#search-from, #search-to').datepicker({
-        autoclose: true
-    });
+    $('#search-from, #search-to').datepicker(<%=pickerFormatForDatePickers3%>);
 </script>
