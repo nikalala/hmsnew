@@ -23,6 +23,7 @@ public class dialog {
     private String type = "";
     private panel[] panels = new panel[0];
     private button[] buttons = new button[0];
+    private long idl = new Date().getTime();
 
     public JSONObject getJson(){
         JSONObject obj = new JSONObject();
@@ -81,8 +82,14 @@ public class dialog {
         JSONObject obj = JSONObject.fromObject((String)json);
         readJson(obj);
     }
-    
-    
+
+    public long getIdl() {
+        return idl;
+    }
+
+    public void setIdl(long idl) {
+        this.idl = idl;
+    }
     
     public dialog() {
     }
@@ -119,18 +126,35 @@ public class dialog {
         this.buttons = buttons;
     }
     
-    public String draw() throws Exception {
-        String data = "";
+    public String getParams(){
+        String s = "{\n";
         
         for(int i=0;i<panels.length;i++){
+            for(int j=0;j<panels[i].getPanelitems().size();j++){
+                panelitem pi = (panelitem)panels[i].getPanelitems().elementAt(j);
+        //        if(j > 0)   s += ",\n";
+                s += pi.getParam();
+            }
+        }
+        
+        s += "act: \"save\"\n}";
+        return s;
+    }
+    
+    public String draw() throws Exception {
+        String data = "";
+        String script = "";
+        for(int i=0;i<panels.length;i++){
             data += panels[i].drawpanel();
+            if(panels[i].getScript().length() > 0)
+                script += " "+panels[i].getScript();
         }
         
         String s = "";
         
         s += "var $textAndPic = $('<div></div>');\n" +
         "        $textAndPic.append('"+data+"');\n" +
-        "        BootstrapDialog.show({\n" +
+        "        $currentmodal = new BootstrapDialog({\n" +
         "            type: BootstrapDialog.TYPE_PRIMARY,\n" +
         "            size: BootstrapDialog.SIZE_"+type+",\n" +
         "            message: $textAndPic,\n" +
@@ -142,7 +166,8 @@ public class dialog {
             if(i == buttons.length-1)   s += "            ]\n";
             else s += ",\n";
         }
-        s += "        });";
+        s += "        });\n$currentmodal.open();\n";
+        //if(script.length() > 0) s += script+"\n";
         return s;
     }
 }

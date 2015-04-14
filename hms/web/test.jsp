@@ -2,7 +2,7 @@
 <%@page pageEncoding="UTF-8" %>
 <%@include file="includes/init.jsp" %>
 <%
-    String pkfmt = "{autoclose: true, format: '" + dateformats1[dff] + "', maxDate : new Date(" + CodeHelpers.addDays(dclosedate, -1) + "), language: 'ka', todayHighlight: true, allowEmpty: false}";
+    String pkfmt = "{autoclose: true, format: dateglobalformat1, maxDate : dateglobalmaxdate, language: 'ka', todayHighlight: true, allowEmpty: false}";
     
 %>
 <!DOCTYPE html>
@@ -59,6 +59,9 @@
     <script type="text/javascript" src="js/redips-drag-min.js"></script>
 
     <script>
+        var dateglobalformat1 = "<%=dateformats1[dff]%>";
+        var dateglobalmaxdate = "new Date(<%=CodeHelpers.addDays(dclosedate, -1)%>)";
+
 
         $(document).ready(function () {
 

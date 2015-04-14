@@ -31,6 +31,9 @@ public class panelitem {
     private int colmd = 16;
     private String onclick = "";
     private String classname = "";
+    private String script = "";
+    private String pkfmt = "{autoclose: true, format: dateglobalformat1, maxDate : dateglobalmaxdate, language: \"ka\", todayHighlight: true, allowEmpty: false}";
+    private int checkboxes = 0;
     
     public void panelitem(){}
     
@@ -52,6 +55,40 @@ public class panelitem {
         for(int i=0;i<values.length;i++){
             this.values[i] = values[i];
         }
+    }
+    
+    public String getParam(){
+        String s = "";
+        switch(type){
+            case 0:
+            case 1:
+            case 2:
+                s += id+": $(\"#"+id+"\").val(),\n";
+                break;
+            case 3:
+                s += id+": $(\"input[name="+id+"]:checked\").val(),\n";
+                
+                break;
+            case 4:
+                for(int i=0;i<checkboxes;i++){
+                    s += id+i+": $(\"#"+id+"\").is(\":checked\"),\n";
+                }
+                break;
+            case 5:
+            case 6:
+                s += id+": $(\"#"+id+"\").val(),\n";
+                break;
+            default:
+        }
+        return s;
+    }
+
+    public String getScript() {
+        return script;
+    }
+
+    public void setScript(String script) {
+        this.script = script;
     }
 
     public String getOnclick() {
@@ -183,6 +220,7 @@ public class panelitem {
         obj.put("placeholder",placeholder);
         obj.put("onclick",onclick);
         obj.put("classname",classname);
+        obj.put("script",script);
         JSONArray ar = new JSONArray();
         for(int i=0;i<values.length;i++){
             ar.add(values[i]);
@@ -207,6 +245,8 @@ public class panelitem {
         placeholder = (String)obj.get("placeholder");
         onclick = (String)obj.get("onclick");
         classname = (String)obj.get("classname");
+        script = (String)obj.get("script");
+        if(script == null)  script = "";
         JSONArray ar = (JSONArray)obj.get("values");
         values = new String[ar.size()];
         for(int i=0;i<ar.size();i++){
@@ -303,6 +343,7 @@ public class panelitem {
                         if(val.equalsIgnoreCase(vl) || val.equalsIgnoreCase(nm))
                             s += " checked";
                         s += ">"+nm+"";
+                        checkboxes++;
                     }
                     rs.close();
                     Manager.getInstance().releaseConnection(con);
@@ -312,6 +353,7 @@ public class panelitem {
                         if(val.equalsIgnoreCase(String.valueOf(i)) || val.equalsIgnoreCase(values[i]))
                             s += " checked";
                         s += ">"+values[i]+"";
+                        checkboxes++;
                     }
                 }
                 s += "</div>";
@@ -322,6 +364,9 @@ public class panelitem {
                 s += "<input type=\"text\" class=\"form-control pull-right "+classname+"\" size=\""+size1+"\" name=\""+id+"\" id=\""+id+"\" value=\""+val+"\"";
                 if(placeholder.length() > 0)    s += " placeholder=\""+placeholder+"\"";
                 s += "/></div>";
+                script += "$('#"+id+"').datepicker(<%=pkfmt%>)";
+                if(onclick.length() > 0)    script += ".on('changeDate', function (e) {"+onclick+"});";
+                else                        script += ";";
                 break;
             case 6:
                 s += "<div class=\"col-md-"+colmd+"\">";

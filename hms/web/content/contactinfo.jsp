@@ -7,10 +7,23 @@ String fl = basedir+"/content/templates/guestprofile_geninfo.json";
 dl.readFromFile(fl);
 
 //System.out.println(fl);
-//System.out.println(dl.draw());
+//System.out.println(dl.getParams());
 %>
 
 <script type="text/javascript">
+    
+    function saveGuestprofileGeninfo(){
+        $.post(
+            "content/saveGuestprofileGeninfo.jsp",
+            <%=dl.getParams()%>,
+            function(data){
+                if(data.result == 0)    BootstrapDialog.alert(data.error);
+                else {
+                    $currentmodal.close();
+                }
+            },
+            "json");
+    }
     
     function addContact(){
         <%=dl.draw()%>

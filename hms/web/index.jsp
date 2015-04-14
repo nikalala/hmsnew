@@ -180,9 +180,10 @@
     <script type="text/javascript" src="js/redips-drag-min.js"></script>
 
     <script>
-
+        var $currentmodal;
         var dateglobalformat = "<%=dateformats2[dff]%>";
         var dateglobalformat1 = "<%=dateformats1[dff]%>";
+        var dateglobalmaxdate = "new Date(<%=CodeHelpers.addDays(dclosedate, -1)%>)";
 
         var globalpars = <%=jschs%>;
 

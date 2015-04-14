@@ -27,6 +27,7 @@ public class panel {
     private String height = "100%";
     private Vector panelitems = new Vector();
     private int colmd = 16;
+    private String script = "";
     
     public JSONObject getJson(){
         JSONObject obj = new JSONObject();
@@ -72,6 +73,14 @@ public class panel {
     }
     
     public void panel(){}
+
+    public String getScript() {
+        return script;
+    }
+
+    public void setScript(String script) {
+        this.script = script;
+    }
 
     public int getColmd() {
         return colmd;
@@ -165,6 +174,8 @@ public class panel {
                         panelitem pi = (panelitem)v.elementAt(i);
                         //if(i == v.size()-1) colmd = cols-colmd*(v.size()-1);
                         s += pi.drawitem();
+                        if(pi.getScript() != null && pi.getScript().trim().length() > 0)
+                            script += " "+pi.getScript();
                     }
                     s += "</div>";
                 }
