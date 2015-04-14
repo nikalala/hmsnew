@@ -135,7 +135,7 @@
                     <a class="head-link" href="javascript:getBody('stayviewleft','dashboard','სამუშაო მაგიდა', 'res1','',true);" data-toggle="tooltip" title="სამუშაო მაგიდა"><span class="fa fa-dashboard"></span></a>
                 </li>
                 <li>
-                    <a class="head-link" href="javascript:getBody('stayviewleft','roomview','ოთახები', 'res1','?width='+$('#centerTabContent .active').width()+'&height='+$('#centerTabContent .active').height(),true)" data-toggle="tooltip" title="ოთახები"><span class="fa fa-building"></span></a>
+                    <a class="head-link" href="javascript:getBody('stayviewleft','roomview','ოთახები', 'res1','?width='+$('#centerTabContent .active').width()+'&height='+$('#centercontent').height(),true)" data-toggle="tooltip" title="ოთახები"><span class="fa fa-building"></span></a>
                 </li>
                 <li>
                     <a class="head-link" href="javascript:void(0);" data-action="launchFullscreen" title="Full Screen"><i class="fa fa-arrows-alt"></i></a>

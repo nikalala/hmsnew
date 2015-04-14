@@ -82,7 +82,7 @@ public class panelitem {
         }
         return s;
     }
-
+    
     public String getScript() {
         return script;
     }
@@ -376,12 +376,12 @@ public class panelitem {
                 s += "/></div>";
                 break;
             case 7:
-                s += "<div class=\"col-md-"+colmd+"\" style=\"text-align: left;\"><a class=\"btn btn-primary\" style=\"background-color: #EEE; color: gray; border-color: #ccc;\"";
+                s += "<div class=\"col-md-"+colmd+"\" style=\"text-align: right;\"><a class=\"btn btn-primary\" style=\"background-color: #EEE; color: gray; border-color: #ccc;\"";
                 if(onclick.length() > 0)    s += " onclick=\""+onclick.replaceAll("'", "\\\\'")+"\"";
                 s += "><i class=\"fa fa-"+classname+"\"></i></a></div>";
                 break;
             case 8:
-                s += "<span class=\"pull-left col-md-"+colmd+"\" style=\"line-height: 2.5;\"><b>"+label+"</b></span>";
+                s += "<span class=\"pull-left col-md-"+colmd+" "+classname+"\" style=\"line-height: 1.6; font-size: 13px; padding-left: 20px;\"><b>"+label+"</b></span>";
             default:
         }
         return s;

@@ -2,20 +2,29 @@
 <%@page pageEncoding="UTF-8" %>
 <%@include file="../includes/init.jsp" %>
 <%
-dialog dl = new dialog();
-String fl = basedir+"/content/templates/guestprofile_geninfo.json";
-dl.readFromFile(fl);
+dialog dl1 = new dialog();
+dl1.readFromFile(basedir+"/content/templates/guestprofile_geninfo_guest.json");
+dialog dl2 = new dialog();
+dl2.readFromFile(basedir+"/content/templates/guestprofile_geninfo.json");
 
 //System.out.println(fl);
-//System.out.println(dl.getParams());
+//System.out.println(dl1.draw());
+System.out.println(dl2.getParams());
 %>
 
 <script type="text/javascript">
     
     function saveGuestprofileGeninfo(){
+        var contragenttype = $("#contragenttype").val();
+        var params = {<%=dl2.getParams().replaceAll("\n","")%>,contragenttype: contragenttype};
+        if(contragenttype == 4) params = {<%=dl1.getParams().replaceAll("\n","")%>,contragenttype: contragenttype};
+        
         $.post(
             "content/saveGuestprofileGeninfo.jsp",
-            <%=dl.getParams()%>,
+            {
+            params,
+            contragenttype: $("#contragenttype").val()
+            },
             function(data){
                 if(data.result == 0)    BootstrapDialog.alert(data.error);
                 else {
@@ -26,7 +35,12 @@ dl.readFromFile(fl);
     }
     
     function addContact(){
-        <%=dl.draw()%>
+        var contragenttype = $("#contragenttype").val();
+        if(contragenttype == 4){
+        <%=dl1.draw()%>
+        }else{
+        <%=dl2.draw()%>
+        }
     }
     
     function searchContact(){
@@ -52,9 +66,10 @@ dl.readFromFile(fl);
             <table>
                 <tr>
                     <td style="padding-right: 10px;">
-                        <select class="dropdown col-md-2" id="contrbean">
+                        <select class="dropdown col-md-2" id="contragenttype">
                             <%
                                 for (int i = 0; i < contragenttype.length - 1; i++) {
+                                    if(i == 1)  continue;
                                     String selected = "";
                                     if (i == 4) {
                                         selected = "selected='selected'";

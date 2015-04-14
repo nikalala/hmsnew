@@ -127,7 +127,7 @@ public class dialog {
     }
     
     public String getParams(){
-        String s = "{\n";
+        String s = "";
         
         for(int i=0;i<panels.length;i++){
             for(int j=0;j<panels[i].getPanelitems().size();j++){
@@ -137,7 +137,7 @@ public class dialog {
             }
         }
         
-        s += "act: \"save\"\n}";
+        s += "act: \"save\"";
         return s;
     }
     

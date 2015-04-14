@@ -50,7 +50,7 @@
         text-overflow: ellipsis !important;
     }
 </style>
-<div id="drag" style="height: <%=mainHeight%>px; max-height: <%=mainHeight%>px; overflow-y: auto;">
+<div id="drag" style="height: <%=mainHeight-30%>px; max-height: <%=mainHeight%>px; overflow-y: auto;">
     <table style="float: right;  margin-top: 0;  margin-bottom: 0;  margin-right: 0;">
         <tr>
             <td style="height: 30px;width: 20px;  border: 0 !important;"><i class="fa fa-save" onclick="tblToJson()"></i></td>
@@ -107,12 +107,6 @@
                         var div = $("#"+j[i].roomid).parent().html();
                         obj[j[i].nestid] = div;
                         rem.push($("#"+j[i].roomid));
-                        /*
-                        $("#"+j[i].roomid).remove();
-                        $( ".drag-table td:eq( "+ j[i].nestid +" )").html(div2)
-                        $("#"+j[i].roomid).hide();
-                        $($("#table1 td")[j[i].nestid]).html(div);
-                         */
 
                     }
                 }

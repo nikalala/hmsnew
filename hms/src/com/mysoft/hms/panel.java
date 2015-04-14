@@ -169,7 +169,7 @@ public class panel {
                     Integer n = (Integer)it.next();
                     Vector v = (Vector)hy.get(n);
                     //int colmd = cols/v.size();
-                    s += "<div class=\"input-group col-md-16\">";
+                    s += "<div style=\"padding-bottom: 7px;\" class=\"input-group col-md-16\">";
                     for(int i=0;i<v.size();i++){
                         panelitem pi = (panelitem)v.elementAt(i);
                         //if(i == v.size()-1) colmd = cols-colmd*(v.size()-1);
