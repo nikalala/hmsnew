@@ -11,3 +11,8 @@
     <img src="http://cdn2.hubspot.net/hub/372608/file-1099652074-png/statistics.png" style="width: 300px;">
 
 </div>
+<script>
+    $(document).ready(function(){
+        $(".gridfooter").remove();
+    });
+</script>

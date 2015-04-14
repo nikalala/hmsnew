@@ -118,7 +118,7 @@
                 </li>
 
                 <li>
-                    <a class="head-link" href="javascript:getBody('construction','construction');" style="padding-top: 15px;"><span class="fa fa-calculator" style="padding-right: 10px; font-size: 14px;"></span> POS</a>
+                    <a class="head-link" href="javascript:getBody('expencesleft','pos','ხარჯები','res1','',true);" style="padding-top: 15px;"><span class="fa fa-calculator" style="padding-right: 10px; font-size: 14px;"></span> POS</a>
                 </li>
                 <li>
                     <a class="head-link" href="javascript:getBody('statsleft','stats','სტატისტიკა','res1','',true);" style="padding-top: 13px;"><span class="fa fa-bar-chart" style="padding-right: 10px;"></span> სტატისტიკა</a>
