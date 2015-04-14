@@ -107,12 +107,6 @@
                         var div = $("#"+j[i].roomid).parent().html();
                         obj[j[i].nestid] = div;
                         rem.push($("#"+j[i].roomid));
-                        /*
-                        $("#"+j[i].roomid).remove();
-                        $( ".drag-table td:eq( "+ j[i].nestid +" )").html(div2)
-                        $("#"+j[i].roomid).hide();
-                        $($("#table1 td")[j[i].nestid]).html(div);
-                         */
 
                     }
                 }

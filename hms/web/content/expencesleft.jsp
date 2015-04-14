@@ -1,11 +1,7 @@
 <%@page contentType="text/html; charset=UTF-8"%>
 <%@page pageEncoding="UTF-8"%>
 <%@include file="../includes/init.jsp"%>
-<%
-    
-    
-%>
-<<<<<<< HEAD
+
 <div class="panel panel-default" id='leftpanel' style="margin-top: 0px; height: 215px; font-family: bgmtavr;">
         <div class="panel-heading  panel-title" style="text-align: center; font-size: 16px !important; height: 31px; background-color: #474544 !important;">
             <b style='vertical-align: middle; color: #FFFFFF; font-family: bgmtavr;'>ძებნა</b>
@@ -71,7 +67,6 @@
         autoclose: true
     });
 </script>
-=======
 <div class="panel panel-default" id='leftpanel' style="margin-top: 0px; height: 300px; font-family: bgmtavr;">
         <div class="panel-heading  panel-title" style="text-align: center; font-size: 16px !important; height: 31px; background-color: #474544 !important;">
             <b style='vertical-align: middle; color: #FFFFFF; font-family: bgmtavr;'>ძებნა</b>
@@ -98,4 +93,3 @@
 
         </div>
 </div>
->>>>>>> origin/master
