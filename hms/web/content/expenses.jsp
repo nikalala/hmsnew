@@ -98,7 +98,7 @@ dl0.setTitle(dl0.getTitle()+selectbox);
     }
 
     function loadDefaults() {
-//        $('.date').datepicker(<%=pickerformat1%>);
+//        $('.date').datepicker(< %=pickerformat1%>);
         $('.dropdown').selectpicker();
         $(".btn-group").css("width", "auto", "!important");
         $("#grid-table label").each(function () {
