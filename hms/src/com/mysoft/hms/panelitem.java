@@ -18,7 +18,7 @@ import net.sf.json.JSONObject;
 public class panelitem {
     
     private String label = "";
-    private int type = 0; // 0: text, 1: textarea; 2: select; 3: radio; 4: checkbox; 5: date; 6: time; 7: button; 8: label
+    private int type = 0; // 0: text, 1: textarea; 2: select; 3: radio; 4: checkbox; 5: date; 6: time; 7: button; 8: label; 9: grid; 10: tabs
     private int size1 = 0;
     private int size2 = 0;
     private String sql = "";
