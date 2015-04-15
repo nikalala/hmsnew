@@ -1,7 +1,7 @@
 {
     "colmd": 16,
     "title": "კონტაქტი",
-    "height": "145",
+    "height": "145px",
     "id": "expenses_contact",
     "classnames": "",
     "panelitems": [{
@@ -49,7 +49,7 @@
             "placeholder": "",
             "onclick": "",
             "classname": "",
-            "style": "height:21px;",
+            "style": "height:35px;",
             "values": []
         }, {
             "type": 8,
@@ -80,7 +80,7 @@
             "placeholder": "",
             "onclick": "",
             "classname": "",
-            "style": "height:21px;",
+            "style": "height:35px;",
             "values": []
         }, {
             "type": 8,
@@ -111,7 +111,7 @@
             "placeholder": "",
             "onclick": "",
             "classname": "",
-            "style": "height:21px;",
+            "style": "height:35px;",
             "values": []
         }]
 }

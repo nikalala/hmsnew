@@ -287,14 +287,14 @@ public class panelitem {
         String mclass = "form-control";
         switch(type){
             case 0:
-                s += "<div class=\"col-md-"+colmd+"\" style=\"padding-bottom: 7px; "+style+"\">";
+                s += "<div class=\"col-md-"+colmd+"\" style=\"padding-bottom: 7px; height: 35px; "+style+"\">";
                 //if(label.length() > 0)  s += "<span>"+label+"</span>";
                 s += "<input type=\"text\" class=\"form-control pull-right "+classname+"\" size=\""+size1+"\" name=\""+id+"\" id=\""+id+"\" value=\""+val+"\"";
                 if(placeholder.length() > 0)    s += " placeholder=\""+placeholder+"\"";
                 s += "/></div>";
                 break;
             case 1:
-                s += "<div class=\"col-md-"+colmd+"\" style=\"padding-bottom: 7px; "+style+"\">";
+                s += "<div class=\"col-md-"+colmd+"\" style=\"padding-bottom: 7px; height: 35px; "+style+"\">";
                 //if(label.length() > 0)  s += "<span>"+label+"</span>";
                 s += "<textarea class=\"form-control pull-right "+classname+"\" cols=\""+size1+"\" rows=\""+size2+"\" name=\""+id+"\" id=\""+id+"\"";
                 if(placeholder.length() > 0)    s += " placeholder=\""+placeholder+"\"";
@@ -302,7 +302,7 @@ public class panelitem {
                 s += "</div>";
                 break;
             case 2:
-                s += "<div class=\"col-md-"+colmd+"\" style=\"padding-bottom: 7px; "+style+"\">";
+                s += "<div class=\"col-md-"+colmd+"\" style=\"padding-bottom: 7px; height: 35px; "+style+"\">";
                 //if(label.length() > 0)  s += "<span>"+label+"</span>";
                 s += "<select class=\"form-control "+classname+"\" name=\""+id+"\" id=\""+id+"\">";
                 if(placeholder.length() > 0)    s += "<option value=\"\">"+ placeholder+"</option>";
@@ -331,7 +331,7 @@ public class panelitem {
                         + "</div>";
                 break;
             case 3:
-                s += "<div class=\"col-md-"+colmd+"\" style=\"padding-bottom: 7px; "+style+"\">";
+                s += "<div class=\"col-md-"+colmd+"\" style=\"padding-bottom: 7px; height: 35px; "+style+"\">";
                 //if(label.length() > 0)  s += "<span>"+label+"</span>";
                 if(sql.length() > 0){
                     Connection con = Manager.getInstance().getConnection();
@@ -359,7 +359,7 @@ public class panelitem {
                 s += "</div>";
                 break;
             case 4:
-                s += "<div class=\""+mclass+" col-md-"+colmd+"\" style=\"padding-bottom: 7px; "+style+"\">";
+                s += "<div class=\""+mclass+" col-md-"+colmd+"\" style=\"padding-bottom: 7px; height: 35px; "+style+"\">";
                 //if(label.length() > 0)  s += "<span>"+label+"</span>";
                 if(sql.length() > 0){
                     Connection con = Manager.getInstance().getConnection();
@@ -387,7 +387,7 @@ public class panelitem {
                 s += "</div>";
                 break;
             case 5:
-                s += "<div class=\"col-md-"+colmd+"\" style=\"padding-bottom: 7px; "+style+"\">";
+                s += "<div class=\"col-md-"+colmd+"\" style=\"padding-bottom: 7px; height: 35px; "+style+"\">";
                 //if(label.length() > 0)  s += "<span>"+label+"</span>";
                 s += "<input type=\"text\" class=\"form-control pull-right "+classname+"\" size=\""+size1+"\" name=\""+id+"\" id=\""+id+"\" value=\""+val+"\"";
                 if(placeholder.length() > 0)    s += " placeholder=\""+placeholder+"\"";
@@ -397,19 +397,19 @@ public class panelitem {
                 else                        script += ";";
                 break;
             case 6:
-                s += "<div class=\"col-md-"+colmd+"\" style=\"padding-bottom: 7px; "+style+"\">";
+                s += "<div class=\"col-md-"+colmd+"\" style=\"padding-bottom: 7px; height: 35px; "+style+"\">";
                 //if(label.length() > 0)  s += "<span>"+label+"</span>";
                 s += "<input type=\"text\" class=\"form-control pull-right "+classname+"\" size=\""+size1+"\" name=\""+id+"\" id=\""+id+"\" value=\""+val+"\"";
                 if(placeholder.length() > 0)    s += " placeholder=\""+placeholder+"\"";
                 s += "/></div>";
                 break;
             case 7:
-                s += "<div class=\"col-md-"+colmd+"\" style=\"text-align: right; padding-bottom: 7px; "+style+"\"><a class=\"btn btn-primary\" style=\"background-color: #EEE; color: gray; border-color: #ccc;\"";
+                s += "<div class=\"col-md-"+colmd+"\" style=\"text-align: right; padding-bottom: 7px; height: 35px; "+style+"\"><a class=\"btn btn-primary\" style=\"background-color: #EEE; color: gray; border-color: #ccc;\"";
                 if(onclick.length() > 0)    s += " onclick=\""+onclick.replaceAll("'", "\\\\'")+"\"";
                 s += "><i class=\"fa fa-"+classname+"\"></i></a></div>";
                 break;
             case 8:
-                s += "<span class=\"pull-left col-md-"+colmd+" "+classname+"\" style=\"padding-bottom: 7px; line-height: 1.6; font-size: 13px; padding-left: 20px; "+style+"\"><b>"+label+"</b></span>";
+                s += "<span class=\"pull-left col-md-"+colmd+" "+classname+"\" style=\"padding-bottom: 7px; height: 35px; line-height: 1.6; font-size: 13px; padding-left: 20px; "+style+"\"><b>"+label+"</b></span>";
             default:
         }
         //s = "<div class=\"col-md-16\">"+s+"</div>";
