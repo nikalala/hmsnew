@@ -17,15 +17,14 @@
     if (!CodeHelpers.isNullOrEmpty(workorderBean.getNum())) {
         ordNum = workorderBean.getNum();
     }
+
+
 %>
 
 <script>
     $(document).ready(function () {
-        $('.dropdown').selectpicker();
-        $(".work-table .btn-group").css("width", "250px", "!important");
-        $(".work-table input").css("height", "27px", "!important").css("margin-left", "4px");
-        $("#dt-block-st").css("margin-left", "0");
-        $('.work-table .date').datepicker(<%=pickerFormatForDatePickers%>);
+        showHideFooter();
+        initDates();
         reloadHistory();
         $("#work-descr").val($("#work-descr").val().trim());
         <% if(CodeHelpers.isNullOrEmpty(wid)){ %>
@@ -43,18 +42,30 @@
         addReason();
         $("#reasonblock").hide();
         $("#reasondrop").next().css("margin-left","4px").css("float","left");
+
+        $('.dropdown').selectpicker();
+        $(".work-table .btn-group").css("width", "250px", "!important");
+        $(".work-table input").css("height", "27px", "!important").css("margin-left", "4px");
+        $("#dt-block-st").css("margin-left", "0");
     });
+
+    function initDates() {
+        $('.work-table .date').datepicker(<%=pickerFormatForDatePickers%>);
+    }
 
     function cancelSaveWorkorder() {
         $(".filter-form1").show();
         $("#workorder_add").html('');
         $(".filter-form2").hide();
+        showHideFooter();
     }
 
     function reloadHistory() {
+        <% if(!CodeHelpers.isNullOrEmpty(wid)){ %>
         $.post("content/getworkorderhistory.jsp?wid=<%=wid%>", function (data) {
             $(".history-table").append(data);
         });
+        <% } %>
     }
 
     function saveWorkOrder() {
@@ -216,6 +227,7 @@
                                 reloadGrid(workOrderGrid.id, workOrderGrid.url);
                                 reloadHistory();
                                 $("#cancelSave").click();
+                                $("#work-order-add-maindiv").remove();
                                 loader.hide();
                             });
                         });
@@ -247,6 +259,7 @@
                     reloadGrid(workOrderGrid.id, workOrderGrid.url);
                     reloadHistory();
                     $("#cancelSave").click();
+                    $("#work-order-add-maindiv").remove();
                     loader.hide();
                 });
             });
@@ -424,7 +437,8 @@
                                     <td>
                                         <select class="dropdown col-md-2" id="work-units">
                                             <option value="">-ოთახის #-</option>
-                                            <% for (int i = 0; i < rooms.length; i++) {
+                                            <%
+                                                for (int i = 0; i < rooms.length; i++) {
 
                                                 String selected = "";
                                                 if (workorderBean.getRoomid() != null && rooms[i].getRoomid().equals(workorderBean.getRoomid())) {
@@ -438,7 +452,6 @@
                                             </option>
                                             <% } %>
                                             <% for (int i = 0; i < units.length; i++) {
-
                                                 String selected = "";
                                                 if (workorderBean.getHouseunitid() != null && units[i].getHouseunitid().equals(workorderBean.getHouseunitid())) {
                                                     selected = "selected";

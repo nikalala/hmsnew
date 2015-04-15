@@ -79,6 +79,9 @@
         var element = $("option:selected", this);
         var openbal = element.attr("openbal");
         var openprice = element.attr("openprice");
+        if(openprice === "null"){
+            return;
+        }
         if (isNullOrEmpty($(this).val())) {
             $("#disc-first, #disc-second").hide();
             return;

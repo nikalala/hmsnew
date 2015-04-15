@@ -150,7 +150,7 @@
         var sql = "INSERT INTO workorderlog(" +
         "workorderlogid, workorderid, note, regbyid)" +
         "VALUES (" +
-        "nextval('workorderlogidd_seq')," +
+        "nextval('workorderlogid_seq')," +
                 id + ", " +
         "N'" + remark + "', " +
         "N'<%=user.getLoginid()%>');";

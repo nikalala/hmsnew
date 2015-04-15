@@ -851,6 +851,7 @@ function getSelectedRowIds(id) {
     });
     return ids.substring(0, ids.trim().lastIndexOf(","));
 }
+
 function getArrayOfSelectedRowIds(id) {
     var ids = getSelectedRowIds(id);
     if(!isNullOrEmpty(ids)){
@@ -1056,7 +1057,6 @@ function loadModalDefs() {
     //$("#maindiv").remove();
 }
 
-
 function checkOut(rid, reloadid) {
     $.post("content/checkout.jsp", {rid: rid}, function (data) {
         if (data.result == 0)    BootstrapDialog.alert(data.error);
@@ -1086,3 +1086,29 @@ function checkIn(rid, reloadid) {
         }
     }, "json");
 }
+
+function showHideFooter(){
+    if($(".gridfooter").length > 0){
+        if($(".gridfooter").is(':visible')){
+            $(".gridfooter").hide();
+        }else{
+            $(".gridfooter").show();
+        }
+    }
+}
+
+$(document).on('click','.btn-default',function(){
+    //TODO
+/*    var id = $(this).parent().parent().attr('id');
+    var text = $(this).text();
+    if(!isNullOrEmpty(id)){
+        if(id === "status_bar"){
+            $(".gridfooter").hide();
+        }
+    }
+    if(!isNullOrEmpty(text) && (text.trim() === "დახურვა" || text.trim() === "შენახვა")){
+        if($(".gridfooter").length > 0){
+            $(".gridfooter").show();
+        }
+    }*/
+});

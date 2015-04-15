@@ -1027,6 +1027,7 @@ System.out.println(rid+" = "+statusid);
     SimpleDateFormat df3 = new SimpleDateFormat("dd.MM.yyyy");
     SimpleDateFormat df2 = new SimpleDateFormat("MM-dd-yyyy");
     SimpleDateFormat dflong = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+    SimpleDateFormat dflongwithdots = new SimpleDateFormat("dd.MM.yyyy HH:mm");
     SimpleDateFormat dftime = new SimpleDateFormat("HH:mm");
     SimpleDateFormat sdf0 = new SimpleDateFormat("yyyy/MM/dd");
     SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");

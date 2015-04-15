@@ -37,6 +37,7 @@
 <script>
 
     $(document).ready(function () {
+        showHideFooter();
         $('.date').datepicker(<%=pickerformat1%>);
         <%if (CodeHelpers.isNullOrEmpty(tid)) { %>
         $('#birthdate , #wifebirthdate, #weddingyeardate').val('');
