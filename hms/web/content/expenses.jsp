@@ -34,6 +34,7 @@ selectbox += "<option value=\""+i+"\" "+selected+">"+contragenttype[i]+"</option
 }
 selectbox += "</select></div>";
 dl0.setTitle(dl0.getTitle()+selectbox);
+session.setAttribute("PANEL0", (panel)dl0);
 %>
 <link rel="stylesheet" type="text/css" href="css/grid-filter.css">
 
@@ -41,7 +42,7 @@ dl0.setTitle(dl0.getTitle()+selectbox);
     
     function saveGuestprofileGeninfo(){
         var contragenttype = $("#contragenttype").val();
-        var params = {<%=dl2.getParams().replaceAll("\n","")%>,contragenttype: contragenttype};
+        var params = {<%=dl2.getParams().replaceAll("\n","")%>,contragenttype: contragenttype,ses: "PANEL0"};
         if(contragenttype == 4) params = {<%=dl1.getParams().replaceAll("\n","")%>,contragenttype: contragenttype};
         
         $.post(
@@ -51,6 +52,7 @@ dl0.setTitle(dl0.getTitle()+selectbox);
                 if(data.result == 0)    BootstrapDialog.alert(data.error);
                 else {
                     $currentmodal.close();
+                    $.post("content/getpanel.jsp",{ ses: "PANEL0" },function(data){ $("#expenses_contactinfo").html(data); });
                 }
             },
             "json");

@@ -12,13 +12,14 @@ for(Enumeration e=request.getParameterNames();e.hasMoreElements();){
         s += val[i]+"; ";
     s += "\n";
 }
-System.out.println(s);
     
 JSONObject obj = new JSONObject();
 Manager.getInstance().beginTransaction();
 try{
        
     int ctype = Integer.parseInt(request.getParameter("contragenttype"));
+    String ses = request.getParameter("ses");
+    panel pl = (panel)session.getAttribute(ses);
     
     if(ctype == 4){
         int     salutationid                    =	 Integer.parseInt(request.getParameter("editcontactinfo_salutationid"));
@@ -102,6 +103,22 @@ try{
         guest.setRegbyid(user.getPersonnelid());
         guest = GuestManager.getInstance().save(guest);
         obj.put("id",guest.getGuestid());
+        Vector items = pl.getPanelitems();
+        for(int i=0;i<items.size();i++){
+            panelitem item = (panelitem)items.elementAt(i);
+            if(item.getId().equalsIgnoreCase("expenses_contactinfo_mobile"))    item.setLabel(guest.getMobile());
+            if(item.getId().equalsIgnoreCase("expenses_contactinfo_phone"))     item.setLabel(guest.getPhone());
+            if(item.getId().equalsIgnoreCase("expenses_contactinfo_email"))     item.setLabel(guest.getEmail());
+            if(item.getId().equalsIgnoreCase("expenses_contactinfo_address")){
+                String ss = "";
+                SalutationBean slt = SalutationManager.getInstance().loadByPrimaryKey(salutationid);
+                ss += slt.getName()+" "+guest.getFname()+" "+guest.getLname()+"<br>";
+                ss += guest.getAddress();
+                item.setLabel(ss);
+            }
+            items.setElementAt((panelitem)item, i);
+        }
+        pl.setPanelitems(items);
     } else {
         int     salutationid                    =	 Integer.parseInt(request.getParameter("editcontactinfo_salutationid"));
         String	business                        =	 request.getParameter("editcontactinfo_business");
@@ -132,6 +149,7 @@ try{
         
         obj.put("id",contragent.getContragentid());
     }
+    session.setAttribute(ses, (panel)pl);
     Manager.getInstance().endTransaction(true);
     obj.put("result",1);
     
