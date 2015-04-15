@@ -12,18 +12,18 @@
 
         String arrdt = request.getParameter("arrdt");
 
-        String depDate = request.getParameter("dep");
+        String depDate = request.getParameter("dep") + " 23:59";
 
         String reason = request.getParameter("reason");
-
         String generatedInsert = "";
+        System.out.println(depDate);
         if (roomId.contains(",")) {
             String[] rooms = roomId.split(",");
             for (String room : rooms) {
                 BlockroomBean br = BlockroomManager.getInstance().createBlockroomBean();
                 br.setRoomid(new Integer(room));
                 br.setBlockstart(dt.parse(arrdt).getTime());
-                br.setBlockend(dt.parse(depDate).getTime());
+                br.setBlockend(dflongwithdots.parse(depDate).getTime());
                 br.setReasonid(new Integer(reason));
                 br.setRegbyid(user.getPersonnelid());
                 br = BlockroomManager.getInstance().save(br);
@@ -32,7 +32,7 @@
             BlockroomBean br = BlockroomManager.getInstance().createBlockroomBean();
             br.setRoomid(new Integer(roomId));
             br.setBlockstart(dt.parse(arrdt).getTime());
-            br.setBlockend(dt.parse(depDate).getTime());
+            br.setBlockend(dflongwithdots.parse(depDate).getTime());
             br.setReasonid(new Integer(reason));
             br.setRegbyid(user.getPersonnelid());
             br = BlockroomManager.getInstance().save(br);

@@ -50,7 +50,7 @@
         <cell>
             <![CDATA[
       <% if(!blockList[i].getIsunblocked()){ %>&nbsp;<a onclick="newsWindow1('blockunblock','დაბლოკვა/მოხსნა','roomid=<%=blockList[i].getRoomid()%>&blockroomid=<%=blockList[i].getBlockroomid()%>')"><i class="fa fa-pencil"></i></a><% } %>
-      &nbsp;<i onclick="changeRemark(<%=blockList[i].getBlockroomid()%>)" class="fa fa-edit"></i>
+      &nbsp;<i onclick="changeRemark(<%=blockList[i].getBlockroomid()%>,'<%=blockList[i].getNote()%>',this)" class="fa fa-edit"></i>
       ]]>
         </cell>
     </row>

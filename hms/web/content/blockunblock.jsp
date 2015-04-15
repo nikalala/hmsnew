@@ -125,7 +125,7 @@
                     if (data.trim() > 0) {
                         BootstrapDialog.alert("არჩეული თარიღებისთვის შეუძლებელია ნომრის დაბლოკვა");
                     }else{
-                        var sql = "update blockroom set blockstart = to_timestamp('" + arrdt.replaceAll(".","/") + "','dd/mm/yyyy'), blockend = " + dep.replaceAll(".","/") + ", reasonid = " + reason + " where blockroomid = <%=blockroomid%>";
+                        var sql = "update blockroom set blockstart = to_timestamp('" + arrdt.replaceAll(".","/") + "','dd/mm/yyyy'), blockend = to_timestamp('" + dep.replaceAll(".","/") + " 23:59','dd/mm/yyyy HH24:MI'), reasonid = " + reason + " where blockroomid = <%=blockroomid%>";
                         $.post("content/execute.jsp?query=" + encodeURIComponent(sql), {}, function () {
                             $("#dismissbutton").click();
                             doFilter(true);

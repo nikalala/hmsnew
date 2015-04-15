@@ -19,6 +19,7 @@
 </style>
 <script>
     $(document).ready(function () {
+        showHideFooter();
         $(".ttable label").css("margin-left", "5px");
         $(".ttable td").css("padding-left", "10px").css("box-shadow", "none", "!important");
         $(".ttable input[type=text],textarea").css("width", "100%");

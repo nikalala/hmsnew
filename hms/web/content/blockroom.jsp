@@ -182,6 +182,15 @@
         }
     });
 
+    function changeRemark(id,text,_this){
+        $("#remarktxt").val('');
+        $("#saveRemarkBtn").attr("onclick","saveRemark("+id+")");
+        $("#updateremark").css("display", "block");
+        $("#updateremark").offset($(_this).offset());
+        $("#remarktxt").val(text);
+        $("#updateremark").css({'left': $("#updateremark").position().left - 210});
+    }
+
     function doFilter(bool,showall) {
         if (bool) {
             /* $("#filter-form :input").each(function () {
@@ -239,18 +248,14 @@
             BootstrapDialog.alert("შეიყვანეთ მინიშნება!!!");
             return;
         }
-        var sql = "INSERT INTO workorderlog(" +
-                "workorderlogid, workorderid, note, regbyid)" +
-                "VALUES (" +
-                "nextval('workorderlogid_seq'), "+  // (SELECT COALESCE(MAX(workorderlogid) + 1,1) FROM workorderlog)," +
-                id + ", " +
-                "N'" + remark + "', " +
-                "N'<%=user.getLoginid()%>');";
+        var sql = "update blockroom set note = N'"+remark+"' WHERE blockroomid = " + id;
         loader.show();
         $.post("content/execute.jsp?query=" + encodeURIComponent(sql), {}, function () {
 
             $("#dismissbutton").click();
             $("#remarktxt").val('');
+            $("#filter-form")[0].reset();
+            reloadGrid(BlockRoomGrid.id, BlockRoomGrid.url);
             loader.hide();
 
         });

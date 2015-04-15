@@ -245,6 +245,7 @@
         $(".filter-form2").hide();
         $("#grid-footer").show();
         $("#tagents_add").html("");
+        showHideFooter();
     }
     function loadDefaults() {
         tagentsGrid.url += "?query=<%=where+order%>";

@@ -99,8 +99,8 @@ dl0.setTitle(dl0.getTitle()+selectbox);
         '</div></div>';
 
 
-        var panel = $("#centercontent .panel")[0];
-        var pwidth = $(panel).width();
+        var panel = $("#centerTabContent");
+        var pwidth = $("#centerTabContent").width();
         $(".gridfooter").remove();
         var panelheading = $(panel).find(".panel-heading")[0];
         $("#centerTabContent").css("height",$(panel).height()-panelheading);
