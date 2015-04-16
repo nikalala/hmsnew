@@ -25,11 +25,14 @@
     .head-link .fa {
         font-size: 16px;
     }
+    .active {
+        color: black;
+    }
 </style>
 <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container-fluid">
         <div class="navbar-header col-md-3" style="text-align: center;">
-            <a href="index.jsp"><img src="img/logo-hms.png" alt=""/></a>
+            <a href="javascript:getBody('stayviewleft', 'stayview', 'დატვირთულობა', 'res1','',true);"><img src="img/logo-hms.png" alt=""/></a>
         </div>
         <div id="head" class="navbar-collapse collapse"> 
             <ul class="nav navbar-nav">
@@ -138,7 +141,7 @@
                     <a class="head-link" href="javascript:getBody('stayviewleft','roomview','ოთახები', 'res1','?width='+$('#centerTabContent .active').width()+'&height='+$('#centercontent').height(),true)" data-toggle="tooltip" title="ოთახები"><span class="fa fa-building"></span></a>
                 </li>
                 <li>
-                    <a class="head-link" href="javascript:void(0);" data-action="launchFullscreen" title="Full Screen"><i class="fa fa-arrows-alt"></i></a>
+                    <a class="head-link" href="javascript:void(0);" data-action="launchFullscreen" title="Full Screen" onclick="toggleFullScreen()"><i class="fa fa-arrows-alt"></i></a>
                 </li>
                 <li class="dropdown">
                     <a href="#" class=" dropdown-toggle head-link" data-toggle="dropdown"><span class="fa fa-power-off"></span></a>
