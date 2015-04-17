@@ -7,7 +7,7 @@ $(document).ready(function () {
 
     loader = $(".loading-panel");
     registerModalFunctions();
-    
+
 });
 
 $(document).keydown(function (e) {
@@ -25,7 +25,6 @@ function registerModalFunctions() {
         //removeModal();
     });
 }
-
 
 
 function launchLockScreen() {
@@ -337,7 +336,7 @@ $(function () {
             hasroom = $(this).attr('hasroom');
             samedate = $(this).attr('samedate');
         }
-        changeContextMenu(status,hasroom,samedate,$contextMenu);
+        changeContextMenu(status, hasroom, samedate, $contextMenu);
         $contextMenu.css({
             display: "block",
             left: e.pageX,
@@ -428,7 +427,7 @@ function modalWindow(fname, title, qr, callback, callbackparam) {
     loadModalDefs();
     $.post("content/" + fname + ".jsp?" + qr, {}, function (data) {
         callback(callbackparam);
-        BootstrapDialog.alert(data.trim()); 
+        BootstrapDialog.alert(data.trim());
     });
 }
 
@@ -483,10 +482,10 @@ function getLBody(fname) {
     });
 }
 
-function search(){
+function search() {
     var frm = $("#filterbyfrm").serialize();
     var params = encodeURIComponent(frm);
-    getBody('stayviewleft', 'trsearch', 'ტრანზაქციების ძიება', 'res1', '?' + params,true);
+    getBody('stayviewleft', 'trsearch', 'ტრანზაქციების ძიება', 'res1', '?' + params, true);
 
 }
 
@@ -615,7 +614,7 @@ function reloadMenu() {
     $('.nav li').css("float", "left");
 }
 
-function loadStats(page,heading){
+function loadStats(page, heading) {
     loader.show();
     $.ajax({
         type: "POST",
@@ -770,9 +769,8 @@ function urlencode(str) {
     return str.replace(' ', '!!!');
 }
 
-String.prototype.replaceAll = function(str1, str2, ignore)
-{
-    return this.replace(new RegExp(str1.replace(/([\/\,\!\\\^\$\{\}\[\]\(\)\.\*\+\?\|\<\>\-\&])/g,"\\$&"),(ignore?"gi":"g")),(typeof(str2)=="string")?str2.replace(/\$/g,"$$$$"):str2);
+String.prototype.replaceAll = function (str1, str2, ignore) {
+    return this.replace(new RegExp(str1.replace(/([\/\,\!\\\^\$\{\}\[\]\(\)\.\*\+\?\|\<\>\-\&])/g, "\\$&"), (ignore ? "gi" : "g")), (typeof(str2) == "string") ? str2.replace(/\$/g, "$$$$") : str2);
 }
 
 var hmsDaysMin = ["კვი", "ორშ", "სამ", "ოთხ", "ხუთ", "პარ", "შაბ", "კვი"];
@@ -818,7 +816,7 @@ function initializeGrid(grid) {
 
 function drawFooter() {
     $(".ui-jqgrid-bdiv").height($(".ui-jqgrid-bdiv").height() - 50);
-    var html = '<div class="gridfooter" >' +        '<div>' +
+    var html = '<div class="gridfooter" >' + '<div>' +
         '<span style="margin: 15px 10px 0 10px; float: left;">ჩანაწერების რაოდენობა გვერდზე</span>' +
         '<select id="limitselectbox" style="float: left; margin: 15px 10px 0 10px;">' +
         '<option value="5">5</option>' +
@@ -836,9 +834,9 @@ function drawFooter() {
     var pwidth = $(panel).width();
     $(".gridfooter").remove();
     var panelheading = $(panel).find(".panel-heading")[0];
-    $("#centerTabContent").css("height",$(panel).height()-panelheading);
+    $("#centerTabContent").css("height", $(panel).height() - panelheading);
     $("#centerTabContent").append(html);
-    $(".gridfooter").css("width",pwidth+"px","!important");
+    $(".gridfooter").css("width", pwidth + "px", "!important");
 }
 
 function getSelectedRowIds(id) {
@@ -854,9 +852,9 @@ function getSelectedRowIds(id) {
 
 function getArrayOfSelectedRowIds(id) {
     var ids = getSelectedRowIds(id);
-    if(!isNullOrEmpty(ids)){
+    if (!isNullOrEmpty(ids)) {
         return ids.split(',');
-    }else{
+    } else {
         return null;
     }
 }
@@ -989,10 +987,10 @@ function checkIfScrollBarExist(divId) {
     }
 })(jQuery);
 
-function strReplace(str,replaceWhat,replaceTo){
+function strReplace(str, replaceWhat, replaceTo) {
     replaceWhat = replaceWhat.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
     var re = new RegExp(replaceWhat, 'g');
-    return str.replace(re,replaceTo);
+    return str.replace(re, replaceTo);
 }
 
 function colModelGenerator(width, colName, alligment) {
@@ -1078,7 +1076,7 @@ function checkOut1(rid, reloadid) {
 }
 
 function checkIn(rid, reloadid) {
-    $.post("content/checkin.jsp?"+rid, {}, function (data) {
+    $.post("content/checkin.jsp?" + rid, {}, function (data) {
         if (data.result == 0)    BootstrapDialog.alert(data.error);
         else {
             reloadGrid(reloadid);
@@ -1087,11 +1085,11 @@ function checkIn(rid, reloadid) {
     }, "json");
 }
 
-function showHideFooter(){
-    if($(".gridfooter").length > 0){
-        if($(".gridfooter").is(':visible')){
+function showHideFooter() {
+    if ($(".gridfooter").length > 0) {
+        if ($(".gridfooter").is(':visible')) {
             $(".gridfooter").hide();
-        }else{
+        } else {
             $(".gridfooter").show();
         }
     }
