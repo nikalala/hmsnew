@@ -14,6 +14,7 @@
     $(document).ready(function () {
 
         loadDefaults();
+        drawFooter();
         secondFooter();
 
     });
@@ -173,6 +174,7 @@
         $(".filter-form2").hide();
         $("#grid-footer").show();
         $("#tagents_add").html("");
+        showHideFooter();
     }
 
     function saveGuest() {

@@ -51,11 +51,12 @@
         if(guestdblistBean!= null && guestdblistBean.getWeddingdate() == null){%>
         $('#weddingyeardate').val('');
         <% }
-} %>
+        } %>
         $('.box_outer .dropdown').selectpicker();
         $(".box_outer input[type=text]").height($(".box_outer .btn-group").height() - 6, "!important");
         $("#tsalutation").next().css("width", "70px").css("padding-right", "10px");
         $("#phone, #mobile, #fax, #tvalue, #topenbal").ForceNumericOnly();
+
     });
 </script>
 
