@@ -1097,39 +1097,23 @@ function showHideFooter(){
     }
 }
 
-$(document).on('click','.btn-default',function(){
-    //TODO
-/*    var id = $(this).parent().parent().attr('id');
-    var text = $(this).text();
-    if(!isNullOrEmpty(id)){
-        if(id === "status_bar"){
-            $(".gridfooter").hide();
+function toggleFullScreen() {
+    if ((document.fullScreenElement && document.fullScreenElement !== null) ||
+        (!document.mozFullScreen && !document.webkitIsFullScreen)) {
+        if (document.documentElement.requestFullScreen) {
+            document.documentElement.requestFullScreen();
+        } else if (document.documentElement.mozRequestFullScreen) {
+            document.documentElement.mozRequestFullScreen();
+        } else if (document.documentElement.webkitRequestFullScreen) {
+            document.documentElement.webkitRequestFullScreen(Element.ALLOW_KEYBOARD_INPUT);
+        }
+    } else {
+        if (document.cancelFullScreen) {
+            document.cancelFullScreen();
+        } else if (document.mozCancelFullScreen) {
+            document.mozCancelFullScreen();
+        } else if (document.webkitCancelFullScreen) {
+            document.webkitCancelFullScreen();
         }
     }
-    if(!isNullOrEmpty(text) && (text.trim() === "დახურვა" || text.trim() === "შენახვა")){
-        if($(".gridfooter").length > 0){
-            $(".gridfooter").show();
-        }
-    }*/
-});
-
-    function toggleFullScreen() {
-  if ((document.fullScreenElement && document.fullScreenElement !== null) ||    
-   (!document.mozFullScreen && !document.webkitIsFullScreen)) {
-    if (document.documentElement.requestFullScreen) {  
-      document.documentElement.requestFullScreen();  
-    } else if (document.documentElement.mozRequestFullScreen) {  
-      document.documentElement.mozRequestFullScreen();  
-    } else if (document.documentElement.webkitRequestFullScreen) {  
-      document.documentElement.webkitRequestFullScreen(Element.ALLOW_KEYBOARD_INPUT);  
-    }  
-  } else {  
-    if (document.cancelFullScreen) {  
-      document.cancelFullScreen();  
-    } else if (document.mozCancelFullScreen) {  
-      document.mozCancelFullScreen();  
-    } else if (document.webkitCancelFullScreen) {  
-      document.webkitCancelFullScreen();  
-    }  
-  }  
 }
