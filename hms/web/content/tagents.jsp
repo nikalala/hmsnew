@@ -44,17 +44,17 @@
                 '</div></div>';
         $(".footer2").remove();
         $(html).insertBefore(".gridfooter");
-        $(".footer2").css("bottom",height);
-        $(".footer2").css("width",width,"!important");
+        $(".footer2").css("bottom", height);
+        $(".footer2").css("width", width, "!important");
     }
 
-    function joinSelected(){
+    function joinSelected() {
         var ids = getSelectedRowIds(tagentsGrid.id);
-        if (isNullOrEmpty(ids) || ids.indexOf(",") ==-1) {
+        if (isNullOrEmpty(ids) || ids.indexOf(",") == -1) {
             BootstrapDialog.alert("თუ გრუსთ მონიშნულის კონსოლიდაცია უნდა აირჩიოთ მინიმუმ 2 ჩანაწერი");
             return;
         }
-        newsWindow1("conscontrlist", "მონიშნულის კონსოლიდაცია", "query="+ids);
+        newsWindow1("conscontrlist", "მონიშნულის კონსოლიდაცია", "query=" + ids);
     }
 
     function deleteSelectedGuest(id) {
@@ -62,7 +62,7 @@
         var ids = "";
         if (isNullOrEmpty(id)) {
             ids = getSelectedRowIds(tagentsGrid.id);
-        }else{
+        } else {
             ids = id;
         }
 
@@ -88,9 +88,9 @@
         $("#tvalue").removeClass("error");
         $("#tcterm, #tclimit").removeClass("error");
         for (var key in str) {
-            if (key != "taddress" && key != "tcity" && key != "tcommissionplan"  &&
-                key != "tphone" && key != "tmobile" && key != "tfax" && key != "zip" && key != "tclimit" &&
-                key != "tcterm" && key != "topenbal" && key != "tvalue") {
+            if (key != "taddress" && key != "tcity" && key != "tcommissionplan" &&
+                    key != "tphone" && key != "tmobile" && key != "tfax" && key != "zip" && key != "tclimit" &&
+                    key != "tcterm" && key != "topenbal" && key != "tvalue") {
                 if (isNullOrEmpty(str[key])) {
                     if (key == "tcountryid") {
                         $("#" + key).next().addClass("error");
@@ -102,13 +102,13 @@
                         var typeCompany = false;
                         <% } %>
 
-                        if(key == "email") {
-                            if($("#tcreateuser").prop("checked") && typeCompany){
+                        if (key == "email") {
+                            if ($("#tcreateuser").prop("checked") && typeCompany) {
                                 $("#email").addClass("error");
-                            }else{
+                            } else {
                                 $("#email").removeClass("error");
                             }
-                        }else {
+                        } else {
                             $("#" + key).addClass("error");
                         }
                     }
@@ -138,44 +138,36 @@
                 }
             }
         }
-        if(!isNullOrEmpty($("#tvalue").val()))
-        {
-            if(isNullOrEmpty($("#tcommissionplan").val()))
-            {
+        if (!isNullOrEmpty($("#tvalue").val())) {
+            if (isNullOrEmpty($("#tcommissionplan").val())) {
                 $("#tcommissionplan").next().addClass("error");
                 errorExist = true;
-            }else{
+            } else {
                 $("#tcommissionplan").next().removeClass("error");
             }
         }
-        if(!isNullOrEmpty($("#tcommissionplan").val()))
-        {
-            if(isNullOrEmpty($("#tvalue").val()))
-            {
+        if (!isNullOrEmpty($("#tcommissionplan").val())) {
+            if (isNullOrEmpty($("#tvalue").val())) {
                 $("#tvalue").addClass("error");
                 errorExist = true;
-            }else{
+            } else {
                 $("#tvalue").removeClass("error");
             }
         }
 
-        if(!isNullOrEmpty($("#tcterm").val()))
-        {
-            if(isNullOrEmpty($("#tclimit").val()))
-            {
+        if (!isNullOrEmpty($("#tcterm").val())) {
+            if (isNullOrEmpty($("#tclimit").val())) {
                 $("#tclimit").addClass("error");
                 errorExist = true;
-            }else{
+            } else {
                 $("#tclimit").removeClass("error");
             }
         }
-        if(!isNullOrEmpty($("#tclimit").val()))
-        {
-            if(isNullOrEmpty($("#tcterm").val()))
-            {
+        if (!isNullOrEmpty($("#tclimit").val())) {
+            if (isNullOrEmpty($("#tcterm").val())) {
                 $("#tcterm").addClass("error");
                 errorExist = true;
-            }else{
+            } else {
                 $("#tcterm").removeClass("error");
             }
         }
@@ -206,9 +198,9 @@
 
     function addContr(id) {
         loader.show();
-        if(isNullOrEmpty(id)){
+        if (isNullOrEmpty(id)) {
             $("#addtagenttxt").html("ტურისტული აგენტის დამატება");
-        }else{
+        } else {
             $("#addtagenttxt").html("ტურისტული აგენტის რედაქტირება");
         }
         $(".filter-form1").hide();
@@ -224,9 +216,9 @@
     }
     function addCompany(id) {
         loader.show();
-        if(isNullOrEmpty(id)){
+        if (isNullOrEmpty(id)) {
             $("#addtagenttxt").html("კომპანიის დამატება");
-        }else{
+        } else {
             $("#addtagenttxt").html("კომპანიის რედაქტირება");
         }
         $(".filter-form1").hide();
@@ -341,7 +333,7 @@
                                 if (type.equals("1")) {
                                     headerVal = "კომპანიის დამატება";
                             %>
-                                <%=headerVal%>
+                            <%=headerVal%>
                             <%
                                 }
                                 if (type.equals("2")) {

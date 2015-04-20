@@ -14,11 +14,12 @@
     $(document).ready(function () {
 
         loadDefaults();
+        drawFooter();
         secondFooter();
 
     });
 
-    $(document).on('click','#addGuest',function(){
+    $(document).on('click', '#addGuest', function () {
         addGuest();
     });
 
@@ -36,17 +37,17 @@
                 '</div></div>';
         $(".footer2").remove();
         $(html).insertBefore(".gridfooter");
-        $(".footer2").css("bottom",height);
-        $(".footer2").css("width",width,"!important");
+        $(".footer2").css("bottom", height);
+        $(".footer2").css("width", width, "!important");
     }
 
-    function joinSelected(){
+    function joinSelected() {
         var ids = getSelectedRowIds(guestGrid.id);
-        if (isNullOrEmpty(ids) || ids.indexOf(",") ==-1) {
+        if (isNullOrEmpty(ids) || ids.indexOf(",") == -1) {
             BootstrapDialog.alert("თუ გრუსთ სტუმრის კონსოლიდაცია უნდა აირჩიოთ მინიმუმ 2 სტუმარი");
             return;
         }
-        newsWindow1("consguestlist", "სტუმრის კონსოლიდაცია", "query="+ids);
+        newsWindow1("consguestlist", "სტუმრის კონსოლიდაცია", "query=" + ids);
     }
 
     function deleteSelectedGuest(id) {
@@ -54,7 +55,7 @@
         var ids = "";
         if (isNullOrEmpty(id)) {
             ids = getSelectedRowIds(guestGrid.id);
-        }else{
+        } else {
             ids = id;
         }
 
@@ -148,11 +149,11 @@
         }
     }
 
-    function addGuest(id){
+    function addGuest(id) {
         loader.show();
-        if(isNullOrEmpty(id)){
+        if (isNullOrEmpty(id)) {
             $("#addtagenttxt").html("კომპანიის დამატება");
-        }else{
+        } else {
             $("#addtagenttxt").html("კომპანიის რედაქტირება");
         }
 
@@ -173,6 +174,7 @@
         $(".filter-form2").hide();
         $("#grid-footer").show();
         $("#tagents_add").html("");
+        showHideFooter();
     }
 
     function saveGuest() {
@@ -184,10 +186,10 @@
                 errorExist = true;
                 $("#txtguestname").addClass("error");
                 BootstrapDialog.alert("სწორად შეიყვანეთ სახელი და გვარი. მაგ(დავით ბერძენიშვილი)");
-            }else{
+            } else {
                 $("#txtguestname").removeClass("error");
             }
-        }else{
+        } else {
             errorExist = true;
             $("#txtguestname").addClass("error");
         }
@@ -196,7 +198,7 @@
                 errorExist = true;
                 $("#email").addClass("error");
                 BootstrapDialog.alert("სწორად შეიყვანეთ ელ-ფოსტა.მაგ(tourist@selfin.ge)");
-            }else{
+            } else {
                 $("#email").removeClass("error");
             }
         }
@@ -208,7 +210,7 @@
             type: 'get', // it's easier to read GET request parameters
             url: 'content/saveguest.jsp',
             data: {
-                guest : encodeURIComponent(JSON.stringify(str))
+                guest: encodeURIComponent(JSON.stringify(str))
             },
             contentType: 'application/json',
             dataType: 'json',
@@ -217,7 +219,7 @@
                     BootstrapDialog.alert("ოპერაცია შესრულდა წარმატებით");
                     cancelSaveGuest();
                     doFilter(true);
-                }else{
+                } else {
                     BootstrapDialog.alert("დაფიქსირდა შეცდომა. სცადეთ ხელახლა");
                 }
             },
@@ -336,7 +338,8 @@
         </tr>
         <tr>
             <td style="border-bottom: solid 1px #c4c4c4 !important; -webkit-box-shadow: 0 0 0 0; box-shadow: 0 0 0 0">
-                <div id="status_bar" class="first-status-bar" align='center' style="-webkit-box-shadow: 0 0 0 0; box-shadow: 0 0 0 0">
+                <div id="status_bar" class="first-status-bar" align='center'
+                     style="-webkit-box-shadow: 0 0 0 0; box-shadow: 0 0 0 0">
                     <div style="width: 100%; float: right;">
                         <button type="button" class="btn btn-default" id="cancelSave" onclick="cancelSaveGuest()"
                                 style="border: 0; font-weight: bold; float: right; margin: 3px 5px 0 0;">

@@ -21,13 +21,13 @@
         var items_per_page = resGrid.limit;
         var offset = (page - 1) * items_per_page;
         var limit = " LIMIT " + items_per_page + " OFFSET " + offset;
-        var url = doFilter(true,limit);
+        var url = doFilter(true, limit);
         reloadGrid(resGrid.id, url);
 
     }
     function getPrevRecords() {
         page -= 1;
-        if(page < 1){
+        if (page < 1) {
             page = 1;
             return;
         }
@@ -35,14 +35,14 @@
         var items_per_page = resGrid.limit;
         var offset = (page - 1) * items_per_page;
         var limit = " LIMIT " + items_per_page + " OFFSET " + offset;
-        var url = doFilter(true,limit);
+        var url = doFilter(true, limit);
         reloadGrid(resGrid.id, url);
     }
 
-    $("#btnNext").click(function(){
+    $("#btnNext").click(function () {
         getNextRecords();
     });
-    $("#btnPrev").click(function(){
+    $("#btnPrev").click(function () {
         getPrevRecords();
     });
 
@@ -114,7 +114,7 @@
     function loadDefaults() {
         AddDays(7);
         var limit = " LIMIT " + resGrid.limit + " OFFSET " + 0;
-        resGrid.url = doFilter(true,limit);
+        resGrid.url = doFilter(true, limit);
         initializeGrid(resGrid);
 
         $('#grid-table .date').datepicker(<%=pickerFormatForDatePickers%>);

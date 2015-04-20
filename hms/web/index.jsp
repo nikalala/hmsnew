@@ -34,60 +34,60 @@
 <% }
 
     String cmenufiles[] = {
-        "TAB_EditTransaction",          //  0 
-        "roommove",                     //  1
-        "amendstay",                    //  2
-        "checkin",                      //  3
-        "undocheckin",                  //  4
-        "checkout",                     //  5
-        "cancel",                       //  6
-        "noshow",                       //  7
-        "assignroom",                   //  8
-        "unassignroom",                 //  9
-        "setMessages",                  // 10
-        "setTask",                     // 11
-        "setPreference",                // 12
-        "StopRoomMove",                 // 13
-        "ExchangeRoom",                 // 14
-        "void"
+            "TAB_EditTransaction",          //  0
+            "roommove",                     //  1
+            "amendstay",                    //  2
+            "checkin",                      //  3
+            "undocheckin",                  //  4
+            "checkout",                     //  5
+            "cancel",                       //  6
+            "noshow",                       //  7
+            "assignroom",                   //  8
+            "unassignroom",                 //  9
+            "setMessages",                  // 10
+            "setTask",                     // 11
+            "setPreference",                // 12
+            "StopRoomMove",                 // 13
+            "ExchangeRoom",                 // 14
+            "void"
     };
-    
+
     String cmenunames[] = {
-        "რედაქტირება",                  //  0
-        "ოთახის გადატანა",              //  1
-        "გახანგრძლივება",               //  2
-        "მიღება",                       //  3
-        "მიღების გაუქმება",             //  4
-        "გაწერა",                       //  5
-        "გაუქმება",                     //  6
-        "არ მოსვლა",                    //  7
-        "ოთახის მინიჭება",              //  8
-        "ოთახის მოხსნა",                //  9
-        "შეტყობინება",                  // 10
-        "დავალება",                     // 11
-        "უპირატესობა",                  // 12
-        "ოთახის გადატანის შეჩერება",    // 13
-        "ოთახის შეცვლა",                // 14
-        "ტრანზაქციის გაუქმება"          // 15
+            "რედაქტირება",                  //  0
+            "ოთახის გადატანა",              //  1
+            "გახანგრძლივება",               //  2
+            "მიღება",                       //  3
+            "მიღების გაუქმება",             //  4
+            "გაწერა",                       //  5
+            "გაუქმება",                     //  6
+            "არ მოსვლა",                    //  7
+            "ოთახის მინიჭება",              //  8
+            "ოთახის მოხსნა",                //  9
+            "შეტყობინება",                  // 10
+            "დავალება",                     // 11
+            "უპირატესობა",                  // 12
+            "ოთახის გადატანის შეჩერება",    // 13
+            "ოთახის შეცვლა",                // 14
+            "ტრანზაქციის გაუქმება"          // 15
     };
 
     String cmenuicons[] = {
-        "რედაქტირება",                  //  0
-        "ოთახის გადატანა",              //  1
-        "გახანგრძლივება",               //  2
-        "მიღება",                       //  3
-        "მიღების გაუქმება",             //  4
-        "გაწერა",                       //  5
-        "გაუქმება",                     //  6
-        "არ მოსვლა",                    //  7
-        "ოთახის მინიჭება",              //  8
-        "ოთახის მოხსნა",                //  9
-        "შეტყობინება",                  // 10
-        "დავალება",                     // 11
-        "უპირატესობა",                  // 12
-        "ოთახის გადატანის შეჩერება",    // 13
-        "ოთახის შეცვლა",                // 14
-        "ტრანზაქციის გაუქმება"          // 15
+            "რედაქტირება",                  //  0
+            "ოთახის გადატანა",              //  1
+            "გახანგრძლივება",               //  2
+            "მიღება",                       //  3
+            "მიღების გაუქმება",             //  4
+            "გაწერა",                       //  5
+            "გაუქმება",                     //  6
+            "არ მოსვლა",                    //  7
+            "ოთახის მინიჭება",              //  8
+            "ოთახის მოხსნა",                //  9
+            "შეტყობინება",                  // 10
+            "დავალება",                     // 11
+            "უპირატესობა",                  // 12
+            "ოთახის გადატანის შეჩერება",    // 13
+            "ოთახის შეცვლა",                // 14
+            "ტრანზაქციის გაუქმება"          // 15
     };
 
     boolean[][] statusmenu = {
@@ -220,38 +220,38 @@
             // დღიური რეზერვაცია 9 + roomid is null
             [true, true, true, true, false, false, true, true, true, false, true, true, true, false, true, true]                    // 13
 
-    ];
-        var stmn = [
-            [0,1,2,0],
-            [0,0,2,1],
-            [1,2,1,2],
-            [1,2,0,3],
-            [2,2,2,4],
-            [3,2,2,5],
-            [4,2,2,6],
-            [5,2,2,7],
-            [6,2,2,8],
-            [7,1,2,9],
-            [7,0,2,10],
-            [8,2,2,11],
-            [9,1,2,12],
-            [9,0,2,13]
         ];
-        
-        function changeContextMenu(st,hr,sd, mn) {
+        var stmn = [
+            [0, 1, 2, 0],
+            [0, 0, 2, 1],
+            [1, 2, 1, 2],
+            [1, 2, 0, 3],
+            [2, 2, 2, 4],
+            [3, 2, 2, 5],
+            [4, 2, 2, 6],
+            [5, 2, 2, 7],
+            [6, 2, 2, 8],
+            [7, 1, 2, 9],
+            [7, 0, 2, 10],
+            [8, 2, 2, 11],
+            [9, 1, 2, 12],
+            [9, 0, 2, 13]
+        ];
+
+        function changeContextMenu(st, hr, sd, mn) {
             var k = -1;
-            for(var i=0;i<stmn.length;i++){
-                if(stmn[i][0] == st){
-                    if(stmn[i][1] == 2 || stmn[i][1] == hr){
-                        if(stmn[i][2] == 2 || stmn[i][2] == sd){
+            for (var i = 0; i < stmn.length; i++) {
+                if (stmn[i][0] == st) {
+                    if (stmn[i][1] == 2 || stmn[i][1] == hr) {
+                        if (stmn[i][2] == 2 || stmn[i][2] == sd) {
                             k = stmn[i][3];
                             break;
                         }
                     }
                 }
             }
-            
-            if(k >= 0){
+
+            if (k >= 0) {
                 $("#contextMenu ul").find('li').each(function () {
                     var n = $(this).attr('num');
                     if (statusmenu[k][n]) $(this).show();
@@ -260,7 +260,7 @@
             }
         }
 
-        function changeContextMenu1(st,hr,sd, mn) {
+        function changeContextMenu1(st, hr, sd, mn) {
             var sts = new Array();
             <%for(int i=0;i<statusmenu.length;i++){
                 %>
@@ -329,7 +329,7 @@
                 $("#action").remove();
                 $("#controls").remove();
             });
-            
+
             $("select").selectpicker();
 
         });
@@ -340,6 +340,7 @@
         .nav-tabs > li > a {
             border-radius: 2px 2px 0 0 !important;
         }
+
         .btn {
             border-radius: 2px !important;
         }
@@ -357,7 +358,8 @@
         </div>
         <div class="col-md-13" id="centercontent" style="height: 100%;">
             <div class="panel panel-default" id='mainpanel0' style="height: 654px; background-color: <%=bgcol%>;">
-                <div class="panel-heading  panel-title" style="text-align: center;height: 31px;background-color: #474544 !important;">
+                <div class="panel-heading  panel-title"
+                     style="text-align: center;height: 31px;background-color: #474544 !important;">
                         <span class="pull-left">
                             <div id="tabs">
                                 <ul class="nav nav-tabs toptab" role="tablist" id='maintabs'
@@ -398,7 +400,8 @@
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
             <div class="modal-header" style="background-color: gray; color: white; height: 30px;">
-                <button type="button" id="smallmodalbtn" class="close" data-dismiss="modal" aria-hidden="true" style='margin-top: -6px;'>&times;</button>
+                <button type="button" id="smallmodalbtn" class="close" data-dismiss="modal" aria-hidden="true"
+                        style='margin-top: -6px;'>&times;</button>
                 <h4 id="smheader" style='margin-top: -4px;'></h4>
             </div>
             <div class="modal-body" id="smbody"></div>
@@ -431,7 +434,8 @@
     </div>
 </div>
 
-<div class="modal fade modal-vertical-centered" id="infomodal" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+<div class="modal fade modal-vertical-centered" id="infomodal" tabindex="-1" role="dialog" aria-labelledby=""
+     aria-hidden="true">
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
             <div class="modal-header" style="background-color: gray; color: white; height: 30px;">
@@ -481,21 +485,21 @@
 
     var seen = 0;
 
-    setInterval(function(){
-        if(seen < 5){
+    setInterval(function () {
+        if (seen < 5) {
             //showAlert();
         }
-    },5000);
+    }, 5000);
 
-    function showAlert(){
-        for(var i = 0; i < 2; i++){
+    function showAlert() {
+        for (var i = 0; i < 2; i++) {
             $.bigBox({
-                title : "Hello. You have new message"+i,
-                content : "Please confirm you job # " +i*16,
-                color : "#5384AF",
+                title: "Hello. You have new message" + i,
+                content: "Please confirm you job # " + i * 16,
+                color: "#5384AF",
                 //timeout: 8000,
-                icon : "fa fa-bell swing animated",
-                number : "2"
+                icon: "fa fa-bell swing animated",
+                number: "2"
             });
             seen++;
         }

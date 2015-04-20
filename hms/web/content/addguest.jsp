@@ -13,11 +13,10 @@
     PaymentmethodBean[] paymentmethodBeans = PaymentmethodManager.getInstance().loadByWhere("");
     String tid = (String) request.getParameter("tid");
     String headerVal = "";
-    if(CodeHelpers.isNullOrEmpty(tid))
-    {
+    if (CodeHelpers.isNullOrEmpty(tid)) {
         tid = "";
         headerVal = "სტუმრის დამატება";
-    }else{
+    } else {
         headerVal = "სტუმრის რედაქტირება";
     }
     if (!CodeHelpers.isNullOrEmpty(tid)) {
@@ -51,11 +50,12 @@
         if(guestdblistBean!= null && guestdblistBean.getWeddingdate() == null){%>
         $('#weddingyeardate').val('');
         <% }
-} %>
+        } %>
         $('.box_outer .dropdown').selectpicker();
         $(".box_outer input[type=text]").height($(".box_outer .btn-group").height() - 6, "!important");
         $("#tsalutation").next().css("width", "70px").css("padding-right", "10px");
         $("#phone, #mobile, #fax, #tvalue, #topenbal").ForceNumericOnly();
+
     });
 </script>
 
@@ -137,7 +137,7 @@
         <h2 class="box_head">
             <span id="ctl0_fdmain_lblGTitle"><%=headerVal%></span>
         </h2>
-        <input type="hidden"name="tid" value="<%=tid%>">
+        <input type="hidden" name="tid" value="<%=tid%>">
         <ul class="box_container">
             <li class="col1" style="width:490px;float: left;">
                 <p class="fieldset">
@@ -154,7 +154,8 @@
                                     selected = "";
                                 }
                         %>
-                        <option value="<%=object.getSalutationid()%>" <%=selected%> ><%=object.getName()%></option>
+                        <option value="<%=object.getSalutationid()%>" <%=selected%> ><%=object.getName()%>
+                        </option>
                         <%
                             }
                         %>
@@ -212,7 +213,8 @@
                     <span id="ctl0_fdmain_lblAddess1" class="label_sm label_big">მისამართი</span>
               <span style="display:block;float:left;">
               <textarea name="txtaddress" rows="4" cols="31" placeholder="" id="txtaddress"
-                        class="textarea"><%if (guestdblistBean != null)%><%=CodeHelpers.ifIsNullOrEmptyReturnEmptryString(guestdblistBean.getAddress())%></textarea>
+                        class="textarea"><%if (guestdblistBean != null)%><%=CodeHelpers.ifIsNullOrEmptyReturnEmptryString(guestdblistBean.getAddress())%>
+              </textarea>
               </span></p>
 
                 <p class="fieldset">
@@ -418,7 +420,8 @@
                                     selected = "";
                                 }
                         %>
-                        <option value="<%=object.getContragentid()%>" <%=selected%> ><%=CodeHelpers.ifIsNullOrEmptyReturnEmptryString(object.getName())%></option>
+                        <option value="<%=object.getContragentid()%>" <%=selected%> ><%=CodeHelpers.ifIsNullOrEmptyReturnEmptryString(object.getName())%>
+                        </option>
                         <%
                             }
                         %>
@@ -441,7 +444,8 @@
                                 }
 
                         %>
-                        <option value="<%=object.getPaymentmethodid()%>" <%=selected%> ><%=CodeHelpers.ifIsNullOrEmptyReturnEmptryString(object.getName())%></option>
+                        <option value="<%=object.getPaymentmethodid()%>" <%=selected%> ><%=CodeHelpers.ifIsNullOrEmptyReturnEmptryString(object.getName())%>
+                        </option>
                         <%
                             }
                         %>
