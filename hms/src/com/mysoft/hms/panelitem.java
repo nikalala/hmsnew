@@ -35,6 +35,7 @@ public class panelitem {
     private String pkfmt = "{autoclose: true, format: dateglobalformat1, maxDate : dateglobalmaxdate, language: \"ka\", todayHighlight: true, allowEmpty: false}";
     private int checkboxes = 0;
     private String style = "";
+    private grid grid = new grid();
     
     public void panelitem(){}
     
@@ -83,6 +84,16 @@ public class panelitem {
         }
         return s;
     }
+
+    public grid getGrid() {
+        return grid;
+    }
+
+    public void setGrid(grid grid) {
+        this.grid = grid;
+    }
+
+    
 
     public String getPkfmt() {
         return pkfmt;
@@ -252,6 +263,9 @@ public class panelitem {
             ar.add(values[i]);
         }
         obj.put("values",(JSONArray)ar);
+        JSONObject ob = grid.getJson();
+        obj.put("grid",ob);
+        
         return obj;
     }
     
@@ -280,6 +294,9 @@ public class panelitem {
         for(int i=0;i<ar.size();i++){
             values[i] = (String)ar.getString(i);
         }
+        JSONObject ob = (JSONObject)obj.get("grid");
+        if(ob != null)  grid.readJson(ob);
+        
     }
     
     public String drawitem() throws Exception {
@@ -392,7 +409,7 @@ public class panelitem {
                 s += "<input type=\"text\" class=\"form-control pull-right "+classname+"\" size=\""+size1+"\" name=\""+id+"\" id=\""+id+"\" value=\""+val+"\"";
                 if(placeholder.length() > 0)    s += " placeholder=\""+placeholder+"\"";
                 s += "/></div>";
-                script += "$('#"+id+"').datepicker(<%=pkfmt%>)";
+                script += "$('#"+id+"').datepicker("+pkfmt+")";
                 if(onclick.length() > 0)    script += ".on('changeDate', function (e) {"+onclick+"});";
                 else                        script += ";";
                 break;
@@ -410,6 +427,11 @@ public class panelitem {
                 break;
             case 8:
                 s += "<span class=\"pull-left col-md-"+colmd+" "+classname+"\" style=\"padding-bottom: 7px; height: 35px; line-height: 1.6; font-size: 13px; padding-left: 20px; "+style+"\"><b>"+label+"</b></span>";
+                break;
+            case 9:
+                s += "<div class=\"col-md-"+colmd+"\" style=\"padding-bottom: 7px; "+style+"\">"+grid.drawGrid()+"</div>";
+                script += grid.getScript();
+                break;
             default:
         }
         //s = "<div class=\"col-md-16\">"+s+"</div>";

@@ -86,6 +86,19 @@ public class grid {
             hidden = (Boolean)obj.get("hidden");
         }
         
+        public JSONObject getJson(){
+            JSONObject obj = new JSONObject();
+
+            obj.put("width",width);
+            obj.put("label",label);
+            obj.put("name",name);
+            obj.put("index",index);
+            obj.put("align",align);
+            obj.put("hidden",hidden);
+
+            return obj;
+        }
+        
         public String getModel(){
             String s = "";
             
@@ -101,7 +114,49 @@ public class grid {
     private boolean multiselect = false;
     private boolean footerrow = false;
     private String id = "";
+    private String script = "";
+    private String height = "";
     private gridcolumn[] columns = new gridcolumn[0];
+
+    public String getHeight() {
+        return height;
+    }
+
+    public void setHeight(String height) {
+        this.height = height;
+    }
+
+    public String getScript() {
+        String s = "jQuery(\"#"+id+"\").jqGrid({ url:\""+url+"\", datatype: \"xml\", rowNum:2000, autowidth: true, sortname: \""+sortname+"\", viewrecords: true, sortorder: \"asc\", altRows: true, altclass: \"altrow\",";
+        if(height.length() > 0) s += " height: \""+height+"\", ";
+        if(footerrow)
+            s += " footerrow : true, userDataOnFooter:true,";
+        else
+            s += " footerrow : false, userDataOnFooter:false,";
+        if(multiselect)
+            s += " multiselect: true, multikey: \"ctrlKey\",";
+        else
+            s += " multiselect: false,";
+        s += " colNames:[";
+        String s1 = "colModel:[";
+        for(int i=0;i<columns.length;i++){
+            if(i > 0) {
+                s += ",";
+                s1 += ",";
+            }
+            s += "'"+columns[i].getLabel()+"'";
+            s1 += columns[i].getModel();
+        }
+        s += "],";
+        s1 += "]";
+        s += s1;
+        s += "}).jqGrid(\"bindKeys\");";
+        return script+s;
+    }
+
+    public void setScript(String script) {
+        this.script = script;
+    }
 
     public String getId() {
         return id;
@@ -162,6 +217,7 @@ public class grid {
         id = (String)obj.get("id");
         multiselect = (Boolean)obj.get("multiselect");
         footerrow = (Boolean)obj.get("footerrow");
+        height = (String)obj.get("height");
         JSONArray ar = (JSONArray)obj.get("columns");
         columns = new gridcolumn[ar.size()];
         for(int i=0;i<ar.size();i++){
@@ -171,30 +227,27 @@ public class grid {
         }
     }
     
-    public String drawGrid(){
-        String s = "jQuery(\"#"+id+"\").jqGrid({ url:\""+url+"\", datatype: \"xml\", rowNum:2000, autowidth: true, sortname: \""+sortname+"\", viewrecords: true, sortorder: \"asc\", altRows: true, altclass: \"altrow\",";
-        if(footerrow)
-            s += " footerrow : true, userDataOnFooter:true,";
-        else
-            s += " footerrow : false, userDataOnFooter:false,";
-        if(multiselect)
-            s += " multiselect: true, multikey: \"ctrlKey\",";
-        else
-            s += " multiselect: false,";
-        s += " colNames:[";
-        String s1 = "colModel:[";
+    public JSONObject getJson(){
+        JSONObject obj = new JSONObject();
+        
+        obj.put("url",url);
+        obj.put("sortname",sortname);
+        obj.put("id",id);
+        obj.put("multiselect",multiselect);
+        obj.put("footerrow",footerrow);
+        obj.put("height",height);
+        JSONArray ar = new JSONArray();
         for(int i=0;i<columns.length;i++){
-            if(i > 0) {
-                s += ",";
-                s1 += ",";
-            }
-            s += "'"+columns[i].getLabel()+"'";
-            s1 += columns[i].getModel();
+            JSONObject ob = columns[i].getJson();
+            ar.add(ob);
         }
-        s += "],";
-        s1 += "]";
-        s += s1;
-        s += "}).jqGrid(\"bindKeys\");";
+        obj.put("columns",ar);
+        return obj;
+    }
+    
+    public String drawGrid(){
+        
+        String s = "<table id=\""+id+"\"></table>";
         
         return s;
     }

@@ -230,7 +230,7 @@ GuestBean[] guests = GuestManager.getInstance().loadByWhere("where upper(fname) 
                     <tr style="cursor: pointer;">
                         <td style="color: #7DA341; font-weight: bold; width: 100px;" onclick="selGuestIn(<%=guests[i].getGuestid()%>,'<%=prefix%>')"><%=guestname%></td>
                         <td style='width: 100px;' onclick="selGuest(<%=guests[i].getGuestid()%>)"><%=guests[i].getCity()%></td>
-                        <td style='width: 100px;' onclick="selGuest(<%=guests[i].getGuestid()%>)"><%=country.getName()%></td>
+                        <td style='width: 100px;' onclick="selGuest(<%=guests[i].getGuestid()%>)"><%=(country != null) ? country.getName():""%></td>
                         <td style='width: 100px;' onclick="selGuest(<%=guests[i].getGuestid()%>)"><%=vipstatus%></td>
                         <td style='width: 100px;' onclick="selGuest(<%=guests[i].getGuestid()%>)"><%=phone%></td>
                         <td style='width: 100px;' onclick="selGuest(<%=guests[i].getGuestid()%>)"><%=mobile%></td>

@@ -13,6 +13,8 @@ for(Enumeration e=request.getParameterNames();e.hasMoreElements();){
     s += "\n";
 }
     
+System.out.println(s);
+
 JSONObject obj = new JSONObject();
 Manager.getInstance().beginTransaction();
 try{
@@ -106,14 +108,18 @@ try{
         Vector items = pl.getPanelitems();
         for(int i=0;i<items.size();i++){
             panelitem item = (panelitem)items.elementAt(i);
-            if(item.getId().equalsIgnoreCase("expenses_contactinfo_mobile"))    item.setLabel(guest.getMobile());
+            if(item.getId().equalsIgnoreCase("expenses_contactinfo_moble"))    item.setLabel(guest.getMobile());
             if(item.getId().equalsIgnoreCase("expenses_contactinfo_phone"))     item.setLabel(guest.getPhone());
             if(item.getId().equalsIgnoreCase("expenses_contactinfo_email"))     item.setLabel(guest.getEmail());
-            if(item.getId().equalsIgnoreCase("expenses_contactinfo_address")){
+            if(item.getId().equalsIgnoreCase("expenses_contact_address")){
                 String ss = "";
                 SalutationBean slt = SalutationManager.getInstance().loadByPrimaryKey(salutationid);
                 ss += slt.getName()+" "+guest.getFname()+" "+guest.getLname()+"<br>";
-                ss += guest.getAddress();
+                ss += guest.getAddress()+"<br>";
+                if(guest.getCity() != null && guest.getCity().length() > 0) ss += guest.getCity()+", ";
+                if(guest.getZip() != null && guest.getZip().length() > 0) ss += guest.getZip()+"<br>";
+                CountryBean country = CountryManager.getInstance().loadByPrimaryKey(guest.getCountryid());
+                ss += country.getName();
                 item.setLabel(ss);
             }
             items.setElementAt((panelitem)item, i);

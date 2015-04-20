@@ -445,7 +445,7 @@
 </div>
 
 <div class="modal fade modal-vertical-centered" id="extramodal0" tabindex="-1" role="dialog"
-     aria-labelledby="extramodal0Label" aria-hidden="true">
+     aria-labelledby="extramodal0Label" aria-hidden="true" style="z-index: 100000;">
     <div class="modal-dialog modal-ex">
         <div class="modal-content">
             <div class="modal-header" style="background-color: green; color: white; height: 30px;">

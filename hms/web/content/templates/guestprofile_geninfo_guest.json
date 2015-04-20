@@ -79,7 +79,7 @@
                     "id": "editcontactinfo_search",
                     "val": "",
                     "placeholder": "",
-                    "onclick": "",
+                    "onclick": "openSearch()",
                     "classname": "search",
                     "values": []
                 }, {
@@ -107,7 +107,7 @@
                     "sql": "",
                     "label": "",
                     "id": "editcontactinfo_adultchild",
-                    "val": "",
+                    "val": "0",
                     "placeholder": "",
                     "onclick": "",
                     "classname": "",
@@ -137,7 +137,7 @@
                     "sql": "",
                     "label": "",
                     "id": "editcontactinfo_gender",
-                    "val": "",
+                    "val": "2",
                     "placeholder": "",
                     "onclick": "",
                     "classname": "",

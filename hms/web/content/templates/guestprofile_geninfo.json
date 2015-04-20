@@ -49,7 +49,7 @@
                     "id": "editcontactinfo_search",
                     "val": "",
                     "placeholder": "",
-                    "onclick": "alert('aaaaa')",
+                    "onclick": "openSearch()",
                     "classname": "search",
                     "values": []
                 }, {

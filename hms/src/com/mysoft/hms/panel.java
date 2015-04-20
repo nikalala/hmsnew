@@ -191,7 +191,6 @@ public class panel {
                     }
                     //s += "</div>";
                 }
-        
                 s += "</div>" +
                 "</div>" +
                 "</div></div>";

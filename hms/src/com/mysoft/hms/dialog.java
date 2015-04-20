@@ -24,6 +24,7 @@ public class dialog {
     private panel[] panels = new panel[0];
     private button[] buttons = new button[0];
     private long idl = new Date().getTime();
+    private String script = "";
 
     public JSONObject getJson(){
         JSONObject obj = new JSONObject();
@@ -143,7 +144,6 @@ public class dialog {
     
     public String draw() throws Exception {
         String data = "";
-        String script = "";
         for(int i=0;i<panels.length;i++){
             data += panels[i].drawpanel();
             if(panels[i].getScript().length() > 0)
@@ -167,7 +167,7 @@ public class dialog {
             else s += ",\n";
         }
         s += "        });\n$currentmodal.open();\n";
-        //if(script.length() > 0) s += script+"\n";
+        s += script+"\n";
         return s;
     }
 }

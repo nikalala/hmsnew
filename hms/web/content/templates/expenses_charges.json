@@ -177,20 +177,70 @@
             "style": "",
             "values": []
         }, {
-            "type": 8,
+            "type": 9,
             "size1": 0,
             "size2": 0,
             "x": 0,
             "y": 2,
             "colmd": 16,
             "sql": "",
-            "label": "GRID",
+            "label": "",
             "id": "",
             "val": "",
             "placeholder": "",
             "onclick": "",
             "classname": "",
             "style": "",
-            "values": []
+            "values": [],
+            "grid": {
+                "columns": [
+                    {
+                        "label":"სერ.N",
+                        "name":"serno",
+                        "index":"serno",
+                        "width":100,
+                        "hidden":false,
+                        "align":"left"
+                    },
+                    {
+                        "label":"რეფ.N",
+                        "name":"refno",
+                        "index":"refno",
+                        "width":100,
+                        "hidden":false,
+                        "align":"left"
+                    },
+                    {
+                        "label":"განმარტება",
+                        "name":"particular",
+                        "index":"particular",
+                        "width":100,
+                        "hidden":false,
+                        "align":"left"
+                    },
+                    {
+                        "label":"შენიშვნა",
+                        "name":"comment",
+                        "index":"comment",
+                        "width":100,
+                        "hidden":false,
+                        "align":"left"
+                    },
+                    {
+                        "label":"ოდენობა",
+                        "name":"amount",
+                        "index":"amount",
+                        "width":100,
+                        "hidden":false,
+                        "align":"right"
+                    }
+                ],
+                "id":"expenseslist1",
+                "url":"content/getexpenseslist.jsp",
+                "sortname":"serno",
+                "multiselect":true,
+                "footerrow":true,
+                "height":"calc((100vh - 383px) / 4)"
+            }
         }]
 }
