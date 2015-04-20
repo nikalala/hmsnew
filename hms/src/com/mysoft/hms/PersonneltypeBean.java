@@ -295,7 +295,7 @@ public class PersonneltypeBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: personneltype.deleted
-     * <li>comments: ???????
+     * <li>comments: წაშლილი
      * <li>default value: false
      * <li>column size: 1
      * <li>jdbc type returned by the driver: Types.BIT

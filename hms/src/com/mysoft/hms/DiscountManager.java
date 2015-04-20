@@ -1308,6 +1308,38 @@ public class DiscountManager
     }
 
     /**
+     * Retrieves an array of PayoutBean using the relation table Folioitem given a DiscountBean object.
+     *
+     * @param pObject the DiscountBean pObject to be used
+     * @return an array of PayoutBean 
+     */
+    // MANY TO MANY
+    public PayoutBean[] loadPayoutViaFolioitem(DiscountBean pObject) throws SQLException
+    {
+         Connection c = null;
+         PreparedStatement ps = null;
+         String strSQL =      " SELECT "
+                         + "        *"
+                         + " FROM  "
+                         + "        payout,folioitem"
+                         + " WHERE "    
+                         + "     folioitem.discountid = ?"
+                         + " AND folioitem.payoutid = payout.payoutid";
+         try
+         {
+             c = getConnection();
+             ps = c.prepareStatement(strSQL,ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+             Manager.setInteger(ps, 1, pObject.getDiscountid());
+             return PayoutManager.getInstance().loadByPreparedStatement(ps);
+         }
+         finally
+         {
+            getManager().close(ps);
+            freeConnection(c);
+         }
+    }
+
+    /**
      * Retrieves an array of PersonnelBean using the relation table Folioitem given a DiscountBean object.
      *
      * @param pObject the DiscountBean pObject to be used

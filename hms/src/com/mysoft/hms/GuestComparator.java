@@ -73,6 +73,8 @@ public class GuestComparator implements Comparator
      *   <li>GuestManager.ID_CARDNUM
      *   <li>GuestManager.ID_REGBYID
      *   <li>GuestManager.ID_REGDATE
+     *   <li>GuestManager.ID_COMPANY
+     *   <li>GuestManager.ID_DOCNUM
      * </ul>
      */
     public GuestComparator(int iType)
@@ -118,6 +120,8 @@ public class GuestComparator implements Comparator
      *   <li>GuestManager.ID_REGBYID
      *   <li>GuestManager.ID_REGDATE
      *   <li>GuestManager.ID_DELETED
+     *   <li>GuestManager.ID_COMPANY
+     *   <li>GuestManager.ID_DOCNUM
      * </ul>
      *
      * @param bReverse set this value to true, if you want to reverse the sorting results
@@ -422,6 +426,28 @@ public class GuestComparator implements Comparator
                     iReturn = 1;
                 } else { 
                     iReturn = b1.getRegdate().compareTo(b2.getRegdate());
+                }
+                break;
+            case GuestManager.ID_COMPANY:
+                if (b1.getCompany() == null && b2.getCompany() != null) {
+                    iReturn = -1;
+                } else if (b1.getCompany() == null && b2.getCompany() == null) {
+                    iReturn = 0;
+                } else if (b1.getCompany() != null && b2.getCompany() == null) {
+                    iReturn = 1;
+                } else { 
+                    iReturn = b1.getCompany().compareTo(b2.getCompany());
+                }
+                break;
+            case GuestManager.ID_DOCNUM:
+                if (b1.getDocnum() == null && b2.getDocnum() != null) {
+                    iReturn = -1;
+                } else if (b1.getDocnum() == null && b2.getDocnum() == null) {
+                    iReturn = 0;
+                } else if (b1.getDocnum() != null && b2.getDocnum() == null) {
+                    iReturn = 1;
+                } else { 
+                    iReturn = b1.getDocnum().compareTo(b2.getDocnum());
                 }
                 break;
             default: 

@@ -182,7 +182,7 @@
                         "label":"სერ.N",
                         "name":"serno",
                         "index":"serno",
-                        "width":100,
+                        "width":50,
                         "hidden":false,
                         "align":"left"
                     },
@@ -190,7 +190,7 @@
                         "label":"რეფ.N",
                         "name":"refno",
                         "index":"refno",
-                        "width":100,
+                        "width":50,
                         "hidden":false,
                         "align":"left"
                     },
@@ -198,7 +198,7 @@
                         "label":"განმარტება",
                         "name":"particular",
                         "index":"particular",
-                        "width":100,
+                        "width":200,
                         "hidden":false,
                         "align":"left"
                     },
@@ -206,7 +206,7 @@
                         "label":"შენიშვნა",
                         "name":"comment",
                         "index":"comment",
-                        "width":100,
+                        "width":200,
                         "hidden":false,
                         "align":"left"
                     },

@@ -1777,6 +1777,38 @@ public class ReservationroomManager
     }
 
     /**
+     * Retrieves an array of PayoutBean using the relation table Folioitem given a ReservationroomBean object.
+     *
+     * @param pObject the ReservationroomBean pObject to be used
+     * @return an array of PayoutBean 
+     */
+    // MANY TO MANY
+    public PayoutBean[] loadPayoutViaFolioitem(ReservationroomBean pObject) throws SQLException
+    {
+         Connection c = null;
+         PreparedStatement ps = null;
+         String strSQL =      " SELECT "
+                         + "        *"
+                         + " FROM  "
+                         + "        payout,folioitem"
+                         + " WHERE "    
+                         + "     folioitem.reservationroomid = ?"
+                         + " AND folioitem.payoutid = payout.payoutid";
+         try
+         {
+             c = getConnection();
+             ps = c.prepareStatement(strSQL,ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+             Manager.setLong(ps, 1, pObject.getReservationroomid());
+             return PayoutManager.getInstance().loadByPreparedStatement(ps);
+         }
+         finally
+         {
+            getManager().close(ps);
+            freeConnection(c);
+         }
+    }
+
+    /**
      * Retrieves an array of PersonnelBean using the relation table Folioitem given a ReservationroomBean object.
      *
      * @param pObject the ReservationroomBean pObject to be used

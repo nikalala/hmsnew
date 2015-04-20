@@ -189,6 +189,13 @@ public class FolioitemManager
     public static final int TYPE_RATETYPEID = Types.INTEGER;
     public static final String NAME_RATETYPEID = "ratetypeid";
 
+    /**
+     * Column payoutid of type Types.INTEGER mapped to Integer.
+     */
+    public static final int ID_PAYOUTID = 23;
+    public static final int TYPE_PAYOUTID = Types.INTEGER;
+    public static final String NAME_PAYOUTID = "payoutid";
+
 
     private static final String TABLE_NAME = "folioitem";
 
@@ -220,6 +227,7 @@ public class FolioitemManager
         ,"folioitem.adult"
         ,"folioitem.child"
         ,"folioitem.ratetypeid"
+        ,"folioitem.payoutid"
     };
 
     /**
@@ -247,7 +255,8 @@ public class FolioitemManager
                             + ",folioitem.reservationroomid"
                             + ",folioitem.adult"
                             + ",folioitem.child"
-                            + ",folioitem.ratetypeid";
+                            + ",folioitem.ratetypeid"
+                            + ",folioitem.payoutid";
 
     private static FolioitemManager singleton = new FolioitemManager();
 
@@ -538,6 +547,57 @@ public class FolioitemManager
             c = getConnection();
             ps = c.prepareStatement("DELETE FROM folioitem WHERE ordermainid=?");
             Manager.setLong(ps, 1, value);
+            return ps.executeUpdate();
+        }
+        finally
+        {
+            getManager().close(ps);
+            freeConnection(c);
+        }
+    }
+
+
+    /**
+     * Loads FolioitemBean array from the folioitem table using its payoutid field.
+     *
+     * @return an array of FolioitemBean 
+     */
+    // LOAD BY IMPORTED KEY
+    public FolioitemBean[] loadByPayoutid(Integer value) throws SQLException 
+    {
+        Connection c = null;
+        PreparedStatement ps = null;
+        try 
+        {
+            c = getConnection();
+            ps = c.prepareStatement("SELECT " + ALL_FIELDS + " FROM folioitem WHERE payoutid=?",ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            Manager.setInteger(ps, 1, value);
+            return loadByPreparedStatement(ps);
+        }
+        finally
+        {
+            getManager().close(ps);
+            freeConnection(c);
+        }
+    }
+
+
+    /**
+     * Deletes from the folioitem table by payoutid field.
+     *
+     * @param value the key value to seek
+     * @return the number of rows deleted
+     */
+    // DELETE BY IMPORTED KEY
+    public int deleteByPayoutid(Integer value) throws SQLException 
+    {
+        Connection c = null;
+        PreparedStatement ps = null;
+        try 
+        {
+            c = getConnection();
+            ps = c.prepareStatement("DELETE FROM folioitem WHERE payoutid=?");
+            Manager.setInteger(ps, 1, value);
             return ps.executeUpdate();
         }
         finally
@@ -865,6 +925,34 @@ public class FolioitemManager
     public FolioitemBean setOrdermainBean(FolioitemBean pObject,OrdermainBean pObjectToBeSet)
     {
         pObject.setOrdermainid(pObjectToBeSet.getOrdermainid());
+        return pObject;
+    }
+
+    /**
+     * Retrieves the PayoutBean object from the folioitem.payoutid field.
+     *
+     * @param pObject the FolioitemBean 
+     * @return the associated PayoutBean pObject
+     */
+    // GET IMPORTED
+    public PayoutBean getPayoutBean(FolioitemBean pObject) throws SQLException
+    {
+        PayoutBean other = PayoutManager.getInstance().createPayoutBean();
+        other.setPayoutid(pObject.getPayoutid());
+        return PayoutManager.getInstance().loadUniqueUsingTemplate(other);
+    }
+
+    /**
+     * Associates the FolioitemBean object to the PayoutBean object.
+     *
+     * @param pObject the FolioitemBean object to use
+     * @param pObjectToBeSet the PayoutBean object to associate to the FolioitemBean 
+     * @return the associated PayoutBean pObject
+     */
+    // SET IMPORTED
+    public FolioitemBean setPayoutBean(FolioitemBean pObject,PayoutBean pObjectToBeSet)
+    {
+        pObject.setPayoutid(pObjectToBeSet.getPayoutid());
         return pObject;
     }
 
@@ -1347,6 +1435,14 @@ public class FolioitemManager
                     _dirtyCount++;
                 }
 
+                if (pObject.isPayoutidModified()) {
+                    if (_dirtyCount>0) {
+                        _sql.append(",");
+                    }
+                    _sql.append("payoutid");
+                    _dirtyCount++;
+                }
+
                 _sql.append(") values (");
                 if(_dirtyCount > 0) {
                     _sql.append("?");
@@ -1449,6 +1545,10 @@ public class FolioitemManager
     
                 if (pObject.isRatetypeidModified()) {
                     Manager.setInteger(ps, ++_dirtyCount, pObject.getRatetypeid());
+                }
+    
+                if (pObject.isPayoutidModified()) {
+                    Manager.setInteger(ps, ++_dirtyCount, pObject.getPayoutid());
                 }
     
                 ps.executeUpdate();
@@ -1669,6 +1769,15 @@ public class FolioitemManager
                     }
                     _sql.append("ratetypeid").append("=?");
                 }
+
+                if (pObject.isPayoutidModified()) {
+                    if (useComma) {
+                        _sql.append(",");
+                    } else {
+                        useComma=true;
+                    }
+                    _sql.append("payoutid").append("=?");
+                }
                 _sql.append(" WHERE ");
                 _sql.append("folioitem.folioitemid=?");
                 ps = c.prepareStatement(_sql.toString(),ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
@@ -1764,6 +1873,10 @@ public class FolioitemManager
 
                 if (pObject.isRatetypeidModified()) {
                       Manager.setInteger(ps, ++_dirtyCount, pObject.getRatetypeid());
+                }
+
+                if (pObject.isPayoutidModified()) {
+                      Manager.setInteger(ps, ++_dirtyCount, pObject.getPayoutid());
                 }
     
                 if (_dirtyCount == 0) {
@@ -1957,6 +2070,11 @@ public class FolioitemManager
                  _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("ratetypeid= ?");
              }
     
+             if (pObject.isPayoutidModified()) {
+                 _dirtyCount ++; 
+                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("payoutid= ?");
+             }
+    
              if (_dirtyCount == 0) {
                  throw new SQLException ("The pObject to look for is invalid : not initialized !");
              }
@@ -2055,6 +2173,10 @@ public class FolioitemManager
     
              if (pObject.isRatetypeidModified()) {
                  Manager.setInteger(ps, ++_dirtyCount, pObject.getRatetypeid());
+             }
+    
+             if (pObject.isPayoutidModified()) {
+                 Manager.setInteger(ps, ++_dirtyCount, pObject.getPayoutid());
              }
     
              ps.executeQuery();
@@ -2247,6 +2369,13 @@ public class FolioitemManager
                 _dirtyAnd ++;
             }
     
+            if (pObject.isPayoutidInitialized()) {
+                if (_dirtyAnd > 0)
+                    sql.append(" AND ");
+                sql.append("payoutid").append("=?");
+                _dirtyAnd ++;
+            }
+    
             c = getConnection();
             ps = c.prepareStatement(sql.toString(),ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             int _dirtyCount = 0;
@@ -2341,6 +2470,10 @@ public class FolioitemManager
     
             if (pObject.isRatetypeidInitialized()) {
                 Manager.setInteger(ps, ++_dirtyCount, pObject.getRatetypeid());
+            }
+    
+            if (pObject.isPayoutidInitialized()) {
+                Manager.setInteger(ps, ++_dirtyCount, pObject.getPayoutid());
             }
     
             int _rows = ps.executeUpdate();
@@ -2605,6 +2738,11 @@ public class FolioitemManager
                     _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("ratetypeid= ?");
                 }
     
+                if (pObject.isPayoutidModified()) {
+                    _dirtyCount++; 
+                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("payoutid= ?");
+                }
+    
                 if (_dirtyCount == 0)
                    throw new SQLException ("The pObject to look is unvalid : not initialized !");
     
@@ -2706,6 +2844,10 @@ public class FolioitemManager
                     Manager.setInteger(ps, ++_dirtyCount, pObject.getRatetypeid());
                 }
     
+                if (pObject.isPayoutidModified()) {
+                    Manager.setInteger(ps, ++_dirtyCount, pObject.getPayoutid());
+                }
+    
                 return countByPreparedStatement(ps);
         }
         finally
@@ -2753,6 +2895,7 @@ public class FolioitemManager
         pObject.setAdult(Manager.getInteger(rs, 21));
         pObject.setChild(Manager.getInteger(rs, 22));
         pObject.setRatetypeid(Manager.getInteger(rs, 23));
+        pObject.setPayoutid(Manager.getInteger(rs, 24));
 
         pObject.isNew(false);
         pObject.resetIsModified();
@@ -2866,6 +3009,10 @@ public class FolioitemManager
                 case ID_RATETYPEID:
                     ++pos;
                     pObject.setRatetypeid(Manager.getInteger(rs, pos));
+                    break;
+                case ID_PAYOUTID:
+                    ++pos;
+                    pObject.setPayoutid(Manager.getInteger(rs, pos));
                     break;
             }
         }

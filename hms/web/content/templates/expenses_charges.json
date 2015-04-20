@@ -236,7 +236,7 @@
                     }
                 ],
                 "id":"expenseslist1",
-                "url":"content/getexpenseslist.jsp",
+                "url":"content/getchargeslist.jsp",
                 "sortname":"serno",
                 "multiselect":true,
                 "footerrow":true,

@@ -91,6 +91,13 @@ public class FolioManager
     public static final int TYPE_INCIDENTAL = Types.BIT;
     public static final String NAME_INCIDENTAL = "incidental";
 
+    /**
+     * Column expence of type Types.BIT mapped to Boolean.
+     */
+    public static final int ID_EXPENCE = 9;
+    public static final int TYPE_EXPENCE = Types.BIT;
+    public static final String NAME_EXPENCE = "expence";
+
 
     private static final String TABLE_NAME = "folio";
 
@@ -108,6 +115,7 @@ public class FolioManager
         ,"folio.regbyid"
         ,"folio.regdate"
         ,"folio.incidental"
+        ,"folio.expence"
     };
 
     /**
@@ -121,7 +129,8 @@ public class FolioManager
                             + ",folio.status"
                             + ",folio.regbyid"
                             + ",folio.regdate"
-                            + ",folio.incidental";
+                            + ",folio.incidental"
+                            + ",folio.expence";
 
     private static FolioManager singleton = new FolioManager();
 
@@ -793,6 +802,14 @@ public class FolioManager
                     _dirtyCount++;
                 }
 
+                if (pObject.isExpenceModified()) {
+                    if (_dirtyCount>0) {
+                        _sql.append(",");
+                    }
+                    _sql.append("expence");
+                    _dirtyCount++;
+                }
+
                 _sql.append(") values (");
                 if(_dirtyCount > 0) {
                     _sql.append("?");
@@ -839,6 +856,10 @@ public class FolioManager
     
                 if (pObject.isIncidentalModified()) {
                     Manager.setBoolean(ps, ++_dirtyCount, pObject.getIncidental());
+                }
+    
+                if (pObject.isExpenceModified()) {
+                    Manager.setBoolean(ps, ++_dirtyCount, pObject.getExpence());
                 }
     
                 ps.executeUpdate();
@@ -933,6 +954,15 @@ public class FolioManager
                     }
                     _sql.append("incidental").append("=?");
                 }
+
+                if (pObject.isExpenceModified()) {
+                    if (useComma) {
+                        _sql.append(",");
+                    } else {
+                        useComma=true;
+                    }
+                    _sql.append("expence").append("=?");
+                }
                 _sql.append(" WHERE ");
                 _sql.append("folio.folioid=?");
                 ps = c.prepareStatement(_sql.toString(),ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
@@ -972,6 +1002,10 @@ public class FolioManager
 
                 if (pObject.isIncidentalModified()) {
                       Manager.setBoolean(ps, ++_dirtyCount, pObject.getIncidental());
+                }
+
+                if (pObject.isExpenceModified()) {
+                      Manager.setBoolean(ps, ++_dirtyCount, pObject.getExpence());
                 }
     
                 if (_dirtyCount == 0) {
@@ -1095,6 +1129,11 @@ public class FolioManager
                  _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("incidental= ?");
              }
     
+             if (pObject.isExpenceModified()) {
+                 _dirtyCount ++; 
+                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("expence= ?");
+             }
+    
              if (_dirtyCount == 0) {
                  throw new SQLException ("The pObject to look for is invalid : not initialized !");
              }
@@ -1137,6 +1176,10 @@ public class FolioManager
     
              if (pObject.isIncidentalModified()) {
                  Manager.setBoolean(ps, ++_dirtyCount, pObject.getIncidental());
+             }
+    
+             if (pObject.isExpenceModified()) {
+                 Manager.setBoolean(ps, ++_dirtyCount, pObject.getExpence());
              }
     
              ps.executeQuery();
@@ -1231,6 +1274,13 @@ public class FolioManager
                 _dirtyAnd ++;
             }
     
+            if (pObject.isExpenceInitialized()) {
+                if (_dirtyAnd > 0)
+                    sql.append(" AND ");
+                sql.append("expence").append("=?");
+                _dirtyAnd ++;
+            }
+    
             c = getConnection();
             ps = c.prepareStatement(sql.toString(),ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             int _dirtyCount = 0;
@@ -1269,6 +1319,10 @@ public class FolioManager
     
             if (pObject.isIncidentalInitialized()) {
                 Manager.setBoolean(ps, ++_dirtyCount, pObject.getIncidental());
+            }
+    
+            if (pObject.isExpenceInitialized()) {
+                Manager.setBoolean(ps, ++_dirtyCount, pObject.getExpence());
             }
     
             int _rows = ps.executeUpdate();
@@ -1374,6 +1428,38 @@ public class FolioManager
              ps = c.prepareStatement(strSQL,ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
              Manager.setLong(ps, 1, pObject.getFolioid());
              return OrdermainManager.getInstance().loadByPreparedStatement(ps);
+         }
+         finally
+         {
+            getManager().close(ps);
+            freeConnection(c);
+         }
+    }
+
+    /**
+     * Retrieves an array of PayoutBean using the relation table Folioitem given a FolioBean object.
+     *
+     * @param pObject the FolioBean pObject to be used
+     * @return an array of PayoutBean 
+     */
+    // MANY TO MANY
+    public PayoutBean[] loadPayoutViaFolioitem(FolioBean pObject) throws SQLException
+    {
+         Connection c = null;
+         PreparedStatement ps = null;
+         String strSQL =      " SELECT "
+                         + "        *"
+                         + " FROM  "
+                         + "        payout,folioitem"
+                         + " WHERE "    
+                         + "     folioitem.folioid = ?"
+                         + " AND folioitem.payoutid = payout.payoutid";
+         try
+         {
+             c = getConnection();
+             ps = c.prepareStatement(strSQL,ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+             Manager.setLong(ps, 1, pObject.getFolioid());
+             return PayoutManager.getInstance().loadByPreparedStatement(ps);
          }
          finally
          {
@@ -1783,6 +1869,11 @@ public class FolioManager
                     _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("incidental= ?");
                 }
     
+                if (pObject.isExpenceModified()) {
+                    _dirtyCount++; 
+                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("expence= ?");
+                }
+    
                 if (_dirtyCount == 0)
                    throw new SQLException ("The pObject to look is unvalid : not initialized !");
     
@@ -1828,6 +1919,10 @@ public class FolioManager
                     Manager.setBoolean(ps, ++_dirtyCount, pObject.getIncidental());
                 }
     
+                if (pObject.isExpenceModified()) {
+                    Manager.setBoolean(ps, ++_dirtyCount, pObject.getExpence());
+                }
+    
                 return countByPreparedStatement(ps);
         }
         finally
@@ -1861,6 +1956,7 @@ public class FolioManager
         pObject.setRegbyid(Manager.getInteger(rs, 7));
         pObject.setRegdate(rs.getTimestamp(8));
         pObject.setIncidental(Manager.getBoolean(rs, 9));
+        pObject.setExpence(Manager.getBoolean(rs, 10));
 
         pObject.isNew(false);
         pObject.resetIsModified();
@@ -1918,6 +2014,10 @@ public class FolioManager
                 case ID_INCIDENTAL:
                     ++pos;
                     pObject.setIncidental(Manager.getBoolean(rs, pos));
+                    break;
+                case ID_EXPENCE:
+                    ++pos;
+                    pObject.setExpence(Manager.getBoolean(rs, pos));
                     break;
             }
         }

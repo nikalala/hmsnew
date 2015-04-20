@@ -14,6 +14,13 @@
 </style>
 <%
 
+    long folioid = 0;
+    FolioBean folio = null;
+    if(request.getParameter("folioid") != null){
+        folioid = Long.parseLong(request.getParameter("folioid"));
+        folio = FolioManager.getInstance().loadByPrimaryKey(folioid);
+    }
+    
     panel dl0 = new panel();
     dl0.readFromFile(basedir+"/content/templates/expenses_contact.json");
     
@@ -30,6 +37,60 @@
     panel pl3 = new panel();
     pl3.readFromFile(basedir+"/content/templates/expenses_payments.json");
     String panel3 = pl3.drawpanel();
+
+    session.removeAttribute("EXPENCES_LIST_WHERE");
+    session.removeAttribute("CHARGES_LIST_WHERE");
+    
+if(folioid > 0){
+        String addr = "";
+        String mobile = "";
+        String phone = "";
+        String email = "";
+        if(folio.getGuestid() != null)  {
+            addr = getGuestName(folio.getGuestid().longValue());
+            GuestBean guest = GuestManager.getInstance().loadByPrimaryKey(folio.getGuestid());
+            addr += "<br>"+guest.getAddress()+"<br>";
+            if(guest.getCity() != null && guest.getCity().length() > 0) addr += guest.getCity()+", ";
+            if(guest.getZip() != null && guest.getZip().length() > 0) addr += guest.getZip()+"<br>";
+            if(guest.getCountryid() != null){
+                CountryBean country = CountryManager.getInstance().loadByPrimaryKey(guest.getCountryid());
+                addr += country.getName();
+            }
+            mobile = guest.getMobile();
+            phone = guest.getPhone();
+            email = guest.getEmail();
+        }
+        if(folio.getContragentid() != null)     {
+            addr = getContragentName(folio.getContragentid().longValue());
+            ContragentBean contragent = ContragentManager.getInstance().loadByPrimaryKey(folio.getContragentid());
+            addr = "<br>"+contragent.getAddress()+"<br>";
+            if(contragent.getCity() != null && contragent.getCity().length() > 0) addr += contragent.getCity()+", ";
+            if(contragent.getZip() != null && contragent.getZip().length() > 0) addr += contragent.getZip()+"<br>";
+            if(contragent.getCountryid() != null){
+                CountryBean country = CountryManager.getInstance().loadByPrimaryKey(contragent.getCountryid());
+                addr += country.getName();
+            }
+            mobile = contragent.getMobile();
+            phone = contragent.getPhone();
+            email = contragent.getEmail();
+        }
+        Vector v = dl0.getPanelitems();
+        for(int i=0;i<v.size();i++){
+            panelitem pl = (panelitem)v.elementAt(i);
+            if(pl.getId().equalsIgnoreCase("expenses_contact_address")) pl.setLabel(addr);
+            if(pl.getId().equalsIgnoreCase("expenses_contactinfo_moble")) pl.setLabel(mobile);
+            if(pl.getId().equalsIgnoreCase("expenses_contactinfo_phone")) pl.setLabel(phone);
+            if(pl.getId().equalsIgnoreCase("expenses_contactinfo_email")) pl.setLabel(email);
+        }
+        
+        String where = "where folioid = "+folioid+" and paymentid is not null order by itemdate";
+        session.setAttribute("EXPENCES_LIST_WHERE", where);
+        
+        where = "where folioid = "+folioid+" order by itemdate";
+        session.setAttribute("CHARGES_LIST_WHERE", where);
+    }
+
+    
 
     dialog dl1 = new dialog();
     dl1.readFromFile(basedir+"/content/templates/guestprofile_geninfo_guest.json");

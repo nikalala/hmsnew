@@ -167,7 +167,7 @@ public class RoomtypeBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: roomtype.code
-     * <li>comments: ????? ??????????
+     * <li>comments: მოკლე დასახელება
      * <li>column size: 2147483647
      * <li>jdbc type returned by the driver: Types.VARCHAR
      * </ul>
@@ -224,7 +224,7 @@ public class RoomtypeBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: roomtype.name
-     * <li>comments: ??????????
+     * <li>comments: დასახელება
      * <li>column size: 2147483647
      * <li>jdbc type returned by the driver: Types.VARCHAR
      * </ul>
@@ -281,7 +281,7 @@ public class RoomtypeBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: roomtype.badult
-     * <li>comments: ???????? ??????
+     * <li>comments: ძირითადი უფროსი
      * <li>column size: 10
      * <li>jdbc type returned by the driver: Types.INTEGER
      * </ul>
@@ -349,7 +349,7 @@ public class RoomtypeBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: roomtype.bchild
-     * <li>comments: ???????? ??????
+     * <li>comments: ძირითადი ბავშვი
      * <li>column size: 10
      * <li>jdbc type returned by the driver: Types.INTEGER
      * </ul>
@@ -417,7 +417,7 @@ public class RoomtypeBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: roomtype.madult
-     * <li>comments: ???????? ??????
+     * <li>comments: მაქსიმუმ უფროსი
      * <li>column size: 10
      * <li>jdbc type returned by the driver: Types.INTEGER
      * </ul>
@@ -485,7 +485,7 @@ public class RoomtypeBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: roomtype.mchild
-     * <li>comments: ???????? ??????
+     * <li>comments: მაქსიმუმ ბავშვი
      * <li>column size: 10
      * <li>jdbc type returned by the driver: Types.INTEGER
      * </ul>
@@ -553,7 +553,7 @@ public class RoomtypeBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: roomtype.web
-     * <li>comments: ?????????
+     * <li>comments: ინტერნეტი
      * <li>default value: true
      * <li>column size: 1
      * <li>jdbc type returned by the driver: Types.BIT
@@ -621,7 +621,7 @@ public class RoomtypeBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: roomtype.color
-     * <li>comments: ????
+     * <li>comments: ფერი
      * <li>column size: 7
      * <li>jdbc type returned by the driver: Types.VARCHAR
      * </ul>
@@ -748,7 +748,7 @@ public class RoomtypeBean
      * <ul>
      * <li>full name: roomtype.regbyid
      * <li> foreign key: personnel.personnelid
-     * <li>comments: ??????
+     * <li>comments: ავტორი
      * <li>column size: 10
      * <li>jdbc type returned by the driver: Types.INTEGER
      * </ul>
@@ -816,7 +816,7 @@ public class RoomtypeBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: roomtype.regdate
-     * <li>comments: ???????????? ??????
+     * <li>comments: რეგისტრაციის თარიღი
      * <li>default value: now()
      * <li>column size: 29
      * <li>jdbc type returned by the driver: Types.TIMESTAMP
@@ -885,7 +885,7 @@ public class RoomtypeBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: roomtype.active
-     * <li>comments: ???????
+     * <li>comments: აქტიური
      * <li>default value: true
      * <li>column size: 1
      * <li>jdbc type returned by the driver: Types.BIT
@@ -953,7 +953,7 @@ public class RoomtypeBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: roomtype.ord
-     * <li>comments: ?????????
+     * <li>comments: სორტირება
      * <li>default value: 0
      * <li>column size: 10
      * <li>jdbc type returned by the driver: Types.INTEGER
@@ -1022,7 +1022,7 @@ public class RoomtypeBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: roomtype.deleted
-     * <li>comments: ???????
+     * <li>comments: წაშლილი
      * <li>default value: false
      * <li>column size: 1
      * <li>jdbc type returned by the driver: Types.BIT

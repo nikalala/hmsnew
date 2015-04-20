@@ -888,6 +888,262 @@ public class PayoutManager
     // MANY TO MANY: LOAD OTHER BEAN VIA JUNCTION TABLE 
     ///////////////////////////////////////////////////////////////////////
     /**
+     * Retrieves an array of DiscountBean using the relation table Folioitem given a PayoutBean object.
+     *
+     * @param pObject the PayoutBean pObject to be used
+     * @return an array of DiscountBean 
+     */
+    // MANY TO MANY
+    public DiscountBean[] loadDiscountViaFolioitem(PayoutBean pObject) throws SQLException
+    {
+         Connection c = null;
+         PreparedStatement ps = null;
+         String strSQL =      " SELECT "
+                         + "        *"
+                         + " FROM  "
+                         + "        discount,folioitem"
+                         + " WHERE "    
+                         + "     folioitem.payoutid = ?"
+                         + " AND folioitem.discountid = discount.discountid";
+         try
+         {
+             c = getConnection();
+             ps = c.prepareStatement(strSQL,ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+             Manager.setInteger(ps, 1, pObject.getPayoutid());
+             return DiscountManager.getInstance().loadByPreparedStatement(ps);
+         }
+         finally
+         {
+            getManager().close(ps);
+            freeConnection(c);
+         }
+    }
+
+    /**
+     * Retrieves an array of ExtrachargeBean using the relation table Folioitem given a PayoutBean object.
+     *
+     * @param pObject the PayoutBean pObject to be used
+     * @return an array of ExtrachargeBean 
+     */
+    // MANY TO MANY
+    public ExtrachargeBean[] loadExtrachargeViaFolioitem(PayoutBean pObject) throws SQLException
+    {
+         Connection c = null;
+         PreparedStatement ps = null;
+         String strSQL =      " SELECT "
+                         + "        *"
+                         + " FROM  "
+                         + "        extracharge,folioitem"
+                         + " WHERE "    
+                         + "     folioitem.payoutid = ?"
+                         + " AND folioitem.extrachargeid = extracharge.extrachargeid";
+         try
+         {
+             c = getConnection();
+             ps = c.prepareStatement(strSQL,ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+             Manager.setInteger(ps, 1, pObject.getPayoutid());
+             return ExtrachargeManager.getInstance().loadByPreparedStatement(ps);
+         }
+         finally
+         {
+            getManager().close(ps);
+            freeConnection(c);
+         }
+    }
+
+    /**
+     * Retrieves an array of FolioBean using the relation table Folioitem given a PayoutBean object.
+     *
+     * @param pObject the PayoutBean pObject to be used
+     * @return an array of FolioBean 
+     */
+    // MANY TO MANY
+    public FolioBean[] loadFolioViaFolioitem(PayoutBean pObject) throws SQLException
+    {
+         Connection c = null;
+         PreparedStatement ps = null;
+         String strSQL =      " SELECT "
+                         + "        *"
+                         + " FROM  "
+                         + "        folio,folioitem"
+                         + " WHERE "    
+                         + "     folioitem.payoutid = ?"
+                         + " AND folioitem.folioid = folio.folioid";
+         try
+         {
+             c = getConnection();
+             ps = c.prepareStatement(strSQL,ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+             Manager.setInteger(ps, 1, pObject.getPayoutid());
+             return FolioManager.getInstance().loadByPreparedStatement(ps);
+         }
+         finally
+         {
+            getManager().close(ps);
+            freeConnection(c);
+         }
+    }
+
+    /**
+     * Retrieves an array of OrdermainBean using the relation table Folioitem given a PayoutBean object.
+     *
+     * @param pObject the PayoutBean pObject to be used
+     * @return an array of OrdermainBean 
+     */
+    // MANY TO MANY
+    public OrdermainBean[] loadOrdermainViaFolioitem(PayoutBean pObject) throws SQLException
+    {
+         Connection c = null;
+         PreparedStatement ps = null;
+         String strSQL =      " SELECT "
+                         + "        *"
+                         + " FROM  "
+                         + "        ordermain,folioitem"
+                         + " WHERE "    
+                         + "     folioitem.payoutid = ?"
+                         + " AND folioitem.ordermainid = ordermain.ordermainid";
+         try
+         {
+             c = getConnection();
+             ps = c.prepareStatement(strSQL,ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+             Manager.setInteger(ps, 1, pObject.getPayoutid());
+             return OrdermainManager.getInstance().loadByPreparedStatement(ps);
+         }
+         finally
+         {
+            getManager().close(ps);
+            freeConnection(c);
+         }
+    }
+
+    /**
+     * Retrieves an array of PersonnelBean using the relation table Folioitem given a PayoutBean object.
+     *
+     * @param pObject the PayoutBean pObject to be used
+     * @return an array of PersonnelBean 
+     */
+    // MANY TO MANY
+    public PersonnelBean[] loadPersonnelViaFolioitem(PayoutBean pObject) throws SQLException
+    {
+         Connection c = null;
+         PreparedStatement ps = null;
+         String strSQL =      " SELECT "
+                         + "        *"
+                         + " FROM  "
+                         + "        personnel,folioitem"
+                         + " WHERE "    
+                         + "     folioitem.payoutid = ?"
+                         + " AND folioitem.regbyid = personnel.personnelid";
+         try
+         {
+             c = getConnection();
+             ps = c.prepareStatement(strSQL,ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+             Manager.setInteger(ps, 1, pObject.getPayoutid());
+             return PersonnelManager.getInstance().loadByPreparedStatement(ps);
+         }
+         finally
+         {
+            getManager().close(ps);
+            freeConnection(c);
+         }
+    }
+
+    /**
+     * Retrieves an array of ReservationroomBean using the relation table Folioitem given a PayoutBean object.
+     *
+     * @param pObject the PayoutBean pObject to be used
+     * @return an array of ReservationroomBean 
+     */
+    // MANY TO MANY
+    public ReservationroomBean[] loadReservationroomViaFolioitem(PayoutBean pObject) throws SQLException
+    {
+         Connection c = null;
+         PreparedStatement ps = null;
+         String strSQL =      " SELECT "
+                         + "        *"
+                         + " FROM  "
+                         + "        reservationroom,folioitem"
+                         + " WHERE "    
+                         + "     folioitem.payoutid = ?"
+                         + " AND folioitem.reservationroomid = reservationroom.reservationroomid";
+         try
+         {
+             c = getConnection();
+             ps = c.prepareStatement(strSQL,ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+             Manager.setInteger(ps, 1, pObject.getPayoutid());
+             return ReservationroomManager.getInstance().loadByPreparedStatement(ps);
+         }
+         finally
+         {
+            getManager().close(ps);
+            freeConnection(c);
+         }
+    }
+
+    /**
+     * Retrieves an array of RoomBean using the relation table Folioitem given a PayoutBean object.
+     *
+     * @param pObject the PayoutBean pObject to be used
+     * @return an array of RoomBean 
+     */
+    // MANY TO MANY
+    public RoomBean[] loadRoomViaFolioitem(PayoutBean pObject) throws SQLException
+    {
+         Connection c = null;
+         PreparedStatement ps = null;
+         String strSQL =      " SELECT "
+                         + "        *"
+                         + " FROM  "
+                         + "        room,folioitem"
+                         + " WHERE "    
+                         + "     folioitem.payoutid = ?"
+                         + " AND folioitem.roomid = room.roomid";
+         try
+         {
+             c = getConnection();
+             ps = c.prepareStatement(strSQL,ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+             Manager.setInteger(ps, 1, pObject.getPayoutid());
+             return RoomManager.getInstance().loadByPreparedStatement(ps);
+         }
+         finally
+         {
+            getManager().close(ps);
+            freeConnection(c);
+         }
+    }
+
+    /**
+     * Retrieves an array of TaxBean using the relation table Folioitem given a PayoutBean object.
+     *
+     * @param pObject the PayoutBean pObject to be used
+     * @return an array of TaxBean 
+     */
+    // MANY TO MANY
+    public TaxBean[] loadTaxViaFolioitem(PayoutBean pObject) throws SQLException
+    {
+         Connection c = null;
+         PreparedStatement ps = null;
+         String strSQL =      " SELECT "
+                         + "        *"
+                         + " FROM  "
+                         + "        tax,folioitem"
+                         + " WHERE "    
+                         + "     folioitem.payoutid = ?"
+                         + " AND folioitem.taxid = tax.taxid";
+         try
+         {
+             c = getConnection();
+             ps = c.prepareStatement(strSQL,ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+             Manager.setInteger(ps, 1, pObject.getPayoutid());
+             return TaxManager.getInstance().loadByPreparedStatement(ps);
+         }
+         finally
+         {
+            getManager().close(ps);
+            freeConnection(c);
+         }
+    }
+
+    /**
      * Retrieves an array of TaxBean using the relation table Taxaccount given a PayoutBean object.
      *
      * @param pObject the PayoutBean pObject to be used

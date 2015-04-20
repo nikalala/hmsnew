@@ -24,9 +24,9 @@
 SimpleDateFormat sdt = new SimpleDateFormat("dd/MM/yyyy");
 SimpleDateFormat sdt0 = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 
-String where = (String)session.getAttribute("EXPENCES_LIST_WHERE");
+String where = (String)session.getAttribute("CHARGES_LIST_WHERE");
 if(where == null)   where = "";
-String ord = (String)session.getAttribute("EXPENCES_LIST_ORDER");
+String ord = (String)session.getAttribute("CHARGES_LIST_ORDER");
 if(ord == null)   ord = "";
 
 
@@ -78,8 +78,7 @@ String order = "order by "+sidx+" "+sord+", currencyid";
                 <cell><![CDATA[<%=folios[i].getFolioitemid()%>]]></cell>
                 <cell><![CDATA[<%=description%>]]></cell>
                 <cell><![CDATA[<%=note%>]]></cell>
-                <cell><![CDATA[<%=dc.format(amount)%>]]></cell>
-                <cell><![CDATA[]]></cell>
+                <cell><![CDATA[<%=dc.format(amount)+"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"%>]]></cell>
             </row>
             <%
             }

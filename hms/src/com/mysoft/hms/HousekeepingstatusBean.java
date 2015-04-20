@@ -135,7 +135,7 @@ public class HousekeepingstatusBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: housekeepingstatus.name
-     * <li>comments: ??????????
+     * <li>comments: დასახელება
      * <li>column size: 2147483647
      * <li>jdbc type returned by the driver: Types.VARCHAR
      * </ul>
@@ -192,7 +192,7 @@ public class HousekeepingstatusBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: housekeepingstatus.color
-     * <li>comments: ????
+     * <li>comments: ფერი
      * <li>default value: '#ffffff'::character varying
      * <li>column size: 100
      * <li>jdbc type returned by the driver: Types.VARCHAR
@@ -250,7 +250,7 @@ public class HousekeepingstatusBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: housekeepingstatus.regbyid
-     * <li>comments: ??????
+     * <li>comments: ავტორი
      * <li>column size: 10
      * <li>jdbc type returned by the driver: Types.INTEGER
      * </ul>
@@ -318,7 +318,7 @@ public class HousekeepingstatusBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: housekeepingstatus.regdate
-     * <li>comments: ???????????? ??????
+     * <li>comments: რეგისტრაციის თარიღი
      * <li>default value: now()
      * <li>column size: 29
      * <li>jdbc type returned by the driver: Types.TIMESTAMP
@@ -387,7 +387,7 @@ public class HousekeepingstatusBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: housekeepingstatus.active
-     * <li>comments: ???????
+     * <li>comments: აქტიური
      * <li>default value: true
      * <li>column size: 1
      * <li>jdbc type returned by the driver: Types.BIT
@@ -455,7 +455,7 @@ public class HousekeepingstatusBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: housekeepingstatus.deleted
-     * <li>comments: ???????
+     * <li>comments: წაშლილი
      * <li>default value: false
      * <li>column size: 1
      * <li>jdbc type returned by the driver: Types.BIT

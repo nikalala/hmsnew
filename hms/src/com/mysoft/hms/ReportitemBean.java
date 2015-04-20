@@ -164,7 +164,7 @@ public class ReportitemBean
      * <ul>
      * <li>full name: reportitem.reportid
      * <li> foreign key: report.reportid
-     * <li>comments: ???????
+     * <li>comments: რეპორტი
      * <li>column size: 10
      * <li>jdbc type returned by the driver: Types.INTEGER
      * </ul>
@@ -232,7 +232,7 @@ public class ReportitemBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: reportitem.name
-     * <li>comments: ??????????
+     * <li>comments: დასახელება
      * <li>column size: 2147483647
      * <li>jdbc type returned by the driver: Types.VARCHAR
      * </ul>
@@ -289,7 +289,7 @@ public class ReportitemBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: reportitem.idx
-     * <li>comments: ???????
+     * <li>comments: ინდექსი
      * <li>column size: 10
      * <li>jdbc type returned by the driver: Types.INTEGER
      * </ul>
@@ -357,7 +357,7 @@ public class ReportitemBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: reportitem.fieldtype
-     * <li>comments: ????
+     * <li>comments: ტიპი
      * <li>column size: 10
      * <li>jdbc type returned by the driver: Types.INTEGER
      * </ul>
@@ -425,7 +425,7 @@ public class ReportitemBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: reportitem.align
-     * <li>comments: ???????
+     * <li>comments: პოზიცია
      * <li>column size: 2147483647
      * <li>jdbc type returned by the driver: Types.VARCHAR
      * </ul>
@@ -482,7 +482,7 @@ public class ReportitemBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: reportitem.wd
-     * <li>comments: ??????
+     * <li>comments: სიგანე
      * <li>column size: 10
      * <li>jdbc type returned by the driver: Types.INTEGER
      * </ul>
@@ -550,7 +550,7 @@ public class ReportitemBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: reportitem.hassum
-     * <li>comments: ???? ????
+     * <li>comments: აქვს ჯამი
      * <li>default value: false
      * <li>column size: 1
      * <li>jdbc type returned by the driver: Types.BIT

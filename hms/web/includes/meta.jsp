@@ -883,6 +883,28 @@ System.out.println(rid+" = "+statusid);
 
         return bret;
     }
+
+    public String getGuestName(long guestid) throws Exception {
+        String gname = "";
+        
+        GuestBean guest = GuestManager.getInstance().loadByPrimaryKey(guestid);
+        SalutationBean slt = SalutationManager.getInstance().loadByPrimaryKey(guest.getSalutationid());
+        gname = slt.getName()+" "+guest.getFname()+" "+guest.getLname();
+        
+        return gname;
+    }
+    
+    public String getContragentName(long contragentid) throws Exception {
+        String gname = "";
+        
+        ContragentBean contragent = ContragentManager.getInstance().loadByPrimaryKey(contragentid);
+        if(contragent.getType().intValue() == 0 || contragent.getType().intValue() == 4 || contragent.getType().intValue() == 5){
+            SalutationBean slt = SalutationManager.getInstance().loadByPrimaryKey(contragent.getSalutationid());
+            gname = slt.getName()+" "+contragent.getFname()+" "+contragent.getLname();
+        } else gname = contragent.getName();
+        
+        return gname;
+    }
     
     public RoomBean[] getAvailableRooms(Date dt1, Date dt2, int rtp) throws Exception {
         SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
@@ -1234,7 +1256,7 @@ System.out.println(rid+" = "+statusid);
             "შავი სიის მიზეზი"
     };
     String[] folioactiontype = {
-            "შესწორება", "ბანკი", "ნაღდი", "კონტრაქტორი", "ფასდაკლება", "მომსახურება", "ოთახის გადასახადი", "გადატანა"
+            "შესწორება", "ბანკი", "ნაღდი", "კონტრაქტორი", "ფასდაკლება", "მომსახურება", "ოთახის გადასახადი", "გადატანა", "გასავალი"
     };
 
     int[] reasoncategory_walkin = {2, 3, 5, 6, 8, 9, 10, 12};

@@ -131,6 +131,14 @@ public class GuestBean
     private boolean deleted_is_modified = false;
     private boolean deleted_is_initialized = false;
     
+    private String company;
+    private boolean company_is_modified = false;
+    private boolean company_is_initialized = false;
+    
+    private String docnum;
+    private boolean docnum_is_modified = false;
+    private boolean docnum_is_initialized = false;
+    
     private boolean _isNew = true;
     
     /**
@@ -1780,7 +1788,7 @@ public class GuestBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: guest.deleted
-     * <li>comments: ???????
+     * <li>comments: წაშლილი
      * <li>default value: false
      * <li>column size: 1
      * <li>jdbc type returned by the driver: Types.BIT
@@ -1843,6 +1851,118 @@ public class GuestBean
     }
 
     /**
+     * Getter method for company.
+     * <br>
+     * Meta Data Information (in progress):
+     * <ul>
+     * <li>full name: guest.company
+     * <li>column size: 2147483647
+     * <li>jdbc type returned by the driver: Types.VARCHAR
+     * </ul>
+     *
+     * @return the value of company
+     */
+    public String getCompany()
+    {
+        return company; 
+    }
+
+    /**
+     * Setter method for company.
+     * <br>
+     * The new value is set only if compareTo() says it is different,
+     * or if one of either the new value or the current value is null.
+     * In case the new value is different, it is set and the field is marked as 'modified'.
+     *
+     * @param newVal the new value to be assigned to company
+     */
+    public void setCompany(String newVal) {
+        if ((newVal != null && this.company != null && (newVal.compareTo(this.company) == 0)) || 
+            (newVal == null && this.company == null && company_is_initialized)) {
+            return; 
+        } 
+        this.company = newVal; 
+        company_is_modified = true; 
+        company_is_initialized = true; 
+    }
+
+    /**
+     * Determines if the company has been modified.
+     *
+     * @return true if the field has been modified, false if the field has not been modified
+     */
+    public boolean isCompanyModified() {
+        return company_is_modified; 
+    }
+
+    /**
+     * Determines if the company has been initialized.
+     * <br>
+     * It is useful to determine if a field is null on purpose or just because it has not been initialized.
+     *
+     * @return true if the field has been initialized, false otherwise
+     */
+    public boolean isCompanyInitialized() {
+        return company_is_initialized; 
+    }
+
+    /**
+     * Getter method for docnum.
+     * <br>
+     * Meta Data Information (in progress):
+     * <ul>
+     * <li>full name: guest.docnum
+     * <li>column size: 2147483647
+     * <li>jdbc type returned by the driver: Types.VARCHAR
+     * </ul>
+     *
+     * @return the value of docnum
+     */
+    public String getDocnum()
+    {
+        return docnum; 
+    }
+
+    /**
+     * Setter method for docnum.
+     * <br>
+     * The new value is set only if compareTo() says it is different,
+     * or if one of either the new value or the current value is null.
+     * In case the new value is different, it is set and the field is marked as 'modified'.
+     *
+     * @param newVal the new value to be assigned to docnum
+     */
+    public void setDocnum(String newVal) {
+        if ((newVal != null && this.docnum != null && (newVal.compareTo(this.docnum) == 0)) || 
+            (newVal == null && this.docnum == null && docnum_is_initialized)) {
+            return; 
+        } 
+        this.docnum = newVal; 
+        docnum_is_modified = true; 
+        docnum_is_initialized = true; 
+    }
+
+    /**
+     * Determines if the docnum has been modified.
+     *
+     * @return true if the field has been modified, false if the field has not been modified
+     */
+    public boolean isDocnumModified() {
+        return docnum_is_modified; 
+    }
+
+    /**
+     * Determines if the docnum has been initialized.
+     * <br>
+     * It is useful to determine if a field is null on purpose or just because it has not been initialized.
+     *
+     * @return true if the field has been initialized, false otherwise
+     */
+    public boolean isDocnumInitialized() {
+        return docnum_is_initialized; 
+    }
+
+    /**
      * Determines if the current object is new.
      *
      * @return true if the current object is new, false if the object is not new
@@ -1894,7 +2014,9 @@ public class GuestBean
 		cardnum_is_modified || 
 		regbyid_is_modified || 
 		regdate_is_modified || 
-		deleted_is_modified;
+		deleted_is_modified || 
+		company_is_modified || 
+		docnum_is_modified;
     }
 
     /**
@@ -1928,6 +2050,8 @@ public class GuestBean
         regbyid_is_modified = false;
         regdate_is_modified = false;
         deleted_is_modified = false;
+        company_is_modified = false;
+        docnum_is_modified = false;
     }
 
     /**
@@ -1963,6 +2087,8 @@ public class GuestBean
         setRegbyid(bean.getRegbyid());
         setRegdate(bean.getRegdate());
         setDeleted(bean.getDeleted());
+        setCompany(bean.getCompany());
+        setDocnum(bean.getDocnum());
     }
 
     /**
@@ -1999,6 +2125,8 @@ public class GuestBean
                  + "\n - guest.regbyid = " + (regbyid_is_initialized ? ("[" + (regbyid == null ? null : regbyid.toString()) + "]") : "not initialized") + ""
                  + "\n - guest.regdate = " + (regdate_is_initialized ? ("[" + (regdate == null ? null : regdate.toString()) + "]") : "not initialized") + ""
                  + "\n - guest.deleted = " + (deleted_is_initialized ? ("[" + (deleted == null ? null : deleted.toString()) + "]") : "not initialized") + ""
+                 + "\n - guest.company = " + (company_is_initialized ? ("[" + (company == null ? null : company.toString()) + "]") : "not initialized") + ""
+                 + "\n - guest.docnum = " + (docnum_is_initialized ? ("[" + (docnum == null ? null : docnum.toString()) + "]") : "not initialized") + ""
             ;
     }
 

@@ -123,7 +123,7 @@ public class IdtypeBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: idtype.name
-     * <li>comments: ??????????
+     * <li>comments: დასახელება
      * <li>column size: 2147483647
      * <li>jdbc type returned by the driver: Types.VARCHAR
      * </ul>
@@ -180,7 +180,7 @@ public class IdtypeBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: idtype.active
-     * <li>comments: ???????
+     * <li>comments: აქტიური
      * <li>default value: true
      * <li>column size: 1
      * <li>jdbc type returned by the driver: Types.BIT
@@ -248,7 +248,7 @@ public class IdtypeBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: idtype.deleted
-     * <li>comments: ???????
+     * <li>comments: წაშლილი
      * <li>default value: false
      * <li>column size: 1
      * <li>jdbc type returned by the driver: Types.BIT

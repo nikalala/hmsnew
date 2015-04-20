@@ -67,6 +67,7 @@ public class FolioitemComparator implements Comparator
      *   <li>FolioitemManager.ID_ADULT
      *   <li>FolioitemManager.ID_CHILD
      *   <li>FolioitemManager.ID_RATETYPEID
+     *   <li>FolioitemManager.ID_PAYOUTID
      * </ul>
      */
     public FolioitemComparator(int iType)
@@ -108,6 +109,7 @@ public class FolioitemComparator implements Comparator
      *   <li>FolioitemManager.ID_ADULT
      *   <li>FolioitemManager.ID_CHILD
      *   <li>FolioitemManager.ID_RATETYPEID
+     *   <li>FolioitemManager.ID_PAYOUTID
      * </ul>
      *
      * @param bReverse set this value to true, if you want to reverse the sorting results
@@ -346,6 +348,17 @@ public class FolioitemComparator implements Comparator
                     iReturn = 1;
                 } else { 
                     iReturn = b1.getRatetypeid().compareTo(b2.getRatetypeid());
+                }
+                break;
+            case FolioitemManager.ID_PAYOUTID:
+                if (b1.getPayoutid() == null && b2.getPayoutid() != null) {
+                    iReturn = -1;
+                } else if (b1.getPayoutid() == null && b2.getPayoutid() == null) {
+                    iReturn = 0;
+                } else if (b1.getPayoutid() != null && b2.getPayoutid() == null) {
+                    iReturn = 1;
+                } else { 
+                    iReturn = b1.getPayoutid().compareTo(b2.getPayoutid());
                 }
                 break;
             default: 

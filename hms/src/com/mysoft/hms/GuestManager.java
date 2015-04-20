@@ -217,6 +217,20 @@ public class GuestManager
     public static final int TYPE_DELETED = Types.BIT;
     public static final String NAME_DELETED = "deleted";
 
+    /**
+     * Column company of type Types.VARCHAR mapped to String.
+     */
+    public static final int ID_COMPANY = 27;
+    public static final int TYPE_COMPANY = Types.VARCHAR;
+    public static final String NAME_COMPANY = "company";
+
+    /**
+     * Column docnum of type Types.VARCHAR mapped to String.
+     */
+    public static final int ID_DOCNUM = 28;
+    public static final int TYPE_DOCNUM = Types.VARCHAR;
+    public static final String NAME_DOCNUM = "docnum";
+
 
     private static final String TABLE_NAME = "guest";
 
@@ -252,6 +266,8 @@ public class GuestManager
         ,"guest.regbyid"
         ,"guest.regdate"
         ,"guest.deleted"
+        ,"guest.company"
+        ,"guest.docnum"
     };
 
     /**
@@ -283,7 +299,9 @@ public class GuestManager
                             + ",guest.cardnum"
                             + ",guest.regbyid"
                             + ",guest.regdate"
-                            + ",guest.deleted";
+                            + ",guest.deleted"
+                            + ",guest.company"
+                            + ",guest.docnum";
 
     private static GuestManager singleton = new GuestManager();
 
@@ -1336,6 +1354,22 @@ public class GuestManager
                     _dirtyCount++;
                 }
 
+                if (pObject.isCompanyModified()) {
+                    if (_dirtyCount>0) {
+                        _sql.append(",");
+                    }
+                    _sql.append("company");
+                    _dirtyCount++;
+                }
+
+                if (pObject.isDocnumModified()) {
+                    if (_dirtyCount>0) {
+                        _sql.append(",");
+                    }
+                    _sql.append("docnum");
+                    _dirtyCount++;
+                }
+
                 _sql.append(") values (");
                 if(_dirtyCount > 0) {
                     _sql.append("?");
@@ -1454,6 +1488,14 @@ public class GuestManager
     
                 if (pObject.isDeletedModified()) {
                     Manager.setBoolean(ps, ++_dirtyCount, pObject.getDeleted());
+                }
+    
+                if (pObject.isCompanyModified()) {
+                    ps.setString(++_dirtyCount, pObject.getCompany());
+                }
+    
+                if (pObject.isDocnumModified()) {
+                    ps.setString(++_dirtyCount, pObject.getDocnum());
                 }
     
                 ps.executeUpdate();
@@ -1710,6 +1752,24 @@ public class GuestManager
                     }
                     _sql.append("deleted").append("=?");
                 }
+
+                if (pObject.isCompanyModified()) {
+                    if (useComma) {
+                        _sql.append(",");
+                    } else {
+                        useComma=true;
+                    }
+                    _sql.append("company").append("=?");
+                }
+
+                if (pObject.isDocnumModified()) {
+                    if (useComma) {
+                        _sql.append(",");
+                    } else {
+                        useComma=true;
+                    }
+                    _sql.append("docnum").append("=?");
+                }
                 _sql.append(" WHERE ");
                 _sql.append("guest.guestid=?");
                 ps = c.prepareStatement(_sql.toString(),ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
@@ -1821,6 +1881,14 @@ public class GuestManager
 
                 if (pObject.isDeletedModified()) {
                       Manager.setBoolean(ps, ++_dirtyCount, pObject.getDeleted());
+                }
+
+                if (pObject.isCompanyModified()) {
+                      ps.setString(++_dirtyCount, pObject.getCompany());
+                }
+
+                if (pObject.isDocnumModified()) {
+                      ps.setString(++_dirtyCount, pObject.getDocnum());
                 }
     
                 if (_dirtyCount == 0) {
@@ -2034,6 +2102,16 @@ public class GuestManager
                  _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("deleted= ?");
              }
     
+             if (pObject.isCompanyModified()) {
+                 _dirtyCount ++; 
+                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("company= ?");
+             }
+    
+             if (pObject.isDocnumModified()) {
+                 _dirtyCount ++; 
+                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("docnum= ?");
+             }
+    
              if (_dirtyCount == 0) {
                  throw new SQLException ("The pObject to look for is invalid : not initialized !");
              }
@@ -2148,6 +2226,14 @@ public class GuestManager
     
              if (pObject.isDeletedModified()) {
                  Manager.setBoolean(ps, ++_dirtyCount, pObject.getDeleted());
+             }
+    
+             if (pObject.isCompanyModified()) {
+                 ps.setString(++_dirtyCount, pObject.getCompany());
+             }
+    
+             if (pObject.isDocnumModified()) {
+                 ps.setString(++_dirtyCount, pObject.getDocnum());
              }
     
              ps.executeQuery();
@@ -2368,6 +2454,20 @@ public class GuestManager
                 _dirtyAnd ++;
             }
     
+            if (pObject.isCompanyInitialized()) {
+                if (_dirtyAnd > 0)
+                    sql.append(" AND ");
+                sql.append("company").append("=?");
+                _dirtyAnd ++;
+            }
+    
+            if (pObject.isDocnumInitialized()) {
+                if (_dirtyAnd > 0)
+                    sql.append(" AND ");
+                sql.append("docnum").append("=?");
+                _dirtyAnd ++;
+            }
+    
             c = getConnection();
             ps = c.prepareStatement(sql.toString(),ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             int _dirtyCount = 0;
@@ -2478,6 +2578,14 @@ public class GuestManager
     
             if (pObject.isDeletedInitialized()) {
                 Manager.setBoolean(ps, ++_dirtyCount, pObject.getDeleted());
+            }
+    
+            if (pObject.isCompanyInitialized()) {
+                ps.setString(++_dirtyCount, pObject.getCompany());
+            }
+    
+            if (pObject.isDocnumInitialized()) {
+                ps.setString(++_dirtyCount, pObject.getDocnum());
             }
     
             int _rows = ps.executeUpdate();
@@ -3082,6 +3190,16 @@ public class GuestManager
                     _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("deleted= ?");
                 }
     
+                if (pObject.isCompanyModified()) {
+                    _dirtyCount++; 
+                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("company= ?");
+                }
+    
+                if (pObject.isDocnumModified()) {
+                    _dirtyCount++; 
+                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("docnum= ?");
+                }
+    
                 if (_dirtyCount == 0)
                    throw new SQLException ("The pObject to look is unvalid : not initialized !");
     
@@ -3199,6 +3317,14 @@ public class GuestManager
                     Manager.setBoolean(ps, ++_dirtyCount, pObject.getDeleted());
                 }
     
+                if (pObject.isCompanyModified()) {
+                    ps.setString(++_dirtyCount, pObject.getCompany());
+                }
+    
+                if (pObject.isDocnumModified()) {
+                    ps.setString(++_dirtyCount, pObject.getDocnum());
+                }
+    
                 return countByPreparedStatement(ps);
         }
         finally
@@ -3250,6 +3376,8 @@ public class GuestManager
         pObject.setRegbyid(Manager.getInteger(rs, 25));
         pObject.setRegdate(rs.getTimestamp(26));
         pObject.setDeleted(Manager.getBoolean(rs, 27));
+        pObject.setCompany(rs.getString(28));
+        pObject.setDocnum(rs.getString(29));
 
         pObject.isNew(false);
         pObject.resetIsModified();
@@ -3379,6 +3507,14 @@ public class GuestManager
                 case ID_DELETED:
                     ++pos;
                     pObject.setDeleted(Manager.getBoolean(rs, pos));
+                    break;
+                case ID_COMPANY:
+                    ++pos;
+                    pObject.setCompany(rs.getString(pos));
+                    break;
+                case ID_DOCNUM:
+                    ++pos;
+                    pObject.setDocnum(rs.getString(pos));
                     break;
             }
         }

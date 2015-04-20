@@ -115,6 +115,10 @@ public class FolioitemBean
     private boolean ratetypeid_is_modified = false;
     private boolean ratetypeid_is_initialized = false;
     
+    private Integer payoutid;
+    private boolean payoutid_is_modified = false;
+    private boolean payoutid_is_initialized = false;
+    
     private boolean _isNew = true;
     
     /**
@@ -1658,6 +1662,74 @@ public class FolioitemBean
     }
 
     /**
+     * Getter method for payoutid.
+     * <br>
+     * Meta Data Information (in progress):
+     * <ul>
+     * <li>full name: folioitem.payoutid
+     * <li> foreign key: payout.payoutid
+     * <li>column size: 10
+     * <li>jdbc type returned by the driver: Types.INTEGER
+     * </ul>
+     *
+     * @return the value of payoutid
+     */
+    public Integer getPayoutid()
+    {
+        return payoutid; 
+    }
+
+    /**
+     * Setter method for payoutid.
+     * <br>
+     * The new value is set only if compareTo() says it is different,
+     * or if one of either the new value or the current value is null.
+     * In case the new value is different, it is set and the field is marked as 'modified'.
+     *
+     * @param newVal the new value to be assigned to payoutid
+     */
+    public void setPayoutid(Integer newVal) {
+        if ((newVal != null && this.payoutid != null && (newVal.compareTo(this.payoutid) == 0)) || 
+            (newVal == null && this.payoutid == null && payoutid_is_initialized)) {
+            return; 
+        } 
+        this.payoutid = newVal; 
+        payoutid_is_modified = true; 
+        payoutid_is_initialized = true; 
+    }
+
+    /**
+     * Setter method for payoutid.
+     * <br>
+     * Convenient for those who do not want to deal with Objects for primary types.
+     *
+     * @param newVal the new value to be assigned to payoutid
+     */
+    public void setPayoutid(int newVal) {
+        setPayoutid(new Integer(newVal));
+    }
+
+    /**
+     * Determines if the payoutid has been modified.
+     *
+     * @return true if the field has been modified, false if the field has not been modified
+     */
+    public boolean isPayoutidModified() {
+        return payoutid_is_modified; 
+    }
+
+    /**
+     * Determines if the payoutid has been initialized.
+     * <br>
+     * It is useful to determine if a field is null on purpose or just because it has not been initialized.
+     *
+     * @return true if the field has been initialized, false otherwise
+     */
+    public boolean isPayoutidInitialized() {
+        return payoutid_is_initialized; 
+    }
+
+    /**
      * Determines if the current object is new.
      *
      * @return true if the current object is new, false if the object is not new
@@ -1705,7 +1777,8 @@ public class FolioitemBean
 		reservationroomid_is_modified || 
 		adult_is_modified || 
 		child_is_modified || 
-		ratetypeid_is_modified;
+		ratetypeid_is_modified || 
+		payoutid_is_modified;
     }
 
     /**
@@ -1735,6 +1808,7 @@ public class FolioitemBean
         adult_is_modified = false;
         child_is_modified = false;
         ratetypeid_is_modified = false;
+        payoutid_is_modified = false;
     }
 
     /**
@@ -1766,6 +1840,7 @@ public class FolioitemBean
         setAdult(bean.getAdult());
         setChild(bean.getChild());
         setRatetypeid(bean.getRatetypeid());
+        setPayoutid(bean.getPayoutid());
     }
 
     /**
@@ -1798,6 +1873,7 @@ public class FolioitemBean
                  + "\n - folioitem.adult = " + (adult_is_initialized ? ("[" + (adult == null ? null : adult.toString()) + "]") : "not initialized") + ""
                  + "\n - folioitem.child = " + (child_is_initialized ? ("[" + (child == null ? null : child.toString()) + "]") : "not initialized") + ""
                  + "\n - folioitem.ratetypeid = " + (ratetypeid_is_initialized ? ("[" + (ratetypeid == null ? null : ratetypeid.toString()) + "]") : "not initialized") + ""
+                 + "\n - folioitem.payoutid = " + (payoutid_is_initialized ? ("[" + (payoutid == null ? null : payoutid.toString()) + "]") : "not initialized") + ""
             ;
     }
 
