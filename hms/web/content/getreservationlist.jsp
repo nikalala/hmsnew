@@ -36,7 +36,7 @@
 
 %>
 
-<rows ttt='11111'>
+<rows>
 <%--    <page><%=ipg%></page>
     <total><%=total_pages%></total>
     <records><%=count%></records>--%>
