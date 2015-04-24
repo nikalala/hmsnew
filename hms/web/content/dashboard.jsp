@@ -7,6 +7,10 @@
     String roomid = "";
     String resId = "";
     String folionum = "";
+    String quickOps = "";
+    String status = request.getParameter("status");
+    String hasroom = request.getParameter("hasroom");
+    String samedate = request.getParameter("samedate");
 
     if (!CodeHelpers.isNullOrEmpty(rromid)) {
         ReservationroomBean rr = ReservationroomManager.getInstance().loadByPrimaryKey(new Long(rromid));
@@ -21,6 +25,8 @@
                 roomid = rb.getName() + " - " + rb.getCode();
             }
         }
+        quickOps = "<ul id='quick_ops_menu' style='margin-left: -35px;'>  </ul>";
+
     }
 
 %>
@@ -72,7 +78,63 @@
 
         $("#optype").next().width(145);
         initializeGrid(folioGrid);
+        $(".gridfooter").remove();
     }
+
+    function newWalkin(){
+        newWindow('walkin','მოსული სტუმარი');
+    }
+
+    function newFolio(){
+        alert("Not Implemented Yet. Here we should pass reservation room id and display modal and on this modal we should display folios for this reservation roomid")
+    }
+
+    function launchHKModal(){
+        newsWindow('hkspopup','დალაგების სტატუსი');
+    }
+
+    function loadQuickOperations(){
+
+        var quickOpsUL = $("#quick_ops_menu");
+        var newMenu = [];
+        if($("#quick_ops_menu").length > 0){
+            var $contextMenu = $("#contextMenu");
+            changeContextMenu(<%=status%>, <%=hasroom%>, <%=samedate%>, $contextMenu);
+            $("#contextMenu .dropdown-menu li").each(function () {
+                if($(this).css('display') != 'none'){
+                    newMenu.push($(this).clone());
+                }
+            });
+            var billTo = '<li class="roomlistitm" num="18"><a icon="გადამხდელი" href="#" onclick="newFolio();">გადამხდელი</a></li>';
+            newMenu.push(billTo);
+        }
+        for(var i = 0; i < newMenu.length; i++){
+            quickOpsUL.append(newMenu[i]);
+        }
+
+        var status = '<%=status%>';
+        var statusArray = [0,1,2,3,6,9];
+        var roomId = '<%=roomid%>';
+        if(!isNaN(parseInt(status)) && $.inArray(status, statusArray) && !isNullOrEmpty(roomId)){
+            var hkmodal = '<li class="roomlistitm" num="19"><a icon="დალაგების სტატუსი" href="#" onclick="launchHKModal()">დალაგების სტატუსი</a></li>';
+            quickOpsUL.append(hkmodal);
+        }
+        var splitF = '<li class="roomlistitm" num="16"><a icon="ფოლიოს გაყოფა" href="#" onclick="return false;">ფოლიოს გაყოფა</a></li>';
+        var newWalk = '<li class="roomlistitm" num="17"><a icon="სტუმრის მიღება / რეზერვაცია" href="#" onclick="newWalkin()">სტუმრის მიღება / რეზერვაცია</a></li>';
+        quickOpsUL.append(splitF);
+        quickOpsUL.append(newWalk);
+
+        $("#quick_ops_menu").on("click", "a", function () {
+            var id = $(this).attr("id");
+            if(isNullOrEmpty(id))return;
+            doContextMenuAction($(this), <%=rromid%>);
+        });
+        if($("#quick_ops_menu").length == 0){
+            $("#quickops").append("<ul id='quick_ops_menu' style='margin-left: -35px;'>"+splitF+newWalk+"</ul>");
+        }
+
+    }
+
     $("#discount").on('change', function () {
         var element = $("option:selected", this);
         var openbal = element.attr("openbal");
@@ -103,13 +165,17 @@
     });
     $(document).ready(function () {
         loadDefaults();
+        loadQuickOperations();
     });
 
     $("#roomlistitems tr").click(function (e) {
         loader.show();
         e.preventDefault();
         var id = $(this).prop('id');
-        getBody('stayviewleft', 'dashboard', 'სამუშაო მაგიდა', 'res1', '?rroomid=' + id, true);
+        var status = $(this).attr('status');
+        var hasroom = $(this).attr('hasroom');
+        var samedate = $(this).attr('samedate');
+        getBody('stayviewleft', 'dashboard', 'სამუშაო მაგიდა', 'res1', '?rroomid=' + id + "&status=" + status + "&hasroom=" + hasroom + "&samedate=" + samedate, true);
         return;
     })
 </script>
@@ -231,6 +297,20 @@
     .pull-right {
         width: auto !important;
     }
+
+   #quick_ops_menu li {
+
+       border: 1px solid #bebebe;
+       color: #000;
+       font-size: 13px;
+       font-weight: bold;
+       float: left;
+       padding: 6px 10px;
+       text-decoration: none;
+       margin: 1px;
+
+    }
+
 </style>
 
 <div class="q-main-div">
@@ -465,8 +545,8 @@
                 <span class="q-statusbar-span">სწრაფი ოპერაციები</span>
             </div>
         </div>
-        <div class="q-table-div" style="height: 164px;">
-
+        <div class="q-table-div" id="quickops" style="height: 164px;">
+            <%=quickOps%>
         </div>
     </div>
 </div>
