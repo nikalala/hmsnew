@@ -4,7 +4,7 @@
     "panels": [{
             "colmd": 10,
             "title": "ზოგადი ინფორმაცია",
-            "height": "172px",
+            "height": "180px",
             "id": "geninfo",
             "classnames": "",
             "panelitems": [{
@@ -101,7 +101,7 @@
         }, {
             "colmd": 6,
             "title": "საკონტაქტო ინფორმაცია",
-            "height": "172px",
+            "height": "180px",
             "id": "contactinfo",
             "classnames": "",
             "panelitems": [{
@@ -228,7 +228,7 @@
         }, {
             "colmd": 16,
             "title": "მისამართი",
-            "height": "106px",
+            "height": "110px",
             "id": "address",
             "classnames": "",
             "panelitems": [{

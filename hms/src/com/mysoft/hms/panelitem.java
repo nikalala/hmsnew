@@ -35,6 +35,8 @@ public class panelitem {
     private String pkfmt = "{autoclose: true, format: dateglobalformat1, maxDate : dateglobalmaxdate, language: \"ka\", todayHighlight: true, allowEmpty: false}";
     private int checkboxes = 0;
     private String style = "";
+    private boolean disabled = false;
+    private boolean readonly = false;
     private grid grid = new grid();
     
     public void panelitem(){}
@@ -83,6 +85,22 @@ public class panelitem {
             default:
         }
         return s;
+    }
+
+    public boolean isDisabled() {
+        return disabled;
+    }
+
+    public void setDisabled(boolean disabled) {
+        this.disabled = disabled;
+    }
+
+    public boolean isReadonly() {
+        return readonly;
+    }
+
+    public void setReadonly(boolean readonly) {
+        this.readonly = readonly;
     }
 
     public grid getGrid() {
@@ -258,6 +276,8 @@ public class panelitem {
         obj.put("classname",classname);
         obj.put("script",script);
         obj.put("style",style);
+        obj.put("disabled",disabled);
+        obj.put("readonly",readonly);
         JSONArray ar = new JSONArray();
         for(int i=0;i<values.length;i++){
             ar.add(values[i]);
@@ -289,6 +309,8 @@ public class panelitem {
         if(script == null)  script = "";
         style = (String)obj.get("style");
         if(style == null)  style = "";
+        if(obj.get("disabled") != null) disabled = (Boolean)obj.get("disabled");
+        if(obj.get("readonly") != null) readonly = (Boolean)obj.get("readonly");
         JSONArray ar = (JSONArray)obj.get("values");
         values = new String[ar.size()];
         for(int i=0;i<ar.size();i++){
@@ -308,6 +330,8 @@ public class panelitem {
                 //if(label.length() > 0)  s += "<span>"+label+"</span>";
                 s += "<input type=\"text\" class=\"form-control pull-right "+classname+"\" size=\""+size1+"\" name=\""+id+"\" id=\""+id+"\" value=\""+val+"\"";
                 if(placeholder.length() > 0)    s += " placeholder=\""+placeholder+"\"";
+                if(disabled)    s += " disabled=\"disabled\"";
+                if(readonly)    s += " readonly=\"readonly\"";
                 s += "/></div>";
                 break;
             case 1:
@@ -315,13 +339,18 @@ public class panelitem {
                 //if(label.length() > 0)  s += "<span>"+label+"</span>";
                 s += "<textarea class=\"form-control pull-right "+classname+"\" cols=\""+size1+"\" rows=\""+size2+"\" name=\""+id+"\" id=\""+id+"\"";
                 if(placeholder.length() > 0)    s += " placeholder=\""+placeholder+"\"";
+                if(disabled)    s += " disabled=\"disabled\"";
+                if(readonly)    s += " readonly=\"readonly\"";
                 s += ">"+val+"</textarea>";
                 s += "</div>";
                 break;
             case 2:
                 s += "<div class=\"col-md-"+colmd+"\" style=\"padding-bottom: 7px; height: 35px; "+style+"\">";
                 //if(label.length() > 0)  s += "<span>"+label+"</span>";
-                s += "<select class=\"form-control "+classname+"\" name=\""+id+"\" id=\""+id+"\">";
+                s += "<select class=\"form-control "+classname+"\" name=\""+id+"\" id=\""+id+"\"";
+                if(disabled)    s += " disabled=\"disabled\"";
+                if(readonly)    s += " readonly=\"readonly\"";
+                s += ">";
                 if(placeholder.length() > 0)    s += "<option value=\"\">"+ placeholder+"</option>";
                 if(sql.length() > 0){
                     Connection con = Manager.getInstance().getConnection();
@@ -359,6 +388,8 @@ public class panelitem {
                         s += "<input type=\"radio\" class=\"css-checkbox\" name=\""+id+"\" id=\""+id+i+"\" value=\""+vl+"\"";
                         if(val.equalsIgnoreCase(vl) || val.equalsIgnoreCase(nm))
                             s += " checked";
+                    if(disabled)    s += " disabled=\"disabled\"";
+                    if(readonly)    s += " readonly=\"readonly\"";
                         s += ">";
                         s += "<label for=\""+id+i+"\" class=\"css-label radGroup1\" style=\"padding-right: 10px;\">"+nm+"</label>";
                     }
@@ -369,6 +400,8 @@ public class panelitem {
                         s += "<input type=\"radio\" class=\"css-checkbox\" name=\""+id+"\" id=\""+id+i+"\" value=\""+i+"\"";
                         if(val.equalsIgnoreCase(String.valueOf(i)) || val.equalsIgnoreCase(values[i]))
                             s += " checked";
+                        if(disabled)    s += " disabled=\"disabled\"";
+                        if(readonly)    s += " readonly=\"readonly\"";
                         s += ">";
                         s += "<label for=\""+id+i+"\" class=\"css-label radGroup1\" style=\"padding-right: 10px;\">"+values[i]+"</label>";
                     }
@@ -387,6 +420,8 @@ public class panelitem {
                         s += "<input type=\"checkbox\" class=\"form-control "+classname+"\" name=\""+id+"\" id=\""+id+i+"\" value=\""+vl+"\"";
                         if(val.equalsIgnoreCase(vl) || val.equalsIgnoreCase(nm))
                             s += " checked";
+                        if(disabled)    s += " disabled=\"disabled\"";
+                        if(readonly)    s += " readonly=\"readonly\"";
                         s += ">"+nm+"";
                         checkboxes++;
                     }
@@ -397,6 +432,8 @@ public class panelitem {
                         s += "<input type=\"radio\" class=\"form-control "+classname+"\" name=\""+id+"\" id=\""+id+i+"\" value=\""+i+"\"";
                         if(val.equalsIgnoreCase(String.valueOf(i)) || val.equalsIgnoreCase(values[i]))
                             s += " checked";
+                        if(disabled)    s += " disabled=\"disabled\"";
+                        if(readonly)    s += " readonly=\"readonly\"";
                         s += ">"+values[i]+"";
                         checkboxes++;
                     }
@@ -404,11 +441,14 @@ public class panelitem {
                 s += "</div>";
                 break;
             case 5:
-                s += "<div class=\"col-md-"+colmd+"\" style=\"padding-bottom: 7px; height: 35px; "+style+"\">";
+                s += "<div class=\"col-md-"+colmd+" input-append date\" style=\"padding-bottom: 7px; height: 35px; "+style+"\">";
                 //if(label.length() > 0)  s += "<span>"+label+"</span>";
                 s += "<input type=\"text\" class=\"form-control pull-right "+classname+"\" size=\""+size1+"\" name=\""+id+"\" id=\""+id+"\" value=\""+val+"\"";
                 if(placeholder.length() > 0)    s += " placeholder=\""+placeholder+"\"";
-                s += "/></div>";
+                if(disabled)    s += " disabled=\"disabled\"";
+                if(readonly)    s += " readonly=\"readonly\"";
+                s += "/><span class=\"add-on\" style=\"position:absolute !important; right: 6px  !important;background : none  !important;border: none !important;top: -2px;\">"
+                        + "<i class=\"fa fa-calendar\"></i></span></div>";
                 script += "$('#"+id+"').datepicker("+pkfmt+")";
                 if(onclick.length() > 0)    script += ".on('changeDate', function (e) {"+onclick+"});";
                 else                        script += ";";
@@ -418,18 +458,26 @@ public class panelitem {
                 //if(label.length() > 0)  s += "<span>"+label+"</span>";
                 s += "<input type=\"text\" class=\"form-control pull-right "+classname+"\" size=\""+size1+"\" name=\""+id+"\" id=\""+id+"\" value=\""+val+"\"";
                 if(placeholder.length() > 0)    s += " placeholder=\""+placeholder+"\"";
+                if(disabled)    s += " disabled=\"disabled\"";
+                if(readonly)    s += " readonly=\"readonly\"";
                 s += "/></div>";
                 break;
             case 7:
                 s += "<div class=\"col-md-"+colmd+"\" style=\"text-align: right; padding-bottom: 7px; height: 35px; "+style+"\"><a class=\"btn btn-primary\" style=\"background-color: #EEE; color: gray; border-color: #ccc;\"";
                 if(onclick.length() > 0)    s += " onclick=\""+onclick.replaceAll("'", "\\\\'")+"\"";
-                s += "><i class=\"fa fa-"+classname+"\"></i></a></div>";
+                if(disabled)    s += " disabled=\"disabled\"";
+                if(readonly)    s += " readonly=\"readonly\"";
+                s += ">";
+                if(placeholder.length() > 0)    s += placeholder+" ";
+                if(classname.length() > 0)    s += "<i class=\"fa fa-"+classname+"\"></i>";
+                if(label.length() > 0)    s += " "+label;
+                s += "</a></div>";
                 break;
             case 8:
                 s += "<span class=\"pull-left col-md-"+colmd+" "+classname+"\" style=\"padding-bottom: 7px; height: 35px; line-height: 1.6; font-size: 13px; padding-left: 20px; "+style+"\"><b>"+label+"</b></span>";
                 break;
             case 9:
-                s += "<div class=\"col-md-"+colmd+"\" style=\"padding-bottom: 7px; "+style+"\">"+grid.drawGrid()+"</div>";
+                s += "<div class=\"col-md-"+colmd+"\" style=\""+style+"\">"+grid.drawGrid()+"</div>";
                 script += grid.getScript();
                 break;
             default:

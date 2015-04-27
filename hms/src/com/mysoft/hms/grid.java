@@ -134,7 +134,7 @@ public class grid {
         else
             s += " footerrow : false, userDataOnFooter:false,";
         if(multiselect)
-            s += " multiselect: true, multikey: \"ctrlKey\",";
+            s += " multiselect: true,";
         else
             s += " multiselect: false,";
         s += " colNames:[";

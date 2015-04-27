@@ -104,6 +104,7 @@ try{
 
         guest.setRegbyid(user.getPersonnelid());
         guest = GuestManager.getInstance().save(guest);
+        obj.put("type",0);
         obj.put("id",guest.getGuestid());
         Vector items = pl.getPanelitems();
         for(int i=0;i<items.size();i++){
@@ -152,7 +153,7 @@ try{
         contragent.setFname(names[0]);
         if(names.length > 1)    contragent.setLname(names[1]);
         contragent = ContragentManager.getInstance().save(contragent);
-        
+        obj.put("type",1);
         obj.put("id",contragent.getContragentid());
     }
     session.setAttribute(ses, (panel)pl);

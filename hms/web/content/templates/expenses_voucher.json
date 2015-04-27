@@ -65,6 +65,8 @@
             "placeholder": "",
             "onclick": "",
             "classname": "",
+            "style": "",
+            "disabled":true,
             "values": []
         }, {
             "type": 8,
@@ -120,7 +122,7 @@
             "x": 3,
             "y": 1,
             "colmd": 5,
-            "sql": "select paymentmethodid, name from paymentmethod where active = true and deleted = false order by name",
+            "sql": "select paymentmethodid, code from paymentmethod order by paymentmode, code",
             "label": "",
             "id": "expenses_voucher_paym",
             "val": "",

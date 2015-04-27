@@ -24,10 +24,8 @@
 SimpleDateFormat sdt = new SimpleDateFormat("dd/MM/yyyy");
 SimpleDateFormat sdt0 = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 
-String where = (String)session.getAttribute("CHARGES_LIST_WHERE");
-if(where == null)   where = "";
-String ord = (String)session.getAttribute("CHARGES_LIST_ORDER");
-if(ord == null)   ord = "";
+FolioitemBean[] folios = (FolioitemBean[])session.getAttribute("CHARGES_LIST_WHERE");
+if(folios == null)   folios = new FolioitemBean[0];
 
 
 int ipg = 1;
@@ -42,7 +40,6 @@ String sord = request.getParameter("sord");
 if(sord == null)    sord = "";
 //if(isidx == 0) isidx = 1;
 
-FolioitemBean[] folios = FolioitemManager.getInstance().loadByWhere(where);
 int count = folios.length;
 int total_pages = 0;
 if(count > 0)    total_pages = (int)(count/ilmt);
@@ -72,16 +69,21 @@ String order = "order by "+sidx+" "+sord+", currencyid";
                 PayoutBean payout = PayoutManager.getInstance().loadByPrimaryKey(folios[i].getPayoutid());
                 description = payout.getName();
             }
+            String z = "false";
+            if(folios[i].getZvoid() != null && folios[i].getZvoid().booleanValue()) z = "true";
             %>
-            <row id='<%=i%>'>
+            <row id='<%=i+1%>'>
                 <cell><![CDATA[<%=i+1%>]]></cell>
-                <cell><![CDATA[<%=folios[i].getFolioitemid()%>]]></cell>
+                <cell><![CDATA[<%=folios[i].getRefno()%>]]></cell>
                 <cell><![CDATA[<%=description%>]]></cell>
                 <cell><![CDATA[<%=note%>]]></cell>
                 <cell><![CDATA[<%=dc.format(amount)+"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"%>]]></cell>
+                <cell><![CDATA[<%=z%>]]></cell>
             </row>
             <%
             }
     %>
     <userdata name="amount"><%=dc.format(tot)%></userdata>
+    <userdata name="serno"><![CDATA[არჩეულის ]]></userdata>
+    <userdata name="refno"><![CDATA[<a class="btn btn-default" onclick="voidCharges()">წაშლა</a> ]]></userdata>
 </rows>

@@ -27,9 +27,9 @@
             "x": 1,
             "y": 0,
             "colmd": 3,
-            "sql": "select payoutid, name from payout",
+            "sql": "select paymentmethodid, case when paymentmode = 0 then 'ნაღდი: ' else 'ბანკი: ' end || ' ' || code from paymentmethod order by paymentmode, name",
             "label": "",
-            "id": "expenses_charges_type",
+            "id": "expenses_payments_type",
             "val": "",
             "placeholder": "",
             "onclick": "",
@@ -60,7 +60,7 @@
             "colmd": 1,
             "sql": "select currencyid, code from currency",
             "label": "",
-            "id": "expenses_charges_amountsel",
+            "id": "expenses_payments_currency",
             "val": "",
             "placeholder": "",
             "onclick": "",
@@ -76,7 +76,7 @@
             "sql": "",
             "style": "",
             "label": "",
-            "id": "expenses_charges_amount",
+            "id": "expenses_payments_amount",
             "val": "",
             "placeholder": "",
             "onclick": "",
@@ -106,7 +106,7 @@
             "colmd": 2,
             "sql": "",
             "label": "გადახდის მეთოდი",
-            "id": "expenses_charges_voucherno",
+            "id": "expenses_payments_voucherno",
             "val": "",
             "placeholder": "",
             "onclick": "",
@@ -137,7 +137,7 @@
             "colmd": 2,
             "sql": "",
             "label": "",
-            "id": "expenses_charges_comment",
+            "id": "expenses_payments_comment",
             "val": "",
             "placeholder": "",
             "onclick": "",
@@ -156,7 +156,7 @@
             "id": "",
             "val": "",
             "placeholder": "",
-            "onclick": "",
+            "onclick": "addPayments()",
             "classname": "plus",
             "style": "",
             "values": []
@@ -190,7 +190,7 @@
                         "label":"რეფ.N",
                         "name":"refno",
                         "index":"refno",
-                        "width":50,
+                        "width":60,
                         "hidden":false,
                         "align":"left"
                     },
@@ -225,6 +225,14 @@
                         "width":100,
                         "hidden":false,
                         "align":"center"
+                    },
+                    {
+                        "label":"z",
+                        "name":"z",
+                        "index":"z",
+                        "width":1,
+                        "hidden":true,
+                        "align":"center"
                     }
                 ],
                 "id":"expenseslist2",
@@ -232,7 +240,7 @@
                 "sortname":"serno",
                 "multiselect":true,
                 "footerrow":true,
-                "height":"calc((100vh - 383px) / 4)"
+                "height":"calc((100vh - 640px) / 2)"
             }
         }]
 }

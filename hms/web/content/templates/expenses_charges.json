@@ -58,13 +58,14 @@
             "x": 3,
             "y": 0,
             "colmd": 1,
-            "sql": "select currencyid, code from currency",
+            "sql": "select currencyid, code from currency order by code",
             "label": "",
-            "id": "expenses_charges_amountsel",
-            "val": "",
+            "id": "expenses_charges_currencyid",
+            "val": "1",
             "placeholder": "",
             "onclick": "",
             "classname": "",
+            "disabled":true,
             "values": []
         }, {
             "type": 0,
@@ -168,11 +169,11 @@
             "y": 1,
             "colmd": 1,
             "sql": "",
-            "label": "asfsa",
+            "label": "",
             "id": "",
             "val": "",
             "placeholder": "",
-            "onclick": "",
+            "onclick": "addCharges()",
             "classname": "plus",
             "style": "",
             "values": []
@@ -198,7 +199,7 @@
                         "label":"სერ.N",
                         "name":"serno",
                         "index":"serno",
-                        "width":100,
+                        "width":50,
                         "hidden":false,
                         "align":"left"
                     },
@@ -206,7 +207,7 @@
                         "label":"რეფ.N",
                         "name":"refno",
                         "index":"refno",
-                        "width":100,
+                        "width":60,
                         "hidden":false,
                         "align":"left"
                     },
@@ -214,7 +215,7 @@
                         "label":"განმარტება",
                         "name":"particular",
                         "index":"particular",
-                        "width":100,
+                        "width":200,
                         "hidden":false,
                         "align":"left"
                     },
@@ -222,7 +223,7 @@
                         "label":"შენიშვნა",
                         "name":"comment",
                         "index":"comment",
-                        "width":100,
+                        "width":200,
                         "hidden":false,
                         "align":"left"
                     },
@@ -230,9 +231,17 @@
                         "label":"ოდენობა",
                         "name":"amount",
                         "index":"amount",
-                        "width":100,
+                        "width":200,
                         "hidden":false,
                         "align":"right"
+                    },
+                    {
+                        "label":"z",
+                        "name":"z",
+                        "index":"z",
+                        "width":1,
+                        "hidden":true,
+                        "align":"center"
                     }
                 ],
                 "id":"expenseslist1",
@@ -240,7 +249,7 @@
                 "sortname":"serno",
                 "multiselect":true,
                 "footerrow":true,
-                "height":"calc((100vh - 383px) / 4)"
+                "height":"calc((100vh - 710px) / 2)"
             }
         }]
 }

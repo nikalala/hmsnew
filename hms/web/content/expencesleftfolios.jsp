@@ -4,11 +4,22 @@
 <%
     String startdate = df.format(dclosedate);
     String enddate = df.format(dclosedate);
+    String cname = request.getParameter("cname");
+    if(cname == null)   cname = "";
+    String vnum = request.getParameter("vnum");
+    if(vnum == null)   vnum = "";
     
     if(request.getParameter("startdate") != null) startdate = df.format(dt.parse(request.getParameter("startdate")));
     if(request.getParameter("enddate") != null) enddate = df.format(dt.parse(request.getParameter("enddate")));
     
-    FolioBean[] folios = FolioManager.getInstance().loadByWhere("where folioid in (select folioid from folioitem where itemdate >= to_date('"+startdate+"','DD/MM/YYYY') and itemdate <= to_date('"+enddate+"','DD/MM/YYYY'))");   // and folioid in (select folioid from folio where where expence = true)");
+    String sql = "where folioid in (select folioid from folioitem where itemdate >= to_date('"+startdate+"','DD/MM/YYYY') and itemdate <= to_date('"+enddate+"','DD/MM/YYYY')) and expence = true ";
+    if(cname.trim().length() > 0) sql += " and case when guestid is not null then upper(guestname(guestid)) like '%"+cname.trim().toUpperCase().replaceAll("'", "''") +"%' else upper(contragentname(contragentid)) like '%"+cname.trim().toUpperCase().replaceAll("'", "''") +"%' end";
+    if(vnum.trim().length() > 0) sql += " and upper(refno) like '%"+vnum.trim().toUpperCase().replaceAll("'", "''") +"%'";
+    sql += " order by num";
+    
+System.out.println(sql);
+    
+    FolioBean[] folios = FolioManager.getInstance().loadByWhere(sql);
     
 %>
 <table class="table table-striped">

@@ -16,7 +16,7 @@
                     <div class="col-md-9 input-append date">
                         <input class="form-control" id="startdate" value="<%=startdate%>"/>
                         <span class="add-on" style="position:absolute !important; right: 10px  !important;background : none  !important;border: none !important;top: 1px;">
-                            <i class="glyphicon glyphicon-calendar"></i>
+                            <i class="fa fa-calendar"></i>
                         </span>
                     </div>
                 </div>
@@ -25,17 +25,17 @@
                     <div class="col-md-9 input-append date">
                         <input class="form-control" id="enddate" value="<%=enddate%>"/>
                         <span class="add-on" style="position:absolute !important; right: 10px  !important;background : none  !important;border: none !important;top: 1px;">
-                            <i class="glyphicon glyphicon-calendar"></i>
+                            <i class="fa fa-calendar"></i>
                         </span>
                     </div>
                 </div>
                 <div class="col-md-16">
                     <label class="col-md-7" style="line-height: 2.4;">სახელი</label>
-                    <div class="col-md-9"><input type="text" class="form-control"/></div>
+                    <div class="col-md-9"><input type="text" class="form-control" id="cname"/></div>
                 </div>
                 <div class="col-md-16">
                     <label class="col-md-7" style="line-height: 2.4;">ვაუჩერის #</label>
-                    <div class="col-md-9"><input type="text" class="form-control"/></div>
+                    <div class="col-md-9"><input type="text" class="form-control" id="vnum"/></div>
                 </div>
                 <div class="col-md-16">
                     <a class="btn btn-default pull-right" style="margin: 5px;" onclick="resetLeftPanel();">განახლება</a>
@@ -67,7 +67,22 @@
     }
     
     function delExpFolio(id){
-        alert("del");
+        if(confirm("ნამდვილად გინდათ ფოლიოს წაშლა?")){
+        $.post(
+            "content/saveexpences.jsp",
+            {
+                oper: "del",
+                folioid: id
+            },
+            function(data){
+                if(data.result == 0)    BootstrapDialog.alert(data.error);
+                else {
+                    getBody('expencesleft','expenses','ხარჯები','res1','',true);
+                }
+            },
+            "json"
+        );
+        }
     }
     
     function initDates(){
@@ -80,7 +95,17 @@
     }
     
     function searchExps(){
-        $.post("content/expencesleftfolios.jsp", { startdate: $("#startdate").val(), enddate: $("#enddate").val() }, function(data){ $("#folios").html(data); });
+        $.post(
+                "content/expencesleftfolios.jsp", 
+            { 
+                startdate: $("#startdate").val(), 
+                enddate: $("#enddate").val(),
+                cname: $("#cname").val(),
+                vnum: $("#vnum").val()
+            }, 
+            function(data){ 
+                $("#folios").html(data); 
+            });
         
     }
     
