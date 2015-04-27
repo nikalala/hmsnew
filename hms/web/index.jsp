@@ -163,15 +163,8 @@
     <script src="js/plugins/jquery.bootstrap.wizard.min.js" type="text/javascript"></script>
     <script src="js/bootstrap-combobox.js" type="text/javascript"></script>
 
-
-    <%--link href="js/ext/ext-theme-classic-all.css" rel="stylesheet" type="text/css" />
-    <link href="js/ext/resources/css/sch-all.css" rel="stylesheet" type="text/css" />
-    <script src="js/ext/ext-all.js" type="text/javascript"></script>
-    <script src="js/ext/sch-all.js" type="text/javascript"></script--%>
-
     <link href="js/ext/1/ext-all.css" rel="stylesheet" type="text/css"/>
     <link href="js/ext/1/sch-all.css" rel="stylesheet" type="text/css"/>
-    <%--script src="js/ext/1/ext-all.js" type="text/javascript"></script--%>
     <script src="js/ext/1/ext-all-src.js" type="text/javascript"></script>
     <script src="js/ext/1/sch-all.js" type="text/javascript"></script>
 
@@ -189,100 +182,12 @@
 
         var lclosedate = <%=lclosedate%>;
 
-        var statusmenu = [
-            //0     1      2     3     4      5     6     7     8     9     10     11     12    13    14     15   
-            // დადასტურებული რეზერვაცია  0 + roomid is not null
-            [true, true, true, true, false, false, true, true, false, true, true, true, true, false, true, true],                  //  0
-            // დადასტურებული რეზერვაცია  0 + roomid is null
-            [true, false, true, false, false, false, true, true, true, false, true, true, true, false, true, true],                //  1
-            // მცხოვრები 1 + arraivaldate = closedate
-            [true, true, true, false, true, false, false, false, false, false, true, true, true, false, true, true],                //  2
-            // მცხოვრები 1 + arraivaldate <> closedate
-            [true, true, true, false, false, false, false, false, false, false, true, true, true, false, true, true],               //  3
-            // ვადაგადაცილებული 2
-            [true, true, true, false, false, false, false, false, false, false, true, true, true, false, true, true],               //  4
-            // წამსვლელი 3
-            [true, true, true, false, false, true, false, false, false, false, true, true, true, false, true, true],                //  5
-            // გაწერილი 4
-            [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false],       //  6
-            // დაბლოკილი 5
-            [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false],       //  7
-            // დღიური გამოყენება 6
-            [true, true, true, false, true, true, false, false, false, false, true, true, true, false, true, true],                 //  8
-            // დაუდასტურებელი რეზერვაცია 7 + roomid is not null
-            [true, true, true, true, false, false, true, true, false, true, true, true, true, false, true, true],                   //  9
-            // დაუდასტურებელი რეზერვაცია 7 + roomid is null
-            [true, false, true, false, false, false, true, true, true, false, true, true, true, false, true, true],                 // 10
-            // თავისუფალი 8
-            [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false],       // 11
-            // დღიური რეზერვაცია 9 + roomid is not null
-            [true, true, true, true, false, false, true, true, false, true, true, true, true, false, true, true],                   // 12
-            // დღიური რეზერვაცია 9 + roomid is null
-            [true, true, true, true, false, false, true, true, true, false, true, true, true, false, true, true]                    // 13
 
-        ];
-        var stmn = [
-            [0, 1, 2, 0],
-            [0, 0, 2, 1],
-            [1, 2, 1, 2],
-            [1, 2, 0, 3],
-            [2, 2, 2, 4],
-            [3, 2, 2, 5],
-            [4, 2, 2, 6],
-            [5, 2, 2, 7],
-            [6, 2, 2, 8],
-            [7, 1, 2, 9],
-            [7, 0, 2, 10],
-            [8, 2, 2, 11],
-            [9, 1, 2, 12],
-            [9, 0, 2, 13]
-        ];
+    </script>
 
-        function changeContextMenu(st, hr, sd, mn) {
-            var k = -1;
-            for (var i = 0; i < stmn.length; i++) {
-                if (stmn[i][0] == st) {
-                    if (stmn[i][1] == 2 || stmn[i][1] == hr) {
-                        if (stmn[i][2] == 2 || stmn[i][2] == sd) {
-                            k = stmn[i][3];
-                            break;
-                        }
-                    }
-                }
-            }
+    <script type="text/javascript" src="js/contextmenu.js"></script>
 
-            if (k >= 0) {
-                $("#contextMenu ul").find('li').each(function () {
-                    var n = $(this).attr('num');
-                    if (statusmenu[k][n]) $(this).show();
-                    else                $(this).hide();
-                });
-            }
-        }
-
-        function changeContextMenu1(st, hr, sd, mn) {
-            var sts = new Array();
-            <%for(int i=0;i<statusmenu.length;i++){
-                %>
-            sts[<%=i%>] = new Array();
-            <%
-            for(int j=0;j<statusmenu[i].length;j++){
-                int v = 0;
-                if(statusmenu[i][j])    v = 1;
-                %>
-            sts[<%=i%>][<%=j%>] = <%=v%>;
-            <%
-        }
-    }
-    %>
-            $("#contextMenu ul").find('li').each(function () {
-                var n = $(this).attr('num');
-                if (sts[st][n] == 0) $(this).hide();
-                else                $(this).show();
-            });
-
-        }
-
+    <script>
 
         $(document).ready(function () {
 
@@ -296,33 +201,13 @@
             if ($("#maincontent").height() > 652)
                 $("#mainpanel0").height($("#maincontent").height() - 2);
 
-
-            /*  $("[data-toggle='tooltip']").tooltip({
-             //html: true,
-             placement: "bottom"
-             });
-
-             $('[data-toggle="tab"]').click(function (e) {
-             e.preventDefault();
-             var $this = $(this),
-             loadurl = $this.attr('src'),
-             targ = $this.attr('href');
-
-             $.get(loadurl, function (data) {
-             $(targ).html(data);
-             });
-             $this.tab('show');
-             return false;
-             });
-
-             registerCloseEvent();
-             */
             $('#myModal').on('hidden.bs.modal', function () {
                 $("#callbackurl").remove();
                 $("#callbackdata").remove();
                 $("#action").remove();
                 $("#controls").remove();
             });
+
             $('#smallmodal').on('hidden.bs.modal', function () {
                 $("#callbackurl").remove();
                 $("#callbackdata").remove();

@@ -299,65 +299,6 @@ function infopage(fname, title, qr) {
     });
 }
 
-function doContextMenuAction(cm, id) {
-    var fl = cm.attr('id').split("_");
-    if (fl.length == 2 && fl[0] == 'TAB') {
-        $.post(
-            "content/getroomparambyid.jsp",
-            {
-                param: "name,roomtype",
-                reservationroomid: id
-            },
-            function (data) {
-                var num = '<span class="glyphicon glyphicon-' + cm.attr('icon') + '"></span>' + '&nbsp;&nbsp;' + data.name + ' - ' + data.roomtype;
-                addTab("content/" + fl[1] + ".jsp?reservationroomid=" + id, num, cm.attr('id') + "_" + id);
-            }, "json");
-
-    }
-    else
-        newWindow1(cm.attr('id'), cm.text(), "reservationid=" + id);
-}
-
-$(function () {
-    var $contextMenu = $("#contextMenu");
-    var choosedid = 0;
-
-    $("body").on("contextmenu click", "#roomlist tr, .sch-event", function (e) {
-        choosedid = $(this).attr('id');
-        var status = 0;
-        var hasroom = 0;
-        var samedate = 0;
-        if (choosedid.indexOf("schedulergrid") == 0) {
-            var nms = choosedid.split("-");
-            choosedid = nms[3];
-            status = nms[4];
-        } else {
-            status = $(this).attr('status');
-            hasroom = $(this).attr('hasroom');
-            samedate = $(this).attr('samedate');
-        }
-        changeContextMenu(status, hasroom, samedate, $contextMenu);
-        $contextMenu.css({
-            display: "block",
-            left: e.pageX,
-            top: e.pageY
-        });
-        return false;
-    });
-
-    $contextMenu.on("click", "a", function () {
-        $contextMenu.hide();
-        doContextMenuAction($(this), choosedid);
-    });
-
-    $("body").on("click", function () {
-        $contextMenu.hide();
-    }).keyup(function (e) {
-        if (e.keyCode == 27)
-            $contextMenu.hide();
-    });
-});
-
 function newWindow(fname, title) {
     loader.show();
     loadModalDefs();

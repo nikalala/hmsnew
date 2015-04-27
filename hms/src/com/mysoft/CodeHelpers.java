@@ -2,6 +2,7 @@ package com.mysoft;
 
 
 import com.mysoft.hms.*;
+import net.sf.json.JSONArray;
 
 import javax.servlet.http.HttpServletRequest;
 import java.net.URLDecoder;
@@ -184,6 +185,10 @@ public class CodeHelpers {
             return false;
         }
         return true;
+    }
+
+    public static String generateMenu(int pageNum){
+        return null;
     }
 
 }

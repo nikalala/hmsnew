@@ -701,6 +701,44 @@ qohsGrid = {
     }
 };
 
+
+var folioGridModel = [];
+folioGridModel.push(
+    colModelGenerator(80, 'folio', 0),
+    colModelGenerator(100, 'billto', 0),
+    colModelGenerator(100, 'ballance', 0),
+    colModelGenerator(100, 'operation', 0)
+);
+
+folioGrid = {
+    id: 'list_folio',
+    url: 'content/getdashfoliolist.jsp',
+    type: 'xml',
+    cols: ['ფოლიო', 'გადამხდელი', 'ბალანსი', 'ქმედება'],
+    model: folioGridModel,
+    sort: 'type',
+    order: 'asc',
+    isPopup: false,
+    altRows: true,
+    altclass: 'altrow',
+    footerrow : false,
+    userDataOnFooter:false,
+    gridComplete: function () {
+        ReDrawTable(folioGrid);
+        var width = $(".q-table-div2 .ui-jqgrid").width();
+        $("#list_folio").width(width-10);
+        $("#gbox_list_folio").width(width-3);
+        $(".q-table-div2 .ui-jqgrid-labels").css("width","100%");
+        $(".q-table-div2 .ui-jqgrid-sdiv").width(width-10);
+        $(".q-table-div2 .ui-jqgrid-ftable").width(width-10);
+        $(".q-table-div2 .ui-jqgrid-bdiv").css("height","75px");
+    },
+    beforeRequest: function () {
+
+    }
+};
+
+
 /* --------------------------------  List Model ------------------------------------*/
 var finGridModel2 = [];
 finGridModel2.push(
