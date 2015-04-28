@@ -89,8 +89,11 @@
         alert("Not Implemented Yet. Here we should pass reservation room id and display modal and on this modal we should display folios for this reservation roomid")
     }
 
-    function launchHKModal(){
-        newsWindow('hkspopup','დალაგების სტატუსი');
+    function launchHKModal(id){
+        if(isNullOrEmpty(id)){
+            id = 15;
+        }
+        newsWindow1('hkspopup','დალაგების სტატუსი','rrid='+id);
     }
 
     function loadQuickOperations(){
@@ -132,7 +135,7 @@
         if($("#quick_ops_menu").length == 0){
             $("#quickops").append("<ul id='quick_ops_menu' style='margin-left: -35px;'>"+splitF+newWalk+"</ul>");
         }
-
+        $(".q-main-div input").css("height","29px")
     }
 
     $("#discount").on('change', function () {
