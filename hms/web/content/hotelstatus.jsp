@@ -114,26 +114,23 @@
 
             var trid = "NULL";
             var thuid = "NULL";
-            var roomquery = "";
+            var where = "";
             if (rid.indexOf("room") != -1) {
                 trid = rid.replace("_room", "");
-                roomquery = "?query=DELETE FROM roomhst where roomid = " + trid;
+                where = " where roomid = " + trid;
             } else {
                 thuid = rid.replace("_house", "");
-                roomquery = "?query=DELETE FROM roomhst where houseunitid = " + thuid;
+                where = " where houseunitid = " + thuid;
             }
 
             var hkid = $(".changestatus2").val();
 
-            var sql = "?query=INSERT INTO roomhst(roomhstid, roomid, housekeepingstatusid, regdate, regbyid, houseunitid) " +
-                    " VALUES (nextval('roomhstid_seq'), " + trid + ", " + hkid + ", '<%=df2.format(dclosedate)%>', <%=user.getPersonnelid()%>, " + thuid + ")";
+            var sql = "?query=UPDATE roomhst SET housekeepingstatusid =  " + hkid + ", closedate = '<%=df2.format(dclosedate)%>', regbyid = <%=user.getPersonnelid()%>" + where;
 
-            $.post("content/execute.jsp" + roomquery, {}, function (data1) {
-                $.post("content/execute.jsp" + sql, {}, function (data2) {
-                    reloadGrid(hsGrid.id, hsGrid.url);
-                    $("#dismissbutton").click();
-                    loader.hide();
-                });
+            $.post("content/execute.jsp" + sql, {}, function (data2) {
+                reloadGrid(hsGrid.id, hsGrid.url);
+                $("#dismissbutton").click();
+                loader.hide();
             });
         }
     }
@@ -175,35 +172,22 @@
 
             var trid = "NULL";
             var thuid = "NULL";
-
+            var where = "";
             if (id.indexOf("room") != -1) {
                 roomids += id.replace("_room", "") + ",";
                 trid = id.replace("_room", "");
+                where = " where roomid = " + trid;
             } else {
                 unitids += id.replace("_house", "") + ",";
                 thuid = id.replace("_house", "");
+                where = " where houseunitid = " + thuid;
             }
 
-            generatedSQL += "INSERT INTO roomhst(roomhstid, roomid, housekeepingstatusid, regdate, regbyid, houseunitid) " +
-            " VALUES (nextval('roomhstid_seq'), " + trid + ", " + hkid + ", '<%=df2.format(dclosedate)%>', <%=user.getPersonnelid()%>, " + thuid + ");";
+            generatedSQL += "UPDATE roomhst SET housekeepingstatusid =  " + hkid + ", closedate = '<%=df2.format(dclosedate)%>', regbyid = <%=user.getPersonnelid()%> " + where+";";
 
         });
 
-        var roomquery = "";
-
-        var unitquery = "";
-
-        if (!isNullOrEmpty(roomids)) {
-            roomids = roomids.substring(0, roomids.trim().lastIndexOf(","));
-            roomquery = "DELETE FROM roomhst where roomid IN(" + roomids + ");";
-        }
-
-        if (!isNullOrEmpty(unitids)) {
-            unitids = unitids.substring(0, unitids.trim().lastIndexOf(","));
-            unitquery = "DELETE FROM roomhst where houseunitid IN(" + unitids + ");";
-        }
-
-        $.post("content/execute.jsp?query=" + encodeURIComponent(unitquery + roomquery + generatedSQL), {}, function (data) {
+        $.post("content/execute.jsp?query=" + encodeURIComponent(generatedSQL), {}, function () {
             reloadGrid(hsGrid.id, hsGrid.url);
             $("#dismissbutton").click();
             loader.hide();
@@ -235,11 +219,7 @@
 
 
         var generatedSQL = "";
-
-        var q = "?query=";
-
         var roomids = "";
-
         var unitids = "";
 
         $.each(result, function (id,val) {
@@ -249,35 +229,22 @@
             var trid = "NULL";
             var thuid = "NULL";
 
+            var where = "";
             if (id.indexOf("room") != -1) {
                 roomids += id.replace("_room", "") + ",";
                 trid = id.replace("_room", "");
+                where = " where roomid = " + trid;
             } else {
                 unitids += id.replace("_house", "") + ",";
                 thuid = id.replace("_house", "");
+                where = " where houseunitid = " + thuid;
             }
 
-            generatedSQL += " INSERT INTO housekeeper(housekeeperid, personnelid, roomid, houseunitid) " +
-            " VALUES " +
-            "(nextval('housekeeperid_seq'), '" + $("#assigntohk").val() + "', " + trid + ", " + thuid + ");";
+            generatedSQL += "UPDATE roomhst SET personnelid =  " + $("#assigntohk").val() + ", closedate = '<%=df2.format(dclosedate)%>', regbyid = <%=user.getPersonnelid()%> " + where+";";
 
         });
 
-        var roomquery = "";
-
-        var unitquery = "";
-
-        if (!isNullOrEmpty(roomids)) {
-            roomids = roomids.substring(0, roomids.trim().lastIndexOf(","));
-            roomquery = "UPDATE housekeeper SET deleted = TRUE where roomid IN(" + roomids + ");";
-        }
-
-        if (!isNullOrEmpty(unitids)) {
-            unitids = unitids.substring(0, unitids.trim().lastIndexOf(","));
-            unitquery = "UPDATE housekeeper SET deleted = TRUE where houseunitid IN(" + unitids + ");";
-        }
-
-        $.post("content/execute.jsp?query=" + encodeURIComponent(unitquery + roomquery + generatedSQL), {}, function () {
+        $.post("content/execute.jsp?query=" + encodeURIComponent(generatedSQL), {}, function () {
             reloadGrid(hsGrid.id, hsGrid.url);
             $("#dismissbutton").click();
             loader.hide();
@@ -306,6 +273,7 @@
 
         $.each(result, function (id,val) {
             var id = val;
+
             if (id.indexOf("room") != -1) {
                 roomids += id.replace("_room", "") + ",";
             } else {
@@ -313,21 +281,19 @@
             }
         });
 
-        var roomquery = "";
-
-        var unitquery = "";
-
         if (!isNullOrEmpty(roomids)) {
             roomids = roomids.substring(0, roomids.trim().lastIndexOf(","));
-            roomquery = "DELETE FROM roomhst where roomid IN(" + roomids + ");";
+            roomids = " AND roomid IN ("+roomids+")";
         }
 
         if (!isNullOrEmpty(unitids)) {
             unitids = unitids.substring(0, unitids.trim().lastIndexOf(","));
-            unitquery = "DELETE FROM roomhst where houseunitid IN(" + unitids + ");";
+            unitids = " AND houseunitid IN ("+unitids+")";
         }
 
-        $.post("content/execute.jsp?query=" + unitquery + roomquery, {}, function (data) {
+        var generatedSQL = "UPDATE roomhst SET housekeepingstatusid = 0, closedate = '<%=df2.format(dclosedate)%>', regbyid = <%=user.getPersonnelid()%> WHERE 2 = 2 " + roomids + unitids+";";
+
+        $.post("content/execute.jsp?query=" + generatedSQL, {}, function (data) {
             reloadGrid(hsGrid.id, hsGrid.url);
             loader.hide();
         });
@@ -362,21 +328,20 @@
             }
         });
 
-        var roomquery = "";
-
-        var unitquery = "";
 
         if (!isNullOrEmpty(roomids)) {
             roomids = roomids.substring(0, roomids.trim().lastIndexOf(","));
-            roomquery = "UPDATE housekeeper SET deleted = TRUE where roomid IN(" + roomids + ");";
+            roomids = " AND roomid IN ("+roomids+")";
         }
 
         if (!isNullOrEmpty(unitids)) {
             unitids = unitids.substring(0, unitids.trim().lastIndexOf(","));
-            unitquery = "UPDATE housekeeper SET deleted = TRUE where houseunitid IN(" + unitids + ");";
+            unitids = " AND houseunitid IN ("+unitids+")";
         }
 
-        $.post("content/execute.jsp?query=" + unitquery + roomquery, {}, function (data) {
+        var generatedSQL = "UPDATE roomhst SET personnelid = 0, closedate = '<%=df2.format(dclosedate)%>', regbyid = <%=user.getPersonnelid()%> WHERE 2 = 2 " + roomids + unitids+";";
+
+        $.post("content/execute.jsp?query=" + generatedSQL, {}, function (data) {
             reloadGrid(hsGrid.id, hsGrid.url);
             loader.hide();
         });
@@ -408,25 +373,16 @@
             return;
         }
 
-        var roomId = "NULL";
-
-        var huId = "NULL";
-
-        var deleteRemarks = "";
-
+        var where = "";
         if(!isHUnit){
-            deleteRemarks = "UPDATE remarks SET deleted = true WHERE roomid in (" + rid + ");";
-            roomId = rid;
-        }else{
-            deleteRemarks = "UPDATE remarks SET deleted = true WHERE houseunitid in (" + rid + ");";
-            huId = rid;
+            where = " where roomid = " + rid;
+        } else {
+            where = " where houseunitid = " + rid;
         }
 
-        var sql = deleteRemarks + " INSERT INTO remarks(remarkid, remark, roomid, houseunitid) " +
-                "VALUES " +
-                "(nextval('remarkid_seq'), '" + remark + "', " + roomId + ", " + huId + ");";
+        var generatedSQL = "UPDATE roomhst SET remark = '" + remark + "', closedate = '<%=df2.format(dclosedate)%>', regbyid = <%=user.getPersonnelid()%> " + where;
 
-        $.post("content/execute.jsp?query=" + encodeURIComponent(sql), {}, function () {
+        $.post("content/execute.jsp?query=" + encodeURIComponent(generatedSQL), {}, function () {
 
             reloadGrid(hsGrid.id, hsGrid.url);
 
@@ -454,25 +410,16 @@
 
     function saveRoomKeeper(isHUnit){
 
-        var roomId = "NULL";
-
-        var huId = "NULL";
-
-        var deleteRK = "";
-
+        var where = "";
         if(!isHUnit){
-            deleteRK = "UPDATE housekeeper SET deleted = true WHERE roomid in (" + rid + ");";
-            roomId = rid;
-        }else{
-            deleteRK = "UPDATE housekeeper SET deleted = true WHERE houseunitid in (" + rid + ");";
-            huId = rid;
+            where = " where roomid = " + rid;
+        } else {
+            where = " where houseunitid = " + rid;
         }
 
-        var sql = deleteRK + " INSERT INTO housekeeper(housekeeperid, personnelid, roomid, houseunitid) " +
-                "VALUES " +
-                "(nextval('housekeeperid_seq'), '" + $("#changekeeper").val() + "', " + roomId + ", " + huId + ");";
+        var generatedSQL = "UPDATE roomhst SET personnelid = " + $("#changekeeper").val() + ", closedate = '<%=df2.format(dclosedate)%>', regbyid = <%=user.getPersonnelid()%> " + where;
 
-        $.post("content/execute.jsp?query=" + encodeURIComponent(sql), {}, function () {
+        $.post("content/execute.jsp?query=" + encodeURIComponent(generatedSQL), {}, function () {
 
             reloadGrid(hsGrid.id, hsGrid.url);
 
@@ -485,15 +432,16 @@
 
     function removeRoomKeeper(id,isHUnit){
 
-        var query = "";
-
-        if (!isHUnit) {
-            query = "UPDATE housekeeper SET deleted = TRUE where roomid IN(" + id + ");";
+        var where = "";
+        if(!isHUnit){
+            where = " where roomid = " + id;
         } else {
-            query = "UPDATE housekeeper SET deleted = TRUE where houseunitid IN(" + id + ");";
+            where = " where houseunitid = " + id;
         }
 
-        $.post("content/execute.jsp?query=" + query, {}, function () {
+        var generatedSQL = "UPDATE roomhst SET personnelid = " + 0 + ", closedate = '<%=df2.format(dclosedate)%>', regbyid = <%=user.getPersonnelid()%> " + where;
+
+        $.post("content/execute.jsp?query=" + generatedSQL, {}, function () {
             reloadGrid(hsGrid.id, hsGrid.url);
             loader.hide();
         });
@@ -502,15 +450,17 @@
 
     function removeRoomStatus(id,isHUnit){
 
-        var query = "";
-
-        if (!isHUnit) {
-            query = "DELETE FROM roomhst where roomid = " + id + ";";
+        var where = "";
+        if(!isHUnit){
+            where = " where roomid = " + id;
         } else {
-            query = "DELETE FROM roomhst where houseunitid = " + id + ";";
+            where = " where houseunitid = " + id;
         }
 
-        $.post("content/execute.jsp?query=" + query, {}, function () {
+        var generatedSQL = "UPDATE roomhst SET housekeepingstatusid = 0, closedate = '<%=df2.format(dclosedate)%>', regbyid = <%=user.getPersonnelid()%> " + where;
+
+
+        $.post("content/execute.jsp?query=" + generatedSQL, {}, function () {
             reloadGrid(hsGrid.id, hsGrid.url);
             loader.hide();
         });
