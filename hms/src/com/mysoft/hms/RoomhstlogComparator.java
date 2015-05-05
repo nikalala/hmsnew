@@ -19,9 +19,9 @@ import java.util.Comparator;
 
 
 /**
- * Comparator class is used to sort the RoomhstBean objects.
+ * Comparator class is used to sort the RoomhstlogBean objects.
  */
-public class RoomhstComparator implements Comparator
+public class RoomhstlogComparator implements Comparator
 // extends+ 
 
 // extends- 
@@ -37,57 +37,57 @@ public class RoomhstComparator implements Comparator
     private boolean bReverse;
 
     /**
-     * Constructor class for RoomhstComparator.
+     * Constructor class for RoomhstlogComparator.
      * <br>
      * Example:
      * <br>
-     * <code>Arrays.sort(pArray, new RoomhstComparator(RoomhstManager.ROOMHSTID, bReverse));<code>
+     * <code>Arrays.sort(pArray, new RoomhstlogComparator(RoomhstlogManager.ROOMHSTLOGID, bReverse));<code>
      *
      * @param iType the field from which you want to sort
      * <br>
      * Possible values are:
      * <ul>
-     *   <li>RoomhstManager.ID_ROOMHSTID
-     *   <li>RoomhstManager.ID_ROOMID
-     *   <li>RoomhstManager.ID_HOUSEKEEPINGSTATUSID
-     *   <li>RoomhstManager.ID_REGDATE
-     *   <li>RoomhstManager.ID_REGBYID
-     *   <li>RoomhstManager.ID_HOUSEUNITID
-     *   <li>RoomhstManager.ID_CLOSEDATE
-     *   <li>RoomhstManager.ID_PERSONNELID
-     *   <li>RoomhstManager.ID_REMARK
+     *   <li>RoomhstlogManager.ID_ROOMHSTLOGID
+     *   <li>RoomhstlogManager.ID_ROOMID
+     *   <li>RoomhstlogManager.ID_HOUSEKEEPINGSTATUSID
+     *   <li>RoomhstlogManager.ID_REGDATE
+     *   <li>RoomhstlogManager.ID_REGBYID
+     *   <li>RoomhstlogManager.ID_HOUSEUNITID
+     *   <li>RoomhstlogManager.ID_CLOSEDATE
+     *   <li>RoomhstlogManager.ID_PERSONNELID
+     *   <li>RoomhstlogManager.ID_REMARK
      * </ul>
      */
-    public RoomhstComparator(int iType)
+    public RoomhstlogComparator(int iType)
     {
         this(iType, false);
     }
 
     /**
-     * Constructor class for RoomhstComparator.
+     * Constructor class for RoomhstlogComparator.
      * <br>
      * Example:
      * <br>
-     * <code>Arrays.sort(pArray, new RoomhstComparator(RoomhstManager.ROOMHSTID, bReverse));<code>
+     * <code>Arrays.sort(pArray, new RoomhstlogComparator(RoomhstlogManager.ROOMHSTLOGID, bReverse));<code>
      *
      * @param iType the field from which you want to sort.
      * <br>
      * Possible values are:
      * <ul>
-     *   <li>RoomhstManager.ID_ROOMHSTID
-     *   <li>RoomhstManager.ID_ROOMID
-     *   <li>RoomhstManager.ID_HOUSEKEEPINGSTATUSID
-     *   <li>RoomhstManager.ID_REGDATE
-     *   <li>RoomhstManager.ID_REGBYID
-     *   <li>RoomhstManager.ID_HOUSEUNITID
-     *   <li>RoomhstManager.ID_CLOSEDATE
-     *   <li>RoomhstManager.ID_PERSONNELID
-     *   <li>RoomhstManager.ID_REMARK
+     *   <li>RoomhstlogManager.ID_ROOMHSTLOGID
+     *   <li>RoomhstlogManager.ID_ROOMID
+     *   <li>RoomhstlogManager.ID_HOUSEKEEPINGSTATUSID
+     *   <li>RoomhstlogManager.ID_REGDATE
+     *   <li>RoomhstlogManager.ID_REGBYID
+     *   <li>RoomhstlogManager.ID_HOUSEUNITID
+     *   <li>RoomhstlogManager.ID_CLOSEDATE
+     *   <li>RoomhstlogManager.ID_PERSONNELID
+     *   <li>RoomhstlogManager.ID_REMARK
      * </ul>
      *
      * @param bReverse set this value to true, if you want to reverse the sorting results
      */
-    public RoomhstComparator(int iType, boolean bReverse)
+    public RoomhstlogComparator(int iType, boolean bReverse)
     {
         this.iType = iType;
         this.bReverse = bReverse;
@@ -98,23 +98,23 @@ public class RoomhstComparator implements Comparator
      */
     public int compare(Object pObj1, Object pObj2)
     {
-        RoomhstBean b1 = (RoomhstBean)pObj1;
-        RoomhstBean b2 = (RoomhstBean)pObj2;
+        RoomhstlogBean b1 = (RoomhstlogBean)pObj1;
+        RoomhstlogBean b2 = (RoomhstlogBean)pObj2;
         int iReturn = 0;
         switch(iType)
         {
-            case RoomhstManager.ID_ROOMHSTID:
-                if (b1.getRoomhstid() == null && b2.getRoomhstid() != null) {
+            case RoomhstlogManager.ID_ROOMHSTLOGID:
+                if (b1.getRoomhstlogid() == null && b2.getRoomhstlogid() != null) {
                     iReturn = -1;
-                } else if (b1.getRoomhstid() == null && b2.getRoomhstid() == null) {
+                } else if (b1.getRoomhstlogid() == null && b2.getRoomhstlogid() == null) {
                     iReturn = 0;
-                } else if (b1.getRoomhstid() != null && b2.getRoomhstid() == null) {
+                } else if (b1.getRoomhstlogid() != null && b2.getRoomhstlogid() == null) {
                     iReturn = 1;
                 } else { 
-                    iReturn = b1.getRoomhstid().compareTo(b2.getRoomhstid());
+                    iReturn = b1.getRoomhstlogid().compareTo(b2.getRoomhstlogid());
                 }
                 break;
-            case RoomhstManager.ID_ROOMID:
+            case RoomhstlogManager.ID_ROOMID:
                 if (b1.getRoomid() == null && b2.getRoomid() != null) {
                     iReturn = -1;
                 } else if (b1.getRoomid() == null && b2.getRoomid() == null) {
@@ -125,7 +125,7 @@ public class RoomhstComparator implements Comparator
                     iReturn = b1.getRoomid().compareTo(b2.getRoomid());
                 }
                 break;
-            case RoomhstManager.ID_HOUSEKEEPINGSTATUSID:
+            case RoomhstlogManager.ID_HOUSEKEEPINGSTATUSID:
                 if (b1.getHousekeepingstatusid() == null && b2.getHousekeepingstatusid() != null) {
                     iReturn = -1;
                 } else if (b1.getHousekeepingstatusid() == null && b2.getHousekeepingstatusid() == null) {
@@ -136,7 +136,7 @@ public class RoomhstComparator implements Comparator
                     iReturn = b1.getHousekeepingstatusid().compareTo(b2.getHousekeepingstatusid());
                 }
                 break;
-            case RoomhstManager.ID_REGDATE:
+            case RoomhstlogManager.ID_REGDATE:
                 if (b1.getRegdate() == null && b2.getRegdate() != null) {
                     iReturn = -1;
                 } else if (b1.getRegdate() == null && b2.getRegdate() == null) {
@@ -147,7 +147,7 @@ public class RoomhstComparator implements Comparator
                     iReturn = b1.getRegdate().compareTo(b2.getRegdate());
                 }
                 break;
-            case RoomhstManager.ID_REGBYID:
+            case RoomhstlogManager.ID_REGBYID:
                 if (b1.getRegbyid() == null && b2.getRegbyid() != null) {
                     iReturn = -1;
                 } else if (b1.getRegbyid() == null && b2.getRegbyid() == null) {
@@ -158,7 +158,7 @@ public class RoomhstComparator implements Comparator
                     iReturn = b1.getRegbyid().compareTo(b2.getRegbyid());
                 }
                 break;
-            case RoomhstManager.ID_HOUSEUNITID:
+            case RoomhstlogManager.ID_HOUSEUNITID:
                 if (b1.getHouseunitid() == null && b2.getHouseunitid() != null) {
                     iReturn = -1;
                 } else if (b1.getHouseunitid() == null && b2.getHouseunitid() == null) {
@@ -169,7 +169,7 @@ public class RoomhstComparator implements Comparator
                     iReturn = b1.getHouseunitid().compareTo(b2.getHouseunitid());
                 }
                 break;
-            case RoomhstManager.ID_CLOSEDATE:
+            case RoomhstlogManager.ID_CLOSEDATE:
                 if (b1.getClosedate() == null && b2.getClosedate() != null) {
                     iReturn = -1;
                 } else if (b1.getClosedate() == null && b2.getClosedate() == null) {
@@ -180,7 +180,7 @@ public class RoomhstComparator implements Comparator
                     iReturn = b1.getClosedate().compareTo(b2.getClosedate());
                 }
                 break;
-            case RoomhstManager.ID_PERSONNELID:
+            case RoomhstlogManager.ID_PERSONNELID:
                 if (b1.getPersonnelid() == null && b2.getPersonnelid() != null) {
                     iReturn = -1;
                 } else if (b1.getPersonnelid() == null && b2.getPersonnelid() == null) {
@@ -191,7 +191,7 @@ public class RoomhstComparator implements Comparator
                     iReturn = b1.getPersonnelid().compareTo(b2.getPersonnelid());
                 }
                 break;
-            case RoomhstManager.ID_REMARK:
+            case RoomhstlogManager.ID_REMARK:
                 if (b1.getRemark() == null && b2.getRemark() != null) {
                     iReturn = -1;
                 } else if (b1.getRemark() == null && b2.getRemark() == null) {

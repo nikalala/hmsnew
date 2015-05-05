@@ -159,7 +159,7 @@ public class TaxBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: tax.name
-     * <li>comments: დასახელება
+     * <li>comments: ??????????
      * <li>column size: 2147483647
      * <li>jdbc type returned by the driver: Types.VARCHAR
      * </ul>
@@ -216,7 +216,7 @@ public class TaxBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: tax.code
-     * <li>comments: მოკლე დასახელება
+     * <li>comments: ????? ??????????
      * <li>column size: 2147483647
      * <li>jdbc type returned by the driver: Types.VARCHAR
      * </ul>
@@ -273,7 +273,7 @@ public class TaxBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: tax.startfrom
-     * <li>comments: საწყისი მნიშვნელობა
+     * <li>comments: ??????? ???????????
      * <li>column size: 13
      * <li>jdbc type returned by the driver: Types.DATE
      * </ul>
@@ -341,7 +341,7 @@ public class TaxBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: tax.exemptafter
-     * <li>comments: საბოლოო მნიშვნელობა
+     * <li>comments: ??????? ???????????
      * <li>default value: 0
      * <li>column size: 10
      * <li>jdbc type returned by the driver: Types.INTEGER
@@ -410,7 +410,7 @@ public class TaxBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: tax.postingtype
-     * <li>comments: დაბეგვრის წესიCODEtaxpostingtype
+     * <li>comments: ????????? ????CODEtaxpostingtype
      * <li>column size: 10
      * <li>jdbc type returned by the driver: Types.INTEGER
      * </ul>
@@ -478,7 +478,7 @@ public class TaxBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: tax.amount
-     * <li>comments: ოდენობა
+     * <li>comments: ???????
      * <li>column size: 17
      * <li>jdbc type returned by the driver: Types.DOUBLE
      * </ul>
@@ -546,7 +546,7 @@ public class TaxBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: tax.applybefore
-     * <li>comments: დაბეგვრა გადახდამდე
+     * <li>comments: ???????? ??????????
      * <li>default value: false
      * <li>column size: 1
      * <li>jdbc type returned by the driver: Types.BIT
@@ -614,7 +614,7 @@ public class TaxBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: tax.applyonrate
-     * <li>comments: სუფთა დაბეგვრა
+     * <li>comments: ????? ????????
      * <li>default value: false
      * <li>column size: 1
      * <li>jdbc type returned by the driver: Types.BIT
@@ -683,7 +683,7 @@ public class TaxBean
      * <ul>
      * <li>full name: tax.regbyid
      * <li> foreign key: personnel.personnelid
-     * <li>comments: ავტორი
+     * <li>comments: ??????
      * <li>column size: 10
      * <li>jdbc type returned by the driver: Types.INTEGER
      * </ul>
@@ -751,7 +751,7 @@ public class TaxBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: tax.regdate
-     * <li>comments: რეგისტრაციის თარიღი
+     * <li>comments: ???????????? ??????
      * <li>default value: now()
      * <li>column size: 29
      * <li>jdbc type returned by the driver: Types.TIMESTAMP
@@ -820,7 +820,7 @@ public class TaxBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: tax.active
-     * <li>comments: აქტიური
+     * <li>comments: ???????
      * <li>default value: true
      * <li>column size: 1
      * <li>jdbc type returned by the driver: Types.BIT
@@ -888,7 +888,7 @@ public class TaxBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: tax.deleted
-     * <li>comments: წაშლილი
+     * <li>comments: ???????
      * <li>default value: false
      * <li>column size: 1
      * <li>jdbc type returned by the driver: Types.BIT

@@ -90,9 +90,6 @@
     }
 
     function launchHKModal(id){
-        if(isNullOrEmpty(id)){
-            id = 15;
-        }
         newsWindow1('hkspopup','დალაგების სტატუსი','rrid='+id);
     }
 
@@ -119,7 +116,7 @@
         var statusArray = [0,1,2,3,6,9];
         var roomId = '<%=roomid%>';
         if(!isNaN(parseInt(status)) && $.inArray(status, statusArray) && !isNullOrEmpty(roomId)){
-            var hkmodal = '<li class="roomlistitm" num="19"><a icon="დალაგების სტატუსი" href="#" onclick="launchHKModal()">დალაგების სტატუსი</a></li>';
+            var hkmodal = '<li class="roomlistitm" num="19"><a icon="დალაგების სტატუსი" href="#" onclick="launchHKModal(<%=rromid%>)">დალაგების სტატუსი</a></li>';
             quickOpsUL.append(hkmodal);
         }
         var splitF = '<li class="roomlistitm" num="16"><a icon="ფოლიოს გაყოფა" href="#" onclick="return false;">ფოლიოს გაყოფა</a></li>';

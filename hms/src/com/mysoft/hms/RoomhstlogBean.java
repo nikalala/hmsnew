@@ -17,47 +17,47 @@ package com.mysoft.hms;
 // imports- 
 
 
-public class RoomstBean
+public class RoomhstlogBean
 // extends+ 
 
 // extends- 
 
 {
-    private Long roomstid;
-    private boolean roomstid_is_modified = false;
-    private boolean roomstid_is_initialized = false;
+    private Long roomhstlogid;
+    private boolean roomhstlogid_is_modified = false;
+    private boolean roomhstlogid_is_initialized = false;
     
     private Integer roomid;
     private boolean roomid_is_modified = false;
     private boolean roomid_is_initialized = false;
     
-    private java.sql.Timestamp statusdate;
-    private boolean statusdate_is_modified = false;
-    private boolean statusdate_is_initialized = false;
-    
-    private Integer st;
-    private boolean st_is_modified = false;
-    private boolean st_is_initialized = false;
-    
-    private Integer regbyid;
-    private boolean regbyid_is_modified = false;
-    private boolean regbyid_is_initialized = false;
+    private Integer housekeepingstatusid;
+    private boolean housekeepingstatusid_is_modified = false;
+    private boolean housekeepingstatusid_is_initialized = false;
     
     private java.sql.Timestamp regdate;
     private boolean regdate_is_modified = false;
     private boolean regdate_is_initialized = false;
     
-    private Long reservationroomid;
-    private boolean reservationroomid_is_modified = false;
-    private boolean reservationroomid_is_initialized = false;
+    private Integer regbyid;
+    private boolean regbyid_is_modified = false;
+    private boolean regbyid_is_initialized = false;
     
-    private Integer roomtypeid;
-    private boolean roomtypeid_is_modified = false;
-    private boolean roomtypeid_is_initialized = false;
+    private Integer houseunitid;
+    private boolean houseunitid_is_modified = false;
+    private boolean houseunitid_is_initialized = false;
     
-    private Long blockroomid;
-    private boolean blockroomid_is_modified = false;
-    private boolean blockroomid_is_initialized = false;
+    private java.sql.Timestamp closedate;
+    private boolean closedate_is_modified = false;
+    private boolean closedate_is_initialized = false;
+    
+    private Integer personnelid;
+    private boolean personnelid_is_modified = false;
+    private boolean personnelid_is_initialized = false;
+    
+    private String remark;
+    private boolean remark_is_modified = false;
+    private boolean remark_is_initialized = false;
     
     private boolean _isNew = true;
     
@@ -65,76 +65,76 @@ public class RoomstBean
      * Do not use this constructor directly, please use the factory method
      * available in the associated manager.
      */
-    RoomstBean()
+    RoomhstlogBean()
     {
     }
     
     /**
-     * Getter method for roomstid.
+     * Getter method for roomhstlogid.
      * <br>
      * PRIMARY KEY.<br>
      * Meta Data Information (in progress):
      * <ul>
-     * <li>full name: roomst.roomstid
+     * <li>full name: roomhstlog.roomhstlogid
      * <li>column size: 19
      * <li>jdbc type returned by the driver: Types.BIGINT
      * </ul>
      *
-     * @return the value of roomstid
+     * @return the value of roomhstlogid
      */
-    public Long getRoomstid()
+    public Long getRoomhstlogid()
     {
-        return roomstid; 
+        return roomhstlogid; 
     }
 
     /**
-     * Setter method for roomstid.
+     * Setter method for roomhstlogid.
      * <br>
      * The new value is set only if compareTo() says it is different,
      * or if one of either the new value or the current value is null.
      * In case the new value is different, it is set and the field is marked as 'modified'.
      *
-     * @param newVal the new value to be assigned to roomstid
+     * @param newVal the new value to be assigned to roomhstlogid
      */
-    public void setRoomstid(Long newVal) {
-        if ((newVal != null && this.roomstid != null && (newVal.compareTo(this.roomstid) == 0)) || 
-            (newVal == null && this.roomstid == null && roomstid_is_initialized)) {
+    public void setRoomhstlogid(Long newVal) {
+        if ((newVal != null && this.roomhstlogid != null && (newVal.compareTo(this.roomhstlogid) == 0)) || 
+            (newVal == null && this.roomhstlogid == null && roomhstlogid_is_initialized)) {
             return; 
         } 
-        this.roomstid = newVal; 
-        roomstid_is_modified = true; 
-        roomstid_is_initialized = true; 
+        this.roomhstlogid = newVal; 
+        roomhstlogid_is_modified = true; 
+        roomhstlogid_is_initialized = true; 
     }
 
     /**
-     * Setter method for roomstid.
+     * Setter method for roomhstlogid.
      * <br>
      * Convenient for those who do not want to deal with Objects for primary types.
      *
-     * @param newVal the new value to be assigned to roomstid
+     * @param newVal the new value to be assigned to roomhstlogid
      */
-    public void setRoomstid(long newVal) {
-        setRoomstid(new Long(newVal));
+    public void setRoomhstlogid(long newVal) {
+        setRoomhstlogid(new Long(newVal));
     }
 
     /**
-     * Determines if the roomstid has been modified.
+     * Determines if the roomhstlogid has been modified.
      *
      * @return true if the field has been modified, false if the field has not been modified
      */
-    public boolean isRoomstidModified() {
-        return roomstid_is_modified; 
+    public boolean isRoomhstlogidModified() {
+        return roomhstlogid_is_modified; 
     }
 
     /**
-     * Determines if the roomstid has been initialized.
+     * Determines if the roomhstlogid has been initialized.
      * <br>
      * It is useful to determine if a field is null on purpose or just because it has not been initialized.
      *
      * @return true if the field has been initialized, false otherwise
      */
-    public boolean isRoomstidInitialized() {
-        return roomstid_is_initialized; 
+    public boolean isRoomhstlogidInitialized() {
+        return roomhstlogid_is_initialized; 
     }
 
     /**
@@ -142,9 +142,7 @@ public class RoomstBean
      * <br>
      * Meta Data Information (in progress):
      * <ul>
-     * <li>full name: roomst.roomid
-     * <li> foreign key: room.roomid
-     * <li>comments: ?????
+     * <li>full name: roomhstlog.roomid
      * <li>column size: 10
      * <li>jdbc type returned by the driver: Types.INTEGER
      * </ul>
@@ -207,208 +205,70 @@ public class RoomstBean
     }
 
     /**
-     * Getter method for statusdate.
+     * Getter method for housekeepingstatusid.
      * <br>
      * Meta Data Information (in progress):
      * <ul>
-     * <li>full name: roomst.statusdate
-     * <li>comments: ??????
-     * <li>column size: 29
-     * <li>jdbc type returned by the driver: Types.TIMESTAMP
-     * </ul>
-     *
-     * @return the value of statusdate
-     */
-    public java.sql.Timestamp getStatusdate()
-    {
-        return statusdate; 
-    }
-
-    /**
-     * Setter method for statusdate.
-     * <br>
-     * The new value is set only if compareTo() says it is different,
-     * or if one of either the new value or the current value is null.
-     * In case the new value is different, it is set and the field is marked as 'modified'.
-     *
-     * @param newVal the new value to be assigned to statusdate
-     */
-    public void setStatusdate(java.sql.Timestamp newVal) {
-        if ((newVal != null && this.statusdate != null && (newVal.compareTo(this.statusdate) == 0)) || 
-            (newVal == null && this.statusdate == null && statusdate_is_initialized)) {
-            return; 
-        } 
-        this.statusdate = newVal; 
-        statusdate_is_modified = true; 
-        statusdate_is_initialized = true; 
-    }
-
-    /**
-     * Setter method for statusdate.
-     * <br>
-     * Convenient for those who do not want to deal with Objects for primary types.
-     *
-     * @param newVal the new value to be assigned to statusdate
-     */
-    public void setStatusdate(long newVal) {
-        setStatusdate(new java.sql.Timestamp(newVal));
-    }
-
-    /**
-     * Determines if the statusdate has been modified.
-     *
-     * @return true if the field has been modified, false if the field has not been modified
-     */
-    public boolean isStatusdateModified() {
-        return statusdate_is_modified; 
-    }
-
-    /**
-     * Determines if the statusdate has been initialized.
-     * <br>
-     * It is useful to determine if a field is null on purpose or just because it has not been initialized.
-     *
-     * @return true if the field has been initialized, false otherwise
-     */
-    public boolean isStatusdateInitialized() {
-        return statusdate_is_initialized; 
-    }
-
-    /**
-     * Getter method for st.
-     * <br>
-     * Meta Data Information (in progress):
-     * <ul>
-     * <li>full name: roomst.st
-     * <li>comments: ???????
+     * <li>full name: roomhstlog.housekeepingstatusid
      * <li>column size: 10
      * <li>jdbc type returned by the driver: Types.INTEGER
      * </ul>
      *
-     * @return the value of st
+     * @return the value of housekeepingstatusid
      */
-    public Integer getSt()
+    public Integer getHousekeepingstatusid()
     {
-        return st; 
+        return housekeepingstatusid; 
     }
 
     /**
-     * Setter method for st.
+     * Setter method for housekeepingstatusid.
      * <br>
      * The new value is set only if compareTo() says it is different,
      * or if one of either the new value or the current value is null.
      * In case the new value is different, it is set and the field is marked as 'modified'.
      *
-     * @param newVal the new value to be assigned to st
+     * @param newVal the new value to be assigned to housekeepingstatusid
      */
-    public void setSt(Integer newVal) {
-        if ((newVal != null && this.st != null && (newVal.compareTo(this.st) == 0)) || 
-            (newVal == null && this.st == null && st_is_initialized)) {
+    public void setHousekeepingstatusid(Integer newVal) {
+        if ((newVal != null && this.housekeepingstatusid != null && (newVal.compareTo(this.housekeepingstatusid) == 0)) || 
+            (newVal == null && this.housekeepingstatusid == null && housekeepingstatusid_is_initialized)) {
             return; 
         } 
-        this.st = newVal; 
-        st_is_modified = true; 
-        st_is_initialized = true; 
+        this.housekeepingstatusid = newVal; 
+        housekeepingstatusid_is_modified = true; 
+        housekeepingstatusid_is_initialized = true; 
     }
 
     /**
-     * Setter method for st.
+     * Setter method for housekeepingstatusid.
      * <br>
      * Convenient for those who do not want to deal with Objects for primary types.
      *
-     * @param newVal the new value to be assigned to st
+     * @param newVal the new value to be assigned to housekeepingstatusid
      */
-    public void setSt(int newVal) {
-        setSt(new Integer(newVal));
+    public void setHousekeepingstatusid(int newVal) {
+        setHousekeepingstatusid(new Integer(newVal));
     }
 
     /**
-     * Determines if the st has been modified.
+     * Determines if the housekeepingstatusid has been modified.
      *
      * @return true if the field has been modified, false if the field has not been modified
      */
-    public boolean isStModified() {
-        return st_is_modified; 
+    public boolean isHousekeepingstatusidModified() {
+        return housekeepingstatusid_is_modified; 
     }
 
     /**
-     * Determines if the st has been initialized.
+     * Determines if the housekeepingstatusid has been initialized.
      * <br>
      * It is useful to determine if a field is null on purpose or just because it has not been initialized.
      *
      * @return true if the field has been initialized, false otherwise
      */
-    public boolean isStInitialized() {
-        return st_is_initialized; 
-    }
-
-    /**
-     * Getter method for regbyid.
-     * <br>
-     * Meta Data Information (in progress):
-     * <ul>
-     * <li>full name: roomst.regbyid
-     * <li> foreign key: personnel.personnelid
-     * <li>comments: ??????
-     * <li>column size: 10
-     * <li>jdbc type returned by the driver: Types.INTEGER
-     * </ul>
-     *
-     * @return the value of regbyid
-     */
-    public Integer getRegbyid()
-    {
-        return regbyid; 
-    }
-
-    /**
-     * Setter method for regbyid.
-     * <br>
-     * The new value is set only if compareTo() says it is different,
-     * or if one of either the new value or the current value is null.
-     * In case the new value is different, it is set and the field is marked as 'modified'.
-     *
-     * @param newVal the new value to be assigned to regbyid
-     */
-    public void setRegbyid(Integer newVal) {
-        if ((newVal != null && this.regbyid != null && (newVal.compareTo(this.regbyid) == 0)) || 
-            (newVal == null && this.regbyid == null && regbyid_is_initialized)) {
-            return; 
-        } 
-        this.regbyid = newVal; 
-        regbyid_is_modified = true; 
-        regbyid_is_initialized = true; 
-    }
-
-    /**
-     * Setter method for regbyid.
-     * <br>
-     * Convenient for those who do not want to deal with Objects for primary types.
-     *
-     * @param newVal the new value to be assigned to regbyid
-     */
-    public void setRegbyid(int newVal) {
-        setRegbyid(new Integer(newVal));
-    }
-
-    /**
-     * Determines if the regbyid has been modified.
-     *
-     * @return true if the field has been modified, false if the field has not been modified
-     */
-    public boolean isRegbyidModified() {
-        return regbyid_is_modified; 
-    }
-
-    /**
-     * Determines if the regbyid has been initialized.
-     * <br>
-     * It is useful to determine if a field is null on purpose or just because it has not been initialized.
-     *
-     * @return true if the field has been initialized, false otherwise
-     */
-    public boolean isRegbyidInitialized() {
-        return regbyid_is_initialized; 
+    public boolean isHousekeepingstatusidInitialized() {
+        return housekeepingstatusid_is_initialized; 
     }
 
     /**
@@ -416,8 +276,7 @@ public class RoomstBean
      * <br>
      * Meta Data Information (in progress):
      * <ul>
-     * <li>full name: roomst.regdate
-     * <li>comments: ???????????? ??????
+     * <li>full name: roomhstlog.regdate
      * <li>default value: now()
      * <li>column size: 29
      * <li>jdbc type returned by the driver: Types.TIMESTAMP
@@ -481,207 +340,327 @@ public class RoomstBean
     }
 
     /**
-     * Getter method for reservationroomid.
+     * Getter method for regbyid.
      * <br>
      * Meta Data Information (in progress):
      * <ul>
-     * <li>full name: roomst.reservationroomid
-     * <li> foreign key: reservationroom.reservationroomid
-     * <li>column size: 19
-     * <li>jdbc type returned by the driver: Types.BIGINT
-     * </ul>
-     *
-     * @return the value of reservationroomid
-     */
-    public Long getReservationroomid()
-    {
-        return reservationroomid; 
-    }
-
-    /**
-     * Setter method for reservationroomid.
-     * <br>
-     * The new value is set only if compareTo() says it is different,
-     * or if one of either the new value or the current value is null.
-     * In case the new value is different, it is set and the field is marked as 'modified'.
-     *
-     * @param newVal the new value to be assigned to reservationroomid
-     */
-    public void setReservationroomid(Long newVal) {
-        if ((newVal != null && this.reservationroomid != null && (newVal.compareTo(this.reservationroomid) == 0)) || 
-            (newVal == null && this.reservationroomid == null && reservationroomid_is_initialized)) {
-            return; 
-        } 
-        this.reservationroomid = newVal; 
-        reservationroomid_is_modified = true; 
-        reservationroomid_is_initialized = true; 
-    }
-
-    /**
-     * Setter method for reservationroomid.
-     * <br>
-     * Convenient for those who do not want to deal with Objects for primary types.
-     *
-     * @param newVal the new value to be assigned to reservationroomid
-     */
-    public void setReservationroomid(long newVal) {
-        setReservationroomid(new Long(newVal));
-    }
-
-    /**
-     * Determines if the reservationroomid has been modified.
-     *
-     * @return true if the field has been modified, false if the field has not been modified
-     */
-    public boolean isReservationroomidModified() {
-        return reservationroomid_is_modified; 
-    }
-
-    /**
-     * Determines if the reservationroomid has been initialized.
-     * <br>
-     * It is useful to determine if a field is null on purpose or just because it has not been initialized.
-     *
-     * @return true if the field has been initialized, false otherwise
-     */
-    public boolean isReservationroomidInitialized() {
-        return reservationroomid_is_initialized; 
-    }
-
-    /**
-     * Getter method for roomtypeid.
-     * <br>
-     * Meta Data Information (in progress):
-     * <ul>
-     * <li>full name: roomst.roomtypeid
-     * <li> foreign key: roomtype.roomtypeid
+     * <li>full name: roomhstlog.regbyid
      * <li>column size: 10
      * <li>jdbc type returned by the driver: Types.INTEGER
      * </ul>
      *
-     * @return the value of roomtypeid
+     * @return the value of regbyid
      */
-    public Integer getRoomtypeid()
+    public Integer getRegbyid()
     {
-        return roomtypeid; 
+        return regbyid; 
     }
 
     /**
-     * Setter method for roomtypeid.
+     * Setter method for regbyid.
      * <br>
      * The new value is set only if compareTo() says it is different,
      * or if one of either the new value or the current value is null.
      * In case the new value is different, it is set and the field is marked as 'modified'.
      *
-     * @param newVal the new value to be assigned to roomtypeid
+     * @param newVal the new value to be assigned to regbyid
      */
-    public void setRoomtypeid(Integer newVal) {
-        if ((newVal != null && this.roomtypeid != null && (newVal.compareTo(this.roomtypeid) == 0)) || 
-            (newVal == null && this.roomtypeid == null && roomtypeid_is_initialized)) {
+    public void setRegbyid(Integer newVal) {
+        if ((newVal != null && this.regbyid != null && (newVal.compareTo(this.regbyid) == 0)) || 
+            (newVal == null && this.regbyid == null && regbyid_is_initialized)) {
             return; 
         } 
-        this.roomtypeid = newVal; 
-        roomtypeid_is_modified = true; 
-        roomtypeid_is_initialized = true; 
+        this.regbyid = newVal; 
+        regbyid_is_modified = true; 
+        regbyid_is_initialized = true; 
     }
 
     /**
-     * Setter method for roomtypeid.
+     * Setter method for regbyid.
      * <br>
      * Convenient for those who do not want to deal with Objects for primary types.
      *
-     * @param newVal the new value to be assigned to roomtypeid
+     * @param newVal the new value to be assigned to regbyid
      */
-    public void setRoomtypeid(int newVal) {
-        setRoomtypeid(new Integer(newVal));
+    public void setRegbyid(int newVal) {
+        setRegbyid(new Integer(newVal));
     }
 
     /**
-     * Determines if the roomtypeid has been modified.
+     * Determines if the regbyid has been modified.
      *
      * @return true if the field has been modified, false if the field has not been modified
      */
-    public boolean isRoomtypeidModified() {
-        return roomtypeid_is_modified; 
+    public boolean isRegbyidModified() {
+        return regbyid_is_modified; 
     }
 
     /**
-     * Determines if the roomtypeid has been initialized.
+     * Determines if the regbyid has been initialized.
      * <br>
      * It is useful to determine if a field is null on purpose or just because it has not been initialized.
      *
      * @return true if the field has been initialized, false otherwise
      */
-    public boolean isRoomtypeidInitialized() {
-        return roomtypeid_is_initialized; 
+    public boolean isRegbyidInitialized() {
+        return regbyid_is_initialized; 
     }
 
     /**
-     * Getter method for blockroomid.
+     * Getter method for houseunitid.
      * <br>
      * Meta Data Information (in progress):
      * <ul>
-     * <li>full name: roomst.blockroomid
-     * <li> foreign key: blockroom.blockroomid
-     * <li>column size: 19
-     * <li>jdbc type returned by the driver: Types.BIGINT
+     * <li>full name: roomhstlog.houseunitid
+     * <li>column size: 10
+     * <li>jdbc type returned by the driver: Types.INTEGER
      * </ul>
      *
-     * @return the value of blockroomid
+     * @return the value of houseunitid
      */
-    public Long getBlockroomid()
+    public Integer getHouseunitid()
     {
-        return blockroomid; 
+        return houseunitid; 
     }
 
     /**
-     * Setter method for blockroomid.
+     * Setter method for houseunitid.
      * <br>
      * The new value is set only if compareTo() says it is different,
      * or if one of either the new value or the current value is null.
      * In case the new value is different, it is set and the field is marked as 'modified'.
      *
-     * @param newVal the new value to be assigned to blockroomid
+     * @param newVal the new value to be assigned to houseunitid
      */
-    public void setBlockroomid(Long newVal) {
-        if ((newVal != null && this.blockroomid != null && (newVal.compareTo(this.blockroomid) == 0)) || 
-            (newVal == null && this.blockroomid == null && blockroomid_is_initialized)) {
+    public void setHouseunitid(Integer newVal) {
+        if ((newVal != null && this.houseunitid != null && (newVal.compareTo(this.houseunitid) == 0)) || 
+            (newVal == null && this.houseunitid == null && houseunitid_is_initialized)) {
             return; 
         } 
-        this.blockroomid = newVal; 
-        blockroomid_is_modified = true; 
-        blockroomid_is_initialized = true; 
+        this.houseunitid = newVal; 
+        houseunitid_is_modified = true; 
+        houseunitid_is_initialized = true; 
     }
 
     /**
-     * Setter method for blockroomid.
+     * Setter method for houseunitid.
      * <br>
      * Convenient for those who do not want to deal with Objects for primary types.
      *
-     * @param newVal the new value to be assigned to blockroomid
+     * @param newVal the new value to be assigned to houseunitid
      */
-    public void setBlockroomid(long newVal) {
-        setBlockroomid(new Long(newVal));
+    public void setHouseunitid(int newVal) {
+        setHouseunitid(new Integer(newVal));
     }
 
     /**
-     * Determines if the blockroomid has been modified.
+     * Determines if the houseunitid has been modified.
      *
      * @return true if the field has been modified, false if the field has not been modified
      */
-    public boolean isBlockroomidModified() {
-        return blockroomid_is_modified; 
+    public boolean isHouseunitidModified() {
+        return houseunitid_is_modified; 
     }
 
     /**
-     * Determines if the blockroomid has been initialized.
+     * Determines if the houseunitid has been initialized.
      * <br>
      * It is useful to determine if a field is null on purpose or just because it has not been initialized.
      *
      * @return true if the field has been initialized, false otherwise
      */
-    public boolean isBlockroomidInitialized() {
-        return blockroomid_is_initialized; 
+    public boolean isHouseunitidInitialized() {
+        return houseunitid_is_initialized; 
+    }
+
+    /**
+     * Getter method for closedate.
+     * <br>
+     * Meta Data Information (in progress):
+     * <ul>
+     * <li>full name: roomhstlog.closedate
+     * <li>column size: 29
+     * <li>jdbc type returned by the driver: Types.TIMESTAMP
+     * </ul>
+     *
+     * @return the value of closedate
+     */
+    public java.sql.Timestamp getClosedate()
+    {
+        return closedate; 
+    }
+
+    /**
+     * Setter method for closedate.
+     * <br>
+     * The new value is set only if compareTo() says it is different,
+     * or if one of either the new value or the current value is null.
+     * In case the new value is different, it is set and the field is marked as 'modified'.
+     *
+     * @param newVal the new value to be assigned to closedate
+     */
+    public void setClosedate(java.sql.Timestamp newVal) {
+        if ((newVal != null && this.closedate != null && (newVal.compareTo(this.closedate) == 0)) || 
+            (newVal == null && this.closedate == null && closedate_is_initialized)) {
+            return; 
+        } 
+        this.closedate = newVal; 
+        closedate_is_modified = true; 
+        closedate_is_initialized = true; 
+    }
+
+    /**
+     * Setter method for closedate.
+     * <br>
+     * Convenient for those who do not want to deal with Objects for primary types.
+     *
+     * @param newVal the new value to be assigned to closedate
+     */
+    public void setClosedate(long newVal) {
+        setClosedate(new java.sql.Timestamp(newVal));
+    }
+
+    /**
+     * Determines if the closedate has been modified.
+     *
+     * @return true if the field has been modified, false if the field has not been modified
+     */
+    public boolean isClosedateModified() {
+        return closedate_is_modified; 
+    }
+
+    /**
+     * Determines if the closedate has been initialized.
+     * <br>
+     * It is useful to determine if a field is null on purpose or just because it has not been initialized.
+     *
+     * @return true if the field has been initialized, false otherwise
+     */
+    public boolean isClosedateInitialized() {
+        return closedate_is_initialized; 
+    }
+
+    /**
+     * Getter method for personnelid.
+     * <br>
+     * Meta Data Information (in progress):
+     * <ul>
+     * <li>full name: roomhstlog.personnelid
+     * <li>column size: 10
+     * <li>jdbc type returned by the driver: Types.INTEGER
+     * </ul>
+     *
+     * @return the value of personnelid
+     */
+    public Integer getPersonnelid()
+    {
+        return personnelid; 
+    }
+
+    /**
+     * Setter method for personnelid.
+     * <br>
+     * The new value is set only if compareTo() says it is different,
+     * or if one of either the new value or the current value is null.
+     * In case the new value is different, it is set and the field is marked as 'modified'.
+     *
+     * @param newVal the new value to be assigned to personnelid
+     */
+    public void setPersonnelid(Integer newVal) {
+        if ((newVal != null && this.personnelid != null && (newVal.compareTo(this.personnelid) == 0)) || 
+            (newVal == null && this.personnelid == null && personnelid_is_initialized)) {
+            return; 
+        } 
+        this.personnelid = newVal; 
+        personnelid_is_modified = true; 
+        personnelid_is_initialized = true; 
+    }
+
+    /**
+     * Setter method for personnelid.
+     * <br>
+     * Convenient for those who do not want to deal with Objects for primary types.
+     *
+     * @param newVal the new value to be assigned to personnelid
+     */
+    public void setPersonnelid(int newVal) {
+        setPersonnelid(new Integer(newVal));
+    }
+
+    /**
+     * Determines if the personnelid has been modified.
+     *
+     * @return true if the field has been modified, false if the field has not been modified
+     */
+    public boolean isPersonnelidModified() {
+        return personnelid_is_modified; 
+    }
+
+    /**
+     * Determines if the personnelid has been initialized.
+     * <br>
+     * It is useful to determine if a field is null on purpose or just because it has not been initialized.
+     *
+     * @return true if the field has been initialized, false otherwise
+     */
+    public boolean isPersonnelidInitialized() {
+        return personnelid_is_initialized; 
+    }
+
+    /**
+     * Getter method for remark.
+     * <br>
+     * Meta Data Information (in progress):
+     * <ul>
+     * <li>full name: roomhstlog.remark
+     * <li>column size: 2147483647
+     * <li>jdbc type returned by the driver: Types.VARCHAR
+     * </ul>
+     *
+     * @return the value of remark
+     */
+    public String getRemark()
+    {
+        return remark; 
+    }
+
+    /**
+     * Setter method for remark.
+     * <br>
+     * The new value is set only if compareTo() says it is different,
+     * or if one of either the new value or the current value is null.
+     * In case the new value is different, it is set and the field is marked as 'modified'.
+     *
+     * @param newVal the new value to be assigned to remark
+     */
+    public void setRemark(String newVal) {
+        if ((newVal != null && this.remark != null && (newVal.compareTo(this.remark) == 0)) || 
+            (newVal == null && this.remark == null && remark_is_initialized)) {
+            return; 
+        } 
+        this.remark = newVal; 
+        remark_is_modified = true; 
+        remark_is_initialized = true; 
+    }
+
+    /**
+     * Determines if the remark has been modified.
+     *
+     * @return true if the field has been modified, false if the field has not been modified
+     */
+    public boolean isRemarkModified() {
+        return remark_is_modified; 
+    }
+
+    /**
+     * Determines if the remark has been initialized.
+     * <br>
+     * It is useful to determine if a field is null on purpose or just because it has not been initialized.
+     *
+     * @return true if the field has been initialized, false otherwise
+     */
+    public boolean isRemarkInitialized() {
+        return remark_is_initialized; 
     }
 
     /**
@@ -710,30 +689,30 @@ public class RoomstBean
      * @return true if the object has been modified, false if the object has not been modified
      */
     public boolean isModified() {
-        return roomstid_is_modified || 
+        return roomhstlogid_is_modified || 
 		roomid_is_modified || 
-		statusdate_is_modified || 
-		st_is_modified || 
-		regbyid_is_modified || 
+		housekeepingstatusid_is_modified || 
 		regdate_is_modified || 
-		reservationroomid_is_modified || 
-		roomtypeid_is_modified || 
-		blockroomid_is_modified;
+		regbyid_is_modified || 
+		houseunitid_is_modified || 
+		closedate_is_modified || 
+		personnelid_is_modified || 
+		remark_is_modified;
     }
 
     /**
      * Resets the object modification status to 'not modified'.
      */
     public void resetIsModified() {
-        roomstid_is_modified = false;
+        roomhstlogid_is_modified = false;
         roomid_is_modified = false;
-        statusdate_is_modified = false;
-        st_is_modified = false;
-        regbyid_is_modified = false;
+        housekeepingstatusid_is_modified = false;
         regdate_is_modified = false;
-        reservationroomid_is_modified = false;
-        roomtypeid_is_modified = false;
-        blockroomid_is_modified = false;
+        regbyid_is_modified = false;
+        houseunitid_is_modified = false;
+        closedate_is_modified = false;
+        personnelid_is_modified = false;
+        remark_is_modified = false;
     }
 
     /**
@@ -741,16 +720,16 @@ public class RoomstBean
      *
      * @param bean the bean to copy into the current bean
      */
-    public void copy(RoomstBean bean) {
-        setRoomstid(bean.getRoomstid());
+    public void copy(RoomhstlogBean bean) {
+        setRoomhstlogid(bean.getRoomhstlogid());
         setRoomid(bean.getRoomid());
-        setStatusdate(bean.getStatusdate());
-        setSt(bean.getSt());
-        setRegbyid(bean.getRegbyid());
+        setHousekeepingstatusid(bean.getHousekeepingstatusid());
         setRegdate(bean.getRegdate());
-        setReservationroomid(bean.getReservationroomid());
-        setRoomtypeid(bean.getRoomtypeid());
-        setBlockroomid(bean.getBlockroomid());
+        setRegbyid(bean.getRegbyid());
+        setHouseunitid(bean.getHouseunitid());
+        setClosedate(bean.getClosedate());
+        setPersonnelid(bean.getPersonnelid());
+        setRemark(bean.getRemark());
     }
 
     /**
@@ -759,16 +738,16 @@ public class RoomstBean
      * @return the object as a string
      */
     public String toString() {
-        return   "\n[roomst] "
-                 + "\n - roomst.roomstid = " + (roomstid_is_initialized ? ("[" + (roomstid == null ? null : roomstid.toString()) + "]") : "not initialized") + ""
-                 + "\n - roomst.roomid = " + (roomid_is_initialized ? ("[" + (roomid == null ? null : roomid.toString()) + "]") : "not initialized") + ""
-                 + "\n - roomst.statusdate = " + (statusdate_is_initialized ? ("[" + (statusdate == null ? null : statusdate.toString()) + "]") : "not initialized") + ""
-                 + "\n - roomst.st = " + (st_is_initialized ? ("[" + (st == null ? null : st.toString()) + "]") : "not initialized") + ""
-                 + "\n - roomst.regbyid = " + (regbyid_is_initialized ? ("[" + (regbyid == null ? null : regbyid.toString()) + "]") : "not initialized") + ""
-                 + "\n - roomst.regdate = " + (regdate_is_initialized ? ("[" + (regdate == null ? null : regdate.toString()) + "]") : "not initialized") + ""
-                 + "\n - roomst.reservationroomid = " + (reservationroomid_is_initialized ? ("[" + (reservationroomid == null ? null : reservationroomid.toString()) + "]") : "not initialized") + ""
-                 + "\n - roomst.roomtypeid = " + (roomtypeid_is_initialized ? ("[" + (roomtypeid == null ? null : roomtypeid.toString()) + "]") : "not initialized") + ""
-                 + "\n - roomst.blockroomid = " + (blockroomid_is_initialized ? ("[" + (blockroomid == null ? null : blockroomid.toString()) + "]") : "not initialized") + ""
+        return   "\n[roomhstlog] "
+                 + "\n - roomhstlog.roomhstlogid = " + (roomhstlogid_is_initialized ? ("[" + (roomhstlogid == null ? null : roomhstlogid.toString()) + "]") : "not initialized") + ""
+                 + "\n - roomhstlog.roomid = " + (roomid_is_initialized ? ("[" + (roomid == null ? null : roomid.toString()) + "]") : "not initialized") + ""
+                 + "\n - roomhstlog.housekeepingstatusid = " + (housekeepingstatusid_is_initialized ? ("[" + (housekeepingstatusid == null ? null : housekeepingstatusid.toString()) + "]") : "not initialized") + ""
+                 + "\n - roomhstlog.regdate = " + (regdate_is_initialized ? ("[" + (regdate == null ? null : regdate.toString()) + "]") : "not initialized") + ""
+                 + "\n - roomhstlog.regbyid = " + (regbyid_is_initialized ? ("[" + (regbyid == null ? null : regbyid.toString()) + "]") : "not initialized") + ""
+                 + "\n - roomhstlog.houseunitid = " + (houseunitid_is_initialized ? ("[" + (houseunitid == null ? null : houseunitid.toString()) + "]") : "not initialized") + ""
+                 + "\n - roomhstlog.closedate = " + (closedate_is_initialized ? ("[" + (closedate == null ? null : closedate.toString()) + "]") : "not initialized") + ""
+                 + "\n - roomhstlog.personnelid = " + (personnelid_is_initialized ? ("[" + (personnelid == null ? null : personnelid.toString()) + "]") : "not initialized") + ""
+                 + "\n - roomhstlog.remark = " + (remark_is_initialized ? ("[" + (remark == null ? null : remark.toString()) + "]") : "not initialized") + ""
             ;
     }
 

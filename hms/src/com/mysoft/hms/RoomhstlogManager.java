@@ -19,9 +19,9 @@ import java.sql.*;
 
 
 /**
- * Handles database calls for the roomhst table.
+ * Handles database calls for the roomhstlog table.
  */
-public class RoomhstManager
+public class RoomhstlogManager
 // extends+ 
 
 // extends- 
@@ -29,11 +29,11 @@ public class RoomhstManager
 {
 
     /**
-     * Column roomhstid of type Types.BIGINT mapped to Long.
+     * Column roomhstlogid of type Types.BIGINT mapped to Long.
      */
-    public static final int ID_ROOMHSTID = 0;
-    public static final int TYPE_ROOMHSTID = Types.BIGINT;
-    public static final String NAME_ROOMHSTID = "roomhstid";
+    public static final int ID_ROOMHSTLOGID = 0;
+    public static final int TYPE_ROOMHSTLOGID = Types.BIGINT;
+    public static final String NAME_ROOMHSTLOGID = "roomhstlogid";
 
     /**
      * Column roomid of type Types.INTEGER mapped to Integer.
@@ -92,68 +92,68 @@ public class RoomhstManager
     public static final String NAME_REMARK = "remark";
 
 
-    private static final String TABLE_NAME = "roomhst";
+    private static final String TABLE_NAME = "roomhstlog";
 
     /**
-     * Create an array of type string containing all the fields of the roomhst table.
+     * Create an array of type string containing all the fields of the roomhstlog table.
      */
     private static final String[] FIELD_NAMES = 
     {
-        "roomhst.roomhstid"
-        ,"roomhst.roomid"
-        ,"roomhst.housekeepingstatusid"
-        ,"roomhst.regdate"
-        ,"roomhst.regbyid"
-        ,"roomhst.houseunitid"
-        ,"roomhst.closedate"
-        ,"roomhst.personnelid"
-        ,"roomhst.remark"
+        "roomhstlog.roomhstlogid"
+        ,"roomhstlog.roomid"
+        ,"roomhstlog.housekeepingstatusid"
+        ,"roomhstlog.regdate"
+        ,"roomhstlog.regbyid"
+        ,"roomhstlog.houseunitid"
+        ,"roomhstlog.closedate"
+        ,"roomhstlog.personnelid"
+        ,"roomhstlog.remark"
     };
 
     /**
-     * Field that contains the comma separated fields of the roomhst table.
+     * Field that contains the comma separated fields of the roomhstlog table.
      */
-    private static final String ALL_FIELDS = "roomhst.roomhstid"
-                            + ",roomhst.roomid"
-                            + ",roomhst.housekeepingstatusid"
-                            + ",roomhst.regdate"
-                            + ",roomhst.regbyid"
-                            + ",roomhst.houseunitid"
-                            + ",roomhst.closedate"
-                            + ",roomhst.personnelid"
-                            + ",roomhst.remark";
+    private static final String ALL_FIELDS = "roomhstlog.roomhstlogid"
+                            + ",roomhstlog.roomid"
+                            + ",roomhstlog.housekeepingstatusid"
+                            + ",roomhstlog.regdate"
+                            + ",roomhstlog.regbyid"
+                            + ",roomhstlog.houseunitid"
+                            + ",roomhstlog.closedate"
+                            + ",roomhstlog.personnelid"
+                            + ",roomhstlog.remark";
 
-    private static RoomhstManager singleton = new RoomhstManager();
+    private static RoomhstlogManager singleton = new RoomhstlogManager();
 
     /**
-     * Get the RoomhstManager singleton.
+     * Get the RoomhstlogManager singleton.
      *
-     * @return RoomhstManager 
+     * @return RoomhstlogManager 
      */
-    synchronized public static RoomhstManager getInstance()
+    synchronized public static RoomhstlogManager getInstance()
     {
         return singleton;
     }
 
     /**
-     * Sets your own RoomhstManager instance.
+     * Sets your own RoomhstlogManager instance.
      <br>
      * This is optional, by default we provide it for you.
      */
-    synchronized public static void setInstance(RoomhstManager instance)
+    synchronized public static void setInstance(RoomhstlogManager instance)
     {
         singleton = instance;
     }
 
 
     /**
-     * Creates a new RoomhstBean instance.
+     * Creates a new RoomhstlogBean instance.
      *
-     * @return the new RoomhstBean 
+     * @return the new RoomhstlogBean 
      */
-    public RoomhstBean createRoomhstBean()
+    public RoomhstlogBean createRoomhstlogBean()
     {
-        return new RoomhstBean();
+        return new RoomhstlogBean();
     }
 
     //////////////////////////////////////
@@ -161,21 +161,21 @@ public class RoomhstManager
     //////////////////////////////////////
 
     /**
-     * Loads a RoomhstBean from the roomhst using its key fields.
+     * Loads a RoomhstlogBean from the roomhstlog using its key fields.
      *
-     * @return a unique RoomhstBean 
+     * @return a unique RoomhstlogBean 
      */
     //12
-    public RoomhstBean loadByPrimaryKey(Long roomhstid) throws SQLException
+    public RoomhstlogBean loadByPrimaryKey(Long roomhstlogid) throws SQLException
     {
         Connection c = null;
         PreparedStatement ps = null;
         try 
         {
             c = getConnection();
-            ps = c.prepareStatement("SELECT " + ALL_FIELDS + " FROM roomhst WHERE roomhst.roomhstid=?",ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-            Manager.setLong(ps, 1, roomhstid);
-            RoomhstBean pReturn[] = loadByPreparedStatement(ps);
+            ps = c.prepareStatement("SELECT " + ALL_FIELDS + " FROM roomhstlog WHERE roomhstlog.roomhstlogid=?",ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            Manager.setLong(ps, 1, roomhstlogid);
+            RoomhstlogBean pReturn[] = loadByPreparedStatement(ps);
             if (pReturn.length < 1)
                 return null;
             else
@@ -194,15 +194,15 @@ public class RoomhstManager
      * @return the number of deleted rows
      */
     //60
-    public int deleteByPrimaryKey(Long roomhstid) throws SQLException
+    public int deleteByPrimaryKey(Long roomhstlogid) throws SQLException
     {
         Connection c = null;
         PreparedStatement ps = null;
         try
         {
             c = getConnection();
-            ps = c.prepareStatement("DELETE from roomhst WHERE roomhst.roomhstid=?",ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-            Manager.setLong(ps, 1, roomhstid);
+            ps = c.prepareStatement("DELETE from roomhstlog WHERE roomhstlog.roomhstlogid=?",ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            Manager.setLong(ps, 1, roomhstlogid);
             return ps.executeUpdate();
         }
         finally
@@ -219,19 +219,19 @@ public class RoomhstManager
     //////////////////////////////////////
 
     /**
-     * Loads all the rows from roomhst.
+     * Loads all the rows from roomhstlog.
      *
-     * @return an array of RoomhstManager pObject
+     * @return an array of RoomhstlogManager pObject
      */
     //38
-    public RoomhstBean[] loadAll() throws SQLException 
+    public RoomhstlogBean[] loadAll() throws SQLException 
     {
         Connection c = null;
         PreparedStatement ps = null;
         try 
         {
             c = getConnection();
-            ps = c.prepareStatement("SELECT " + ALL_FIELDS + " FROM roomhst",ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            ps = c.prepareStatement("SELECT " + ALL_FIELDS + " FROM roomhstlog",ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             return loadByPreparedStatement(ps);
         }
         finally
@@ -245,31 +245,31 @@ public class RoomhstManager
     // SQL 'WHERE' METHOD
     //////////////////////////////////////
     /**
-     * Retrieves an array of RoomhstBean given a sql 'where' clause.
+     * Retrieves an array of RoomhstlogBean given a sql 'where' clause.
      *
      * @param where the sql 'where' clause
-     * @return the resulting RoomhstBean table 
+     * @return the resulting RoomhstlogBean table 
      */
     //49
-    public RoomhstBean[] loadByWhere(String where) throws SQLException
+    public RoomhstlogBean[] loadByWhere(String where) throws SQLException
     {
         return loadByWhere(where, null);
     }
 
     /**
-     * Retrieves an array of RoomhstBean given a sql where clause, and a list of fields.
+     * Retrieves an array of RoomhstlogBean given a sql where clause, and a list of fields.
      * It is up to you to pass the 'WHERE' in your where clausis.
      *
      * @param where the sql 'where' clause
      * @param fieldList table of the field's associated constants
-     * @return the resulting RoomhstBean table 
+     * @return the resulting RoomhstlogBean table 
      */
     //51
-    public RoomhstBean[] loadByWhere(String where, int[] fieldList) throws SQLException
+    public RoomhstlogBean[] loadByWhere(String where, int[] fieldList) throws SQLException
     {
         String sql = null;
         if(fieldList == null)
-            sql = "select " + ALL_FIELDS + " from roomhst " + where;
+            sql = "select " + ALL_FIELDS + " from roomhstlog " + where;
         else
         {
             StringBuffer buff = new StringBuffer(128);
@@ -280,7 +280,7 @@ public class RoomhstManager
                     buff.append(",");
                 buff.append(FIELD_NAMES[fieldList[i]]);
             }
-            buff.append(" from roomhst ");
+            buff.append(" from roomhstlog ");
             buff.append(where);
             sql = buff.toString();
             buff = null;
@@ -303,7 +303,7 @@ public class RoomhstManager
                     v.add(decodeRow(rs, fieldList));
             }
 
-            return (RoomhstBean[])v.toArray(new RoomhstBean[0]);
+            return (RoomhstlogBean[])v.toArray(new RoomhstlogBean[0]);
         }
         finally
         {
@@ -315,7 +315,7 @@ public class RoomhstManager
 
 
     /**
-     * Deletes all rows from roomhst table.
+     * Deletes all rows from roomhstlog table.
      * @return the number of deleted rows.
      */
     public int deleteAll() throws SQLException
@@ -325,7 +325,7 @@ public class RoomhstManager
 
 
     /**
-     * Deletes rows from the roomhst table using a 'where' clause.
+     * Deletes rows from the roomhstlog table using a 'where' clause.
      * It is up to you to pass the 'WHERE' in your where clausis.
      * <br>Attention, if 'WHERE' is omitted it will delete all records. 
      *
@@ -340,7 +340,7 @@ public class RoomhstManager
         try
         {
             c = getConnection();
-            String delByWhereSQL = "DELETE FROM roomhst " + where;
+            String delByWhereSQL = "DELETE FROM roomhstlog " + where;
             ps = c.prepareStatement(delByWhereSQL);
             return ps.executeUpdate();
         }
@@ -357,12 +357,12 @@ public class RoomhstManager
     // SAVE 
     ///////////////////////////////////////////////////////////////////////
     /**
-     * Saves the RoomhstBean pObject into the database.
+     * Saves the RoomhstlogBean pObject into the database.
      *
-     * @param pObject the RoomhstBean pObject to be saved
+     * @param pObject the RoomhstlogBean pObject to be saved
      */
     //100
-    public RoomhstBean save(RoomhstBean pObject) throws SQLException
+    public RoomhstlogBean save(RoomhstlogBean pObject) throws SQLException
     {
         Connection c = null;
         PreparedStatement ps = null;
@@ -373,15 +373,15 @@ public class RoomhstManager
             c = getConnection();
             if (pObject.isNew())
             { // SAVE 
-                if (!pObject.isRoomhstidModified())
+                if (!pObject.isRoomhstlogidModified())
                 {
-                    ps = c.prepareStatement("SELECT nextval('roomhstid_seq')");
+                    ps = c.prepareStatement("SELECT nextval('roomhstlogid_seq')");
                     ResultSet rs = null;
                     try
                     {
                         rs = ps.executeQuery();
                         if(rs.next())
-                            pObject.setRoomhstid(Manager.getLong(rs, 1));
+                            pObject.setRoomhstlogid(Manager.getLong(rs, 1));
                         else
                             getManager().log("ATTENTION: Could not retrieve generated key!");
                     }
@@ -393,13 +393,13 @@ public class RoomhstManager
                 }
                 beforeInsert(pObject); // listener callback
                 int _dirtyCount = 0;
-                _sql = new StringBuffer("INSERT into roomhst (");
+                _sql = new StringBuffer("INSERT into roomhstlog (");
     
-                if (pObject.isRoomhstidModified()) {
+                if (pObject.isRoomhstlogidModified()) {
                     if (_dirtyCount>0) {
                         _sql.append(",");
                     }
-                    _sql.append("roomhstid");
+                    _sql.append("roomhstlogid");
                     _dirtyCount++;
                 }
 
@@ -479,8 +479,8 @@ public class RoomhstManager
                 ps = c.prepareStatement(_sql.toString(), ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
                 _dirtyCount = 0;
 
-                if (pObject.isRoomhstidModified()) {
-                    Manager.setLong(ps, ++_dirtyCount, pObject.getRoomhstid());
+                if (pObject.isRoomhstlogidModified()) {
+                    Manager.setLong(ps, ++_dirtyCount, pObject.getRoomhstlogid());
                 }
     
                 if (pObject.isRoomidModified()) {
@@ -524,16 +524,16 @@ public class RoomhstManager
             else 
             { // UPDATE 
                 beforeUpdate(pObject); // listener callback
-                _sql = new StringBuffer("UPDATE roomhst SET ");
+                _sql = new StringBuffer("UPDATE roomhstlog SET ");
                 boolean useComma=false;
 
-                if (pObject.isRoomhstidModified()) {
+                if (pObject.isRoomhstlogidModified()) {
                     if (useComma) {
                         _sql.append(",");
                     } else {
                         useComma=true;
                     }
-                    _sql.append("roomhstid").append("=?");
+                    _sql.append("roomhstlogid").append("=?");
                 }
 
                 if (pObject.isRoomidModified()) {
@@ -608,12 +608,12 @@ public class RoomhstManager
                     _sql.append("remark").append("=?");
                 }
                 _sql.append(" WHERE ");
-                _sql.append("roomhst.roomhstid=?");
+                _sql.append("roomhstlog.roomhstlogid=?");
                 ps = c.prepareStatement(_sql.toString(),ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
                 int _dirtyCount = 0;
 
-                if (pObject.isRoomhstidModified()) {
-                      Manager.setLong(ps, ++_dirtyCount, pObject.getRoomhstid());
+                if (pObject.isRoomhstlogidModified()) {
+                      Manager.setLong(ps, ++_dirtyCount, pObject.getRoomhstlogid());
                 }
 
                 if (pObject.isRoomidModified()) {
@@ -652,7 +652,7 @@ public class RoomhstManager
                      return pObject;
                 }
     
-                Manager.setLong(ps, ++_dirtyCount, pObject.getRoomhstid());
+                Manager.setLong(ps, ++_dirtyCount, pObject.getRoomhstlogid());
                 ps.executeUpdate();
                 pObject.resetIsModified();
                 afterUpdate(pObject); // listener callback
@@ -670,13 +670,13 @@ public class RoomhstManager
 
 
     /**
-     * Saves an array of RoomhstBean pObjects into the database.
+     * Saves an array of RoomhstlogBean pObjects into the database.
      *
-     * @param pObjects the RoomhstBean pObject table to be saved
-     * @return the saved RoomhstBean array.
+     * @param pObjects the RoomhstlogBean pObject table to be saved
+     * @return the saved RoomhstlogBean array.
      */
     //65
-    public RoomhstBean[] save(RoomhstBean[] pObjects) throws SQLException 
+    public RoomhstlogBean[] save(RoomhstlogBean[] pObjects) throws SQLException 
     {
         for (int iIndex = 0; iIndex < pObjects.length; iIndex ++){
             save(pObjects[iIndex]);
@@ -690,15 +690,15 @@ public class RoomhstManager
     // USING TEMPLATE 
     ///////////////////////////////////////////////////////////////////////
     /**
-     * Loads a unique RoomhstBean pObject from a template one giving a c
+     * Loads a unique RoomhstlogBean pObject from a template one giving a c
      *
-     * @param pObject the RoomhstBean pObject to look for
+     * @param pObject the RoomhstlogBean pObject to look for
      * @return the pObject matching the template
      */
     //85
-    public RoomhstBean loadUniqueUsingTemplate(RoomhstBean pObject) throws SQLException
+    public RoomhstlogBean loadUniqueUsingTemplate(RoomhstlogBean pObject) throws SQLException
     {
-         RoomhstBean[] pReturn = loadUsingTemplate(pObject);
+         RoomhstlogBean[] pReturn = loadUsingTemplate(pObject);
          if (pReturn.length == 0)
              return null;
          if (pReturn.length > 1)
@@ -707,26 +707,26 @@ public class RoomhstManager
      }
 
     /**
-     * Loads an array of RoomhstBean from a template one.
+     * Loads an array of RoomhstlogBean from a template one.
      *
-     * @param pObject the RoomhstBean template to look for
-     * @return all the RoomhstBean matching the template
+     * @param pObject the RoomhstlogBean template to look for
+     * @return all the RoomhstlogBean matching the template
      */
     //88
-    public RoomhstBean[] loadUsingTemplate(RoomhstBean pObject) throws SQLException
+    public RoomhstlogBean[] loadUsingTemplate(RoomhstlogBean pObject) throws SQLException
     {
         Connection c = null;
         PreparedStatement ps = null;
         StringBuffer where = new StringBuffer("");
-        StringBuffer _sql = new StringBuffer("SELECT " + ALL_FIELDS + " from roomhst WHERE ");
+        StringBuffer _sql = new StringBuffer("SELECT " + ALL_FIELDS + " from roomhstlog WHERE ");
         StringBuffer _sqlWhere = new StringBuffer("");
         try
         {
             int _dirtyCount = 0;
     
-             if (pObject.isRoomhstidModified()) {
+             if (pObject.isRoomhstlogidModified()) {
                  _dirtyCount ++; 
-                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("roomhstid= ?");
+                 _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("roomhstlogid= ?");
              }
     
              if (pObject.isRoomidModified()) {
@@ -777,8 +777,8 @@ public class RoomhstManager
              ps = c.prepareStatement(_sql.toString(),ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
              _dirtyCount = 0;
     
-             if (pObject.isRoomhstidModified()) {
-                 Manager.setLong(ps, ++_dirtyCount, pObject.getRoomhstid());
+             if (pObject.isRoomhstlogidModified()) {
+                 Manager.setLong(ps, ++_dirtyCount, pObject.getRoomhstlogid());
              }
     
              if (pObject.isRoomidModified()) {
@@ -823,16 +823,16 @@ public class RoomhstManager
         }
     }
     /**
-     * Deletes rows using a RoomhstBean template.
+     * Deletes rows using a RoomhstlogBean template.
      *
-     * @param pObject the RoomhstBean object(s) to be deleted
+     * @param pObject the RoomhstlogBean object(s) to be deleted
      * @return the number of deleted objects
      */
     //63
-    public int deleteUsingTemplate(RoomhstBean pObject) throws SQLException
+    public int deleteUsingTemplate(RoomhstlogBean pObject) throws SQLException
     {
-        if (pObject.isRoomhstidInitialized())
-            return deleteByPrimaryKey(pObject.getRoomhstid());
+        if (pObject.isRoomhstlogidInitialized())
+            return deleteByPrimaryKey(pObject.getRoomhstlogid());
     
         Connection c = null;
         PreparedStatement ps = null;
@@ -840,12 +840,12 @@ public class RoomhstManager
     
         try 
         {
-            sql = new StringBuffer("DELETE FROM roomhst WHERE ");
+            sql = new StringBuffer("DELETE FROM roomhstlog WHERE ");
             int _dirtyAnd = 0;
-            if (pObject.isRoomhstidInitialized()) {
+            if (pObject.isRoomhstlogidInitialized()) {
                 if (_dirtyAnd > 0)
                     sql.append(" AND ");
-                sql.append("roomhstid").append("=?");
+                sql.append("roomhstlogid").append("=?");
                 _dirtyAnd ++;
             }
     
@@ -909,8 +909,8 @@ public class RoomhstManager
             ps = c.prepareStatement(sql.toString(),ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             int _dirtyCount = 0;
     
-            if (pObject.isRoomhstidInitialized()) {
-                Manager.setLong(ps, ++_dirtyCount, pObject.getRoomhstid());
+            if (pObject.isRoomhstlogidInitialized()) {
+                Manager.setLong(ps, ++_dirtyCount, pObject.getRoomhstlogid());
             }
     
             if (pObject.isRoomidInitialized()) {
@@ -962,7 +962,7 @@ public class RoomhstManager
     ///////////////////////////////////////////////////////////////////////
 
     /**
-     * Retrieves the number of rows of the table roomhst.
+     * Retrieves the number of rows of the table roomhstlog.
      *
      * @return the number of rows returned
      */
@@ -975,7 +975,7 @@ public class RoomhstManager
 
 
     /**
-     * Retrieves the number of rows of the table roomhst with a 'where' clause.
+     * Retrieves the number of rows of the table roomhstlog with a 'where' clause.
      * It is up to you to pass the 'WHERE' in your where clausis.
      *
      * @param where the restriction clause
@@ -983,7 +983,7 @@ public class RoomhstManager
      */
     public int countWhere(String where) throws SQLException
     {
-        String sql = "select count(*) as MCOUNT from roomhst " + where;
+        String sql = "select count(*) as MCOUNT from roomhstlog " + where;
         Connection c = null;
         Statement pStatement = null;
         ResultSet rs =  null;
@@ -1009,7 +1009,7 @@ public class RoomhstManager
     }
 
     /**
-     * Retrieves the number of rows of the table roomhst with a prepared statement.
+     * Retrieves the number of rows of the table roomhstlog with a prepared statement.
      *
      * @param ps the PreparedStatement to be used
      * @return the number of rows returned
@@ -1035,13 +1035,13 @@ public class RoomhstManager
     }
 
     /**
-     * Looks for the number of elements of a specific RoomhstBean pObject given a c
+     * Looks for the number of elements of a specific RoomhstlogBean pObject given a c
      *
-     * @param pObject the RoomhstBean pObject to look for
+     * @param pObject the RoomhstlogBean pObject to look for
      * @return the number of rows returned
      */
     //83
-    public int countUsingTemplate(RoomhstBean pObject) throws SQLException
+    public int countUsingTemplate(RoomhstlogBean pObject) throws SQLException
     {
         StringBuffer where = new StringBuffer("");
         Connection c = null;
@@ -1051,13 +1051,13 @@ public class RoomhstManager
     
         try
         {
-                _sql = new StringBuffer("SELECT count(*) as MCOUNT  from roomhst WHERE ");
+                _sql = new StringBuffer("SELECT count(*) as MCOUNT  from roomhstlog WHERE ");
                 _sqlWhere = new StringBuffer("");
                 int _dirtyCount = 0;
     
-                if (pObject.isRoomhstidModified()) {
+                if (pObject.isRoomhstlogidModified()) {
                     _dirtyCount++; 
-                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("roomhstid= ?");
+                    _sqlWhere.append((_sqlWhere.length() == 0) ? " " : " AND ").append("roomhstlogid= ?");
                 }
     
                 if (pObject.isRoomidModified()) {
@@ -1109,8 +1109,8 @@ public class RoomhstManager
     
                 _dirtyCount = 0;
     
-                if (pObject.isRoomhstidModified()) {
-                    Manager.setLong(ps, ++_dirtyCount, pObject.getRoomhstid());
+                if (pObject.isRoomhstlogidModified()) {
+                    Manager.setLong(ps, ++_dirtyCount, pObject.getRoomhstlogid());
                 }
     
                 if (pObject.isRoomidModified()) {
@@ -1160,16 +1160,16 @@ public class RoomhstManager
     // DECODE RESULT SET 
     ///////////////////////////////////////////////////////////////////////
     /**
-     * Transforms a ResultSet iterating on the roomhst on a RoomhstBean pObject.
+     * Transforms a ResultSet iterating on the roomhstlog on a RoomhstlogBean pObject.
      *
      * @param rs the ResultSet to be transformed
-     * @return pObject resulting RoomhstBean pObject
+     * @return pObject resulting RoomhstlogBean pObject
      */
     //72
-    public RoomhstBean decodeRow(ResultSet rs) throws SQLException
+    public RoomhstlogBean decodeRow(ResultSet rs) throws SQLException
     {
-        RoomhstBean pObject = createRoomhstBean();
-        pObject.setRoomhstid(Manager.getLong(rs, 1));
+        RoomhstlogBean pObject = createRoomhstlogBean();
+        pObject.setRoomhstlogid(Manager.getLong(rs, 1));
         pObject.setRoomid(Manager.getInteger(rs, 2));
         pObject.setHousekeepingstatusid(Manager.getInteger(rs, 3));
         pObject.setRegdate(rs.getTimestamp(4));
@@ -1186,23 +1186,23 @@ public class RoomhstManager
     }
 
     /**
-     * Transforms a ResultSet iterating on the roomhst table on a RoomhstBean pObject according to a list of fields.
+     * Transforms a ResultSet iterating on the roomhstlog table on a RoomhstlogBean pObject according to a list of fields.
      *
      * @param rs the ResultSet to be transformed
      * @param fieldList table of the field's associated constants
-     * @return pObject resulting RoomhstBean pObject
+     * @return pObject resulting RoomhstlogBean pObject
      */
     //73
-    public RoomhstBean decodeRow(ResultSet rs, int[] fieldList) throws SQLException
+    public RoomhstlogBean decodeRow(ResultSet rs, int[] fieldList) throws SQLException
     {
-        RoomhstBean pObject = createRoomhstBean();
+        RoomhstlogBean pObject = createRoomhstlogBean();
         int pos = 0;
         for(int i = 0; i < fieldList.length; i++)
         {
             switch(fieldList[i]) {
-                case ID_ROOMHSTID:
+                case ID_ROOMHSTLOGID:
                     ++pos;
-                    pObject.setRoomhstid(Manager.getLong(rs, pos));
+                    pObject.setRoomhstlogid(Manager.getLong(rs, pos));
                     break;
                 case ID_ROOMID:
                     ++pos;
@@ -1252,10 +1252,10 @@ public class RoomhstManager
      * Loads all the elements using a prepared statement.
      *
      * @param ps the PreparedStatement to be used
-     * @return an array of RoomhstBean 
+     * @return an array of RoomhstlogBean 
      */
     //41
-    public RoomhstBean[] loadByPreparedStatement(PreparedStatement ps) throws SQLException
+    public RoomhstlogBean[] loadByPreparedStatement(PreparedStatement ps) throws SQLException
     {
         return loadByPreparedStatement(ps, null);
     }
@@ -1265,9 +1265,9 @@ public class RoomhstManager
      *
      * @param ps the PreparedStatement to be used
      * @param fieldList table of the field's associated constants
-     * @return an array of RoomhstBean 
+     * @return an array of RoomhstlogBean 
      */
-    public RoomhstBean[] loadByPreparedStatement(PreparedStatement ps, int[] fieldList) throws SQLException
+    public RoomhstlogBean[] loadByPreparedStatement(PreparedStatement ps, int[] fieldList) throws SQLException
     {
         ResultSet rs =  null;
         java.util.ArrayList v =  null;
@@ -1282,7 +1282,7 @@ public class RoomhstManager
                 else 
                     v.add(decodeRow(rs, fieldList));
             }
-            return (RoomhstBean[])v.toArray(new RoomhstBean[0]);
+            return (RoomhstlogBean[])v.toArray(new RoomhstlogBean[0]);
         }
         finally
         {
@@ -1294,56 +1294,56 @@ public class RoomhstManager
     ///////////////////////////////////////////////////////////////////////
     // LISTENER 
     ///////////////////////////////////////////////////////////////////////
-    private RoomhstListener listener = null;
+    private RoomhstlogListener listener = null;
 
     /**
-     * Registers a unique RoomhstListener listener.
+     * Registers a unique RoomhstlogListener listener.
      */
     //66.5
-    public void registerListener(RoomhstListener listener) {
+    public void registerListener(RoomhstlogListener listener) {
         this.listener = listener;
     }
 
     /**
-     * Before the save of the RoomhstBean pObject.
+     * Before the save of the RoomhstlogBean pObject.
      *
-     * @param pObject the RoomhstBean pObject to be saved
+     * @param pObject the RoomhstlogBean pObject to be saved
      */
     //67
-    void beforeInsert(RoomhstBean pObject) throws SQLException {
+    void beforeInsert(RoomhstlogBean pObject) throws SQLException {
         if (listener != null)
             listener.beforeInsert(pObject);
     }
 
     /**
-     * After the save of the RoomhstBean pObject.
+     * After the save of the RoomhstlogBean pObject.
      *
-     * @param pObject the RoomhstBean pObject to be saved
+     * @param pObject the RoomhstlogBean pObject to be saved
      */
     //68
-    void afterInsert(RoomhstBean pObject) throws SQLException {
+    void afterInsert(RoomhstlogBean pObject) throws SQLException {
         if (listener != null)
             listener.afterInsert(pObject);
     }
 
     /**
-     * Before the update of the RoomhstBean pObject.
+     * Before the update of the RoomhstlogBean pObject.
      *
-     * @param pObject the RoomhstBean pObject to be updated
+     * @param pObject the RoomhstlogBean pObject to be updated
      */
     //69
-    void beforeUpdate(RoomhstBean pObject) throws SQLException {
+    void beforeUpdate(RoomhstlogBean pObject) throws SQLException {
         if (listener != null)
             listener.beforeUpdate(pObject);
     }
 
     /**
-     * After the update of the RoomhstBean pObject.
+     * After the update of the RoomhstlogBean pObject.
      *
-     * @param pObject the RoomhstBean pObject to be updated
+     * @param pObject the RoomhstlogBean pObject to be updated
      */
     //70
-    void afterUpdate(RoomhstBean pObject) throws SQLException {
+    void afterUpdate(RoomhstlogBean pObject) throws SQLException {
         if (listener != null)
             listener.afterUpdate(pObject);
     }

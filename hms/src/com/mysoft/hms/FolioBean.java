@@ -407,7 +407,7 @@ public class FolioBean
      * Meta Data Information (in progress):
      * <ul>
      * <li>full name: folio.status
-     * <li>comments: 0 - Reserved, 1 - Cancelled, 2 - No Show, 3 - Checked In, 4 - Checked Out, 5 - Void
+     * <li>comments: 0 - Reserved, 1 - Cancelled, 2 - No Show, 3 - Checked In, 4 - Checked Out, 5 - Void, -1 -active
      * <li>column size: 10
      * <li>jdbc type returned by the driver: Types.INTEGER
      * </ul>
